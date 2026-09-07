@@ -1,0 +1,19 @@
+name: Deploy to avtonomka server
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.AVTONOMKA_HOST }}
+          username: ${{ secrets.AVTONOMKA_USER }}
+          key: ${{ secrets.AVTONOMKA_SSH_KEY }}
+          script: |
+            cd /home/avtonomka.com.ua/public_html
+            git pull
