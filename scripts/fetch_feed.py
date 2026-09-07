@@ -94,8 +94,17 @@ def main() -> int:
         print(f"ПОМИЛКА: не вдалося розпарсити JSON: {exc}", file=sys.stderr)
         return 1
 
+    # Фід може приходити або "голим" масивом (старий формат), або обʼєктом
+    # {"generated_at": "...ISO8601...", "products": [...]} (новий формат від
+    # постачальника — дата формування файлу для монітора свіжості).
+    if isinstance(data, dict):
+        generated_at = data.get("generated_at") or data.get("updated_at")
+        if generated_at:
+            print(f"  Фід сформовано: {generated_at}")
+        data = data.get("products", data.get("items"))
+
     if not isinstance(data, list):
-        print("ПОМИЛКА: очікується JSON-масив", file=sys.stderr)
+        print("ПОМИЛКА: очікується JSON-масив або обʼєкт з полем 'products'", file=sys.stderr)
         return 1
 
     # Preserve existing descriptions, links, embeds and slugs from current products.json
