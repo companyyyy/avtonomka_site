@@ -97,36 +97,6 @@
 
   <!-- Товари -->
   <url>
-    <loc>https://avtonomka.com.ua/product/must-pv19-6048exp-felicity-flb48314tg1-h/152675.html</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/must-pv18-2012eco-felicity-fla12100pg2/152696.html</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/must-pv18-1012vpk-felicity-fla12100pg2/152697.html</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/must-pv19-6048exp-felicity-flb48230wg1-h/152699.html</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/felicity-ivem8048-ii-felicity-flb48230wg1-h/152701.html</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://avtonomka.com.ua/product/must-pv19-6048exp-felicity-fla48230/152219.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>weekly</changefreq>
@@ -164,7 +134,7 @@
   </url>
   <url>
     <loc>https://avtonomka.com.ua/product/felicity-ivem8048-ii-deye-se-f5-pro-c/152274.html</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -176,13 +146,7 @@
   </url>
   <url>
     <loc>https://avtonomka.com.ua/product/felicity-ivem8048-ii-felicity-flb48314tg1-h/152278.html</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/felicity-fla48314-eu/151617.html</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -194,7 +158,7 @@
   </url>
   <url>
     <loc>https://avtonomka.com.ua/product/felicity-ivem6048-ii/152085.html</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -206,7 +170,7 @@
   </url>
   <url>
     <loc>https://avtonomka.com.ua/product/felicity-fla24230/152173.html</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -224,7 +188,7 @@
   </url>
   <url>
     <loc>https://avtonomka.com.ua/product/felicity-ivem8048-ii-felicity-fla48314-eu/152203.html</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -260,6 +224,42 @@
   </url>
   <url>
     <loc>https://avtonomka.com.ua/product/must-pv18-1012vpk/150825.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/felicity-fla48314-eu/151617.html</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/must-pv18-3224-vpm-ii/142723.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/must-pv19-6048exp/142725.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/ecoflow-delta-3-1024wh-1800w-kytaiski-rozetky-z-perekhidnykamy/148245.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/ecoflow-delta-2-1800w-1024wh-eu/148299.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/must-pv18-2012-eco/148317.html</loc>
     <lastmod>2026-09-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -331,20 +331,44 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://avtonomka.com.ua/product/ecoflow-delta-3-1024wh-1800w-kytaiski-rozetky-z-perekhidnykamy/148245.html</loc>
+    <loc>https://avtonomka.com.ua/product/deye-se-f16-s/151057.html</loc>
     <lastmod>2026-09-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://avtonomka.com.ua/product/ecoflow-delta-2-1800w-1024wh-eu/148299.html</loc>
+    <loc>https://avtonomka.com.ua/product/deye-sun-16k-sg01lp1-eu-am3-p/151288.html</loc>
     <lastmod>2026-09-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://avtonomka.com.ua/product/must-pv18-2012-eco/148317.html</loc>
-    <lastmod>2026-09-08</lastmod>
+    <loc>https://avtonomka.com.ua/product/must-pv19-6048exp-felicity-flb48314tg1-h/152675.html</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/must-pv18-2012eco-felicity-fla12100pg2/152696.html</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/must-pv18-1012vpk-felicity-fla12100pg2/152697.html</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/must-pv19-6048exp-felicity-flb48230wg1-h/152699.html</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/felicity-ivem8048-ii-felicity-flb48230wg1-h/152701.html</loc>
+    <lastmod>2026-09-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -362,13 +386,13 @@
   </url>
   <url>
     <loc>https://avtonomka.com.ua/product/felicity-ivem8048-ii-felicity-flb48314tg1-h/152365.html</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://avtonomka.com.ua/product/felicity-ivem8048-ii-felicity-fla48280/152368.html</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -386,7 +410,7 @@
   </url>
   <url>
     <loc>https://avtonomka.com.ua/product/must-pv19-6048exp-felicity-fla48280/152377.html</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -416,13 +440,13 @@
   </url>
   <url>
     <loc>https://avtonomka.com.ua/product/felicity-ivem8048-ii-felicity-fla48171/152492.html</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://avtonomka.com.ua/product/must-pv19-6048exp-felicity-fla48171/152495.html</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -440,30 +464,6 @@
   </url>
   <url>
     <loc>https://avtonomka.com.ua/product/felicity-lpba48100-ol/152520.html</loc>
-    <lastmod>2026-09-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/must-pv18-3224-vpm-ii/142723.html</loc>
-    <lastmod>2026-09-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/must-pv19-6048exp/142725.html</loc>
-    <lastmod>2026-09-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/deye-se-f16-s/151057.html</loc>
-    <lastmod>2026-09-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/deye-sun-16k-sg01lp1-eu-am3-p/151288.html</loc>
     <lastmod>2026-09-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
