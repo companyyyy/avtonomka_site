@@ -38,7 +38,7 @@
   {
     "id": "152219",
     "title": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48230 51.2V 230Ah",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152219.jpg",
     "additional_images": [],
     "price": "93323 UAH",
     "availability": "in_stock",
@@ -57,7 +57,7 @@
   {
     "id": "152220",
     "title": "Комплект автономного енергоживлення: Must PV18-3224VPM II+ Felicity FLA24230 25.6V 230Ah",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152220.jpg",
     "additional_images": [],
     "price": "53784 UAH",
     "availability": "in_stock",
@@ -76,7 +76,7 @@
   {
     "id": "152221",
     "title": "Комплект автономного енергоживлення: Must PV18-3224VPM II+ Felicity FLA24280 25.6V 280Ah",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152221.jpg",
     "additional_images": [],
     "price": "71344 UAH",
     "availability": "in_stock",
@@ -156,7 +156,7 @@
   {
     "id": "152274",
     "title": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + DEYE SE-F5 Pro-C 51.2V 100 Аh",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152274.jpg",
     "additional_images": [],
     "price": "81179 UAH",
     "availability": "in_stock",
@@ -174,7 +174,7 @@
   {
     "id": "152277",
     "title": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + Felicity FLA48230 51.2V 230Ah",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152277.jpg",
     "additional_images": [],
     "price": "106329 UAH",
     "availability": "in_stock",
@@ -218,7 +218,7 @@
   {
     "id": "152086",
     "title": "Гібридний інвертор Felicity IVEM4024-II 4 кВт 24 В, 430х310х120, 10.4 кг",
-    "image_link": "https://dfi2.com.ua/images/152086_1.jpg",
+    "image_link": "assets/images/komp/152086.jpg",
     "additional_images": [
       "https://dfi2.com.ua/images/152086_2.jpg",
       "https://dfi2.com.ua/images/152086_3.jpg",
@@ -243,7 +243,7 @@
   {
     "id": "152173",
     "title": "Акумуляторна батарея Felicity FLA24230 25.6V 230Ah LiFePO4, 547х400х280, 52.5 кг",
-    "image_link": "https://dfi2.com.ua/images/152173_1.jpg",
+    "image_link": "assets/images/komp/152173.jpg",
     "additional_images": [
       "https://dfi2.com.ua/images/152173_2.jpg",
       "https://dfi2.com.ua/images/152173_3.jpg",
@@ -268,7 +268,7 @@
   {
     "id": "152174",
     "title": "Акумуляторна батарея Felicity FLA24280 25.6V 280Ah LiFePO4, 700х430х253, 71 кг",
-    "image_link": "https://dfi2.com.ua/images/152174_1.jpg",
+    "image_link": "assets/images/komp/152174.jpg",
     "additional_images": [],
     "price": "56885 UAH",
     "availability": "in_stock",
@@ -304,7 +304,7 @@
   {
     "id": "152203",
     "title": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48314-EU 51.2V 314Ah 16kWh",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152203.jpg",
     "additional_images": [],
     "price": "123229 UAH",
     "availability": "in_stock",
@@ -322,7 +322,7 @@
   {
     "id": "152214",
     "title": "Комплект автономного енергоживлення: Felicity IVEM4024-II 24В 4 кВт+ Felicity FLA24230 25.6V 230Ah",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152214.jpg",
     "additional_images": [],
     "price": "58237 UAH",
     "availability": "in_stock",
@@ -341,7 +341,7 @@
   {
     "id": "152215",
     "title": "Комплект автономного енергоживлення: Felicity IVEM4024-II 24В 4 кВт+ Felicity FLA24280 25.6V 280Ah",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152215.jpg",
     "additional_images": [],
     "price": "75797 UAH",
     "availability": "in_stock",
@@ -804,7 +804,7 @@
   {
     "id": "152696",
     "title": "Комплект автономного енергоживлення: Must PV18-2012ECO, 12 В, 2 кВт+ Felicity FLA12100PG2 12.8V 100Ah",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152696.jpg",
     "additional_images": [
       "https://dfi2.com.ua/images/152696_1.jpg"
     ],
@@ -824,7 +824,7 @@
   {
     "id": "152697",
     "title": "Комплект автономного енергоживлення: Must PV18-1012VPK, 12 В, 1000 Вт+ Felicity FLA12100PG2 12.8V 100Ah",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152697.jpg",
     "additional_images": [],
     "price": "26384 UAH",
     "availability": "in_stock",
@@ -842,7 +842,7 @@
   {
     "id": "152699",
     "title": "Комплект автономного енергоживлення: Must PV19-6048EXP 6 кВт 48 В + Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152699.jpg",
     "additional_images": [],
     "price": "97325 UAH",
     "availability": "in_stock",
@@ -861,7 +861,7 @@
   {
     "id": "152701",
     "title": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152701.jpg",
     "additional_images": [],
     "price": "110331 UAH",
     "availability": "in_stock",
@@ -880,7 +880,7 @@
   {
     "id": "152278",
     "title": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48314TG1-H 51.2V 314Ah",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152278.jpg",
     "additional_images": [],
     "price": "126029 UAH",
     "availability": "in_stock",
@@ -898,7 +898,7 @@
   {
     "id": "152296",
     "title": "Акумуляторна батарея Felicity FLB48100WG1-H 51.2V 100Ah LiFePO4, з підігрівом, LiFePO4, 650х450х174, 48.5 кг",
-    "image_link": "https://dfi2.com.ua/images/152296_1.jpg",
+    "image_link": "assets/images/komp/152296.jpg",
     "additional_images": [
       "https://dfi2.com.ua/images/152296_2.jpg",
       "https://dfi2.com.ua/images/152296_3.jpg",
@@ -958,7 +958,7 @@
   {
     "id": "152365",
     "title": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48314TG1-H 51.2V 314Ah",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152365.jpg",
     "additional_images": [],
     "price": "126029 UAH",
     "availability": "in_stock",
@@ -976,7 +976,7 @@
   {
     "id": "152368",
     "title": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48280 51.2V 280Ah",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152368.jpg",
     "additional_images": [],
     "price": "113919 UAH",
     "availability": "in_stock",
@@ -1091,7 +1091,7 @@
   {
     "id": "152472",
     "title": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152472.jpg",
     "additional_images": [],
     "price": "76329 UAH",
     "availability": "in_stock",
@@ -1110,7 +1110,7 @@
   {
     "id": "152473",
     "title": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152473.jpg",
     "additional_images": [],
     "price": "63322 UAH",
     "availability": "in_stock",
@@ -1129,7 +1129,7 @@
   {
     "id": "152492",
     "title": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48171 51.2V 171Ah LiFePO4",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152492.jpg",
     "additional_images": [],
     "price": "101229 UAH",
     "availability": "in_stock",
@@ -1147,7 +1147,7 @@
   {
     "id": "152495",
     "title": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48171 51.2V 171Ah LiFePO4",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152495.jpg",
     "additional_images": [],
     "price": "88223 UAH",
     "availability": "in_stock",
@@ -1183,7 +1183,7 @@
   {
     "id": "152513",
     "title": "Комплект автономного енергоживлення: Felicity IVEM4024-II 24В 4 кВт+ MUST LP15-24100 25.6V 100Ah LiFePO4",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152513.jpg",
     "additional_images": [],
     "price": "41262 UAH",
     "availability": "in_stock",
