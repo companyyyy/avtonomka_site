@@ -104,3 +104,28 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # ─────────────────────────────────────────────────────────────
+  # Job 3: задеплоїти на avtonomka.com.ua (git pull по SSH)
+  #
+  # Не можна покладатись на deploy-server.yml (on: push) для цього –
+  # GitHub не запускає інші workflow "on: push" реакцією на git push,
+  # зроблений default GITHUB_TOKEN'ом (це роблять кроки "Commit updated
+  # data" вище), щоб уникнути рекурсії. Через це щоденні автокоміти сюди
+  # ніколи не доїжджали до сервера, поки хтось не пушив щось руками.
+  # Тому деплой на сервер продубльовано прямо тут, у тому самому прогоні.
+  # ─────────────────────────────────────────────────────────────
+  deploy-server:
+    needs: update-data
+    if: needs.update-data.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.AVTONOMKA_HOST }}
+          username: ${{ secrets.AVTONOMKA_USER }}
+          key: ${{ secrets.AVTONOMKA_SSH_KEY }}
+          script: |
+            cd /home/avtonomka.com.ua/public_html
+            git pull
