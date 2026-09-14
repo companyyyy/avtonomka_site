@@ -559,6 +559,24 @@ function groupBy(arr,key){return arr.reduce((acc,i)=>{const k=i[key]||"-";if(!ac
 function fmt(p){const n=parseFloat(String(p).replace(/\s/g,"").replace(",","."));return isNaN(n)?p:n.toLocaleString("uk-UA");}
 function escHtml(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 
+/* Product descriptions on the site are full multi-paragraph texts (800-3500
+   chars) - way too long for the compact modal here. Take just the lead
+   sentence: the first paragraph, or the second if the first is a short
+   title-line restatement, trimmed to a word boundary. Full text stays in
+   p.desc for search (line ~479) - this only shortens what's displayed. */
+function shortDesc(text,max){
+  if(!text) return "";
+  const paras=String(text).split(/\n{2,}/).map(s=>s.trim()).filter(Boolean);
+  let body=paras[0]||"";
+  if(body.length<100 && paras.length>1) body=paras[1];
+  body=body.replace(/\*\*/g,"").replace(/\s+/g," ").trim();
+  if(body.length<=max) return body;
+  let cut=body.slice(0,max);
+  const lastSpace=cut.lastIndexOf(" ");
+  if(lastSpace>max*0.6) cut=cut.slice(0,lastSpace);
+  return cut.trim()+"…";
+}
+
 // ── MODAL ──
 let currentProduct=null, modalQty=1;
 
@@ -572,7 +590,7 @@ function openModal(p){
     <div class="modal-body">
       <div class="modal-brand">${p.brand!=="-"?p.brand+" · ":""}${p.category}</div>
       <div class="modal-name">${p.shortName}</div>
-      ${p.desc?`<p style="font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:12px">${escHtml(p.desc)}</p>`:""}
+      ${p.desc?`<p style="font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:12px">${escHtml(shortDesc(p.desc,160))}</p>`:""}
       ${p.price?`<div class="modal-price">${fmt(p.price)} <span style="font-size:14px;color:var(--text2);font-family:Inter,sans-serif;font-weight:400">${p.unit}</span></div>`:""}
       ${stockNote}
       <div class="modal-discount">💚 <strong>Інсталяторам та гуртовим покупцям</strong> - спеціальна ціна. Зв'яжіться з менеджером.</div>
