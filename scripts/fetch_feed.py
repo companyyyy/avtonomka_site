@@ -107,6 +107,23 @@ def main() -> int:
         print("ПОМИЛКА: очікується JSON-масив або обʼєкт з полем 'products'", file=sys.stderr)
         return 1
 
+    # Постачальник іноді підмішує метадані (напр. {"generated_at": "..."})
+    # прямо в масив товарів замість того, щоб віддати їх окремим полем -
+    # відфільтровуємо будь-який елемент без "id" (він не товар), але
+    # дістаємо з нього дату формування фіду, якщо вона там є.
+    products_only = []
+    for item in data:
+        if isinstance(item, dict) and item.get("id"):
+            products_only.append(item)
+        elif isinstance(item, dict) and (item.get("generated_at") or item.get("updated_at")):
+            print(f"  Фід сформовано: {item.get('generated_at') or item.get('updated_at')}")
+        else:
+            print(f"  ПОПЕРЕДЖЕННЯ: пропущено елемент без 'id' (не товар): {item!r}", file=sys.stderr)
+    skipped = len(data) - len(products_only)
+    if skipped:
+        print(f"  Пропущено {skipped} елемент(и) без 'id' зі списку товарів")
+    data = products_only
+
     # Preserve existing descriptions, links, embeds and slugs from current products.json
     existing_desc = {}
     existing_link = {}
