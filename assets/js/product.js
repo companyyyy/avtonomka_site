@@ -91,6 +91,15 @@ function kitBrandParts(title) {
   if (parts.length !== 2) return [null, null];
   return [extractBrand(parts[0]), extractBrand(parts[1])];
 }
+/* Inverter/battery model text for the "Даташит для інвертора/акумулятора: <модель>"
+   labels below - same title split as kitBrandParts, just returns the raw text
+   (trimmed of trailing comma) instead of just the brand. */
+function kitModelParts(title) {
+  const body = (title || '').replace(/^Комплект автономного енергоживлення:\s*/i, '');
+  const parts = body.split(/\s*\+\s*/).map(s => s.trim().replace(/,\s*$/, ''));
+  if (parts.length !== 2) return [null, null];
+  return parts;
+}
 function extractKw(title) {
   if (!title) return null;
   let m = title.match(/(\d+(?:[.,]\d+)?)\s*(?:кВт|kw)(?!h)/i);
@@ -392,12 +401,24 @@ function render(p) {
     cartBtn.setAttribute('data-sku', p.mpn || '');
   }
 
-  /* ---- Datasheet button(s) ---- */
+  /* ---- Datasheet button(s) ----
+     Kit (has link2): label each button with which component it's for and
+     that component's model, taken from the two halves of the title
+     ("<інвертор> + <акумулятор>"). Single product (link only): label with
+     the product's own name. Sets text directly and drops data-i18n so the
+     generic translation string doesn't overwrite it on a language switch. */
+  const isKit = !!(p.link && p.link2 && /Комплект/i.test(p.product_type || ''));
+  const [invModel, batModel] = isKit ? kitModelParts(p.title) : [null, null];
+
   const datasheetWrap = document.getElementById('product-datasheet-wrap');
   const datasheetBtn  = document.getElementById('btn-datasheet');
   if (datasheetWrap && datasheetBtn) {
     if (p.link) {
       datasheetBtn.href = resolveImg(p.link);
+      datasheetBtn.removeAttribute('data-i18n');
+      datasheetBtn.textContent = isKit
+        ? '↓ Даташит для інвертора' + (invModel ? ': ' + invModel : '')
+        : '↓ Скачати даташит для ' + (p.title || 'товару');
       datasheetWrap.classList.remove('hidden');
     } else {
       datasheetWrap.remove();
@@ -409,6 +430,8 @@ function render(p) {
   if (datasheetWrap2 && datasheetBtn2) {
     if (p.link2) {
       datasheetBtn2.href = resolveImg(p.link2);
+      datasheetBtn2.removeAttribute('data-i18n');
+      datasheetBtn2.textContent = '↓ Даташит для акумулятора' + (batModel ? ': ' + batModel : '');
       datasheetWrap2.classList.remove('hidden');
     } else {
       datasheetWrap2.remove();
