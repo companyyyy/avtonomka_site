@@ -100,6 +100,18 @@ function kitModelParts(title) {
   if (parts.length !== 2) return [null, null];
   return parts;
 }
+/* Product titles run long (specs, dimensions, weight all inline) and these
+   labels sit inside a button, not a paragraph - trim to a word boundary so
+   "Даташит для..." stays a short, scannable line instead of the full title. */
+function truncateLabel(text, max) {
+  if (!text) return '';
+  text = text.trim();
+  if (text.length <= max) return text;
+  let cut = text.slice(0, max);
+  const lastSpace = cut.lastIndexOf(' ');
+  if (lastSpace > max * 0.6) cut = cut.slice(0, lastSpace);
+  return cut.trim().replace(/[,;:.\s]+$/, '') + '…';
+}
 function extractKw(title) {
   if (!title) return null;
   let m = title.match(/(\d+(?:[.,]\d+)?)\s*(?:кВт|kw)(?!h)/i);
@@ -417,8 +429,8 @@ function render(p) {
       datasheetBtn.href = resolveImg(p.link);
       datasheetBtn.removeAttribute('data-i18n');
       datasheetBtn.textContent = isKit
-        ? '↓ Даташит для інвертора' + (invModel ? ': ' + invModel : '')
-        : '↓ Скачати даташит для ' + (p.title || 'товару');
+        ? '↓ Даташит для інвертора' + (invModel ? ': ' + truncateLabel(invModel, 45) : '')
+        : '↓ Скачати даташит для ' + truncateLabel(p.title || 'товару', 55);
       datasheetWrap.classList.remove('hidden');
     } else {
       datasheetWrap.remove();
@@ -431,7 +443,7 @@ function render(p) {
     if (p.link2) {
       datasheetBtn2.href = resolveImg(p.link2);
       datasheetBtn2.removeAttribute('data-i18n');
-      datasheetBtn2.textContent = '↓ Даташит для акумулятора' + (batModel ? ': ' + batModel : '');
+      datasheetBtn2.textContent = '↓ Даташит для акумулятора' + (batModel ? ': ' + truncateLabel(batModel, 45) : '');
       datasheetWrap2.classList.remove('hidden');
     } else {
       datasheetWrap2.remove();

@@ -1396,6 +1396,12 @@ main { flex: 1; }
   align-items: center;
   gap: 8px;
   transition: background var(--transition), border-color var(--transition), color var(--transition);
+  /* Overrides .btn's white-space: nowrap - these labels now carry the
+     product/model name (product.js) and can run long, so let them wrap
+     onto a second line instead of getting clipped by the button's edge. */
+  white-space: normal;
+  text-align: left;
+  max-width: 100%;
 }
 .btn-datasheet:hover {
   background: #bbdefb;
