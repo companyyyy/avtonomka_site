@@ -90,7 +90,7 @@ values (
 Саме тому під час проєктування сучасної автономної або резервної енергосистеми важливо дивитися не на окремі компоненти, а на всю систему в комплексі: генерація → перетворення → накопичення → керування → споживання.
 
 Сонячна енергетика дала можливість виробляти власну електроенергію. А сучасні системи накопичення дають змогу вирішувати, коли і як нею скористатися.',
-  null,
+  'assets/images/articles/chomu-nakopychennya-energii-vazhlyve-yak-paneli.jpg',
   '2026-09-15'
 )
 on conflict (id) do update set
@@ -98,5 +98,6 @@ on conflict (id) do update set
   title    = excluded.title,
   summary  = excluded.summary,
   body     = excluded.body,
+  photo    = excluded.photo,
   date     = excluded.date,
   updated_at = now();
