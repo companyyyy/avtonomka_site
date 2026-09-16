@@ -2291,7 +2291,7 @@ html.lang-en .lang-hide-en { display: none !important; }
 .auction-gallery__main {
   position: relative;
   width: 100%;
-  height: min(60vh, 480px);
+  height: 340px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: #111;
@@ -2437,7 +2437,7 @@ html.lang-en .lang-hide-en { display: none !important; }
 }
 
 @media (max-width: 600px) {
-  .auction-gallery__main { height: 320px; }
+  .auction-gallery__main { height: 260px; }
   .auction-gallery__nav { width: 34px; height: 34px; font-size: 1.2rem; }
 }
 
