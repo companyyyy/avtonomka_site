@@ -2460,7 +2460,13 @@ html.lang-en .lang-hide-en { display: none !important; }
   gap: 24px;
   margin-bottom: 20px;
 }
-.auction-lot__top-info { flex: 0 0 280px; }
+.auction-lot__top-info {
+  flex: 0 0 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.auction-lot__top-info .auction-bid-form { margin-bottom: 0; }
 .auction-lot__top-gallery { flex: 1 1 auto; min-width: 0; }
 .auction-lot__top-gallery .auction-gallery { margin-bottom: 0; }
 @media (max-width: 800px) {

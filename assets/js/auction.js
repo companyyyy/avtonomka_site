@@ -512,6 +512,9 @@
       <h1 class="auction-lot__title">${escHtml(lot.title)}</h1>
 
       <div class="auction-lot__top">
+        <div class="auction-lot__top-gallery">
+          ${mediaGalleryHtml(lot.media)}
+        </div>
         <div class="auction-lot__top-info">
           <div class="auction-lot__stats">
             <div><span>${escHtml(t('auction.starting_price'))}</span><strong>${fmtMoney(lot.starting_price)}</strong></div>
@@ -519,9 +522,15 @@
             <div><span>${escHtml(t('auction.bid_step'))}</span><strong id="auction-bid-step">${fmtMoney(lot.bid_step)}</strong></div>
             <div><span>${escHtml(t('auction.time_left'))}</span><strong id="auction-time-left">${escHtml(fmtCountdown(lot.ends_at))}</strong></div>
           </div>
-        </div>
-        <div class="auction-lot__top-gallery">
-          ${mediaGalleryHtml(lot.media)}
+
+          <form id="auction-bid-form" class="auction-bid-form">
+            <label for="auction-bid-amount">${escHtml(t('auction.bid_amount_label'))}</label>
+            <div class="auction-bid-form__row">
+              <input type="number" id="auction-bid-amount" min="${Number(lot.current_price) + Number(lot.bid_step)}" step="1" value="${Number(lot.current_price) + Number(lot.bid_step)}" required>
+              <button type="submit" class="btn btn-primary">${escHtml(t('auction.bid_submit'))}</button>
+            </div>
+            <p id="auction-bid-msg" class="auction-bid-msg" role="status"></p>
+          </form>
         </div>
       </div>
 
@@ -531,15 +540,6 @@
           <h2>${escHtml(t('auction.condition_title'))}</h2>
           <p>${escHtml(lot.condition_note)}</p>
         </div>` : ''}
-
-      <form id="auction-bid-form" class="auction-bid-form">
-        <label for="auction-bid-amount">${escHtml(t('auction.bid_amount_label'))}</label>
-        <div class="auction-bid-form__row">
-          <input type="number" id="auction-bid-amount" min="${Number(lot.current_price) + Number(lot.bid_step)}" step="1" value="${Number(lot.current_price) + Number(lot.bid_step)}" required>
-          <button type="submit" class="btn btn-primary">${escHtml(t('auction.bid_submit'))}</button>
-        </div>
-        <p id="auction-bid-msg" class="auction-bid-msg" role="status"></p>
-      </form>
 
       <div class="auction-lot__bids">
         <h2>${escHtml(t('auction.bids_history'))}</h2>
