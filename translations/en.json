@@ -228,7 +228,7 @@
   },
   "auction": {
     "list_title": "Auction",
-    "list_subtitle": "Used and lightly defective items at special terms - highest bidder wins.",
+    "list_subtitle": "<ul><li>Registration (name and phone) is required before your first bid.</li><li>A bid is accepted only if it's at least the current price plus the bid step.</li><li>The winner is whoever leads when the timer runs out - our manager will contact them.</li><li>Bidders appear anonymously in the bid feed ('Bidder 1', 'Bidder 2') - only our admin sees contact details.</li></ul>",
     "loading": "Loading lots…",
     "empty": "No active lots right now.",
     "current_price": "Current price",
