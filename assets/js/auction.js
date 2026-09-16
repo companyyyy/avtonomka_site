@@ -243,13 +243,133 @@
     return new URLSearchParams(window.location.search).get('id');
   }
 
+  /* ---- Gallery: big main photo + thumbs + swipe + lightbox ---- */
+  let galleryMedia = [];
+  let galleryIndex = 0;
+  let lightboxOverlay = null;
+  let lightboxOpen = false;
+
+  function galleryItemHtml(m) {
+    return m.type === 'video'
+      ? `<video src="${escHtml(m.url)}" controls playsinline></video>`
+      : `<img src="${escHtml(m.url)}" alt="" loading="lazy">`;
+  }
+
   function mediaGalleryHtml(media) {
-    if (!Array.isArray(media) || !media.length) return '';
-    return `<div class="auction-lot__gallery">${media.map(m =>
-      m.type === 'video'
-        ? `<video src="${escHtml(m.url)}" controls></video>`
-        : `<img src="${escHtml(m.url)}" alt="" loading="lazy">`
-    ).join('')}</div>`;
+    galleryMedia = Array.isArray(media) ? media : [];
+    if (!galleryMedia.length) return '';
+    const multi = galleryMedia.length > 1;
+    return `
+    <div class="auction-gallery">
+      <div class="auction-gallery__main" id="auction-gallery-main">
+        ${galleryItemHtml(galleryMedia[0])}
+        <button type="button" class="auction-gallery__zoom" id="auction-gallery-zoom" aria-label="${escHtml(t('auction.gallery_zoom'))}">⤢</button>
+        ${multi ? `
+          <button type="button" class="auction-gallery__nav auction-gallery__nav--prev" id="auction-gallery-prev" aria-label="${escHtml(t('auction.gallery_prev'))}">&#8249;</button>
+          <button type="button" class="auction-gallery__nav auction-gallery__nav--next" id="auction-gallery-next" aria-label="${escHtml(t('auction.gallery_next'))}">&#8250;</button>
+          <span class="auction-gallery__counter" id="auction-gallery-counter">1 / ${galleryMedia.length}</span>
+        ` : ''}
+      </div>
+      ${multi ? `<div class="auction-gallery__thumbs" id="auction-gallery-thumbs">${galleryMedia.map((m, i) => `
+        <button type="button" class="auction-gallery__thumb${i === 0 ? ' is-active' : ''}" data-index="${i}">
+          ${m.type === 'video' ? `<video src="${escHtml(m.url)}" muted playsinline></video>` : `<img src="${escHtml(m.url)}" alt="" loading="lazy">`}
+        </button>`).join('')}</div>` : ''}
+    </div>`;
+  }
+
+  function attachSwipe(el, onLeft, onRight) {
+    let startX = null;
+    el.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+    el.addEventListener('touchend', (e) => {
+      if (startX === null) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      startX = null;
+      if (Math.abs(dx) < 40) return;
+      if (dx < 0) onLeft(); else onRight();
+    }, { passive: true });
+  }
+
+  function showGalleryIndex(i) {
+    const n = galleryMedia.length;
+    if (!n) return;
+    galleryIndex = ((i % n) + n) % n;
+    const mainEl = document.getElementById('auction-gallery-main');
+    if (mainEl) {
+      const old = mainEl.querySelector('img, video');
+      if (old) old.remove();
+      mainEl.insertAdjacentHTML('afterbegin', galleryItemHtml(galleryMedia[galleryIndex]));
+      const counter = document.getElementById('auction-gallery-counter');
+      if (counter) counter.textContent = `${galleryIndex + 1} / ${n}`;
+    }
+    document.querySelectorAll('.auction-gallery__thumb').forEach((el, idx) =>
+      el.classList.toggle('is-active', idx === galleryIndex));
+    if (lightboxOpen) renderLightbox();
+  }
+
+  function renderLightbox() {
+    const content = document.getElementById('auction-lightbox-content');
+    content.innerHTML = galleryItemHtml(galleryMedia[galleryIndex]);
+    const n = galleryMedia.length;
+    document.getElementById('auction-lightbox-counter').textContent = n > 1 ? `${galleryIndex + 1} / ${n}` : '';
+    document.getElementById('auction-lightbox-prev').classList.toggle('hidden', n <= 1);
+    document.getElementById('auction-lightbox-next').classList.toggle('hidden', n <= 1);
+  }
+
+  function buildLightbox() {
+    document.body.insertAdjacentHTML('beforeend', `
+      <div id="auction-lightbox" class="auction-lightbox hidden">
+        <button type="button" class="auction-lightbox__close" id="auction-lightbox-close" aria-label="Close">&times;</button>
+        <button type="button" class="auction-lightbox__nav auction-lightbox__nav--prev" id="auction-lightbox-prev" aria-label="${escHtml(t('auction.gallery_prev'))}">&#8249;</button>
+        <div class="auction-lightbox__content" id="auction-lightbox-content"></div>
+        <button type="button" class="auction-lightbox__nav auction-lightbox__nav--next" id="auction-lightbox-next" aria-label="${escHtml(t('auction.gallery_next'))}">&#8250;</button>
+        <span class="auction-lightbox__counter" id="auction-lightbox-counter"></span>
+      </div>`);
+    lightboxOverlay = document.getElementById('auction-lightbox');
+    document.getElementById('auction-lightbox-close').addEventListener('click', closeLightbox);
+    document.getElementById('auction-lightbox-prev').addEventListener('click', () => showGalleryIndex(galleryIndex - 1));
+    document.getElementById('auction-lightbox-next').addEventListener('click', () => showGalleryIndex(galleryIndex + 1));
+    lightboxOverlay.addEventListener('click', (e) => { if (e.target === lightboxOverlay) closeLightbox(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lightboxOpen) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showGalleryIndex(galleryIndex - 1);
+      if (e.key === 'ArrowRight') showGalleryIndex(galleryIndex + 1);
+    });
+    attachSwipe(lightboxOverlay, () => showGalleryIndex(galleryIndex + 1), () => showGalleryIndex(galleryIndex - 1));
+  }
+
+  function openLightbox(index) {
+    if (!lightboxOverlay) buildLightbox();
+    galleryIndex = index;
+    lightboxOpen = true;
+    renderLightbox();
+    lightboxOverlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    if (!lightboxOverlay) return;
+    lightboxOpen = false;
+    lightboxOverlay.classList.add('hidden');
+    document.body.style.overflow = '';
+    const v = lightboxOverlay.querySelector('video');
+    if (v) v.pause();
+  }
+
+  function setupGallery() {
+    if (!galleryMedia.length) return;
+    galleryIndex = 0;
+    const mainEl = document.getElementById('auction-gallery-main');
+    document.getElementById('auction-gallery-prev')?.addEventListener('click', () => showGalleryIndex(galleryIndex - 1));
+    document.getElementById('auction-gallery-next')?.addEventListener('click', () => showGalleryIndex(galleryIndex + 1));
+    document.getElementById('auction-gallery-zoom')?.addEventListener('click', () => openLightbox(galleryIndex));
+    document.querySelectorAll('.auction-gallery__thumb').forEach(btn =>
+      btn.addEventListener('click', () => showGalleryIndex(Number(btn.dataset.index))));
+    mainEl.addEventListener('click', (e) => {
+      if (e.target.closest('.auction-gallery__nav, .auction-gallery__zoom, video')) return;
+      openLightbox(galleryIndex);
+    });
+    attachSwipe(mainEl, () => showGalleryIndex(galleryIndex + 1), () => showGalleryIndex(galleryIndex - 1));
   }
 
   function bidRowHtml(b) {
@@ -426,6 +546,7 @@
       ensureRegistered(() => placeBid(sb, amount));
     });
 
+    setupGallery();
     renderCountdown();
     bidTimer = setInterval(renderCountdown, 1000);
     await loadBids(sb, lot.id);
