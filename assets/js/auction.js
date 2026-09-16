@@ -531,6 +531,12 @@
             </div>
             <p id="auction-bid-msg" class="auction-bid-msg" role="status"></p>
           </form>
+
+          <div class="auction-lot__contact">
+            <span>${escHtml(t('auction.questions'))}</span>
+            <a href="tel:+380987772020">+38 (098) 777-20-20</a>
+            <a href="https://telegram.me/avtonomka_od" target="_blank" rel="noopener">Telegram</a>
+          </div>
         </div>
       </div>
 
