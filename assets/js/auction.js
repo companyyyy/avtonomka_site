@@ -140,23 +140,26 @@
     regSubmitBtn.textContent = t('auction.register_sending');
     regErrorEl.classList.add('hidden');
 
-    const { data, error } = await sb
+    /* Anon не має SELECT-прав на auction_bidders (щоб ніхто не бачив чужі
+       телефони), тож RETURNING після INSERT впаде на RLS. Генеруємо id
+       на клієнті й вставляємо його явно - тоді сервер нічого повертати
+       не мусить. */
+    const bidderId = crypto.randomUUID();
+    const { error } = await sb
       .from('auction_bidders')
-      .insert({ name, phone, email: email || null, consent: true })
-      .select('id')
-      .single();
+      .insert({ id: bidderId, name, phone, email: email || null, consent: true });
 
     regSubmitBtn.disabled = false;
     regSubmitBtn.textContent = t('auction.register_submit');
 
-    if (error || !data) {
+    if (error) {
       console.warn('auction.js: не вдалося зареєструвати учасника', error);
       regErrorEl.textContent = t('auction.register_error');
       regErrorEl.classList.remove('hidden');
       return;
     }
 
-    localStorage.setItem(BIDDER_KEY, data.id);
+    localStorage.setItem(BIDDER_KEY, bidderId);
     closeRegModal();
     if (pendingAfterRegister) {
       const cb = pendingAfterRegister;
