@@ -510,13 +510,6 @@
 
     root.innerHTML = `
       <h1 class="auction-lot__title">${escHtml(lot.title)}</h1>
-      ${mediaGalleryHtml(lot.media)}
-      ${lot.description ? `<p class="auction-lot__description">${escHtml(lot.description)}</p>` : ''}
-      ${lot.condition_note ? `
-        <div class="auction-lot__condition">
-          <h2>${escHtml(t('auction.condition_title'))}</h2>
-          <p>${escHtml(lot.condition_note)}</p>
-        </div>` : ''}
 
       <div class="auction-lot__stats">
         <div><span>${escHtml(t('auction.starting_price'))}</span><strong>${fmtMoney(lot.starting_price)}</strong></div>
@@ -524,6 +517,14 @@
         <div><span>${escHtml(t('auction.bid_step'))}</span><strong id="auction-bid-step">${fmtMoney(lot.bid_step)}</strong></div>
         <div><span>${escHtml(t('auction.time_left'))}</span><strong id="auction-time-left">${escHtml(fmtCountdown(lot.ends_at))}</strong></div>
       </div>
+
+      ${mediaGalleryHtml(lot.media)}
+      ${lot.description ? `<p class="auction-lot__description">${escHtml(lot.description)}</p>` : ''}
+      ${lot.condition_note ? `
+        <div class="auction-lot__condition">
+          <h2>${escHtml(t('auction.condition_title'))}</h2>
+          <p>${escHtml(lot.condition_note)}</p>
+        </div>` : ''}
 
       <form id="auction-bid-form" class="auction-bid-form">
         <label for="auction-bid-amount">${escHtml(t('auction.bid_amount_label'))}</label>
