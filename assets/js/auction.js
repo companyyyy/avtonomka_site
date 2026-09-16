@@ -39,8 +39,8 @@
     const h = Math.floor((s % 86400) / 3600);
     const m = Math.floor((s % 3600) / 60);
     const sec = s % 60;
-    if (d > 0) return `${d}д ${h}г ${m}хв`;
-    if (h > 0) return `${h}г ${m}хв`;
+    if (d > 0) return `${d}д ${h}г ${m}хв ${sec}с`;
+    if (h > 0) return `${h}г ${m}хв ${sec}с`;
     if (m > 0) return `${m}хв ${sec}с`;
     return `${sec}с`;
   }
@@ -233,7 +233,7 @@
       listEl.querySelectorAll('.auction-card__time').forEach((el, i) => {
         el.textContent = `${t('auction.time_left')}: ${fmtCountdown(data[i].ends_at)}`;
       });
-    }, 30000);
+    }, 1000);
   }
 
   /* ============================================================
