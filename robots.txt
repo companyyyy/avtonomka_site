@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /auction.html
+Disallow: /auction-lot.html
+Disallow: /auction-admin.html
 
 Sitemap: https://avtonomka.com.ua/sitemap.xml

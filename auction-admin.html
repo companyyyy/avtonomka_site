@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Аукціон - Адмін - Автономка</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="assets/images/logo.jpg" type="image/jpeg">
+  <link rel="canonical" href="https://avtonomka.com.ua/auction-admin.html">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f4f6f8;
+      color: #222831;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font-family: inherit; }
+    img { max-width: 100%; display: block; }
+    .hidden { display: none !important; }
+
+    .auth-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .auth-card { background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(26,46,74,.12); padding: 40px 36px; width: 100%; max-width: 400px; }
+    .auth-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+    .auth-logo img { width: 42px; height: 42px; border-radius: 6px; object-fit: contain; }
+    .auth-logo span { font-size: 1.2rem; font-weight: 800; color: #1a2e4a; }
+    .auth-title { font-size: 1.3rem; font-weight: 700; color: #1a2e4a; margin-bottom: 6px; }
+    .auth-sub { font-size: .88rem; color: #6c757d; margin-bottom: 24px; }
+
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: .82rem; font-weight: 600; color: #6c757d; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; }
+    .form-input { width: 100%; padding: 10px 14px; border: 2px solid #e0e6ed; border-radius: 8px; font-size: .95rem; font-family: inherit; color: #222831; background: #fff; transition: border-color .2s; outline: none; }
+    .form-input:focus { border-color: #f5a623; }
+    .form-msg { font-size: .85rem; min-height: 20px; margin-top: 10px; }
+    .form-msg.error { color: #e74c3c; }
+    .form-msg.success { color: #17a126; }
+
+    .btn-primary { width: 100%; padding: 12px; background: #f5a623; color: #1a2e4a; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; transition: background .2s; }
+    .btn-primary:hover { background: #e0921a; }
+
+    .admin-header { background: #1a2e4a; color: #fff; padding: 0 24px; height: 62px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; box-shadow: 0 2px 12px rgba(0,0,0,.25); }
+    .admin-header__logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.05rem; color: #2ecc40; }
+    .admin-header__logo img { width: 36px; height: 36px; border-radius: 5px; object-fit: contain; }
+    .admin-header__badge { font-size: .72rem; background: rgba(245,166,35,.18); color: #f5a623; padding: 3px 10px; border-radius: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-left: 6px; }
+    .admin-header__actions { display: flex; gap: 10px; }
+    .admin-btn { padding: 7px 16px; border-radius: 7px; border: none; font-size: .88rem; font-weight: 600; font-family: inherit; transition: background .2s, color .2s; }
+    .admin-btn--primary { background: #f5a623; color: #1a2e4a; }
+    .admin-btn--primary:hover { background: #e0921a; }
+    .admin-btn--ghost { background: rgba(255,255,255,.1); color: #fff; }
+    .admin-btn--ghost:hover { background: rgba(255,255,255,.2); }
+    .admin-btn--danger { background: rgba(231,76,60,.12); color: #c0392b; }
+    .admin-btn--danger:hover { background: rgba(231,76,60,.22); }
+    .admin-btn--sm { padding: 5px 12px; font-size: .82rem; }
+
+    .admin-body { max-width: 900px; margin: 0 auto; padding: 32px 20px 64px; display: flex; flex-direction: column; gap: 28px; }
+
+    .status-bar { padding: 12px 18px; border-radius: 8px; font-size: .92rem; font-weight: 500; }
+    .status-bar.success { background: rgba(46,204,64,.12); color: #17a126; border: 1px solid rgba(46,204,64,.25); }
+    .status-bar.error   { background: rgba(231,76,60,.10); color: #c0392b; border: 1px solid rgba(231,76,60,.2); }
+    .status-bar:not(.success):not(.error) { background: rgba(245,166,35,.1); color: #c07d00; border: 1px solid rgba(245,166,35,.2); }
+
+    .admin-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(26,46,74,.08); overflow: hidden; }
+    .admin-card__head { display: flex; align-items: center; justify-content: space-between; padding: 18px 22px; border-bottom: 1px solid #e0e6ed; gap: 12px; flex-wrap: wrap; }
+    .admin-card__title { font-size: 1.05rem; font-weight: 700; color: #1a2e4a; }
+    .admin-card__body { padding: 22px; }
+
+    .admin-hint { font-size: .9rem; color: #6c757d; padding: 12px 0; }
+    .admin-hint.error { color: #c0392b; }
+
+    .lot-item { display: flex; align-items: flex-start; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #e0e6ed; gap: 12px; flex-wrap: wrap; }
+    .lot-item:last-child { border-bottom: none; }
+    .lot-item strong { display: block; font-size: .98rem; color: #1a2e4a; }
+    .lot-meta { font-size: .8rem; color: #6c757d; margin-top: 3px; }
+    .lot-actions { display: flex; gap: 8px; flex-shrink: 0; flex-wrap: wrap; }
+    .badge { display: inline-block; font-size: .72rem; font-weight: 700; padding: 2px 9px; border-radius: 20px; text-transform: uppercase; letter-spacing: .04em; margin-right: 6px; }
+    .badge--draft { background: rgba(108,117,125,.15); color: #6c757d; }
+    .badge--active { background: rgba(46,204,64,.15); color: #17a126; }
+    .badge--cancelled { background: rgba(231,76,60,.12); color: #c0392b; }
+    .badge--ended { background: rgba(245,166,35,.15); color: #c07d00; }
+
+    .editor-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .editor-form textarea.form-input { resize: vertical; min-height: 100px; }
+    .editor-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+    .editor-actions .btn-primary { width: auto; padding: 11px 28px; }
+
+    .media-list { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+    .media-item { position: relative; width: 90px; height: 90px; border-radius: 8px; overflow: hidden; background: #f0f2f5; border: 1px solid #e0e6ed; }
+    .media-item img, .media-item video { width: 100%; height: 100%; object-fit: cover; }
+    .media-item button { position: absolute; top: 2px; right: 2px; background: rgba(0,0,0,.6); color: #fff; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: .7rem; line-height: 1; }
+
+    .bid-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eef1f4; font-size: .88rem; flex-wrap: wrap; gap: 6px; }
+    .bid-row:last-child { border-bottom: none; }
+    .winner-card { background: rgba(46,204,64,.08); border: 1px solid rgba(46,204,64,.25); border-radius: 8px; padding: 14px 16px; margin-bottom: 14px; font-size: .9rem; }
+    .winner-card strong { color: #17a126; }
+
+    @media (max-width: 600px) {
+      .auth-card { padding: 28px 20px; }
+      .admin-body { padding: 20px 12px 48px; }
+      .editor-form .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== SETUP SCREEN ===== -->
+  <div id="screen-setup" class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <img src="assets/images/logo.jpg" alt="Автономка">
+        <span>Автономка</span>
+      </div>
+      <h1 class="auth-title">Перше налаштування</h1>
+      <p class="auth-sub">Придумайте пароль для входу до цієї панелі. Пароль зберігається лише у вашому браузері.</p>
+      <form id="setup-form">
+        <div class="form-group">
+          <label for="setup-password">Новий пароль</label>
+          <input type="password" id="setup-password" class="form-input" placeholder="Мінімум 6 символів" autocomplete="new-password" required>
+        </div>
+        <div class="form-group">
+          <label for="setup-confirm">Підтвердіть пароль</label>
+          <input type="password" id="setup-confirm" class="form-input" placeholder="Повторіть пароль" autocomplete="new-password" required>
+        </div>
+        <button type="submit" class="btn-primary">Встановити пароль і увійти</button>
+        <div id="setup-msg" class="form-msg"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== LOGIN SCREEN ===== -->
+  <div id="screen-login" class="auth-wrap hidden">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <img src="assets/images/logo.jpg" alt="Автономка">
+        <span>Автономка</span>
+      </div>
+      <h1 class="auth-title">Вхід до панелі аукціону</h1>
+      <p class="auth-sub">Введіть пароль.</p>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-password">Пароль</label>
+          <input type="password" id="login-password" class="form-input" placeholder="Ваш пароль" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="btn-primary">Увійти</button>
+        <div id="login-msg" class="form-msg"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== MAIN SCREEN ===== -->
+  <div id="screen-main" class="hidden">
+
+    <header class="admin-header">
+      <div class="admin-header__logo">
+        <img src="assets/images/logo.jpg" alt="">
+        <span>Автономка</span>
+        <span class="admin-header__badge">Аукціон</span>
+      </div>
+      <div class="admin-header__actions">
+        <a href="auction.html" target="_blank" class="admin-btn admin-btn--ghost">Сторінка аукціону →</a>
+        <button id="btn-logout" class="admin-btn admin-btn--ghost">Вийти</button>
+      </div>
+    </header>
+
+    <div class="admin-body">
+
+      <div id="status-bar" class="status-bar hidden"></div>
+
+      <!-- Supabase auth -->
+      <div class="admin-card">
+        <div class="admin-card__head">
+          <span class="admin-card__title">Вхід</span>
+          <button id="btn-supabase-logout" class="admin-btn admin-btn--sm admin-btn--ghost hidden" style="background:#e0e6ed;color:#1a2e4a">Вийти з Supabase</button>
+        </div>
+        <div class="admin-card__body">
+          <p id="supabase-login-hint" style="font-size:.88rem;color:#6c757d;margin-bottom:18px">
+            Увійди Auth-користувачем, якого створено для аукціонної адмінки в Supabase Dashboard →
+            Authentication → Users (не той самий, що для головної адмінки сайту - ця панель навмисно
+            не має доступу до статей/коментарів/товарів, лише до аукціону).
+          </p>
+          <form id="supabase-login-form" class="settings-form">
+            <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+              <div class="form-group">
+                <label for="supabase-email">Email</label>
+                <input type="email" id="supabase-email" class="form-input" autocomplete="username">
+              </div>
+              <div class="form-group">
+                <label for="supabase-password">Пароль</label>
+                <input type="password" id="supabase-password" class="form-input" autocomplete="current-password">
+              </div>
+            </div>
+            <button type="submit" class="admin-btn admin-btn--primary">Увійти</button>
+            <p id="supabase-login-msg" class="form-msg"></p>
+          </form>
+          <p id="supabase-signed-in-as" class="hidden" style="font-size:.88rem;color:#17a126"></p>
+        </div>
+      </div>
+
+      <!-- Lot list -->
+      <div class="admin-card hidden" id="lots-card">
+        <div class="admin-card__head">
+          <span class="admin-card__title">Лоти</span>
+          <button id="btn-new-lot" class="admin-btn admin-btn--primary">+ Новий лот</button>
+        </div>
+        <div class="admin-card__body">
+          <div id="lot-list"></div>
+        </div>
+      </div>
+
+      <!-- Editor -->
+      <div class="admin-card hidden" id="editor-card">
+        <div class="admin-card__head">
+          <span class="admin-card__title" id="editor-heading">Новий лот</span>
+        </div>
+        <div class="admin-card__body">
+          <form id="lot-form" class="editor-form">
+            <div class="form-group">
+              <label for="lot-title">Назва *</label>
+              <input type="text" id="lot-title" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="lot-description">Опис</label>
+              <textarea id="lot-description" class="form-input"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="lot-condition">Стан / опис дефекту</label>
+              <textarea id="lot-condition" class="form-input" placeholder="Чому цей товар продається через аукціон"></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="lot-starting-price">Стартова ціна (грн) *</label>
+                <input type="number" id="lot-starting-price" class="form-input" min="0" step="1" required>
+              </div>
+              <div class="form-group">
+                <label for="lot-bid-step">Крок ставки (грн) *</label>
+                <input type="number" id="lot-bid-step" class="form-input" min="1" step="1" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="lot-ends-at">Дедлайн *</label>
+                <input type="datetime-local" id="lot-ends-at" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label for="lot-status">Статус *</label>
+                <select id="lot-status" class="form-input">
+                  <option value="draft">Чернетка (не видно на сайті)</option>
+                  <option value="active">Активний (опубліковано)</option>
+                  <option value="cancelled">Скасовано</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Фото / відео</label>
+              <div id="media-list" class="media-list"></div>
+              <input type="file" id="lot-media-input" accept="image/*,video/*" multiple>
+              <p id="media-upload-msg" style="font-size:.8rem;color:#6c757d;margin-top:6px"></p>
+            </div>
+            <div class="editor-actions">
+              <button type="submit" id="editor-submit" class="btn-primary">Опублікувати / зберегти</button>
+              <button type="button" id="btn-cancel-edit" class="admin-btn admin-btn--ghost" style="background:#e0e6ed;color:#1a2e4a">Скасувати</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Bids viewer -->
+      <div class="admin-card hidden" id="bids-card">
+        <div class="admin-card__head">
+          <span class="admin-card__title" id="bids-heading">Ставки</span>
+          <button id="btn-close-bids" class="admin-btn admin-btn--sm admin-btn--ghost" style="background:#e0e6ed;color:#1a2e4a">Закрити</button>
+        </div>
+        <div class="admin-card__body">
+          <div id="winner-block"></div>
+          <div id="bids-list"></div>
+        </div>
+      </div>
+
+      <!-- Local password -->
+      <div class="admin-card">
+        <div class="admin-card__head"><span class="admin-card__title">Безпека</span></div>
+        <div class="admin-card__body" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <p style="font-size:.88rem;color:#6c757d">Пароль входу в цю панель (не Supabase).</p>
+          <button id="btn-change-password" class="admin-btn admin-btn--danger">Змінити пароль</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script>
+    /* ---- Utilities ---- */
+    async function sha256(msg) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+    function escHtml(str) {
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    const getPwdHash = () => localStorage.getItem('auction_admin_pwd_hash') || '';
+    const isAuthed   = () => sessionStorage.getItem('auction_admin_ok') === '1';
+
+    function showScreen(id) {
+      ['screen-setup','screen-login','screen-main'].forEach(s =>
+        document.getElementById(s).classList.toggle('hidden', s !== id)
+      );
+    }
+
+    function init() {
+      if (!getPwdHash()) { showScreen('screen-setup'); return; }
+      if (!isAuthed())   { showScreen('screen-login'); return; }
+      showScreen('screen-main');
+      checkSupabaseSession();
+    }
+
+    document.getElementById('setup-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const pwd = document.getElementById('setup-password').value;
+      const rep = document.getElementById('setup-confirm').value;
+      if (pwd.length < 6) { showMsg('setup-msg','Мінімум 6 символів','error'); return; }
+      if (pwd !== rep)     { showMsg('setup-msg','Паролі не співпадають','error'); return; }
+      localStorage.setItem('auction_admin_pwd_hash', await sha256(pwd));
+      sessionStorage.setItem('auction_admin_ok', '1');
+      showScreen('screen-main');
+      checkSupabaseSession();
+    });
+
+    document.getElementById('login-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const pwd = document.getElementById('login-password').value;
+      if (await sha256(pwd) !== getPwdHash()) {
+        showMsg('login-msg','Невірний пароль','error');
+        document.getElementById('login-password').value = '';
+        return;
+      }
+      sessionStorage.setItem('auction_admin_ok', '1');
+      showScreen('screen-main');
+      checkSupabaseSession();
+    });
+
+    document.getElementById('btn-logout').addEventListener('click', () => {
+      sessionStorage.removeItem('auction_admin_ok');
+      showScreen('screen-login');
+      document.getElementById('login-password').value = '';
+    });
+
+    document.getElementById('btn-change-password').addEventListener('click', () => {
+      if (!confirm('Скинути пароль? Вас буде перенаправлено на сторінку встановлення нового паролю.')) return;
+      localStorage.removeItem('auction_admin_pwd_hash');
+      sessionStorage.removeItem('auction_admin_ok');
+      document.getElementById('setup-password').value = '';
+      document.getElementById('setup-confirm').value  = '';
+      showScreen('screen-setup');
+    });
+
+    function showMsg(id, msg, type) {
+      const el = document.getElementById(id);
+      el.textContent = msg;
+      el.className = 'form-msg ' + (type || '');
+    }
+    let statusTimer = null;
+    function showStatus(msg, type) {
+      const el = document.getElementById('status-bar');
+      el.textContent = msg;
+      el.className = 'status-bar ' + (type || '');
+      el.classList.remove('hidden');
+      clearTimeout(statusTimer);
+      if (type === 'success') statusTimer = setTimeout(() => el.classList.add('hidden'), 6000);
+    }
+
+    /* ---- Supabase ----
+       ⚠ Ці значення мають збігатися з admin.html/comments.js/auction.js -
+       той самий проєкт, доступ розділяється через RLS + app_metadata.role,
+       а не через окремий проєкт. */
+    const SUPABASE_URL = 'https://uvndubhmqzqqsrnrxgaj.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bmR1YmhtcXpxcXNybnJ4Z2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDY4MDIsImV4cCI6MjEwMzkyMjgwMn0.AavrYyhDXBQkjKOMdQ9wAQX6B901dOfUpmtUDwO5Cv8';
+    let sbClient = null;
+    function getSb() {
+      if (sbClient) return sbClient;
+      if (!window.supabase) return null;
+      sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      return sbClient;
+    }
+
+    async function checkSupabaseSession() {
+      const sb = getSb();
+      if (!sb) return;
+      const { data } = await sb.auth.getSession();
+      await showSignedInState(data.session);
+    }
+
+    async function showSignedInState(session) {
+      const signedIn = !!session;
+      document.getElementById('supabase-login-form').classList.toggle('hidden', signedIn);
+      document.getElementById('supabase-login-hint').classList.toggle('hidden', signedIn);
+      document.getElementById('btn-supabase-logout').classList.toggle('hidden', !signedIn);
+      const signedInAs = document.getElementById('supabase-signed-in-as');
+      signedInAs.classList.toggle('hidden', !signedIn);
+      if (signedIn) signedInAs.textContent = 'Увійшли як ' + session.user.email;
+
+      document.getElementById('lots-card').classList.toggle('hidden', !signedIn);
+      if (signedIn) {
+        await loadLots();
+      } else {
+        document.getElementById('editor-card').classList.add('hidden');
+        document.getElementById('bids-card').classList.add('hidden');
+      }
+    }
+
+    document.getElementById('supabase-login-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const sb = getSb();
+      const email    = document.getElementById('supabase-email').value.trim();
+      const password = document.getElementById('supabase-password').value;
+      const { data, error } = await sb.auth.signInWithPassword({ email, password });
+      if (error) { showMsg('supabase-login-msg', error.message, 'error'); return; }
+      document.getElementById('supabase-password').value = '';
+      await showSignedInState(data.session);
+    });
+
+    document.getElementById('btn-supabase-logout').addEventListener('click', async () => {
+      const sb = getSb();
+      if (sb) await sb.auth.signOut();
+      await showSignedInState(null);
+    });
+
+    /* ---- Slug ---- */
+    function genSlug(title) {
+      const map = {а:'a',б:'b',в:'v',г:'g',д:'d',е:'e',ё:'yo',є:'ye',ж:'zh',з:'z',и:'i',і:'i',ї:'yi',й:'y',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'kh',ц:'ts',ч:'ch',ш:'sh',щ:'shch',ъ:'',ы:'y',ь:'',э:'e',ю:'yu',я:'ya',ґ:'g'};
+      return title.toLowerCase()
+        .replace(/[а-яёіїєґ]/g, c => map[c] || c)
+        .replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-').replace(/-+/g,'-').slice(0,48)
+        + '-' + Date.now().toString(36);
+    }
+
+    /* ---- Lot list ---- */
+    let editId = null;
+    let currentMedia = [];
+
+    function lotBadge(lot) {
+      if (lot.status === 'active' && new Date(lot.ends_at) < new Date()) return '<span class="badge badge--ended">Завершено</span>';
+      if (lot.status === 'active') return '<span class="badge badge--active">Активний</span>';
+      if (lot.status === 'cancelled') return '<span class="badge badge--cancelled">Скасовано</span>';
+      return '<span class="badge badge--draft">Чернетка</span>';
+    }
+
+    async function loadLots() {
+      const el = document.getElementById('lot-list');
+      const sb = getSb();
+      el.innerHTML = '<p class="admin-hint">Завантаження…</p>';
+      const { data, error } = await sb.from('auction_lots').select('*').order('created_at', { ascending: false });
+      if (error) { el.innerHTML = `<p class="admin-hint error">Помилка: ${escHtml(error.message)}</p>`; return; }
+      if (!data.length) { el.innerHTML = '<p class="admin-hint">Лотів ще немає - створіть перший!</p>'; return; }
+      el.innerHTML = data.map(l => `
+        <div class="lot-item">
+          <div>
+            ${lotBadge(l)}
+            <strong>${escHtml(l.title)}</strong>
+            <div class="lot-meta">Поточна ціна: ${Math.round(l.current_price).toLocaleString('uk-UA')} грн · дедлайн: ${escHtml(new Date(l.ends_at).toLocaleString('uk-UA'))}</div>
+          </div>
+          <div class="lot-actions">
+            <button class="admin-btn admin-btn--sm" onclick="viewBids(${l.id})">Ставки</button>
+            <button class="admin-btn admin-btn--sm" onclick="startEdit(${l.id})">Редагувати</button>
+            <button class="admin-btn admin-btn--sm admin-btn--danger" onclick="removeLot(${l.id})">Видалити</button>
+          </div>
+        </div>`).join('');
+    }
+
+    function resetEditor() {
+      editId = null;
+      currentMedia = [];
+      ['lot-title','lot-description','lot-condition','lot-starting-price','lot-bid-step','lot-ends-at'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('lot-status').value = 'draft';
+      document.getElementById('editor-heading').textContent = 'Новий лот';
+      renderMediaList();
+    }
+
+    function renderMediaList() {
+      const el = document.getElementById('media-list');
+      el.innerHTML = currentMedia.map((m, i) => `
+        <div class="media-item">
+          ${m.type === 'video' ? `<video src="${escHtml(m.url)}" muted></video>` : `<img src="${escHtml(m.url)}" alt="">`}
+          <button type="button" onclick="removeMedia(${i})">✕</button>
+        </div>`).join('');
+    }
+
+    function removeMedia(i) {
+      currentMedia.splice(i, 1);
+      renderMediaList();
+    }
+
+    document.getElementById('lot-media-input').addEventListener('change', async e => {
+      const files = Array.from(e.target.files || []);
+      if (!files.length) return;
+      const sb = getSb();
+      const msgEl = document.getElementById('media-upload-msg');
+      msgEl.textContent = 'Завантаження…';
+      for (const file of files) {
+        const path = `${Date.now()}-${Math.random().toString(36).slice(2)}-${file.name}`;
+        const { error } = await sb.storage.from('auction-media').upload(path, file);
+        if (error) { msgEl.textContent = 'Помилка завантаження: ' + error.message; continue; }
+        const { data } = sb.storage.from('auction-media').getPublicUrl(path);
+        currentMedia.push({ type: file.type.startsWith('video') ? 'video' : 'photo', url: data.publicUrl });
+      }
+      msgEl.textContent = '';
+      e.target.value = '';
+      renderMediaList();
+    });
+
+    async function startEdit(id) {
+      const sb = getSb();
+      const { data: l, error } = await sb.from('auction_lots').select('*').eq('id', id).single();
+      if (error || !l) return;
+      editId = l.id;
+      currentMedia = Array.isArray(l.media) ? l.media : [];
+      document.getElementById('lot-title').value = l.title || '';
+      document.getElementById('lot-description').value = l.description || '';
+      document.getElementById('lot-condition').value = l.condition_note || '';
+      document.getElementById('lot-starting-price').value = l.starting_price;
+      document.getElementById('lot-bid-step').value = l.bid_step;
+      document.getElementById('lot-status').value = l.status;
+      document.getElementById('lot-ends-at').value = new Date(l.ends_at).toISOString().slice(0, 16);
+      document.getElementById('editor-heading').textContent = 'Редагувати лот';
+      renderMediaList();
+      document.getElementById('editor-card').classList.remove('hidden');
+      document.getElementById('bids-card').classList.add('hidden');
+      document.getElementById('editor-card').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async function removeLot(id) {
+      if (!confirm('Видалити цей лот та всі його ставки? Цю дію не можна скасувати.')) return;
+      const sb = getSb();
+      const { error } = await sb.from('auction_lots').delete().eq('id', id);
+      if (error) { showStatus('Помилка: ' + error.message, 'error'); return; }
+      showStatus('Лот видалено.', 'success');
+      await loadLots();
+    }
+
+    document.getElementById('lot-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const sb = getSb();
+      const title          = document.getElementById('lot-title').value.trim();
+      const description    = document.getElementById('lot-description').value.trim();
+      const condition_note = document.getElementById('lot-condition').value.trim();
+      const starting_price = Number(document.getElementById('lot-starting-price').value);
+      const bid_step       = Number(document.getElementById('lot-bid-step').value);
+      const status         = document.getElementById('lot-status').value;
+      const ends_at        = new Date(document.getElementById('lot-ends-at').value).toISOString();
+      if (!title || !ends_at || !(starting_price >= 0) || !(bid_step > 0)) {
+        showStatus('Заповніть усі обов\'язкові поля коректно', 'error');
+        return;
+      }
+
+      showStatus('Збереження…');
+      try {
+        if (editId) {
+          const { error } = await sb.from('auction_lots')
+            .update({ title, description, condition_note, bid_step, status, ends_at, media: currentMedia })
+            .eq('id', editId);
+          if (error) throw error;
+        } else {
+          const { error } = await sb.from('auction_lots').insert({
+            slug: genSlug(title), title, description, condition_note,
+            starting_price, bid_step, current_price: starting_price,
+            status, ends_at, media: currentMedia,
+          });
+          if (error) throw error;
+        }
+        showStatus('Збережено!', 'success');
+        resetEditor();
+        document.getElementById('editor-card').classList.add('hidden');
+        await loadLots();
+      } catch (e) { showStatus('Помилка збереження: ' + e.message, 'error'); }
+    });
+
+    document.getElementById('btn-cancel-edit').addEventListener('click', () => {
+      resetEditor();
+      document.getElementById('editor-card').classList.add('hidden');
+    });
+
+    document.getElementById('btn-new-lot').addEventListener('click', () => {
+      resetEditor();
+      document.getElementById('editor-card').classList.remove('hidden');
+      document.getElementById('bids-card').classList.add('hidden');
+      document.getElementById('editor-card').scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('lot-title').focus();
+    });
+
+    /* ---- Bids viewer (з повними контактами лідера) ---- */
+    async function viewBids(lotId) {
+      const sb = getSb();
+      document.getElementById('editor-card').classList.add('hidden');
+      document.getElementById('bids-card').classList.remove('hidden');
+
+      const { data: lot } = await sb.from('auction_lots').select('*').eq('id', lotId).single();
+      document.getElementById('bids-heading').textContent = 'Ставки - ' + (lot ? lot.title : '');
+
+      const winnerEl = document.getElementById('winner-block');
+      winnerEl.innerHTML = '';
+      if (lot && lot.leader_bid_id) {
+        const { data: leadBid } = await sb.from('auction_bids').select('*, auction_bidders(name, phone, email)').eq('id', lot.leader_bid_id).single();
+        if (leadBid && leadBid.auction_bidders) {
+          const b = leadBid.auction_bidders;
+          winnerEl.innerHTML = `
+            <div class="winner-card">
+              <strong>Поточний лідер: ${escHtml(leadBid.display_name)}</strong> - ${Math.round(leadBid.amount).toLocaleString('uk-UA')} грн<br>
+              ${escHtml(b.name)} · <a href="tel:${escHtml(b.phone)}">${escHtml(b.phone)}</a>${b.email ? ' · ' + escHtml(b.email) : ''}
+            </div>`;
+        }
+      }
+
+      const el = document.getElementById('bids-list');
+      el.innerHTML = '<p class="admin-hint">Завантаження…</p>';
+      const { data: bids, error } = await sb
+        .from('auction_bids')
+        .select('*, auction_bidders(name, phone, email)')
+        .eq('lot_id', lotId)
+        .order('created_at', { ascending: false });
+      if (error) { el.innerHTML = `<p class="admin-hint error">Помилка: ${escHtml(error.message)}</p>`; return; }
+      if (!bids.length) { el.innerHTML = '<p class="admin-hint">Ставок ще немає.</p>'; return; }
+      el.innerHTML = bids.map(b => `
+        <div class="bid-row">
+          <span>${escHtml(b.display_name)} - ${escHtml(new Date(b.created_at).toLocaleString('uk-UA'))}</span>
+          <span><strong>${Math.round(b.amount).toLocaleString('uk-UA')} грн</strong> · ${b.auction_bidders ? escHtml(b.auction_bidders.name) + ' · ' + escHtml(b.auction_bidders.phone) : ''}</span>
+        </div>`).join('');
+    }
+
+    document.getElementById('btn-close-bids').addEventListener('click', () => {
+      document.getElementById('bids-card').classList.add('hidden');
+    });
+
+    /* ---- Start ---- */
+    init();
+  </script>
+
+</body>
+</html>
