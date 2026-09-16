@@ -49,7 +49,12 @@
   function getClient() {
     if (client) return client;
     if (!window.supabase) return null;
-    client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    /* persistSession: false - публічна сторінка має завжди діяти як анонімний
+       відвідувач, навіть якщо в цьому браузері одночасно залогінені в
+       auction-admin.html (той самий origin ділить localStorage/сесію). */
+    client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+      auth: { persistSession: false },
+    });
     return client;
   }
 
