@@ -105,52 +105,8 @@
 </head>
 <body>
 
-  <!-- ===== SETUP SCREEN ===== -->
-  <div id="screen-setup" class="auth-wrap">
-    <div class="auth-card">
-      <div class="auth-logo">
-        <img src="assets/images/logo.jpg" alt="Автономка">
-        <span>Автономка</span>
-      </div>
-      <h1 class="auth-title">Перше налаштування</h1>
-      <p class="auth-sub">Придумайте пароль для входу до цієї панелі. Пароль зберігається лише у вашому браузері.</p>
-      <form id="setup-form">
-        <div class="form-group">
-          <label for="setup-password">Новий пароль</label>
-          <input type="password" id="setup-password" class="form-input" placeholder="Мінімум 6 символів" autocomplete="new-password" required>
-        </div>
-        <div class="form-group">
-          <label for="setup-confirm">Підтвердіть пароль</label>
-          <input type="password" id="setup-confirm" class="form-input" placeholder="Повторіть пароль" autocomplete="new-password" required>
-        </div>
-        <button type="submit" class="btn-primary">Встановити пароль і увійти</button>
-        <div id="setup-msg" class="form-msg"></div>
-      </form>
-    </div>
-  </div>
-
-  <!-- ===== LOGIN SCREEN ===== -->
-  <div id="screen-login" class="auth-wrap hidden">
-    <div class="auth-card">
-      <div class="auth-logo">
-        <img src="assets/images/logo.jpg" alt="Автономка">
-        <span>Автономка</span>
-      </div>
-      <h1 class="auth-title">Вхід до панелі аукціону</h1>
-      <p class="auth-sub">Введіть пароль.</p>
-      <form id="login-form">
-        <div class="form-group">
-          <label for="login-password">Пароль</label>
-          <input type="password" id="login-password" class="form-input" placeholder="Ваш пароль" autocomplete="current-password" required>
-        </div>
-        <button type="submit" class="btn-primary">Увійти</button>
-        <div id="login-msg" class="form-msg"></div>
-      </form>
-    </div>
-  </div>
-
   <!-- ===== MAIN SCREEN ===== -->
-  <div id="screen-main" class="hidden">
+  <div id="screen-main">
 
     <header class="admin-header">
       <div class="admin-header__logo">
@@ -160,7 +116,7 @@
       </div>
       <div class="admin-header__actions">
         <a href="auction.html" target="_blank" class="admin-btn admin-btn--ghost">Сторінка аукціону →</a>
-        <button id="btn-logout" class="admin-btn admin-btn--ghost">Вийти</button>
+        <button id="btn-logout" class="admin-btn admin-btn--ghost hidden">Вийти</button>
       </div>
     </header>
 
@@ -172,7 +128,6 @@
       <div class="admin-card">
         <div class="admin-card__head">
           <span class="admin-card__title">Вхід</span>
-          <button id="btn-supabase-logout" class="admin-btn admin-btn--sm admin-btn--ghost hidden" style="background:#e0e6ed;color:#1a2e4a">Вийти з Supabase</button>
         </div>
         <div class="admin-card__body">
           <p id="supabase-login-hint" style="font-size:.88rem;color:#6c757d;margin-bottom:18px">
@@ -278,82 +233,24 @@
         </div>
       </div>
 
-      <!-- Local password -->
-      <div class="admin-card">
-        <div class="admin-card__head"><span class="admin-card__title">Безпека</span></div>
-        <div class="admin-card__body" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-          <p style="font-size:.88rem;color:#6c757d">Пароль входу в цю панель (не Supabase).</p>
-          <button id="btn-change-password" class="admin-btn admin-btn--danger">Змінити пароль</button>
-        </div>
-      </div>
-
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script>
     /* ---- Utilities ---- */
-    async function sha256(msg) {
-      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
-      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
-    }
     function escHtml(str) {
       return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
-    const getPwdHash = () => localStorage.getItem('auction_admin_pwd_hash') || '';
-    const isAuthed   = () => sessionStorage.getItem('auction_admin_ok') === '1';
-
-    function showScreen(id) {
-      ['screen-setup','screen-login','screen-main'].forEach(s =>
-        document.getElementById(s).classList.toggle('hidden', s !== id)
-      );
-    }
 
     function init() {
-      if (!getPwdHash()) { showScreen('screen-setup'); return; }
-      if (!isAuthed())   { showScreen('screen-login'); return; }
-      showScreen('screen-main');
       checkSupabaseSession();
     }
 
-    document.getElementById('setup-form').addEventListener('submit', async e => {
-      e.preventDefault();
-      const pwd = document.getElementById('setup-password').value;
-      const rep = document.getElementById('setup-confirm').value;
-      if (pwd.length < 6) { showMsg('setup-msg','Мінімум 6 символів','error'); return; }
-      if (pwd !== rep)     { showMsg('setup-msg','Паролі не співпадають','error'); return; }
-      localStorage.setItem('auction_admin_pwd_hash', await sha256(pwd));
-      sessionStorage.setItem('auction_admin_ok', '1');
-      showScreen('screen-main');
-      checkSupabaseSession();
-    });
-
-    document.getElementById('login-form').addEventListener('submit', async e => {
-      e.preventDefault();
-      const pwd = document.getElementById('login-password').value;
-      if (await sha256(pwd) !== getPwdHash()) {
-        showMsg('login-msg','Невірний пароль','error');
-        document.getElementById('login-password').value = '';
-        return;
-      }
-      sessionStorage.setItem('auction_admin_ok', '1');
-      showScreen('screen-main');
-      checkSupabaseSession();
-    });
-
-    document.getElementById('btn-logout').addEventListener('click', () => {
-      sessionStorage.removeItem('auction_admin_ok');
-      showScreen('screen-login');
-      document.getElementById('login-password').value = '';
-    });
-
-    document.getElementById('btn-change-password').addEventListener('click', () => {
-      if (!confirm('Скинути пароль? Вас буде перенаправлено на сторінку встановлення нового паролю.')) return;
-      localStorage.removeItem('auction_admin_pwd_hash');
-      sessionStorage.removeItem('auction_admin_ok');
-      document.getElementById('setup-password').value = '';
-      document.getElementById('setup-confirm').value  = '';
-      showScreen('screen-setup');
+    document.getElementById('btn-logout').addEventListener('click', async () => {
+      const sb = getSb();
+      if (sb) await sb.auth.signOut();
+      await showSignedInState(null);
     });
 
     function showMsg(id, msg, type) {
@@ -396,7 +293,7 @@
       const signedIn = !!session;
       document.getElementById('supabase-login-form').classList.toggle('hidden', signedIn);
       document.getElementById('supabase-login-hint').classList.toggle('hidden', signedIn);
-      document.getElementById('btn-supabase-logout').classList.toggle('hidden', !signedIn);
+      document.getElementById('btn-logout').classList.toggle('hidden', !signedIn);
       const signedInAs = document.getElementById('supabase-signed-in-as');
       signedInAs.classList.toggle('hidden', !signedIn);
       if (signedIn) signedInAs.textContent = 'Увійшли як ' + session.user.email;
@@ -419,12 +316,6 @@
       if (error) { showMsg('supabase-login-msg', error.message, 'error'); return; }
       document.getElementById('supabase-password').value = '';
       await showSignedInState(data.session);
-    });
-
-    document.getElementById('btn-supabase-logout').addEventListener('click', async () => {
-      const sb = getSb();
-      if (sb) await sb.auth.signOut();
-      await showSignedInState(null);
     });
 
     /* ---- Slug ---- */
