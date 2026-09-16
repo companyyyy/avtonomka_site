@@ -511,14 +511,20 @@
     root.innerHTML = `
       <h1 class="auction-lot__title">${escHtml(lot.title)}</h1>
 
-      <div class="auction-lot__stats">
-        <div><span>${escHtml(t('auction.starting_price'))}</span><strong>${fmtMoney(lot.starting_price)}</strong></div>
-        <div><span>${escHtml(t('auction.current_price'))}</span><strong id="auction-current-price">${fmtMoney(lot.current_price)}</strong><em id="auction-leader-name" class="auction-lot__leader"></em></div>
-        <div><span>${escHtml(t('auction.bid_step'))}</span><strong id="auction-bid-step">${fmtMoney(lot.bid_step)}</strong></div>
-        <div><span>${escHtml(t('auction.time_left'))}</span><strong id="auction-time-left">${escHtml(fmtCountdown(lot.ends_at))}</strong></div>
+      <div class="auction-lot__top">
+        <div class="auction-lot__top-info">
+          <div class="auction-lot__stats">
+            <div><span>${escHtml(t('auction.starting_price'))}</span><strong>${fmtMoney(lot.starting_price)}</strong></div>
+            <div><span>${escHtml(t('auction.current_price'))}</span><strong id="auction-current-price">${fmtMoney(lot.current_price)}</strong><em id="auction-leader-name" class="auction-lot__leader"></em></div>
+            <div><span>${escHtml(t('auction.bid_step'))}</span><strong id="auction-bid-step">${fmtMoney(lot.bid_step)}</strong></div>
+            <div><span>${escHtml(t('auction.time_left'))}</span><strong id="auction-time-left">${escHtml(fmtCountdown(lot.ends_at))}</strong></div>
+          </div>
+        </div>
+        <div class="auction-lot__top-gallery">
+          ${mediaGalleryHtml(lot.media)}
+        </div>
       </div>
 
-      ${mediaGalleryHtml(lot.media)}
       ${lot.description ? `<p class="auction-lot__description">${escHtml(lot.description)}</p>` : ''}
       ${lot.condition_note ? `
         <div class="auction-lot__condition">
