@@ -2,7 +2,7 @@
   {
     "id": "151283",
     "title": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + MUST LP1600-48100 48v 100ah, LiFePo4",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/151283.png",
     "additional_images": [],
     "price": "63322 UAH",
     "availability": "in_stock",
@@ -61,7 +61,7 @@
   {
     "id": "142727",
     "title": "Акумуляторна батарея MUST LP16-48100 51.2V 100Ah, 442х625.5х177, 44 кг, LiFePO4",
-    "image_link": "https://dfi2.com.ua/images/142727_1.jpg",
+    "image_link": "assets/images/products/142727_1.png",
     "additional_images": [
       "https://dfi2.com.ua/images/142727_2.jpg",
       "https://dfi2.com.ua/images/142727_3.jpg",
@@ -290,7 +290,7 @@
   {
     "id": "152725",
     "title": "Гібридний інвертор MUST PV19-4024 EXP 4 кВт 24 В, 322х486х134, 9.5 кг",
-    "image_link": "",
+    "image_link": "assets/images/products/152725_1.png",
     "additional_images": [],
     "price": "21902 UAH",
     "availability": "in_stock",
@@ -546,7 +546,7 @@
   {
     "id": "148300",
     "title": "Акумуляторна батарея MUST LP16-24200, 25.6V 200Ah, 442х486.5х250, 45 кг, LiFePO4",
-    "image_link": "https://dfi2.com.ua/images/148300_1.jpg",
+    "image_link": "assets/images/products/148300_1.png",
     "additional_images": [
       "https://dfi2.com.ua/images/148300_2.jpg",
       "https://dfi2.com.ua/images/148300_3.jpg",
@@ -570,7 +570,7 @@
   {
     "id": "148301",
     "title": "Комплект автономного енергоживлення: Must PV18-3224VPM II 24V 3.2kW + MUST LP1600-24200, 25.6V 200Ah, LiFePO4",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/148301.png",
     "additional_images": [],
     "price": "53820 UAH",
     "availability": "in_stock",
@@ -911,7 +911,7 @@
   {
     "id": "152216",
     "title": "Комплект автономного енергоживлення: Felicity IVEM4024-II 24В 4 кВт+ MUST LP16-24100 25.6V 100Ah",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152216.png",
     "additional_images": [],
     "price": "48838 UAH",
     "availability": "in_stock",
@@ -965,7 +965,7 @@
   {
     "id": "152217",
     "title": "Комплект автономного енергоживлення: Felicity IVEM4024-II 24В 4 кВт+ MUST LP16-24200, 25.6V 200Ah",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152217.png",
     "additional_images": [],
     "price": "57857 UAH",
     "availability": "in_stock",
@@ -1058,7 +1058,7 @@
   {
     "id": "152265",
     "title": "Акумуляторна батарея MUST LP16-48300, 51.2V 300Ah, 490х923х265, 117 кг, LiFePO4",
-    "image_link": "https://dfi2.com.ua/images/152265_1.jpg",
+    "image_link": "assets/images/products/152265_1.png",
     "additional_images": [],
     "price": "88625 UAH",
     "availability": "in_stock",
@@ -1380,7 +1380,7 @@
   {
     "id": "152517",
     "title": "Гібридний інвертор Must PV18-1512 VPM II 1.5 кВт 12 В, 255х318х110, 5.5 кг",
-    "image_link": "https://dfi2.com.ua/images/152517_1.jpg",
+    "image_link": "assets/images/products/152517_1.png",
     "additional_images": [],
     "price": "11138 UAH",
     "availability": "in_stock",
