@@ -309,6 +309,19 @@ function extractKw(title){
   return null;
 }
 
+// ── BATTERY CAPACITY (Ah) - для сортування акумуляторів (mirrors extractAh in assets/js/catalog.js) ──
+function extractAh(title){
+  const m=title.match(/(\d+(?:[.,]\d+)?)\s*[AaАа][hH]\b/);
+  return m ? m[1].replace(",",".") : null;
+}
+
+// Категорії, які сортуємо за зростанням ємності/потужності всередині бренду
+const SORT_METRIC={
+  "Акумулятори для гібридних інверторів": extractAh,
+  "Акумулятори для ДБЖ": extractAh,
+  "Гібридні інвертори": extractKw,
+};
+
 // ── SHORT DISPLAY NAME (повна назва лишається в p.name - для кошика й заявки) ──
 // Родові префікси зайві, коли товар уже показаний всередині своєї категорії.
 // JS-регекс \b не бачить кириличних літер як "словесні" - межа слова після
@@ -510,6 +523,19 @@ function renderProducts(){
       const pb=parseFloat(b.replace(",",".").replace("кВт","").trim())||999;
       return pa-pb;
     });
+  }
+
+  const sortMetric=SORT_METRIC[activeCat];
+  if(sortMetric){
+    for(const brand of brandKeys){
+      byBrand[brand].sort((a,b)=>{
+        const va=parseFloat(sortMetric(a.name)), vb=parseFloat(sortMetric(b.name));
+        if(isNaN(va)&&isNaN(vb)) return 0;
+        if(isNaN(va)) return 1;
+        if(isNaN(vb)) return -1;
+        return va-vb;
+      });
+    }
   }
 
   for(const brand of brandKeys){ const bItems=byBrand[brand];
