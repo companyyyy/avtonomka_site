@@ -248,7 +248,7 @@
   {
     "id": "150599",
     "title": "Акумулятор MUST LP15-12100 12V 100Ah LiFePO4, 330х173х217, 10.5 кг",
-    "image_link": "https://dfi2.com.ua/images/150599_1.jpg",
+    "image_link": "assets/images/products/150599_1.jpg",
     "additional_images": [
       "https://dfi2.com.ua/images/150599_2.jpg",
       "https://dfi2.com.ua/images/150599_3.jpg"
@@ -358,7 +358,7 @@
   {
     "id": "152639",
     "title": "Акумуляторна батарея Felicity FLA12100 PG2 12.8V 100Ah LiFePO4, 295x201x199, 10 кг",
-    "image_link": "https://dfi2.com.ua/images/152639_1.jpg",
+    "image_link": "assets/images/products/152639_1.jpg",
     "additional_images": [
       "https://dfi2.com.ua/images/152639_2.jpg"
     ],
@@ -451,7 +451,7 @@
   {
     "id": "152723",
     "title": "Система зберігання електроенергії MUST HBP18-1012 OS 2в1 1.2 кВт 1280 Втг, 225х295х363, 17 кг",
-    "image_link": "https://dfi2.com.ua/images/152723_1.jpg",
+    "image_link": "assets/images/products/152723_1.jpg",
     "additional_images": [],
     "price": "26994 UAH",
     "availability": "in_stock",
@@ -722,7 +722,7 @@
   {
     "id": "152264",
     "title": "Акумулятор MUST LP15-24100 25.6V 100Ah LiFePO4, 522х240х218, 23 кг",
-    "image_link": "https://dfi2.com.ua/images/152264_1.jpg",
+    "image_link": "assets/images/products/152264_1.jpg",
     "additional_images": [
       "https://dfi2.com.ua/images/152264_2.jpg"
     ],
@@ -1062,7 +1062,7 @@
   {
     "id": "152516",
     "title": "Система зберігання електроенергії MUST HBP18-3024 OS 2в1 3 кВт 3072 Втг, 288х348х490, 33 кг",
-    "image_link": "",
+    "image_link": "assets/images/products/152516_1.jpg",
     "additional_images": [],
     "price": "44990 UAH",
     "availability": "in_stock",

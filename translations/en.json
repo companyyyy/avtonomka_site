@@ -62,7 +62,9 @@
     "akumulyatory": "Batteries for Hybrid Inverters",
     "komplekty": "Off-Grid Power Kits",
     "kabeli": "Power & Solar Cables",
-    "dzherela-zhyvlennya": "UPS / Backup Power"
+    "dzherela-zhyvlennya": "UPS / Backup Power",
+    "akumulyatory-dbzh": "Batteries for UPS",
+    "systemy-zberihannya": "Energy Storage Systems"
   },
   "catalog": {
     "page_title": "Product Catalog - Avtonomka",

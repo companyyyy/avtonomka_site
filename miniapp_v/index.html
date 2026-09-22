@@ -260,9 +260,11 @@ const CATEGORY_LABEL = {
   "Автономна енергетика > Комплекти автономного енергоживлення":  "Комплекти автономного енергоживлення",
   "Автономна енергетика > Силові та сонячні кабелі":               "Силові та сонячні кабелі",
   "Обладнання > Джерела безперебійного живлення":                  "Джерела безперебійного живлення",
+  "Акумулятори і батарейки > Акумулятори для ДБЖ":                  "Акумулятори для ДБЖ",
+  "Автономна енергетика > Системи зберігання електроенергії 2 в 1": "Системи зберігання енергії",
 };
 
-const EMOJI = {"комплекти автономного енергоживлення":"🏠","гібридні інвертори":"⚡","акумулятори":"🔋","джерела безперебійного живлення":"🔌","силові та сонячні кабелі":"🔌","інші товари":"📦"};
+const EMOJI = {"комплекти автономного енергоживлення":"🏠","гібридні інвертори":"⚡","акумулятори для дбж":"🔋","акумулятори":"🔋","джерела безперебійного живлення":"🔌","силові та сонячні кабелі":"🔌","системи зберігання енергії":"🔋","інші товари":"📦"};
 const ce = cat => { const k=(cat||"").toLowerCase(); for(const[key,v] of Object.entries(EMOJI)) if(k.includes(key)) return v; return "📦"; };
 
 if(window.Telegram?.WebApp){Telegram.WebApp.ready();Telegram.WebApp.expand();}
@@ -407,6 +409,8 @@ const CAT_ICON_FILES = {
   "Джерела безперебійного живлення":      "icons/dzherela.png",
   "Силові та сонячні кабелі":             "icons/kabeli.png",
   "Комплекти автономного енергоживлення": "icons/komplekty.png",
+  "Акумулятори для ДБЖ":                  "icons/akumulyatory-dbzh.jpg",
+  "Системи зберігання енергії":           "icons/systemy-zberihannya.jpg",
 };
 function getCatIconSrc(cat) {
   return CAT_ICON_FILES[cat] || "";
@@ -418,10 +422,16 @@ const CATEGORY_ORDER=[
   "Акумулятори для гібридних інверторів",
   "Джерела безперебійного живлення",
   "Силові та сонячні кабелі",
+  // нові категорії - показуємо внизу переліку
+  "Акумулятори для ДБЖ",
+  "Системи зберігання енергії",
 ];
+// Категорія, якої немає в CATEGORY_ORDER (ще не додана в перелік вручну),
+// теж іде вниз, а не вгору - indexOf(-1) інакше сортував би її першою.
+function catRank(cat){ const i=CATEGORY_ORDER.indexOf(cat); return i===-1?CATEGORY_ORDER.length:i; }
 function buildCats(){
   const cats=[...new Set(all.map(p=>p.category))]
-    .sort((a,b)=>CATEGORY_ORDER.indexOf(a)-CATEGORY_ORDER.indexOf(b));
+    .sort((a,b)=>catRank(a)-catRank(b));
   const grid=document.getElementById("catGrid");
   grid.innerHTML="";
   cats.forEach(cat=>{
