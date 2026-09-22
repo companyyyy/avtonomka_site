@@ -7,6 +7,8 @@ const SLUG_TO_CATEGORY = {
   'komplekty':            'Автономна енергетика > Комплекти автономного енергоживлення',
   'kabeli':               'Автономна енергетика > Силові та сонячні кабелі',
   'dzherela-zhyvlennya':  'Обладнання > Джерела безперебійного живлення',
+  'akumulyatory-dbzh':    'Акумулятори і батарейки > Акумулятори для ДБЖ',
+  'systemy-zberihannya':  'Автономна енергетика > Системи зберігання електроенергії 2 в 1',
 };
 
 const CATEGORY_TO_SLUG = {};
@@ -25,6 +27,8 @@ const FACET_CONFIG = {
   'akumulyatory':        { brand: true, capacity: true },
   'kabeli':              { crossSection: true, length: true, lugSize: true },
   'dzherela-zhyvlennya': { brand: true },
+  'akumulyatory-dbzh':   { brand: true, capacity: true },
+  'systemy-zberihannya': { power: true, brand: true },
 };
 const KNOWN_BRANDS = ['DAH Solar', 'Deye', 'Dyness', 'Felicity', 'Must', 'EcoFlow', 'TTN'];
 
