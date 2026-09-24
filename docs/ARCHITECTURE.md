@@ -87,8 +87,12 @@ Job **update-data**:
 3. `node scripts/export_to_csv.js` → `catalog_export.csv` (для Google Sheets).
 4. `node scripts/generate_merchant_feed.js` → `feed.xml` (RSS 2.0 + Google
    Shopping namespace, доступний на `https://avtonomka.com.ua/feed.xml`).
-5. `node scripts/generate_static_pages.js` — див. розділ 4.
-6. Коміт `chore: update products and posts [дата]` (тільки якщо щось
+5. `node scripts/generate_prom_feed.js` → `prom.xml` (імпорт у Prom.ua,
+   формат XML Price.ua: `<shop><catalog><items><item>`, доступний на
+   `https://avtonomka.com.ua/prom.xml`). ID груп зафіксовані в скрипті -
+   не перенумеровувати, нові категорії тільки дописувати.
+6. `node scripts/generate_static_pages.js` — див. розділ 4.
+7. Коміт `chore: update products and posts [дата]` (тільки якщо щось
    реально змінилось) і пуш.
 
 Job **deploy** (залежить від update-data): вивантажує весь корінь репо як
@@ -96,7 +100,7 @@ GitHub Pages artifact і деплоїть. Тобто зміни з кроку 6
 живий сайт — окремого серверного cron/git pull більше немає.
 
 **Важливо:** `node` і `npm` недоступні в звичайному sandbox-середовищі
-розробки — кроки 3–5 виконуються лише в CI. Локально їх можна лише
+розробки — кроки 3–6 виконуються лише в CI. Локально їх можна лише
 редагувати текстом, не запускати.
 
 ---
@@ -335,6 +339,7 @@ RLS - той самий патерн, що й `articles`, але з поправ
   `assets/js/catalog.js`) - **ні**, навмисно виключені.
 - **`feed.xml`** (Google Merchant) - **ні**: Merchant без ціни товар
   відхиляє, а достовірної ціни в них немає.
+- **`prom.xml`** (Prom.ua) - **ні**, з тієї ж причини.
 - `products.json` / `catalog_export.csv` - ні (як і було).
 
 ### 9.4.1. Заплановане, але ще не зроблено

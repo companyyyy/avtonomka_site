@@ -56,6 +56,9 @@ jobs:
       - name: Generate merchant feed
         run: node scripts/generate_merchant_feed.js
 
+      - name: Generate Prom.ua feed
+        run: node scripts/generate_prom_feed.js
+
       - name: Generate static product pages and prerendered catalog grids
         run: node scripts/generate_static_pages.js
 
@@ -64,7 +67,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add products.json data/telegram_posts.json catalog_export.csv feed.xml \
+          git add products.json data/telegram_posts.json catalog_export.csv feed.xml prom.xml \
                   product/ catalog.html catalog/*.html sitemap.xml .htaccess \
                   articles.html blog.html index.html
           if git diff --cached --quiet; then
