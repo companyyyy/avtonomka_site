@@ -66,6 +66,8 @@ const SLUG_TO_CATEGORY = {
   'komplekty':            'Автономна енергетика > Комплекти автономного енергоживлення',
   'kabeli':               'Автономна енергетика > Силові та сонячні кабелі',
   'dzherela-zhyvlennya':  'Обладнання > Джерела безперебійного живлення',
+  'akumulyatory-dbzh':    'Акумулятори і батарейки > Акумулятори для ДБЖ',
+  'systemy-zberihannya':  'Автономна енергетика > Системи зберігання електроенергії 2 в 1',
 };
 const CATEGORY_LABEL_UK = {
   'hybridni-invertory':   'Гібридні інвертори',
@@ -73,6 +75,8 @@ const CATEGORY_LABEL_UK = {
   'komplekty':            'Комплекти автономного енергоживлення',
   'kabeli':               'Силові та сонячні кабелі',
   'dzherela-zhyvlennya':  'Джерела безперебійного живлення',
+  'akumulyatory-dbzh':    'Акумулятори для ДБЖ',
+  'systemy-zberihannya':  'Системи зберігання енергії',
 };
 const CATEGORY_TO_SLUG = {};
 Object.keys(SLUG_TO_CATEGORY).forEach(slug => { CATEGORY_TO_SLUG[SLUG_TO_CATEGORY[slug]] = slug; });
@@ -825,7 +829,7 @@ function generateCatalogGrids(products) {
     lastmod[slug]  = lastmodFor(relPath, gridChanged || descChanged);
   });
 
-  console.log('generate_static_pages: prerendered catalog.html + 5 catalog/*.html grids');
+  console.log(`generate_static_pages: prerendered catalog.html + ${Object.keys(SLUG_TO_CATEGORY).length} catalog/*.html grids`);
   return lastmod;
 }
 

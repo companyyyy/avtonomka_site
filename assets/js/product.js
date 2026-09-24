@@ -58,6 +58,8 @@ const _SLUG_TO_CATEGORY = {
   'komplekty':            'Автономна енергетика > Комплекти автономного енергоживлення',
   'kabeli':               'Автономна енергетика > Силові та сонячні кабелі',
   'dzherela-zhyvlennya':  'Обладнання > Джерела безперебійного живлення',
+  'akumulyatory-dbzh':    'Акумулятори і батарейки > Акумулятори для ДБЖ',
+  'systemy-zberihannya':  'Автономна енергетика > Системи зберігання електроенергії 2 в 1',
 };
 const _CATEGORY_TO_SLUG = {};
 Object.keys(_SLUG_TO_CATEGORY).forEach(function(slug) {
