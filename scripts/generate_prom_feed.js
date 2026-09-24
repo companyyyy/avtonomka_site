@@ -257,8 +257,12 @@ ${images ? images + '\n' : ''}${vendor ? `      <vendor>${escXml(vendor)}</vendo
 ${params ? params + '\n' : ''}    </item>`;
 }
 
-const items = products.map(buildItem).filter(Boolean);
-const usedIds = new Set(products.map(p => categoryFor(p.product_type).id));
+/* Groups not sent to Prom at all - kits aren't sold there (owner's call). */
+const EXCLUDED_GROUPS = new Set([3]); // Комплекти автономного енергоживлення
+const exported = products.filter(p => !EXCLUDED_GROUPS.has(categoryFor(p.product_type).id));
+
+const items = exported.map(buildItem).filter(Boolean);
+const usedIds = new Set(exported.map(p => categoryFor(p.product_type).id));
 const catalog = CATEGORIES
   .filter(c => usedIds.has(c.id))
   .map(c => `    <category id="${c.id}"${c.portal ? ` portal_id="${c.portal}"` : ''}>${escXml(c.name)}</category>`)
