@@ -91,6 +91,9 @@ Job **update-data**:
    формат XML Price.ua: `<shop><catalog><items><item>`, доступний на
    `https://avtonomka.com.ua/prom.xml`). ID груп зафіксовані в скрипті -
    не перенумеровувати, нові категорії тільки дописувати.
+   Фото в `prom.xml` - тільки оригінали постачальника (білий фон), не
+   брендовані фото сайту: `fetch_feed.py` (`download_prom_images`) качає їх
+   у `assets/images/prom/<id>_<n>.jpg` і пише шляхи в `p.prom_images`.
 6. `node scripts/generate_static_pages.js` — див. розділ 4.
 7. Коміт `chore: update products and posts [дата]` (тільки якщо щось
    реально змінилось) і пуш.

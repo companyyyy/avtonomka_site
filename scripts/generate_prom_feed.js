@@ -229,7 +229,10 @@ function buildItem(p) {
 
   const cat    = categoryFor(p.product_type);
   const vendor = detectBrand(p.title);
-  const images = [p.image_link, ...(p.additional_images || [])]
+  /* Only the supplier's original (white-background) photos, copied to our
+     server by scripts/fetch_feed.py:download_prom_images - never the
+     site's branded ones. No supplier photo -> no <image>, by design. */
+  const images = (p.prom_images || [])
     .filter(Boolean)
     .slice(0, 10)
     .map(img => `      <image>${escXml(absoluteUrl(img))}</image>`)

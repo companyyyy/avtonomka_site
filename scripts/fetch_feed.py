@@ -75,6 +75,51 @@ def apply_price_adjustments(data) -> None:
         print(f"  Застосовано знижку до {adjusted} товарів (scripts/price_adjustments.json)")
 
 
+PROM_IMAGES_DIR = Path(__file__).parent.parent / "assets" / "images" / "prom"
+
+
+def download_prom_images(data) -> None:
+    """Фото для фіда Prom (prom.xml) - тільки оригінальні фото постачальника
+    (білий фон), а не брендовані фото сайту з assets/images/products|komp.
+    Копії лежать на нашому сервері в assets/images/prom/ (те саме ім'я файлу,
+    що в постачальника: <id>_<n>.jpg), шляхи пишуться в p["prom_images"].
+
+    Викликати ДО підміни image_link на локальні фото - поки там ще URL
+    постачальника. Уже скачаний файл повторно не качається. Фото, яке не
+    вдалося скачати (404 тощо), просто пропускається - у Prom воно не піде,
+    сайтові фото замість нього навмисно не підставляються."""
+    PROM_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
+    downloaded = failed = 0
+    for p in data:
+        local = []
+        urls = [p.get("image_link")] + list(p.get("additional_images") or [])
+        for url in urls:
+            if not isinstance(url, str) or not url.startswith("http"):
+                continue
+            name = re.sub(r"[^A-Za-z0-9._-]", "_", url.split("?")[0].rsplit("/", 1)[-1])
+            if not name:
+                continue
+            dest = PROM_IMAGES_DIR / name
+            if not dest.exists():
+                try:
+                    r = requests.get(url, headers=HEADERS, timeout=30)
+                    r.raise_for_status()
+                    if not r.headers.get("Content-Type", "").startswith("image/"):
+                        raise ValueError(f"не зображення ({r.headers.get('Content-Type')})")
+                    dest.write_bytes(r.content)
+                    downloaded += 1
+                except Exception as exc:
+                    failed += 1
+                    print(f"  Prom-фото не скачано: {url} ({exc})", file=sys.stderr)
+                    continue
+            local.append(f"assets/images/prom/{name}")
+        if local:
+            p["prom_images"] = local[:10]
+        else:
+            p.pop("prom_images", None)
+    print(f"  Prom-фото: скачано нових {downloaded}, не вдалося {failed}")
+
+
 def main() -> int:
     print(f"[{datetime.now().strftime('%H:%M:%S')}] Завантаження {FEED_URL}...")
 
@@ -174,6 +219,8 @@ def main() -> int:
         else:
             p.pop("merchant_keywords_uk", None)
             p.pop("merchant_keywords_ru", None)
+
+    download_prom_images(data)
 
     komp_dir = Path(__file__).parent.parent / "assets" / "images" / "komp"
     if komp_dir.exists():
