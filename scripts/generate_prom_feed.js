@@ -79,6 +79,83 @@ function detectBrand(title) {
   return PROM_UNKNOWN_VENDORS.has(brand) ? '' : brand;
 }
 
+/* ---- Search queries (Prom «Пошукові запити»: <keywords_ua> / <keywords>) ----
+   Starts from the merchant_keywords_uk/_ru phrases already in products.json
+   (scripts/generate_seo_keywords.py), then tops up with phrases built from
+   the product type, brand, model and key spec - Prom asks for at least 8
+   queries, and several products have none or only 6. Comma-separated,
+   capped at Prom's 1024-char limit on whole phrases. */
+const BRAND_PHONETIC = { // same as generate_seo_keywords.py
+  'DAH Solar': ['дан солар', 'дан солар'], 'Deye': ['дея', 'дея'],
+  'Dyness': ['дайнес', 'дайнес'], 'Felicity': ['селіситі', 'селисити'],
+  'MUST': ['маст', 'маст'], 'KBE': ['кбе', 'кбе'],
+  'EcoFlow': ['екофлоу', 'экофлоу'], 'TTN': ['ттн', 'ттн'],
+};
+/* Per group id: [main type word, extra generic queries] in uk and ru. */
+const KEYWORD_TYPES = {
+  1: { uk: ['гібридний інвертор', ['інвертор', 'інвертор для сонячних панелей', 'інвертор для дому', 'інвертор для резервного живлення']],
+       ru: ['гибридный инвертор', ['инвертор', 'инвертор для солнечных панелей', 'инвертор для дома', 'инвертор для резервного питания']] },
+  2: { uk: ['акумулятор', ['акумуляторна батарея', 'акумулятор для інвертора', 'акумулятор LiFePO4', 'батарея для інвертора']],
+       ru: ['аккумулятор', ['аккумуляторная батарея', 'аккумулятор для инвертора', 'аккумулятор LiFePO4', 'батарея для инвертора']] },
+  3: { uk: ['комплект автономного живлення', ['інвертор з акумулятором', 'резервне живлення для дому', 'комплект для дому', 'система резервного живлення']],
+       ru: ['комплект автономного питания', ['инвертор с аккумулятором', 'резервное питание для дома', 'комплект для дома', 'система резервного питания']] },
+  4: { uk: ['силовий кабель', ['кабель для акумулятора', 'кабель для інвертора', 'мідний кабель', 'кабель з накінечниками']],
+       ru: ['силовой кабель', ['кабель для аккумулятора', 'кабель для инвертора', 'медный кабель', 'кабель с наконечниками']] },
+  5: { uk: ['безперебійник', ['ДБЖ', 'джерело безперебійного живлення', 'резервне живлення', 'зарядна станція']],
+       ru: ['бесперебойник', ['ИБП', 'источник бесперебойного питания', 'резервное питание', 'зарядная станция']] },
+  6: { uk: ['акумулятор для ДБЖ', ['акумулятор для безперебійника', 'акумулятор LiFePO4', 'акумуляторна батарея']],
+       ru: ['аккумулятор для ИБП', ['аккумулятор для бесперебойника', 'аккумулятор LiFePO4', 'аккумуляторная батарея']] },
+  7: { uk: ['система зберігання енергії', ['система зберігання електроенергії', 'інвертор з акумулятором', 'ДБЖ 2 в 1', 'безперебійник для дому']],
+       ru: ['система хранения энергии', ['система хранения электроэнергии', 'инвертор с аккумулятором', 'ИБП 2 в 1', 'бесперебойник для дома']] },
+};
+
+function keyTokens(title) {
+  const t = String(title || '');
+  const out = [];
+  let m = t.match(/(\d+(?:[.,]\d+)?)\s*[AaАа][hH]\b/);
+  if (m) out.push(m[1].replace(',', '.') + 'Ah');
+  m = t.match(/(\d+(?:[.,]\d+)?)\s*кВт(?!\s*·?год)/i);
+  if (m) out.push(m[1].replace(',', '.') + ' кВт');
+  m = t.match(/(\d+(?:[.,]\d+)?)\s*мм/);
+  if (m) out.push(m[1] + ' мм');
+  return out;
+}
+
+function brandsIn(title) {
+  return KNOWN_BRANDS.filter(([re]) => re.test(title || '')).map(([, name]) => name);
+}
+
+function buildKeywords(p, cat, lang) {
+  const li = lang === 'uk' ? 0 : 1;
+  const existing = String(p[lang === 'uk' ? 'merchant_keywords_uk' : 'merchant_keywords_ru'] || '')
+    .split(',');
+  const extra = [];
+  const types = KEYWORD_TYPES[cat.id] && KEYWORD_TYPES[cat.id][lang];
+  if (types) {
+    const [main, generic] = types;
+    for (const b of brandsIn(p.title)) {
+      extra.push(`${main} ${b}`, `${main} ${BRAND_PHONETIC[b][li]}`);
+      if (p.mpn) extra.push(`${b} ${p.mpn}`);
+    }
+    for (const tok of keyTokens(p.title)) extra.push(`${main} ${tok}`);
+    extra.push(main, ...generic);
+  }
+  if (p.mpn) extra.push(p.mpn);
+
+  const seen = new Set();
+  const out = [];
+  let len = 0;
+  for (const raw of [...existing, ...extra]) {
+    const k = raw.replace(/\s+/g, ' ').trim();
+    if (!k || k.includes(',') || seen.has(k.toLowerCase())) continue;
+    if (len + k.length + (out.length ? 2 : 0) > 1024) break;
+    seen.add(k.toLowerCase());
+    out.push(k);
+    len += k.length + (out.length > 1 ? 2 : 0);
+  }
+  return out.join(', ');
+}
+
 function escXml(str) {
   return String(str || '')
     .replace(/&/g, '&amp;')
@@ -172,6 +249,8 @@ ${portalFor(p, cat) ? `      <portal_category_id>${portalFor(p, cat)}</portal_ca
 ${images ? images + '\n' : ''}${vendor ? `      <vendor>${escXml(vendor)}</vendor>\n` : ''}${p.mpn ? `      <vendorCode>${escXml(String(p.mpn).slice(0, 25))}</vendorCode>\n` : ''}      <available>${p.availability === 'in_stock' ? 'true' : 'false'}</available>
       <description>${desc}</description>
       <description_ua>${desc}</description_ua>
+      <keywords>${escXml(buildKeywords(p, cat, 'ru'))}</keywords>
+      <keywords_ua>${escXml(buildKeywords(p, cat, 'uk'))}</keywords_ua>
 ${params ? params + '\n' : ''}    </item>`;
 }
 
