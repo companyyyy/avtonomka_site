@@ -18,16 +18,34 @@ const products = JSON.parse(fs.readFileSync(path.join(__dirname, '../products.js
 
 /* Prom groups. IDs are fixed so a group keeps its identity in the Prom
    cabinet across imports - never renumber, only append. Same product_type
-   strings as SLUG_TO_CATEGORY in assets/js/catalog.js. */
+   strings as SLUG_TO_CATEGORY in assets/js/catalog.js.
+   portal = Prom marketplace category id (from Prom's "Список категорій",
+   https://my.prom.ua/cabinet/export_categories/xls). Set explicitly so Prom
+   doesn't guess - left to itself it put a kit into a spare-parts category
+   that requires «Код запчастини». */
+const PORTAL = {
+  inverters: 5140401,   // Електрообладнання > ... > Перетворювачі > Інвертори
+  batteries: 5280501,   // Електрообладнання > Батареї та акумулятори > Акумулятори загального призначення
+  ups:       14191106,  // Електрообладнання > ... > Блоки живлення > Джерела безперебійного живлення (дбж)
+  cables:    14190408,  // Електрообладнання > ... > Дріт, кабель > Силові кабелі, перемички
+  stations:  500901,    // Техніка та електроніка > Повербанки та зарядні станції > Зарядні станції
+};
 const CATEGORIES = [
-  { id: 1, type: 'Автономна енергетика > Гибридні інвертори',                        name: 'Гібридні інвертори' },
-  { id: 2, type: 'Автономна енергетика > Акумулятори для гібридних інверторів',      name: 'Акумулятори для гібридних інверторів' },
-  { id: 3, type: 'Автономна енергетика > Комплекти автономного енергоживлення',      name: 'Комплекти автономного енергоживлення' },
-  { id: 4, type: 'Автономна енергетика > Силові та сонячні кабелі',                  name: 'Силові та сонячні кабелі' },
-  { id: 5, type: 'Обладнання > Джерела безперебійного живлення',                     name: 'Джерела безперебійного живлення' },
-  { id: 6, type: 'Акумулятори і батарейки > Акумулятори для ДБЖ',                     name: 'Акумулятори для ДБЖ' },
-  { id: 7, type: 'Автономна енергетика > Системи зберігання електроенергії 2 в 1',   name: 'Системи зберігання електроенергії 2 в 1' },
+  { id: 1, type: 'Автономна енергетика > Гибридні інвертори',                        name: 'Гібридні інвертори',                       portal: PORTAL.inverters },
+  { id: 2, type: 'Автономна енергетика > Акумулятори для гібридних інверторів',      name: 'Акумулятори для гібридних інверторів',     portal: PORTAL.batteries },
+  { id: 3, type: 'Автономна енергетика > Комплекти автономного енергоживлення',      name: 'Комплекти автономного енергоживлення',     portal: PORTAL.ups },
+  { id: 4, type: 'Автономна енергетика > Силові та сонячні кабелі',                  name: 'Силові та сонячні кабелі',                 portal: PORTAL.cables },
+  { id: 5, type: 'Обладнання > Джерела безперебійного живлення',                     name: 'Джерела безперебійного живлення',          portal: PORTAL.ups },
+  { id: 6, type: 'Акумулятори і батарейки > Акумулятори для ДБЖ',                     name: 'Акумулятори для ДБЖ',                      portal: PORTAL.batteries },
+  { id: 7, type: 'Автономна енергетика > Системи зберігання електроенергії 2 в 1',   name: 'Системи зберігання електроенергії 2 в 1',  portal: PORTAL.ups },
 ];
+
+/* Per-item override of the group's portal category - the ДБЖ group mixes
+   mini-UPS units with portable charging stations. */
+function portalFor(p, cat) {
+  if (/^Зарядна станція/i.test(p.title || '')) return PORTAL.stations;
+  return cat.portal;
+}
 const CATEGORY_BY_TYPE = {};
 CATEGORIES.forEach(c => { CATEGORY_BY_TYPE[c.type] = c; });
 
@@ -45,16 +63,20 @@ function categoryFor(type) {
 }
 
 /* Mirrors KNOWN_BRANDS in miniapp_v/index.html. Prom only keeps a vendor
-   that exists in its manufacturer base, so an unknown one is harmless. */
+   that exists in its manufacturer base and flags anything else as an
+   import error («Невідомий виробник»), so brands missing there are listed
+   in PROM_UNKNOWN_VENDORS and simply not sent. */
 const KNOWN_BRANDS = [
   [/DAH\s*Solar/i, 'DAH Solar'], [/Dyness/i, 'Dyness'], [/Deye/i, 'Deye'],
   [/Felicity/i, 'Felicity'], [/\bMUST\b/i, 'MUST'], [/\bKBE\b/i, 'KBE'],
   [/EcoFlow/i, 'EcoFlow'], [/\bTTN\b/, 'TTN'],
 ];
+const PROM_UNKNOWN_VENDORS = new Set(['TTN']);
 function detectBrand(title) {
   const found = new Set();
   for (const [re, name] of KNOWN_BRANDS) if (re.test(title || '')) found.add(name);
-  return found.size === 1 ? [...found][0] : '';
+  const brand = found.size === 1 ? [...found][0] : '';
+  return PROM_UNKNOWN_VENDORS.has(brand) ? '' : brand;
 }
 
 function escXml(str) {
@@ -145,7 +167,7 @@ function buildItem(p) {
       <name>${escXml(p.title)}</name>
       <name_ua>${escXml(p.title)}</name_ua>
       <categoryId>${cat.id}</categoryId>
-      <priceuah>${price}</priceuah>
+${portalFor(p, cat) ? `      <portal_category_id>${portalFor(p, cat)}</portal_category_id>\n` : ''}      <priceuah>${price}</priceuah>
       <url>${escXml(productLink(p))}</url>
 ${images ? images + '\n' : ''}${vendor ? `      <vendor>${escXml(vendor)}</vendor>\n` : ''}${p.mpn ? `      <vendorCode>${escXml(String(p.mpn).slice(0, 25))}</vendorCode>\n` : ''}      <available>${p.availability === 'in_stock' ? 'true' : 'false'}</available>
       <description>${desc}</description>
@@ -157,7 +179,7 @@ const items = products.map(buildItem).filter(Boolean);
 const usedIds = new Set(products.map(p => categoryFor(p.product_type).id));
 const catalog = CATEGORIES
   .filter(c => usedIds.has(c.id))
-  .map(c => `    <category id="${c.id}">${escXml(c.name)}</category>`)
+  .map(c => `    <category id="${c.id}"${c.portal ? ` portal_id="${c.portal}"` : ''}>${escXml(c.name)}</category>`)
   .join('\n');
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>

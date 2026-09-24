@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <shop>
   <catalog>
-    <category id="1">Гібридні інвертори</category>
-    <category id="2">Акумулятори для гібридних інверторів</category>
-    <category id="3">Комплекти автономного енергоживлення</category>
-    <category id="4">Силові та сонячні кабелі</category>
-    <category id="5">Джерела безперебійного живлення</category>
-    <category id="6">Акумулятори для ДБЖ</category>
-    <category id="7">Системи зберігання електроенергії 2 в 1</category>
+    <category id="1" portal_id="5140401">Гібридні інвертори</category>
+    <category id="2" portal_id="5280501">Акумулятори для гібридних інверторів</category>
+    <category id="3" portal_id="14191106">Комплекти автономного енергоживлення</category>
+    <category id="4" portal_id="14190408">Силові та сонячні кабелі</category>
+    <category id="5" portal_id="14191106">Джерела безперебійного живлення</category>
+    <category id="6" portal_id="5280501">Акумулятори для ДБЖ</category>
+    <category id="7" portal_id="14191106">Системи зберігання електроенергії 2 в 1</category>
   </catalog>
   <items>
     <item id="151617" selling_type="r">
       <name>Акумуляторна батарея Felicity FLA48314-EU 51.2V 314Ah 16kWh LiFePO4, 435х880х247, 121.5 кг</name>
       <name_ua>Акумуляторна батарея Felicity FLA48314-EU 51.2V 314Ah 16kWh LiFePO4, 435х880х247, 121.5 кг</name_ua>
       <categoryId>2</categoryId>
+      <portal_category_id>5280501</portal_category_id>
       <priceuah>86194</priceuah>
       <url>https://avtonomka.com.ua/product/felicity-fla48314-eu/151617.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/151617_1.jpg</image>
@@ -51,6 +52,7 @@
       <name>Гібридний інвертор Must PV18-3224 VPM II 3.2 кВт 24 В, 254.5х367.4х103, 5.6 кг</name>
       <name_ua>Гібридний інвертор Must PV18-3224 VPM II 3.2 кВт 24 В, 254.5х367.4х103, 5.6 кг</name_ua>
       <categoryId>1</categoryId>
+      <portal_category_id>5140401</portal_category_id>
       <priceuah>13458</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv18-3224-vpm-ii/142723.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/142723_1.jpg</image>
@@ -95,6 +97,7 @@
       <name>Гібридний інвертор Must PV19-6048EXP 6 кВт 48 В, 309х505х147, 14 кг</name>
       <name_ua>Гібридний інвертор Must PV19-6048EXP 6 кВт 48 В, 309х505х147, 14 кг</name_ua>
       <categoryId>1</categoryId>
+      <portal_category_id>5140401</portal_category_id>
       <priceuah>23320</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv19-6048exp/142725.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/142725_1.jpg</image>
@@ -131,6 +134,7 @@
       <name>Акумуляторна батарея MUST LP16-48100 51.2V 100Ah, 442х625.5х177, 44 кг, LiFePO4</name>
       <name_ua>Акумуляторна батарея MUST LP16-48100 51.2V 100Ah, 442х625.5х177, 44 кг, LiFePO4</name_ua>
       <categoryId>2</categoryId>
+      <portal_category_id>5280501</portal_category_id>
       <priceuah>37267</priceuah>
       <url>https://avtonomka.com.ua/product/must-lp16-48100/142727.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/142727_1.png</image>
@@ -144,6 +148,7 @@
       <name>Акумуляторна батарея Dyness DL5.0C (Heating) 51.2V 100Ah LiFePO4, з підігрівом, 558х545х150, 54 кг</name>
       <name_ua>Акумуляторна батарея Dyness DL5.0C (Heating) 51.2V 100Ah LiFePO4, з підігрівом, 558х545х150, 54 кг</name_ua>
       <categoryId>2</categoryId>
+      <portal_category_id>5280501</portal_category_id>
       <priceuah>39517</priceuah>
       <url>https://avtonomka.com.ua/product/dyness-dl5-0c-heating/142740.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/142740.jpg</image>
@@ -158,6 +163,7 @@
       <name>Гібридний інвертор Deye SUN-6K-SG05LP1-EU-AM2-P 6 кВт 48 В 1 фаза, 330х580х232, 24.9 кг</name>
       <name_ua>Гібридний інвертор Deye SUN-6K-SG05LP1-EU-AM2-P 6 кВт 48 В 1 фаза, 330х580х232, 24.9 кг</name_ua>
       <categoryId>1</categoryId>
+      <portal_category_id>5140401</portal_category_id>
       <priceuah>44915</priceuah>
       <url>https://avtonomka.com.ua/product/deye-sun-6k-sg05lp1-eu-am2-p/148193.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/148193_1.jpg</image>
@@ -178,6 +184,7 @@
       <name>Зарядна станція ECOFLOW DELTA 3 1024Wh 1800W (китайські розетки, з перехідниками)</name>
       <name_ua>Зарядна станція ECOFLOW DELTA 3 1024Wh 1800W (китайські розетки, з перехідниками)</name_ua>
       <categoryId>5</categoryId>
+      <portal_category_id>500901</portal_category_id>
       <priceuah>33693</priceuah>
       <url>https://avtonomka.com.ua/product/ecoflow-delta-3-1024wh-1800w-kytaiski-rozetky-z-perekhidnykamy/148245.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/148245_1.jpg</image>
@@ -195,6 +202,7 @@
       <name>Зарядна станція EcoFlow Delta 2, 1800W, 1024Wh (EU)</name>
       <name_ua>Зарядна станція EcoFlow Delta 2, 1800W, 1024Wh (EU)</name_ua>
       <categoryId>5</categoryId>
+      <portal_category_id>500901</portal_category_id>
       <priceuah>34368</priceuah>
       <url>https://avtonomka.com.ua/product/ecoflow-delta-2-1800w-1024wh-eu/148299.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/148299_1.jpg</image>
@@ -213,6 +221,7 @@
       <name>Акумуляторна батарея MUST LP16-24200, 25.6V 200Ah, 442х486.5х250, 45 кг, LiFePO4</name>
       <name_ua>Акумуляторна батарея MUST LP16-24200, 25.6V 200Ah, 442х486.5х250, 45 кг, LiFePO4</name_ua>
       <categoryId>2</categoryId>
+      <portal_category_id>5280501</portal_category_id>
       <priceuah>37267</priceuah>
       <url>https://avtonomka.com.ua/product/must-lp16-24200/148300.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/148300_1.png</image>
@@ -226,6 +235,7 @@
       <name>Комплект автономного енергоживлення: Must PV18-3224VPM II 24V 3.2kW + MUST LP1600-24200, 25.6V 200Ah, LiFePO4</name>
       <name_ua>Комплект автономного енергоживлення: Must PV18-3224VPM II 24V 3.2kW + MUST LP1600-24200, 25.6V 200Ah, LiFePO4</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>50874</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv18-3224vpm-ii-must-lp1600-24200/148301.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/148301.png</image>
@@ -239,6 +249,7 @@
       <name>Система зберігання електроенергії MUST HBP19-5548 VPM 2в1 5.5 кВт 5120 Втг, 486х850х160, 58 кг</name>
       <name_ua>Система зберігання електроенергії MUST HBP19-5548 VPM 2в1 5.5 кВт 5120 Втг, 486х850х160, 58 кг</name_ua>
       <categoryId>7</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>69735</priceuah>
       <url>https://avtonomka.com.ua/product/systema-zberihannia-elektroenerhii-must-hbp19-5548-vpm/150416.html</url>
       <image>https://dfi2.com.ua/images/150416_1.jpg</image>
@@ -256,6 +267,7 @@
       <name>Акумуляторна батарея Felicity FLA12100 PG2 12.8V 100Ah LiFePO4, 295x201x199, 10 кг</name>
       <name_ua>Акумуляторна батарея Felicity FLA12100 PG2 12.8V 100Ah LiFePO4, 295x201x199, 10 кг</name_ua>
       <categoryId>6</categoryId>
+      <portal_category_id>5280501</portal_category_id>
       <priceuah>13497</priceuah>
       <url>https://avtonomka.com.ua/product/felicity-fla12100-pg2/152639.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/152639_1.jpg</image>
@@ -269,6 +281,7 @@
       <name>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48314TG1-H 51.2V 314Ah</name>
       <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48314TG1-H 51.2V 314Ah</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>111169</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv19-6048exp-felicity-flb48314tg1-h/152675.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152675.jpg</image>
@@ -280,6 +293,7 @@
       <name>Комплект автономного енергоживлення: Must PV18-1012VPK, 12 В, 1000 Вт+ Felicity FLA12100PG2 12.8V 100Ah</name>
       <name_ua>Комплект автономного енергоживлення: Must PV18-1012VPK, 12 В, 1000 Вт+ Felicity FLA12100PG2 12.8V 100Ah</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>23317</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv18-1012vpk-felicity-fla12100pg2/152697.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152697.jpg</image>
@@ -291,6 +305,7 @@
       <name>Комплект автономного енергоживлення: Must PV19-6048EXP 6 кВт 48 В + Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом</name>
       <name_ua>Комплект автономного енергоживлення: Must PV19-6048EXP 6 кВт 48 В + Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>95379</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv19-6048exp-felicity-flb48230wg1-h/152699.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152699.jpg</image>
@@ -302,6 +317,7 @@
       <name>Система зберігання електроенергії MUST HBP18-1212 OS 2в1 1.2 кВт 1280 Втг, 225х295х363, 17 кг</name>
       <name_ua>Система зберігання електроенергії MUST HBP18-1212 OS 2в1 1.2 кВт 1280 Втг, 225х295х363, 17 кг</name_ua>
       <categoryId>7</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>22046</priceuah>
       <url>https://avtonomka.com.ua/product/systema-zberihannia-elektroenerhii-must-hbp18-1012-os/152723.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/152723_1.jpg</image>
@@ -315,6 +331,7 @@
       <name>Комплект автономного енергоживлення: Must PV18-1512 VPM II 1.5 кВт 12 В + Felicity FLA12100PG2 12.8V 100Ah</name>
       <name_ua>Комплект автономного енергоживлення: Must PV18-1512 VPM II 1.5 кВт 12 В + Felicity FLA12100PG2 12.8V 100Ah</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>24745</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv18-1512-vpm-ii-felicity-fla12100pg2/152724.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152724.png</image>
@@ -326,6 +343,7 @@
       <name>Гібридний інвертор MUST PV19-4024 EXP 4 кВт 24 В, 322х486х134, 9.5 кг</name>
       <name_ua>Гібридний інвертор MUST PV19-4024 EXP 4 кВт 24 В, 322х486х134, 9.5 кг</name_ua>
       <categoryId>1</categoryId>
+      <portal_category_id>5140401</portal_category_id>
       <priceuah>19271</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv19-4024-exp/152725.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/152725_1.png</image>
@@ -339,6 +357,7 @@
       <name>Комплект автономного енергоживлення: Must PV18-1512 VPM II 1.5 кВт 12 Вт+ MUST LP15-12100 12V 100Ah LiFePO4</name>
       <name_ua>Комплект автономного енергоживлення: Must PV18-1512 VPM II 1.5 кВт 12 Вт+ MUST LP15-12100 12V 100Ah LiFePO4</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>23845</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv18-1512-vpm-ii-must-lp15-12100/152726.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152726.png</image>
@@ -355,6 +374,7 @@
 
 </name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>43191</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv18-4024-exp-must-lp15-24100/152727.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152727.png</image>
@@ -367,6 +387,7 @@
       <name>Комплект автономного енергоживлення: MUST PV18-4024 EXP 4 кВт, 24V + Felicity FLA24230 25.6V 230Ah</name>
       <name_ua>Комплект автономного енергоживлення: MUST PV18-4024 EXP 4 кВт, 24V + Felicity FLA24230 25.6V 230Ah</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>58368</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv18-4024-exp-felicity-fla24230/152729.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152729.png</image>
@@ -378,6 +399,7 @@
       <name>Комплект автономного енергоживлення: MUST PV18-4024 EXP 4 кВт, 24V + Felicity FLA24280 25.6V 280Ah</name>
       <name_ua>Комплект автономного енергоживлення: MUST PV18-4024 EXP 4 кВт, 24V + Felicity FLA24280 25.6V 280Ah</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>77527</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv18-4024-exp-felicity-fla24280/152730.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152730.png</image>
@@ -389,6 +411,7 @@
       <name>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + MUST LP16-48300, 51.2V 300Ah</name>
       <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + MUST LP16-48300, 51.2V 300Ah</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>106654</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv19-6048exp-must-lp16-48300/152732.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152732.png</image>
@@ -401,6 +424,7 @@
       <name>Система зберігання електроенергії MUST HBP18-3024 2в1 3 кВт 3200 Втг, 288х348х490, 33 кг</name>
       <name_ua>Система зберігання електроенергії MUST HBP18-3024 2в1 3 кВт 3200 Втг, 288х348х490, 33 кг</name_ua>
       <categoryId>7</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>43641</priceuah>
       <url>https://avtonomka.com.ua/product/systema-zberihannia-elektroenerhii-must-hbp18-3024/152738.html</url>
       <vendor>MUST</vendor>
@@ -413,6 +437,7 @@
       <name>Комплект автономного енергоживлення: Must PV18-3224VPM II 24V 3.2kW + MUST LP1600-24100, 25.6V 100Ah, LiFePO4</name>
       <name_ua>Комплект автономного енергоживлення: Must PV18-3224VPM II 24V 3.2kW + MUST LP1600-24100, 25.6V 100Ah, LiFePO4</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>41118</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv18-3224vpm-ii-must-lp1600-24100/143938.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/143938.png</image>
@@ -426,6 +451,7 @@
       <name>Акумуляторна батарея Dyness BX51100 51.2v 100ah, 5.12kwh LiFePo4, Trade IN</name>
       <name_ua>Акумуляторна батарея Dyness BX51100 51.2v 100ah, 5.12kwh LiFePo4, Trade IN</name_ua>
       <categoryId>2</categoryId>
+      <portal_category_id>5280501</portal_category_id>
       <priceuah>34568</priceuah>
       <url>https://avtonomka.com.ua/product/dyness-bx51100/150590.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/150590_1.jpg</image>
@@ -458,6 +484,7 @@
       <name>Акумулятор MUST LP15-12100 12V 100Ah LiFePO4, 330х173х217, 10.5 кг</name>
       <name_ua>Акумулятор MUST LP15-12100 12V 100Ah LiFePO4, 330х173х217, 10.5 кг</name_ua>
       <categoryId>6</categoryId>
+      <portal_category_id>5280501</portal_category_id>
       <priceuah>12598</priceuah>
       <url>https://avtonomka.com.ua/product/must-lp15-12100/150599.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/150599_1.jpg</image>
@@ -471,6 +498,7 @@
       <name>Безперебійник для роутера TTN DC1036P 12000 mAh DC Mini UPS for Wifi Router</name>
       <name_ua>Безперебійник для роутера TTN DC1036P 12000 mAh DC Mini UPS for Wifi Router</name_ua>
       <categoryId>5</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>1660</priceuah>
       <url>https://avtonomka.com.ua/product/ttn-dc1036p-12000-mah-dc-mini-ups-for/150649.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/150649_1.jpg</image>
@@ -478,7 +506,6 @@
       <image>https://avtonomka.com.ua/assets/images/products/150649_3.jpg</image>
       <image>https://avtonomka.com.ua/assets/images/products/150649_4.jpg</image>
       <image>https://avtonomka.com.ua/assets/images/products/150649_5.jpg</image>
-      <vendor>TTN</vendor>
       <vendorCode>DC1036P</vendorCode>
       <available>true</available>
       <description><![CDATA[<p>Безперебійник для роутера TTN DC1036P 12000 mAh DC Mini UPS for WiFi Router</p><p>TTN DC1036P — компактний міні ДБЖ для роутера, який допомагає підтримувати роботу Wi-Fi під час відключення електроенергії. Вбудований акумулятор ємністю 12000 mAh забезпечує резервне живлення роутера та іншого сумісного мережевого обладнання.</p><p>Такий безперебійник для роутера зручно використовувати вдома або в офісі, коли важливо залишатися на зв&apos;язку навіть під час перебоїв з електропостачанням. TTN DC1036P підключається між блоком живлення та роутером і автоматично переходить на живлення від акумулятора при зникненні напруги в мережі.</p><p>Компактний корпус не займає багато місця, тому DC Mini UPS для WiFi роутера можна розмістити безпосередньо біля мережевого обладнання. Ємність 12000 mAh дозволяє довше підтримувати роботу підключеного пристрою порівняно з невеликими резервними акумуляторами.</p><p>TTN DC1036P стане практичним рішенням для резервного живлення роутера, коли під час відключень електроенергії потрібно зберегти доступ до Wi-Fi та інтернету.</p><p>Характеристики:</p><p>виробник: TTN<br>модель: DC1036P<br>тип: DC Mini UPS<br>ємність акумулятора: 12000 mAh<br>призначення: резервне живлення роутера та мережевого обладнання<br>тип обладнання: ДБЖ для Wi-Fi роутера<br>формат: компактний міні ДБЖ</p>]]></description>
@@ -488,6 +515,7 @@
       <name>Акумуляторна батарея DEYE SE-F5 Pro-C 51.2V 100 Аh, 404х547х141, 45 кг, LiFePO4 5.12kWh</name>
       <name_ua>Акумуляторна батарея DEYE SE-F5 Pro-C 51.2V 100 Аh, 404х547х141, 45 кг, LiFePO4 5.12kWh</name_ua>
       <categoryId>2</categoryId>
+      <portal_category_id>5280501</portal_category_id>
       <priceuah>39967</priceuah>
       <url>https://avtonomka.com.ua/product/deye-se-f5-pro-c/150676.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/150676_1.jpg</image>
@@ -530,6 +558,7 @@
       <name>Гібридний інвертор Must PV18-1012VPK 1 кВт 12 В, 297.5х468х125, 5 кг</name>
       <name_ua>Гібридний інвертор Must PV18-1012VPK 1 кВт 12 В, 297.5х468х125, 5 кг</name_ua>
       <categoryId>1</categoryId>
+      <portal_category_id>5140401</portal_category_id>
       <priceuah>9745</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv18-1012vpk/150825.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/150825_1.jpg</image>
@@ -571,6 +600,7 @@
       <name>Сонячний кабель KBE Solar 6 мм, 500 м (бухта), чорний, Німеччина</name>
       <name_ua>Сонячний кабель KBE Solar 6 мм, 500 м (бухта), чорний, Німеччина</name_ua>
       <categoryId>4</categoryId>
+      <portal_category_id>14190408</portal_category_id>
       <priceuah>33723</priceuah>
       <url>https://avtonomka.com.ua/product/kbe-solar-6-mm-500-m-bukhta-chornyi-nimechchyna/146741.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/146741_1.jpg</image>
@@ -584,6 +614,7 @@
       <name>Комплект силових кабелів Dyness 4AWG 1000V VW1 2050мм</name>
       <name_ua>Комплект силових кабелів Dyness 4AWG 1000V VW1 2050мм</name_ua>
       <categoryId>4</categoryId>
+      <portal_category_id>14190408</portal_category_id>
       <priceuah>1926</priceuah>
       <url>https://avtonomka.com.ua/product/dyness-4awg/145284.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/145284_1.jpg</image>
@@ -597,6 +628,7 @@
       <name>Сонячний кабель KBE 6 мм 1 м, Німеччина</name>
       <name_ua>Сонячний кабель KBE 6 мм 1 м, Німеччина</name_ua>
       <categoryId>4</categoryId>
+      <portal_category_id>14190408</portal_category_id>
       <priceuah>67</priceuah>
       <url>https://avtonomka.com.ua/product/kbe-6-mm-1-m-nimechchyna/151777.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/151777_1.jpg</image>
@@ -610,6 +642,7 @@
       <name>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48314-EU 51.2V 314Ah 16kWh</name>
       <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48314-EU 51.2V 314Ah 16kWh</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>109664</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv19-6048exp-felicity-fla48314-eu/151790.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/151790.jpg</image>
@@ -621,6 +654,7 @@
       <name>Комплект силових кабелів 25 мм 1 м, 2 шт., мідь, мідні накінечники М8</name>
       <name_ua>Комплект силових кабелів 25 мм 1 м, 2 шт., мідь, мідні накінечники М8</name_ua>
       <categoryId>4</categoryId>
+      <portal_category_id>14190408</portal_category_id>
       <priceuah>849</priceuah>
       <url>https://avtonomka.com.ua/product/25-mm-1-m-2-sht-mid-midni-nakinechnyky-m8/151847.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/151847_1.jpg</image>
@@ -632,6 +666,7 @@
       <name>Комплект силових кабелів 25 мм 50см, 2 шт., мідь, мідні накінечники М8</name>
       <name_ua>Комплект силових кабелів 25 мм 50см, 2 шт., мідь, мідні накінечники М8</name_ua>
       <categoryId>4</categoryId>
+      <portal_category_id>14190408</portal_category_id>
       <priceuah>389</priceuah>
       <url>https://avtonomka.com.ua/product/25-mm-50sm-2-sht-mid-midni-nakinechnyky-m8/151848.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/151848_1.jpg</image>
@@ -643,6 +678,7 @@
       <name>Комплект силових кабелів 25 мм 1.5м, 2 шт., мідь, мідні накінечники М8</name>
       <name_ua>Комплект силових кабелів 25 мм 1.5м, 2 шт., мідь, мідні накінечники М8</name_ua>
       <categoryId>4</categoryId>
+      <portal_category_id>14190408</portal_category_id>
       <priceuah>1410</priceuah>
       <url>https://avtonomka.com.ua/product/25-mm-1-5m-2-sht-mid-midni-nakinechnyky-m8/151849.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/151849_1.jpg</image>
@@ -654,6 +690,7 @@
       <name>Комплект силових кабелів 25 мм 75см, 2 шт., мідь, мідні накінечники М8</name>
       <name_ua>Комплект силових кабелів 25 мм 75см, 2 шт., мідь, мідні накінечники М8</name_ua>
       <categoryId>4</categoryId>
+      <portal_category_id>14190408</portal_category_id>
       <priceuah>745</priceuah>
       <url>https://avtonomka.com.ua/product/25-mm-75sm-2-sht-mid-midni-nakinechnyky-m8/151850.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/151850_1.jpg</image>
@@ -665,6 +702,7 @@
       <name>Комплект силових кабелів 25 мм 1 м, 2 шт., мідь, мідні накінечники М10</name>
       <name_ua>Комплект силових кабелів 25 мм 1 м, 2 шт., мідь, мідні накінечники М10</name_ua>
       <categoryId>4</categoryId>
+      <portal_category_id>14190408</portal_category_id>
       <priceuah>849</priceuah>
       <url>https://avtonomka.com.ua/product/25-mm-1-m-2-sht-mid-midni-nakinechnyky-m10/151851.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/151851_1.jpg</image>
@@ -676,6 +714,7 @@
       <name>Комплект силових кабелів 25 мм 50см, 2 шт., мідь, мідні накінечники М10</name>
       <name_ua>Комплект силових кабелів 25 мм 50см, 2 шт., мідь, мідні накінечники М10</name_ua>
       <categoryId>4</categoryId>
+      <portal_category_id>14190408</portal_category_id>
       <priceuah>389</priceuah>
       <url>https://avtonomka.com.ua/product/25-mm-50sm-2-sht-mid-midni-nakinechnyky-m10/151852.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/151852_1.jpg</image>
@@ -687,6 +726,7 @@
       <name>Комплект силових кабелів 25 мм 1.5м, 2 шт., мідь, мідні накінечники М10</name>
       <name_ua>Комплект силових кабелів 25 мм 1.5м, 2 шт., мідь, мідні накінечники М10</name_ua>
       <categoryId>4</categoryId>
+      <portal_category_id>14190408</portal_category_id>
       <priceuah>1410</priceuah>
       <url>https://avtonomka.com.ua/product/25-mm-1-5m-2-sht-mid-midni-nakinechnyky-m10/151853.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/151853_1.jpg</image>
@@ -698,6 +738,7 @@
       <name>Комплект силових кабелів 25 мм 75см, 2 шт., мідь, мідні накінечники М10</name>
       <name_ua>Комплект силових кабелів 25 мм 75см, 2 шт., мідь, мідні накінечники М10</name_ua>
       <categoryId>4</categoryId>
+      <portal_category_id>14190408</portal_category_id>
       <priceuah>745</priceuah>
       <url>https://avtonomka.com.ua/product/25-mm-75sm-2-sht-mid-midni-nakinechnyky-m10/151854.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/151854_1.jpg</image>
@@ -709,6 +750,7 @@
       <name>Гібридний інвертор Felicity IVEM4024-II 4 кВт 24 В, 430х310х120, 10.4 кг</name>
       <name_ua>Гібридний інвертор Felicity IVEM4024-II 4 кВт 24 В, 430х310х120, 10.4 кг</name_ua>
       <categoryId>1</categoryId>
+      <portal_category_id>5140401</portal_category_id>
       <priceuah>18821</priceuah>
       <url>https://avtonomka.com.ua/product/felicity-ivem4024-ii/152086.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152086.jpg</image>
@@ -728,6 +770,7 @@
       <name>Акумуляторна батарея Felicity FLA24230 25.6V 230Ah LiFePO4, 547х400х280, 52.5 кг</name>
       <name_ua>Акумуляторна батарея Felicity FLA24230 25.6V 230Ah LiFePO4, 547х400х280, 52.5 кг</name_ua>
       <categoryId>2</categoryId>
+      <portal_category_id>5280501</portal_category_id>
       <priceuah>38947</priceuah>
       <url>https://avtonomka.com.ua/product/felicity-fla24230/152173.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152173.jpg</image>
@@ -747,6 +790,7 @@
       <name>Акумуляторна батарея Felicity FLA24280 25.6V 280Ah LiFePO4, 700х430х253, 71 кг</name>
       <name_ua>Акумуляторна батарея Felicity FLA24280 25.6V 280Ah LiFePO4, 700х430х253, 71 кг</name_ua>
       <categoryId>2</categoryId>
+      <portal_category_id>5280501</portal_category_id>
       <priceuah>58107</priceuah>
       <url>https://avtonomka.com.ua/product/felicity-fla24280/152174.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152174.jpg</image>
@@ -760,6 +804,7 @@
       <name>Акумуляторна батарея Felicity FLA48230 51.2V 230Ah LiFePO4, 783x450x274, 97 кг</name>
       <name_ua>Акумуляторна батарея Felicity FLA48230 51.2V 230Ah LiFePO4, 783x450x274, 97 кг</name_ua>
       <categoryId>2</categoryId>
+      <portal_category_id>5280501</portal_category_id>
       <priceuah>69141</priceuah>
       <url>https://avtonomka.com.ua/product/felicity-fla48230/152175.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152175.jpg</image>
@@ -796,6 +841,7 @@
       <name>Комплект автономного енергоживлення: Felicity IVEM4024-II 24В 4 кВт+ Felicity FLA24230 25.6V 230Ah</name>
       <name_ua>Комплект автономного енергоживлення: Felicity IVEM4024-II 24В 4 кВт+ Felicity FLA24230 25.6V 230Ah</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>57918</priceuah>
       <url>https://avtonomka.com.ua/product/felicity-ivem4024-ii-felicity-fla24230/152214.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152214.jpg</image>
@@ -808,6 +854,7 @@
       <name>Комплект автономного енергоживлення: Felicity IVEM4024-II 24В 4 кВт+ Felicity FLA24280 25.6V 280Ah</name>
       <name_ua>Комплект автономного енергоживлення: Felicity IVEM4024-II 24В 4 кВт+ Felicity FLA24280 25.6V 280Ah</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>77077</priceuah>
       <url>https://avtonomka.com.ua/product/felicity-ivem4024-ii-felicity-fla24280/152215.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152215.jpg</image>
@@ -820,6 +867,7 @@
       <name>Комплект автономного енергоживлення: Felicity IVEM4024-II 24В 4 кВт+ MUST LP16-24100 25.6V 100Ah</name>
       <name_ua>Комплект автономного енергоживлення: Felicity IVEM4024-II 24В 4 кВт+ MUST LP16-24100 25.6V 100Ah</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>46482</priceuah>
       <url>https://avtonomka.com.ua/product/felicity-ivem4024-ii-must-lp16-24100/152216.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152216.png</image>
@@ -831,6 +879,7 @@
       <name>Акумуляторна батарея MUST LP16-24100, 25.6V 100Ah, 442х485.5х177, 23 кг, LiFePO4</name>
       <name_ua>Акумуляторна батарея MUST LP16-24100, 25.6V 100Ah, 442х485.5х177, 23 кг, LiFePO4</name_ua>
       <categoryId>2</categoryId>
+      <portal_category_id>5280501</portal_category_id>
       <priceuah>27536</priceuah>
       <url>https://avtonomka.com.ua/product/must-lp16-24100/143477.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/143477_1.jpg</image>
@@ -850,6 +899,7 @@
       <name>Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi, 309х505х147, 14 кг</name>
       <name_ua>Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi, 309х505х147, 14 кг</name_ua>
       <categoryId>1</categoryId>
+      <portal_category_id>5140401</portal_category_id>
       <priceuah>23770</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv19-6048exp/150935.html</url>
       <image>https://dfi2.com.ua/images/150935_1.jpg</image>
@@ -867,6 +917,7 @@
       <name>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + MUST LP1600-48100 48v 100ah, LiFePo4</name>
       <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + MUST LP1600-48100 48v 100ah, LiFePo4</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>60737</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv19-6048exp-must-lp1600-48100/151283.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/151283.png</image>
@@ -879,6 +930,7 @@
       <name>Комплект автономного енергоживлення: Felicity IVEM4024-II 24В 4 кВт+ MUST LP16-24200, 25.6V 200Ah</name>
       <name_ua>Комплект автономного енергоживлення: Felicity IVEM4024-II 24В 4 кВт+ MUST LP16-24200, 25.6V 200Ah</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>56238</priceuah>
       <url>https://avtonomka.com.ua/product/felicity-ivem4024-ii-must-lp16-24200/152217.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152217.png</image>
@@ -890,6 +942,7 @@
       <name>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48230 51.2V 230Ah</name>
       <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48230 51.2V 230Ah</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>92611</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv19-6048exp-felicity-fla48230/152219.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152219.jpg</image>
@@ -901,6 +954,7 @@
       <name>Комплект автономного енергоживлення: Must PV18-3224VPM II+ Felicity FLA24230 25.6V 230Ah</name>
       <name_ua>Комплект автономного енергоживлення: Must PV18-3224VPM II+ Felicity FLA24230 25.6V 230Ah</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>52554</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv18-3224vpm-ii-felicity-fla24230/152220.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152220.jpg</image>
@@ -912,6 +966,7 @@
       <name>Комплект автономного енергоживлення: Must PV18-3224VPM II+ Felicity FLA24280 25.6V 280Ah</name>
       <name_ua>Комплект автономного енергоживлення: Must PV18-3224VPM II+ Felicity FLA24280 25.6V 280Ah</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>71714</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv18-3224vpm-ii-felicity-fla24280/152221.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152221.jpg</image>
@@ -923,6 +978,7 @@
       <name>Сонячний кабель KBE Solar 6 мм, 500 м (бухта), червоний, Німеччина</name>
       <name_ua>Сонячний кабель KBE Solar 6 мм, 500 м (бухта), червоний, Німеччина</name_ua>
       <categoryId>4</categoryId>
+      <portal_category_id>14190408</portal_category_id>
       <priceuah>33723</priceuah>
       <url>https://avtonomka.com.ua/product/kbe-solar-6-mm-500-m-bukhta-chervonyi-nimechchyna/152253.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152253.jpg</image>
@@ -936,6 +992,7 @@
       <name>Акумулятор MUST LP15-24100 25.6V 100Ah LiFePO4, 522х240х218, 23 кг</name>
       <name_ua>Акумулятор MUST LP15-24100 25.6V 100Ah LiFePO4, 522х240х218, 23 кг</name_ua>
       <categoryId>6</categoryId>
+      <portal_category_id>5280501</portal_category_id>
       <priceuah>25645</priceuah>
       <url>https://avtonomka.com.ua/product/must-lp15-24100/152264.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/152264_1.jpg</image>
@@ -949,6 +1006,7 @@
       <name>Акумуляторна батарея MUST LP16-48300, 51.2V 300Ah, 490х923х265, 117 кг, LiFePO4</name>
       <name_ua>Акумуляторна батарея MUST LP16-48300, 51.2V 300Ah, 490х923х265, 117 кг, LiFePO4</name_ua>
       <categoryId>2</categoryId>
+      <portal_category_id>5280501</portal_category_id>
       <priceuah>83184</priceuah>
       <url>https://avtonomka.com.ua/product/must-lp16-48300/152265.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/152265_1.png</image>
@@ -962,6 +1020,7 @@
       <name>Акумуляторна батарея Felicity FLB48314TG1-H 51.2V 314Ah, з підігрівом, 895х450х235, 121 кг</name>
       <name_ua>Акумуляторна батарея Felicity FLB48314TG1-H 51.2V 314Ah, з підігрівом, 895х450х235, 121 кг</name_ua>
       <categoryId>2</categoryId>
+      <portal_category_id>5280501</portal_category_id>
       <priceuah>87699</priceuah>
       <url>https://avtonomka.com.ua/product/felicity-flb48314tg1-h/152270.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152270.jpg</image>
@@ -1000,6 +1059,7 @@
       <name>Акумуляторна батарея Felicity FLB48100WG1-H 51.2V 100Ah LiFePO4, з підігрівом, LiFePO4, 650х450х174, 48.5 кг</name>
       <name_ua>Акумуляторна батарея Felicity FLB48100WG1-H 51.2V 100Ah LiFePO4, з підігрівом, LiFePO4, 650х450х174, 48.5 кг</name_ua>
       <categoryId>2</categoryId>
+      <portal_category_id>5280501</portal_category_id>
       <priceuah>39549</priceuah>
       <url>https://avtonomka.com.ua/product/felicity-flb48100wg1-h/152296.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152296.jpg</image>
@@ -1018,6 +1078,7 @@
       <name>Акумуляторна батарея Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом, LiFePO4, 683х450х258, 91 кг</name>
       <name_ua>Акумуляторна батарея Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом, LiFePO4, 683х450х258, 91 кг</name_ua>
       <categoryId>2</categoryId>
+      <portal_category_id>5280501</portal_category_id>
       <priceuah>71909</priceuah>
       <url>https://avtonomka.com.ua/product/felicity-flb48230wg1-h/152297.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152297.jpg</image>
@@ -1031,6 +1092,7 @@
       <name>Комплект автономного енергоживлення: Must PV18-1012VPK, 12 В, 1000 Вт+ MUST LP15-12100 12V 100Ah LiFePO4</name>
       <name_ua>Комплект автономного енергоживлення: Must PV18-1012VPK, 12 В, 1000 Вт+ MUST LP15-12100 12V 100Ah LiFePO4</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>22417</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv18-1012vpk-must-lp15-12100/152375.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152375.jpg</image>
@@ -1043,6 +1105,7 @@
       <name>Акумуляторна батарея Felicity FLA48171 51.2V 171Ah LiFePO4, 735х433х188, 68 кг</name>
       <name_ua>Акумуляторна батарея Felicity FLA48171 51.2V 171Ah LiFePO4, 735х433х188, 68 кг</name_ua>
       <categoryId>2</categoryId>
+      <portal_category_id>5280501</portal_category_id>
       <priceuah>57906</priceuah>
       <url>https://avtonomka.com.ua/product/felicity-fla48171/152469.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/152469_2.jpg</image>
@@ -1064,6 +1127,7 @@
       <name>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом</name>
       <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>63018</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv19-6048exp-felicity-flb48100wg1-h/152473.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152473.jpg</image>
@@ -1075,6 +1139,7 @@
       <name>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48171 51.2V 171Ah LiFePO4</name>
       <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48171 51.2V 171Ah LiFePO4</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>81376</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv19-6048exp-felicity-fla48171/152495.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152495.jpg</image>
@@ -1086,6 +1151,7 @@
       <name>Комплект автономного енергоживлення: Must PV18-3224 VPM II 3.2 кВт + MUST LP15-24100 25.6V 100Ah LiFePO4</name>
       <name_ua>Комплект автономного енергоживлення: Must PV18-3224 VPM II 3.2 кВт + MUST LP15-24100 25.6V 100Ah LiFePO4</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>37377</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv18-3224-vpm-ii-must-lp15-24100/152505.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152505.jpg</image>
@@ -1098,6 +1164,7 @@
       <name>Комплект автономного енергоживлення: Felicity IVEM4024-II 24В 4 кВт+ MUST LP15-24100 25.6V 100Ah LiFePO4</name>
       <name_ua>Комплект автономного енергоживлення: Felicity IVEM4024-II 24В 4 кВт+ MUST LP15-24100 25.6V 100Ah LiFePO4</name_ua>
       <categoryId>3</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>42741</priceuah>
       <url>https://avtonomka.com.ua/product/felicity-ivem4024-ii-must-lp15-24100/152513.html</url>
       <image>https://avtonomka.com.ua/assets/images/komp/152513.jpg</image>
@@ -1109,6 +1176,7 @@
       <name>Система зберігання електроенергії MUST HBP18-3024 OS 2в1 3 кВт 3072 Втг, 288х348х490, 33 кг</name>
       <name_ua>Система зберігання електроенергії MUST HBP18-3024 OS 2в1 3 кВт 3072 Втг, 288х348х490, 33 кг</name_ua>
       <categoryId>7</categoryId>
+      <portal_category_id>14191106</portal_category_id>
       <priceuah>43641</priceuah>
       <url>https://avtonomka.com.ua/product/systema-zberihannia-elektroenerhii-must-hbp18-3024-os/152516.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/152516_1.jpg</image>
@@ -1122,6 +1190,7 @@
       <name>Гібридний інвертор Must PV18-1512 VPM II 1.5 кВт 12 В, 255х318х110, 5.5 кг</name>
       <name_ua>Гібридний інвертор Must PV18-1512 VPM II 1.5 кВт 12 В, 255х318х110, 5.5 кг</name_ua>
       <categoryId>1</categoryId>
+      <portal_category_id>5140401</portal_category_id>
       <priceuah>11173</priceuah>
       <url>https://avtonomka.com.ua/product/must-pv18-1512-vpm-ii/152517.html</url>
       <image>https://avtonomka.com.ua/assets/images/products/152517_1.png</image>
