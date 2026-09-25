@@ -255,12 +255,12 @@
   {
     "id": "150416",
     "title": "Система зберігання електроенергії MUST HBP19-5548 VPM 2в1 5.5 кВт 5120 Втг, 486х850х160, 58 кг",
-    "image_link": "https://dfi2.com.ua/images/150416_1.jpg",
+    "image_link": "assets/images/products/150416_1.jpg",
     "additional_images": [
-      "https://dfi2.com.ua/images/150416_2.jpg",
-      "https://dfi2.com.ua/images/150416_3.jpg",
-      "https://dfi2.com.ua/images/150416_4.jpg",
-      "https://dfi2.com.ua/images/150416_5.jpg"
+      "assets/images/products/150416_2.jpg",
+      "assets/images/products/150416_3.jpg",
+      "assets/images/products/150416_4.jpg",
+      "assets/images/products/150416_5.jpg"
     ],
     "price": "70215 UAH",
     "availability": "in_stock",
@@ -317,12 +317,12 @@
   {
     "id": "150935",
     "title": "Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi, 309х505х147, 14 кг",
-    "image_link": "https://dfi2.com.ua/images/150935_1.jpg",
+    "image_link": "assets/images/products/150935_1.jpg",
     "additional_images": [
-      "https://dfi2.com.ua/images/150935_2.jpg",
-      "https://dfi2.com.ua/images/150935_3.jpg",
-      "https://dfi2.com.ua/images/150935_4.jpg",
-      "https://dfi2.com.ua/images/150935_5.jpg"
+      "assets/images/products/150935_2.jpg",
+      "assets/images/products/150935_3.jpg",
+      "assets/images/products/150935_4.jpg",
+      "assets/images/products/150935_5.jpg"
     ],
     "price": "23934 UAH",
     "availability": "in_stock",
@@ -1210,7 +1210,7 @@
   {
     "id": "152738",
     "title": "Система зберігання електроенергії MUST HBP18-3024 2в1 3 кВт 3200 Втг, 288х348х490, 33 кг",
-    "image_link": "",
+    "image_link": "assets/images/products/152738_1.jpg",
     "additional_images": [],
     "price": "43941 UAH",
     "availability": "in_stock",
