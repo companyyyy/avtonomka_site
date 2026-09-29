@@ -1,7 +1,7 @@
 """
-Generates ultradomik.xml - the Prom.ua import feed (Price.ua format, RU + UA)
+Generates prom_file.xml - the Prom.ua import feed (Price.ua format, RU + UA)
 for the reseller client Ultradomik.
-Served at https://avtonomka.com.ua/ultradomik.xml - the client's Prom
+Served at https://avtonomka.com.ua/prom_file.xml - the client's Prom
 cabinet pulls it by link.
 
 Prices and stock come from the Google Sheet "Price Avtonomka під XML"
@@ -30,7 +30,7 @@ SITE_URL = 'https://avtonomka.com.ua'
 SHEET_CSV = ('https://docs.google.com/spreadsheets/d/'
              '1hUWLK904eO_jA5wtsJRXIcuyfwHeNJdeo5CteDCY4-0/export?format=csv&gid=1763821507')
 USD_RATE = 45
-OUT_PATH = ROOT / 'ultradomik.xml'
+OUT_PATH = ROOT / 'prom_file.xml'
 
 # Group ids are fixed so a group keeps its identity in the client's Prom
 # cabinet across imports - never renumber, only append. portal = Prom
@@ -282,11 +282,11 @@ def main():
                 '\n  </catalog>\n  <items>\n' + '\n'.join(items) + '\n  </items>\n</shop>\n')
 
     if FORBIDDEN.search(xml):
-        sys.exit('ultradomik.xml: forbidden substring found, file not written')
+        sys.exit('prom_file.xml: forbidden substring found, file not written')
     ElementTree.fromstring(xml.encode('utf-8'))
     OUT_PATH.write_text(xml, encoding='utf-8')
 
-    print(f'ultradomik.xml generated: {len(items)} items -> {OUT_PATH}')
+    print(f'prom_file.xml generated: {len(items)} items -> {OUT_PATH}')
     labels = {'no_data': 'Немає даних/фото на сайті (пропущено)',
               'no_price': 'Без ціни (пропущено)',
               'no_photo': 'Немає фото на білому фоні (пропущено)',
