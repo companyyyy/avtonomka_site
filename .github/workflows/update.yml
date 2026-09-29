@@ -37,7 +37,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install Python dependencies
-        run: pip install requests beautifulsoup4 lxml
+        run: pip install requests beautifulsoup4 lxml pillow
 
       - name: Fetch products feed
         run: python scripts/fetch_feed.py
@@ -59,6 +59,9 @@ jobs:
       - name: Generate Prom.ua feed
         run: node scripts/generate_prom_feed.js
 
+      - name: Generate Ultradomik Prom.ua feed
+        run: python scripts/generate_ultradomik_feed.py
+
       - name: Generate static product pages and prerendered catalog grids
         run: node scripts/generate_static_pages.js
 
@@ -67,7 +70,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add products.json data/telegram_posts.json catalog_export.csv feed.xml prom.xml \
+          git add products.json data/telegram_posts.json catalog_export.csv feed.xml prom.xml ultradomik.xml \
                   product/ catalog.html catalog/*.html sitemap.xml .htaccess assets/images/prom/ \
                   articles.html blog.html index.html
           if git diff --cached --quiet; then
