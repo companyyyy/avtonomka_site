@@ -266,7 +266,9 @@ def main():
             if vendor in PROM_VENDORS:
                 lines.append(f'      <vendor>{esc(vendor)}</vendor>')
             lines += [f'      <image>{esc(u)}</image>' for u in images[:10]]
-            lines += [f'      <param name="{esc(n)}">{esc(v)}</param>' for n, v in specs_ua[:100]]
+            # No <param>: Prom validates them against each marketplace category's
+            # own characteristic list and flagged ours as invalid data. Specs stay
+            # in the description (both languages).
             lines += [
                 f'      <description>{cdata(desc_ru)}</description>',
                 f'      <description_ua>{cdata(desc_ua)}</description_ua>',
