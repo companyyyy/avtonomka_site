@@ -62,21 +62,35 @@ function feedDescription(p) {
   return kw ? `${base} ${kw}` : base;
 }
 
-/* Фото на білому фоні спеціально для Merchant: assets/images/merchant/<id>.jpg
-   (напр. комплекти, зібрані з білих фото інвертора й акумулятора). Якщо файл
-   є - він стає головним фото замість брендованого image_link сайту. */
+/* Фото в Merchant:
+   - комплекти - брендовані фото сайту з фоном (image_link), як на сайті;
+   - окремі товари - фото постачальника на білому фоні (p.prom_images,
+     їх качає scripts/fetch_feed.py:download_prom_images);
+   - assets/images/merchant/<id>.jpg - ручне біле фото, коли в постачальника
+     його немає (має пріоритет над усім).
+   Немає білого фото -> лишається image_link, бо без фото Merchant товар відхиляє. */
 const MERCHANT_IMAGES_DIR = path.join(__dirname, '../assets/images/merchant');
 const merchantImages = fs.existsSync(MERCHANT_IMAGES_DIR)
   ? Object.fromEntries(fs.readdirSync(MERCHANT_IMAGES_DIR)
       .map(f => [path.parse(f).name, `assets/images/merchant/${f}`]))
   : {};
 
+function isKit(p) {
+  return /Комплект/i.test(p.product_type || '');
+}
+
+function feedImages(p) {
+  if (merchantImages[p.id]) return [merchantImages[p.id]];
+  if (!isKit(p) && (p.prom_images || []).length) return p.prom_images;
+  return [p.image_link, ...(p.additional_images || [])];
+}
+
 function buildItem(p) {
   const price = formatPrice(p.price);
   if (!price) return '';
 
-  const mainImage = merchantImages[p.id] || p.image_link;
-  const additionalImages = (merchantImages[p.id] ? [] : (p.additional_images || []))
+  const [mainImage, ...restImages] = feedImages(p).filter(Boolean);
+  const additionalImages = restImages
     .slice(0, 10)
     .map(img => `      <g:additional_image_link>${escXml(absoluteUrl(img))}</g:additional_image_link>`)
     .join('\n');
