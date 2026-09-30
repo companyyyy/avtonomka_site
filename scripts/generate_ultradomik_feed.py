@@ -7,7 +7,8 @@ cabinet pulls it by link.
 Prices and stock come from the Google Sheet "Price Avtonomka під XML"
 (USD, converted at a fixed rate of 45). Texts (UA + RU), specs and search
 queries come from data/ultradomik/products.json; photos are the supplier's
-white-background copies from products.json -> prom_images, re-checked here.
+white-background copies from products.json -> prom_images (plus a photo taken
+from the sheet in assets/images/ultradomik/<id>.jpg, if any), re-checked here.
 A sheet row with no entry in data/ultradomik/products.json, no price or no
 white-background photo is left out and listed in the report.
 
@@ -230,8 +231,12 @@ def main():
             def t(s, lang):
                 return s.replace('{color}', variant.get(lang, '')) if variant else s
 
+            # Photo taken from the price sheet itself (flattened on white) goes
+            # first; then the supplier's white-background copies.
+            sheet_photos = [f'assets/images/ultradomik/{f.name}'
+                            for f in sorted((ROOT / 'assets/images/ultradomik').glob(f'{pid}.*'))]
             images, rejected = [], 0
-            for img in p.get('prom_images') or []:
+            for img in sheet_photos + list(p.get('prom_images') or []):
                 path = ROOT / img
                 if FORBIDDEN.search(img) or not path.exists() or white_ratio(path) < 0.95:
                     rejected += 1
