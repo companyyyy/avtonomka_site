@@ -70,7 +70,7 @@
       <name_ua>Гібридний інвертор MUST PV19-4024 EXP 4 кВт 24 В</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>14400.00</priceuah>
+      <priceuah>13950.00</priceuah>
       <available>true</available>
       <vendorCode>PV19-4024EXP</vendorCode>
       <vendor>MUST</vendor>
@@ -85,7 +85,7 @@
       <name_ua>Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>20700.00</priceuah>
+      <priceuah>19350.00</priceuah>
       <available>true</available>
       <vendorCode>PV19-6048EXP</vendorCode>
       <vendor>MUST</vendor>
@@ -125,7 +125,7 @@
       <name_ua>Гібридний інвертор Felicity IVEM6048-II 6 кВт 48 В</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>21600.00</priceuah>
+      <priceuah>20925.00</priceuah>
       <available>true</available>
       <vendorCode>IVEM6048-II</vendorCode>
       <vendor>Felicity</vendor>
@@ -182,7 +182,7 @@
       <name_ua>Акумулятор MUST LP15-12100 12 В 100 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>10350.00</priceuah>
+      <priceuah>9900.00</priceuah>
       <available>true</available>
       <vendorCode>LP15-12100</vendorCode>
       <vendor>MUST</vendor>
@@ -194,28 +194,12 @@
       <keywords>аккумулятор MUST LP15-12100, аккумулятор 12 В 100 Аh, аккумулятор LiFePO4 12 В, аккумулятор для ИБП, аккумулятор для инвертора 12 В, батарея маст, литиевый аккумулятор 12 В, LP15-12100</keywords>
       <keywords_ua>акумулятор MUST LP15-12100, акумулятор 12 В 100 Аh, акумулятор LiFePO4 12 В, акумулятор для ДБЖ, акумулятор для інвертора 12 В, батарея маст, літієвий акумулятор 12 В, LP15-12100</keywords_ua>
     </item>
-    <item id="152264" selling_type="r">
-      <name>Аккумулятор MUST LP15-24100 25,6 В 100 А·ч LiFePO4</name>
-      <name_ua>Акумулятор MUST LP15-24100 25,6 В 100 А·год LiFePO4</name_ua>
-      <categoryId>2</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>23400.00</priceuah>
-      <available>true</available>
-      <vendorCode>LP15-24100</vendorCode>
-      <vendor>MUST</vendor>
-      <image>https://avtonomka.com.ua/assets/images/prom/152264_1.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152264_2.jpg</image>
-      <description><![CDATA[<p>MUST LP15-24100 – аккумулятор LiFePO4 с номинальным напряжением 25,6 В и емкостью 100 А·ч для инверторов и ИБП на 24 В.</p><p>Энергоемкость около 2,56 кВт·ч. Батарея подходит для резервного питания дома или офиса и для систем с солнечными панелями.</p><p>Размеры 522 × 240 × 218 мм, вес 23 кг.</p><p><strong>Где используется:</strong></p><ul><li>резервное питание дома или квартиры</li><li>автономное электропитание</li><li>работа с гибридным инвертором</li><li>накопление энергии от солнечных панелей</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Номинальное напряжение: 25,6 В</li><li>Емкость: 100 А·ч</li><li>Тип аккумулятора: LiFePO4</li><li>Размеры: 522 × 240 × 218 мм</li><li>Вес: 23 кг</li></ul>]]></description>
-      <description_ua><![CDATA[<p>MUST LP15-24100 – акумулятор LiFePO4 з номінальною напругою 25,6 В і ємністю 100 А·год для інверторів і ДБЖ на 24 В.</p><p>Енергоємність близько 2,56 кВт·год. Батарея підходить для резервного живлення будинку чи офісу та для систем із сонячними панелями.</p><p>Розміри 522 × 240 × 218 мм, вага 23 кг.</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку або квартири</li><li>автономне електроживлення</li><li>робота з гібридним інвертором</li><li>накопичення енергії від сонячних панелей</li></ul><p><strong>Основні характеристики:</strong></p><ul><li>Номінальна напруга: 25,6 В</li><li>Ємність: 100 А·год</li><li>Тип акумулятора: LiFePO4</li><li>Розміри: 522 × 240 × 218 мм</li><li>Вага: 23 кг</li></ul>]]></description_ua>
-      <keywords>аккумулятор MUST LP15-24100, аккумулятор 24 В 100 Аh, аккумулятор 25.6 В, аккумулятор LiFePO4 24 В, аккумулятор для инвертора 24 В, батарея маст, аккумулятор для ИБП, LP15-24100</keywords>
-      <keywords_ua>акумулятор MUST LP15-24100, акумулятор 24 В 100 Аh, акумулятор 25.6 В, акумулятор LiFePO4 24 В, акумулятор для інвертора 24 В, батарея маст, акумулятор для ДБЖ, LP15-24100</keywords_ua>
-    </item>
     <item id="143477" selling_type="r">
       <name>Аккумуляторная батарея MUST LP16-24100 25,6 В 100 А·ч LiFePO4</name>
       <name_ua>Акумуляторна батарея MUST LP16-24100 25,6 В 100 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>24750.00</priceuah>
+      <priceuah>24300.00</priceuah>
       <available>true</available>
       <vendorCode>LP16-24100</vendorCode>
       <vendor>MUST</vendor>
@@ -290,7 +274,7 @@
       <name_ua>Акумулятор Felicity FLA12100PG2 12,8 В 100 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>11250.00</priceuah>
+      <priceuah>11025.00</priceuah>
       <available>true</available>
       <vendorCode>FLA12100PG2</vendorCode>
       <vendor>Felicity</vendor>
@@ -321,7 +305,7 @@
       <name_ua>Акумуляторна батарея Felicity FLB48100WG1-H 51,2 В 100 А·год LiFePO4 з підігрівом</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>36000.00</priceuah>
+      <priceuah>35100.00</priceuah>
       <available>true</available>
       <vendorCode>FLB48100WG1-H</vendorCode>
       <vendor>Felicity</vendor>
@@ -340,7 +324,7 @@
       <name_ua>Акумуляторна батарея Felicity FLA48230 51,2 В 230 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>67500.00</priceuah>
+      <priceuah>66600.00</priceuah>
       <available>true</available>
       <vendorCode>FLA48230</vendorCode>
       <vendor>Felicity</vendor>
@@ -403,7 +387,7 @@
       <name_ua>Система зберігання електроенергії MUST HBP18-1212 OS 2 в 1 1,2 кВт 1280 Вт·год</name_ua>
       <categoryId>3</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>20250.00</priceuah>
+      <priceuah>18900.00</priceuah>
       <available>true</available>
       <vendorCode>HBP18-1212OS</vendorCode>
       <vendor>MUST</vendor>
