@@ -433,6 +433,51 @@ function buildRelatedArticlesBlock(p, articlesBySlug) {
     `      </div>\n    </section>\n  </main>`;
 }
 
+/* Datasheet buttons, rendered into the static page (same labels as
+   assets/js/product.js). In the template they sit hidden with href="#" until
+   JS fills them in - crawlers (Google/Merchant) saw a "#" link. Now: a real
+   file -> real href, visible; no file -> the block is dropped entirely. */
+function truncateLabel(text, max) {
+  if (!text) return '';
+  text = text.trim();
+  if (text.length <= max) return text;
+  let cut = text.slice(0, max);
+  const lastSpace = cut.lastIndexOf(' ');
+  if (lastSpace > max * 0.6) cut = cut.slice(0, lastSpace);
+  return cut.trim().replace(/[,;:.\s]+$/, '') + '…';
+}
+
+function datasheetExists(link) {
+  if (!link) return false;
+  if (/^https?:\/\//.test(link)) return true;
+  return fs.existsSync(path.join(__dirname, '..', link.replace(/^\//, '')));
+}
+
+function renderDatasheetButtons(html, p) {
+  const isKit = !!(p.link && p.link2 && /Комплект/i.test(p.product_type || ''));
+  const parts = isKit
+    ? (p.title || '').replace(/^Комплект автономного енергоживлення:\s*/i, '')
+        .split(/\s*\+\s*/).map(s => s.trim().replace(/,\s*$/, ''))
+    : [];
+  const [invModel, batModel] = parts.length === 2 ? parts : [null, null];
+
+  const buttons = [
+    { wrap: 'product-datasheet-wrap', btn: 'btn-datasheet', link: p.link,
+      label: isKit
+        ? '↓ Даташит для інвертора' + (invModel ? ': ' + truncateLabel(invModel, 45) : '')
+        : '↓ Скачати даташит для ' + truncateLabel(p.title || 'товару', 55) },
+    { wrap: 'product-datasheet-wrap-2', btn: 'btn-datasheet-2', link: p.link2,
+      label: '↓ Даташит для акумулятора' + (batModel ? ': ' + truncateLabel(batModel, 45) : '') },
+  ];
+  for (const b of buttons) {
+    const re = new RegExp(`\\s*<div id="${b.wrap}" class="hidden"([^>]*)>\\s*<a id="${b.btn}" href="#"([^>]*?) data-i18n="[^"]*">[\\s\\S]*?</a>\\s*</div>`);
+    html = html.replace(re, (m, wrapAttrs, aAttrs) => datasheetExists(b.link)
+      ? `\n                <div id="${b.wrap}"${wrapAttrs}>\n                  <a id="${b.btn}" href="${escapeHtml(b.link)}"${aAttrs}>${escapeHtml(b.label)}</a>\n                </div>`
+      : '');
+  }
+  return html;
+}
+
 function generateProductPage(p, template, articlesBySlug) {
   const title       = p.title || '';
   const isVirtual   = !!p.virtual;
@@ -563,6 +608,8 @@ function generateProductPage(p, template, articlesBySlug) {
     '<div id="product-desc" class="product-desc"></div>',
     `<div id="product-desc" class="product-desc">${descText}</div>`
   );
+
+  html = renderDatasheetButtons(html, p);
 
   const relatedArticles = buildRelatedArticlesBlock(p, articlesBySlug);
   if (relatedArticles) {

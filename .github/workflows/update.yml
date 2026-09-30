@@ -56,6 +56,12 @@ jobs:
       - name: Generate merchant feed
         run: node scripts/generate_merchant_feed.js
 
+      # Brand / MPN / condition / no keyword tail / no RU text. Red step if broken,
+      # but never blocks the price update itself.
+      - name: Validate merchant feed
+        run: python scripts/validate_merchant_feed.py
+        continue-on-error: true
+
       - name: Generate Prom.ua feed
         run: node scripts/generate_prom_feed.js
 

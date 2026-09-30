@@ -207,9 +207,9 @@ def main() -> int:
         # /product/<slug>/<id>.html URL. Only a genuinely new id gets a
         # fresh slug here.
         p["slug"] = existing_slug.get(p["id"]) or slugify(p.get("title", ""))
-        # Merchant-feed-only bilingual keywords, appended to <g:description>
-        # by generate_merchant_feed.js — never read by product.js /
-        # generate_static_pages.js / catalog.js, so never shown on-site.
+        # Bilingual keywords for the Prom feed (generate_prom_feed.js) — never
+        # read by product.js / generate_static_pages.js / catalog.js, so never
+        # shown on-site. No longer appended to the Merchant feed (keyword stuffing).
         # Regenerated fresh every run (no carry-forward needed like slug —
         # unlike a URL, these don't need to stay stable if the title changes).
         kw = build_merchant_keywords(p)
