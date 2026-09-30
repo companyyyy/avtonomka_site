@@ -1,8 +1,8 @@
 """
-Generates prom_file.xml - the Prom.ua import feed (Price.ua format, RU + UA)
-for the reseller client Ultradomik.
-Served at https://avtonomka.com.ua/prom_file.xml - the client's Prom
-cabinet pulls it by link.
+Generates the Prom.ua import feeds (Price.ua format, RU + UA) for reseller
+clients - see FEEDS: prom_file.xml (Ultradomik) and invertorshop.xml
+(ІнверторШоп, +18%). Served at https://avtonomka.com.ua/<file> - each
+client's Prom cabinet pulls its own file by link.
 
 Prices and stock come from the Google Sheet "Price Avtonomka під XML"
 (USD, converted at a fixed rate of 45). Texts (UA + RU), specs and search
@@ -33,7 +33,12 @@ SITE_URL = 'https://avtonomka.com.ua'
 SHEET_CSV = ('https://docs.google.com/spreadsheets/d/'
              '1hUWLK904eO_jA5wtsJRXIcuyfwHeNJdeo5CteDCY4-0/export?format=csv&gid=1763821507')
 USD_RATE = 45
-OUT_PATH = ROOT / 'prom_file.xml'
+# One build, several files: the same items, texts, photos and categories,
+# only the price differs. (file, price markup)
+FEEDS = [
+    ('prom_file.xml', 1.00),      # Ultradomik
+    ('invertorshop.xml', 1.18),   # ІнверторШоп: +18% on every price
+]
 
 # Group ids are fixed so a group keeps its identity in the client's Prom
 # cabinet across imports - never renumber, only append. portal = Prom
@@ -242,7 +247,7 @@ def main():
         if not entry:
             report['no_data'].append(name)
             continue
-        price_uah = round(price_usd * entry.get('mult', 1) * USD_RATE, 2)
+        price_uah = price_usd * entry.get('mult', 1) * USD_RATE
 
         for pid in entry['ids']:
             # feed_only: sold through the feed only, no product card on the site
@@ -292,7 +297,7 @@ def main():
                 f'      <name_ua>{esc(t(e["name_ua"], "ua"))}</name_ua>',
                 f'      <categoryId>{cat}</categoryId>',
                 f'      <portal_category_id>{e.get("portal") or CATEGORIES[cat][1]}</portal_category_id>',
-                f'      <priceuah>{price_uah:.2f}</priceuah>',
+                '      <priceuah>{price}</priceuah>',
                 f'      <available>{"true" if in_stock(stock) else "false"}</available>',
             ]
             if code:
@@ -310,19 +315,20 @@ def main():
                 f'      <keywords_ua>{esc(cap_keywords(e["kw_ua"]))}</keywords_ua>',
                 '    </item>',
             ]
-            items.append('\n'.join(lines))
+            items.append((price_uah, '\n'.join(lines)))
 
     catalog = '\n'.join(f'    <category id="{cid}" portal_id="{CATEGORIES[cid][1]}">{esc(CATEGORIES[cid][0])}</category>'
                         for cid in sorted(used_cats))
-    xml = clean('<?xml version="1.0" encoding="UTF-8"?>\n<shop>\n  <catalog>\n' + catalog +
-                '\n  </catalog>\n  <items>\n' + '\n'.join(items) + '\n  </items>\n</shop>\n')
+    for fname, markup in FEEDS:
+        body = '\n'.join(text.replace('{price}', f'{round(base * markup, 2):.2f}') for base, text in items)
+        xml = clean('<?xml version="1.0" encoding="UTF-8"?>\n<shop>\n  <catalog>\n' + catalog +
+                    '\n  </catalog>\n  <items>\n' + body + '\n  </items>\n</shop>\n')
+        if FORBIDDEN.search(xml):
+            sys.exit(f'{fname}: forbidden substring found, file not written')
+        ElementTree.fromstring(xml.encode('utf-8'))
+        (ROOT / fname).write_text(xml, encoding='utf-8')
+        print(f'{fname} generated: {len(items)} items, markup x{markup:.2f}')
 
-    if FORBIDDEN.search(xml):
-        sys.exit('prom_file.xml: forbidden substring found, file not written')
-    ElementTree.fromstring(xml.encode('utf-8'))
-    OUT_PATH.write_text(xml, encoding='utf-8')
-
-    print(f'prom_file.xml generated: {len(items)} items -> {OUT_PATH}')
     labels = {'no_data': 'Немає даних/фото на сайті (пропущено)',
               'no_price': 'Без ціни (пропущено)',
               'no_photo': 'Немає фото на білому фоні (пропущено)',
