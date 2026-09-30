@@ -50,7 +50,7 @@
       <name_ua>Гібридний інвертор MUST PV18-3224 VPM II 3,2 кВт 24 В</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>5140401</portal_category_id>
-      <priceuah>11925.00</priceuah>
+      <priceuah>10575.00</priceuah>
       <available>true</available>
       <vendorCode>PV18-3224VPM II</vendorCode>
       <vendor>MUST</vendor>
@@ -124,7 +124,7 @@
       <name_ua>Акумуляторна батарея Deye SE-F5 Pro-C 51,2 В 100 А·год 5,12 кВт·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>5280501</portal_category_id>
-      <priceuah>36900.00</priceuah>
+      <priceuah>36000.00</priceuah>
       <available>true</available>
       <vendorCode>SE-F5 Pro-C</vendorCode>
       <vendor>Deye</vendor>
@@ -144,7 +144,7 @@
       <name_ua>Акумуляторна батарея Dyness DL5.0C 51,2 В 100 А·год LiFePO4 з підігрівом</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>5280501</portal_category_id>
-      <priceuah>38250.00</priceuah>
+      <priceuah>36000.00</priceuah>
       <available>true</available>
       <vendorCode>DL5.0C Heating</vendorCode>
       <vendor>Dyness</vendor>
@@ -333,7 +333,7 @@
       <name_ua>Акумуляторна батарея Felicity FLA48314-EU 51,2 В 314 А·год 16 кВт·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>5280501</portal_category_id>
-      <priceuah>81000.00</priceuah>
+      <priceuah>78750.00</priceuah>
       <available>true</available>
       <vendorCode>FLA48314-EU</vendorCode>
       <vendor>Felicity</vendor>
@@ -351,7 +351,7 @@
       <name_ua>Акумуляторна батарея Felicity FLB48314TG1-H 51,2 В 314 А·год 16 кВт·год LiFePO4 з підігрівом</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>5280501</portal_category_id>
-      <priceuah>82350.00</priceuah>
+      <priceuah>81000.00</priceuah>
       <available>true</available>
       <vendorCode>FLB48314TG1-H</vendorCode>
       <vendor>Felicity</vendor>
