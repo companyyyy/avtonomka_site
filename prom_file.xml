@@ -3,14 +3,14 @@
   <catalog>
     <category id="1" portal_id="5140401">Гібридні інвертори</category>
     <category id="2" portal_id="5280501">Акумулятори</category>
-    <category id="3" portal_id="14191106">Системи зберігання електроенергії 2 в 1</category>
-    <category id="4" portal_id="14190408">Кабельна продукція</category>
-    <category id="5" portal_id="71109">Зарядні станції</category>
-    <category id="6" portal_id="14191106">Безперебійники для роутерів</category>
-    <category id="7" portal_id="14190906">Автоматичне введення резерву (АВР)</category>
+    <category id="3" portal_id="14191103">Системи зберігання електроенергії 2 в 1</category>
+    <category id="4" portal_id="14190499">Кабельна продукція</category>
+    <category id="5" portal_id="500901">Зарядні станції</category>
+    <category id="6" portal_id="14191103">Безперебійники для роутерів</category>
+    <category id="7" portal_id="14190603">Автоматичне введення резерву (АВР)</category>
     <category id="8" portal_id="14190901">Реле напруги</category>
     <category id="9" portal_id="620">Таймери</category>
-    <category id="10" portal_id="15370304">Лічильники електроенергії</category>
+    <category id="10" portal_id="15370308">Лічильники електроенергії</category>
   </catalog>
   <items>
     <item id="150825" selling_type="r">
@@ -405,7 +405,7 @@
       <name>Система хранения электроэнергии MUST HBP18-1212 OS 2 в 1 1,2 кВт 1280 Вт·ч</name>
       <name_ua>Система зберігання електроенергії MUST HBP18-1212 OS 2 в 1 1,2 кВт 1280 Вт·год</name_ua>
       <categoryId>3</categoryId>
-      <portal_category_id>14191106</portal_category_id>
+      <portal_category_id>14191103</portal_category_id>
       <priceuah>20250.00</priceuah>
       <available>true</available>
       <vendorCode>HBP18-1212OS</vendorCode>
@@ -420,7 +420,7 @@
       <name>Система хранения электроэнергии MUST HBP18-3024 2 в 1 3 кВт 3200 Вт·ч</name>
       <name_ua>Система зберігання електроенергії MUST HBP18-3024 2 в 1 3 кВт 3200 Вт·год</name_ua>
       <categoryId>3</categoryId>
-      <portal_category_id>14191106</portal_category_id>
+      <portal_category_id>14191103</portal_category_id>
       <priceuah>41850.00</priceuah>
       <available>true</available>
       <vendorCode>HBP18-3024</vendorCode>
@@ -435,7 +435,7 @@
       <name>Система хранения электроэнергии MUST HBP18-3024 OS 2 в 1 3 кВт 3072 Вт·ч</name>
       <name_ua>Система зберігання електроенергії MUST HBP18-3024 OS 2 в 1 3 кВт 3072 Вт·год</name_ua>
       <categoryId>3</categoryId>
-      <portal_category_id>14191106</portal_category_id>
+      <portal_category_id>14191103</portal_category_id>
       <priceuah>43200.00</priceuah>
       <available>true</available>
       <vendorCode>HBP18-3024OS</vendorCode>
@@ -450,7 +450,7 @@
       <name>Система хранения электроэнергии MUST HBP19-5548 VPM 2 в 1 5,5 кВт 5120 Вт·ч</name>
       <name_ua>Система зберігання електроенергії MUST HBP19-5548 VPM 2 в 1 5,5 кВт 5120 Вт·год</name_ua>
       <categoryId>3</categoryId>
-      <portal_category_id>14191106</portal_category_id>
+      <portal_category_id>14191103</portal_category_id>
       <priceuah>63000.00</priceuah>
       <available>true</available>
       <vendorCode>HBP19-5548VPM</vendorCode>
@@ -469,7 +469,7 @@
       <name>Солнечный кабель KBE Solar 6 мм², 500 м (бухта), красный, Германия</name>
       <name_ua>Сонячний кабель KBE Solar 6 мм², 500 м (бухта), червоний, Німеччина</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190408</portal_category_id>
+      <portal_category_id>14190499</portal_category_id>
       <priceuah>28125.00</priceuah>
       <available>true</available>
       <vendorCode>KBE Solar 6</vendorCode>
@@ -484,7 +484,7 @@
       <name>Солнечный кабель KBE Solar 6 мм², 500 м (бухта), черный, Германия</name>
       <name_ua>Сонячний кабель KBE Solar 6 мм², 500 м (бухта), чорний, Німеччина</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190408</portal_category_id>
+      <portal_category_id>14190499</portal_category_id>
       <priceuah>28125.00</priceuah>
       <available>true</available>
       <vendorCode>KBE Solar 6</vendorCode>
@@ -499,7 +499,7 @@
       <name>Солнечный кабель KBE 6 мм² 1 м, Германия</name>
       <name_ua>Сонячний кабель KBE 6 мм² 1 м, Німеччина</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190408</portal_category_id>
+      <portal_category_id>14190499</portal_category_id>
       <priceuah>63.00</priceuah>
       <available>true</available>
       <vendorCode>KBE Solar 6</vendorCode>
@@ -514,7 +514,7 @@
       <name>Комплект силовых кабелей 25 мм² 1,5 м, 2 шт., медь, медные наконечники М8</name>
       <name_ua>Комплект силових кабелів 25 мм² 1,5 м, 2 шт., мідь, мідні наконечники М8</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190408</portal_category_id>
+      <portal_category_id>14190499</portal_category_id>
       <priceuah>1305.00</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151849_1.jpg</image>
@@ -527,7 +527,7 @@
       <name>Комплект силовых кабелей 25 мм² 1,5 м, 2 шт., медь, медные наконечники М10</name>
       <name_ua>Комплект силових кабелів 25 мм² 1,5 м, 2 шт., мідь, мідні наконечники М10</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190408</portal_category_id>
+      <portal_category_id>14190499</portal_category_id>
       <priceuah>1305.00</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151853_1.jpg</image>
@@ -540,7 +540,7 @@
       <name>Комплект силовых кабелей 25 мм² 1 м, 2 шт., медь, медные наконечники М8</name>
       <name_ua>Комплект силових кабелів 25 мм² 1 м, 2 шт., мідь, мідні наконечники М8</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190408</portal_category_id>
+      <portal_category_id>14190499</portal_category_id>
       <priceuah>675.00</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151847_1.jpg</image>
@@ -553,7 +553,7 @@
       <name>Комплект силовых кабелей 25 мм² 1 м, 2 шт., медь, медные наконечники М10</name>
       <name_ua>Комплект силових кабелів 25 мм² 1 м, 2 шт., мідь, мідні наконечники М10</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190408</portal_category_id>
+      <portal_category_id>14190499</portal_category_id>
       <priceuah>675.00</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151851_1.jpg</image>
@@ -566,7 +566,7 @@
       <name>Комплект силовых кабелей 25 мм² 75 см, 2 шт., медь, медные наконечники М8</name>
       <name_ua>Комплект силових кабелів 25 мм² 75 см, 2 шт., мідь, мідні наконечники М8</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190408</portal_category_id>
+      <portal_category_id>14190499</portal_category_id>
       <priceuah>630.00</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151850_1.jpg</image>
@@ -579,7 +579,7 @@
       <name>Комплект силовых кабелей 25 мм² 75 см, 2 шт., медь, медные наконечники М10</name>
       <name_ua>Комплект силових кабелів 25 мм² 75 см, 2 шт., мідь, мідні наконечники М10</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190408</portal_category_id>
+      <portal_category_id>14190499</portal_category_id>
       <priceuah>630.00</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151854_1.jpg</image>
@@ -592,7 +592,7 @@
       <name>Комплект силовых кабелей 25 мм² 50 см, 2 шт., медь, медные наконечники М8</name>
       <name_ua>Комплект силових кабелів 25 мм² 50 см, 2 шт., мідь, мідні наконечники М8</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190408</portal_category_id>
+      <portal_category_id>14190499</portal_category_id>
       <priceuah>360.00</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151848_1.jpg</image>
@@ -605,7 +605,7 @@
       <name>Комплект силовых кабелей 25 мм² 50 см, 2 шт., медь, медные наконечники М10</name>
       <name_ua>Комплект силових кабелів 25 мм² 50 см, 2 шт., мідь, мідні наконечники М10</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190408</portal_category_id>
+      <portal_category_id>14190499</portal_category_id>
       <priceuah>360.00</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151852_1.jpg</image>
@@ -618,7 +618,7 @@
       <name>Зарядная станция EcoFlow DELTA 2 1800 Вт 1024 Вт·ч (EU)</name>
       <name_ua>Зарядна станція EcoFlow DELTA 2 1800 Вт 1024 Вт·год (EU)</name_ua>
       <categoryId>5</categoryId>
-      <portal_category_id>71109</portal_category_id>
+      <portal_category_id>500901</portal_category_id>
       <priceuah>32400.00</priceuah>
       <available>true</available>
       <vendorCode>DELTA 2 EU</vendorCode>
@@ -636,7 +636,7 @@
       <name>Зарядная станция EcoFlow DELTA 3 1024 Вт·ч 1800 Вт (китайские розетки, с переходниками)</name>
       <name_ua>Зарядна станція EcoFlow DELTA 3 1024 Вт·год 1800 Вт (китайські розетки, з перехідниками)</name_ua>
       <categoryId>5</categoryId>
-      <portal_category_id>71109</portal_category_id>
+      <portal_category_id>500901</portal_category_id>
       <priceuah>31950.00</priceuah>
       <available>true</available>
       <vendorCode>DELTA 3</vendorCode>
@@ -653,7 +653,7 @@
       <name>Автоматический переключатель ввода резерва АВР TOMZN TOQ5-100/2P 1 фаза 100 А</name>
       <name_ua>Автоматичний перемикач введення резерву АВР TOMZN TOQ5-100/2P 1 фаза 100 А</name_ua>
       <categoryId>7</categoryId>
-      <portal_category_id>14190906</portal_category_id>
+      <portal_category_id>14190603</portal_category_id>
       <priceuah>1125.00</priceuah>
       <available>true</available>
       <vendorCode>TOQ5-100/2P</vendorCode>
@@ -667,7 +667,7 @@
       <name>Автоматический переключатель ввода резерва АВР TOMZN TOQ5-100/4P 3 фазы 100 А</name>
       <name_ua>Автоматичний перемикач введення резерву АВР TOMZN TOQ5-100/4P 3 фази 100 А</name_ua>
       <categoryId>7</categoryId>
-      <portal_category_id>14190906</portal_category_id>
+      <portal_category_id>14190603</portal_category_id>
       <priceuah>1305.00</priceuah>
       <available>true</available>
       <vendorCode>TOQ5-100/4P</vendorCode>
@@ -681,7 +681,7 @@
       <name>Бесперебойник для роутера TTN DC1036P 12000 mAh, выходы 5/9/12 В, USB, PoE</name>
       <name_ua>Безперебійник для роутера TTN DC1036P 12000 mAh, виходи 5/9/12 В, USB, PoE</name_ua>
       <categoryId>6</categoryId>
-      <portal_category_id>14191106</portal_category_id>
+      <portal_category_id>14191103</portal_category_id>
       <priceuah>1485.00</priceuah>
       <available>true</available>
       <vendorCode>DC1036P</vendorCode>
@@ -753,7 +753,7 @@
       <name>Энергометр в розетку, ваттметр – счетчик электроэнергии с дисплеем</name>
       <name_ua>Енергометр у розетку, ватметр – лічильник електроенергії з дисплеєм</name_ua>
       <categoryId>10</categoryId>
-      <portal_category_id>15370304</portal_category_id>
+      <portal_category_id>15370308</portal_category_id>
       <priceuah>360.00</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/ultradomik/ud-enerhometr.jpg</image>

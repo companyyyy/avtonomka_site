@@ -37,18 +37,21 @@ OUT_PATH = ROOT / 'prom_file.xml'
 
 # Group ids are fixed so a group keeps its identity in the client's Prom
 # cabinet across imports - never renumber, only append. portal = Prom
-# marketplace category (same ids as scripts/generate_prom_feed.js).
+# marketplace category. Only ids from the client's Prom category list
+# (Prom.ua_categories_30_09_2026.xls) that are NOT marked «автовизначення» in
+# «Категорії без можливості редагування.xlsx» - otherwise Prom re-assigns the
+# category itself and flags the item ("категорію визначено автоматично").
 CATEGORIES = {
     1: ('Гібридні інвертори', 5140401),
     2: ('Акумулятори', 5280501),
-    3: ('Системи зберігання електроенергії 2 в 1', 14191106),
-    4: ('Кабельна продукція', 14190408),
-    5: ('Зарядні станції', 71109),  # Портативні зарядні пристрої (500901 not allowed in the client's Prom)
-    6: ('Безперебійники для роутерів', 14191106),
-    7: ('Автоматичне введення резерву (АВР)', 14190906),
+    3: ('Системи зберігання електроенергії 2 в 1', 14191103),
+    4: ('Кабельна продукція', 14190499),
+    5: ('Зарядні станції', 500901),
+    6: ('Безперебійники для роутерів', 14191103),
+    7: ('Автоматичне введення резерву (АВР)', 14190603),
     8: ('Реле напруги', 14190901),
     9: ('Таймери', 620),
-    10: ('Лічильники електроенергії', 15370304),
+    10: ('Лічильники електроенергії', 15370308),
 }
 
 USAGE = {
