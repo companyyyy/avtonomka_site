@@ -5,7 +5,7 @@
     <category id="2" portal_id="5280501">Акумулятори</category>
     <category id="3" portal_id="14191106">Системи зберігання електроенергії 2 в 1</category>
     <category id="4" portal_id="14190408">Кабельна продукція</category>
-    <category id="5" portal_id="500901">Зарядні станції</category>
+    <category id="5" portal_id="71109">Зарядні станції</category>
     <category id="6" portal_id="14191106">Безперебійники для роутерів</category>
     <category id="7" portal_id="14190906">Автоматичне введення резерву (АВР)</category>
     <category id="8" portal_id="14190901">Реле напруги</category>
@@ -618,7 +618,7 @@
       <name>Зарядная станция EcoFlow DELTA 2 1800 Вт 1024 Вт·ч (EU)</name>
       <name_ua>Зарядна станція EcoFlow DELTA 2 1800 Вт 1024 Вт·год (EU)</name_ua>
       <categoryId>5</categoryId>
-      <portal_category_id>500901</portal_category_id>
+      <portal_category_id>71109</portal_category_id>
       <priceuah>32400.00</priceuah>
       <available>true</available>
       <vendorCode>DELTA 2 EU</vendorCode>
@@ -636,7 +636,7 @@
       <name>Зарядная станция EcoFlow DELTA 3 1024 Вт·ч 1800 Вт (китайские розетки, с переходниками)</name>
       <name_ua>Зарядна станція EcoFlow DELTA 3 1024 Вт·год 1800 Вт (китайські розетки, з перехідниками)</name_ua>
       <categoryId>5</categoryId>
-      <portal_category_id>500901</portal_category_id>
+      <portal_category_id>71109</portal_category_id>
       <priceuah>31950.00</priceuah>
       <available>true</available>
       <vendorCode>DELTA 3</vendorCode>
