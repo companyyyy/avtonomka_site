@@ -9,6 +9,8 @@ Prices and stock come from the Google Sheet "Price Avtonomka під XML"
 queries come from data/ultradomik/products.json; photos are the supplier's
 white-background copies from products.json -> prom_images (plus a photo taken
 from the sheet in assets/images/ultradomik/<id>.jpg, if any), re-checked here.
+An entry with "feed_only": true has no product card on the site - its id is
+our own and its photo comes only from assets/images/ultradomik/.
 A sheet row with no entry in data/ultradomik/products.json, no price or no
 white-background photo is left out and listed in the report.
 
@@ -43,6 +45,10 @@ CATEGORIES = {
     4: ('Кабельна продукція', 14190408),
     5: ('Зарядні станції', 500901),
     6: ('Безперебійники для роутерів', 14191106),
+    7: ('Автоматичне введення резерву (АВР)', 14190906),
+    8: ('Реле напруги', 14190901),
+    9: ('Таймери', 620),
+    10: ('Лічильники електроенергії', 15370304),
 }
 
 USAGE = {
@@ -70,6 +76,22 @@ USAGE = {
          'резервне живлення мережевого обладнання'],
         ['питание роутера и ONU во время отключений', 'питание камер видеонаблюдения',
          'резервное питание сетевого оборудования']),
+    7: (['автоматичне перемикання між мережею та генератором', 'резервне живлення будинку, котеджу чи офісу',
+         'електрощити з резервним джерелом живлення'],
+        ['автоматическое переключение между сетью и генератором', 'резервное питание дома, коттеджа или офиса',
+         'электрощиты с резервным источником питания']),
+    8: (['захист побутової техніки від стрибків напруги', 'захист котла, холодильника, телевізора',
+         'живлення техніки від мережі з нестабільною напругою'],
+        ['защита бытовой техники от скачков напряжения', 'защита котла, холодильника, телевизора',
+         'питание техники от сети с нестабильным напряжением']),
+    9: (['увімкнення та вимкнення техніки за розкладом', 'освітлення, обігрівачі, бойлер, полив',
+         'економія електроенергії'],
+        ['включение и выключение техники по расписанию', 'освещение, обогреватели, бойлер, полив',
+         'экономия электроэнергии']),
+    10: (['контроль споживання електроенергії побутовою технікою', 'підбір інвертора чи зарядної станції під навантаження',
+          'економія електроенергії'],
+         ['контроль потребления электроэнергии бытовой техникой', 'подбор инвертора или зарядной станции под нагрузку',
+          'экономия электроэнергии']),
 }
 
 # Prom only keeps a vendor that exists in its manufacturer base; an unknown
@@ -217,7 +239,8 @@ def main():
         price_uah = round(price_usd * entry.get('mult', 1) * USD_RATE, 2)
 
         for pid in entry['ids']:
-            p = products.get(pid)
+            # feed_only: sold through the feed only, no product card on the site
+            p = products.get(pid) or ({'id': pid, 'title': ''} if entry.get('feed_only') else None)
             if not p:
                 report['no_data'].append(f'{name} (товару {pid} немає в products.json)')
                 continue
@@ -262,7 +285,7 @@ def main():
                 f'      <name>{esc(t(e["name_ru"], "ru"))}</name>',
                 f'      <name_ua>{esc(t(e["name_ua"], "ua"))}</name_ua>',
                 f'      <categoryId>{cat}</categoryId>',
-                f'      <portal_category_id>{CATEGORIES[cat][1]}</portal_category_id>',
+                f'      <portal_category_id>{e.get("portal") or CATEGORIES[cat][1]}</portal_category_id>',
                 f'      <priceuah>{price_uah:.2f}</priceuah>',
                 f'      <available>{"true" if in_stock(stock) else "false"}</available>',
             ]
