@@ -62,11 +62,21 @@ function feedDescription(p) {
   return kw ? `${base} ${kw}` : base;
 }
 
+/* Фото на білому фоні спеціально для Merchant: assets/images/merchant/<id>.jpg
+   (напр. комплекти, зібрані з білих фото інвертора й акумулятора). Якщо файл
+   є - він стає головним фото замість брендованого image_link сайту. */
+const MERCHANT_IMAGES_DIR = path.join(__dirname, '../assets/images/merchant');
+const merchantImages = fs.existsSync(MERCHANT_IMAGES_DIR)
+  ? Object.fromEntries(fs.readdirSync(MERCHANT_IMAGES_DIR)
+      .map(f => [path.parse(f).name, `assets/images/merchant/${f}`]))
+  : {};
+
 function buildItem(p) {
   const price = formatPrice(p.price);
   if (!price) return '';
 
-  const additionalImages = (p.additional_images || [])
+  const mainImage = merchantImages[p.id] || p.image_link;
+  const additionalImages = (merchantImages[p.id] ? [] : (p.additional_images || []))
     .slice(0, 10)
     .map(img => `      <g:additional_image_link>${escXml(absoluteUrl(img))}</g:additional_image_link>`)
     .join('\n');
@@ -77,7 +87,7 @@ function buildItem(p) {
       <g:title>${escXml(p.title)}</g:title>
       <g:description>${escXml(feedDescription(p))}</g:description>
       <g:link>${escXml(productLink(p))}</g:link>
-      <g:image_link>${escXml(absoluteUrl(p.image_link))}</g:image_link>
+      <g:image_link>${escXml(absoluteUrl(mainImage))}</g:image_link>
 ${additionalImages ? additionalImages + '\n' : ''}      <g:price>${price}</g:price>
       <g:availability>${availability(p.availability)}</g:availability>
       <g:condition>${escXml(p.condition || 'new')}</g:condition>
