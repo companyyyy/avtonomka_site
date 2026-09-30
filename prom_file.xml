@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <shop>
   <catalog>
-    <category id="1" portal_id="5140401">Гібридні інвертори</category>
-    <category id="2" portal_id="5280501">Акумулятори</category>
-    <category id="3" portal_id="14191103">Системи зберігання електроенергії 2 в 1</category>
-    <category id="4" portal_id="14190499">Кабельна продукція</category>
+    <category id="1" portal_id="501001">Гібридні інвертори</category>
+    <category id="2" portal_id="501001">Акумулятори</category>
+    <category id="3" portal_id="501001">Системи зберігання електроенергії 2 в 1</category>
+    <category id="4" portal_id="501001">Кабельна продукція</category>
     <category id="5" portal_id="500901">Зарядні станції</category>
-    <category id="6" portal_id="14191103">Безперебійники для роутерів</category>
-    <category id="7" portal_id="14190603">Автоматичне введення резерву (АВР)</category>
+    <category id="6" portal_id="501001">Безперебійники для роутерів</category>
+    <category id="7" portal_id="501001">Автоматичне введення резерву (АВР)</category>
   </catalog>
   <items>
     <item id="150825" selling_type="r">
       <name>Гибридный инвертор MUST PV18-1012VPK 1 кВт 12 В</name>
       <name_ua>Гібридний інвертор MUST PV18-1012VPK 1 кВт 12 В</name_ua>
       <categoryId>1</categoryId>
-      <portal_category_id>5140401</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>7875.00</priceuah>
       <available>true</available>
       <vendorCode>PV18-1012VPK</vendorCode>
@@ -35,7 +35,7 @@
       <name>Гибридный инвертор MUST PV18-1512 VPM II 1,5 кВт 12 В</name>
       <name_ua>Гібридний інвертор MUST PV18-1512 VPM II 1,5 кВт 12 В</name_ua>
       <categoryId>1</categoryId>
-      <portal_category_id>5140401</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>9450.00</priceuah>
       <available>true</available>
       <vendorCode>PV18-1512VPM II</vendorCode>
@@ -50,7 +50,7 @@
       <name>Гибридный инвертор MUST PV18-3224 VPM II 3,2 кВт 24 В</name>
       <name_ua>Гібридний інвертор MUST PV18-3224 VPM II 3,2 кВт 24 В</name_ua>
       <categoryId>1</categoryId>
-      <portal_category_id>5140401</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>10575.00</priceuah>
       <available>true</available>
       <vendorCode>PV18-3224VPM II</vendorCode>
@@ -69,7 +69,7 @@
       <name>Гибридный инвертор MUST PV19-4024 EXP 4 кВт 24 В</name>
       <name_ua>Гібридний інвертор MUST PV19-4024 EXP 4 кВт 24 В</name_ua>
       <categoryId>1</categoryId>
-      <portal_category_id>5140401</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>14400.00</priceuah>
       <available>true</available>
       <vendorCode>PV19-4024EXP</vendorCode>
@@ -84,7 +84,7 @@
       <name>Гибридный инвертор MUST PV19-6048EXP 6 кВт 48 В</name>
       <name_ua>Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В</name_ua>
       <categoryId>1</categoryId>
-      <portal_category_id>5140401</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>20700.00</priceuah>
       <available>true</available>
       <vendorCode>PV19-6048EXP</vendorCode>
@@ -104,7 +104,7 @@
       <name>Гибридный инвертор Felicity IVEM4024-II 4 кВт 24 В</name>
       <name_ua>Гібридний інвертор Felicity IVEM4024-II 4 кВт 24 В</name_ua>
       <categoryId>1</categoryId>
-      <portal_category_id>5140401</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>15750.00</priceuah>
       <available>true</available>
       <vendorCode>IVEM4024-II</vendorCode>
@@ -124,7 +124,7 @@
       <name>Гибридный инвертор Felicity IVEM6048-II 6 кВт 48 В</name>
       <name_ua>Гібридний інвертор Felicity IVEM6048-II 6 кВт 48 В</name_ua>
       <categoryId>1</categoryId>
-      <portal_category_id>5140401</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>21600.00</priceuah>
       <available>true</available>
       <vendorCode>IVEM6048-II</vendorCode>
@@ -145,7 +145,7 @@
       <name>Аккумуляторная батарея Deye SE-F5 Pro-C 51,2 В 100 А·ч 5,12 кВт·ч LiFePO4</name>
       <name_ua>Акумуляторна батарея Deye SE-F5 Pro-C 51,2 В 100 А·год 5,12 кВт·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
-      <portal_category_id>5280501</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>36000.00</priceuah>
       <available>true</available>
       <vendorCode>SE-F5 Pro-C</vendorCode>
@@ -165,7 +165,7 @@
       <name>Аккумуляторная батарея Dyness DL5.0C 51,2 В 100 А·ч LiFePO4 с подогревом</name>
       <name_ua>Акумуляторна батарея Dyness DL5.0C 51,2 В 100 А·год LiFePO4 з підігрівом</name_ua>
       <categoryId>2</categoryId>
-      <portal_category_id>5280501</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>36000.00</priceuah>
       <available>true</available>
       <vendorCode>DL5.0C Heating</vendorCode>
@@ -181,7 +181,7 @@
       <name>Аккумулятор MUST LP15-12100 12 В 100 А·ч LiFePO4</name>
       <name_ua>Акумулятор MUST LP15-12100 12 В 100 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
-      <portal_category_id>5280501</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>10350.00</priceuah>
       <available>true</available>
       <vendorCode>LP15-12100</vendorCode>
@@ -198,7 +198,7 @@
       <name>Аккумулятор MUST LP15-24100 25,6 В 100 А·ч LiFePO4</name>
       <name_ua>Акумулятор MUST LP15-24100 25,6 В 100 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
-      <portal_category_id>5280501</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>23400.00</priceuah>
       <available>true</available>
       <vendorCode>LP15-24100</vendorCode>
@@ -214,7 +214,7 @@
       <name>Аккумуляторная батарея MUST LP16-24100 25,6 В 100 А·ч LiFePO4</name>
       <name_ua>Акумуляторна батарея MUST LP16-24100 25,6 В 100 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
-      <portal_category_id>5280501</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>24750.00</priceuah>
       <available>true</available>
       <vendorCode>LP16-24100</vendorCode>
@@ -234,7 +234,7 @@
       <name>Аккумуляторная батарея MUST LP16-24200 25,6 В 200 А·ч LiFePO4</name>
       <name_ua>Акумуляторна батарея MUST LP16-24200 25,6 В 200 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
-      <portal_category_id>5280501</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>33750.00</priceuah>
       <available>true</available>
       <vendorCode>LP16-24200</vendorCode>
@@ -254,7 +254,7 @@
       <name>Аккумуляторная батарея MUST LP16-48100 51,2 В 100 А·ч LiFePO4</name>
       <name_ua>Акумуляторна батарея MUST LP16-48100 51,2 В 100 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
-      <portal_category_id>5280501</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>33750.00</priceuah>
       <available>true</available>
       <vendorCode>LP16-48100</vendorCode>
@@ -274,7 +274,7 @@
       <name>Аккумуляторная батарея MUST LP16-48300 51,2 В 300 А·ч LiFePO4</name>
       <name_ua>Акумуляторна батарея MUST LP16-48300 51,2 В 300 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
-      <portal_category_id>5280501</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>77850.00</priceuah>
       <available>true</available>
       <vendorCode>LP16-48300</vendorCode>
@@ -289,7 +289,7 @@
       <name>Аккумулятор Felicity FLA12100PG2 12,8 В 100 А·ч LiFePO4</name>
       <name_ua>Акумулятор Felicity FLA12100PG2 12,8 В 100 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
-      <portal_category_id>5280501</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>11250.00</priceuah>
       <available>true</available>
       <vendorCode>FLA12100PG2</vendorCode>
@@ -305,7 +305,7 @@
       <name>Аккумуляторная батарея Felicity FLA24280 25,6 В 280 А·ч LiFePO4</name>
       <name_ua>Акумуляторна батарея Felicity FLA24280 25,6 В 280 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
-      <portal_category_id>5280501</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>54000.00</priceuah>
       <available>true</available>
       <vendorCode>FLA24280</vendorCode>
@@ -320,7 +320,7 @@
       <name>Аккумуляторная батарея Felicity FLB48100WG1-H 51,2 В 100 А·ч LiFePO4 с подогревом</name>
       <name_ua>Акумуляторна батарея Felicity FLB48100WG1-H 51,2 В 100 А·год LiFePO4 з підігрівом</name_ua>
       <categoryId>2</categoryId>
-      <portal_category_id>5280501</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>36000.00</priceuah>
       <available>true</available>
       <vendorCode>FLB48100WG1-H</vendorCode>
@@ -339,7 +339,7 @@
       <name>Аккумуляторная батарея Felicity FLA48230 51,2 В 230 А·ч LiFePO4</name>
       <name_ua>Акумуляторна батарея Felicity FLA48230 51,2 В 230 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
-      <portal_category_id>5280501</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>67500.00</priceuah>
       <available>true</available>
       <vendorCode>FLA48230</vendorCode>
@@ -354,7 +354,7 @@
       <name>Аккумуляторная батарея Felicity FLB48230WG1-H 51,2 В 230 А·ч LiFePO4 с подогревом</name>
       <name_ua>Акумуляторна батарея Felicity FLB48230WG1-H 51,2 В 230 А·год LiFePO4 з підігрівом</name_ua>
       <categoryId>2</categoryId>
-      <portal_category_id>5280501</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>66600.00</priceuah>
       <available>true</available>
       <vendorCode>FLB48230WG1-H</vendorCode>
@@ -369,7 +369,7 @@
       <name>Аккумуляторная батарея Felicity FLA48314-EU 51,2 В 314 А·ч 16 кВт·ч LiFePO4</name>
       <name_ua>Акумуляторна батарея Felicity FLA48314-EU 51,2 В 314 А·год 16 кВт·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
-      <portal_category_id>5280501</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>78750.00</priceuah>
       <available>true</available>
       <vendorCode>FLA48314-EU</vendorCode>
@@ -387,7 +387,7 @@
       <name>Аккумуляторная батарея Felicity FLB48314TG1-H 51,2 В 314 А·ч 16 кВт·ч LiFePO4 с подогревом</name>
       <name_ua>Акумуляторна батарея Felicity FLB48314TG1-H 51,2 В 314 А·год 16 кВт·год LiFePO4 з підігрівом</name_ua>
       <categoryId>2</categoryId>
-      <portal_category_id>5280501</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>81000.00</priceuah>
       <available>true</available>
       <vendorCode>FLB48314TG1-H</vendorCode>
@@ -402,7 +402,7 @@
       <name>Система хранения электроэнергии MUST HBP18-1212 OS 2 в 1 1,2 кВт 1280 Вт·ч</name>
       <name_ua>Система зберігання електроенергії MUST HBP18-1212 OS 2 в 1 1,2 кВт 1280 Вт·год</name_ua>
       <categoryId>3</categoryId>
-      <portal_category_id>14191103</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>20250.00</priceuah>
       <available>true</available>
       <vendorCode>HBP18-1212OS</vendorCode>
@@ -417,7 +417,7 @@
       <name>Система хранения электроэнергии MUST HBP18-3024 2 в 1 3 кВт 3200 Вт·ч</name>
       <name_ua>Система зберігання електроенергії MUST HBP18-3024 2 в 1 3 кВт 3200 Вт·год</name_ua>
       <categoryId>3</categoryId>
-      <portal_category_id>14191103</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>41850.00</priceuah>
       <available>true</available>
       <vendorCode>HBP18-3024</vendorCode>
@@ -432,7 +432,7 @@
       <name>Система хранения электроэнергии MUST HBP18-3024 OS 2 в 1 3 кВт 3072 Вт·ч</name>
       <name_ua>Система зберігання електроенергії MUST HBP18-3024 OS 2 в 1 3 кВт 3072 Вт·год</name_ua>
       <categoryId>3</categoryId>
-      <portal_category_id>14191103</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>43200.00</priceuah>
       <available>true</available>
       <vendorCode>HBP18-3024OS</vendorCode>
@@ -447,7 +447,7 @@
       <name>Система хранения электроэнергии MUST HBP19-5548 VPM 2 в 1 5,5 кВт 5120 Вт·ч</name>
       <name_ua>Система зберігання електроенергії MUST HBP19-5548 VPM 2 в 1 5,5 кВт 5120 Вт·год</name_ua>
       <categoryId>3</categoryId>
-      <portal_category_id>14191103</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>63000.00</priceuah>
       <available>true</available>
       <vendorCode>HBP19-5548VPM</vendorCode>
@@ -466,7 +466,7 @@
       <name>Солнечный кабель KBE Solar 6 мм², 500 м (бухта), красный, Германия</name>
       <name_ua>Сонячний кабель KBE Solar 6 мм², 500 м (бухта), червоний, Німеччина</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190499</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>28125.00</priceuah>
       <available>true</available>
       <vendorCode>KBE Solar 6</vendorCode>
@@ -481,7 +481,7 @@
       <name>Солнечный кабель KBE Solar 6 мм², 500 м (бухта), черный, Германия</name>
       <name_ua>Сонячний кабель KBE Solar 6 мм², 500 м (бухта), чорний, Німеччина</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190499</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>28125.00</priceuah>
       <available>true</available>
       <vendorCode>KBE Solar 6</vendorCode>
@@ -496,7 +496,7 @@
       <name>Солнечный кабель KBE 6 мм² 1 м, Германия</name>
       <name_ua>Сонячний кабель KBE 6 мм² 1 м, Німеччина</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190499</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>63.00</priceuah>
       <available>true</available>
       <vendorCode>KBE Solar 6</vendorCode>
@@ -511,7 +511,7 @@
       <name>Комплект силовых кабелей 25 мм² 1,5 м, 2 шт., медь, медные наконечники М8</name>
       <name_ua>Комплект силових кабелів 25 мм² 1,5 м, 2 шт., мідь, мідні наконечники М8</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190499</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>1305.00</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151849_1.jpg</image>
@@ -524,7 +524,7 @@
       <name>Комплект силовых кабелей 25 мм² 1,5 м, 2 шт., медь, медные наконечники М10</name>
       <name_ua>Комплект силових кабелів 25 мм² 1,5 м, 2 шт., мідь, мідні наконечники М10</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190499</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>1305.00</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151853_1.jpg</image>
@@ -537,7 +537,7 @@
       <name>Комплект силовых кабелей 25 мм² 1 м, 2 шт., медь, медные наконечники М8</name>
       <name_ua>Комплект силових кабелів 25 мм² 1 м, 2 шт., мідь, мідні наконечники М8</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190499</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>675.00</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151847_1.jpg</image>
@@ -550,7 +550,7 @@
       <name>Комплект силовых кабелей 25 мм² 1 м, 2 шт., медь, медные наконечники М10</name>
       <name_ua>Комплект силових кабелів 25 мм² 1 м, 2 шт., мідь, мідні наконечники М10</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190499</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>675.00</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151851_1.jpg</image>
@@ -563,7 +563,7 @@
       <name>Комплект силовых кабелей 25 мм² 75 см, 2 шт., медь, медные наконечники М8</name>
       <name_ua>Комплект силових кабелів 25 мм² 75 см, 2 шт., мідь, мідні наконечники М8</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190499</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>630.00</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151850_1.jpg</image>
@@ -576,7 +576,7 @@
       <name>Комплект силовых кабелей 25 мм² 75 см, 2 шт., медь, медные наконечники М10</name>
       <name_ua>Комплект силових кабелів 25 мм² 75 см, 2 шт., мідь, мідні наконечники М10</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190499</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>630.00</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151854_1.jpg</image>
@@ -589,7 +589,7 @@
       <name>Комплект силовых кабелей 25 мм² 50 см, 2 шт., медь, медные наконечники М8</name>
       <name_ua>Комплект силових кабелів 25 мм² 50 см, 2 шт., мідь, мідні наконечники М8</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190499</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>360.00</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151848_1.jpg</image>
@@ -602,7 +602,7 @@
       <name>Комплект силовых кабелей 25 мм² 50 см, 2 шт., медь, медные наконечники М10</name>
       <name_ua>Комплект силових кабелів 25 мм² 50 см, 2 шт., мідь, мідні наконечники М10</name_ua>
       <categoryId>4</categoryId>
-      <portal_category_id>14190499</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>360.00</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151852_1.jpg</image>
@@ -650,7 +650,7 @@
       <name>Автоматический переключатель ввода резерва АВР TOMZN TOQ5-100/2P 1 фаза 100 А</name>
       <name_ua>Автоматичний перемикач введення резерву АВР TOMZN TOQ5-100/2P 1 фаза 100 А</name_ua>
       <categoryId>7</categoryId>
-      <portal_category_id>14190603</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>1125.00</priceuah>
       <available>true</available>
       <vendorCode>TOQ5-100/2P</vendorCode>
@@ -664,7 +664,7 @@
       <name>Автоматический переключатель ввода резерва АВР TOMZN TOQ5-100/4P 3 фазы 100 А</name>
       <name_ua>Автоматичний перемикач введення резерву АВР TOMZN TOQ5-100/4P 3 фази 100 А</name_ua>
       <categoryId>7</categoryId>
-      <portal_category_id>14190603</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>1305.00</priceuah>
       <available>true</available>
       <vendorCode>TOQ5-100/4P</vendorCode>
@@ -678,7 +678,7 @@
       <name>Бесперебойник для роутера TTN DC1036P 12000 mAh, выходы 5/9/12 В, USB, PoE</name>
       <name_ua>Безперебійник для роутера TTN DC1036P 12000 mAh, виходи 5/9/12 В, USB, PoE</name_ua>
       <categoryId>6</categoryId>
-      <portal_category_id>14191103</portal_category_id>
+      <portal_category_id>501001</portal_category_id>
       <priceuah>1485.00</priceuah>
       <available>true</available>
       <vendorCode>DC1036P</vendorCode>

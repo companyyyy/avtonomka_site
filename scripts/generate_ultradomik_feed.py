@@ -37,18 +37,21 @@ OUT_PATH = ROOT / 'prom_file.xml'
 
 # Group ids are fixed so a group keeps its identity in the client's Prom
 # cabinet across imports - never renumber, only append. portal = Prom
-# marketplace category. Only ids from the client's Prom category list
-# (Prom.ua_categories_30_09_2026.xls) that are NOT marked «автовизначення» in
-# «Категорії без можливості редагування.xlsx» - otherwise Prom re-assigns the
-# category itself and flags the item ("категорію визначено автоматично").
+# marketplace category. Prom locked its old categories (everything listed in
+# «Категорії без можливості редагування.xlsx» - inverters, batteries, UPS,
+# cables...): an item sent there is flagged «Автоматично вказана категорія».
+# Only ids from Prom.ua_categories_30_09_2026.xls that are NOT in that file are
+# used - for this range that is the new «Автономна енергетика» section and
+# «Зарядні станції».
+AUTONOMOUS_ENERGY = 501001  # Техніка та електроніка > Автономна енергетика > Автономна енергетика, загальне
 CATEGORIES = {
-    1: ('Гібридні інвертори', 5140401),
-    2: ('Акумулятори', 5280501),
-    3: ('Системи зберігання електроенергії 2 в 1', 14191103),
-    4: ('Кабельна продукція', 14190499),
+    1: ('Гібридні інвертори', AUTONOMOUS_ENERGY),
+    2: ('Акумулятори', AUTONOMOUS_ENERGY),
+    3: ('Системи зберігання електроенергії 2 в 1', AUTONOMOUS_ENERGY),
+    4: ('Кабельна продукція', AUTONOMOUS_ENERGY),
     5: ('Зарядні станції', 500901),
-    6: ('Безперебійники для роутерів', 14191103),
-    7: ('Автоматичне введення резерву (АВР)', 14190603),
+    6: ('Безперебійники для роутерів', AUTONOMOUS_ENERGY),
+    7: ('Автоматичне введення резерву (АВР)', AUTONOMOUS_ENERGY),
     8: ('Реле напруги', 14190901),
     9: ('Таймери', 620),
     10: ('Лічильники електроенергії', 15370308),
