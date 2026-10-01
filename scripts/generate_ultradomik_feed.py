@@ -1,7 +1,7 @@
 """
 Generates the Prom.ua import feeds (Price.ua format, RU + UA) for reseller
 clients - see FEEDS: prom_file.xml (Ultradomik) and invertorshop.xml
-(ІнверторШоп, +18%). Served at https://avtonomka.com.ua/<file> - each
+(ІнверторШоп, +35%). Served at https://avtonomka.com.ua/<file> - each
 client's Prom cabinet pulls its own file by link.
 
 Prices and stock come from the Google Sheet "Price Avtonomka під XML"
@@ -37,7 +37,7 @@ USD_RATE = 45
 # only the price differs. (file, price markup)
 FEEDS = [
     ('prom_file.xml', 1.00),      # Ultradomik
-    ('invertorshop.xml', 1.18),   # ІнверторШоп: +18% on every price
+    ('invertorshop.xml', 1.35),   # ІнверторШоп: +35% on every price
 ]
 
 # Group ids are fixed so a group keeps its identity in the client's Prom
