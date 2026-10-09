@@ -4,25 +4,24 @@ clients - see FEEDS: prom_file.xml (Ultradomik) and invertorshop.xml
 (ІнверторШоп, +35%). Served at https://avtonomka.com.ua/<file> - each
 client's Prom cabinet pulls its own file by link.
 
-Prices and stock come from the Google Sheet "Price Avtonomka під XML"
-(USD, converted at a fixed rate of 45). Texts (UA + RU), specs and search
-queries come from data/ultradomik/products.json; photos are the supplier's
+Prices (UAH) and stock come from data/ultradomik/prices.json, keyed by item
+id - edited in the price table at https://avtonomka.com.ua/prom-admin/.
+Texts (UA + RU), specs and search queries come from
+data/ultradomik/products.json; photos are the supplier's
 white-background copies from products.json -> prom_images (plus a photo taken
 from the sheet in assets/images/ultradomik/<id>.jpg, if any), re-checked here.
 An entry with "feed_only": true has no product card on the site - its id is
 our own and its photo comes only from assets/images/ultradomik/.
-A sheet row with no entry in data/ultradomik/products.json, no price or no
-white-background photo is left out and listed in the report.
+An item with no price or no white-background photo is left out and listed in
+the report. The list of items for the price table (name, category, photo,
+whether it made it into the feed) is written to data/ultradomik/feed_items.json.
 
 Run: python scripts/generate_ultradomik_feed.py
 """
 
-import csv
-import io
 import json
 import re
 import sys
-import urllib.request
 from pathlib import Path
 from xml.etree import ElementTree
 
@@ -30,9 +29,6 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE_URL = 'https://avtonomka.com.ua'
-SHEET_CSV = ('https://docs.google.com/spreadsheets/d/'
-             '1hUWLK904eO_jA5wtsJRXIcuyfwHeNJdeo5CteDCY4-0/export?format=csv&gid=1763821507')
-USD_RATE = 45
 # One build, several files: the same items, texts, photos and categories,
 # only the price differs. (file, price markup)
 FEEDS = [
@@ -141,34 +137,6 @@ def cable_kit(entry, pid, lug):
     }
 
 
-def norm(s):
-    return re.sub(r'\s+', '', str(s or '')).lower()
-
-
-def fetch_sheet():
-    with urllib.request.urlopen(SHEET_CSV, timeout=60) as r:
-        text = r.read().decode('utf-8')
-    rows = []
-    for row in csv.reader(io.StringIO(text)):
-        row += [''] * (7 - len(row))
-        name, price, stock = row[1].strip(), row[3].strip(), row[6].strip()
-        if not name:  # section/brand headers, or a price-only sub-row (e.g. preorder)
-            continue
-        rows.append((name, price, stock))
-    return rows
-
-
-def parse_price(raw):
-    try:
-        return float(raw.replace(' ', '').replace(',', '.'))
-    except ValueError:
-        return None
-
-
-def in_stock(stock):
-    return stock.lstrip('`').startswith('+')
-
-
 def white_ratio(path):
     """Share of near-white (R,G,B >= 240) pixels in a ~2.5% border strip."""
     im = Image.open(path).convert('RGB')
@@ -233,27 +201,19 @@ def cap_keywords(s):
 def main():
     products = {p['id']: p for p in json.loads((ROOT / 'products.json').read_text('utf-8'))}
     entries = json.loads((ROOT / 'data/ultradomik/products.json').read_text('utf-8'))
-    by_sheet = {norm(e['sheet']): e for e in entries}
+    prices = json.loads((ROOT / 'data/ultradomik/prices.json').read_text('utf-8'))
 
     report = {'no_data': [], 'no_price': [], 'no_photo': [], 'rejected_photos': []}
-    items, used_cats = [], set()
+    items, used_cats, admin_items = [], set(), []
 
-    for name, raw_price, stock in fetch_sheet():
-        price_usd = parse_price(raw_price)
-        if price_usd is None or price_usd <= 0:
-            report['no_price'].append(f'{name} ({raw_price or "порожньо"}, {stock})')
-            continue
-        entry = by_sheet.get(norm(name))
-        if not entry:
-            report['no_data'].append(name)
-            continue
-        price_uah = price_usd * entry.get('mult', 1) * USD_RATE
-
+    for entry in entries:
         for pid in entry['ids']:
             # feed_only: sold through the feed only, no product card on the site
             p = products.get(pid) or ({'id': pid, 'title': ''} if entry.get('feed_only') else None)
             if not p:
-                report['no_data'].append(f'{name} (товару {pid} немає в products.json)')
+                report['no_data'].append(f'{entry["sheet"]} (товару {pid} немає в products.json)')
+                admin_items.append({'id': pid, 'name': entry['sheet'], 'cat': entry['cat'],
+                                    'photo': '', 'problem': 'немає товару на сайті'})
                 continue
             if entry.get('cable_kit'):
                 lug = 'М10' if re.search(r'М10|M10', p['title']) else 'М8'
@@ -278,8 +238,17 @@ def main():
                 images.append(f'{SITE_URL}/{img}')
             if rejected:
                 report['rejected_photos'].append(f'{pid} {t(e["name_ua"], "ua")}: {rejected}')
+            admin_item = {'id': pid, 'name': t(e['name_ua'], 'ua'), 'cat': entry['cat'],
+                          'photo': images[0][len(SITE_URL) + 1:] if images else '', 'problem': ''}
+            admin_items.append(admin_item)
             if not images:
                 report['no_photo'].append(f'{pid} {t(e["name_ua"], "ua")}')
+                admin_item['problem'] = 'немає фото на білому фоні'
+                continue
+            price = prices.get(pid, {})
+            price_uah = price.get('price')
+            if not price_uah or price_uah <= 0:
+                report['no_price'].append(f'{pid} {t(e["name_ua"], "ua")}')
                 continue
 
             cat = entry['cat']
@@ -298,7 +267,7 @@ def main():
                 f'      <categoryId>{cat}</categoryId>',
                 f'      <portal_category_id>{e.get("portal") or CATEGORIES[cat][1]}</portal_category_id>',
                 '      <priceuah>{price}</priceuah>',
-                f'      <available>{"true" if in_stock(stock) else "false"}</available>',
+                f'      <available>{"true" if price.get("in_stock") else "false"}</available>',
             ]
             if code:
                 lines.append(f'      <vendorCode>{esc(code)}</vendorCode>')
@@ -328,6 +297,9 @@ def main():
         ElementTree.fromstring(xml.encode('utf-8'))
         (ROOT / fname).write_text(xml, encoding='utf-8')
         print(f'{fname} generated: {len(items)} items, markup x{markup:.2f}')
+
+    (ROOT / 'data/ultradomik/feed_items.json').write_text(
+        json.dumps(admin_items, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
     labels = {'no_data': 'Немає даних/фото на сайті (пропущено)',
               'no_price': 'Без ціни (пропущено)',

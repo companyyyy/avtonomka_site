@@ -1,0 +1,296 @@
+[
+  {
+    "id": "150825",
+    "name": "Гібридний інвертор MUST PV18-1012VPK 1 кВт 12 В",
+    "cat": 1,
+    "photo": "assets/images/prom/150825_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "152517",
+    "name": "Гібридний інвертор MUST PV18-1512 VPM II 1,5 кВт 12 В",
+    "cat": 1,
+    "photo": "assets/images/prom/152517_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "142723",
+    "name": "Гібридний інвертор MUST PV18-3224 VPM II 3,2 кВт 24 В",
+    "cat": 1,
+    "photo": "assets/images/prom/142723_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "152725",
+    "name": "Гібридний інвертор MUST PV19-4024 EXP 4 кВт 24 В",
+    "cat": 1,
+    "photo": "assets/images/prom/152725_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "142725",
+    "name": "Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В",
+    "cat": 1,
+    "photo": "assets/images/prom/142725_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "152086",
+    "name": "Felicity IVEM4024-II 24В 4 кВт",
+    "cat": 1,
+    "photo": "",
+    "problem": "немає товару на сайті"
+  },
+  {
+    "id": "150676",
+    "name": "Акумуляторна батарея Deye SE-F5 Pro-C 51,2 В 100 А·год 5,12 кВт·год LiFePO4",
+    "cat": 2,
+    "photo": "assets/images/prom/150676_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "142740",
+    "name": "Акумуляторна батарея Dyness DL5.0C 51,2 В 100 А·год LiFePO4 з підігрівом",
+    "cat": 2,
+    "photo": "assets/images/prom/142740_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "150599",
+    "name": "Акумулятор MUST LP15-12100 12 В 100 А·год LiFePO4",
+    "cat": 2,
+    "photo": "assets/images/prom/150599_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "152264",
+    "name": "MUST LP15-24100 25.6V 100Ah LiFePO4",
+    "cat": 2,
+    "photo": "",
+    "problem": "немає товару на сайті"
+  },
+  {
+    "id": "143477",
+    "name": "Акумуляторна батарея MUST LP16-24100 25,6 В 100 А·год LiFePO4",
+    "cat": 2,
+    "photo": "assets/images/prom/143477_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "148300",
+    "name": "Акумуляторна батарея MUST LP16-24200 25,6 В 200 А·год LiFePO4",
+    "cat": 2,
+    "photo": "assets/images/prom/148300_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "142727",
+    "name": "Акумуляторна батарея MUST LP16-48100 51,2 В 100 А·год LiFePO4",
+    "cat": 2,
+    "photo": "assets/images/prom/142727_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "152265",
+    "name": "Акумуляторна батарея MUST LP16-48300 51,2 В 300 А·год LiFePO4",
+    "cat": 2,
+    "photo": "assets/images/prom/152265_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "152639",
+    "name": "Акумулятор Felicity FLA12100PG2 12,8 В 100 А·год LiFePO4",
+    "cat": 2,
+    "photo": "assets/images/prom/152639_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "152174",
+    "name": "Акумуляторна батарея Felicity FLA24280 25,6 В 280 А·год LiFePO4",
+    "cat": 2,
+    "photo": "assets/images/prom/152174_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "152296",
+    "name": "Felicity FLB48100WG1-H 51.2V 100Ah LiFePO4",
+    "cat": 2,
+    "photo": "",
+    "problem": "немає товару на сайті"
+  },
+  {
+    "id": "152175",
+    "name": "Акумуляторна батарея Felicity FLA48230 51,2 В 230 А·год LiFePO4",
+    "cat": 2,
+    "photo": "assets/images/prom/152175_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "151617",
+    "name": "Акумуляторна батарея Felicity FLA48314-EU 51,2 В 314 А·год 16 кВт·год LiFePO4",
+    "cat": 2,
+    "photo": "assets/images/prom/151617_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "152270",
+    "name": "Акумуляторна батарея Felicity FLB48314TG1-H 51,2 В 314 А·год 16 кВт·год LiFePO4 з підігрівом",
+    "cat": 2,
+    "photo": "assets/images/prom/152270_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "150416",
+    "name": "Система зберігання електроенергії MUST HBP19-5548 VPM 2 в 1 5,5 кВт 5120 Вт·год",
+    "cat": 3,
+    "photo": "assets/images/prom/150416_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "152253",
+    "name": "Сонячний кабель KBE Solar 6 мм², 500 м (бухта), червоний, Німеччина",
+    "cat": 4,
+    "photo": "assets/images/prom/152253_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "146741",
+    "name": "Сонячний кабель KBE Solar 6 мм², 500 м (бухта), чорний, Німеччина",
+    "cat": 4,
+    "photo": "assets/images/prom/146741_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "151777",
+    "name": "Сонячний кабель KBE 6 мм² 1 м, Німеччина",
+    "cat": 4,
+    "photo": "assets/images/prom/151777_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "151849",
+    "name": "Комплект силових кабелів 25 мм² 1,5 м, 2 шт., мідь, мідні наконечники М8",
+    "cat": 4,
+    "photo": "assets/images/prom/151849_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "151853",
+    "name": "Комплект силових кабелів 25 мм² 1,5 м, 2 шт., мідь, мідні наконечники М10",
+    "cat": 4,
+    "photo": "assets/images/prom/151853_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "151847",
+    "name": "Комплект силових кабелів 25 мм² 1 м, 2 шт., мідь, мідні наконечники М8",
+    "cat": 4,
+    "photo": "assets/images/prom/151847_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "151851",
+    "name": "Комплект силових кабелів 25 мм² 1 м, 2 шт., мідь, мідні наконечники М10",
+    "cat": 4,
+    "photo": "assets/images/prom/151851_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "151850",
+    "name": "Комплект силових кабелів 25 мм² 75 см, 2 шт., мідь, мідні наконечники М8",
+    "cat": 4,
+    "photo": "assets/images/prom/151850_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "151854",
+    "name": "Комплект силових кабелів 25 мм² 75 см, 2 шт., мідь, мідні наконечники М10",
+    "cat": 4,
+    "photo": "assets/images/prom/151854_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "151848",
+    "name": "Комплект силових кабелів 25 мм² 50 см, 2 шт., мідь, мідні наконечники М8",
+    "cat": 4,
+    "photo": "assets/images/prom/151848_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "151852",
+    "name": "Комплект силових кабелів 25 мм² 50 см, 2 шт., мідь, мідні наконечники М10",
+    "cat": 4,
+    "photo": "assets/images/prom/151852_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "148299",
+    "name": "Зарядна станція EcoFlow DELTA 2 1800 Вт 1024 Вт·год (EU)",
+    "cat": 5,
+    "photo": "assets/images/prom/148299_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "148245",
+    "name": "Зарядна станція EcoFlow DELTA 3 1024 Вт·год 1800 Вт (китайські розетки, з перехідниками)",
+    "cat": 5,
+    "photo": "assets/images/prom/148245_2.jpg",
+    "problem": ""
+  },
+  {
+    "id": "150649",
+    "name": "Безперебійник для роутера TTN DC1036P 12000 mAh, виходи 5/9/12 В, USB, PoE",
+    "cat": 6,
+    "photo": "assets/images/prom/150649_1.jpg",
+    "problem": ""
+  },
+  {
+    "id": "152085",
+    "name": "Гібридний інвертор Felicity IVEM6048-II 6 кВт 48 В",
+    "cat": 1,
+    "photo": "assets/images/ultradomik/152085.jpg",
+    "problem": ""
+  },
+  {
+    "id": "152297",
+    "name": "Акумуляторна батарея Felicity FLB48230WG1-H 51,2 В 230 А·год LiFePO4 з підігрівом",
+    "cat": 2,
+    "photo": "assets/images/ultradomik/152297.jpg",
+    "problem": ""
+  },
+  {
+    "id": "152723",
+    "name": "Система зберігання електроенергії MUST HBP18-1212 OS 2 в 1 1,2 кВт 1280 Вт·год",
+    "cat": 3,
+    "photo": "assets/images/ultradomik/152723.jpg",
+    "problem": ""
+  },
+  {
+    "id": "152738",
+    "name": "MUST HBP18-3024 2в1 3 кВт 3200 Втг",
+    "cat": 3,
+    "photo": "",
+    "problem": "немає товару на сайті"
+  },
+  {
+    "id": "152516",
+    "name": "Система зберігання електроенергії MUST HBP18-3024 OS 2 в 1 3 кВт 3072 Вт·год",
+    "cat": 3,
+    "photo": "assets/images/ultradomik/152516.jpg",
+    "problem": ""
+  },
+  {
+    "id": "ud-avr-2p",
+    "name": "Автоматичний перемикач введення резерву АВР TOMZN TOQ5-100/2P 1 фаза 100 А",
+    "cat": 7,
+    "photo": "assets/images/ultradomik/ud-avr-2p.jpg",
+    "problem": ""
+  },
+  {
+    "id": "ud-avr-4p",
+    "name": "Автоматичний перемикач введення резерву АВР TOMZN TOQ5-100/4P 3 фази 100 А",
+    "cat": 7,
+    "photo": "assets/images/ultradomik/ud-avr-4p.jpg",
+    "problem": ""
+  }
+]

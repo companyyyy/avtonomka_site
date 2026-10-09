@@ -1,0 +1,63 @@
+name: Update Prom feeds
+
+on:
+  # Ціни з адмінки /prom-admin/ (data/ultradomik/prices.json) або правки текстів -
+  # prom_file.xml і invertorshop.xml перебудовуються одразу.
+  push:
+    branches: [ master ]
+    paths:
+      - 'data/ultradomik/prices.json'
+      - 'data/ultradomik/products.json'
+      - 'assets/images/ultradomik/**'
+      - 'scripts/generate_ultradomik_feed.py'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+# Не запускати два оновлення одночасно (кілька збережень поспіль в адмінці).
+concurrency:
+  group: prom-feed
+  cancel-in-progress: false
+
+jobs:
+  update-feed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: pip install pillow
+
+      - name: Build prom_file.xml and invertorshop.xml
+        run: python scripts/generate_ultradomik_feed.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add prom_file.xml invertorshop.xml data/ultradomik/feed_items.json
+          if git diff --cached --quiet; then
+            echo "Змін немає"
+          else
+            git commit -m "Оновлення фідів Prom з адмінки"
+            # За час генерації в master могли з'явитися нові коміти.
+            git pull --rebase
+            git push
+          fi
+
+      # Коміт бота (GITHUB_TOKEN) не запускає deploy-server.yml, тому викладаємо тут.
+      # Сам коміт з адмінки вже запустив деплой, але фіди в ньому ще старі.
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.AVTONOMKA_HOST }}
+          username: ${{ secrets.AVTONOMKA_USER }}
+          key: ${{ secrets.AVTONOMKA_SSH_KEY }}
+          script: |
+            cd /home/avtonomka.com.ua/public_html
+            git pull
