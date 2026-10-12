@@ -182,6 +182,20 @@
 
   .toast { position:fixed; left:50%; bottom:90px; transform:translateX(-50%) translateY(20px); background:#1a2e1a; color:#fff; padding:12px 20px; border-radius:100px; font-size:13px; z-index:300; opacity:0; pointer-events:none; transition:all .25s ease; white-space:nowrap; max-width:88vw; overflow:hidden; text-overflow:ellipsis; }
   .toast.visible { opacity:1; transform:translateX(-50%) translateY(0); }
+
+  /* LIKES / ОБРАНЕ */
+  .like-btn { width:36px; height:36px; border:none; background:none; color:var(--text3); display:flex; align-items:center; justify-content:center; flex-shrink:0; cursor:pointer; border-radius:50%; padding:0; }
+  .like-btn svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:2; transition:transform .15s; }
+  .like-btn.liked { color:#e53935; }
+  .like-btn.liked svg { fill:currentColor; }
+  .like-btn:active svg { transform:scale(1.25); }
+  .modal-title-row { display:flex; align-items:flex-start; gap:8px; }
+  .modal-title-row .modal-name { flex:1; }
+  .modal-title-row .like-btn { margin-top:-8px; }
+  .fav-btn { display:flex; align-items:center; gap:4px; flex-shrink:0; border:none; background:var(--bg3); color:#e53935; border-radius:100px; padding:6px 10px; font-size:13px; font-weight:700; cursor:pointer; font-family:inherit; }
+  .fav-btn svg { width:18px; height:18px; fill:currentColor; }
+  .fav-btn .fav-count { color:var(--text); }
+  .fav-btn .fav-count:empty { display:none; }
 </style>
 </head>
 <body>
@@ -197,6 +211,7 @@
     <div class="header-subtitle" id="headerSub">АВТОНОМНА ЕНЕРГЕТИКА</div>
     <a href="tel:+380987772020" id="headerPhone" style="font-size:11px;color:#2e7d32;font-weight:600;text-decoration:none;margin-top:1px;display:block">📞 0987772020</a>
   </div>
+  <button class="fav-btn" id="favBtn" onclick="openFavorites()" aria-label="Обране"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 3 4.5 6.6 4.5c2.1 0 3.6 1.2 4.4 2.6.8-1.4 2.3-2.6 4.4-2.6 3.6 0 5.7 3.7 4.2 7.2C19.5 16.4 12 21 12 21z"/></svg><span class="fav-count" id="favCount"></span></button>
 </div>
 
 <!-- SEARCH (для екрану товарів) -->
@@ -250,6 +265,11 @@ const CONFIG = {
      (assets/js/order-form.js, assets/js/checkout.js) - усі замовлення
      пишуться в один аркуш "Заявки", з колонкою "Джерело" для розрізнення. */
   ORDERS_URL: "https://script.google.com/macros/s/AKfycbz7JbuQpZmBlUck24Bjp7SGKZL-JqE_clqLuYb9y15QG4-FSk45ZkpPHf5faZWISHcE/exec",
+  /* Той самий проєкт Supabase, що для коментарів на сайті (assets/js/comments.js).
+     anon-ключ публічний за задумом: мініапп лише викликає функції з
+     scripts/supabase/miniapp_tracking_schema.sql, читати таблиці він не може. */
+  SUPABASE_URL: "https://uvndubhmqzqqsrnrxgaj.supabase.co",
+  SUPABASE_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bmR1YmhtcXpxcXNybnJ4Z2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDY4MDIsImV4cCI6MjEwMzkyMjgwMn0.AavrYyhDXBQkjKOMdQ9wAQX6B901dOfUpmtUDwO5Cv8",
 };
 
 /* Той самий асортимент, що на сайті (products.json), тому мапимо по
@@ -269,6 +289,96 @@ const EMOJI = {"комплекти автономного енергоживле
 const ce = cat => { const k=(cat||"").toLowerCase(); for(const[key,v] of Object.entries(EMOJI)) if(k.includes(key)) return v; return "📦"; };
 
 if(window.Telegram?.WebApp){Telegram.WebApp.ready();Telegram.WebApp.expand();}
+
+// ── ОБЛІК ЗАХОДІВ І ЛАЙКИ ──
+// Хто зайшов, що відкривав, що лайкав - у Supabase (таблиці tg_users /
+// tg_events / tg_likes, див. scripts/supabase/miniapp_tracking_schema.sql).
+// Працює лише коли мініапп відкритий у Telegram (є initDataUnsafe.user); у
+// звичайному браузері нічого не пишемо, а лайки живуть тільки в localStorage.
+// Усі запити - "вистрілив і забув": помилка мережі чи Supabase ніколи не
+// заважає клієнту дивитись каталог.
+const TG=window.Telegram?.WebApp;
+const TG_USER=TG?.initDataUnsafe?.user?.id ? TG.initDataUnsafe.user : null;
+const HEART_SVG='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 3 4.5 6.6 4.5c2.1 0 3.6 1.2 4.4 2.6.8-1.4 2.3-2.6 4.4-2.6 3.6 0 5.7 3.7 4.2 7.2C19.5 16.4 12 21 12 21z"/></svg>';
+const FAV="__fav__";
+let LIKES=new Set();
+try{ LIKES=new Set(JSON.parse(localStorage.getItem("avtonomka_likes")||"[]")); }catch(e){}
+let writeAccess=TG_USER?.allows_write_to_pm?true:null;
+let productOpens=0;
+
+function rpc(fn,args){
+  return fetch(`${CONFIG.SUPABASE_URL}/rest/v1/rpc/${fn}`,{
+    method:"POST", keepalive:true,
+    headers:{apikey:CONFIG.SUPABASE_KEY, Authorization:"Bearer "+CONFIG.SUPABASE_KEY, "Content-Type":"application/json"},
+    body:JSON.stringify(args),
+  });
+}
+// Події чекають на реєстрацію заходу - інакше перші кліки нового клієнта
+// загубились би (функції ігнорують невідомий tg_id).
+const visitDone=TG_USER
+  ? rpc("miniapp_visit",{p_user:TG_USER, p_platform:TG.platform||null, p_start_param:TG.initDataUnsafe.start_param||null})
+      .then(r=>r.ok?r.json():null)
+      .then(res=>{
+        if(!res) return;
+        LIKES=new Set(res.likes||[]);
+        saveLikes();
+        if(res.write_access) writeAccess=true;
+        else if(writeAccess===null && res.write_access===false) writeAccess=false;
+      })
+      .catch(()=>{})
+  : Promise.resolve();
+
+function track(event,{product=null,category=null,query=null}={}){
+  if(!TG_USER) return;
+  visitDone.then(()=>rpc("miniapp_track",{
+    p_tg_id:TG_USER.id, p_event:event,
+    p_product_id:product?.id||null, p_product_name:product?.name||null,
+    p_category:category||product?.category||null, p_query:query||null,
+  })).catch(()=>{});
+}
+
+function saveLikes(){
+  try{ localStorage.setItem("avtonomka_likes", JSON.stringify([...LIKES])); }catch(e){}
+  refreshHearts();
+}
+function likeBtnHTML(id){
+  return `<button type="button" class="like-btn${LIKES.has(id)?" liked":""}" data-like-id="${id}" aria-label="В обране" onclick="toggleLike(event,'${id}')">${HEART_SVG}</button>`;
+}
+function refreshHearts(){
+  document.querySelectorAll("[data-like-id]").forEach(b=>b.classList.toggle("liked", LIKES.has(b.dataset.likeId)));
+  const c=document.getElementById("favCount");
+  if(c) c.textContent=LIKES.size?String(LIKES.size):"";
+}
+function toggleLike(e,id){
+  e.stopPropagation();
+  const p=all.find(x=>x.id===id);
+  const liked=!LIKES.has(id);
+  if(liked) LIKES.add(id); else LIKES.delete(id);
+  saveLikes();
+  if(TG?.HapticFeedback) TG.HapticFeedback.impactOccurred("light");
+  if(liked) showToast("❤️ Додано в обране");
+  if(TG_USER){
+    visitDone.then(()=>rpc("miniapp_set_like",{p_tg_id:TG_USER.id, p_product_id:id, p_product_name:p?.name||null, p_liked:liked})).catch(()=>{});
+  }
+  if(activeCat===FAV) renderProducts();
+  if(liked) askWriteAccess();
+}
+
+// Дозвіл боту писати клієнту (знадобиться для розсилки знижок). Питаємо
+// один раз, у момент інтересу: перший лайк, додавання в кошик або 3-й
+// відкритий товар - а не одразу при вході.
+function askWriteAccess(){
+  if(!TG_USER || writeAccess===true || !TG.requestWriteAccess) return;
+  if(TG.isVersionAtLeast && !TG.isVersionAtLeast("6.9")) return;
+  try{ if(localStorage.getItem("avtonomka_wa_asked")) return; localStorage.setItem("avtonomka_wa_asked","1"); }catch(e){ return; }
+  visitDone.then(()=>{
+    if(writeAccess===true) return;
+    TG.requestWriteAccess(ok=>{
+      writeAccess=!!ok;
+      rpc("miniapp_set_write_access",{p_tg_id:TG_USER.id, p_allowed:!!ok}).catch(()=>{});
+    });
+  });
+}
 
 // ── BRAND DETECTION (mirrors scripts/generate_static_pages.js:detectBrand) ──
 const KNOWN_BRANDS = [
@@ -409,6 +519,8 @@ async function loadData(){
     if(!res.ok)throw new Error("HTTP "+res.status);
     all=(await res.json()).map(norm).filter(p=>p.name);
     buildCats();
+    refreshHearts();
+    openStartProduct();
   }catch(e){
     document.getElementById("catGrid").innerHTML=`
       <div style="grid-column:1/-1">
@@ -416,6 +528,16 @@ async function loadData(){
         <div style="text-align:center;padding:16px"><button onclick="loadData()" style="background:var(--accent);color:#fff;border:none;padding:10px 22px;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer">🔄 Повторити</button></div>
       </div>`;
   }
+}
+
+// Посилання з розсилки: t.me/<бот>/<апп>?startapp=product_<id> одразу
+// відкриває потрібний товар.
+function openStartProduct(){
+  const m=/^product_([A-Za-z0-9]+)$/.exec(TG?.initDataUnsafe?.start_param||"");
+  const p=m&&all.find(x=>x.id===m[1]);
+  if(!p) return;
+  openCat(p.category);
+  openModal(p);
 }
 
 // ── CATEGORIES SCREEN ──
@@ -470,8 +592,11 @@ function buildCats(){
 }
 
 // ── OPEN CATEGORY ──
+function openFavorites(){ openCat(FAV); }
 function openCat(cat){
   const ph=document.getElementById('headerPhone'); if(ph) ph.style.display='none';
+  const isFav=cat===FAV;
+  track(isFav?"favorites_open":"category_open",{category:isFav?null:cat});
   activeCat=cat;
   searchQ="";
   document.getElementById("searchInput").value="";
@@ -481,8 +606,8 @@ function openCat(cat){
   document.getElementById("screenProducts").classList.add("active");
   document.getElementById("backBtn").classList.add("visible");
   document.getElementById("searchWrap").classList.add("visible");
-  document.getElementById("headerTitle").textContent=cat;
-  document.getElementById("headerSub").textContent=`${ce(cat)} ${all.filter(p=>p.category===cat).length} позицій`;
+  document.getElementById("headerTitle").textContent=isFav?"Обране":cat;
+  document.getElementById("headerSub").textContent=isFav?`❤️ ${LIKES.size} позицій`:`${ce(cat)} ${all.filter(p=>p.category===cat).length} позицій`;
 
   renderProducts();
 }
@@ -499,30 +624,48 @@ function goBack(){
   activeCat=""; searchQ="";
 }
 
-document.getElementById("searchInput").addEventListener("input",e=>{searchQ=e.target.value.toLowerCase();renderProducts();});
+let searchTrackTm;
+document.getElementById("searchInput").addEventListener("input",e=>{
+  searchQ=e.target.value.toLowerCase();renderProducts();
+  // У базу - лише "дописаний" запит, а не кожна літера
+  clearTimeout(searchTrackTm);
+  const q=e.target.value.trim();
+  if(q.length>=2) searchTrackTm=setTimeout(()=>track("search",{category:activeCat===FAV?null:activeCat, query:q}),1500);
+});
 
 // ── RENDER PRODUCTS ──
 function renderProducts(){
-  let items=all.filter(p=>p.category===activeCat);
+  const isFav=activeCat===FAV;
+  let items=isFav?all.filter(p=>LIKES.has(p.id)):all.filter(p=>p.category===activeCat);
   if(searchQ)items=items.filter(p=>p.name.toLowerCase().includes(searchQ)||p.brand.toLowerCase().includes(searchQ)||p.desc.toLowerCase().includes(searchQ));
 
   const el=document.getElementById("productsContent");
   el.innerHTML="";
 
-  if(!items.length){el.innerHTML=`<div class="empty"><div class="empty-icon">🔍</div><div>Нічого не знайдено</div></div>`;return;}
+  if(isFav) document.getElementById("headerSub").textContent=`❤️ ${LIKES.size} позицій`;
+  if(!items.length){
+    el.innerHTML=isFav&&!searchQ
+      ?`<div class="empty"><div class="empty-icon">❤️</div><div>Тут з'являться товари, які ви додасте в обране</div></div>`
+      :`<div class="empty"><div class="empty-icon">🔍</div><div>Нічого не знайдено</div></div>`;
+    return;
+  }
 
   // Title bar
   const tb=document.createElement("div"); tb.className="cat-title-bar";
-  tb.innerHTML=`<span class="cat-title-icon">${ce(activeCat)}</span><span class="cat-title-text">${activeCat}</span><span class="cat-title-count">${items.length} поз.</span>`;
+  tb.innerHTML=isFav
+    ?`<span class="cat-title-icon">❤️</span><span class="cat-title-text">Обране</span><span class="cat-title-count">${items.length} поз.</span>`
+    :`<span class="cat-title-icon">${ce(activeCat)}</span><span class="cat-title-text">${activeCat}</span><span class="cat-title-count">${items.length} поз.</span>`;
   el.appendChild(tb);
 
-  // Group by brand
-  const byBrand=groupBy(items,"brand");
+  // Group by brand (в обраному - за категорією, бо там товари з різних категорій)
+  const byBrand=groupBy(items,isFav?"category":"brand");
   const multi=Object.keys(byBrand).length>1;
 
   // For "Автономне енергоживлення" sort by numeric power value
   const brandKeys = Object.keys(byBrand);
-  if(activeCat==="Комплекти автономного енергоживлення"){
+  if(isFav){
+    brandKeys.sort((a,b)=>catRank(a)-catRank(b));
+  }else if(activeCat==="Комплекти автономного енергоживлення"){
     brandKeys.sort((a,b)=>{
       const pa=parseFloat(a.replace(",",".").replace("кВт","").trim())||999;
       const pb=parseFloat(b.replace(",",".").replace("кВт","").trim())||999;
@@ -570,7 +713,7 @@ function renderProducts(){
             ${stockHTML}
           </div>
         </div>
-        <div class="product-arrow">›</div>`;
+        ${likeBtnHTML(p.id)}`;
       el.appendChild(row);
 
       // True lazy load - завантажуємо тільки коли елемент видно
@@ -623,6 +766,8 @@ let currentProduct=null, modalQty=1;
 
 function openModal(p){
   currentProduct=p; modalQty=1;
+  track("product_open",{product:p});
+  if(++productOpens===3) askWriteAccess();
   const stockNote=getStockNote(p);
   document.getElementById("modalContent").innerHTML=`
     <div class="modal-img-wrap">
@@ -630,7 +775,10 @@ function openModal(p){
     </div>
     <div class="modal-body">
       <div class="modal-brand">${p.brand!=="-"?p.brand+" · ":""}${p.category}</div>
-      <div class="modal-name">${p.shortName}</div>
+      <div class="modal-title-row">
+        <div class="modal-name">${p.shortName}</div>
+        ${likeBtnHTML(p.id)}
+      </div>
       ${p.desc?`<p style="font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:12px">${escHtml(shortDesc(p.desc,160))}</p>`:""}
       ${p.price?`<div class="modal-price">${fmt(p.price)} <span style="font-size:14px;color:var(--text2);font-family:Inter,sans-serif;font-weight:400">${p.unit}</span></div>`:""}
       ${stockNote}
@@ -641,7 +789,7 @@ function openModal(p){
         <button class="qty-btn" onclick="changeModalQty(1)">+</button>
       </div>
       <button class="modal-btn" onclick="addToCart(currentProduct, modalQty)">🛒 Додати в кошик</button>
-      <a class="modal-btn modal-btn-secondary" href="${CONFIG.MANAGER}?text=${encodeURIComponent("Цікавить: "+p.name)}" target="_blank">Написати менеджеру</a>
+      <a class="modal-btn modal-btn-secondary" href="${CONFIG.MANAGER}?text=${encodeURIComponent("Цікавить: "+p.name)}" target="_blank" onclick="track('manager_click',{product:currentProduct})">Написати менеджеру</a>
     </div>`;
   document.getElementById("modalOverlay").classList.add("open");
   document.body.style.overflow="hidden";
@@ -670,6 +818,8 @@ function addToCart(p, qty){
   if(idx>-1) CART[idx].qty+=qty;
   else CART.push({name:p.name, shortName:p.shortName, sku:p.id, price:p.price, unit:p.unit, brand:p.brand, category:p.category, qty:qty});
   saveCart();
+  track("cart_add",{product:p});
+  askWriteAccess();
   showToast(`Додано в кошик: ${p.shortName}`);
   if(window.Telegram?.WebApp?.HapticFeedback) Telegram.WebApp.HapticFeedback.notificationOccurred("success");
 }
@@ -797,6 +947,7 @@ function submitOrder(){
     }
   }catch(e){}
 
+  CART.forEach(i=>track("order",{product:{id:i.sku, name:i.name, category:i.category}}));
   CART=[];
   saveCart();
   document.getElementById("modalOverlay").classList.remove("open");
