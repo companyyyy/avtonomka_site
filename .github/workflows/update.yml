@@ -68,6 +68,10 @@ jobs:
       - name: Generate reseller Prom.ua feeds (Ultradomik, ІнверторШоп)
         run: python scripts/generate_ultradomik_feed.py
 
+      # YML feed for Bezpeka.club - https://avtonomka.com.ua/feed/bezpeka.xml
+      - name: Generate Bezpeka.club feed
+        run: python scripts/generate_bezpeka_feed.py
+
       - name: Generate static product pages and prerendered catalog grids
         run: node scripts/generate_static_pages.js
 
@@ -76,7 +80,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add products.json data/telegram_posts.json catalog_export.csv feed.xml prom.xml prom_file.xml invertorshop.xml \
+          git add products.json data/telegram_posts.json catalog_export.csv feed.xml prom.xml prom_file.xml invertorshop.xml feed/bezpeka.xml \
                   product/ catalog.html catalog/*.html sitemap.xml .htaccess assets/images/prom/ \
                   articles.html blog.html index.html
           if git diff --cached --quiet; then
