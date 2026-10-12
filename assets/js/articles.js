@@ -28,6 +28,7 @@ const SLUG_TO_CATEGORY = {
   'dzherela-zhyvlennya':  'Обладнання > Джерела безперебійного живлення',
   'akumulyatory-dbzh':    'Акумулятори і батарейки > Акумулятори для ДБЖ',
   'systemy-zberihannya':  'Автономна енергетика > Системи зберігання електроенергії 2 в 1',
+  'wifi-moduli':          'Автономна енергетика > Wi-Fi модули для гібридних інверторів',
 };
 
 function articleField(article, field) {

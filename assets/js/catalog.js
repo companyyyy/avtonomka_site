@@ -9,6 +9,7 @@ const SLUG_TO_CATEGORY = {
   'dzherela-zhyvlennya':  'Обладнання > Джерела безперебійного живлення',
   'akumulyatory-dbzh':    'Акумулятори і батарейки > Акумулятори для ДБЖ',
   'systemy-zberihannya':  'Автономна енергетика > Системи зберігання електроенергії 2 в 1',
+  'wifi-moduli':          'Автономна енергетика > Wi-Fi модули для гібридних інверторів',
 };
 
 const CATEGORY_TO_SLUG = {};
@@ -29,6 +30,7 @@ const FACET_CONFIG = {
   'dzherela-zhyvlennya': { brand: true },
   'akumulyatory-dbzh':   { brand: true, capacity: true },
   'systemy-zberihannya': { power: true, brand: true },
+  'wifi-moduli':         { brand: true },
 };
 const KNOWN_BRANDS = ['DAH Solar', 'Deye', 'Dyness', 'Felicity', 'Must', 'EcoFlow', 'TTN'];
 

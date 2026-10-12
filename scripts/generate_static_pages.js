@@ -68,6 +68,7 @@ const SLUG_TO_CATEGORY = {
   'dzherela-zhyvlennya':  'Обладнання > Джерела безперебійного живлення',
   'akumulyatory-dbzh':    'Акумулятори і батарейки > Акумулятори для ДБЖ',
   'systemy-zberihannya':  'Автономна енергетика > Системи зберігання електроенергії 2 в 1',
+  'wifi-moduli':          'Автономна енергетика > Wi-Fi модули для гібридних інверторів',
 };
 const CATEGORY_LABEL_UK = {
   'hybridni-invertory':   'Гібридні інвертори',
@@ -77,6 +78,7 @@ const CATEGORY_LABEL_UK = {
   'dzherela-zhyvlennya':  'Джерела безперебійного живлення',
   'akumulyatory-dbzh':    'Акумулятори для ДБЖ',
   'systemy-zberihannya':  'Системи зберігання енергії',
+  'wifi-moduli':          'Wi-Fi модулі для інверторів',
 };
 const CATEGORY_TO_SLUG = {};
 Object.keys(SLUG_TO_CATEGORY).forEach(slug => { CATEGORY_TO_SLUG[SLUG_TO_CATEGORY[slug]] = slug; });
