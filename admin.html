@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Адмін - Автономка</title>
+  <title>Контент - Адмін - Автономка</title>
+  <meta name="robots" content="noindex,nofollow">
   <link rel="icon" href="assets/images/logo.jpg" type="image/jpeg">
   <link rel="canonical" href="https://avtonomka.com.ua/admin.html">
   <style>
@@ -20,33 +21,6 @@
     button { cursor: pointer; font-family: inherit; }
     img { max-width: 100%; display: block; }
     .hidden { display: none !important; }
-
-    /* ---- Auth screens ---- */
-    .auth-wrap {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-    .auth-card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 24px rgba(26,46,74,.12);
-      padding: 40px 36px;
-      width: 100%;
-      max-width: 400px;
-    }
-    .auth-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 28px;
-    }
-    .auth-logo img { width: 42px; height: 42px; border-radius: 6px; object-fit: contain; }
-    .auth-logo span { font-size: 1.2rem; font-weight: 800; color: #1a2e4a; }
-    .auth-title { font-size: 1.3rem; font-weight: 700; color: #1a2e4a; margin-bottom: 6px; }
-    .auth-sub { font-size: .88rem; color: #6c757d; margin-bottom: 24px; }
 
     .form-group { margin-bottom: 18px; }
     .form-group label {
@@ -92,41 +66,6 @@
     }
     .btn-primary:hover { background: #e0921a; }
 
-    /* ---- Main layout ---- */
-    .admin-header {
-      background: #1a2e4a;
-      color: #fff;
-      padding: 0 24px;
-      height: 62px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: 0 2px 12px rgba(0,0,0,.25);
-    }
-    .admin-header__logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 800;
-      font-size: 1.05rem;
-      color: #2ecc40;
-    }
-    .admin-header__logo img { width: 36px; height: 36px; border-radius: 5px; object-fit: contain; }
-    .admin-header__badge {
-      font-size: .72rem;
-      background: rgba(245,166,35,.18);
-      color: #f5a623;
-      padding: 3px 10px;
-      border-radius: 20px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      margin-left: 6px;
-    }
-    .admin-header__actions { display: flex; gap: 10px; }
     .admin-btn {
       padding: 7px 16px;
       border-radius: 7px;
@@ -251,124 +190,20 @@
     }
     .btn-toggle-pw:hover { color: #1a2e4a; }
 
-    .danger-zone {
-      border: 1px solid rgba(231,76,60,.25);
-      border-radius: 8px;
-      padding: 16px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .danger-zone p { font-size: .88rem; color: #6c757d; }
-    .danger-zone strong { display: block; font-size: .92rem; color: #c0392b; margin-bottom: 2px; }
-
     @media (max-width: 600px) {
-      .auth-card { padding: 28px 20px; }
       .admin-body { padding: 20px 12px 48px; }
       .editor-form .form-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
-<body>
+<body data-admin-section="content">
 
-  <!-- ===== SETUP SCREEN ===== -->
-  <div id="screen-setup" class="auth-wrap">
-    <div class="auth-card">
-      <div class="auth-logo">
-        <img src="assets/images/logo.jpg" alt="Автономка">
-        <span>Автономка</span>
-      </div>
-      <h1 class="auth-title">Перше налаштування</h1>
-      <p class="auth-sub">Придумайте пароль для входу до адмін-панелі. Пароль зберігається лише у вашому браузері.</p>
-      <form id="setup-form">
-        <div class="form-group">
-          <label for="setup-password">Новий пароль</label>
-          <input type="password" id="setup-password" class="form-input" placeholder="Мінімум 6 символів" autocomplete="new-password" required>
-        </div>
-        <div class="form-group">
-          <label for="setup-confirm">Підтвердіть пароль</label>
-          <input type="password" id="setup-confirm" class="form-input" placeholder="Повторіть пароль" autocomplete="new-password" required>
-        </div>
-        <button type="submit" class="btn-primary">Встановити пароль і увійти</button>
-        <div id="setup-msg" class="form-msg"></div>
-      </form>
-    </div>
-  </div>
-
-  <!-- ===== LOGIN SCREEN ===== -->
-  <div id="screen-login" class="auth-wrap hidden">
-    <div class="auth-card">
-      <div class="auth-logo">
-        <img src="assets/images/logo.jpg" alt="Автономка">
-        <span>Автономка</span>
-      </div>
-      <h1 class="auth-title">Вхід до панелі</h1>
-      <p class="auth-sub">Введіть пароль адміністратора.</p>
-      <form id="login-form">
-        <div class="form-group">
-          <label for="login-password">Пароль</label>
-          <input type="password" id="login-password" class="form-input" placeholder="Ваш пароль" autocomplete="current-password" required>
-        </div>
-        <button type="submit" class="btn-primary">Увійти</button>
-        <div id="login-msg" class="form-msg"></div>
-      </form>
-    </div>
-  </div>
-
-  <!-- ===== MAIN SCREEN ===== -->
-  <div id="screen-main" class="hidden">
-
-    <header class="admin-header">
-      <div class="admin-header__logo">
-        <img src="assets/images/logo.jpg" alt="">
-        <span>Автономка</span>
-        <span class="admin-header__badge">Адмін</span>
-      </div>
-      <div class="admin-header__actions">
-        <a href="miniapp-admin.html" class="admin-btn admin-btn--ghost">Мініапп</a>
-        <a href="articles.html" target="_blank" class="admin-btn admin-btn--ghost">Сайт →</a>
-        <button id="btn-logout" class="admin-btn admin-btn--ghost">Вийти</button>
-      </div>
-    </header>
+  <div id="admin-app" hidden>
 
     <div class="admin-body">
 
       <!-- Status bar -->
       <div id="status-bar" class="status-bar hidden"></div>
-
-      <!-- Supabase auth - one login unlocks both articles and comments moderation -->
-      <div class="admin-card">
-        <div class="admin-card__head">
-          <span class="admin-card__title">Вхід для керування контентом</span>
-          <button id="btn-supabase-logout" class="admin-btn admin-btn--sm admin-btn--ghost hidden" style="background:#e0e6ed;color:#1a2e4a">Вийти з Supabase</button>
-        </div>
-        <div class="admin-card__body">
-          <p id="supabase-login-hint" style="font-size:.88rem;color:#6c757d;margin-bottom:18px">
-            Статті й коментарі клієнтів зберігаються в Supabase. Увійди користувачем, якого створено в
-            Supabase Dashboard → Authentication → Users → Add user (це не той самий пароль, що для входу в
-            цю панель).
-          </p>
-
-          <form id="supabase-login-form" class="settings-form">
-            <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-              <div class="form-group">
-                <label for="supabase-email">Email</label>
-                <input type="email" id="supabase-email" class="form-input" autocomplete="username">
-              </div>
-              <div class="form-group">
-                <label for="supabase-password">Пароль</label>
-                <input type="password" id="supabase-password" class="form-input" autocomplete="current-password">
-              </div>
-            </div>
-            <button type="submit" class="admin-btn admin-btn--primary">Увійти</button>
-            <p id="supabase-login-msg" class="form-msg"></p>
-          </form>
-
-          <p id="supabase-signed-in-as" class="hidden" style="font-size:.88rem;color:#17a126"></p>
-        </div>
-      </div>
 
       <!-- Articles list -->
       <div class="admin-card">
@@ -425,22 +260,6 @@
         </div>
       </div>
 
-      <!-- Local admin password -->
-      <div class="admin-card">
-        <div class="admin-card__head">
-          <span class="admin-card__title">Безпека</span>
-        </div>
-        <div class="admin-card__body">
-          <div class="danger-zone">
-            <div>
-              <strong>Змінити пароль</strong>
-              <p>Пароль входу в саму цю панель (не Supabase). Скинути поточний і встановити новий.</p>
-            </div>
-            <button id="btn-change-password" class="admin-btn admin-btn--danger">Змінити пароль</button>
-          </div>
-        </div>
-      </div>
-
       <!-- Comments moderation (Supabase) -->
       <div class="admin-card">
         <div class="admin-card__head">
@@ -448,8 +267,7 @@
         </div>
         <div class="admin-card__body">
           <div id="comments-panel">
-            <p id="comments-hint" class="admin-hint">Увійдіть вище через Supabase, щоб бачити коментарі, що чекають модерації.</p>
-            <div id="comments-controls" class="hidden" style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+            <div id="comments-controls" style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
               <button id="btn-comments-refresh" class="admin-btn admin-btn--sm admin-btn--ghost" style="background:#e0e6ed;color:#1a2e4a">Оновити список</button>
             </div>
             <div id="comments-list"></div>
@@ -463,8 +281,7 @@
           <span class="admin-card__title">Віртуальні товари (SEO)</span>
         </div>
         <div class="admin-card__body">
-          <p id="virtual-hint" class="admin-hint">Увійдіть вище через Supabase, щоб керувати віртуальними товарами.</p>
-          <div id="virtual-controls" class="hidden">
+          <div id="virtual-controls">
             <p style="font-size:.85rem;color:#6c757d;margin-bottom:16px">
               Вимкнений товар одразу зникає з публічного сайту (пошук/картки), а знову з'являється після наступного
               перегенерування сторінок (щоденний автозапуск або ручний запуск). Це не видаляє товар з бази.
@@ -490,62 +307,15 @@
       </div>
 
     </div><!-- /admin-body -->
-  </div><!-- /screen-main -->
+  </div><!-- /admin-app -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="assets/js/admin-shell.js"></script>
   <script>
     /* ---- Utilities ---- */
-    async function sha256(msg) {
-      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
-      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
-    }
     function escHtml(str) {
       return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
-    const getPwdHash   = () => localStorage.getItem('admin_pwd_hash') || '';
-    const isAuthed     = () => sessionStorage.getItem('admin_ok') === '1';
-
-    /* ---- Screen switcher ---- */
-    function showScreen(id) {
-      ['screen-setup','screen-login','screen-main'].forEach(s =>
-        document.getElementById(s).classList.toggle('hidden', s !== id)
-      );
-    }
-
-    /* ---- Bootstrap ---- */
-    function init() {
-      if (!getPwdHash())    { showScreen('screen-setup'); return; }
-      if (!isAuthed())      { showScreen('screen-login'); return; }
-      showScreen('screen-main');
-      loadMain();
-    }
-
-    /* ---- Setup ---- */
-    document.getElementById('setup-form').addEventListener('submit', async e => {
-      e.preventDefault();
-      const pwd = document.getElementById('setup-password').value;
-      const rep = document.getElementById('setup-confirm').value;
-      if (pwd.length < 6) { showMsg('setup-msg','Мінімум 6 символів','error'); return; }
-      if (pwd !== rep)     { showMsg('setup-msg','Паролі не співпадають','error'); return; }
-      localStorage.setItem('admin_pwd_hash', await sha256(pwd));
-      sessionStorage.setItem('admin_ok', '1');
-      showScreen('screen-main');
-      loadMain();
-    });
-
-    /* ---- Login ---- */
-    document.getElementById('login-form').addEventListener('submit', async e => {
-      e.preventDefault();
-      const pwd = document.getElementById('login-password').value;
-      if (await sha256(pwd) !== getPwdHash()) {
-        showMsg('login-msg','Невірний пароль','error');
-        document.getElementById('login-password').value = '';
-        return;
-      }
-      sessionStorage.setItem('admin_ok', '1');
-      showScreen('screen-main');
-      loadMain();
-    });
 
     /* ---- ID generator ---- */
     function genId(title) {
@@ -559,72 +329,8 @@
     /* ---- Main screen ---- */
     let editId = null;
 
-    async function loadMain() {
-      await checkSupabaseSession();
-    }
-
-    /* ---- Supabase auth (shared by articles + comments moderation) ----
-       ⚠ Ці значення мають збігатися з assets/js/comments.js, assets/js/articles.js,
-       index.html і scripts/generate_static_pages.js. */
-    const SUPABASE_URL = 'https://uvndubhmqzqqsrnrxgaj.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bmR1YmhtcXpxcXNybnJ4Z2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDY4MDIsImV4cCI6MjEwMzkyMjgwMn0.AavrYyhDXBQkjKOMdQ9wAQX6B901dOfUpmtUDwO5Cv8';
-    let sbClient = null;
-    function getSb() {
-      if (sbClient) return sbClient;
-      if (!window.supabase || SUPABASE_URL.includes('YOUR-PROJECT')) return null;
-      sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      return sbClient;
-    }
-
-    async function checkSupabaseSession() {
-      const sb = getSb();
-      if (!sb) return;
-      const { data } = await sb.auth.getSession();
-      await showSignedInState(data.session);
-    }
-
-    async function showSignedInState(session) {
-      const signedIn = !!session;
-      document.getElementById('supabase-login-form').classList.toggle('hidden', signedIn);
-      document.getElementById('supabase-login-hint').classList.toggle('hidden', signedIn);
-      document.getElementById('btn-supabase-logout').classList.toggle('hidden', !signedIn);
-      const signedInAs = document.getElementById('supabase-signed-in-as');
-      signedInAs.classList.toggle('hidden', !signedIn);
-      if (signedIn) signedInAs.textContent = 'Увійшли як ' + session.user.email;
-
-      document.getElementById('comments-hint').classList.toggle('hidden', signedIn);
-      document.getElementById('comments-controls').classList.toggle('hidden', !signedIn);
-      document.getElementById('virtual-hint').classList.toggle('hidden', signedIn);
-      document.getElementById('virtual-controls').classList.toggle('hidden', !signedIn);
-
-      if (signedIn) {
-        await refreshList();
-        await loadPendingComments();
-        await loadVirtualProducts();
-      } else {
-        document.getElementById('article-list').innerHTML = '<p class="admin-hint">Увійдіть вище через Supabase, щоб бачити й редагувати статті.</p>';
-        document.getElementById('comments-list').innerHTML = '';
-        document.getElementById('virtual-list').innerHTML = '';
-      }
-    }
-
-    document.getElementById('supabase-login-form').addEventListener('submit', async e => {
-      e.preventDefault();
-      const sb = getSb();
-      if (!sb) { showMsg('supabase-login-msg', 'Спочатку встав SUPABASE_URL / SUPABASE_ANON_KEY у код admin.html', 'error'); return; }
-      const email    = document.getElementById('supabase-email').value.trim();
-      const password = document.getElementById('supabase-password').value;
-      const { data, error } = await sb.auth.signInWithPassword({ email, password });
-      if (error) { showMsg('supabase-login-msg', error.message, 'error'); return; }
-      document.getElementById('supabase-password').value = '';
-      await showSignedInState(data.session);
-    });
-
-    document.getElementById('btn-supabase-logout').addEventListener('click', async () => {
-      const sb = getSb();
-      if (sb) await sb.auth.signOut();
-      await showSignedInState(null);
-    });
+    // Вхід, шапка й клієнт Supabase - assets/js/admin-shell.js
+    const getSb = () => AdminShell.sb;
 
     document.getElementById('btn-comments-refresh').addEventListener('click', loadPendingComments);
 
@@ -736,7 +442,6 @@
     async function refreshList() {
       const el = document.getElementById('article-list');
       const sb = getSb();
-      if (!sb) { el.innerHTML = '<p class="admin-hint">Спочатку встав SUPABASE_URL / SUPABASE_ANON_KEY у код admin.html.</p>'; return; }
       el.innerHTML = '<p class="admin-hint">Завантаження…</p>';
       try {
         const { data: articles, error } = await sb.from('articles').select('*').order('date', { ascending: false });
@@ -805,7 +510,6 @@
       if (!title || !body) { showStatus('Заповніть заголовок та текст статті', 'error'); return; }
 
       const sb = getSb();
-      if (!sb) { showStatus('Спочатку встав SUPABASE_URL / SUPABASE_ANON_KEY у код admin.html', 'error'); return; }
 
       showStatus('Збереження…');
       try {
@@ -836,22 +540,6 @@
       document.getElementById('editor-title').focus();
     });
 
-    /* ---- Auth actions ---- */
-    document.getElementById('btn-logout').addEventListener('click', () => {
-      sessionStorage.removeItem('admin_ok');
-      showScreen('screen-login');
-      document.getElementById('login-password').value = '';
-    });
-
-    document.getElementById('btn-change-password').addEventListener('click', () => {
-      if (!confirm('Скинути пароль? Вас буде перенаправлено на сторінку встановлення нового паролю.')) return;
-      localStorage.removeItem('admin_pwd_hash');
-      sessionStorage.removeItem('admin_ok');
-      document.getElementById('setup-password').value = '';
-      document.getElementById('setup-confirm').value  = '';
-      showScreen('screen-setup');
-    });
-
     /* ---- Helpers ---- */
     function showMsg(id, msg, type) {
       const el = document.getElementById(id);
@@ -870,7 +558,11 @@
     }
 
     /* ---- Start ---- */
-    init();
+    AdminShell.ready(async () => {
+      await refreshList();
+      await loadPendingComments();
+      await loadVirtualProducts();
+    });
   </script>
 
 </body>

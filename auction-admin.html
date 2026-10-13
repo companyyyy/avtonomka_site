@@ -22,13 +22,6 @@
     img { max-width: 100%; display: block; }
     .hidden { display: none !important; }
 
-    .auth-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
-    .auth-card { background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(26,46,74,.12); padding: 40px 36px; width: 100%; max-width: 400px; }
-    .auth-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
-    .auth-logo img { width: 42px; height: 42px; border-radius: 6px; object-fit: contain; }
-    .auth-logo span { font-size: 1.2rem; font-weight: 800; color: #1a2e4a; }
-    .auth-title { font-size: 1.3rem; font-weight: 700; color: #1a2e4a; margin-bottom: 6px; }
-    .auth-sub { font-size: .88rem; color: #6c757d; margin-bottom: 24px; }
 
     .form-group { margin-bottom: 18px; }
     .form-group label { display: block; font-size: .82rem; font-weight: 600; color: #6c757d; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; }
@@ -41,11 +34,6 @@
     .btn-primary { width: 100%; padding: 12px; background: #f5a623; color: #1a2e4a; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; transition: background .2s; }
     .btn-primary:hover { background: #e0921a; }
 
-    .admin-header { background: #1a2e4a; color: #fff; padding: 0 24px; height: 62px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; box-shadow: 0 2px 12px rgba(0,0,0,.25); }
-    .admin-header__logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.05rem; color: #2ecc40; }
-    .admin-header__logo img { width: 36px; height: 36px; border-radius: 5px; object-fit: contain; }
-    .admin-header__badge { font-size: .72rem; background: rgba(245,166,35,.18); color: #f5a623; padding: 3px 10px; border-radius: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-left: 6px; }
-    .admin-header__actions { display: flex; gap: 10px; }
     .admin-btn { padding: 7px 16px; border-radius: 7px; border: none; font-size: .88rem; font-weight: 600; font-family: inherit; transition: background .2s, color .2s; }
     .admin-btn--primary { background: #f5a623; color: #1a2e4a; }
     .admin-btn--primary:hover { background: #e0921a; }
@@ -97,64 +85,21 @@
     .winner-card strong { color: #17a126; }
 
     @media (max-width: 600px) {
-      .auth-card { padding: 28px 20px; }
       .admin-body { padding: 20px 12px 48px; }
       .editor-form .form-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
-<body>
+<body data-admin-section="auction">
 
-  <!-- ===== MAIN SCREEN ===== -->
-  <div id="screen-main">
-
-    <header class="admin-header">
-      <div class="admin-header__logo">
-        <img src="assets/images/logo.jpg" alt="">
-        <span>Автономка</span>
-        <span class="admin-header__badge">Аукціон</span>
-      </div>
-      <div class="admin-header__actions">
-        <a href="auction.html" target="_blank" class="admin-btn admin-btn--ghost">Сторінка аукціону →</a>
-        <button id="btn-logout" class="admin-btn admin-btn--ghost hidden">Вийти</button>
-      </div>
-    </header>
+  <div id="admin-app" hidden>
 
     <div class="admin-body">
 
       <div id="status-bar" class="status-bar hidden"></div>
 
-      <!-- Supabase auth -->
-      <div class="admin-card">
-        <div class="admin-card__head">
-          <span class="admin-card__title">Вхід</span>
-        </div>
-        <div class="admin-card__body">
-          <p id="supabase-login-hint" style="font-size:.88rem;color:#6c757d;margin-bottom:18px">
-            Увійди Auth-користувачем, якого створено для аукціонної адмінки в Supabase Dashboard →
-            Authentication → Users (не той самий, що для головної адмінки сайту - ця панель навмисно
-            не має доступу до статей/коментарів/товарів, лише до аукціону).
-          </p>
-          <form id="supabase-login-form" class="settings-form">
-            <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-              <div class="form-group">
-                <label for="supabase-email">Email</label>
-                <input type="email" id="supabase-email" class="form-input" autocomplete="username">
-              </div>
-              <div class="form-group">
-                <label for="supabase-password">Пароль</label>
-                <input type="password" id="supabase-password" class="form-input" autocomplete="current-password">
-              </div>
-            </div>
-            <button type="submit" class="admin-btn admin-btn--primary">Увійти</button>
-            <p id="supabase-login-msg" class="form-msg"></p>
-          </form>
-          <p id="supabase-signed-in-as" class="hidden" style="font-size:.88rem;color:#17a126"></p>
-        </div>
-      </div>
-
       <!-- Lot list -->
-      <div class="admin-card hidden" id="lots-card">
+      <div class="admin-card" id="lots-card">
         <div class="admin-card__head">
           <span class="admin-card__title">Лоти</span>
           <button id="btn-new-lot" class="admin-btn admin-btn--primary">+ Новий лот</button>
@@ -234,30 +179,16 @@
       </div>
 
     </div>
-  </div>
+  </div><!-- /admin-app -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="assets/js/admin-shell.js"></script>
   <script>
     /* ---- Utilities ---- */
     function escHtml(str) {
       return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
 
-    function init() {
-      checkSupabaseSession();
-    }
-
-    document.getElementById('btn-logout').addEventListener('click', async () => {
-      const sb = getSb();
-      if (sb) await sb.auth.signOut();
-      await showSignedInState(null);
-    });
-
-    function showMsg(id, msg, type) {
-      const el = document.getElementById(id);
-      el.textContent = msg;
-      el.className = 'form-msg ' + (type || '');
-    }
     let statusTimer = null;
     function showStatus(msg, type) {
       const el = document.getElementById('status-bar');
@@ -268,55 +199,8 @@
       if (type === 'success') statusTimer = setTimeout(() => el.classList.add('hidden'), 6000);
     }
 
-    /* ---- Supabase ----
-       ⚠ Ці значення мають збігатися з admin.html/comments.js/auction.js -
-       той самий проєкт, доступ розділяється через RLS + app_metadata.role,
-       а не через окремий проєкт. */
-    const SUPABASE_URL = 'https://uvndubhmqzqqsrnrxgaj.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bmR1YmhtcXpxcXNybnJ4Z2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDY4MDIsImV4cCI6MjEwMzkyMjgwMn0.AavrYyhDXBQkjKOMdQ9wAQX6B901dOfUpmtUDwO5Cv8';
-    let sbClient = null;
-    function getSb() {
-      if (sbClient) return sbClient;
-      if (!window.supabase) return null;
-      sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      return sbClient;
-    }
-
-    async function checkSupabaseSession() {
-      const sb = getSb();
-      if (!sb) return;
-      const { data } = await sb.auth.getSession();
-      await showSignedInState(data.session);
-    }
-
-    async function showSignedInState(session) {
-      const signedIn = !!session;
-      document.getElementById('supabase-login-form').classList.toggle('hidden', signedIn);
-      document.getElementById('supabase-login-hint').classList.toggle('hidden', signedIn);
-      document.getElementById('btn-logout').classList.toggle('hidden', !signedIn);
-      const signedInAs = document.getElementById('supabase-signed-in-as');
-      signedInAs.classList.toggle('hidden', !signedIn);
-      if (signedIn) signedInAs.textContent = 'Увійшли як ' + session.user.email;
-
-      document.getElementById('lots-card').classList.toggle('hidden', !signedIn);
-      if (signedIn) {
-        await loadLots();
-      } else {
-        document.getElementById('editor-card').classList.add('hidden');
-        document.getElementById('bids-card').classList.add('hidden');
-      }
-    }
-
-    document.getElementById('supabase-login-form').addEventListener('submit', async e => {
-      e.preventDefault();
-      const sb = getSb();
-      const email    = document.getElementById('supabase-email').value.trim();
-      const password = document.getElementById('supabase-password').value;
-      const { data, error } = await sb.auth.signInWithPassword({ email, password });
-      if (error) { showMsg('supabase-login-msg', error.message, 'error'); return; }
-      document.getElementById('supabase-password').value = '';
-      await showSignedInState(data.session);
-    });
+    // Вхід, шапка й клієнт Supabase - assets/js/admin-shell.js
+    const getSb = () => AdminShell.sb;
 
     /* ---- Slug ---- */
     function genSlug(title) {
@@ -524,7 +408,7 @@
     });
 
     /* ---- Start ---- */
-    init();
+    AdminShell.ready(loadLots);
   </script>
 
 </body>

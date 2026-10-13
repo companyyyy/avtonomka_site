@@ -21,23 +21,10 @@
     img { max-width: 100%; display: block; }
     .hidden { display: none !important; }
 
-    .form-group { margin-bottom: 18px; }
-    .form-group label { display: block; font-size: .82rem; font-weight: 600; color: #6c757d; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; }
     .form-input { width: 100%; padding: 10px 14px; border: 2px solid #e0e6ed; border-radius: 8px; font-size: .95rem; font-family: inherit; color: #222831; background: #fff; transition: border-color .2s; outline: none; }
     .form-input:focus { border-color: #f5a623; }
-    .form-msg { font-size: .85rem; min-height: 20px; margin-top: 10px; }
-    .form-msg.error { color: #e74c3c; }
-    .btn-primary { padding: 11px 28px; background: #f5a623; color: #1a2e4a; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; transition: background .2s; }
-    .btn-primary:hover { background: #e0921a; }
 
-    .admin-header { background: #1a2e4a; color: #fff; padding: 0 24px; height: 62px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; box-shadow: 0 2px 12px rgba(0,0,0,.25); gap: 12px; }
-    .admin-header__logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.05rem; color: #2ecc40; }
-    .admin-header__logo img { width: 36px; height: 36px; border-radius: 5px; object-fit: contain; }
-    .admin-header__badge { font-size: .72rem; background: rgba(245,166,35,.18); color: #f5a623; padding: 3px 10px; border-radius: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-left: 6px; }
-    .admin-header__actions { display: flex; gap: 10px; }
     .admin-btn { padding: 7px 16px; border-radius: 7px; border: none; font-size: .88rem; font-weight: 600; font-family: inherit; transition: background .2s, color .2s; white-space: nowrap; }
-    .admin-btn--ghost { background: rgba(255,255,255,.1); color: #fff; }
-    .admin-btn--ghost:hover { background: rgba(255,255,255,.2); }
     .admin-btn--light { background: #e0e6ed; color: #1a2e4a; }
     .admin-btn--light:hover { background: #d0d8e2; }
     .admin-btn--sm { padding: 5px 12px; font-size: .82rem; }
@@ -100,8 +87,6 @@
     .feed-time { color: #6c757d; font-size: .8rem; white-space: nowrap; min-width: 110px; font-variant-numeric: tabular-nums; }
 
     @media (max-width: 640px) {
-      .admin-header { padding: 0 12px; }
-      .admin-header__badge, .admin-header__home { display: none; }
       .admin-body { padding: 18px 10px 48px; }
       .admin-card__body { padding: 16px 12px; }
       .toolbar, .toolbar .form-input { width: 100%; }
@@ -109,42 +94,10 @@
     }
   </style>
 </head>
-<body>
+<body data-admin-section="miniapp">
 
-  <header class="admin-header">
-    <div class="admin-header__logo">
-      <img src="assets/images/logo.jpg" alt="">
-      <span>Автономка</span>
-      <span class="admin-header__badge">Мініапп</span>
-    </div>
-    <div class="admin-header__actions">
-      <a href="admin.html" class="admin-btn admin-btn--ghost admin-header__home">Адмінка</a>
-      <button id="btn-refresh" class="admin-btn admin-btn--ghost hidden">Оновити</button>
-      <button id="btn-logout" class="admin-btn admin-btn--ghost hidden">Вийти</button>
-    </div>
-  </header>
-
+  <div id="admin-app" hidden>
   <div class="admin-body">
-
-    <!-- Login -->
-    <div class="admin-card hidden" id="login-card">
-      <div class="admin-card__head"><span class="admin-card__title">Вхід</span></div>
-      <div class="admin-card__body">
-        <p class="admin-hint" style="padding-top:0">Увійдіть тим самим користувачем Supabase, що й в основній адмінці (статті, коментарі).</p>
-        <form id="login-form" style="max-width:520px">
-          <div class="form-group">
-            <label for="login-email">Email</label>
-            <input type="email" id="login-email" class="form-input" autocomplete="username" required>
-          </div>
-          <div class="form-group">
-            <label for="login-password">Пароль</label>
-            <input type="password" id="login-password" class="form-input" autocomplete="current-password" required>
-          </div>
-          <button type="submit" class="btn-primary">Увійти</button>
-          <p id="login-msg" class="form-msg"></p>
-        </form>
-      </div>
-    </div>
 
     <div class="admin-card hidden" id="denied-card">
       <div class="admin-card__body">
@@ -166,6 +119,7 @@
           </div>
           <div class="toolbar">
             <input type="search" id="search" class="form-input" placeholder="Пошук: ім'я, @username, товар">
+            <button id="btn-refresh" class="admin-btn admin-btn--light">Оновити</button>
           </div>
         </div>
         <div class="admin-card__body" id="list-body"></div>
@@ -180,17 +134,17 @@
 
     </div>
   </div>
+  </div><!-- /admin-app -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="assets/js/admin-shell.js"></script>
   <script>
     /* Дані мініаппа (miniapp_v/index.html) з Supabase: таблиці tg_users /
        tg_events / tg_likes і зведення tg_users_overview / tg_product_interest
        - див. scripts/supabase/miniapp_tracking_schema.sql. Читати їх можуть
        лише користувачі зі списку tg_admins.
-       ⚠ SUPABASE_URL / ключ - ті самі, що в admin.html і assets/js/comments.js. */
-    const SUPABASE_URL = 'https://uvndubhmqzqqsrnrxgaj.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bmR1YmhtcXpxcXNybnJ4Z2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDY4MDIsImV4cCI6MjEwMzkyMjgwMn0.AavrYyhDXBQkjKOMdQ9wAQX6B901dOfUpmtUDwO5Cv8';
-    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+       Вхід, шапка й клієнт Supabase - assets/js/admin-shell.js. */
+    const sb = AdminShell.sb;
 
     const $ = id => document.getElementById(id);
     function escHtml(str) {
@@ -538,36 +492,15 @@
       $('detail-body').querySelectorAll('tr[data-client]').forEach(tr => tr.addEventListener('click', () => openClient(Number(tr.dataset.client))));
     }
 
-    /* ---- Вхід ---- */
-    async function showState(session) {
-      const signedIn = !!session;
-      $('login-card').classList.toggle('hidden', signedIn);
-      $('btn-logout').classList.toggle('hidden', !signedIn);
-      $('main').classList.add('hidden');
-      $('denied-card').classList.add('hidden');
-      $('btn-refresh').classList.add('hidden');
-      if (!signedIn) return;
+    /* ---- Старт: дані бачать лише адміни зі списку tg_admins ---- */
+    $('btn-refresh').addEventListener('click', loadAll);
+    AdminShell.ready(async () => {
       const { data: isAdmin, error } = await sb.rpc('is_tg_admin');
       if (error || !isAdmin) { $('denied-card').classList.remove('hidden'); return; }
       $('main').classList.remove('hidden');
-      $('btn-refresh').classList.remove('hidden');
       await loadProducts();
       await loadAll();
-    }
-
-    $('login-form').addEventListener('submit', async e => {
-      e.preventDefault();
-      const msg = $('login-msg');
-      msg.textContent = '';
-      const { data, error } = await sb.auth.signInWithPassword({ email: $('login-email').value.trim(), password: $('login-password').value });
-      if (error) { msg.textContent = error.message; msg.className = 'form-msg error'; return; }
-      $('login-password').value = '';
-      await showState(data.session);
     });
-    $('btn-logout').addEventListener('click', async () => { await sb.auth.signOut(); await showState(null); });
-    $('btn-refresh').addEventListener('click', loadAll);
-
-    sb.auth.getSession().then(({ data }) => showState(data.session));
   </script>
 </body>
 </html>
