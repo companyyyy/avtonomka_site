@@ -502,8 +502,11 @@ function kitShortName(name){
 }
 
 // ── NORMALIZE products.json entry ──
-// Комплекти в мініаппі показують окремий набір "темних" брендованих фото
-// (щоб не чіпати зелені фото на самому сайті) - див. miniapp_v/photos/manifest.json
+// Фото комплектів - те саме, що зараз на сайті (assets/images/komp/), тож
+// завжди актуальне. Запасний варіант, коли на сайті фото ще немає
+// (заглушка), - копії в miniapp_v/photos/ (manifest.json): колись мініапп
+// показував лише їх, бо на сайті були зелені банери; тепер там сині
+// студійні фото, як і тут.
 let KIT_DARK_PHOTOS={};
 function norm(p){
   const catLabel=CATEGORY_LABEL[p.product_type]||(p.product_type||"").split(">").pop().trim()||"Інші товари";
@@ -516,6 +519,7 @@ function norm(p){
   }
   const name=p.title||"";
   const darkExt=isKit?KIT_DARK_PHOTOS[p.id]:null;
+  const sitePhoto=p.image_link&&!/zaglushka/i.test(p.image_link)?resolveImg(p.image_link):"";
   return {
     id:p.id,
     category:catLabel,
@@ -523,9 +527,7 @@ function norm(p){
     name,
     shortName:isKit?kitShortName(name):stripTypePrefix(name),
     price, unit,
-    // Комплекти НІКОЛИ не показують сайтове (зелене) фото як запасний варіант
-    // — краще заглушка, ніж зелений стиль у мініаппі. Це правило постійне.
-    photo:isKit?(darkExt?`photos/${p.id}.${darkExt}`:""):resolveImg(p.image_link),
+    photo:isKit?(sitePhoto||(darkExt?`photos/${p.id}.${darkExt}`:"")):resolveImg(p.image_link),
     desc:p.description||"",
     availability:p.availability||"in_stock",
   };
