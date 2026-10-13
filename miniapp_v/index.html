@@ -313,7 +313,6 @@ const START_PARAM=TG?.initDataUnsafe?.start_param||new URLSearchParams(location.
 let LIKES=new Set();
 try{ LIKES=new Set(JSON.parse(localStorage.getItem("avtonomka_likes")||"[]")); }catch(e){}
 let writeAccess=TG_USER?.allows_write_to_pm?true:null;
-let productOpens=0;
 
 const API_FN={miniapp_visit:"visit", miniapp_track:"track", miniapp_set_like:"like", miniapp_set_write_access:"write_access"};
 function rpc(fn,args){
@@ -378,18 +377,28 @@ function toggleLike(e,id){
     visitDone.then(()=>rpc("miniapp_set_like",{p_tg_id:TG_USER.id, p_product_id:id, p_product_name:p?.name||null, p_liked:liked})).catch(()=>{});
   }
   if(activeCat===FAV) renderProducts();
-  if(liked) askWriteAccess();
+  if(liked) askWriteAccess("action");
 }
 
 // Дозвіл боту писати клієнту (знадобиться для розсилки знижок). Питаємо
-// один раз, у момент інтересу: перший лайк, додавання в кошик або 3-й
-// відкритий товар - а не одразу при вході.
-function askWriteAccess(){
+// одразу при першому відкритті ("open"); хто відмовився - ще раз при лайку
+// чи додаванні в кошик ("action"), але не частіше ніж раз на 3 дні і не
+// більше 3 разів загалом.
+const WA_KEY="avtonomka_wa";
+const WA_MAX_ASKS=3, WA_GAP_MS=3*24*3600*1000;
+function askWriteAccess(trigger){
   if(!TG_USER || writeAccess===true || !TG.requestWriteAccess) return;
   if(TG.isVersionAtLeast && !TG.isVersionAtLeast("6.9")) return;
-  try{ if(localStorage.getItem("avtonomka_wa_asked")) return; localStorage.setItem("avtonomka_wa_asked","1"); }catch(e){ return; }
+  let st;
+  try{
+    st=JSON.parse(localStorage.getItem(WA_KEY)||"null")
+      // попередня версія питала один раз і ставила лише цей прапорець
+      ||(localStorage.getItem("avtonomka_wa_asked")?{n:1,at:0}:{n:0,at:0});
+  }catch(e){ return; } // без localStorage не знаємо, чи вже питали - краще не набридати
+  if(trigger==="open"?st.n>0:(st.n>=WA_MAX_ASKS||Date.now()-st.at<WA_GAP_MS)) return;
   visitDone.then(()=>{
     if(writeAccess===true) return;
+    try{ localStorage.setItem(WA_KEY, JSON.stringify({n:st.n+1, at:Date.now()})); }catch(e){ return; }
     TG.requestWriteAccess(ok=>{
       writeAccess=!!ok;
       rpc("miniapp_set_write_access",{p_tg_id:TG_USER.id, p_allowed:!!ok}).catch(()=>{});
@@ -538,6 +547,8 @@ async function loadData(){
     buildCats();
     refreshHearts();
     openStartProduct();
+    // Запит на повідомлення - коли каталог уже на екрані, а не поверх порожньої сторінки
+    setTimeout(()=>askWriteAccess("open"),1000);
   }catch(e){
     document.getElementById("catGrid").innerHTML=`
       <div style="grid-column:1/-1">
@@ -784,7 +795,6 @@ let currentProduct=null, modalQty=1;
 function openModal(p){
   currentProduct=p; modalQty=1;
   track("product_open",{product:p});
-  if(++productOpens===3) askWriteAccess();
   const stockNote=getStockNote(p);
   document.getElementById("modalContent").innerHTML=`
     <div class="modal-img-wrap">
@@ -836,7 +846,7 @@ function addToCart(p, qty){
   else CART.push({name:p.name, shortName:p.shortName, sku:p.id, price:p.price, unit:p.unit, brand:p.brand, category:p.category, qty:qty});
   saveCart();
   track("cart_add",{product:p});
-  askWriteAccess();
+  askWriteAccess("action");
   showToast(`Додано в кошик: ${p.shortName}`);
   if(window.Telegram?.WebApp?.HapticFeedback) Telegram.WebApp.HapticFeedback.notificationOccurred("success");
 }
