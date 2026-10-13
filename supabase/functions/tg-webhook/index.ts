@@ -1,6 +1,6 @@
 // tg-webhook - приймає оновлення від Telegram (вебхук бота).
 //
-//   кнопка «Не надсилати мені пропозицій» (callback "unsub") і /stop
+//   /stop (і кнопка «Не надсилати мені пропозицій» у старих розсилках, callback "unsub")
 //                         → tg_users.opted_out = true
 //   /start                → клієнт у tg_users, боту можна писати; відповідь з
 //                           кнопкою «Відкрити каталог»
@@ -71,7 +71,7 @@ function orderText(o: any, from: any) {
 }
 
 export async function handleUpdate(u: any) {
-  // Кнопка «Не надсилати мені пропозицій»
+  // Кнопка «Не надсилати мені пропозицій» - була в розсилках до 13.10, лишається робочою у старих повідомленнях
   if (u.callback_query?.data === "unsub") {
     const from = u.callback_query.from;
     await upsertUser(from, { opted_out: true });

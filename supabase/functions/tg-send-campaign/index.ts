@@ -25,7 +25,6 @@ const MINIAPP_URL = Deno.env.get("MINIAPP_URL") ?? `${SITE_URL}/miniapp_v/index.
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const TIME_BUDGET_MS = 100_000;
 const SEND_GAP_MS = 50;
-const UNSUB_TEXT = "Не надсилати мені пропозицій";
 
 const CORS = {
   "Access-Control-Allow-Origin": "*",
@@ -79,7 +78,6 @@ export function buildMessage(campaign: any, product: Product | null, firstName: 
   const reply_markup = {
     inline_keyboard: [
       [{ text: campaign.button_text || "Переглянути товар", web_app: { url: `${MINIAPP_URL}?startapp=${start}` } }],
-      [{ text: UNSUB_TEXT, callback_data: "unsub" }],
     ],
   };
   const photo = product?.image_link
