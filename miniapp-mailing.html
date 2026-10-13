@@ -40,6 +40,7 @@
     label.field { display: block; font-size: .78rem; font-weight: 600; color: #6c757d; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; }
     .form-input { width: 100%; padding: 9px 12px; border: 2px solid #e0e6ed; border-radius: 8px; font-size: .93rem; font-family: inherit; color: #222831; background: #fff; outline: none; }
     .form-input:focus { border-color: #f5a623; }
+    .form-input.invalid { border-color: #e74c3c; }
     textarea.form-input { resize: vertical; min-height: 170px; line-height: 1.5; }
     .num-input { width: 74px; display: inline-block; padding: 6px 8px; text-align: center; }
     .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -119,6 +120,7 @@
                 <div>
                   <label class="field" for="f-product">Товар</label>
                   <select id="f-product" class="form-input"></select>
+                  <div class="msg error" id="product-msg" style="min-height:0;margin-top:4px"></div>
                 </div>
                 <div>
                   <label class="field" for="f-title">Назва розсилки (лише для вас)</label>
@@ -225,7 +227,7 @@
         const res = await fetch('products.json?t=' + Date.now());
         PRODUCTS = (await res.json()).sort((a, b) => a.title.localeCompare(b.title, 'uk'));
       } catch (e) { PRODUCTS = []; }
-      $('f-product').innerHTML = '<option value="">Будь-який товар (за всіма товарами)</option>' +
+      $('f-product').innerHTML = '<option value="" disabled selected>- Оберіть товар -</option>' +
         PRODUCTS.map(p => `<option value="${escHtml(p.id)}">${escHtml(p.title)}</option>`).join('');
     }
     const productById = id => PRODUCTS.find(p => p.id === id) || null;
@@ -307,6 +309,16 @@
       c.textContent = `${len} / ${CAPTION_LIMIT} символів` + (len > CAPTION_LIMIT ? ' - довгий текст піде окремим повідомленням без фото' : '');
       c.classList.toggle('over', len > CAPTION_LIMIT);
     }
+    // Розсилка завжди про конкретний товар.
+    function requireProduct() {
+      const sel = $('f-product');
+      if (sel.value) return true;
+      sel.classList.add('invalid');
+      $('product-msg').textContent = 'Оберіть товар, про який розсилка.';
+      sel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      sel.focus();
+      return false;
+    }
     function setMsg(text, kind = '') { const el = $('editor-msg'); el.textContent = text; el.className = 'msg ' + kind; }
     function syncButtons() {
       const locked = editing && editing.status !== 'draft';
@@ -319,7 +331,9 @@
     }
 
     ['f-message', 'f-button'].forEach(id => $(id).addEventListener('input', renderPreview));
-    $('f-product').addEventListener('change', () => { onProductChange(); $('recipients').innerHTML = ''; lastRecipients = null; });
+    $('f-product').addEventListener('change', () => {
+      $('f-product').classList.remove('invalid'); $('product-msg').textContent = '';
+      onProductChange(); $('recipients').innerHTML = ''; lastRecipients = null; });
     ['f-min-views', 'f-days', 'f-liked', 'f-carted', 'f-exclude-ordered', 'f-cooldown'].forEach(id =>
       $(id).addEventListener('change', () => { $('recipients').innerHTML = ''; lastRecipients = null; }));
     document.querySelectorAll('[data-insert]').forEach(b => b.addEventListener('click', () => {
@@ -334,6 +348,7 @@
 
     /* ---- Отримувачі ---- */
     async function showRecipients() {
+      if (!requireProduct()) return null;
       const el = $('recipients');
       el.innerHTML = '<p class="admin-hint">Рахую…</p>';
       const s = segmentFromForm();
@@ -365,6 +380,7 @@
 
     /* ---- Зберегти / надіслати ---- */
     async function saveDraft() {
+      if (!requireProduct()) return null;
       const p = productById($('f-product').value);
       const message = $('f-message').value.trim();
       if (!message) { setMsg('Напишіть текст повідомлення.', 'error'); return null; }
@@ -393,6 +409,7 @@
     });
 
     $('btn-test').addEventListener('click', async () => {
+      if (!(editing && editing.status !== 'draft') && !requireProduct()) return;
       const who = prompt('Кому надіслати тест? Ваш @username або Telegram id (ви маєте хоч раз відкрити мініапп і запустити бота).');
       if (!who) return;
       const key = who.trim().replace(/^@/, '').toLowerCase();
