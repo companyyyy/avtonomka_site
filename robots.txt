@@ -3,5 +3,6 @@ Allow: /
 Disallow: /auction.html
 Disallow: /auction-lot.html
 Disallow: /auction-admin.html
+Disallow: /miniapp-admin.html
 
 Sitemap: https://avtonomka.com.ua/sitemap.xml

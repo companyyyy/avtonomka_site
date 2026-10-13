@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мініапп - Адмін - Автономка</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="assets/images/logo.jpg" type="image/jpeg">
+  <link rel="canonical" href="https://avtonomka.com.ua/miniapp-admin.html">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f4f6f8;
+      color: #222831;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font-family: inherit; }
+    img { max-width: 100%; display: block; }
+    .hidden { display: none !important; }
+
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: .82rem; font-weight: 600; color: #6c757d; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; }
+    .form-input { width: 100%; padding: 10px 14px; border: 2px solid #e0e6ed; border-radius: 8px; font-size: .95rem; font-family: inherit; color: #222831; background: #fff; transition: border-color .2s; outline: none; }
+    .form-input:focus { border-color: #f5a623; }
+    .form-msg { font-size: .85rem; min-height: 20px; margin-top: 10px; }
+    .form-msg.error { color: #e74c3c; }
+    .btn-primary { padding: 11px 28px; background: #f5a623; color: #1a2e4a; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; transition: background .2s; }
+    .btn-primary:hover { background: #e0921a; }
+
+    .admin-header { background: #1a2e4a; color: #fff; padding: 0 24px; height: 62px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; box-shadow: 0 2px 12px rgba(0,0,0,.25); gap: 12px; }
+    .admin-header__logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.05rem; color: #2ecc40; }
+    .admin-header__logo img { width: 36px; height: 36px; border-radius: 5px; object-fit: contain; }
+    .admin-header__badge { font-size: .72rem; background: rgba(245,166,35,.18); color: #f5a623; padding: 3px 10px; border-radius: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-left: 6px; }
+    .admin-header__actions { display: flex; gap: 10px; }
+    .admin-btn { padding: 7px 16px; border-radius: 7px; border: none; font-size: .88rem; font-weight: 600; font-family: inherit; transition: background .2s, color .2s; white-space: nowrap; }
+    .admin-btn--ghost { background: rgba(255,255,255,.1); color: #fff; }
+    .admin-btn--ghost:hover { background: rgba(255,255,255,.2); }
+    .admin-btn--light { background: #e0e6ed; color: #1a2e4a; }
+    .admin-btn--light:hover { background: #d0d8e2; }
+    .admin-btn--sm { padding: 5px 12px; font-size: .82rem; }
+
+    .admin-body { max-width: 1180px; margin: 0 auto; padding: 28px 20px 64px; display: flex; flex-direction: column; gap: 24px; }
+
+    .admin-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(26,46,74,.08); overflow: hidden; }
+    .admin-card__head { display: flex; align-items: center; justify-content: space-between; padding: 16px 22px; border-bottom: 1px solid #e0e6ed; gap: 12px; flex-wrap: wrap; }
+    .admin-card__title { font-size: 1.05rem; font-weight: 700; color: #1a2e4a; }
+    .admin-card__body { padding: 22px; }
+    .admin-hint { font-size: .9rem; color: #6c757d; padding: 12px 0; }
+    .admin-hint.error { color: #c0392b; }
+
+    /* Stats */
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; }
+    .stat { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(26,46,74,.08); padding: 16px 18px; }
+    .stat__value { font-size: 1.7rem; font-weight: 800; color: #1a2e4a; line-height: 1.2; font-variant-numeric: tabular-nums; }
+    .stat__label { font-size: .82rem; color: #6c757d; }
+
+    /* Tabs */
+    .tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+    .tab { padding: 8px 16px; border-radius: 8px; border: none; background: transparent; color: #6c757d; font-weight: 600; font-size: .92rem; }
+    .tab:hover { background: #f0f2f5; }
+    .tab.active { background: #1a2e4a; color: #fff; }
+    .toolbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .toolbar .form-input { width: 260px; padding: 7px 12px; font-size: .9rem; }
+
+    /* Tables */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    th { text-align: left; font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: #6c757d; padding: 8px 10px; border-bottom: 2px solid #e0e6ed; white-space: nowrap; }
+    th.sortable { cursor: pointer; user-select: none; }
+    th.sortable:hover { color: #1a2e4a; }
+    th.sorted::after { content: ' ↓'; }
+    th.sorted.asc::after { content: ' ↑'; }
+    td { padding: 9px 10px; border-bottom: 1px solid #eef1f4; vertical-align: top; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    tr.clickable { cursor: pointer; }
+    tr.clickable:hover td { background: #f7f9fb; }
+    .muted { color: #6c757d; font-size: .8rem; }
+    .who strong { color: #1a2e4a; }
+    .tg-link { color: #2a7ab0; }
+    .tg-link:hover { text-decoration: underline; }
+    .product-link { color: #1a2e4a; }
+    .product-link:hover { text-decoration: underline; }
+    .pill { display: inline-block; font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 20px; white-space: nowrap; }
+    .pill--yes { background: rgba(46,204,64,.15); color: #17a126; }
+    .pill--no { background: rgba(231,76,60,.12); color: #c0392b; }
+    .pill--unknown { background: rgba(108,117,125,.15); color: #6c757d; }
+    .heart { color: #e53935; }
+
+    /* Detail */
+    .detail-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+    .detail-name { font-size: 1.25rem; font-weight: 800; color: #1a2e4a; }
+    .detail-meta { display: flex; gap: 18px; flex-wrap: wrap; font-size: .88rem; color: #6c757d; margin-top: 4px; }
+    .detail-meta b { color: #1a2e4a; }
+    .section-title { font-size: .95rem; font-weight: 700; color: #1a2e4a; margin: 22px 0 8px; }
+    .feed-item { display: flex; gap: 12px; padding: 7px 0; border-bottom: 1px solid #eef1f4; font-size: .88rem; }
+    .feed-item:last-child { border-bottom: none; }
+    .feed-time { color: #6c757d; font-size: .8rem; white-space: nowrap; min-width: 110px; font-variant-numeric: tabular-nums; }
+
+    @media (max-width: 640px) {
+      .admin-header { padding: 0 12px; }
+      .admin-header__badge, .admin-header__home { display: none; }
+      .admin-body { padding: 18px 10px 48px; }
+      .admin-card__body { padding: 16px 12px; }
+      .toolbar, .toolbar .form-input { width: 100%; }
+      .feed-time { min-width: 86px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="admin-header">
+    <div class="admin-header__logo">
+      <img src="assets/images/logo.jpg" alt="">
+      <span>Автономка</span>
+      <span class="admin-header__badge">Мініапп</span>
+    </div>
+    <div class="admin-header__actions">
+      <a href="admin.html" class="admin-btn admin-btn--ghost admin-header__home">Адмінка</a>
+      <button id="btn-refresh" class="admin-btn admin-btn--ghost hidden">Оновити</button>
+      <button id="btn-logout" class="admin-btn admin-btn--ghost hidden">Вийти</button>
+    </div>
+  </header>
+
+  <div class="admin-body">
+
+    <!-- Login -->
+    <div class="admin-card hidden" id="login-card">
+      <div class="admin-card__head"><span class="admin-card__title">Вхід</span></div>
+      <div class="admin-card__body">
+        <p class="admin-hint" style="padding-top:0">Увійдіть тим самим користувачем Supabase, що й в основній адмінці (статті, коментарі).</p>
+        <form id="login-form" style="max-width:520px">
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" class="form-input" autocomplete="username" required>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Пароль</label>
+            <input type="password" id="login-password" class="form-input" autocomplete="current-password" required>
+          </div>
+          <button type="submit" class="btn-primary">Увійти</button>
+          <p id="login-msg" class="form-msg"></p>
+        </form>
+      </div>
+    </div>
+
+    <div class="admin-card hidden" id="denied-card">
+      <div class="admin-card__body">
+        <p class="admin-hint error" style="padding:0">Цей користувач не має доступу до даних мініаппа. Доступ видається в Supabase - див. таблицю tg_admins у scripts/supabase/miniapp_tracking_schema.sql.</p>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div id="main" class="hidden" style="display:flex;flex-direction:column;gap:24px">
+
+      <div class="stats" id="stats"></div>
+
+      <div class="admin-card" id="list-card">
+        <div class="admin-card__head">
+          <div class="tabs" role="tablist">
+            <button class="tab active" data-tab="clients">Клієнти</button>
+            <button class="tab" data-tab="products">Товари</button>
+            <button class="tab" data-tab="feed">Останні дії</button>
+          </div>
+          <div class="toolbar">
+            <input type="search" id="search" class="form-input" placeholder="Пошук: ім'я, @username, товар">
+          </div>
+        </div>
+        <div class="admin-card__body" id="list-body"></div>
+      </div>
+
+      <div class="admin-card hidden" id="detail-card">
+        <div class="admin-card__head">
+          <button class="admin-btn admin-btn--light admin-btn--sm" id="btn-back">← Назад до списку</button>
+        </div>
+        <div class="admin-card__body" id="detail-body"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script>
+    /* Дані мініаппа (miniapp_v/index.html) з Supabase: таблиці tg_users /
+       tg_events / tg_likes і зведення tg_users_overview / tg_product_interest
+       - див. scripts/supabase/miniapp_tracking_schema.sql. Читати їх можуть
+       лише користувачі зі списку tg_admins.
+       ⚠ SUPABASE_URL / ключ - ті самі, що в admin.html і assets/js/comments.js. */
+    const SUPABASE_URL = 'https://uvndubhmqzqqsrnrxgaj.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bmR1YmhtcXpxcXNybnJ4Z2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDY4MDIsImV4cCI6MjEwMzkyMjgwMn0.AavrYyhDXBQkjKOMdQ9wAQX6B901dOfUpmtUDwO5Cv8';
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const $ = id => document.getElementById(id);
+    function escHtml(str) {
+      return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    const DATE_FMT = new Intl.DateTimeFormat('uk-UA', { timeZone: 'Europe/Kyiv', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+    const DAY_FMT = new Intl.DateTimeFormat('uk-UA', { timeZone: 'Europe/Kyiv', year: 'numeric', month: '2-digit', day: '2-digit' });
+    const TIME_FMT = new Intl.DateTimeFormat('uk-UA', { timeZone: 'Europe/Kyiv', hour: '2-digit', minute: '2-digit' });
+    function fmtTime(iso) {
+      if (!iso) return '-';
+      const d = new Date(iso);
+      const day = DAY_FMT.format(d);
+      if (day === DAY_FMT.format(new Date())) return 'сьогодні ' + TIME_FMT.format(d);
+      if (day === DAY_FMT.format(new Date(Date.now() - 86400000))) return 'вчора ' + TIME_FMT.format(d);
+      return DATE_FMT.format(d);
+    }
+
+    /* PostgREST віддає максимум 1000 рядків за запит - дочитуємо сторінками. */
+    async function fetchAll(build) {
+      const out = [];
+      for (let from = 0; ; from += 1000) {
+        const { data, error } = await build().range(from, from + 999);
+        if (error) throw error;
+        out.push(...data);
+        if (data.length < 1000) return out;
+      }
+    }
+
+    /* ---- Товари сайту: назва й посилання на сторінку товару ---- */
+    let PRODUCTS = {};
+    async function loadProducts() {
+      try {
+        const res = await fetch('products.json?t=' + Date.now());
+        (await res.json()).forEach(p => { PRODUCTS[p.id] = p; });
+      } catch (e) { /* без посилань - не страшно */ }
+    }
+    function productName(id, fallback) {
+      return PRODUCTS[id]?.title || fallback || ('Товар ' + id);
+    }
+    function productLink(id, fallback) {
+      const p = PRODUCTS[id];
+      const name = escHtml(productName(id, fallback));
+      if (!p || !p.slug) return name;
+      return `<a class="product-link" href="product/${encodeURIComponent(p.slug)}/${encodeURIComponent(id)}.html" target="_blank" rel="noopener">${name}</a>`;
+    }
+
+    function clientName(u) {
+      return (u.name && u.name.trim()) || u.username || ('id ' + u.tg_id);
+    }
+    function tgLink(u) {
+      if (!u.username) return `<span class="muted">без @username</span>`;
+      const handle = u.username.replace(/^@/, '');
+      return `<a class="tg-link" href="https://t.me/${encodeURIComponent(handle)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">@${escHtml(handle)}</a>`;
+    }
+    function writePill(v) {
+      if (v === true) return '<span class="pill pill--yes" title="Дозволив боту писати">можна писати</span>';
+      if (v === false) return '<span class="pill pill--no" title="Відмовився від повідомлень">відмовився</span>';
+      return '<span class="pill pill--unknown" title="Ще не питали">не питали</span>';
+    }
+
+    const EVENT_LABEL = {
+      app_open: 'Відкрив мініапп',
+      category_open: 'Відкрив категорію',
+      product_open: 'Переглянув товар',
+      search: 'Шукав',
+      cart_add: 'Додав у кошик',
+      order: 'Замовив',
+      like: '❤️ Лайкнув',
+      unlike: 'Зняв лайк',
+      favorites_open: 'Відкрив «Обране»',
+      manager_click: 'Натиснув «Написати менеджеру»',
+    };
+    function describeEvent(e) {
+      let s = escHtml(EVENT_LABEL[e.event] || e.event);
+      if (e.product_id) s += ': ' + productLink(e.product_id, e.product_name);
+      else if (e.event === 'category_open' && e.category) s += ': ' + escHtml(e.category);
+      if (e.event === 'search' && e.query) s += ': «' + escHtml(e.query) + '»' + (e.category ? ` <span class="muted">в «${escHtml(e.category)}»</span>` : '');
+      if (e.event === 'app_open' && e.query) s += ` <span class="muted">(за посиланням ${escHtml(e.query)})</span>`;
+      return s;
+    }
+
+    /* ---- Дані ---- */
+    let USERS = [], INTEREST = [], LIKES = [], FEED = [];
+    let usersById = {};
+
+    async function loadAll() {
+      $('list-body').innerHTML = '<p class="admin-hint">Завантаження…</p>';
+      try {
+        const since = new Date(Date.now() - 7 * 86400000).toISOString();
+        const countEvents = (event) => sb.from('tg_events').select('id', { count: 'exact', head: true }).eq('event', event).gte('created_at', since);
+        const [users, interest, likes, feed, opens7, views7] = await Promise.all([
+          fetchAll(() => sb.from('tg_users_overview').select('*')),
+          fetchAll(() => sb.from('tg_product_interest').select('*')),
+          fetchAll(() => sb.from('tg_likes').select('tg_id, product_id, product_name, created_at').order('created_at', { ascending: false })),
+          sb.from('tg_events').select('*').order('created_at', { ascending: false }).limit(300),
+          countEvents('app_open'),
+          countEvents('product_open'),
+        ]);
+        if (feed.error) throw feed.error;
+        USERS = users; INTEREST = interest; LIKES = likes; FEED = feed.data;
+        usersById = Object.fromEntries(USERS.map(u => [u.tg_id, u]));
+        renderStats({ opens7: opens7.count || 0, views7: views7.count || 0 });
+        renderList();
+      } catch (err) {
+        $('list-body').innerHTML = `<p class="admin-hint error">Помилка: ${escHtml(err.message || err)}</p>`;
+      }
+    }
+
+    function renderStats({ opens7, views7 }) {
+      const active7 = USERS.filter(u => Date.now() - new Date(u.last_seen) < 7 * 86400000).length;
+      const canWrite = USERS.filter(u => u.write_access === true && !u.opted_out).length;
+      const items = [
+        [USERS.length, 'клієнтів усього'],
+        [active7, 'заходили за 7 днів'],
+        [opens7, 'відкриттів мініаппа за 7 днів'],
+        [views7, 'переглядів товарів за 7 днів'],
+        [LIKES.length, 'лайків'],
+        [canWrite, 'можна писати ботом'],
+      ];
+      $('stats').innerHTML = items.map(([v, l]) =>
+        `<div class="stat"><div class="stat__value">${v.toLocaleString('uk-UA')}</div><div class="stat__label">${l}</div></div>`).join('');
+    }
+
+    /* ---- Список: вкладки, пошук, сортування ---- */
+    let activeTab = 'clients';
+    const sortState = { clients: { key: 'last_seen', asc: false }, products: { key: 'views', asc: false } };
+
+    document.querySelectorAll('.tab').forEach(btn => btn.addEventListener('click', () => {
+      activeTab = btn.dataset.tab;
+      document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b === btn));
+      renderList();
+    }));
+    $('search').addEventListener('input', () => renderList());
+
+    function sortRows(rows, tab) {
+      const { key, asc } = sortState[tab];
+      return rows.sort((a, b) => {
+        let va = a[key], vb = b[key];
+        if (typeof va === 'string' && typeof vb === 'string' && !/^\d{4}-/.test(va)) return asc ? va.localeCompare(vb, 'uk') : vb.localeCompare(va, 'uk');
+        va = va ?? ''; vb = vb ?? '';
+        return (va < vb ? -1 : va > vb ? 1 : 0) * (asc ? 1 : -1);
+      });
+    }
+    function th(tab, key, label, cls = '') {
+      const s = sortState[tab];
+      const sorted = s.key === key ? ' sorted' + (s.asc ? ' asc' : '') : '';
+      return `<th class="sortable ${cls}${sorted}" data-sort="${key}">${label}</th>`;
+    }
+    function bindSort(tab) {
+      $('list-body').querySelectorAll('th[data-sort]').forEach(el => el.addEventListener('click', () => {
+        const s = sortState[tab];
+        if (s.key === el.dataset.sort) s.asc = !s.asc; else { s.key = el.dataset.sort; s.asc = false; }
+        renderList();
+      }));
+    }
+
+    function renderList() {
+      const q = $('search').value.trim().toLowerCase();
+      if (activeTab === 'clients') renderClients(q);
+      else if (activeTab === 'products') renderProducts(q);
+      else renderFeed(q);
+    }
+
+    function renderClients(q) {
+      let rows = USERS.map(u => ({ ...u, display: clientName(u) }));
+      if (q) rows = rows.filter(u => (u.display + ' ' + (u.username || '') + ' ' + (u.top_product || '') + ' ' + u.tg_id).toLowerCase().includes(q));
+      if (!rows.length) { $('list-body').innerHTML = `<p class="admin-hint">${USERS.length ? 'Нічого не знайдено.' : 'Поки ніхто не заходив у мініапп.'}</p>`; return; }
+      sortRows(rows, 'clients');
+      $('list-body').innerHTML = `<div class="table-wrap"><table>
+        <thead><tr>
+          ${th('clients', 'display', 'Клієнт')}
+          ${th('clients', 'visits', 'Заходів', 'num')}
+          ${th('clients', 'last_seen', 'Останній захід')}
+          ${th('clients', 'product_views', 'Переглядів', 'num')}
+          ${th('clients', 'likes', 'Лайків', 'num')}
+          ${th('clients', 'orders', 'Замовлень', 'num')}
+          <th>Найчастіше дивився</th>
+          ${th('clients', 'write_access', 'Повідомлення')}
+        </tr></thead>
+        <tbody>${rows.map(u => `
+          <tr class="clickable" data-client="${u.tg_id}">
+            <td class="who"><strong>${escHtml(u.display)}</strong><br>${tgLink(u)}</td>
+            <td class="num">${u.visits}</td>
+            <td>${fmtTime(u.last_seen)}</td>
+            <td class="num">${u.product_views}</td>
+            <td class="num">${u.likes ? `<span class="heart">❤</span> ${u.likes}` : 0}</td>
+            <td class="num">${u.orders}</td>
+            <td>${u.top_product ? escHtml(u.top_product) : '<span class="muted">-</span>'}</td>
+            <td>${u.opted_out ? '<span class="pill pill--no">відписався</span>' : writePill(u.write_access)}</td>
+          </tr>`).join('')}
+        </tbody></table></div>`;
+      bindSort('clients');
+      $('list-body').querySelectorAll('tr[data-client]').forEach(tr => tr.addEventListener('click', () => openClient(Number(tr.dataset.client))));
+    }
+
+    function productStats() {
+      const byId = {};
+      for (const r of INTEREST) {
+        const p = byId[r.product_id] ||= { product_id: r.product_id, name: productName(r.product_id, r.product_name), views: 0, viewers: 0, likes: 0, cart_adds: 0, last_view: null };
+        p.views += r.views;
+        if (r.views) p.viewers++;
+        if (r.liked) p.likes++;
+        p.cart_adds += r.cart_adds;
+        if (r.last_view && (!p.last_view || r.last_view > p.last_view)) p.last_view = r.last_view;
+      }
+      return Object.values(byId);
+    }
+
+    function renderProducts(q) {
+      let rows = productStats();
+      if (q) rows = rows.filter(p => (p.name + ' ' + p.product_id).toLowerCase().includes(q));
+      if (!rows.length) { $('list-body').innerHTML = `<p class="admin-hint">${INTEREST.length ? 'Нічого не знайдено.' : 'Ще ніхто не переглядав товари.'}</p>`; return; }
+      sortRows(rows, 'products');
+      $('list-body').innerHTML = `<div class="table-wrap"><table>
+        <thead><tr>
+          ${th('products', 'name', 'Товар')}
+          ${th('products', 'views', 'Переглядів', 'num')}
+          ${th('products', 'viewers', 'Клієнтів', 'num')}
+          ${th('products', 'likes', 'Лайків', 'num')}
+          ${th('products', 'cart_adds', 'У кошик', 'num')}
+          ${th('products', 'last_view', 'Останній перегляд')}
+        </tr></thead>
+        <tbody>${rows.map(p => `
+          <tr class="clickable" data-product="${escHtml(p.product_id)}">
+            <td>${escHtml(p.name)} <span class="muted">${escHtml(p.product_id)}</span></td>
+            <td class="num">${p.views}</td>
+            <td class="num">${p.viewers}</td>
+            <td class="num">${p.likes ? `<span class="heart">❤</span> ${p.likes}` : 0}</td>
+            <td class="num">${p.cart_adds}</td>
+            <td>${fmtTime(p.last_view)}</td>
+          </tr>`).join('')}
+        </tbody></table></div>`;
+      bindSort('products');
+      $('list-body').querySelectorAll('tr[data-product]').forEach(tr => tr.addEventListener('click', () => openProduct(tr.dataset.product)));
+    }
+
+    function feedHTML(events, withWho) {
+      if (!events.length) return '<p class="admin-hint">Подій немає.</p>';
+      return events.map(e => {
+        const u = usersById[e.tg_id];
+        const who = withWho && u ? `<a href="#" class="tg-link" data-client="${e.tg_id}">${escHtml(clientName(u))}</a> - ` : '';
+        return `<div class="feed-item"><div class="feed-time">${fmtTime(e.created_at)}</div><div>${who}${describeEvent(e)}</div></div>`;
+      }).join('');
+    }
+    function bindClientLinks(root) {
+      root.querySelectorAll('a[data-client]').forEach(a => a.addEventListener('click', ev => { ev.preventDefault(); openClient(Number(a.dataset.client)); }));
+    }
+
+    function renderFeed(q) {
+      let events = FEED;
+      if (q) events = events.filter(e => {
+        const u = usersById[e.tg_id];
+        return ((u ? clientName(u) + ' ' + (u.username || '') : '') + ' ' + (e.product_name || '') + ' ' + (e.category || '') + ' ' + (e.query || '')).toLowerCase().includes(q);
+      });
+      $('list-body').innerHTML = `<p class="muted" style="margin-bottom:8px">Останні ${FEED.length} дій усіх клієнтів.</p>` + feedHTML(events, true);
+      bindClientLinks($('list-body'));
+    }
+
+    /* ---- Деталі ---- */
+    function showDetail(html) {
+      $('list-card').classList.add('hidden');
+      $('detail-card').classList.remove('hidden');
+      $('detail-body').innerHTML = html;
+      window.scrollTo(0, 0);
+    }
+    $('btn-back').addEventListener('click', () => {
+      $('detail-card').classList.add('hidden');
+      $('list-card').classList.remove('hidden');
+    });
+
+    async function openClient(tgId) {
+      const u = usersById[tgId];
+      if (!u) return;
+      showDetail('<p class="admin-hint">Завантаження…</p>');
+      const { data: events, error } = await sb.from('tg_events').select('*').eq('tg_id', tgId).order('created_at', { ascending: false }).limit(300);
+      const interest = INTEREST.filter(r => r.tg_id === tgId).sort((a, b) => b.views - a.views);
+      const likes = LIKES.filter(l => l.tg_id === tgId);
+      showDetail(`
+        <div class="detail-head">
+          <div>
+            <div class="detail-name">${escHtml(clientName(u))}</div>
+            <div>${tgLink(u)} <span class="muted">· Telegram id ${u.tg_id}${u.platform ? ' · ' + escHtml(u.platform) : ''}</span></div>
+            <div class="detail-meta">
+              <span>Заходів: <b>${u.visits}</b></span>
+              <span>Перший захід: <b>${fmtTime(u.first_seen)}</b></span>
+              <span>Останній: <b>${fmtTime(u.last_seen)}</b></span>
+              <span>Замовлень: <b>${u.orders}</b></span>
+            </div>
+          </div>
+          <div>${u.opted_out ? '<span class="pill pill--no">відписався</span>' : writePill(u.write_access)}</div>
+        </div>
+
+        <div class="section-title">Товари, які переглядав</div>
+        ${interest.length ? `<div class="table-wrap"><table>
+          <thead><tr><th>Товар</th><th class="num">Переглядів</th><th class="num">У кошик</th><th>Лайк</th><th>Останній перегляд</th></tr></thead>
+          <tbody>${interest.map(r => `<tr>
+            <td>${productLink(r.product_id, r.product_name)}</td>
+            <td class="num">${r.views}</td>
+            <td class="num">${r.cart_adds}</td>
+            <td>${r.liked ? '<span class="heart">❤</span>' : ''}</td>
+            <td>${fmtTime(r.last_view)}</td></tr>`).join('')}
+          </tbody></table></div>` : '<p class="admin-hint">Товари не переглядав.</p>'}
+
+        <div class="section-title">Лайки (${likes.length})</div>
+        ${likes.length ? likes.map(l => `<div class="feed-item"><div class="feed-time">${fmtTime(l.created_at)}</div><div><span class="heart">❤</span> ${productLink(l.product_id, l.product_name)}</div></div>`).join('') : '<p class="admin-hint">Лайків немає.</p>'}
+
+        <div class="section-title">Історія дій</div>
+        ${error ? `<p class="admin-hint error">Помилка: ${escHtml(error.message)}</p>` : feedHTML(events, false)}
+      `);
+    }
+
+    function openProduct(productId) {
+      const rows = INTEREST.filter(r => r.product_id === productId)
+        .map(r => ({ ...r, user: usersById[r.tg_id] }))
+        .filter(r => r.user)
+        .sort((a, b) => (b.liked - a.liked) || (b.views - a.views));
+      const p = productStats().find(x => x.product_id === productId);
+      showDetail(`
+        <div class="detail-head">
+          <div>
+            <div class="detail-name">${productLink(productId, p?.name)}</div>
+            <div class="detail-meta">
+              <span>Переглядів: <b>${p?.views || 0}</b></span>
+              <span>Клієнтів: <b>${p?.viewers || 0}</b></span>
+              <span>Лайків: <b>${p?.likes || 0}</b></span>
+              <span>У кошик: <b>${p?.cart_adds || 0}</b></span>
+            </div>
+          </div>
+        </div>
+        <div class="section-title">Хто цікавився товаром</div>
+        <p class="muted" style="margin-bottom:8px">Ці люди - кандидати для персональної знижки. Писати ботом можна тим, у кого «можна писати».</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Клієнт</th><th class="num">Переглядів</th><th class="num">У кошик</th><th>Лайк</th><th>Останній перегляд</th><th class="num">Замовлень</th><th>Повідомлення</th></tr></thead>
+          <tbody>${rows.map(r => `<tr class="clickable" data-client="${r.tg_id}">
+            <td class="who"><strong>${escHtml(clientName(r.user))}</strong><br>${tgLink(r.user)}</td>
+            <td class="num">${r.views}</td>
+            <td class="num">${r.cart_adds}</td>
+            <td>${r.liked ? '<span class="heart">❤</span>' : ''}</td>
+            <td>${fmtTime(r.last_view)}</td>
+            <td class="num">${r.user.orders}</td>
+            <td>${r.user.opted_out ? '<span class="pill pill--no">відписався</span>' : writePill(r.user.write_access)}</td>
+          </tr>`).join('')}</tbody>
+        </table></div>
+      `);
+      $('detail-body').querySelectorAll('tr[data-client]').forEach(tr => tr.addEventListener('click', () => openClient(Number(tr.dataset.client))));
+    }
+
+    /* ---- Вхід ---- */
+    async function showState(session) {
+      const signedIn = !!session;
+      $('login-card').classList.toggle('hidden', signedIn);
+      $('btn-logout').classList.toggle('hidden', !signedIn);
+      $('main').classList.add('hidden');
+      $('denied-card').classList.add('hidden');
+      $('btn-refresh').classList.add('hidden');
+      if (!signedIn) return;
+      const { data: isAdmin, error } = await sb.rpc('is_tg_admin');
+      if (error || !isAdmin) { $('denied-card').classList.remove('hidden'); return; }
+      $('main').classList.remove('hidden');
+      $('btn-refresh').classList.remove('hidden');
+      await loadProducts();
+      await loadAll();
+    }
+
+    $('login-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const msg = $('login-msg');
+      msg.textContent = '';
+      const { data, error } = await sb.auth.signInWithPassword({ email: $('login-email').value.trim(), password: $('login-password').value });
+      if (error) { msg.textContent = error.message; msg.className = 'form-msg error'; return; }
+      $('login-password').value = '';
+      await showState(data.session);
+    });
+    $('btn-logout').addEventListener('click', async () => { await sb.auth.signOut(); await showState(null); });
+    $('btn-refresh').addEventListener('click', loadAll);
+
+    sb.auth.getSession().then(({ data }) => showState(data.session));
+  </script>
+</body>
+</html>

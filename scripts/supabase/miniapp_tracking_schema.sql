@@ -9,11 +9,12 @@
 --
 -- Доступ: анонімний клієнт (мініапп з anon-ключем) НЕ має прав на таблиці
 -- взагалі - ні читати, ні писати напряму. Він лише викликає 4 функції нижче
--- (security definer), які пишуть рівно те, що треба. Читати все може тільки
--- адмін (authenticated - вхід через Supabase Auth, як для коментарів).
+-- (security definer), які пишуть рівно те, що треба. Читати все можуть тільки
+-- адміни зі списку tg_admins - не будь-який authenticated: реєстрація в
+-- Supabase Auth відкрита, тож authenticated може бути хто завгодно.
 --
--- Перегляд даних: Table Editor → tg_users_overview (клієнти) і
--- tg_product_interest (хто що дивився / лайкав).
+-- Перегляд даних: miniapp-admin.html, або Table Editor → tg_users_overview
+-- (клієнти) і tg_product_interest (хто що дивився / лайкав).
 
 -- ─── Таблиці ───────────────────────────────────────────────────────────
 
@@ -59,6 +60,37 @@ create index if not exists tg_likes_product_idx on public.tg_likes (product_id);
 
 -- ─── Доступ ────────────────────────────────────────────────────────────
 
+-- Хто з користувачів Supabase Auth бачить дані мініаппа. Додати людину:
+--   insert into public.tg_admins (user_id, email)
+--   select id, email from auth.users where email = 'хтось@пошта';
+-- Прибрати: delete from public.tg_admins where email = 'хтось@пошта';
+create table if not exists public.tg_admins (
+  user_id   uuid primary key references auth.users (id) on delete cascade,
+  email     text,
+  added_at  timestamptz not null default now()
+);
+alter table public.tg_admins enable row level security;
+revoke all on public.tg_admins from anon, authenticated;
+
+-- Перший запуск: адмінами стають усі вже наявні користувачі Auth (їх
+-- створювали вручну в Dashboard). Далі список ведеться вручну - повторний
+-- запуск скрипта нікого не додає.
+insert into public.tg_admins (user_id, email)
+select id, email from auth.users
+ where not exists (select 1 from public.tg_admins);
+
+create or replace function public.is_tg_admin()
+returns boolean
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select exists (select 1 from tg_admins where user_id = auth.uid());
+$$;
+revoke all on function public.is_tg_admin() from public;
+grant execute on function public.is_tg_admin() to authenticated;
+
 alter table public.tg_users  enable row level security;
 alter table public.tg_events enable row level security;
 alter table public.tg_likes  enable row level security;
@@ -69,9 +101,12 @@ revoke all on public.tg_users, public.tg_events, public.tg_likes from anon;
 drop policy if exists "authenticated can read tg_users"  on public.tg_users;
 drop policy if exists "authenticated can read tg_events" on public.tg_events;
 drop policy if exists "authenticated can read tg_likes"  on public.tg_likes;
-create policy "authenticated can read tg_users"  on public.tg_users  for select to authenticated using (true);
-create policy "authenticated can read tg_events" on public.tg_events for select to authenticated using (true);
-create policy "authenticated can read tg_likes"  on public.tg_likes  for select to authenticated using (true);
+drop policy if exists "admins can read tg_users"  on public.tg_users;
+drop policy if exists "admins can read tg_events" on public.tg_events;
+drop policy if exists "admins can read tg_likes"  on public.tg_likes;
+create policy "admins can read tg_users"  on public.tg_users  for select to authenticated using (public.is_tg_admin());
+create policy "admins can read tg_events" on public.tg_events for select to authenticated using (public.is_tg_admin());
+create policy "admins can read tg_likes"  on public.tg_likes  for select to authenticated using (public.is_tg_admin());
 
 -- ─── Функції, які викликає мініапп ─────────────────────────────────────
 
@@ -272,3 +307,6 @@ order by views desc, last_view desc nulls last;
 
 revoke all on public.tg_users_overview, public.tg_product_interest from anon;
 grant select on public.tg_users_overview, public.tg_product_interest to authenticated;
+
+-- Хто має доступ до даних мініаппа (перевірте список після запуску):
+select email, added_at from public.tg_admins order by added_at;
