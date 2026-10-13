@@ -1,12 +1,13 @@
 /* admin-shell.js - спільна шапка, меню й вхід для всіх сторінок адмінки:
-   admin.html (контент), miniapp-admin.html, auction-admin.html, prom-admin/.
+   admin.html (контент), miniapp-admin.html, miniapp-mailing.html,
+   auction-admin.html, prom-admin/.
 
    Один вхід - користувач Supabase Auth (email + пароль). Сесію supabase-js
    тримає в localStorage цього домену, тож увійти достатньо на будь-якій
    сторінці адмінки - решта вже відкриваються залогіненими.
 
    Підключення на сторінці (після supabase-js, до власного скрипта сторінки):
-     <body data-admin-section="content|miniapp|auction|prom">
+     <body data-admin-section="content|miniapp|mailing|auction|prom">
        <div id="admin-app" hidden> ...вміст розділу... </div>
        <script src=".../supabase.js"></script>
        <script src=".../assets/js/admin-shell.js"></script>
@@ -26,6 +27,7 @@
   const SECTIONS = [
     ['content', 'Контент', 'admin.html'],
     ['miniapp', 'Мініапп', 'miniapp-admin.html'],
+    ['mailing', 'Розсилка', 'miniapp-mailing.html'],
     ['auction', 'Аукціон', 'auction-admin.html'],
     ['prom', 'Ціни Prom', 'prom-admin/'],
   ];
@@ -87,7 +89,7 @@
   login.innerHTML = `
     <form id="ash-login-form">
       <h1>Вхід в адмінку</h1>
-      <p>Один вхід для всіх розділів: контент, мініапп, аукціон, ціни Prom.</p>
+      <p>Один вхід для всіх розділів: контент, мініапп, розсилка, аукціон, ціни Prom.</p>
       <label for="ash-login-email">Email</label>
       <input type="email" id="ash-login-email" autocomplete="username" required>
       <label for="ash-login-password">Пароль</label>

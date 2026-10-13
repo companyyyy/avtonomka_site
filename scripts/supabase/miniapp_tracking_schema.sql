@@ -15,6 +15,8 @@
 --
 -- Перегляд даних: miniapp-admin.html, або Table Editor → tg_users_overview
 -- (клієнти) і tg_product_interest (хто що дивився / лайкав).
+-- Розсилки (tg_campaigns) - розділ «Розсилка» адмінки (miniapp-mailing.html);
+-- надсилає їх Edge Function supabase/functions/tg-send-campaign.
 
 -- ─── Таблиці ───────────────────────────────────────────────────────────
 
@@ -33,6 +35,10 @@ create table if not exists public.tg_users (
   write_access_at  timestamptz,
   opted_out        boolean     not null default false -- відписався від розсилок
 );
+
+-- Стан бота щодо клієнта (пише Edge Function бота):
+alter table public.tg_users add column if not exists bot_blocked     boolean not null default false; -- заблокував бота
+alter table public.tg_users add column if not exists last_message_at timestamptz;                    -- остання розсилка йому
 
 create table if not exists public.tg_events (
   id            bigint generated always as identity primary key,
@@ -158,6 +164,14 @@ begin
 
   insert into tg_events (tg_id, event, query) values (v_id, 'app_open', left(p_start_param, 128));
 
+  -- Відкрив мініапп кнопкою з розсилки: start_param product_<id>_c<кампанія>
+  if p_start_param ~ '_c[0-9]+$' then
+    update tg_campaign_recipients
+       set opened_at = coalesce(opened_at, now())
+     where campaign_id = substring(p_start_param from '_c([0-9]+)$')::bigint
+       and tg_id = v_id;
+  end if;
+
   select coalesce(jsonb_agg(product_id order by created_at), '[]'::jsonb) into v_likes
     from tg_likes where tg_id = v_id;
 
@@ -250,6 +264,187 @@ grant execute on function public.miniapp_visit(jsonb, text, text)               
 grant execute on function public.miniapp_track(bigint, text, text, text, text, text) to anon, authenticated;
 grant execute on function public.miniapp_set_like(bigint, text, text, boolean)      to anon, authenticated;
 grant execute on function public.miniapp_set_write_access(bigint, boolean)          to anon, authenticated;
+
+-- ─── Розсилки ──────────────────────────────────────────────────────────
+
+-- Кампанія = товар + умови відбору (segment) + текст. Отримувачі
+-- фіксуються в момент надсилання (tg_prepare_campaign), не при створенні.
+create table if not exists public.tg_campaigns (
+  id            bigint generated always as identity primary key,
+  title         text        not null,                 -- внутрішня назва
+  product_id    text,                                 -- null = без прив'язки до товару
+  product_name  text,
+  message       text        not null,                 -- текст; {ім'я} {товар} {ціна} підставляються
+  button_text   text        not null default 'Переглянути товар',
+  segment       jsonb       not null default '{}'::jsonb, -- параметри tg_segment
+  status        text        not null default 'draft'
+                check (status in ('draft', 'sending', 'sent', 'cancelled')),
+  created_by    uuid        default auth.uid(),
+  created_at    timestamptz not null default now(),
+  sent_at       timestamptz
+);
+
+create table if not exists public.tg_campaign_recipients (
+  campaign_id  bigint      not null references public.tg_campaigns (id) on delete cascade,
+  tg_id        bigint      not null references public.tg_users (tg_id) on delete cascade,
+  status       text        not null default 'pending'
+               check (status in ('pending', 'sent', 'failed', 'blocked')),
+  error        text,
+  sent_at      timestamptz,
+  opened_at    timestamptz,                           -- натиснув кнопку в повідомленні
+  primary key (campaign_id, tg_id)
+);
+
+alter table public.tg_campaigns           enable row level security;
+alter table public.tg_campaign_recipients enable row level security;
+revoke all on public.tg_campaigns, public.tg_campaign_recipients from anon;
+
+drop policy if exists "admins manage tg_campaigns"         on public.tg_campaigns;
+drop policy if exists "admins read tg_campaign_recipients" on public.tg_campaign_recipients;
+create policy "admins manage tg_campaigns" on public.tg_campaigns
+  for all to authenticated using (public.is_tg_admin()) with check (public.is_tg_admin());
+create policy "admins read tg_campaign_recipients" on public.tg_campaign_recipients
+  for select to authenticated using (public.is_tg_admin());
+
+-- Кому можна писати і чому ні. Один рядок на клієнта, що підпадає під умови.
+--   p_product_id     - товар (null = будь-який товар)
+--   p_min_views      - мінімум переглядів товару за період (0 = не важливо)
+--   p_days           - період, днів
+--   p_liked_only     - лише ті, в кого товар в обраному
+--   p_carted_only    - лише ті, хто додавав у кошик за період
+--   p_exclude_ordered - прибрати тих, хто вже замовляв (цей товар / будь-що)
+--   p_cooldown_days  - не писати тим, кому писали менше ніж N днів тому
+create or replace function public.tg_segment(
+  p_product_id text default null, p_min_views int default 1, p_days int default 30,
+  p_liked_only boolean default false, p_carted_only boolean default false,
+  p_exclude_ordered boolean default true, p_cooldown_days int default 7)
+returns table (
+  tg_id bigint, username text, name text,
+  views bigint, liked boolean, cart_adds bigint, ordered boolean, last_view timestamptz,
+  can_message boolean, reason text)
+language plpgsql
+stable
+security definer
+set search_path = public
+as $$
+begin
+  if not is_tg_admin() then
+    raise exception 'not allowed';
+  end if;
+
+  return query
+  with ev as (
+    select e.tg_id,
+           count(*) filter (where e.event = 'product_open')                         as views,
+           count(*) filter (where e.event = 'cart_add')                             as cart_adds,
+           max(e.created_at) filter (where e.event = 'product_open')                as last_view
+      from tg_events e
+     where e.created_at > now() - make_interval(days => p_days)
+       and (p_product_id is null or e.product_id = p_product_id)
+     group by e.tg_id
+  ), ord as (
+    select distinct e.tg_id from tg_events e
+     where e.event = 'order' and (p_product_id is null or e.product_id = p_product_id)
+  ), lk as (
+    select distinct l.tg_id from tg_likes l
+     where p_product_id is null or l.product_id = p_product_id
+  )
+  select u.tg_id,
+         case when u.username is not null then '@' || u.username end,
+         trim(coalesce(u.first_name, '') || ' ' || coalesce(u.last_name, '')),
+         coalesce(ev.views, 0),
+         lk.tg_id is not null,
+         coalesce(ev.cart_adds, 0),
+         ord.tg_id is not null,
+         ev.last_view,
+         (u.write_access is true and not u.opted_out and not u.bot_blocked
+           and (u.last_message_at is null or u.last_message_at < now() - make_interval(days => p_cooldown_days))),
+         case
+           when u.opted_out          then 'відписався від розсилок'
+           when u.bot_blocked        then 'заблокував бота'
+           when u.write_access is not true then 'не дозволив боту писати'
+           when u.last_message_at >= now() - make_interval(days => p_cooldown_days)
+             then 'вже отримував розсилку ' || to_char(u.last_message_at at time zone 'Europe/Kyiv', 'DD.MM')
+         end
+    from tg_users u
+    left join ev  on ev.tg_id  = u.tg_id
+    left join lk  on lk.tg_id  = u.tg_id
+    left join ord on ord.tg_id = u.tg_id
+   where coalesce(ev.views, 0) >= p_min_views
+     and (not p_liked_only  or lk.tg_id is not null)
+     and (not p_carted_only or coalesce(ev.cart_adds, 0) > 0)
+     and (not p_exclude_ordered or ord.tg_id is null)
+     and (ev.tg_id is not null or lk.tg_id is not null)
+   order by 9 desc, 4 desc;
+end;
+$$;
+
+-- Зафіксувати отримувачів кампанії (ті, кому можна писати) і перевести її
+-- в 'sending'. Викликає Edge Function перед надсиланням; повторний виклик
+-- для вже відправленої кампанії нічого не робить.
+create or replace function public.tg_prepare_campaign(p_campaign_id bigint)
+returns integer
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  c tg_campaigns;
+  n integer;
+begin
+  if not is_tg_admin() then
+    raise exception 'not allowed';
+  end if;
+  select * into c from tg_campaigns where id = p_campaign_id for update;
+  if c.id is null then raise exception 'campaign % not found', p_campaign_id; end if;
+  if c.status <> 'draft' then raise exception 'campaign % is already %', p_campaign_id, c.status; end if;
+
+  insert into tg_campaign_recipients (campaign_id, tg_id)
+  select p_campaign_id, s.tg_id
+    from tg_segment(
+      c.product_id,
+      coalesce((c.segment ->> 'min_views')::int, 1),
+      coalesce((c.segment ->> 'days')::int, 30),
+      coalesce((c.segment ->> 'liked_only')::boolean, false),
+      coalesce((c.segment ->> 'carted_only')::boolean, false),
+      coalesce((c.segment ->> 'exclude_ordered')::boolean, true),
+      coalesce((c.segment ->> 'cooldown_days')::int, 7)) s
+   where s.can_message
+  on conflict do nothing;
+  get diagnostics n = row_count;
+
+  update tg_campaigns set status = 'sending' where id = p_campaign_id;
+  return n;
+end;
+$$;
+
+revoke all on function public.tg_segment(text, int, int, boolean, boolean, boolean, int) from public, anon;
+revoke all on function public.tg_prepare_campaign(bigint) from public, anon;
+grant execute on function public.tg_segment(text, int, int, boolean, boolean, boolean, int) to authenticated;
+grant execute on function public.tg_prepare_campaign(bigint) to authenticated;
+
+-- Результат кампаній: скільки надіслано, не дійшло, відкрили, замовили
+-- (замовлення товару кампанії протягом 14 днів після надсилання).
+create or replace view public.tg_campaign_stats
+with (security_invoker = true) as
+select
+  c.id, c.title, c.product_id, c.product_name, c.status, c.created_at, c.sent_at,
+  count(r.tg_id)                                            as recipients,
+  count(r.tg_id) filter (where r.status = 'sent')           as sent,
+  count(r.tg_id) filter (where r.status in ('failed', 'blocked')) as failed,
+  count(r.opened_at)                                        as opened,
+  count(r.tg_id) filter (where exists (
+    select 1 from tg_events e
+     where e.tg_id = r.tg_id and e.event = 'order'
+       and (c.product_id is null or e.product_id = c.product_id)
+       and e.created_at between r.sent_at and r.sent_at + interval '14 days')) as ordered
+from tg_campaigns c
+left join tg_campaign_recipients r on r.campaign_id = c.id
+group by c.id
+order by c.created_at desc;
+
+revoke all on public.tg_campaign_stats from anon;
+grant select on public.tg_campaign_stats to authenticated;
 
 -- ─── Зведення для перегляду (Table Editor) ─────────────────────────────
 

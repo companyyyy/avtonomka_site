@@ -8,6 +8,7 @@ Supabase Auth) для всіх розділів. Увійти достатньо
 |---|---|---|
 | Контент | `admin.html` | статті, модерація коментарів, віртуальні товари (SEO) |
 | Мініапп | `miniapp-admin.html` | клієнти Telegram-мініаппа: заходи, перегляди, лайки |
+| Розсилка | `miniapp-mailing.html` | розсилки ботом тим, хто цікавився товаром (див. docs/TELEGRAM_BOT_SETUP.md) |
 | Аукціон | `auction-admin.html` | лоти, ставки, контакти лідера |
 | Ціни Prom | `prom-admin/` | ціни й наявність для `prom_file.xml` та `invertorshop.xml` |
 

@@ -475,7 +475,8 @@
           </div>
         </div>
         <div class="section-title">Хто цікавився товаром</div>
-        <p class="muted" style="margin-bottom:8px">Ці люди - кандидати для персональної знижки. Писати ботом можна тим, у кого «можна писати».</p>
+        <p class="muted" style="margin-bottom:8px">Ці люди - кандидати для персональної знижки. Писати ботом можна тим, у кого «можна писати».
+          <a class="tg-link" href="miniapp-mailing.html?product=${encodeURIComponent(productId)}">✉️ Створити розсилку на цей товар →</a></p>
         <div class="table-wrap"><table>
           <thead><tr><th>Клієнт</th><th class="num">Переглядів</th><th class="num">У кошик</th><th>Лайк</th><th>Останній перегляд</th><th class="num">Замовлень</th><th>Повідомлення</th></tr></thead>
           <tbody>${rows.map(r => `<tr class="clickable" data-client="${r.tg_id}">

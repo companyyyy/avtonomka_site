@@ -270,6 +270,11 @@ const CONFIG = {
      scripts/supabase/miniapp_tracking_schema.sql, читати таблиці він не може. */
   SUPABASE_URL: "https://uvndubhmqzqqsrnrxgaj.supabase.co",
   SUPABASE_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bmR1YmhtcXpxcXNybnJ4Z2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDY4MDIsImV4cCI6MjEwMzkyMjgwMn0.AavrYyhDXBQkjKOMdQ9wAQX6B901dOfUpmtUDwO5Cv8",
+  /* Коли підключать бота: адреса Edge Function miniapp-api (перевіряє підпис
+     Telegram), напр. "https://uvndubhmqzqqsrnrxgaj.supabase.co/functions/v1/miniapp-api".
+     Порожньо - мініапп викликає SQL-функції напряму (без перевірки підпису).
+     Див. docs/TELEGRAM_BOT_SETUP.md. */
+  MINIAPP_API: "",
 };
 
 /* Той самий асортимент, що на сайті (products.json), тому мапимо по
@@ -301,12 +306,24 @@ const TG=window.Telegram?.WebApp;
 const TG_USER=TG?.initDataUnsafe?.user?.id ? TG.initDataUnsafe.user : null;
 const HEART_SVG='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 3 4.5 6.6 4.5c2.1 0 3.6 1.2 4.4 2.6.8-1.4 2.3-2.6 4.4-2.6 3.6 0 5.7 3.7 4.2 7.2C19.5 16.4 12 21 12 21z"/></svg>';
 const FAV="__fav__";
+// Параметр запуску: з посилання t.me/<бот>/<апп>?startapp=... Telegram кладе
+// його в start_param, а кнопка web_app у повідомленні бота (розсилка)
+// передає його в адресі сторінки (?startapp=...).
+const START_PARAM=TG?.initDataUnsafe?.start_param||new URLSearchParams(location.search).get("startapp")||null;
 let LIKES=new Set();
 try{ LIKES=new Set(JSON.parse(localStorage.getItem("avtonomka_likes")||"[]")); }catch(e){}
 let writeAccess=TG_USER?.allows_write_to_pm?true:null;
 let productOpens=0;
 
+const API_FN={miniapp_visit:"visit", miniapp_track:"track", miniapp_set_like:"like", miniapp_set_write_access:"write_access"};
 function rpc(fn,args){
+  if(CONFIG.MINIAPP_API){
+    return fetch(CONFIG.MINIAPP_API,{
+      method:"POST", keepalive:true,
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({initData:TG?.initData||"", fn:API_FN[fn], args}),
+    });
+  }
   return fetch(`${CONFIG.SUPABASE_URL}/rest/v1/rpc/${fn}`,{
     method:"POST", keepalive:true,
     headers:{apikey:CONFIG.SUPABASE_KEY, Authorization:"Bearer "+CONFIG.SUPABASE_KEY, "Content-Type":"application/json"},
@@ -316,7 +333,7 @@ function rpc(fn,args){
 // Події чекають на реєстрацію заходу - інакше перші кліки нового клієнта
 // загубились би (функції ігнорують невідомий tg_id).
 const visitDone=TG_USER
-  ? rpc("miniapp_visit",{p_user:TG_USER, p_platform:TG.platform||null, p_start_param:TG.initDataUnsafe.start_param||null})
+  ? rpc("miniapp_visit",{p_user:TG_USER, p_platform:TG.platform||null, p_start_param:START_PARAM})
       .then(r=>r.ok?r.json():null)
       .then(res=>{
         if(!res) return;
@@ -530,10 +547,10 @@ async function loadData(){
   }
 }
 
-// Посилання з розсилки: t.me/<бот>/<апп>?startapp=product_<id> одразу
-// відкриває потрібний товар.
+// Посилання на товар (startapp=product_<id>, з розсилки ще _c<кампанія>)
+// одразу відкриває потрібний товар.
 function openStartProduct(){
-  const m=/^product_([A-Za-z0-9]+)$/.exec(TG?.initDataUnsafe?.start_param||"");
+  const m=/^product_([A-Za-z0-9]+)(?:_c\d+)?$/.exec(START_PARAM||"");
   const p=m&&all.find(x=>x.id===m[1]);
   if(!p) return;
   openCat(p.category);

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Розсилка - Адмін - Автономка</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="assets/images/logo.jpg" type="image/jpeg">
+  <link rel="canonical" href="https://avtonomka.com.ua/miniapp-mailing.html">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f8; color: #222831; line-height: 1.6; min-height: 100vh; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font-family: inherit; }
+    .hidden { display: none !important; }
+
+    .admin-body { max-width: 1180px; margin: 0 auto; padding: 28px 20px 64px; display: flex; flex-direction: column; gap: 24px; }
+    .admin-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(26,46,74,.08); overflow: hidden; }
+    .admin-card__head { display: flex; align-items: center; justify-content: space-between; padding: 16px 22px; border-bottom: 1px solid #e0e6ed; gap: 12px; flex-wrap: wrap; }
+    .admin-card__title { font-size: 1.05rem; font-weight: 700; color: #1a2e4a; }
+    .admin-card__body { padding: 22px; }
+    .admin-hint { font-size: .9rem; color: #6c757d; padding: 12px 0; }
+    .admin-hint.error { color: #c0392b; }
+    .muted { color: #6c757d; font-size: .82rem; }
+
+    .admin-btn { padding: 8px 16px; border-radius: 7px; border: none; font-size: .9rem; font-weight: 600; transition: background .2s; white-space: nowrap; }
+    .admin-btn:disabled { opacity: .45; cursor: not-allowed; }
+    .admin-btn--primary { background: #f5a623; color: #1a2e4a; }
+    .admin-btn--primary:hover:not(:disabled) { background: #e0921a; }
+    .admin-btn--light { background: #e0e6ed; color: #1a2e4a; }
+    .admin-btn--light:hover:not(:disabled) { background: #d0d8e2; }
+    .admin-btn--danger { background: rgba(231,76,60,.12); color: #c0392b; }
+    .admin-btn--sm { padding: 5px 11px; font-size: .82rem; }
+
+    .banner { padding: 12px 18px; border-radius: 10px; font-size: .92rem; }
+    .banner--ok { background: rgba(46,204,64,.12); color: #17a126; border: 1px solid rgba(46,204,64,.25); }
+    .banner--warn { background: rgba(245,166,35,.12); color: #8a5a00; border: 1px solid rgba(245,166,35,.3); }
+    .banner--error { background: rgba(231,76,60,.10); color: #c0392b; border: 1px solid rgba(231,76,60,.2); }
+
+    label.field { display: block; font-size: .78rem; font-weight: 600; color: #6c757d; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; }
+    .form-input { width: 100%; padding: 9px 12px; border: 2px solid #e0e6ed; border-radius: 8px; font-size: .93rem; font-family: inherit; color: #222831; background: #fff; outline: none; }
+    .form-input:focus { border-color: #f5a623; }
+    textarea.form-input { resize: vertical; min-height: 170px; line-height: 1.5; }
+    .num-input { width: 74px; display: inline-block; padding: 6px 8px; text-align: center; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .group { margin-bottom: 18px; }
+    .conditions { display: flex; flex-direction: column; gap: 10px; font-size: .92rem; }
+    .conditions label { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .conditions label.check { flex-wrap: nowrap; align-items: flex-start; }
+    .conditions label.check input { margin-top: 3px; flex-shrink: 0; }
+    .conditions input[type=checkbox] { width: 17px; height: 17px; accent-color: #1a2e4a; }
+    .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+    .chip { background: #eef1f4; border: none; border-radius: 20px; padding: 3px 10px; font-size: .8rem; color: #1a2e4a; }
+    .chip:hover { background: #e0e6ed; }
+    .counter { font-size: .78rem; color: #6c757d; text-align: right; margin-top: 4px; }
+    .counter.over { color: #c0392b; font-weight: 700; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .msg { font-size: .88rem; min-height: 20px; margin-top: 10px; }
+    .msg.error { color: #c0392b; }
+    .msg.ok { color: #17a126; }
+
+    /* Preview like a Telegram message */
+    .tg-preview { background: #a8c69a url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%23ffffff' fill-opacity='.25'/%3E%3C/svg%3E"); border-radius: 12px; padding: 18px; }
+    .tg-bubble { background: #fff; border-radius: 12px; max-width: 340px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.15); }
+    .tg-bubble img { width: 100%; max-height: 260px; object-fit: contain; background: #f5f5f5; display: block; }
+    .tg-text { padding: 8px 12px 10px; font-size: .9rem; white-space: pre-wrap; word-wrap: break-word; }
+    .tg-buttons { max-width: 340px; display: flex; flex-direction: column; gap: 4px; margin-top: 4px; }
+    .tg-buttons div { background: rgba(0,0,0,.18); color: #fff; text-align: center; border-radius: 8px; padding: 7px; font-size: .86rem; font-weight: 600; }
+
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+    th { text-align: left; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: #6c757d; padding: 8px 10px; border-bottom: 2px solid #e0e6ed; white-space: nowrap; }
+    td { padding: 8px 10px; border-bottom: 1px solid #eef1f4; vertical-align: top; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .pill { display: inline-block; font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 20px; white-space: nowrap; }
+    .pill--yes { background: rgba(46,204,64,.15); color: #17a126; }
+    .pill--no { background: rgba(108,117,125,.15); color: #6c757d; }
+    .pill--draft { background: rgba(108,117,125,.15); color: #6c757d; }
+    .pill--sending { background: rgba(245,166,35,.18); color: #8a5a00; }
+    .pill--sent { background: rgba(46,204,64,.15); color: #17a126; }
+    .summary { font-size: .95rem; margin-bottom: 10px; }
+    .summary b { color: #1a2e4a; }
+    .editor-layout { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 28px; }
+    .editor-layout > div, .grid2 > div { min-width: 0; }
+
+    @media (max-width: 900px) { .editor-layout { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) {
+      .admin-body { padding: 18px 10px 48px; }
+      .admin-card__body { padding: 16px 12px; }
+      .grid2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-admin-section="mailing">
+
+  <div id="admin-app" hidden>
+  <div class="admin-body">
+
+    <div class="admin-card hidden" id="denied-card">
+      <div class="admin-card__body">
+        <p class="admin-hint error" style="padding:0">Цей користувач не має доступу до даних мініаппа (список tg_admins, див. docs/ADMIN.md).</p>
+      </div>
+    </div>
+
+    <div id="main" class="hidden" style="display:flex;flex-direction:column;gap:24px">
+
+      <div id="bot-banner" class="banner banner--warn">Перевіряю, чи підключено бота…</div>
+
+      <!-- Editor -->
+      <div class="admin-card">
+        <div class="admin-card__head">
+          <span class="admin-card__title" id="editor-title">Нова розсилка</span>
+          <button class="admin-btn admin-btn--light admin-btn--sm hidden" id="btn-new">+ Нова розсилка</button>
+        </div>
+        <div class="admin-card__body">
+          <div class="editor-layout">
+            <div>
+              <div class="grid2 group">
+                <div>
+                  <label class="field" for="f-product">Товар</label>
+                  <select id="f-product" class="form-input"></select>
+                </div>
+                <div>
+                  <label class="field" for="f-title">Назва розсилки (лише для вас)</label>
+                  <input id="f-title" class="form-input" placeholder="Напр.: Знижка на MUST 3224, жовтень">
+                </div>
+              </div>
+
+              <div class="group">
+                <label class="field">Кому надсилати</label>
+                <div class="conditions">
+                  <label>Переглядав товар не менше <input type="number" id="f-min-views" class="form-input num-input" min="0" value="3"> разів за останні <input type="number" id="f-days" class="form-input num-input" min="1" value="30"> днів</label>
+                  <label class="check"><input type="checkbox" id="f-liked"> лише ті, в кого товар в обраному ❤️</label>
+                  <label class="check"><input type="checkbox" id="f-carted"> лише ті, хто додавав у кошик</label>
+                  <label class="check"><input type="checkbox" id="f-exclude-ordered" checked> <span id="f-exclude-label">не надсилати тим, хто вже замовляв цей товар</span></label>
+                  <label>не писати тим, хто отримував розсилку за останні <input type="number" id="f-cooldown" class="form-input num-input" min="0" value="7"> днів</label>
+                </div>
+                <div class="actions" style="margin-top:14px">
+                  <button class="admin-btn admin-btn--light" id="btn-recipients">Показати отримувачів</button>
+                </div>
+                <div id="recipients" style="margin-top:14px"></div>
+              </div>
+
+              <div class="group">
+                <label class="field" for="f-message">Текст повідомлення</label>
+                <textarea id="f-message" class="form-input"></textarea>
+                <div class="chips">
+                  <span class="muted" style="align-self:center">Вставити:</span>
+                  <button type="button" class="chip" data-insert="{ім'я}">{ім'я}</button>
+                  <button type="button" class="chip" data-insert="{товар}">{товар}</button>
+                  <button type="button" class="chip" data-insert="{ціна}">{ціна}</button>
+                </div>
+                <div class="counter" id="f-counter"></div>
+              </div>
+
+              <div class="group" style="max-width:340px">
+                <label class="field" for="f-button">Текст кнопки</label>
+                <input id="f-button" class="form-input" value="Переглянути товар" maxlength="40">
+              </div>
+
+              <div class="actions">
+                <button class="admin-btn admin-btn--light" id="btn-save">Зберегти чернетку</button>
+                <button class="admin-btn admin-btn--light" id="btn-test">Надіслати тест собі</button>
+                <button class="admin-btn admin-btn--primary" id="btn-send">Надіслати</button>
+              </div>
+              <div class="msg" id="editor-msg"></div>
+            </div>
+
+            <div>
+              <label class="field">Так побачить клієнт</label>
+              <div class="tg-preview">
+                <div class="tg-bubble">
+                  <img id="pv-img" alt="" hidden>
+                  <div class="tg-text" id="pv-text"></div>
+                </div>
+                <div class="tg-buttons"><div id="pv-button"></div><div>Не надсилати мені пропозицій</div></div>
+              </div>
+              <p class="muted" style="margin-top:8px">Кнопка відкриває мініапп одразу на цьому товарі. «Не надсилати мені пропозицій» відписує клієнта від розсилок.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Campaigns -->
+      <div class="admin-card">
+        <div class="admin-card__head">
+          <span class="admin-card__title">Розсилки</span>
+          <button class="admin-btn admin-btn--light admin-btn--sm" id="btn-reload">Оновити</button>
+        </div>
+        <div class="admin-card__body" id="campaigns"></div>
+      </div>
+
+    </div>
+  </div>
+  </div><!-- /admin-app -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="assets/js/admin-shell.js"></script>
+  <script>
+    /* Розсилки ботом клієнтам мініаппа. Дані - scripts/supabase/miniapp_tracking_schema.sql
+       (tg_campaigns, tg_segment, tg_campaign_stats), надсилання - Edge Function
+       supabase/functions/tg-send-campaign. Поки функцію не розгорнуто (немає
+       токена бота), розсилки можна готувати й зберігати, а кнопки надсилання
+       неактивні. Вхід, шапка й клієнт Supabase - assets/js/admin-shell.js. */
+    const sb = AdminShell.sb;
+    const $ = id => document.getElementById(id);
+    function escHtml(s) {
+      return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    const DATE_FMT = new Intl.DateTimeFormat('uk-UA', { timeZone: 'Europe/Kyiv', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+    const fmtTime = iso => iso ? DATE_FMT.format(new Date(iso)) : '-';
+
+    const DEFAULT_MESSAGE = "Вітаю, {ім'я}! 👋\n\nВи цікавились: {товар}.\nДля вас персональна пропозиція: [опишіть знижку, напр. -1 500 грн до неділі].\n\nЗамовити можна прямо в каталозі 👇";
+    const CAPTION_LIMIT = 1024;
+
+    let BOT_READY = false;
+    let PRODUCTS = [];
+    let USERS = [];               // для «тест собі»
+    let editing = null;           // кампанія, відкрита в редакторі
+    let lastRecipients = null;    // скільки отримають (після «Показати отримувачів»)
+
+    /* ---- Товари ---- */
+    async function loadProducts() {
+      try {
+        const res = await fetch('products.json?t=' + Date.now());
+        PRODUCTS = (await res.json()).sort((a, b) => a.title.localeCompare(b.title, 'uk'));
+      } catch (e) { PRODUCTS = []; }
+      $('f-product').innerHTML = '<option value="">Будь-який товар (за всіма товарами)</option>' +
+        PRODUCTS.map(p => `<option value="${escHtml(p.id)}">${escHtml(p.title)}</option>`).join('');
+    }
+    const productById = id => PRODUCTS.find(p => p.id === id) || null;
+    const priceText = p => {
+      const n = parseFloat(String(p?.price || '').replace(/\s/g, '').replace(',', '.'));
+      return Number.isFinite(n) ? Math.round(n).toLocaleString('uk-UA') + ' грн' : '';
+    };
+
+    /* ---- Бот підключено? ---- */
+    async function checkBot() {
+      const el = $('bot-banner');
+      try {
+        const { data, error } = await sb.functions.invoke('tg-send-campaign', { body: { ping: true } });
+        if (error || !data?.ok) throw error || new Error(data?.error);
+        BOT_READY = true;
+        el.className = 'banner banner--ok';
+        el.textContent = `Бот @${data.bot} підключено - розсилки можна надсилати.`;
+      } catch (e) {
+        BOT_READY = false;
+        el.className = 'banner banner--warn';
+        el.textContent = 'Бота ще не підключено. Розсилки можна готувати й зберігати як чернетки; надсилання запрацює, щойно бота підключать (docs/TELEGRAM_BOT_SETUP.md).';
+      }
+      syncButtons();
+    }
+
+    /* ---- Форма ---- */
+    function segmentFromForm() {
+      return {
+        min_views: Math.max(0, parseInt($('f-min-views').value, 10) || 0),
+        days: Math.max(1, parseInt($('f-days').value, 10) || 30),
+        liked_only: $('f-liked').checked,
+        carted_only: $('f-carted').checked,
+        exclude_ordered: $('f-exclude-ordered').checked,
+        cooldown_days: Math.max(0, parseInt($('f-cooldown').value, 10) || 0),
+      };
+    }
+    function fillForm(c) {
+      editing = c;
+      const s = c?.segment || {};
+      $('f-product').value = c?.product_id || $('f-product').value || '';
+      $('f-title').value = c?.title || '';
+      $('f-min-views').value = s.min_views ?? 3;
+      $('f-days').value = s.days ?? 30;
+      $('f-liked').checked = !!s.liked_only;
+      $('f-carted').checked = !!s.carted_only;
+      $('f-exclude-ordered').checked = s.exclude_ordered ?? true;
+      $('f-cooldown').value = s.cooldown_days ?? 7;
+      $('f-message').value = c?.message || DEFAULT_MESSAGE;
+      $('f-button').value = c?.button_text || 'Переглянути товар';
+      const locked = c && c.status !== 'draft';
+      document.querySelectorAll('#f-product, #f-title, #f-min-views, #f-days, #f-liked, #f-carted, #f-exclude-ordered, #f-cooldown, #f-message, #f-button')
+        .forEach(el => { el.disabled = !!locked; });
+      $('editor-title').textContent = !c ? 'Нова розсилка' : locked ? `Розсилка «${c.title}» (${statusLabel(c.status).toLowerCase()})` : `Чернетка «${c.title}»`;
+      $('btn-new').classList.toggle('hidden', !c);
+      $('recipients').innerHTML = '';
+      lastRecipients = null;
+      setMsg('');
+      onProductChange();
+    }
+    function onProductChange() {
+      const p = productById($('f-product').value);
+      $('f-exclude-label').textContent = p ? 'не надсилати тим, хто вже замовляв цей товар' : 'не надсилати тим, хто вже щось замовляв';
+      if (!$('f-title').value && p && !editing) $('f-title').placeholder = 'Напр.: Знижка на ' + p.title.slice(0, 40);
+      $('f-button').value = $('f-button').value || (p ? 'Переглянути товар' : 'Відкрити каталог');
+      renderPreview();
+    }
+    function renderPreview() {
+      const p = productById($('f-product').value);
+      const text = $('f-message').value
+        .replaceAll("{ім'я}", 'Іван')
+        .replaceAll('{товар}', p ? p.title : 'назва товару')
+        .replaceAll('{ціна}', p ? priceText(p) : '');
+      $('pv-text').textContent = text;
+      $('pv-button').textContent = $('f-button').value || 'Переглянути товар';
+      const img = $('pv-img');
+      if (p && p.image_link) { img.src = p.image_link; img.hidden = false; } else { img.hidden = true; }
+      const len = $('f-message').value.length;
+      const c = $('f-counter');
+      c.textContent = `${len} / ${CAPTION_LIMIT} символів` + (len > CAPTION_LIMIT ? ' - довгий текст піде окремим повідомленням без фото' : '');
+      c.classList.toggle('over', len > CAPTION_LIMIT);
+    }
+    function setMsg(text, kind = '') { const el = $('editor-msg'); el.textContent = text; el.className = 'msg ' + kind; }
+    function syncButtons() {
+      const locked = editing && editing.status !== 'draft';
+      $('btn-save').disabled = !!locked;
+      $('btn-test').disabled = !BOT_READY;
+      $('btn-send').disabled = !BOT_READY || (editing && editing.status === 'sent');
+      $('btn-send').textContent = editing?.status === 'sending' ? 'Продовжити надсилання' : 'Надіслати';
+      const why = BOT_READY ? '' : 'Стане доступно після підключення бота';
+      $('btn-test').title = why; $('btn-send').title = why;
+    }
+
+    ['f-message', 'f-button'].forEach(id => $(id).addEventListener('input', renderPreview));
+    $('f-product').addEventListener('change', () => { onProductChange(); $('recipients').innerHTML = ''; lastRecipients = null; });
+    ['f-min-views', 'f-days', 'f-liked', 'f-carted', 'f-exclude-ordered', 'f-cooldown'].forEach(id =>
+      $(id).addEventListener('change', () => { $('recipients').innerHTML = ''; lastRecipients = null; }));
+    document.querySelectorAll('[data-insert]').forEach(b => b.addEventListener('click', () => {
+      const ta = $('f-message');
+      if (ta.disabled) return;
+      const pos = ta.selectionStart ?? ta.value.length;
+      ta.value = ta.value.slice(0, pos) + b.dataset.insert + ta.value.slice(ta.selectionEnd ?? pos);
+      ta.focus(); ta.selectionStart = ta.selectionEnd = pos + b.dataset.insert.length;
+      renderPreview();
+    }));
+    $('btn-new').addEventListener('click', () => { fillForm(null); syncButtons(); });
+
+    /* ---- Отримувачі ---- */
+    async function showRecipients() {
+      const el = $('recipients');
+      el.innerHTML = '<p class="admin-hint">Рахую…</p>';
+      const s = segmentFromForm();
+      const { data, error } = await sb.rpc('tg_segment', {
+        p_product_id: $('f-product').value || null, p_min_views: s.min_views, p_days: s.days,
+        p_liked_only: s.liked_only, p_carted_only: s.carted_only,
+        p_exclude_ordered: s.exclude_ordered, p_cooldown_days: s.cooldown_days,
+      });
+      if (error) { el.innerHTML = `<p class="admin-hint error">Помилка: ${escHtml(error.message)}</p>`; return null; }
+      const ok = data.filter(r => r.can_message).length;
+      lastRecipients = ok;
+      if (!data.length) { el.innerHTML = '<p class="admin-hint">Під ці умови ніхто не підпадає. Спробуйте зменшити кількість переглядів або збільшити період.</p>'; return 0; }
+      el.innerHTML = `
+        <p class="summary">Отримають повідомлення: <b>${ok}</b> з ${data.length}${data.length - ok ? ` <span class="muted">(решті писати не можна - причина в таблиці)</span>` : ''}</p>
+        <div class="table-wrap" style="max-height:360px;overflow-y:auto"><table>
+          <thead><tr><th>Клієнт</th><th class="num">Переглядів</th><th>Лайк</th><th class="num">У кошик</th><th>Замовляв</th><th>Писати</th></tr></thead>
+          <tbody>${data.map(r => `<tr>
+            <td><strong>${escHtml(r.name || r.username || ('id ' + r.tg_id))}</strong>${r.username ? ` <span class="muted">${escHtml(r.username)}</span>` : ''}</td>
+            <td class="num">${r.views}</td>
+            <td>${r.liked ? '❤' : ''}</td>
+            <td class="num">${r.cart_adds}</td>
+            <td>${r.ordered ? 'так' : ''}</td>
+            <td>${r.can_message ? '<span class="pill pill--yes">так</span>' : `<span class="pill pill--no">${escHtml(r.reason || 'ні')}</span>`}</td>
+          </tr>`).join('')}</tbody>
+        </table></div>`;
+      return ok;
+    }
+    $('btn-recipients').addEventListener('click', showRecipients);
+
+    /* ---- Зберегти / надіслати ---- */
+    async function saveDraft() {
+      const p = productById($('f-product').value);
+      const message = $('f-message').value.trim();
+      if (!message) { setMsg('Напишіть текст повідомлення.', 'error'); return null; }
+      if (/\[опишіть знижку/.test(message)) { setMsg('Замініть у тексті «[опишіть знижку…]» на справжню пропозицію.', 'error'); return null; }
+      const row = {
+        title: $('f-title').value.trim() || (p ? 'Розсилка: ' + p.title.slice(0, 60) : 'Розсилка ' + new Date().toLocaleDateString('uk-UA')),
+        product_id: p ? p.id : null,
+        product_name: p ? p.title : null,
+        message,
+        button_text: $('f-button').value.trim() || 'Переглянути товар',
+        segment: segmentFromForm(),
+      };
+      const q = editing
+        ? sb.from('tg_campaigns').update(row).eq('id', editing.id).select().single()
+        : sb.from('tg_campaigns').insert(row).select().single();
+      const { data, error } = await q;
+      if (error) { setMsg('Помилка збереження: ' + error.message, 'error'); return null; }
+      editing = data;
+      $('editor-title').textContent = `Чернетка «${data.title}»`;
+      $('btn-new').classList.remove('hidden');
+      await loadCampaigns();
+      return data;
+    }
+    $('btn-save').addEventListener('click', async () => {
+      if (await saveDraft()) setMsg('Чернетку збережено.', 'ok');
+    });
+
+    $('btn-test').addEventListener('click', async () => {
+      const who = prompt('Кому надіслати тест? Ваш @username або Telegram id (ви маєте хоч раз відкрити мініапп і запустити бота).');
+      if (!who) return;
+      const key = who.trim().replace(/^@/, '').toLowerCase();
+      const u = USERS.find(u => String(u.tg_id) === key || (u.username || '').replace(/^@/, '').toLowerCase() === key);
+      if (!u) { setMsg('Такого клієнта не знайдено серед тих, хто відкривав мініапп.', 'error'); return; }
+      const c = editing && editing.status !== 'draft' ? editing : await saveDraft();
+      if (!c) return;
+      setMsg('Надсилаю тест…');
+      const { data, error } = await sb.functions.invoke('tg-send-campaign', { body: { campaign_id: c.id, test_tg_id: u.tg_id } });
+      if (error || !data?.ok) setMsg('Не вдалося: ' + (data?.error || error?.message), 'error');
+      else setMsg('Тест надіслано - перевірте Telegram.', 'ok');
+    });
+
+    $('btn-send').addEventListener('click', async () => {
+      let c = editing;
+      if (!c || c.status === 'draft') {
+        const n = await showRecipients();
+        if (n === null) return;
+        if (!n) { setMsg('Немає кому надсилати.', 'error'); return; }
+        if (!confirm(`Надіслати повідомлення ${n} клієнтам? Скасувати після надсилання буде неможливо.`)) return;
+        c = await saveDraft();
+        if (!c) return;
+      }
+      $('btn-send').disabled = true;
+      const total = { sent: 0, failed: 0, blocked: 0 };
+      try {
+        // Функція надсилає порціями (~100 с за виклик) - викликаємо, доки не залишиться нікого.
+        for (;;) {
+          setMsg(`Надсилаю… доставлено ${total.sent}`);
+          const { data, error } = await sb.functions.invoke('tg-send-campaign', { body: { campaign_id: c.id } });
+          if (error || !data?.ok) throw new Error(data?.error || error?.message || 'помилка');
+          total.sent += data.sent; total.failed += data.failed; total.blocked += data.blocked;
+          if (!data.remaining) break;
+        }
+        setMsg(`Готово: доставлено ${total.sent}` + (total.blocked ? `, заблокували бота ${total.blocked}` : '') + (total.failed ? `, не вдалося ${total.failed}` : '') + '.', 'ok');
+      } catch (e) {
+        setMsg('Надсилання перервалось: ' + e.message + '. Натисніть «Продовжити надсилання», щоб дослати решті.', 'error');
+      }
+      await loadCampaigns();
+      const { data: fresh } = await sb.from('tg_campaigns').select('*').eq('id', c.id).single();
+      if (fresh) { fillForm(fresh); }
+      syncButtons();
+    });
+
+    /* ---- Список розсилок ---- */
+    const statusLabel = s => ({ draft: 'Чернетка', sending: 'Надсилається', sent: 'Надіслано', cancelled: 'Скасовано' }[s] || s);
+    async function loadCampaigns() {
+      const el = $('campaigns');
+      const { data, error } = await sb.from('tg_campaign_stats').select('*');
+      if (error) { el.innerHTML = `<p class="admin-hint error">Помилка: ${escHtml(error.message)}</p>`; return; }
+      if (!data.length) { el.innerHTML = '<p class="admin-hint">Розсилок ще не було.</p>'; return; }
+      el.innerHTML = `<div class="table-wrap"><table>
+        <thead><tr><th>Розсилка</th><th>Статус</th><th>Дата</th><th class="num">Отримувачів</th><th class="num">Доставлено</th><th class="num">Не дійшло</th><th class="num">Відкрили</th><th class="num">Замовили</th><th></th></tr></thead>
+        <tbody>${data.map(c => `<tr>
+          <td><strong>${escHtml(c.title)}</strong>${c.product_name ? `<br><span class="muted">${escHtml(c.product_name)}</span>` : ''}</td>
+          <td><span class="pill pill--${c.status}">${statusLabel(c.status)}</span></td>
+          <td>${fmtTime(c.sent_at || c.created_at)}</td>
+          <td class="num">${c.status === 'draft' ? '-' : c.recipients}</td>
+          <td class="num">${c.status === 'draft' ? '-' : c.sent}</td>
+          <td class="num">${c.status === 'draft' ? '-' : c.failed}</td>
+          <td class="num">${c.status === 'draft' ? '-' : c.opened}</td>
+          <td class="num">${c.status === 'draft' ? '-' : c.ordered}</td>
+          <td style="white-space:nowrap">
+            <button class="admin-btn admin-btn--light admin-btn--sm" data-open="${c.id}">Відкрити</button>
+            ${c.status === 'draft' ? `<button class="admin-btn admin-btn--danger admin-btn--sm" data-del="${c.id}">Видалити</button>` : ''}
+          </td></tr>`).join('')}</tbody>
+      </table></div>
+      <p class="muted" style="margin-top:8px">«Відкрили» - натиснули кнопку в повідомленні. «Замовили» - оформили замовлення цього товару в мініаппі протягом 14 днів після розсилки.</p>`;
+      el.querySelectorAll('[data-open]').forEach(b => b.addEventListener('click', async () => {
+        const { data: c } = await sb.from('tg_campaigns').select('*').eq('id', b.dataset.open).single();
+        if (c) { fillForm(c); syncButtons(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+      }));
+      el.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', async () => {
+        if (!confirm('Видалити цю чернетку?')) return;
+        await sb.from('tg_campaigns').delete().eq('id', b.dataset.del);
+        if (editing && String(editing.id) === b.dataset.del) { fillForm(null); syncButtons(); }
+        await loadCampaigns();
+      }));
+    }
+    $('btn-reload').addEventListener('click', loadCampaigns);
+
+    /* ---- Старт ---- */
+    AdminShell.ready(async () => {
+      const { data: isAdmin, error } = await sb.rpc('is_tg_admin');
+      if (error || !isAdmin) { $('denied-card').classList.remove('hidden'); return; }
+      $('main').classList.remove('hidden');
+      await loadProducts();
+      const pre = new URLSearchParams(location.search).get('product');
+      if (pre && productById(pre)) $('f-product').value = pre;
+      fillForm(null);
+      syncButtons();
+      sb.from('tg_users_overview').select('tg_id, username').then(({ data }) => { USERS = data || []; });
+      checkBot();
+      loadCampaigns();
+    });
+  </script>
+</body>
+</html>
