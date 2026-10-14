@@ -1,10 +1,10 @@
 {
   "142723": {
-    "price": 11951,
+    "price": 14959,
     "in_stock": true
   },
   "142725": {
-    "price": 19350,
+    "price": 24840,
     "in_stock": true
   },
   "142727": {
@@ -12,39 +12,39 @@
     "in_stock": false
   },
   "142740": {
-    "price": null,
-    "in_stock": false
+    "price": 39789,
+    "in_stock": true
   },
   "143477": {
-    "price": 24354,
+    "price": 31635,
     "in_stock": true
   },
   "146741": {
-    "price": 28125,
+    "price": 33955,
     "in_stock": true
   },
   "148245": {
-    "price": 31950,
+    "price": 36190,
     "in_stock": true
   },
   "148299": {
-    "price": 32400,
+    "price": 36190,
     "in_stock": true
   },
   "148300": {
-    "price": 37433,
+    "price": 41601,
     "in_stock": true
   },
   "150416": {
-    "price": 63000,
+    "price": 71818,
     "in_stock": true
   },
   "150599": {
-    "price": 10373,
+    "price": 14063,
     "in_stock": true
   },
   "150649": {
-    "price": 1485,
+    "price": 1672,
     "in_stock": true
   },
   "150676": {
@@ -56,47 +56,47 @@
     "in_stock": false
   },
   "151617": {
-    "price": 81180,
+    "price": 89822,
     "in_stock": true
   },
   "151777": {
-    "price": 63,
+    "price": 68,
     "in_stock": true
   },
   "151847": {
-    "price": 675,
+    "price": 855,
     "in_stock": true
   },
   "151848": {
-    "price": 360,
+    "price": 392,
     "in_stock": true
   },
   "151849": {
-    "price": 1305,
+    "price": 1420,
     "in_stock": true
   },
   "151850": {
-    "price": 630,
+    "price": 751,
     "in_stock": true
   },
   "151851": {
-    "price": 675,
+    "price": 855,
     "in_stock": true
   },
   "151852": {
-    "price": 360,
+    "price": 392,
     "in_stock": true
   },
   "151853": {
-    "price": 1305,
+    "price": 1420,
     "in_stock": true
   },
   "151854": {
-    "price": 630,
+    "price": 751,
     "in_stock": true
   },
   "152085": {
-    "price": 19393,
+    "price": 22575,
     "in_stock": true
   },
   "152086": {
@@ -104,15 +104,15 @@
     "in_stock": false
   },
   "152174": {
-    "price": 54000,
-    "in_stock": false
+    "price": 56550,
+    "in_stock": true
   },
   "152175": {
-    "price": 66600,
+    "price": 77267,
     "in_stock": true
   },
   "152253": {
-    "price": 28125,
+    "price": 33955,
     "in_stock": true
   },
   "152264": {
@@ -120,11 +120,11 @@
     "in_stock": false
   },
   "152265": {
-    "price": 78925,
+    "price": 83796,
     "in_stock": true
   },
   "152270": {
-    "price": 83435,
+    "price": 90325,
     "in_stock": true
   },
   "152296": {
@@ -132,7 +132,7 @@
     "in_stock": false
   },
   "152297": {
-    "price": 66600,
+    "price": 77267,
     "in_stock": true
   },
   "152516": {
@@ -140,24 +140,24 @@
     "in_stock": false
   },
   "152517": {
-    "price": 9471,
+    "price": 11477,
     "in_stock": true
   },
   "152639": {
-    "price": 11025,
+    "price": 12958,
     "in_stock": true
   },
   "152723": {
-    "price": 18900,
+    "price": 20612,
     "in_stock": true
   },
   "152725": {
-    "price": 13981,
+    "price": 18508,
     "in_stock": true
   },
   "152738": {
-    "price": 45000,
-    "in_stock": false
+    "price": 49830,
+    "in_stock": true
   },
   "ud-avr-2p": {
     "price": 1125,
