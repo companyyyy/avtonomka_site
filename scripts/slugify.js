@@ -45,11 +45,13 @@ function stripTypePrefix(name) {
 }
 
 function partShort(segment) {
+  // A cut at position 0 would leave nothing (e.g. "Wi-Fi-модуль для ...") -
+  // only cut a tail that follows a real name.
   const cuts = [];
   const m1 = segment.match(UNIT_CUT_RE);
-  if (m1) cuts.push(m1.index);
+  if (m1 && m1.index > 0) cuts.push(m1.index);
   const m2 = segment.match(WIFI_RE);
-  if (m2) cuts.push(m2.index);
+  if (m2 && m2.index > 0) cuts.push(m2.index);
   const s = cuts.length ? segment.slice(0, Math.min(...cuts)) : segment;
   return s.trim().replace(/[,+]+$/, '').trim();
 }

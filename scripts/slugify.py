@@ -41,12 +41,14 @@ def strip_type_prefix(name):
 
 
 def part_short(segment):
+    # A cut at position 0 would leave nothing (e.g. "Wi-Fi-модуль для ...") -
+    # only cut a tail that follows a real name.
     cuts = []
     m1 = UNIT_CUT_RE.search(segment)
-    if m1:
+    if m1 and m1.start() > 0:
         cuts.append(m1.start())
     m2 = WIFI_RE.search(segment)
-    if m2:
+    if m2 and m2.start() > 0:
         cuts.append(m2.start())
     s = segment[:min(cuts)] if cuts else segment
     return s.strip().rstrip(',+').strip()
