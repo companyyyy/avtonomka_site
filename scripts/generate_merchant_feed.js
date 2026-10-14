@@ -58,7 +58,7 @@ function absoluteUrl(url) {
 /* Опис для фіду: лише текст опису товару (без HTML), БЕЗ merchant_keywords_uk/ru.
    Раніше в кінець дописувався хвіст ключових слів (UA + RU, з «екодрайв»);
    Merchant вважає це keyword stuffing, а RU-частина - текстом не тією мовою.
-   Поля merchant_keywords_* лишаються в products.json для generate_prom_feed.js.
+   Поля merchant_keywords_* лишаються в products.json (раніше їх брав фід prom.xml, тепер вимкнений).
    Немає опису -> назва товару (і товар іде у звіт validate_merchant_feed.js). */
 function plainText(text) {
   return String(text || '')

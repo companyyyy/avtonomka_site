@@ -88,13 +88,13 @@ Job **update-data**:
 3. `node scripts/export_to_csv.js` → `catalog_export.csv` (для Google Sheets).
 4. `node scripts/generate_merchant_feed.js` → `feed.xml` (RSS 2.0 + Google
    Shopping namespace, доступний на `https://avtonomka.com.ua/feed.xml`).
-5. `node scripts/generate_prom_feed.js` → `prom.xml` (імпорт у Prom.ua,
-   формат XML Price.ua: `<shop><catalog><items><item>`, доступний на
-   `https://avtonomka.com.ua/prom.xml`). ID груп зафіксовані в скрипті -
-   не перенумеровувати, нові категорії тільки дописувати.
-   Фото в `prom.xml` - тільки оригінали постачальника (білий фон), не
+5. `python scripts/generate_ultradomik_feed.py` → фіди для Prom.ua:
+   `prom_file.xml` (роздрібні ціни, основний) і додаткові фіди ± % з
+   `/prom-admin/` (`data/ultradomik/feeds.json`, напр. `invertorshop.xml`).
+   Фото в них - тільки оригінали постачальника (білий фон), не
    брендовані фото сайту: `fetch_feed.py` (`download_prom_images`) качає їх
    у `assets/images/prom/<id>_<n>.jpg` і пише шляхи в `p.prom_images`.
+   (Окремий фід власного магазину `prom.xml` вимкнено 14.10.2026 - не використовувався.)
 6. `node scripts/generate_static_pages.js` — див. розділ 4.
 7. Коміт `chore: update products and posts [дата]` (тільки якщо щось
    реально змінилось) і пуш.
@@ -343,7 +343,7 @@ RLS - той самий патерн, що й `articles`, але з поправ
   `assets/js/catalog.js`) - **ні**, навмисно виключені.
 - **`feed.xml`** (Google Merchant) - **ні**: Merchant без ціни товар
   відхиляє, а достовірної ціни в них немає.
-- **`prom.xml`** (Prom.ua) - **ні**, з тієї ж причини.
+- фіди Prom (`prom_file.xml` тощо) - **ні**, з тієї ж причини.
 - `products.json` / `catalog_export.csv` - ні (як і було).
 
 ### 9.4.1. Заплановане, але ще не зроблено
