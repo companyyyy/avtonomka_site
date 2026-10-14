@@ -115,6 +115,7 @@
           <div class="tabs" role="tablist">
             <button class="tab active" data-tab="clients">Клієнти</button>
             <button class="tab" data-tab="products">Товари</button>
+            <button class="tab" data-tab="watches">Підписки на ціну</button>
             <button class="tab" data-tab="feed">Останні дії</button>
           </div>
           <div class="toolbar">
@@ -216,6 +217,9 @@
       unlike: 'Зняв лайк',
       favorites_open: 'Відкрив «Обране»',
       manager_click: 'Натиснув «Написати менеджеру»',
+      price_watch: '🔔 Підписався на зниження ціни',
+      price_unwatch: 'Скасував підписку на ціну',
+      price_alert: '🔔 Отримав сповіщення про зниження ціни',
     };
     function describeEvent(e) {
       let s = escHtml(EVENT_LABEL[e.event] || e.event);
@@ -227,7 +231,7 @@
     }
 
     /* ---- Дані ---- */
-    let USERS = [], INTEREST = [], LIKES = [], FEED = [];
+    let USERS = [], INTEREST = [], LIKES = [], FEED = [], WATCHES = [];
     let usersById = {};
 
     async function loadAll() {
@@ -235,16 +239,18 @@
       try {
         const since = new Date(Date.now() - 7 * 86400000).toISOString();
         const countEvents = (event) => sb.from('tg_events').select('id', { count: 'exact', head: true }).eq('event', event).gte('created_at', since);
-        const [users, interest, likes, feed, opens7, views7] = await Promise.all([
+        const [users, interest, likes, feed, opens7, views7, watches] = await Promise.all([
           fetchAll(() => sb.from('tg_users_overview').select('*')),
           fetchAll(() => sb.from('tg_product_interest').select('*')),
           fetchAll(() => sb.from('tg_likes').select('tg_id, product_id, product_name, created_at').order('created_at', { ascending: false })),
           sb.from('tg_events').select('*').order('created_at', { ascending: false }).limit(300),
           countEvents('app_open'),
           countEvents('product_open'),
+          // Таблиці може ще не бути (scripts/supabase/price_watch_schema.sql) - тоді просто порожньо.
+          sb.from('tg_price_watch').select('*').order('created_at', { ascending: false }),
         ]);
         if (feed.error) throw feed.error;
-        USERS = users; INTEREST = interest; LIKES = likes; FEED = feed.data;
+        USERS = users; INTEREST = interest; LIKES = likes; FEED = feed.data; WATCHES = watches.data || [];
         usersById = Object.fromEntries(USERS.map(u => [u.tg_id, u]));
         renderStats({ opens7: opens7.count || 0, views7: views7.count || 0 });
         renderList();
@@ -262,6 +268,7 @@
         [opens7, 'відкриттів мініаппа за 7 днів'],
         [views7, 'переглядів товарів за 7 днів'],
         [LIKES.length, 'лайків'],
+        [WATCHES.length, 'підписок на ціну'],
         [canWrite, 'можна писати ботом'],
       ];
       $('stats').innerHTML = items.map(([v, l]) =>
@@ -270,7 +277,7 @@
 
     /* ---- Список: вкладки, пошук, сортування ---- */
     let activeTab = 'clients';
-    const sortState = { clients: { key: 'last_seen', asc: false }, products: { key: 'views', asc: false } };
+    const sortState = { clients: { key: 'last_seen', asc: false }, products: { key: 'views', asc: false }, watches: { key: 'created_at', asc: false } };
 
     document.querySelectorAll('.tab').forEach(btn => btn.addEventListener('click', () => {
       activeTab = btn.dataset.tab;
@@ -305,6 +312,7 @@
       const q = $('search').value.trim().toLowerCase();
       if (activeTab === 'clients') renderClients(q);
       else if (activeTab === 'products') renderProducts(q);
+      else if (activeTab === 'watches') renderWatches(q);
       else renderFeed(q);
     }
 
@@ -379,6 +387,54 @@
         </tbody></table></div>`;
       bindSort('products');
       $('list-body').querySelectorAll('tr[data-product]').forEach(tr => tr.addEventListener('click', () => openProduct(tr.dataset.product)));
+    }
+
+    /* ---- Підписки «Повідомити про зниження ціни» (tg_price_watch) ---- */
+    const sitePrice = id => {
+      const n = parseFloat(String(PRODUCTS[id]?.price || '').replace(/\s/g, ''));
+      return Number.isFinite(n) && n > 0 ? n : null;
+    };
+    const uah = n => n == null ? '-' : Math.round(n).toLocaleString('uk-UA') + ' грн';
+
+    function renderWatches(q) {
+      let rows = WATCHES.map(w => {
+        const u = usersById[w.tg_id] || { tg_id: w.tg_id };
+        const now = sitePrice(w.product_id);
+        return { ...w, u, display: clientName(u), name: productName(w.product_id, w.product_name),
+                 ref_price: Number(w.ref_price), now_price: now, diff: now == null ? null : now - Number(w.ref_price) };
+      });
+      if (q) rows = rows.filter(r => (r.display + ' ' + (r.u.username || '') + ' ' + r.name + ' ' + r.product_id).toLowerCase().includes(q));
+      if (!rows.length) { $('list-body').innerHTML = `<p class="admin-hint">${WATCHES.length ? 'Нічого не знайдено.' : 'Поки ніхто не підписався на зниження ціни.'}</p>`; return; }
+      sortRows(rows, 'watches');
+      $('list-body').innerHTML = `<p class="muted" style="margin-bottom:8px">Бот пише автоматично після оновлення цін сайту, якщо ціна стала нижчою за «точку відліку» щонайменше на 1%. Після сповіщення точкою відліку стає нова ціна.</p>
+        <div class="table-wrap"><table>
+        <thead><tr>
+          ${th('watches', 'display', 'Клієнт')}
+          ${th('watches', 'name', 'Товар')}
+          ${th('watches', 'ref_price', 'Точка відліку', 'num')}
+          ${th('watches', 'now_price', 'Ціна зараз', 'num')}
+          ${th('watches', 'diff', 'Різниця', 'num')}
+          ${th('watches', 'created_at', 'Підписався')}
+          ${th('watches', 'last_notified_at', 'Останнє сповіщення')}
+          <th>Повідомлення</th>
+        </tr></thead>
+        <tbody>${rows.map(r => `
+          <tr class="clickable" data-client="${r.tg_id}">
+            <td class="who"><strong>${escHtml(r.display)}</strong><br>${tgLink(r.u)}</td>
+            <td>${productLink(r.product_id, r.product_name)} <span class="muted">${escHtml(r.product_id)}</span></td>
+            <td class="num">${uah(r.ref_price)}</td>
+            <td class="num">${r.now_price == null ? '<span class="muted">немає на сайті</span>' : uah(r.now_price)}</td>
+            <td class="num">${r.diff == null || r.diff === 0 ? '<span class="muted">-</span>' : (r.diff < 0 ? '−' : '+') + uah(Math.abs(r.diff))}</td>
+            <td>${fmtTime(r.created_at)}</td>
+            <td>${r.last_notified_at ? fmtTime(r.last_notified_at) : '<span class="muted">ще не було</span>'}</td>
+            <td>${r.u.bot_blocked ? '<span class="pill pill--no">заблокував бота</span>' : writePill(r.u.write_access)}</td>
+          </tr>`).join('')}
+        </tbody></table></div>`;
+      bindSort('watches');
+      $('list-body').querySelectorAll('tr[data-client]').forEach(tr => tr.addEventListener('click', ev => {
+        if (ev.target.closest('a')) return;
+        openClient(Number(tr.dataset.client));
+      }));
     }
 
     function feedHTML(events, withWho) {
