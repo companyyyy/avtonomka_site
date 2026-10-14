@@ -52,6 +52,13 @@ function t(key) {
   return window.I18n ? window.I18n.t(key) : key;
 }
 
+/* t() з запасним текстом - для ключів, яких може не бути в закешованому
+   браузером старому translations/*.json (файли без ?v=). */
+function tOr(key, fallback) {
+  const v = t(key);
+  return v && v !== key ? v : fallback;
+}
+
 const _SLUG_TO_CATEGORY = {
   'hybridni-invertory':   'Автономна енергетика > Гибридні інвертори',
   'akumulyatory':         'Автономна енергетика > Акумулятори для гібридних інверторів',
@@ -211,7 +218,10 @@ function buildBadgeStackHtml(p, displayTitle) {
     if (len) extraHtml += `<span class="product-card__pill product-card__pill--spec">📏 ${escHtml(len)}</span>`;
   }
 
-  const availabilityHtml = slug === 'komplekty' ? '' : `<span class="product-card__pill product-card__pill--${inStock ? 'in-stock' : 'out-of-stock'}">${escHtml(inStock ? t('catalog.in_stock') : t('catalog.out_of_stock'))}</span>`;
+  const onOrder = p.availability === 'backorder' || p.availability === 'preorder';
+  const availabilityHtml = slug === 'komplekty' ? '' : onOrder
+    ? `<span class="product-card__pill product-card__pill--backorder">${escHtml(p.availability === 'preorder' ? tOr('product.preorder', 'Передзамовлення') : tOr('catalog.backorder', 'Під замовлення'))}</span>`
+    : `<span class="product-card__pill product-card__pill--${inStock ? 'in-stock' : 'out-of-stock'}">${escHtml(inStock ? t('catalog.in_stock') : t('catalog.out_of_stock'))}</span>`;
   const topBadgeHtml = isTopProduct(p.id) ? `<span class="product-card__pill product-card__pill--top">${escHtml(t('catalog.top_badge'))}</span>` : '';
   return `<div class="product-card__badge-stack">${topBadgeHtml}${availabilityHtml}${extraHtml}</div>`;
 }
@@ -259,8 +269,24 @@ function fetchVirtualProducts() {
 function getProductId() {
   const params = new URLSearchParams(window.location.search);
   if (params.get('id')) return params.get('id');
-  const m = window.location.pathname.match(/\/product\/(?:[^/]+\/)?([^/]+)\.html$/);
+  const m = window.location.pathname.match(/\/product\/(?:[^/]+\/)?([^/]+?)(?:-pid-zamovlennya)?\.html$/);
   return m ? m[1] : null;
+}
+
+/* Сторінка «під замовлення» (/product/<slug>/<id>-pid-zamovlennya.html):
+   ціна, статус і id для кошика вже записані генератором у data-offer-*
+   на #product-content (scripts/generate_static_pages.js) - беремо їх
+   звідти, а не з products.json, де лежить ціна «в наявності». */
+function getOrderOffer() {
+  const el = document.getElementById('product-content');
+  if (!el || el.dataset.variant !== 'order') return null;
+  return {
+    id: el.dataset.offerId,
+    price: el.dataset.offerPrice,
+    currency: el.dataset.offerCurrency || 'UAH',
+    status: el.dataset.offerStatus === 'preorder' ? 'preorder' : 'backorder',
+    dateLabel: el.dataset.offerDateLabel || '',
+  };
 }
 
 /* ---- Legacy ?id= link → canonical /product/<id>.html (avoids duplicate content) ---- */
@@ -303,7 +329,10 @@ function init() {
       const products = (Array.isArray(data) ? data : (data.products || [])).concat(virtual);
       const product  = products.find(p => String(p.id) === String(id));
       if (!product) { showNotFound(); return; }
-      render(product);
+      const offer = getOrderOffer();
+      render(offer
+        ? Object.assign({}, product, { price: offer.price + ' ' + offer.currency, availability: offer.status, _offer: offer })
+        : product);
     })
     .catch(function(e) {
       showError();
@@ -315,7 +344,7 @@ function init() {
 function render(p) {
   const displayTitle = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
   var brandSuffix = (window.I18n && window.I18n.lang === 'en') ? 'Avtonomka' : 'Автономка';
-  document.title = displayTitle + ' - ' + brandSuffix;
+  document.title = displayTitle + (p._offer ? ' (' + tOr('product.backorder', 'Під замовлення').toLowerCase() + ')' : '') + ' - ' + brandSuffix;
 
   /* breadcrumb */
   const bcName = document.getElementById('bc-name');
@@ -350,8 +379,15 @@ function render(p) {
   const availEl = document.getElementById('product-availability');
   if (availEl) {
     const inStock = p.availability === 'in_stock';
-    availEl.textContent = inStock ? t('product.in_stock') : t('product.out_of_stock');
-    availEl.className   = 'badge ' + (inStock ? 'badge-green' : 'badge-grey');
+    if (p._offer) {
+      availEl.textContent = p._offer.status === 'preorder'
+        ? tOr('product.preorder', 'Передзамовлення')
+        : tOr('product.backorder', 'Під замовлення');
+      availEl.className   = 'badge badge-orange';
+    } else {
+      availEl.textContent = inStock ? t('product.in_stock') : t('product.out_of_stock');
+      availEl.className   = 'badge ' + (inStock ? 'badge-green' : 'badge-grey');
+    }
   }
 
   /* ---- Price ---- */
@@ -409,8 +445,13 @@ function render(p) {
   const cartBtn = document.getElementById('btn-add-cart');
   if (cartBtn) {
     const priceNum = parseFloat(p.price);
-    cartBtn.setAttribute('data-id', p.id);
-    cartBtn.setAttribute('data-title', displayTitle);
+    /* Варіант «під замовлення» - окремий id у кошику (<id>-order), щоб не
+       злитися з тим самим товаром «в наявності», і умови прямо в назві,
+       яку менеджер бачить у заявці. */
+    cartBtn.setAttribute('data-id', p._offer ? p._offer.id : p.id);
+    cartBtn.setAttribute('data-title', p._offer
+      ? displayTitle + (p._offer.status === 'preorder' ? ' (передзамовлення' : ' (під замовлення') + ', очікується до ' + p._offer.dateLabel + ')'
+      : displayTitle);
     cartBtn.setAttribute('data-price', isNaN(priceNum) ? '0' : priceNum.toFixed(2));
     cartBtn.setAttribute('data-currency', String(p.price || '').replace(/[\d.\s]+/, '').trim() || 'UAH');
     cartBtn.setAttribute('data-sku', p.mpn || '');

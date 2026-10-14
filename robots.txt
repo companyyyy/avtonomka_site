@@ -4,5 +4,7 @@ Disallow: /auction.html
 Disallow: /auction-lot.html
 Disallow: /auction-admin.html
 Disallow: /miniapp-admin.html
+Disallow: /prom-admin/
+Disallow: /preorder-admin/
 
 Sitemap: https://avtonomka.com.ua/sitemap.xml

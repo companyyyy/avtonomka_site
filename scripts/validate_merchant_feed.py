@@ -6,7 +6,10 @@ Exits with code 1 and a list of problems if any rule is broken:
   - «ecodrive» / «екодрайв» / «экодрайв» or Russian text anywhere in an item;
   - an item has neither gtin/mpn nor identifier_exists=no;
   - one MPN shared by items with different titles (except ALLOWED_MPN_DUPES);
-  - an item mentions Trade-IN / б/в but condition is not «used».
+  - an item mentions Trade-IN / б/в but condition is not «used»;
+  - duplicate g:id, or one GTIN on more than one item;
+  - backorder/preorder without availability_date, or with a date in the past
+    or more than 365 days ahead (variants from scripts/backorder_offers.json).
 Also prints (without failing) items that need a manual look: no brand, short
 description, no google_product_category.
 
@@ -15,7 +18,8 @@ Run: python scripts/validate_merchant_feed.py [path/to/feed.xml]
 
 import re
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from xml.etree import ElementTree
 
@@ -45,6 +49,8 @@ def main():
     items = root.findall('./channel/item')
     errors, notes = [], defaultdict(list)
     mpns = defaultdict(list)
+    ids, gtins = Counter(), Counter()
+    now = datetime.now(timezone.utc)
 
     if not items:
         errors.append('no <item> in feed')
@@ -68,6 +74,24 @@ def main():
             errors.append(f'{label}: Trade-IN / б/в, але condition не used')
         if mpn:
             mpns[mpn].append((pid, title))
+        ids[pid] += 1
+        if gtin:
+            gtins[gtin] += 1
+
+        avail = text(it, 'availability')
+        if avail in ('backorder', 'preorder'):
+            raw_date = text(it, 'availability_date')
+            if not raw_date:
+                errors.append(f'{label}: {avail} без availability_date')
+            else:
+                try:
+                    when = datetime.fromisoformat(raw_date)
+                    if when.tzinfo is None:
+                        when = when.replace(tzinfo=timezone.utc)
+                    if when < now - timedelta(days=1) or when > now + timedelta(days=365):
+                        errors.append(f'{label}: availability_date {raw_date} у минулому або далі ніж 365 днів')
+                except ValueError:
+                    errors.append(f'{label}: availability_date «{raw_date}» не ISO 8601')
 
         if not brand:
             notes['Без бренду'].append(label)
@@ -75,6 +99,13 @@ def main():
             notes['Потрібен нормальний опис (зараз лише назва або < 50 символів)'].append(label)
         if not text(it, 'google_product_category'):
             notes['Без google_product_category'].append(label)
+
+    for pid, n in ids.items():
+        if n > 1:
+            errors.append(f'g:id {pid} повторюється {n} рази')
+    for gtin, n in gtins.items():
+        if n > 1:
+            errors.append(f'GTIN {gtin} у {n} items (два офери одного товару з однаковим GTIN)')
 
     for mpn, rows in mpns.items():
         if len({t for _, t in rows}) > 1:

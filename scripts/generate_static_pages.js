@@ -35,6 +35,7 @@ const fs      = require('fs');
 const path    = require('path');
 const { execFileSync } = require('child_process');
 const { slugify } = require('./slugify');
+const { getBackorderOffer, PAGE_SUFFIX } = require('./backorder');
 
 const ROOT           = path.join(__dirname, '..');
 const SITE_URL        = 'https://avtonomka.com.ua';
@@ -157,6 +158,16 @@ function productSlug(p) {
 
 function productUrl(p) {
   return `${SITE_URL}/product/${productSlug(p)}/${encodeURIComponent(p.id)}.html`;
+}
+
+/* Окрема сторінка варіанта «під замовлення» (scripts/backorder_offers.json),
+   лежить поруч з основною: /product/<slug>/<id>-pid-zamovlennya.html */
+function orderPageFile(p) {
+  return `${encodeURIComponent(p.id)}${PAGE_SUFFIX}.html`;
+}
+
+function orderUrl(p) {
+  return `${SITE_URL}/product/${productSlug(p)}/${orderPageFile(p)}`;
 }
 
 /* Old flat URL — kept alive as a redirect stub, not a real page anymore. */
@@ -355,28 +366,34 @@ function groupArticlesBySlug(articles) {
    Per-product static page: product/<id>.html
    ============================================================ */
 
-function buildJsonLd(p) {
+/* order = пропозиція «під замовлення» (scripts/backorder.js) - тоді Offer
+   описує саме її: свій URL, нижча ціна, BackOrder/PreOrder і дата
+   надходження, а sku = id цього варіанта у feed.xml (<id>-order). */
+function buildJsonLd(p, order = null) {
   const images = [p.image_link, ...(p.additional_images || [])].filter(Boolean).map(absoluteUrl);
-  const num = parseFloat(p.price);
+  const num = order ? order.price : parseFloat(p.price);
   const ld = {
     '@context': 'https://schema.org/',
     '@type': 'Product',
     name: p.title,
     image: images,
     description: cleanDescription(p.description) || p.title,
-    sku: p.id,
+    sku: order ? order.id : p.id,
     ...(p.mpn ? { mpn: p.mpn } : {}),
     ...(detectBrand(p.title) ? { brand: { '@type': 'Brand', name: detectBrand(p.title) } } : {}),
     offers: {
       '@type': 'Offer',
-      url: productUrl(p),
-      priceCurrency: isNaN(num) ? undefined : priceCurrency(p.price),
+      url: order ? orderUrl(p) : productUrl(p),
+      priceCurrency: isNaN(num) ? undefined : (order ? order.currency : priceCurrency(p.price)),
       price: isNaN(num) ? undefined : num.toFixed(2),
-      availability: p.availability === 'in_stock'
+      availability: order
+        ? (order.status === 'preorder' ? 'https://schema.org/PreOrder' : 'https://schema.org/BackOrder')
+        : p.availability === 'in_stock'
         ? 'https://schema.org/InStock'
         : p.availability === 'backorder'
         ? 'https://schema.org/BackOrder'
         : 'https://schema.org/OutOfStock',
+      ...(order ? { availabilityStarts: order.isoDate } : {}),
       itemCondition: p.condition === 'new' ? 'https://schema.org/NewCondition' : 'https://schema.org/UsedCondition',
       hasMerchantReturnPolicy: {
         '@type': 'MerchantReturnPolicy',
@@ -480,27 +497,67 @@ function renderDatasheetButtons(html, p) {
   return html;
 }
 
-function generateProductPage(p, template, articlesBySlug) {
+function offerPriceStr(order) {
+  return formatPrice(`${order.price} ${order.currency}`);
+}
+
+/* Перехресні посилання між варіантами «в наявності» / «під замовлення».
+   Ціни й дата - з тих самих даних, що й основна ціна сторінки. Посилання
+   відносні в межах тієї ж папки /product/<slug>/, тому блок вставляється
+   вже після rewriteRelativePaths(). */
+function buildOfferAltBlock(p, order, variant) {
+  if (variant === 'order') {
+    const statusText = order.status === 'preorder' ? 'Передзамовлення' : 'Під замовлення';
+    return `
+              <div class="product-offer-note">
+                <strong>${statusText}</strong> · Очікується до ${escapeHtml(order.dateLabel)} (до ${order.leadDays} днів)
+              </div>
+              <div class="product-offer-alt">
+                Потрібно швидше? <a href="${escapeHtml(encodeURIComponent(p.id))}.html">Є в наявності за ${escapeHtml(formatPrice(p.price || ''))}</a>
+              </div>
+`;
+  }
+  return `
+              <div class="product-offer-alt">
+                Можна дешевше під замовлення — <a href="${escapeHtml(orderPageFile(p))}">${escapeHtml(offerPriceStr(order))}</a>, доставка до ${escapeHtml(order.dateLabel)}
+              </div>
+`;
+}
+
+/* variant: 'stock' (основна сторінка) або 'order' (сторінка «під замовлення»,
+   тоді order обовʼязковий). order на основній сторінці - лише для посилання
+   «можна дешевше під замовлення». */
+function generateProductPage(p, template, articlesBySlug, order = null, variant = 'stock') {
+  const isOrder     = variant === 'order' && !!order;
   const title       = p.title || '';
   const isVirtual   = !!p.virtual;
-  const priceStr    = isVirtual ? 'Ціну уточнюйте' : formatPrice(p.price || '');
-  const inStock     = !isVirtual && p.availability === 'in_stock';
-  const badgeClass  = isVirtual ? 'badge-grey' : (inStock ? 'badge-green' : 'badge-grey');
-  const badgeText   = isVirtual ? 'Під замовлення' : (inStock ? '✓ В наявності' : 'Немає в наявності');
+  const priceStr    = isVirtual ? 'Ціну уточнюйте' : (isOrder ? offerPriceStr(order) : formatPrice(p.price || ''));
+  const inStock     = !isVirtual && !isOrder && p.availability === 'in_stock';
+  const badgeClass  = isOrder ? 'badge-orange' : isVirtual ? 'badge-grey' : (inStock ? 'badge-green' : 'badge-grey');
+  const badgeText   = isOrder
+    ? (order.status === 'preorder' ? 'Передзамовлення' : 'Під замовлення')
+    : isVirtual ? 'Під замовлення' : (inStock ? '✓ В наявності' : 'Немає в наявності');
+  const pageTitle   = isOrder ? `${title} (під замовлення)` : title;
+  const cartId      = isOrder ? order.id : p.id;
+  const cartTitle   = isOrder
+    ? `${title} (${order.status === 'preorder' ? 'передзамовлення' : 'під замовлення'}, очікується до ${order.dateLabel})`
+    : title;
+  const cartPrice   = isOrder ? order.price : parseFloat(p.price);
+  const cartCurrency = isOrder ? order.currency : priceCurrency(p.price);
   const image       = absoluteUrl(p.image_link);
   const metaDesc    = truncate(cleanDescription(p.description) || title, 160);
   const descText    = escapeHtml(cleanDescription(p.description) || '');
   const catLabel    = categoryLabel(p.product_type);
   const mpn         = p.mpn || '-';
   const canonical   = productUrl(p);
-  const jsonLd      = buildJsonLd(p);
+  const jsonLd      = buildJsonLd(p, isOrder ? order : null);
   const breadcrumbLd = buildBreadcrumbJsonLd(p);
 
   let html = template;
 
   html = html.replace(
     '<title>Товар - Автономка</title>',
-    `<title>${escapeHtml(title)} - Автономка</title>`
+    `<title>${escapeHtml(pageTitle)} - Автономка</title>`
   );
   html = html.replace(
     '<meta name="description" content="Детальна інформація про товар в магазині Автономка.">',
@@ -508,7 +565,7 @@ function generateProductPage(p, template, articlesBySlug) {
   );
   html = html.replace(
     '<meta property="og:title" content="Автономка - товар">',
-    `<meta property="og:title" content="${escapeHtml(title)} - Автономка">`
+    `<meta property="og:title" content="${escapeHtml(pageTitle)} - Автономка">`
   );
   html = html.replace(
     '<meta property="og:image" content="assets/images/sticker.webp">',
@@ -565,9 +622,16 @@ function generateProductPage(p, template, articlesBySlug) {
 `,
     ''
   );
+  /* data-variant / data-offer-* читає assets/js/product.js, щоб після
+     завантаження products.json не перемалювати ціну «під замовлення»
+     ціною «в наявності». */
   html = html.replace(
     '<div id="product-content" class="hidden">',
-    '<div id="product-content">'
+    isOrder
+      ? `<div id="product-content" data-variant="order" data-offer-id="${escapeHtml(order.id)}" ` +
+        `data-offer-price="${order.price.toFixed(2)}" data-offer-currency="${escapeHtml(order.currency)}" ` +
+        `data-offer-status="${order.status}" data-offer-date-label="${escapeHtml(order.dateLabel)}">`
+      : '<div id="product-content">'
   );
   html = html.replace(
     '<img id="gallery-main-img" src="" alt="">',
@@ -595,7 +659,7 @@ function generateProductPage(p, template, articlesBySlug) {
   } else {
     html = html.replace(
       '<button type="button" id="btn-add-cart" class="btn btn-cart" data-add-to-cart data-id="" data-title="" data-price="" data-sku="">',
-      `<button type="button" id="btn-add-cart" class="btn btn-cart" data-add-to-cart data-id="${escapeHtml(p.id)}" data-title="${escapeHtml(title)}" data-price="${isNaN(parseFloat(p.price)) ? '0' : parseFloat(p.price).toFixed(2)}" data-currency="${escapeHtml(priceCurrency(p.price))}" data-sku="${escapeHtml(p.mpn || '')}">`
+      `<button type="button" id="btn-add-cart" class="btn btn-cart" data-add-to-cart data-id="${escapeHtml(cartId)}" data-title="${escapeHtml(cartTitle)}" data-price="${isNaN(cartPrice) ? '0' : cartPrice.toFixed(2)}" data-currency="${escapeHtml(cartCurrency)}" data-sku="${escapeHtml(p.mpn || '')}">`
     );
   }
   html = html.replace(
@@ -618,7 +682,16 @@ function generateProductPage(p, template, articlesBySlug) {
     html = html.replace('</main>', relatedArticles);
   }
 
-  return rewriteRelativePaths(html);
+  html = rewriteRelativePaths(html);
+
+  if (order && !isVirtual) {
+    html = html.replace(
+      '              <div class="product-info__meta">',
+      buildOfferAltBlock(p, order, isOrder ? 'order' : 'stock') + '\n              <div class="product-info__meta">'
+    );
+  }
+
+  return html;
 }
 
 /* Old flat /product/<id>.html — kept as a tiny redirect page (not deleted)
@@ -655,13 +728,15 @@ async function generateAllProductPages(products) {
 
   const validRelPaths  = new Set(); // 'slug/id.html' — current nested pages
   const validStubNames = new Set(); // 'id.html' — current legacy stubs
+  let orderPages = 0;
 
   products.forEach(p => {
     const slug = productSlug(p);
     const dir  = path.join(outDir, slug);
     fs.mkdirSync(dir, { recursive: true });
 
-    const html     = generateProductPage(p, template, articlesBySlug);
+    const order    = getBackorderOffer(p);
+    const html     = generateProductPage(p, template, articlesBySlug, order, 'stock');
     const filePath = path.join(dir, `${p.id}.html`);
     const relPath  = path.join('product', slug, `${p.id}.html`);
     const before   = fs.existsSync(filePath) ? fs.readFileSync(filePath, 'utf8') : null;
@@ -669,6 +744,18 @@ async function generateAllProductPages(products) {
     fs.writeFileSync(filePath, html, 'utf8');
     lastmod[p.id] = lastmodFor(relPath, changed);
     validRelPaths.add(path.join(slug, `${p.id}.html`));
+
+    /* Варіант «під замовлення» - окремий URL з canonical на основну сторінку
+       (canonical береться з productUrl(p) у generateProductPage). У sitemap
+       навмисно НЕ додається. Зникне з backorder_offers.json - файл
+       видалить прибирання нижче. */
+    if (order) {
+      const orderFile = decodeURIComponent(orderPageFile(p));
+      fs.writeFileSync(path.join(dir, orderFile),
+        generateProductPage(p, template, articlesBySlug, order, 'order'), 'utf8');
+      validRelPaths.add(path.join(slug, orderFile));
+      orderPages++;
+    }
 
     const stubPath = path.join(outDir, `${p.id}.html`);
     fs.writeFileSync(stubPath, buildRedirectStub(productUrl(p), legacyProductUrl(p)), 'utf8');
@@ -702,6 +789,7 @@ async function generateAllProductPages(products) {
 
   console.log(`generate_static_pages: wrote ${products.length} product pages to /product/<slug>/<id>.html ` +
     `+ ${products.length} legacy redirect stubs` +
+    (orderPages ? ` + ${orderPages} «під замовлення» page(s)` : '') +
     (removed ? `, removed ${removed} stale file(s) for discontinued products` : ''));
 
   return lastmod;

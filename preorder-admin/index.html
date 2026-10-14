@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Під замовлення - Автономка</title>
+  <link rel="icon" href="/assets/images/logo.jpg" type="image/jpeg">
+  <!-- Ціни «під замовлення» (дешевше, з довезенням). Список товарів, ціна й
+       наявність на сайті - з products.json (постачальник, тут лише для
+       перегляду). Ціну під замовлення й строк довезення вводить шеф; сторінка
+       читає й комітить scripts/backorder_offers.json через GitHub API (той самий
+       токен, що в «Ціни Prom»). Після коміту GitHub Actions (preorder.yml)
+       перебудовує сторінки product/<slug>/<id>-pid-zamovlennya.html і feed.xml
+       (логіка - scripts/backorder.js) і викладає їх на сервер. -->
+  <style>
+    :root {
+      --bg: #f6f7f9; --surface: #fff; --text: #1b1f24; --muted: #6b7280;
+      --border: #e3e6ea; --accent: #2f6fde; --accent-text: #fff;
+      --changed: #fff6d6; --error: #c62828; --ok: #2e7d32; --row-hover: #f1f4f8;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #16181c; --surface: #1e2126; --text: #e6e8eb; --muted: #9aa1ab;
+        --border: #30343b; --accent: #4a86f0; --accent-text: #fff;
+        --changed: #3a3320; --error: #ef6b6b; --ok: #6cc070; --row-hover: #252930;
+      }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text);
+      font: 15px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    /* top - під спільною шапкою адмінки (assets/js/admin-shell.js) */
+    header { position: sticky; top: var(--ash-h, 0); z-index: 2; background: var(--surface);
+      border-bottom: 1px solid var(--border); padding: 12px 16px;
+      display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    header h1 { font-size: 18px; margin: 0 8px 0 0; }
+    .spacer { flex: 1; }
+    input[type=search], input[type=password], input.price, input.days {
+      font: inherit; color: var(--text); background: var(--bg);
+      border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; }
+    input[type=search] { width: 240px; max-width: 100%; }
+    input.days { width: 64px; text-align: right; }
+    input.price { width: 110px; text-align: right; font-variant-numeric: tabular-nums; }
+    input.price:focus, input[type=search]:focus, input[type=password]:focus {
+      outline: 2px solid var(--accent); outline-offset: -1px; }
+    input.price.invalid, input.days.invalid { outline: 2px solid var(--error); }
+    td.site { white-space: nowrap; font-variant-numeric: tabular-nums; }
+    td.site .stock { display: block; font-size: 13px; color: var(--ok); }
+    td.site .stock.out { color: var(--error); }
+    td.note { font-size: 13px; color: var(--muted); min-width: 150px; }
+    td.note .warn { color: var(--error); }
+    td.note a { color: var(--accent); }
+    label.only { display: flex; gap: 6px; align-items: center; font-size: 14px; }
+    input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--accent); }
+    button { font: inherit; border-radius: 6px; padding: 7px 14px; cursor: pointer;
+      border: 1px solid var(--border); background: var(--surface); color: var(--text); }
+    button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+    button:disabled { opacity: .5; cursor: default; }
+    .cats { display: flex; gap: 4px; flex-wrap: wrap; }
+    .cats button { padding: 5px 10px; font-size: 14px; }
+    .cats button.active { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+    main { padding: 16px; max-width: 1200px; margin: 0 auto; }
+    .table-wrap { overflow-x: auto; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; min-width: 760px; }
+    th, td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: middle; }
+    th { font-size: 13px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+    th.group { text-align: center; border-left: 1px solid var(--border); }
+    td.sep, th.sep { border-left: 1px solid var(--border); }
+    td.c, th.c { text-align: center; }
+    td.r, th.r { text-align: right; }
+    td.markup { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+    tbody tr:hover { background: var(--row-hover); }
+    tbody tr.changed { background: var(--changed); }
+    tbody tr.off td.name, tbody tr.off td.img { opacity: .5; }
+    td.id { color: var(--muted); font-variant-numeric: tabular-nums; width: 70px; }
+    td.img { width: 52px; }
+    td.img img { width: 40px; height: 40px; object-fit: contain; background: #fff; border-radius: 4px; display: block; }
+    td.name .cat { display: block; color: var(--muted); font-size: 13px; }
+    td.name .problem { color: var(--error); }
+    .status { min-height: 20px; margin: 0 0 12px; }
+    .status.error { color: var(--error); }
+    .status.ok { color: var(--ok); }
+    .hint { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
+    .login { max-width: 520px; margin: 40px auto; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+    .login input { width: 100%; margin: 8px 0 12px; }
+    .login p { color: var(--muted); margin: 0 0 8px; }
+    .savebar { position: sticky; bottom: 0; background: var(--surface); border-top: 1px solid var(--border);
+      padding: 10px 16px; display: flex; gap: 10px; align-items: center; justify-content: flex-end; }
+    [hidden] { display: none !important; }
+    @media (max-width: 640px) {
+      header { gap: 8px; }
+      input[type=search] { width: 100%; }
+    }
+  </style>
+</head>
+<body data-admin-section="preorder">
+ <div id="admin-app" hidden>
+  <header>
+    <h1>Під замовлення</h1>
+    <span class="spacer"></span>
+    <div class="cats" id="cats"></div>
+    <label class="only"><input type="checkbox" id="only-set" /> лише з ціною</label>
+    <input type="search" id="search" placeholder="Пошук за назвою або ID" />
+  </header>
+
+  <main>
+    <div class="login" id="login" hidden>
+      <h2>Токен GitHub</h2>
+      <p>Ціни зберігаються в репозиторії сайту, тому для запису потрібен токен GitHub (вводиться один раз, браузер його запам'ятає; той самий, що для «Ціни Prom»). Вставте токен з доступом до репозиторію companyyyy/avtonomka_site (Contents: Read and write):</p>
+      <input type="password" id="token" placeholder="github_pat_…" autocomplete="off" />
+      <button class="primary" id="login-btn">Увійти</button>
+    </div>
+
+    <p class="status" id="status"></p>
+    <p class="hint" id="hint" hidden>Наявність і ціна «на сайті» - з сайту (постачальник), їх тут не змінити. Впишіть ціну під замовлення - у товару з'явиться окрема сторінка «під замовлення» і пропозиція в Google Merchant. Ціна має бути нижчою за ціну на сайті, інакше пропозиція не показується. Строк - через скільки днів товар буде у клієнта (порожньо = <span id="default-days">14</span>). Щоб прибрати пропозицію, зітріть ціну. Після збереження сайт оновиться приблизно за 2–3 хвилини.</p>
+
+    <div class="table-wrap" id="table-wrap" hidden>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th><th></th><th>Товар</th>
+            <th class="sep r">На сайті, грн</th>
+            <th class="sep">Під замовлення, грн</th><th>Строк, днів</th>
+            <th>Знижка</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <div class="savebar" id="savebar" hidden>
+    <span id="changed-count"></span>
+    <button id="reset-btn">Скасувати</button>
+    <button class="primary" id="save-btn">Зберегти</button>
+  </div>
+ </div><!-- /admin-app -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="../assets/js/admin-shell.js"></script>
+  <script>
+  (() => {
+    const REPO = "companyyyy/avtonomka_site";
+    const BRANCH = "master";
+    const OFFERS = "scripts/backorder_offers.json";
+    const API = "https://api.github.com";
+    const TOKEN_KEY = "avtonomka-prom-admin.token"; // спільний з prom-admin/
+
+    const $ = (id) => document.getElementById(id);
+    let token = null;
+    let defaultDays = 14;
+    // id -> { product (з products.json або заглушка), orig, edit: { price, lead_days } }
+    let products = new Map();
+    let filterCat = "";
+
+    function storageGet(key) {
+      try { return localStorage.getItem(key); } catch { return null; }
+    }
+    function storageSet(key, value) {
+      try { value == null ? localStorage.removeItem(key) : localStorage.setItem(key, value); } catch {}
+    }
+
+    function setStatus(text, kind = "") {
+      const el = $("status");
+      el.textContent = text;
+      el.className = "status " + kind;
+    }
+
+    async function gh(path, options = {}) {
+      const res = await fetch(API + path, {
+        ...options,
+        cache: "no-store",
+        headers: {
+          Accept: "application/vnd.github+json",
+          Authorization: "Bearer " + token,
+          "X-GitHub-Api-Version": "2022-11-28",
+          ...(options.body ? { "Content-Type": "application/json" } : {}),
+        },
+      });
+      if (!res.ok) {
+        const err = new Error(`GitHub ${res.status}: ${(await res.text()).slice(0, 200)}`);
+        err.status = res.status;
+        throw err;
+      }
+      return res.json();
+    }
+
+    const b64decode = (b64) => new TextDecoder().decode(Uint8Array.from(atob(b64.replace(/\s/g, "")), (c) => c.charCodeAt(0)));
+    const b64encode = (text) => btoa(Array.from(new TextEncoder().encode(text), (b) => String.fromCharCode(b)).join(""));
+
+    async function readJson(path) {
+      const file = await gh(`/repos/${REPO}/contents/${path}?ref=${BRANCH}`);
+      return { sha: file.sha, data: JSON.parse(b64decode(file.content)) };
+    }
+
+    const sitePrice = (p) => {
+      const n = parseFloat(String(p.price || "").replace(/\s/g, ""));
+      return Number.isFinite(n) && n > 0 ? n : null;
+    };
+    const category = (p) => String(p.product_type || "").split(">").pop().trim();
+
+    async function load() {
+      setStatus("Завантаження…");
+      $("table-wrap").hidden = true;
+      const [offers, site] = await Promise.all([
+        readJson(OFFERS),
+        fetch(`../products.json?t=${Date.now()}`, { cache: "no-store" }).then((r) => {
+          if (!r.ok) throw new Error("products.json: HTTP " + r.status);
+          return r.json();
+        }),
+      ]);
+      defaultDays = Number(offers.data.default_lead_days ?? 14);
+      $("default-days").textContent = defaultDays;
+      const byId = offers.data.by_id || {};
+      products = new Map();
+      const list = (Array.isArray(site) ? site : site.products || []).filter((p) => !p.virtual);
+      list.sort((a, b) => category(a).localeCompare(category(b), "uk") || a.title.localeCompare(b.title, "uk"));
+      for (const p of list) products.set(String(p.id), row(p, byId[p.id]));
+      // Пропозиції на товари, яких уже немає на сайті - показуємо, щоб їх можна було прибрати.
+      for (const [id, entry] of Object.entries(byId)) {
+        if (!products.has(id)) products.set(id, row({ id, title: "Товару зараз немає на сайті", missing: true }, entry));
+      }
+      render();
+      $("table-wrap").hidden = false;
+      $("hint").hidden = false;
+      setStatus("");
+    }
+
+    function row(product, entry) {
+      const orig = pickEditable(entry, product);
+      return { product, orig, edit: { ...orig } };
+    }
+
+    // Стара пропозиція могла бути задана знижкою ("discount") - показуємо як ціну.
+    function pickEditable(entry, product) {
+      if (!entry) return { price: null, lead_days: null };
+      let price = entry.price != null ? Number(entry.price) : null;
+      if (price == null && entry.discount != null && sitePrice(product)) price = sitePrice(product) - Number(entry.discount);
+      return { price, lead_days: entry.lead_days != null ? Number(entry.lead_days) : null };
+    }
+
+    function isChanged(p) {
+      return p.orig.price !== p.edit.price || p.orig.lead_days !== p.edit.lead_days;
+    }
+
+    // "12 500" -> 12500; порожньо -> null; помилка -> NaN
+    function parseNum(text, integer) {
+      const t = text.replace(/[\s\u00a0]/g, "").replace(",", ".");
+      if (t === "") return null;
+      if (!/^\d+(\.\d+)?$/.test(t)) return NaN;
+      const n = integer ? Number(t) : Math.round(parseFloat(t));
+      if (integer && !Number.isInteger(n)) return NaN;
+      return n > 0 ? n : NaN;
+    }
+
+    const fmt = (n) => n.toLocaleString("uk-UA", { maximumFractionDigits: 2 });
+
+    function numInput(p, field, cls, placeholder) {
+      const input = document.createElement("input");
+      input.className = cls;
+      input.inputMode = "numeric";
+      input.placeholder = placeholder;
+      input.value = p.edit[field] ?? "";
+      input.addEventListener("input", () => {
+        const v = parseNum(input.value, field === "lead_days");
+        input.classList.toggle("invalid", Number.isNaN(v));
+        p.edit[field] = v;
+        refreshRow(p);
+      });
+      // Enter - до того ж поля в наступному рядку (Shift+Enter - у попередньому).
+      input.addEventListener("keydown", (e) => {
+        if (e.key !== "Enter") return;
+        e.preventDefault();
+        const all = [...document.querySelectorAll("input." + cls)].filter((el) => !el.closest("tr").hidden);
+        const next = all[all.indexOf(input) + (e.shiftKey ? -1 : 1)];
+        if (next) { next.focus(); next.select(); }
+      });
+      return input;
+    }
+
+    function td(className, ...children) {
+      const cell = document.createElement("td");
+      if (className) cell.className = className;
+      children.forEach((c) => cell.append(c));
+      return cell;
+    }
+
+    function render() {
+      const tbody = $("rows");
+      tbody.textContent = "";
+      for (const p of products.values()) {
+        const d = p.product;
+        const tr = document.createElement("tr");
+        p.row = tr;
+        tr.dataset.cat = d.missing ? "" : category(d);
+        tr.dataset.search = `${d.id} ${d.title}`.toLowerCase();
+
+        const img = document.createElement("img");
+        img.alt = "";
+        img.loading = "lazy";
+        if (d.image_link) img.src = /^https?:\/\//.test(d.image_link) ? d.image_link : "/" + d.image_link.replace(/^\//, "");
+        else img.hidden = true;
+
+        const name = document.createElement("span");
+        name.textContent = d.title;
+        const cat = document.createElement("span");
+        cat.className = "cat";
+        cat.textContent = d.missing ? "" : category(d);
+
+        const site = td("sep r site");
+        const price = sitePrice(d);
+        site.textContent = price ? fmt(price) : "-";
+        const stock = document.createElement("span");
+        const inStock = !d.missing && d.availability === "in_stock";
+        stock.className = "stock" + (inStock ? "" : " out");
+        stock.textContent = d.missing ? "немає на сайті" : inStock ? "в наявності" : "немає в наявності";
+        site.append(stock);
+
+        p.noteCell = td("note");
+        tr.append(
+          td("id", String(d.id)),
+          td("img", img),
+          td("name", name, cat),
+          site,
+          td("sep", numInput(p, "price", "price", "")),
+          td("", numInput(p, "lead_days", "days", String(defaultDays))),
+          p.noteCell,
+        );
+        tbody.append(tr);
+        refreshRow(p);
+      }
+      renderCats();
+      applyFilter();
+    }
+
+    function refreshRow(p) {
+      const d = p.product;
+      const price = p.edit.price;
+      const site = sitePrice(d);
+      const note = p.noteCell;
+      note.textContent = "";
+      if (price > 0) {
+        if (d.missing) {
+          note.innerHTML = '<span class="warn">товару немає на сайті - не показується</span>';
+        } else if (!site || price >= site) {
+          note.innerHTML = '<span class="warn">має бути нижчою за ціну на сайті - не показується</span>';
+        } else {
+          const diff = site - price;
+          note.textContent = `−${fmt(Math.round(diff))} грн (−${Math.round(diff / site * 100)}%)`;
+        }
+      }
+      p.row.classList.toggle("changed", isChanged(p));
+      p.row.classList.toggle("off", !(price > 0));
+      const changed = [...products.values()].filter(isChanged);
+      $("savebar").hidden = changed.length === 0;
+      $("changed-count").textContent = `Змінено товарів: ${changed.length}`;
+    }
+
+    function renderCats() {
+      const box = $("cats");
+      box.textContent = "";
+      const cats = [...new Set([...products.values()].map((p) => p.row.dataset.cat).filter(Boolean))];
+      for (const c of ["", ...cats]) {
+        const b = document.createElement("button");
+        b.textContent = c || "Усі";
+        b.classList.toggle("active", c === filterCat);
+        b.addEventListener("click", () => {
+          filterCat = c;
+          [...box.children].forEach((x) => x.classList.toggle("active", x === b));
+          applyFilter();
+        });
+        box.append(b);
+      }
+    }
+
+    function applyFilter() {
+      const q = $("search").value.trim().toLowerCase();
+      const onlySet = $("only-set").checked;
+      for (const p of products.values()) {
+        const r = p.row;
+        r.hidden = (filterCat && r.dataset.cat !== filterCat) || (q && !r.dataset.search.includes(q))
+          || (onlySet && !(p.edit.price > 0) && !(p.orig.price > 0));
+      }
+    }
+
+    async function save() {
+      const changed = [...products.values()].filter(isChanged);
+      if (changed.some((p) => Number.isNaN(p.edit.price) || Number.isNaN(p.edit.lead_days))) {
+        setStatus("Виправте поля, підсвічені червоним: лише ціле число більше нуля або порожньо.", "error");
+        return;
+      }
+      $("save-btn").disabled = true;
+      setStatus("Збереження…");
+      try {
+        await commit(changed);
+        const done = `Збережено (${changed.length} товарів). Сайт оновиться приблизно за 2–3 хвилини.`;
+        await load();
+        setStatus(done, "ok");
+      } catch (e) {
+        setStatus(e.message, "error");
+      } finally {
+        $("save-btn").disabled = false;
+      }
+    }
+
+    // Беремо свіжий backorder_offers.json і міняємо лише відредаговані товари.
+    // Якщо той самий товар щойно змінив хтось інший - не перезаписуємо.
+    async function commit(changed, attempt = 1) {
+      const current = await readJson(OFFERS);
+      const byId = { ...(current.data.by_id || {}) };
+      const conflicts = changed.filter((p) => {
+        const now = pickEditable(byId[p.product.id], p.product);
+        return now.price !== p.orig.price || now.lead_days !== p.orig.lead_days;
+      });
+      if (conflicts.length) {
+        throw new Error("Ці товари щойно змінив хтось інший: " +
+          conflicts.map((p) => p.product.title).join(", ") + ". Оновіть сторінку і внесіть зміни ще раз.");
+      }
+      for (const p of changed) {
+        const id = String(p.product.id);
+        if (!(p.edit.price > 0)) { delete byId[id]; continue; }
+        const { discount, price, lead_days, ...rest } = byId[id] || {};
+        const entry = { ...rest, price: p.edit.price };
+        if (p.edit.lead_days > 0) entry.lead_days = p.edit.lead_days;
+        byId[id] = entry;
+      }
+      const data = { ...current.data, by_id: byId };
+      try {
+        await gh(`/repos/${REPO}/contents/${OFFERS}`, {
+          method: "PUT",
+          body: JSON.stringify({
+            message: `Адмінка: під замовлення (товари ${changed.map((p) => p.product.id).join(", ")})`,
+            content: b64encode(JSON.stringify(data, null, 2) + "\n"),
+            sha: current.sha,
+            branch: BRANCH,
+          }),
+        });
+      } catch (e) {
+        if ((e.status === 409 || e.status === 422) && attempt < 3) return commit(changed, attempt + 1);
+        throw e;
+      }
+    }
+
+    async function start() {
+      token = storageGet(TOKEN_KEY);
+      if (!token) {
+        $("login").hidden = false;
+        return;
+      }
+      try {
+        await load();
+      } catch (e) {
+        if (e.status === 401 || e.status === 403 || e.status === 404) {
+          storageSet(TOKEN_KEY, null);
+          $("login").hidden = false;
+          setStatus("Токен не підходить або не має доступу до репозиторію. Увійдіть ще раз.", "error");
+        } else {
+          setStatus(e.message, "error");
+        }
+      }
+    }
+
+    $("login-btn").addEventListener("click", () => {
+      const t = $("token").value.trim();
+      if (!t) return;
+      storageSet(TOKEN_KEY, t);
+      $("login").hidden = true;
+      setStatus("");
+      start();
+    });
+    $("token").addEventListener("keydown", (e) => { if (e.key === "Enter") $("login-btn").click(); });
+    $("search").addEventListener("input", applyFilter);
+    $("only-set").addEventListener("change", applyFilter);
+    $("save-btn").addEventListener("click", save);
+    $("reset-btn").addEventListener("click", () => {
+      for (const p of products.values()) p.edit = { ...p.orig };
+      render();
+    });
+    window.addEventListener("beforeunload", (e) => {
+      if ([...products.values()].some(isChanged)) e.preventDefault();
+    });
+
+    AdminShell.ready(start);
+  })();
+  </script>
+</body>
+</html>

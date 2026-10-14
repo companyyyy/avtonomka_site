@@ -39,7 +39,11 @@
  * кошика — по рядку на товар зі спільним "№ замовлення") на аркуш "Заявки"
  * цієї ж таблиці:
  * Дата/час | Ім'я | Телефон | Товар | Коментар | Кількість | № замовлення |
- * Місто | Відділення/поштомат НП | Спосіб оплати | Джерело.
+ * Місто | Відділення/поштомат НП | Спосіб оплати | Джерело | Ціна за од.
+ *
+ * "Ціна за од." - ціна з кошика (та, що була на сторінці товару в момент
+ * додавання). Для варіанта «під замовлення» це нижча ціна, а сама умова
+ * видна в колонці "Товар": «... (під замовлення, очікується до <дата>)».
  *
  * Місто, відділення НП і спосіб оплати заповнюються лише замовленнями з
  * кошика (checkout.html) — швидка заявка через order-form.js та заявки з
@@ -52,7 +56,7 @@
  */
 
 const SHEET_NAME = 'Заявки';
-const HEADER = ['Дата/час', "Ім'я", 'Телефон', 'Товар', 'Коментар', 'Кількість', '№ замовлення', 'Місто', 'Відділення/поштомат НП', 'Спосіб оплати', 'Джерело'];
+const HEADER = ['Дата/час', "Ім'я", 'Телефон', 'Товар', 'Коментар', 'Кількість', '№ замовлення', 'Місто', 'Відділення/поштомат НП', 'Спосіб оплати', 'Джерело', 'Ціна за од.'];
 
 function ensureSheet(ss) {
   let sheet = ss.getSheetByName(SHEET_NAME);
@@ -127,6 +131,9 @@ function doPost(e) {
         const title = (item && (item.title || item.name)) || '';
         const sku   = (item && item.sku) || '';
         const qty   = (item && item.qty) || 1;
+        const price = (item && item.price != null && item.price !== '')
+          ? (item.price + ' ' + (item.currency || 'UAH'))
+          : '';
         sheet.appendRow([
           timestamp,
           name,
@@ -138,13 +145,14 @@ function doPost(e) {
           city,
           npBranch,
           paymentMethod,
-          source
+          source,
+          price
         ]);
       });
     } else {
       /* Швидка заявка на 1 товар (сайт: order-form.js, або заявка без кошика
          з міні-аппи), без даних доставки. */
-      sheet.appendRow([timestamp, name, phone, params.product || '', comment, '', '', '', '', '', source]);
+      sheet.appendRow([timestamp, name, phone, params.product || '', comment, '', '', '', '', '', source, '']);
     }
 
     return ContentService

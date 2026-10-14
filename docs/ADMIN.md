@@ -11,6 +11,7 @@ Supabase Auth) для всіх розділів. Увійти достатньо
 | Розсилка | `miniapp-mailing.html` | розсилки ботом тим, хто цікавився товаром (див. docs/TELEGRAM_BOT_SETUP.md) |
 | Аукціон | `auction-admin.html` | лоти, ставки, контакти лідера |
 | Ціни Prom | `prom-admin/` | ціни й наявність для `prom_file.xml` та `invertorshop.xml` |
+| Під замовлення | `preorder-admin/` | ціна й строк «під замовлення» (`scripts/backorder_offers.json`); наявність і ціна в наявності - з сайту |
 
 Шапку, меню й вхід малює спільний скрипт `assets/js/admin-shell.js`.
 

@@ -6,6 +6,7 @@
 const fs   = require('fs');
 const path = require('path');
 const { slugify } = require('./slugify');
+const { getBackorderOffer, PAGE_SUFFIX } = require('./backorder');
 
 const SITE_URL    = 'https://avtonomka.com.ua';
 const SHOP_NAME   = 'Автономка';
@@ -41,6 +42,12 @@ function availability(val) {
 function productLink(p) {
   const slug = p.slug || slugify(p.title || '');
   return `${SITE_URL}/product/${slug}/${encodeURIComponent(p.id)}.html`;
+}
+
+/* Сторінка варіанта «під замовлення» - див. scripts/generate_static_pages.js */
+function orderLink(p) {
+  const slug = p.slug || slugify(p.title || '');
+  return `${SITE_URL}/product/${slug}/${encodeURIComponent(p.id)}${PAGE_SUFFIX}.html`;
 }
 
 function absoluteUrl(url) {
@@ -169,8 +176,14 @@ function feedImages(p) {
   return [p.image_link, ...(p.additional_images || [])];
 }
 
-function buildItem(p) {
-  const price = formatPrice(p.price);
+/* order = пропозиція «під замовлення» (scripts/backorder.js). Тоді це
+   ДРУГИЙ item того ж товару: g:id <id>-order, своя сторінка, нижча ціна,
+   backorder/preorder + availability_date (обовʼязкова для цих статусів).
+   custom_label_0 (in_stock / backorder / preorder) ставиться лише товарам, що мають
+   обидва варіанти - щоб розвести їх по різних кампаніях. GTIN у даних немає,
+   тож двох оферів з однаковим GTIN не виникає. */
+function buildItem(p, order = null, hasOrderVariant = false) {
+  const price = order ? formatPrice(order.price) : formatPrice(p.price);
   if (!price) return '';
 
   const [mainImage, ...restImages] = feedImages(p).filter(Boolean);
@@ -187,20 +200,26 @@ function buildItem(p) {
 
   return `
     <item>
-      <g:id>${escXml(p.id)}</g:id>
+      <g:id>${escXml(order ? order.id : p.id)}</g:id>
       <g:title>${escXml(feedTitle(p))}</g:title>
       <g:description>${escXml(feedDescription(p))}</g:description>
-      <g:link>${escXml(productLink(p))}</g:link>
+      <g:link>${escXml(order ? orderLink(p) : productLink(p))}</g:link>
       <g:image_link>${escXml(absoluteUrl(mainImage))}</g:image_link>
 ${additionalImages ? additionalImages + '\n' : ''}      <g:price>${price}</g:price>
-      <g:availability>${availability(p.availability)}</g:availability>
-      <g:condition>${isUsed(p) ? 'used' : escXml(p.condition || 'new')}</g:condition>
+      <g:availability>${order ? order.status : availability(p.availability)}</g:availability>
+${order ? `      <g:availability_date>${order.isoDate}</g:availability_date>\n` : ''}      <g:condition>${isUsed(p) ? 'used' : escXml(p.condition || 'new')}</g:condition>
 ${opt('brand', brand)}${opt('gtin', gtin)}${opt('mpn', mpn)}${!gtin && (!mpn || !brand) ? '      <g:identifier_exists>no</g:identifier_exists>\n' : ''}${isBundle(p) ? '      <g:is_bundle>yes</g:is_bundle>\n' : ''}${gcat ? `      <g:google_product_category>${gcat}</g:google_product_category>\n` : ''}      <g:product_type>${escXml(feedProductType(p))}</g:product_type>
-    </item>`;
+${order ? `      <g:custom_label_0>${order.status}</g:custom_label_0>\n` : hasOrderVariant ? '      <g:custom_label_0>in_stock</g:custom_label_0>\n' : ''}    </item>`;
 }
 
 (async () => {
-  const items = products.map(buildItem).filter(Boolean).join('');
+  let orderItems = 0;
+  const items = products.map(p => {
+    const order = getBackorderOffer(p);
+    if (!order) return buildItem(p);
+    orderItems++;
+    return buildItem(p, null, true) + buildItem(p, order);
+  }).filter(Boolean).join('');
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
@@ -215,5 +234,6 @@ ${items}
 
   const outPath = path.join(__dirname, '../feed.xml');
   fs.writeFileSync(outPath, xml, 'utf-8');
-  console.log(`feed.xml generated: ${products.length} products → ${outPath}`);
+  console.log(`feed.xml generated: ${products.length} products` +
+    (orderItems ? ` + ${orderItems} «під замовлення» item(s)` : '') + ` → ${outPath}`);
 })();

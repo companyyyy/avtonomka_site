@@ -551,6 +551,7 @@ main { flex: 1; }
 }
 .product-card__pill--in-stock     { background: #17a126; }
 .product-card__pill--out-of-stock { background: var(--color-muted); }
+.product-card__pill--backorder    { background: #c07d00; }
 .product-card__pill--installment  { background: var(--color-orange); color: var(--color-dark); }
 .product-card__pill--tier-light   { background: #1976d2; }
 .product-card__pill--tier-optimal { background: #c07d00; }
@@ -1341,6 +1342,16 @@ main { flex: 1; }
   flex-shrink: 0;
 }
 .product-meta-row__value { color: var(--color-text); font-weight: 500; }
+
+/* Варіанти «в наявності» / «під замовлення» (scripts/backorder_offers.json) */
+.product-offer-note,
+.product-offer-alt {
+  padding: 12px 28px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: .92rem;
+}
+.product-offer-note { background: rgba(245,166,35,.12); color: #8a5a00; }
+.product-offer-alt a { font-weight: 700; }
 
 .product-info__desc {
   padding: 20px 28px;
