@@ -32,8 +32,8 @@
     "in_stock": true
   },
   "148300": {
-    "price": 41601,
-    "in_stock": false
+    "price": 42960,
+    "in_stock": true
   },
   "150416": {
     "price": 71818,
@@ -48,8 +48,8 @@
     "in_stock": true
   },
   "150676": {
-    "price": 36000,
-    "in_stock": false
+    "price": 40695,
+    "in_stock": true
   },
   "150825": {
     "price": 7875,
@@ -105,7 +105,7 @@
   },
   "152174": {
     "price": 56550,
-    "in_stock": false
+    "in_stock": true
   },
   "152175": {
     "price": 77267,
