@@ -5,7 +5,9 @@ clients - see FEEDS: prom_file.xml (Ultradomik) and invertorshop.xml
 client's Prom cabinet pulls its own file by link.
 
 Prices (UAH) and stock come from data/ultradomik/prices.json, keyed by item
-id - edited in the price table at https://avtonomka.com.ua/prom-admin/.
+id. The scheduled site update fills it with site prices
+(scripts/sync_ultradomik_prices.py); a manual edit in the price table at
+https://avtonomka.com.ua/prom-admin/ wins until the next scheduled update.
 Texts (UA + RU), specs and search queries come from
 data/ultradomik/products.json; photos are the supplier's
 white-background copies from products.json -> prom_images (plus a photo taken
