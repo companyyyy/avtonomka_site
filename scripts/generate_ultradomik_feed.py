@@ -20,6 +20,7 @@ Run: python scripts/generate_ultradomik_feed.py
 """
 
 import json
+import random
 import re
 import sys
 from pathlib import Path
@@ -31,6 +32,9 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE_URL = 'https://avtonomka.com.ua'
 # One build, several files: the same items, texts, photos and categories,
 # only the price differs. (file, price markup)
+# Every build adds a fresh random 1-10 UAH to each item's price (prom_file.xml
+# price); the other feeds take their markup from that already-bumped price.
+RANDOM_ADD_UAH = (1, 10)
 FEEDS = [
     ('prom_file.xml', 1.00),      # Ultradomik
     ('invertorshop.xml', 1.35),   # ІнверторШоп: +35% on every price
@@ -284,7 +288,7 @@ def main():
                 f'      <keywords_ua>{esc(cap_keywords(e["kw_ua"]))}</keywords_ua>',
                 '    </item>',
             ]
-            items.append((price_uah, '\n'.join(lines)))
+            items.append((price_uah + random.randint(*RANDOM_ADD_UAH), '\n'.join(lines)))
 
     catalog = '\n'.join(f'    <category id="{cid}" portal_id="{CATEGORIES[cid][1]}">{esc(CATEGORIES[cid][0])}</category>'
                         for cid in sorted(used_cats))
