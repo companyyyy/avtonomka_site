@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex, nofollow" />
   <title>Ціни для Prom - Автономка</title>
   <link rel="icon" href="/assets/images/logo.jpg" type="image/jpeg">
-  <!-- Ціни й наявність товарів фіду prom_file.xml (Ультрадомік). invertorshop.xml
+  <!-- Ціни й наявність товарів фіду prom_file.xml (роздрібні ціни). invertorshop.xml
        будується з тих самих цін +35%. Читає й комітить data/ultradomik/prices.json
        через GitHub API; після коміту GitHub Actions (prom-feed.yml) перебудовує
        обидва фіди й викладає їх на сервер. При кожному автооновленні сайту
@@ -180,9 +180,8 @@
     // scripts/generate_ultradomik_feed.py; prom-feed.yml перебудовує їх після коміту.
     const FEEDS = "data/ultradomik/feeds.json";
     const SITE = "https://avtonomka.com.ua";
-    const MAIN_FEED = { file: "prom_file.xml", name: "Ультрадомік (основний)" };
+    const MAIN_FEED = { file: "prom_file.xml", name: "Роздрібні ціни (основний)" };
     const OTHER_FEEDS = [
-      ["prom.xml", "Власний магазин на Prom"],
       ["feed.xml", "Google Merchant"],
       ["feed/bezpeka.xml", "Bezpeka.club"],
     ];
@@ -508,7 +507,7 @@
       const groups = feeds.map((f) => `<th class="group">${escHtml(f.name)} · ${escHtml(f.file)}</th>`).join("");
       const cols = feeds.map((f) => `<th class="sep r">Ціна, грн (${escHtml(pctLabel(f.percent))})</th>`).join("");
       head.innerHTML = `
-        <tr><th colspan="3"></th><th class="group" colspan="2">Ультрадомік · prom_file.xml</th>${groups}</tr>
+        <tr><th colspan="3"></th><th class="group" colspan="2">Роздрібні ціни · prom_file.xml</th>${groups}</tr>
         <tr><th>ID</th><th></th><th>Товар</th><th class="sep">Ціна, грн</th><th class="c">В наявності</th>${cols}</tr>`;
     }
 

@@ -49,7 +49,7 @@ RESERVED_FILES = {MAIN_FEED, 'prom.xml', 'feed.xml', 'sitemap.xml', 'feed/bezpek
 
 def load_feeds():
     """[(file, multiplier, name)] - the main feed first, then valid extras."""
-    feeds = [(MAIN_FEED, 1.0, 'Ультрадомік')]
+    feeds = [(MAIN_FEED, 1.0, 'Роздрібні ціни')]
     try:
         extra = json.loads(FEEDS_CONFIG.read_text('utf-8')).get('feeds', [])
     except FileNotFoundError:
