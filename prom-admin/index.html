@@ -115,15 +115,20 @@
     <h1>Ціни для Prom</h1>
     <span class="spacer"></span>
     <div class="cats" id="cats"></div>
-    <input type="search" id="search" placeholder="Пошук за назвою або ID" />
+    <input type="search" id="search" name="product-search" placeholder="Пошук за назвою або ID" autocomplete="off" data-lpignore="true" data-1p-ignore />
   </header>
 
   <main>
     <div class="login" id="login" hidden>
       <h2>Токен GitHub</h2>
       <p>Ціни зберігаються в репозиторії сайту, тому для запису потрібен токен GitHub (вводиться один раз, браузер його запам'ятає). Вставте токен з доступом до репозиторію companyyyy/avtonomka_site (Contents: Read and write):</p>
-      <input type="password" id="token" placeholder="github_pat_…" autocomplete="off" />
-      <button class="primary" id="login-btn">Увійти</button>
+      <!-- Окрема форма: інакше Chrome вважає поле «Пошук» логіном до цього
+           пароля і після першого кліку вписує туди збережений email - фільтр
+           ховав усі товари. -->
+      <form id="token-form" autocomplete="off" onsubmit="return false">
+        <input type="password" id="token" name="github-token" placeholder="github_pat_…" autocomplete="off" />
+        <button type="button" class="primary" id="login-btn">Увійти</button>
+      </form>
     </div>
 
     <p class="status" id="status"></p>
@@ -155,6 +160,7 @@
         <tbody id="rows"></tbody>
       </table>
     </div>
+    <p class="hint" id="empty" hidden></p>
   </main>
 
   <div class="savebar" id="savebar" hidden>
@@ -588,6 +594,27 @@
         const r = p.row;
         r.hidden = (filterCat && Number(r.dataset.cat) !== filterCat) || (q && !r.dataset.search.includes(q));
       }
+      showEmpty(q);
+    }
+
+    // Фільтр сховав усе - кажемо чому і даємо скинути (раніше таблиця просто
+    // порожніла, напр. коли браузер сам вписував email у пошук).
+    function showEmpty(q) {
+      const el = $("empty");
+      const any = [...products.values()].some((p) => !p.row.hidden);
+      el.hidden = any || products.size === 0;
+      if (any) return;
+      el.textContent = q ? `Нічого не знайдено за «${$("search").value.trim()}». ` : "Немає товарів за цим фільтром. ";
+      const reset = document.createElement("button");
+      reset.textContent = q ? "Очистити пошук" : "Показати всі";
+      reset.addEventListener("click", () => {
+        $("search").value = "";
+        filterCat = typeof filterCat === "number" ? 0 : "";
+        [...$("cats").children].forEach((b, i) => b.classList.toggle("active", i === 0));
+        if ($("only-set")) $("only-set").checked = false;
+        applyFilter();
+      });
+      el.append(reset);
     }
 
     async function save() {
