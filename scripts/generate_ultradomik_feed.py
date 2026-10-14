@@ -1,7 +1,8 @@
 """
 Generates the Prom.ua import feeds (Price.ua format, RU + UA) for reseller
-clients - see FEEDS: prom_file.xml (Ultradomik) and invertorshop.xml
-(ІнверторШоп, +35%). Served at https://avtonomka.com.ua/<file> - each
+clients: the main prom_file.xml (Ultradomik) plus the extra feeds listed in
+data/ultradomik/feeds.json (name, file, +/- percent from the main feed price,
+e.g. invertorshop.xml - ІнверторШоп, +35%), edited in /prom-admin/. Served at https://avtonomka.com.ua/<file> - each
 client's Prom cabinet pulls its own file by link.
 
 Prices (UAH) and stock come from data/ultradomik/prices.json, keyed by item
@@ -33,14 +34,36 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parent.parent
 SITE_URL = 'https://avtonomka.com.ua'
 # One build, several files: the same items, texts, photos and categories,
-# only the price differs. (file, price markup)
-# Every build adds a fresh random 1-10 UAH to each item's price (prom_file.xml
-# price); the other feeds take their markup from that already-bumped price.
+# only the price differs. Every build adds a fresh random 1-10 UAH to each
+# item's price (prom_file.xml price); the extra feeds take their percent from
+# that already-bumped price.
 RANDOM_ADD_UAH = (1, 10)
-FEEDS = [
-    ('prom_file.xml', 1.00),      # Ultradomik
-    ('invertorshop.xml', 1.35),   # ІнверторШоп: +35% on every price
-]
+MAIN_FEED = 'prom_file.xml'                        # Ultradomik
+FEEDS_CONFIG = ROOT / 'data/ultradomik/feeds.json'  # extra feeds, from /prom-admin/
+# Files this script wrote last time - a feed removed in the admin gets its
+# file deleted, and nothing else (feed/bezpeka.xml etc.) is ever touched.
+FEEDS_BUILT = ROOT / 'data/ultradomik/feeds_built.json'
+FEED_FILE_RE = re.compile(r'^(?:feed/)?[a-z0-9][a-z0-9-]{0,60}\.xml$')
+RESERVED_FILES = {MAIN_FEED, 'prom.xml', 'feed.xml', 'sitemap.xml', 'feed/bezpeka.xml'}
+
+
+def load_feeds():
+    """[(file, multiplier, name)] - the main feed first, then valid extras."""
+    feeds = [(MAIN_FEED, 1.0, 'Ультрадомік')]
+    try:
+        extra = json.loads(FEEDS_CONFIG.read_text('utf-8')).get('feeds', [])
+    except FileNotFoundError:
+        extra = []
+    seen = {MAIN_FEED}
+    for f in extra:
+        fname, pct = str(f.get('file', '')), f.get('percent', 0)
+        if (not FEED_FILE_RE.match(fname) or fname in seen or fname in RESERVED_FILES
+                or not isinstance(pct, (int, float)) or not -90 <= pct <= 500):
+            print(f'feeds.json: skipped invalid feed {f!r}')
+            continue
+        seen.add(fname)
+        feeds.append((fname, 1 + pct / 100, str(f.get('name') or fname)))
+    return feeds
 
 # Group ids are fixed so a group keeps its identity in the client's Prom
 # cabinet across imports - never renumber, only append. portal = Prom
@@ -294,15 +317,28 @@ def main():
 
     catalog = '\n'.join(f'    <category id="{cid}" portal_id="{CATEGORIES[cid][1]}">{esc(CATEGORIES[cid][0])}</category>'
                         for cid in sorted(used_cats))
-    for fname, markup in FEEDS:
+    feeds = load_feeds()
+    for fname, markup, _ in feeds:
         body = '\n'.join(text.replace('{price}', f'{round(base * markup, 2):.2f}') for base, text in items)
         xml = clean('<?xml version="1.0" encoding="UTF-8"?>\n<shop>\n  <catalog>\n' + catalog +
                     '\n  </catalog>\n  <items>\n' + body + '\n  </items>\n</shop>\n')
         if FORBIDDEN.search(xml):
             sys.exit(f'{fname}: forbidden substring found, file not written')
         ElementTree.fromstring(xml.encode('utf-8'))
+        (ROOT / fname).parent.mkdir(parents=True, exist_ok=True)
         (ROOT / fname).write_text(xml, encoding='utf-8')
         print(f'{fname} generated: {len(items)} items, markup x{markup:.2f}')
+
+    built = [f for f, _, _ in feeds]
+    try:
+        previous = json.loads(FEEDS_BUILT.read_text('utf-8'))
+    except FileNotFoundError:
+        previous = []
+    for old in previous:
+        if old not in built and FEED_FILE_RE.match(old) and old not in RESERVED_FILES and (ROOT / old).exists():
+            (ROOT / old).unlink()
+            print(f'{old} removed (feed deleted in /prom-admin/)')
+    FEEDS_BUILT.write_text(json.dumps(built, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
     (ROOT / 'data/ultradomik/feed_items.json').write_text(
         json.dumps(admin_items, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')

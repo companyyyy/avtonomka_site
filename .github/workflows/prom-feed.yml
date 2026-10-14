@@ -1,13 +1,14 @@
 name: Update Prom feeds
 
 on:
-  # Ціни з адмінки /prom-admin/ (data/ultradomik/prices.json) або правки текстів -
-  # prom_file.xml і invertorshop.xml перебудовуються одразу.
+  # Ціни чи список фідів з адмінки /prom-admin/ (data/ultradomik/prices.json,
+  # feeds.json) або правки текстів - prom_file.xml і додаткові фіди перебудовуються одразу.
   push:
     branches: [ master ]
     paths:
       - 'data/ultradomik/prices.json'
       - 'data/ultradomik/products.json'
+      - 'data/ultradomik/feeds.json'
       - 'assets/images/ultradomik/**'
       - 'scripts/generate_ultradomik_feed.py'
   workflow_dispatch: {}
@@ -33,14 +34,14 @@ jobs:
       - name: Install Python dependencies
         run: pip install pillow
 
-      - name: Build prom_file.xml and invertorshop.xml
+      - name: Build prom_file.xml and the extra feeds (data/ultradomik/feeds.json)
         run: python scripts/generate_ultradomik_feed.py
 
       - name: Commit and push if changed
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add prom_file.xml invertorshop.xml data/ultradomik/feed_items.json
+          git add prom_file.xml invertorshop.xml feed/ data/ultradomik/feed_items.json data/ultradomik/feeds_built.json
           if git diff --cached --quiet; then
             echo "Змін немає"
           else

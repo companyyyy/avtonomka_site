@@ -75,6 +75,27 @@
     .status.error { color: var(--error); }
     .status.ok { color: var(--ok); }
     .hint { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+      padding: 14px 16px; margin: 0 0 16px; }
+    .card h2 { font-size: 16px; margin: 0 0 4px; }
+    .card h3 { font-size: 14px; margin: 16px 0 6px; color: var(--muted); font-weight: 600; }
+    .card .sub { color: var(--muted); font-size: 13px; margin: 0 0 10px; }
+    .feeds { width: 100%; min-width: 640px; border-collapse: collapse; }
+    .feeds td, .feeds th { padding: 6px 8px; }
+    .feeds input.fname { width: 180px; }
+    .feeds input.fpct, .add-feed input.fpct { width: 80px; text-align: right; }
+    .feeds input, .add-feed input { font: inherit; color: var(--text); background: var(--bg);
+      border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; }
+    .feeds input.invalid, .add-feed input.invalid { outline: 2px solid var(--error); }
+    .feeds a, .other-feeds a { color: var(--accent); word-break: break-all; }
+    .feeds .main-feed td { font-weight: 600; }
+    .feeds .pending { color: var(--muted); font-size: 13px; }
+    .feeds button, .other-feeds button, .add-feed button { padding: 4px 10px; font-size: 14px; }
+    .add-feed { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 12px; }
+    .add-feed input.fname { width: 220px; }
+    .other-feeds { list-style: none; padding: 0; margin: 0; }
+    .other-feeds li { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 4px 0; }
+    .other-feeds .what { color: var(--muted); min-width: 170px; }
     .login { max-width: 520px; margin: 40px auto; background: var(--surface);
       border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
     .login input { width: 100%; margin: 8px 0 12px; }
@@ -106,22 +127,31 @@
     </div>
 
     <p class="status" id="status"></p>
-    <p class="hint" id="hint" hidden>Ціни й наявність підтягуються з сайту при кожному автооновленні (≈11:10, 15:10, 19:10 Київ). Ручна зміна тут діє одразу, але до наступного автооновлення - потім її перезапише сайт. Товарів, яких немає на сайті, автооновлення не чіпає. У фід до кожної ціни додається випадкові 1-10 грн. Товар без ціни у фід не потрапляє. Ціна ІнверторШоп рахується автоматично (+35%).</p>
+    <section class="card" id="feeds-card" hidden>
+      <h2>Фіди</h2>
+      <p class="sub">Кожен фід - ті самі товари, що в основному, з ціною ± відсоток від ціни основного фіду. Посилання на фід лишається тим самим, навіть якщо змінити назву чи відсоток. Новий фід з'являється за посиланням приблизно за 1–2 хвилини.</p>
+      <div class="table-wrap">
+        <table class="feeds">
+          <thead><tr><th>Назва</th><th>Від основного, %</th><th>Посилання</th><th></th></tr></thead>
+          <tbody id="feed-rows"></tbody>
+        </table>
+      </div>
+      <div class="add-feed">
+        <strong>Новий фід:</strong>
+        <input class="fname" id="new-feed-name" placeholder="Назва, напр. СоларМаркет" maxlength="60" />
+        <input class="fpct" id="new-feed-pct" placeholder="+20" inputmode="decimal" />
+        <span>%</span>
+        <button class="primary" id="add-feed-btn">Створити</button>
+      </div>
+      <h3>Інші фіди сайту (ціни з сайту, тут не налаштовуються)</h3>
+      <ul class="other-feeds" id="other-feeds"></ul>
+    </section>
+
+    <p class="hint" id="hint" hidden>Ціни й наявність підтягуються з сайту при кожному автооновленні (≈11:10, 15:10, 19:10 Київ). Ручна зміна тут діє одразу, але до наступного автооновлення - потім її перезапише сайт. Товарів, яких немає на сайті, автооновлення не чіпає. У фід до кожної ціни додається випадкові 1-10 грн (у таблиці нижче ціни інших фідів - без них). Товар без ціни у фід не потрапляє.</p>
 
     <div class="table-wrap" id="table-wrap" hidden>
       <table>
-        <thead>
-          <tr>
-            <th colspan="3"></th>
-            <th class="group" colspan="2">Ультрадомік · prom_file.xml</th>
-            <th class="group">ІнверторШоп · invertorshop.xml</th>
-          </tr>
-          <tr>
-            <th>ID</th><th></th><th>Товар</th>
-            <th class="sep">Ціна, грн</th><th class="c">В наявності</th>
-            <th class="sep r">Ціна, грн (+35%)</th>
-          </tr>
-        </thead>
+        <thead id="thead"></thead>
         <tbody id="rows"></tbody>
       </table>
     </div>
@@ -146,7 +176,17 @@
     const ITEMS = "data/ultradomik/feed_items.json";
     const API = "https://api.github.com";
     const TOKEN_KEY = "avtonomka-prom-admin.token";
-    const MARKUP = 1.35; // invertorshop.xml - як FEEDS у scripts/generate_ultradomik_feed.py
+    // Додаткові фіди (назва, файл, ± % від ціни prom_file.xml) - читає
+    // scripts/generate_ultradomik_feed.py; prom-feed.yml перебудовує їх після коміту.
+    const FEEDS = "data/ultradomik/feeds.json";
+    const SITE = "https://avtonomka.com.ua";
+    const MAIN_FEED = { file: "prom_file.xml", name: "Ультрадомік (основний)" };
+    const OTHER_FEEDS = [
+      ["prom.xml", "Власний магазин на Prom"],
+      ["feed.xml", "Google Merchant"],
+      ["feed/bezpeka.xml", "Bezpeka.club"],
+    ];
+    let feeds = []; // [{ file, name, percent }]
     // Як CATEGORIES у scripts/generate_ultradomik_feed.py
     const CATEGORIES = {
       1: "Інвертори", 2: "Акумулятори", 3: "Системи 2 в 1", 4: "Кабелі", 5: "Зарядні станції",
@@ -203,7 +243,10 @@
     async function load() {
       setStatus("Завантаження…");
       $("table-wrap").hidden = true;
-      const [items, prices] = await Promise.all([readJson(ITEMS), readJson(PRICES)]);
+      const [items, prices, feedCfg] = await Promise.all([readJson(ITEMS), readJson(PRICES), readFeeds()]);
+      feeds = feedCfg.data.feeds || [];
+      renderFeeds();
+      renderHead();
       products = new Map();
       items.data
         .slice()
@@ -305,14 +348,14 @@
           cat.append(problem);
         }
 
-        p.markupCell = td("sep r markup");
+        p.markupCells = feeds.map(() => td("sep r markup"));
         tr.append(
           td("id", String(d.id)),
           td("img", img),
           td("name", name, cat),
           td("sep", priceInput(p)),
           td("c", checkbox(p)),
-          p.markupCell,
+          ...p.markupCells,
         );
         tbody.append(tr);
         refreshRow(p);
@@ -324,11 +367,197 @@
       const price = p.edit.price;
       p.row.classList.toggle("changed", isChanged(p));
       p.row.classList.toggle("off", !price || !!p.item.problem);
-      p.markupCell.textContent = price > 0 ? fmt(Math.round(price * MARKUP * 100) / 100) : "-";
+      feeds.forEach((f, i) => {
+        p.markupCells[i].textContent = price > 0 ? fmt(Math.round(price * (1 + f.percent / 100) * 100) / 100) : "-";
+      });
       const changed = [...products.values()].filter(isChanged);
       $("savebar").hidden = changed.length === 0;
       $("changed-count").textContent = `Змінено товарів: ${changed.length}`;
     }
+
+    /* ---- Фіди ---- */
+    async function readFeeds() {
+      try {
+        return await readJson(FEEDS);
+      } catch (e) {
+        if (e.status === 404) return { sha: null, data: { feeds: [] } };
+        throw e;
+      }
+    }
+
+    const pctLabel = (n) => (n > 0 ? "+" : n < 0 ? "−" : "") + fmt(Math.abs(n)) + "%";
+    const feedUrl = (file) => `${SITE}/${file}`;
+
+    // "+20" / "-5,5" / "35" -> число; помилка -> NaN
+    function parsePct(text) {
+      const t = text.replace(/[\s%]/g, "").replace(",", ".").replace("−", "-");
+      if (!/^[+-]?\d+(\.\d+)?$/.test(t)) return NaN;
+      const n = Math.round(parseFloat(t) * 100) / 100;
+      return n >= -90 && n <= 500 ? n : NaN;
+    }
+
+    // Назва -> feed/<латиниця>.xml, унікальний серед наявних фідів.
+    const TRANSLIT = { а:"a",б:"b",в:"v",г:"h",ґ:"g",д:"d",е:"e",є:"ie",ж:"zh",з:"z",и:"y",і:"i",ї:"i",й:"i",к:"k",л:"l",м:"m",н:"n",о:"o",п:"p",р:"r",с:"s",т:"t",у:"u",ф:"f",х:"kh",ц:"ts",ч:"ch",ш:"sh",щ:"shch",ь:"",ю:"iu",я:"ia",ё:"e",э:"e",ы:"y",ъ:"","'":"","’":"" };
+    function fileFor(name, taken) {
+      const base = [...name.toLowerCase()].map((c) => TRANSLIT[c] ?? c).join("")
+        .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 50) || "feed";
+      let file = `feed/${base}.xml`;
+      for (let i = 2; taken.has(file) || file === "feed/bezpeka.xml"; i++) file = `feed/${base}-${i}.xml`;
+      return file;
+    }
+
+    function linkCell(file) {
+      const cell = document.createElement("td");
+      const a = document.createElement("a");
+      a.href = feedUrl(file);
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = feedUrl(file);
+      const copy = document.createElement("button");
+      copy.textContent = "Копіювати";
+      copy.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(feedUrl(file));
+          copy.textContent = "Скопійовано ✓";
+        } catch {
+          copy.textContent = "Не вдалося";
+        }
+        setTimeout(() => { copy.textContent = "Копіювати"; }, 1500);
+      });
+      const status = document.createElement("span");
+      status.className = "pending";
+      // Новий фід ще будується - показуємо, поки файлу немає на сайті.
+      fetch(feedUrl(file) + "?t=" + Date.now(), { method: "HEAD", cache: "no-store" })
+        .then((r) => { if (!r.ok) status.textContent = " · ще формується (1–2 хв)"; })
+        .catch(() => {});
+      cell.append(a, " ", copy, status);
+      return cell;
+    }
+
+    function renderFeeds() {
+      const tbody = $("feed-rows");
+      tbody.textContent = "";
+      const main = document.createElement("tr");
+      main.className = "main-feed";
+      main.append(td("", MAIN_FEED.name), td("", "0% (ціни з таблиці нижче)"), linkCell(MAIN_FEED.file), td(""));
+      tbody.append(main);
+
+      for (const f of feeds) {
+        const tr = document.createElement("tr");
+        const name = document.createElement("input");
+        name.className = "fname";
+        name.maxLength = 60;
+        name.value = f.name;
+        const pct = document.createElement("input");
+        pct.className = "fpct";
+        pct.inputMode = "decimal";
+        pct.value = (f.percent > 0 ? "+" : "") + f.percent;
+        const save = document.createElement("button");
+        save.className = "primary";
+        save.textContent = "Зберегти";
+        save.hidden = true;
+        const del = document.createElement("button");
+        del.textContent = "Видалити";
+        const changed = () => {
+          const v = parsePct(pct.value);
+          pct.classList.toggle("invalid", Number.isNaN(v));
+          name.classList.toggle("invalid", !name.value.trim());
+          save.hidden = name.value.trim() === f.name && v === f.percent;
+        };
+        name.addEventListener("input", changed);
+        pct.addEventListener("input", changed);
+        save.addEventListener("click", () => {
+          const v = parsePct(pct.value);
+          if (Number.isNaN(v) || !name.value.trim()) {
+            setStatus("Назва не може бути порожньою, відсоток - число від −90 до +500.", "error");
+            return;
+          }
+          saveFeeds((list) => {
+            const it = list.find((x) => x.file === f.file);
+            if (!it) throw new Error("Цей фід щойно видалив хтось інший. Оновіть сторінку.");
+            it.name = name.value.trim();
+            it.percent = v;
+          }, `Адмінка Prom: фід ${f.file} (${pctLabel(v)})`, `Фід «${name.value.trim()}» збережено: ${pctLabel(v)}. Ціни у фіді оновляться за 1–2 хвилини.`);
+        });
+        del.addEventListener("click", () => {
+          if (!confirm(`Видалити фід «${f.name}»? Посилання ${feedUrl(f.file)} перестане працювати.`)) return;
+          saveFeeds((list) => list.filter((x) => x.file !== f.file),
+            `Адмінка Prom: видалено фід ${f.file}`, `Фід «${f.name}» видалено.`);
+        });
+        const pctCell = td("", pct, " %");
+        tr.append(td("", name), pctCell, linkCell(f.file), td("", save, " ", del));
+        tbody.append(tr);
+      }
+
+      const others = $("other-feeds");
+      others.textContent = "";
+      for (const [file, what] of OTHER_FEEDS) {
+        const li = document.createElement("li");
+        const label = document.createElement("span");
+        label.className = "what";
+        label.textContent = what;
+        const cell = linkCell(file);
+        li.append(label, ...cell.childNodes);
+        others.append(li);
+      }
+      $("feeds-card").hidden = false;
+    }
+
+    function renderHead() {
+      const head = $("thead");
+      const groups = feeds.map((f) => `<th class="group">${escHtml(f.name)} · ${escHtml(f.file)}</th>`).join("");
+      const cols = feeds.map((f) => `<th class="sep r">Ціна, грн (${escHtml(pctLabel(f.percent))})</th>`).join("");
+      head.innerHTML = `
+        <tr><th colspan="3"></th><th class="group" colspan="2">Ультрадомік · prom_file.xml</th>${groups}</tr>
+        <tr><th>ID</th><th></th><th>Товар</th><th class="sep">Ціна, грн</th><th class="c">В наявності</th>${cols}</tr>`;
+    }
+
+    const escHtml = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+    // Свіжий feeds.json -> зміна -> коміт (з повтором, якщо файл встиг змінитися).
+    async function saveFeeds(mutate, message, done, attempt = 1) {
+      setStatus("Збереження…");
+      try {
+        const current = await readFeeds();
+        const list = (current.data.feeds || []).map((f) => ({ ...f }));
+        const next = mutate(list) || list;
+        const body = {
+          message,
+          content: b64encode(JSON.stringify({ ...current.data, feeds: next }, null, 2) + "\n"),
+          branch: BRANCH,
+        };
+        if (current.sha) body.sha = current.sha;
+        await gh(`/repos/${REPO}/contents/${FEEDS}`, { method: "PUT", body: JSON.stringify(body) });
+        await load();
+        setStatus(done, "ok");
+        return true;
+      } catch (e) {
+        if ((e.status === 409 || e.status === 422) && attempt < 3) return saveFeeds(mutate, message, done, attempt + 1);
+        setStatus(e.message, "error");
+        return false;
+      }
+    }
+
+    $("add-feed-btn").addEventListener("click", () => {
+      const nameEl = $("new-feed-name"), pctEl = $("new-feed-pct");
+      const name = nameEl.value.trim();
+      const pct = parsePct(pctEl.value);
+      nameEl.classList.toggle("invalid", !name);
+      pctEl.classList.toggle("invalid", Number.isNaN(pct));
+      if (!name || Number.isNaN(pct)) {
+        setStatus("Вкажіть назву і відсоток від −90 до +500 (напр. +20 або -5).", "error");
+        return;
+      }
+      if (products.size && [...products.values()].some(isChanged)
+          && !confirm("У таблиці цін є незбережені зміни - після створення фіду сторінка оновиться і вони зникнуть. Продовжити?")) return;
+      saveFeeds((list) => {
+        const file = fileFor(name, new Set(list.map((f) => f.file)));
+        list.push({ file, name, percent: pct });
+        return list;
+      }, `Адмінка Prom: новий фід «${name}» (${pctLabel(pct)})`,
+         `Фід «${name}» створено (${pctLabel(pct)}). Посилання запрацює приблизно за 1–2 хвилини.`)
+        .then((ok) => { if (ok) { nameEl.value = ""; pctEl.value = ""; } });
+    });
 
     function renderCats() {
       const box = $("cats");

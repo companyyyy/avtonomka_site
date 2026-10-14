@@ -85,8 +85,8 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add products.json data/telegram_posts.json catalog_export.csv feed.xml prom.xml prom_file.xml invertorshop.xml feed/bezpeka.xml \
-                  data/ultradomik/prices.json data/ultradomik/feed_items.json \
+          git add products.json data/telegram_posts.json catalog_export.csv feed.xml prom.xml prom_file.xml invertorshop.xml feed/ \
+                  data/ultradomik/prices.json data/ultradomik/feed_items.json data/ultradomik/feeds_built.json \
                   product/ catalog.html catalog/*.html sitemap.xml .htaccess assets/images/prom/ \
                   articles.html blog.html index.html
           if git diff --cached --quiet; then
