@@ -4,11 +4,6 @@
       "file": "invertorshop.xml",
       "name": "ІнверторШоп",
       "percent": 35
-    },
-    {
-      "file": "feed/testmarket.xml",
-      "name": "ТестМаркет",
-      "percent": 10
     }
   ]
 }
