@@ -153,6 +153,7 @@
   .qty-value { font-family:'Unbounded',sans-serif; font-size:16px; font-weight:700; min-width:22px; text-align:center; }
 
   .modal-btn-secondary { background:#fff; color:var(--accent); border:1px solid var(--accent); margin-top:8px; }
+  .watch-btn.on { background:#eaf5eb; }
 
   .cart-bar { position:fixed; left:14px; right:14px; bottom:14px; background:var(--accent); color:#fff; border-radius:var(--radius); padding:13px 16px; display:none; align-items:center; gap:10px; box-shadow:0 4px 16px rgba(0,80,0,.35); cursor:pointer; z-index:150; }
   .cart-bar.visible { display:flex; animation:fadeIn .2s ease; }
@@ -314,7 +315,8 @@ let LIKES=new Set();
 try{ LIKES=new Set(JSON.parse(localStorage.getItem("avtonomka_likes")||"[]")); }catch(e){}
 let writeAccess=TG_USER?.allows_write_to_pm?true:null;
 
-const API_FN={miniapp_visit:"visit", miniapp_track:"track", miniapp_set_like:"like", miniapp_set_write_access:"write_access"};
+const API_FN={miniapp_visit:"visit", miniapp_track:"track", miniapp_set_like:"like", miniapp_set_write_access:"write_access",
+  miniapp_set_price_watch:"price_watch", miniapp_price_watches:"price_watches"};
 function rpc(fn,args){
   if(CONFIG.MINIAPP_API){
     return fetch(CONFIG.MINIAPP_API,{
@@ -343,6 +345,57 @@ const visitDone=TG_USER
       })
       .catch(()=>{})
   : Promise.resolve();
+
+// ── ПОВІДОМИТИ ПРО ЗНИЖЕННЯ ЦІНИ ──
+// Підписка в tg_price_watch (scripts/supabase/price_watch_schema.sql); пише
+// клієнту Edge Function tg-price-alerts після автооновлення цін сайту.
+let WATCHES=new Set();
+try{ WATCHES=new Set(JSON.parse(localStorage.getItem("avtonomka_watches")||"[]")); }catch(e){}
+function saveWatches(){
+  try{ localStorage.setItem("avtonomka_watches", JSON.stringify([...WATCHES])); }catch(e){}
+  refreshWatchBtn();
+}
+if(TG_USER){
+  visitDone.then(()=>rpc("miniapp_price_watches",{p_tg_id:TG_USER.id}))
+    .then(r=>r&&r.ok?r.json():null)
+    .then(ids=>{ if(Array.isArray(ids)){ WATCHES=new Set(ids.map(String)); saveWatches(); } })
+    .catch(()=>{});
+}
+function watchBtnHTML(p){
+  if(!TG_USER || !p.price) return "";
+  return `<button type="button" class="modal-btn modal-btn-secondary watch-btn" id="watchBtn" onclick="togglePriceWatch()"></button>`;
+}
+function refreshWatchBtn(){
+  const b=document.getElementById("watchBtn");
+  if(!b || !currentProduct) return;
+  const on=WATCHES.has(String(currentProduct.id));
+  b.classList.toggle("on", on);
+  b.textContent=on?"✅ Повідомимо про зниження ціни · скасувати":"🔔 Повідомити про зниження ціни";
+}
+function togglePriceWatch(){
+  const p=currentProduct;
+  if(!TG_USER || !p) return;
+  const id=String(p.id);
+  const on=!WATCHES.has(id);
+  if(on) WATCHES.add(id); else WATCHES.delete(id);
+  saveWatches();
+  if(TG?.HapticFeedback) TG.HapticFeedback.impactOccurred("light");
+  visitDone.then(()=>rpc("miniapp_set_price_watch",{
+    p_tg_id:TG_USER.id, p_product_id:id, p_product_name:p.name||null,
+    p_price:parseFloat(String(p.price).replace(/\s/g,"").replace(",","."))||null, p_on:on,
+  })).catch(()=>{});
+  if(!on){ showToast("Сповіщення про ціну вимкнено"); return; }
+  // Без дозволу бот не зможе написати - питаємо одразу, без лімітів askWriteAccess.
+  if(writeAccess===true || !TG.requestWriteAccess || (TG.isVersionAtLeast && !TG.isVersionAtLeast("6.9"))){
+    showToast("🔔 Напишемо, щойно ціна знизиться");
+    return;
+  }
+  TG.requestWriteAccess(ok=>{
+    writeAccess=!!ok;
+    rpc("miniapp_set_write_access",{p_tg_id:TG_USER.id, p_allowed:!!ok}).catch(()=>{});
+    showToast(ok?"🔔 Напишемо, щойно ціна знизиться":"Без дозволу на повідомлення бот не зможе вам написати");
+  });
+}
 
 function track(event,{product=null,category=null,query=null}={}){
   if(!TG_USER) return;
@@ -819,7 +872,9 @@ function openModal(p){
       </div>
       <button class="modal-btn" onclick="addToCart(currentProduct, modalQty)">🛒 Додати в кошик</button>
       <a class="modal-btn modal-btn-secondary" href="${CONFIG.MANAGER}?text=${encodeURIComponent("Цікавить: "+p.name)}" target="_blank" onclick="track('manager_click',{product:currentProduct})">Написати менеджеру</a>
+      ${watchBtnHTML(p)}
     </div>`;
+  refreshWatchBtn();
   document.getElementById("modalOverlay").classList.add("open");
   document.body.style.overflow="hidden";
 }

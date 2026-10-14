@@ -151,3 +151,19 @@ jobs:
           script: |
             cd /home/avtonomka.com.ua/public_html
             git pull
+
+  # ─────────────────────────────────────────────────────────────
+  # Job 4: «Повідомити про зниження ціни» (мініапп) - після того, як нові
+  # ціни вже на сервері. Edge Function tg-price-alerts сама бере живий
+  # products.json і пише в Telegram підписаним, у кого ціна знизилась.
+  # Помилка тут не ламає оновлення сайту.
+  # ─────────────────────────────────────────────────────────────
+  price-alerts:
+    needs: deploy-server
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Notify price drops
+        run: |
+          curl -sS --fail-with-body -X POST \
+            https://uvndubhmqzqqsrnrxgaj.supabase.co/functions/v1/tg-price-alerts

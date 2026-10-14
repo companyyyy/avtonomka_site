@@ -3,7 +3,7 @@
 // бота, і id клієнта береться з підписаних даних, а не з запиту.
 //
 // Запит: POST { initData, fn, args }
-//   fn = "visit" | "track" | "like" | "write_access"
+//   fn = "visit" | "track" | "like" | "write_access" | "price_watch" | "price_watches"
 // Далі викликає ті самі SQL-функції (scripts/supabase/miniapp_tracking_schema.sql)
 // ключем service_role.
 //
@@ -202,6 +202,18 @@ Deno.serve(async (req) => {
       break;
     case "write_access":
       res = await db.rpc("miniapp_set_write_access", { p_tg_id: tgId, p_allowed: a.p_allowed === true });
+      break;
+    case "price_watch":
+      res = await db.rpc("miniapp_set_price_watch", {
+        p_tg_id: tgId,
+        p_product_id: str(a.p_product_id, 32),
+        p_product_name: str(a.p_product_name),
+        p_price: typeof a.p_price === "number" && a.p_price > 0 ? a.p_price : null,
+        p_on: a.p_on === true,
+      });
+      break;
+    case "price_watches":
+      res = await db.rpc("miniapp_price_watches", { p_tg_id: tgId });
       break;
     default:
       return json({ error: "unknown fn" }, 400);
