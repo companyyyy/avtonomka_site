@@ -2562,21 +2562,22 @@ html.lang-en .lang-hide-en { display: none !important; }
   display: block;
   overflow: hidden;
   white-space: nowrap;
-  background: #229ed9;
-  color: #fff;
-  font-size: .9rem;
-  font-weight: 600;
-  line-height: 34px;
-  height: 34px;
+  background: var(--color-dark);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  color: rgba(255,255,255,.75);
+  font-size: .8rem;
+  line-height: 26px;
+  height: 26px;
   text-decoration: none;
 }
-.tg-ticker:hover { background: #1b8bc0; }
+.tg-ticker:hover { color: #fff; }
 .tg-ticker__track {
   display: inline-block;
-  animation: tg-ticker 60s linear infinite;
+  animation: tg-ticker 90s linear infinite;
 }
 .tg-ticker:hover .tg-ticker__track { animation-play-state: paused; }
-.tg-ticker__item { display: inline-block; padding-right: 64px; }
+.tg-ticker__item { display: inline-block; padding-right: 180px; }
+.tg-ticker__item::before { content: '✈'; color: #4fb3e8; margin-right: 8px; }
 @keyframes tg-ticker {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }

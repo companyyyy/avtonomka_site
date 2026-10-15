@@ -210,9 +210,7 @@ const SITE_LANG = (() => {
   const header = document.querySelector('.site-header');
   // Не в Telegram mini app - там людина вже в Telegram.
   if (!header || window.Telegram?.WebApp?.initData) return;
-  const text = SITE_LANG === 'en'
-    ? '📢 Subscribe to our Telegram channel - news, deals and new arrivals'
-    : '📢 Підписуйтесь на наш Telegram-канал - новини, акції та нові надходження';
+  const text = SITE_LANG === 'en' ? 'Follow us on Telegram' : 'Підписуйтесь на наш Telegram-канал';
   const ticker = document.createElement('a');
   ticker.className = 'tg-ticker';
   ticker.href = 'https://t.me/avtonomka_od';
@@ -223,7 +221,7 @@ const SITE_LANG = (() => {
   track.className = 'tg-ticker__track';
   track.setAttribute('aria-hidden', 'true');
   // Дві однакові половини: анімація зсуває на -50%, і стрічка йде без розриву.
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 12; i++) {
     const item = document.createElement('span');
     item.className = 'tg-ticker__item';
     item.textContent = text;
