@@ -546,12 +546,23 @@
     }
     const ADD_ERROR = "Надбавка - два цілі числа «від» і «до» (від ≤ до), напр. 1 і 200, або обидва поля порожні.";
 
-    function nameCell(text, f) {
+    // Правило ціни словами, напр. «ціна з таблиці +1…+200 грн (випадково для кожного товару)».
+    function ruleText(f) {
+      const pct = f.percent ? ` ${pctLabel(f.percent)}` : "";
+      return hasAdd(f)
+        ? `Ціна: з таблиці${pct} ${signed(f.add_min)}…${signed(f.add_max)} грн (випадково для кожного товару)`
+        : `Ціна: основний фід ${pctLabel(f.percent)}`;
+    }
+
+    function nameCell(text, f, rule = "") {
       const cell = td("", text);
-      const counts = document.createElement("span");
-      counts.className = "counts";
-      counts.textContent = countsLabel(f);
-      cell.append(counts);
+      for (const [cls, t] of [["counts", rule], ["counts", countsLabel(f)]]) {
+        if (!t) continue;
+        const span = document.createElement("span");
+        span.className = cls;
+        span.textContent = t;
+        cell.append(span);
+      }
       return cell;
     }
 
@@ -576,6 +587,7 @@
         const addMin = document.createElement("input"), addMax = document.createElement("input");
         for (const [el, v] of [[addMin, f.add_min], [addMax, f.add_max]]) {
           el.className = "fadd";
+          el.placeholder = "—";
           el.inputMode = "numeric";
           el.value = v ?? "";
           el.addEventListener("input", () => changed());
@@ -619,7 +631,7 @@
             `Адмінка Prom: видалено фід ${f.file}`, `Фід «${f.name}» видалено.`);
         });
         const pctCell = td("", pct, " %");
-        const nameTd = nameCell("", f);
+        const nameTd = nameCell("", f, ruleText(f));
         nameTd.prepend(name);
         tr.append(nameTd, pctCell, td("", addMin, " … ", addMax), linkCell(f.file), td("", save, " ", del));
         tbody.append(tr);
