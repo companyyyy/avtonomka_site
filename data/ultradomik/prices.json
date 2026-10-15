@@ -41,7 +41,7 @@
   },
   "148300": {
     "price": 42960,
-    "in_stock": true,
+    "in_stock": false,
     "wholesale": 0
   },
   "150416": {
@@ -61,7 +61,7 @@
   },
   "150676": {
     "price": 40695,
-    "in_stock": true,
+    "in_stock": false,
     "wholesale": 0
   },
   "150825": {
