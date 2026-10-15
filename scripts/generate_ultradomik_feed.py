@@ -7,6 +7,8 @@ either +/- percent from the main feed price (invertorshop.xml - Інвертор
 +35%) or, when it has add_min/add_max, the table price (+/- percent) plus a
 fresh random add_min..add_max UAH per item (feed/enerhiia24.xml - Енергія24,
 +1..200 UAH).
+An extra feed with "base": "wholesale" is counted from the wholesale price
+instead (no 1-10 UAH bump; items without a wholesale price are left out).
 feed/opt.xml is the wholesale feed: the "wholesale" price set by hand in
 /prom-admin/ (prices.json, never touched by the site sync), as is; an item
 whose wholesale price is 0 or empty is left out of it.
@@ -82,7 +84,8 @@ def load_feeds():
             continue
         seen.add(fname)
         feeds.append(dict(file=fname, name=str(f.get('name') or fname), mult=1 + pct / 100,
-                          add=(int(lo), int(hi)) if ranged else None))
+                          add=(int(lo), int(hi)) if ranged else None,
+                          from_wholesale=f.get('base') == 'wholesale'))
     return feeds
 
 # Group ids are fixed so a group keeps its identity in the client's Prom
@@ -342,10 +345,16 @@ def main():
         fname, markup = feed['file'], feed['mult']
         body = []
         for base, bump, wholesale, text in items:
+            has_wholesale = is_num(wholesale) and wholesale > 0
             if feed.get('wholesale'):
-                if not (isinstance(wholesale, (int, float)) and wholesale > 0):
+                if not has_wholesale:
                     continue
                 value = wholesale
+            elif feed.get('from_wholesale'):
+                # Client feed built on the wholesale price: +/- % and its own range, no 1-10.
+                if not has_wholesale:
+                    continue
+                value = max(1, wholesale * markup + (random.randint(*feed['add']) if feed['add'] else 0))
             elif feed['add']:
                 # Random-range feed: table price (+/- %) plus its own random UAH,
                 # not the main feed's 1-10.
@@ -361,6 +370,7 @@ def main():
         (ROOT / fname).parent.mkdir(parents=True, exist_ok=True)
         (ROOT / fname).write_text(xml, encoding='utf-8')
         print(f'{fname} generated: {len(body)} items, markup x{markup:.2f}'
+              + (' from wholesale' if feed.get('from_wholesale') else '')
               + (f', +{feed["add"][0]}..{feed["add"][1]} UAH' if feed['add'] else ''))
 
     built = [f['file'] for f in feeds]

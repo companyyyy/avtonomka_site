@@ -10,7 +10,8 @@
        (data/ultradomik/feeds.json) будуються з тих самих цін: ± відсоток і/або
        випадкова надбавка в гривнях (діапазон). feed/opt.xml (гурт) - лише ручна
        гуртова ціна (prices.json -> wholesale, автооновлення її не чіпає); товар
-       з гуртовою ціною 0 у фід опту не йде. Читає й комітить data/ultradomik/prices.json
+       з гуртовою ціною 0 у фід опту не йде. Клієнтський фід з "base": "wholesale"
+       рахується від гуртової ціни, а не від роздрібної. Читає й комітить data/ultradomik/prices.json
        через GitHub API; після коміту GitHub Actions (prom-feed.yml) перебудовує
        обидва фіди й викладає їх на сервер. При кожному автооновленні сайту
        (update.yml) ціни й наявність перезаписуються цінами сайту
@@ -89,6 +90,8 @@
     .feeds input.fpct, .add-feed input.fpct { width: 80px; text-align: right; }
     .feeds input.fadd, .add-feed input.fadd { width: 70px; text-align: right; }
     .feeds .rule { display: block; color: var(--muted); font-size: 12px; font-weight: 400; }
+    .feeds select, .add-feed select { font: inherit; color: var(--text); background: var(--bg);
+      border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; }
     .feeds input, .add-feed input { font: inherit; color: var(--text); background: var(--bg);
       border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; }
     .feeds input.invalid, .add-feed input.invalid { outline: 2px solid var(--error); }
@@ -142,13 +145,17 @@
       <p class="sub">Кожен фід - ті самі товари, що в основному. Ціна: ± відсоток від ціни основного фіду, або (якщо задано надбавку) ціна з таблиці ± відсоток плюс випадкова сума з діапазону, своя для кожного товару й кожної генерації (напр. від 1 до 200 грн). Посилання на фід лишається тим самим, навіть якщо змінити назву чи ціни. Новий фід з'являється за посиланням приблизно за 1–2 хвилини.</p>
       <div class="table-wrap">
         <table class="feeds">
-          <thead><tr><th>Назва</th><th>Від основного, %</th><th>Випадкова надбавка, грн</th><th>Посилання</th><th></th></tr></thead>
+          <thead><tr><th>Назва</th><th>Основа</th><th>Від основи, %</th><th>Випадкова надбавка, грн</th><th>Посилання</th><th></th></tr></thead>
           <tbody id="feed-rows"></tbody>
         </table>
       </div>
       <div class="add-feed">
         <strong>Новий фід:</strong>
         <input class="fname" id="new-feed-name" placeholder="Назва, напр. СоларМаркет" maxlength="60" />
+        <select id="new-feed-base" title="Від якої ціни рахувати фід">
+          <option value="retail">від роздрібу</option>
+          <option value="wholesale">від опту</option>
+        </select>
         <input class="fpct" id="new-feed-pct" placeholder="+20" inputmode="decimal" />
         <span>%</span>
         <span>надбавка від</span>
@@ -390,7 +397,7 @@
       const price = p.edit.price;
       p.row.classList.toggle("changed", isChanged(p));
       p.row.classList.toggle("off", !price || !!p.item.problem);
-      feeds.forEach((f, i) => { p.markupCells[i].textContent = autoPrice(price, f); });
+      feeds.forEach((f, i) => { p.markupCells[i].textContent = autoPrice(isOpt(f) ? p.edit.wholesale : price, f); });
       const changed = [...products.values()].filter(isChanged);
       $("savebar").hidden = changed.length === 0;
       $("changed-count").textContent = `Змінено товарів: ${changed.length}`;
@@ -409,6 +416,8 @@
     const pctLabel = (n) => (n > 0 ? "+" : n < 0 ? "−" : "") + fmt(Math.abs(n)) + "%";
     const signed = (n) => (n > 0 ? "+" : n < 0 ? "−" : "") + fmt(Math.abs(n));
     const hasAdd = (f) => f.add_min != null && f.add_max != null;
+    const isOpt = (f) => f.base === "wholesale";
+    const BASES = [["retail", "Роздріб"], ["wholesale", "Опт"]];
     // "+35%", "+1…+200 грн", "+10% +1…+200 грн"
     function ruleLabel(f) {
       const add = hasAdd(f) ? `${signed(f.add_min)}…${signed(f.add_max)} грн` : "";
@@ -486,6 +495,9 @@
       maxEl.classList.toggle("invalid", bad);
       return bad ? null : { min, max };
     }
+    function setBase(feed, base) {
+      if (base === "wholesale") feed.base = "wholesale"; else delete feed.base;
+    }
     function setAdd(feed, add) {
       if (add.min === null) { delete feed.add_min; delete feed.add_max; }
       else { feed.add_min = add.min; feed.add_max = add.max; }
@@ -495,9 +507,10 @@
     // Правило ціни словами, напр. «ціна з таблиці +1…+200 грн (випадково для кожного товару)».
     function ruleText(f) {
       const pct = f.percent ? ` ${pctLabel(f.percent)}` : "";
+      const from = isOpt(f) ? "ціна гурт" : hasAdd(f) ? "ціна роздріб" : "основний фід";
       return hasAdd(f)
-        ? `Ціна: з таблиці${pct} ${signed(f.add_min)}…${signed(f.add_max)} грн (випадково для кожного товару)`
-        : `Ціна: основний фід ${pctLabel(f.percent)}`;
+        ? `Ціна: ${from}${pct} ${signed(f.add_min)}…${signed(f.add_max)} грн (випадково для кожного товару)`
+        : `Ціна: ${from} ${pctLabel(f.percent)}`;
     }
 
     function nameCell(input, f) {
@@ -512,11 +525,11 @@
       tbody.textContent = "";
       const main = document.createElement("tr");
       main.className = "main-feed";
-      main.append(td("", MAIN_FEED.name), td("", "0% (ціни з таблиці нижче)"), td("", "1–10 грн"), linkCell(MAIN_FEED.file), td(""));
+      main.append(td("", MAIN_FEED.name), td("", "Роздріб"), td("", "0% (ціни з таблиці нижче)"), td("", "1–10 грн"), linkCell(MAIN_FEED.file), td(""));
       tbody.append(main);
       const opt = document.createElement("tr");
       opt.className = "main-feed";
-      opt.append(td("", OPT_FEED.name), td("", "ціни вручну (колонка «Ціна гурт»)"), td("", "-"), linkCell(OPT_FEED.file), td(""));
+      opt.append(td("", OPT_FEED.name), td("", "Опт"), td("", "ціни вручну (колонка «Ціна гурт»)"), td("", "-"), linkCell(OPT_FEED.file), td(""));
       tbody.append(opt);
 
       for (const f of feeds) {
@@ -543,12 +556,15 @@
         save.hidden = true;
         const del = document.createElement("button");
         del.textContent = "Видалити";
+        const base = document.createElement("select");
+        for (const [v, label] of BASES) base.append(new Option(label, v, false, (f.base || "retail") === v));
+        base.addEventListener("change", () => changed());
         const changed = () => {
           const v = parsePct(pct.value);
           pct.classList.toggle("invalid", Number.isNaN(v));
           name.classList.toggle("invalid", !name.value.trim());
           const add = readAdd(addMin, addMax);
-          save.hidden = name.value.trim() === f.name && v === f.percent
+          save.hidden = name.value.trim() === f.name && v === f.percent && base.value === (f.base || "retail")
             && add && add.min === (f.add_min ?? null) && add.max === (f.add_max ?? null);
         };
         name.addEventListener("input", changed);
@@ -561,12 +577,13 @@
             return;
           }
           if (!add) { setStatus(ADD_ERROR, "error"); return; }
-          const rule = ruleLabel({ percent: v, add_min: add.min, add_max: add.max });
+          const rule = (base.value === "wholesale" ? "від опту " : "") + ruleLabel({ percent: v, add_min: add.min, add_max: add.max });
           saveFeeds((list) => {
             const it = list.find((x) => x.file === f.file);
             if (!it) throw new Error("Цей фід щойно видалив хтось інший. Оновіть сторінку.");
             it.name = name.value.trim();
             it.percent = v;
+            setBase(it, base.value);
             setAdd(it, add);
           }, `Адмінка Prom: фід ${f.file} (${rule})`, `Фід «${name.value.trim()}» збережено: ${rule}. Ціни у фіді оновляться за 1–2 хвилини.`);
         });
@@ -576,7 +593,7 @@
             `Адмінка Prom: видалено фід ${f.file}`, `Фід «${f.name}» видалено.`);
         });
         const pctCell = td("", pct, " %");
-        tr.append(nameCell(name, f), pctCell, td("", addMin, " … ", addMax), linkCell(f.file), td("", save, " ", del));
+        tr.append(nameCell(name, f), td("", base), pctCell, td("", addMin, " … ", addMax), linkCell(f.file), td("", save, " ", del));
         tbody.append(tr);
       }
 
@@ -597,7 +614,7 @@
     function renderHead() {
       const head = $("thead");
       const groups = feeds.map((f) => `<th class="group">${escHtml(f.name)} · ${escHtml(f.file)}</th>`).join("");
-      const cols = feeds.map((f) => `<th class="sep r">Ціна, грн (${escHtml(ruleLabel(f))})</th>`).join("");
+      const cols = feeds.map((f) => `<th class="sep r">Ціна, грн (${isOpt(f) ? "опт " : ""}${escHtml(ruleLabel(f))})</th>`).join("");
       head.innerHTML = `
         <tr><th colspan="3"></th><th class="group">prom_file.xml</th><th class="group">feed/opt.xml</th><th class="group">Усі фіди</th>${groups}</tr>
         <tr><th>ID</th><th></th><th>Товар</th><th class="sep">Ціна роздріб, грн</th><th class="sep">Ціна гурт, грн</th><th class="sep c">В наявності</th>${cols}</tr>`;
@@ -643,18 +660,24 @@
         return;
       }
       if (!add) { setStatus(ADD_ERROR, "error"); return; }
-      const rule = ruleLabel({ percent: pct, add_min: add.min, add_max: add.max });
+      const baseVal = $("new-feed-base").value;
+      const rule = (baseVal === "wholesale" ? "від опту " : "") + ruleLabel({ percent: pct, add_min: add.min, add_max: add.max });
       if (products.size && [...products.values()].some(isChanged)
           && !confirm("У таблиці цін є незбережені зміни - після створення фіду сторінка оновиться і вони зникнуть. Продовжити?")) return;
       saveFeeds((list) => {
         const file = fileFor(name, new Set(list.map((f) => f.file)));
         const feed = { file, name, percent: pct };
+        setBase(feed, baseVal);
         setAdd(feed, add);
         list.push(feed);
         return list;
       }, `Адмінка Prom: новий фід «${name}» (${rule})`,
          `Фід «${name}» створено (${rule}). Посилання запрацює приблизно за 1–2 хвилини.`)
-        .then((ok) => { if (ok) for (const el of [nameEl, pctEl, minEl, maxEl]) el.value = ""; });
+        .then((ok) => {
+          if (!ok) return;
+          for (const el of [nameEl, pctEl, minEl, maxEl]) el.value = "";
+          $("new-feed-base").value = "retail";
+        });
     });
 
     function renderCats() {
