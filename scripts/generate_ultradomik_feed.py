@@ -9,9 +9,10 @@ fresh random add_min..add_max UAH per item (feed/enerhiia24.xml - Енергія
 +1..200 UAH).
 An extra feed with "base": "wholesale" is counted from the wholesale price
 instead (no 1-10 UAH bump; items without a wholesale price are left out).
-feed/opt.xml is the wholesale feed: the "wholesale" price set by hand in
-/prom-admin/ (prices.json, never touched by the site sync), as is; an item
-whose wholesale price is 0 or empty is left out of it.
+feed/opt.xml is the wholesale feed: the wholesale price is set by hand in
+/prom-admin/ in US dollars (prices.json -> wholesale_usd, never touched by the
+site sync) and turned into UAH at the rate set there (feeds.json -> usd_rate,
+45 by default); an item whose wholesale price is 0 or empty is left out of it.
 
 Prices (UAH) and stock come from data/ultradomik/prices.json, keyed by item
 id. The scheduled site update fills it with site prices
@@ -66,6 +67,15 @@ RESERVED_FILES = {MAIN_FEED, OPT_FEED, 'prom.xml', 'feed.xml', 'sitemap.xml', 'f
 
 
 ADD_LIMIT = 100000  # UAH, bound for add_min/add_max
+USD_RATE_DEFAULT = 45  # UAH per $1 for wholesale prices, until set in /prom-admin/
+
+
+def usd_rate():
+    try:
+        rate = json.loads(FEEDS_CONFIG.read_text('utf-8')).get('usd_rate')
+    except FileNotFoundError:
+        rate = None
+    return rate if isinstance(rate, (int, float)) and 1 <= rate <= 1000 else USD_RATE_DEFAULT
 
 
 def is_num(v):
@@ -411,6 +421,7 @@ def main():
 
     report = {'no_data': [], 'no_price': [], 'no_photo': [], 'rejected_photos': []}
     items, used_cats, admin_items = [], set(), []
+    rate = usd_rate()
     known = {pid for e in entries for pid in e['ids']}
     auto = auto_entries(products, known)
     if auto:
@@ -507,7 +518,9 @@ def main():
                 f'      <keywords_ua>{esc(cap_keywords(e["kw_ua"]))}</keywords_ua>',
                 '    </item>',
             ]
-            items.append((price_uah, random.randint(*RANDOM_ADD_UAH), price.get('wholesale'), '\n'.join(lines)))
+            usd = price.get('wholesale_usd')
+            wholesale = round(usd * rate, 2) if is_num(usd) and usd > 0 else 0
+            items.append((price_uah, random.randint(*RANDOM_ADD_UAH), wholesale, '\n'.join(lines)))
 
     catalog = '\n'.join(f'    <category id="{cid}" portal_id="{CATEGORIES[cid][1]}">{esc(CATEGORIES[cid][0])}</category>'
                         for cid in sorted(used_cats))

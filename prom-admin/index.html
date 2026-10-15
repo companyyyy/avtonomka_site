@@ -9,8 +9,9 @@
   <!-- Ціни й наявність товарів фіду prom_file.xml (роздрібні ціни). Додаткові фіди
        (data/ultradomik/feeds.json) будуються з тих самих цін: ± відсоток і/або
        випадкова надбавка в гривнях (діапазон). feed/opt.xml (гурт) - лише ручна
-       гуртова ціна (prices.json -> wholesale, автооновлення її не чіпає); товар
-       з гуртовою ціною 0 у фід опту не йде. Клієнтський фід з "base": "wholesale"
+       гуртова ціна в доларах (prices.json -> wholesale_usd, автооновлення її не
+       чіпає) × курс (feeds.json -> usd_rate); товар з гуртовою ціною 0 у фід
+       опту не йде. Клієнтський фід з "base": "wholesale"
        рахується від гуртової ціни, а не від роздрібної. Читає й комітить data/ultradomik/prices.json
        через GitHub API; після коміту GitHub Actions (prom-feed.yml) перебудовує
        обидва фіди й викладає їх на сервер. При кожному автооновленні сайту
@@ -79,6 +80,12 @@
     .status.error { color: var(--error); }
     .status.ok { color: var(--ok); }
     .hint { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
+    .rate-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 12px; }
+    .rate-bar input { width: 90px; text-align: right; font-variant-numeric: tabular-nums;
+      font: inherit; color: var(--text); background: var(--bg);
+      border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; }
+    .rate-bar input.invalid { outline: 2px solid var(--error); }
+    td .uah { display: block; color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
     .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
       padding: 14px 16px; margin: 0 0 16px; }
     .card h2 { font-size: 16px; margin: 0 0 4px; }
@@ -169,8 +176,16 @@
       <ul class="other-feeds" id="other-feeds"></ul>
     </section>
 
+    <div class="card rate-bar" id="rate-bar" hidden>
+      <strong>Курс $ для гурту:</strong>
+      <input id="usd-rate" inputmode="decimal" autocomplete="off" />
+      <span>грн за $1</span>
+      <button class="primary" id="rate-save" hidden>Зберегти курс</button>
+      <span class="hint" style="margin:0">«Ціна гурт» вписується в доларах; у фід опту і фіди від опту йде ціна × цей курс.</span>
+    </div>
+
     <p class="hint" id="hint" hidden>Ціни й наявність підтягуються з сайту при кожному автооновленні (≈11:10, 15:10, 19:10 Київ). Ручна зміна тут діє одразу, але до наступного автооновлення - потім її перезапише сайт. Товарів, яких немає на сайті, автооновлення не чіпає. У prom_file.xml і фіди з відсотком до кожної ціни додається випадкові 1-10 грн (у таблиці ціни відсоткових фідів - без них); фід з надбавкою отримує свою випадкову суму з діапазону. Товар без ціни у фід не потрапляє.<br>
-      «Ціна гурт» - лише вручну, автооновлення її не змінює; іде у фід опту feed/opt.xml точно такою. Товар з гуртовою ціною 0 у фід опту не потрапляє. «В наявності» діє на всі фіди одразу.</p>
+      «Ціна гурт» - у доларах, лише вручну, автооновлення її не змінює; у фід опту feed/opt.xml іде ціна × курс $. Товар з гуртовою ціною 0 у фід опту не потрапляє. «В наявності» діє на всі фіди одразу.</p>
 
     <div class="table-wrap" id="table-wrap" hidden>
       <table>
@@ -210,7 +225,11 @@
       ["feed.xml", "Google Merchant"],
       ["feed/bezpeka.xml", "Bezpeka.club"],
     ];
-    let feeds = []; // [{ file, name, percent, add_min?, add_max? }]
+    let feeds = []; // [{ file, name, percent, add_min?, add_max?, base? }]
+    // Курс $ для гуртових цін (feeds.json -> usd_rate), як USD_RATE_DEFAULT у генераторі.
+    const USD_RATE_DEFAULT = 45;
+    let usdRate = USD_RATE_DEFAULT;
+    const toUah = (usd) => (usd > 0 ? Math.round(usd * usdRate * 100) / 100 : 0);
     // Як CATEGORIES у scripts/generate_ultradomik_feed.py
     const CATEGORIES = {
       1: "Інвертори", 2: "Акумулятори", 3: "Системи 2 в 1", 4: "Кабелі", 5: "Зарядні станції",
@@ -270,6 +289,10 @@
       $("table-wrap").hidden = true;
       const [items, prices, feedsFile] = await Promise.all([readJson(ITEMS), readJson(PRICES), readFeeds()]);
       feeds = feedsFile.data.feeds || [];
+      usdRate = validRate(feedsFile.data.usd_rate) ? feedsFile.data.usd_rate : USD_RATE_DEFAULT;
+      $("usd-rate").value = String(usdRate).replace(".", ",");
+      $("rate-save").hidden = true;
+      $("rate-bar").hidden = false;
       renderFeeds();
       renderHead();
       products = new Map();
@@ -287,7 +310,7 @@
     }
 
     function pickEditable(d = {}) {
-      return { price: d.price ?? null, wholesale: d.wholesale ?? 0, in_stock: d.in_stock ?? false };
+      return { price: d.price ?? null, wholesale_usd: d.wholesale_usd ?? 0, in_stock: d.in_stock ?? false };
     }
 
     function isChanged(p) {
@@ -303,9 +326,19 @@
       return n > 0 ? n : NaN;
     }
     // Гуртова ціна: порожньо або 0 -> 0 (товар не йде у фід опту).
-    function parseWholesale(text) {
-      const v = parsePrice(text.replace(/^\s*0+([.,]0*)?\s*$/, ""));
-      return v === null ? 0 : v;
+    // Гуртова ціна в $: "1250" / "1 250,50" -> число (до центів); порожньо або 0 -> 0.
+    function parseUsd(text) {
+      const t = text.replace(/[\s $]/g, "").replace(",", ".");
+      if (t === "") return 0;
+      if (!/^\d+(\.\d+)?$/.test(t)) return NaN;
+      return Math.round(parseFloat(t) * 100) / 100;
+    }
+    const validRate = (n) => typeof n === "number" && n >= 1 && n <= 1000;
+    function parseRate(text) {
+      const t = text.replace(/\s/g, "").replace(",", ".");
+      if (!/^\d+(\.\d+)?$/.test(t)) return NaN;
+      const n = Math.round(parseFloat(t) * 100) / 100;
+      return validRate(n) ? n : NaN;
     }
 
     const fmt = (n) => n.toLocaleString("uk-UA", { maximumFractionDigits: 2 });
@@ -341,6 +374,14 @@
         refreshRow(p);
       });
       return input;
+    }
+
+    // Під гуртовою ціною в $ - скільки це в гривнях за поточним курсом.
+    function uahHint(p) {
+      const span = document.createElement("span");
+      span.className = "uah";
+      p.uahEl = span;
+      return span;
     }
 
     function td(className, ...children) {
@@ -384,7 +425,7 @@
           td("img", img),
           td("name", name, cat),
           td("sep", priceInput(p)),
-          td("sep", priceInput(p, "wholesale", parseWholesale)),
+          td("sep", priceInput(p, "wholesale_usd", parseUsd), uahHint(p)),
           td("sep c", checkbox(p)),
           ...p.markupCells,
         );
@@ -398,7 +439,9 @@
       const price = p.edit.price;
       p.row.classList.toggle("changed", isChanged(p));
       p.row.classList.toggle("off", !price || !!p.item.problem);
-      feeds.forEach((f, i) => { p.markupCells[i].textContent = autoPrice(isOpt(f) ? p.edit.wholesale : price, f); });
+      const usd = p.edit.wholesale_usd;
+      p.uahEl.textContent = usd > 0 ? `≈ ${fmt(toUah(usd))} грн` : "у фід опту не йде";
+      feeds.forEach((f, i) => { p.markupCells[i].textContent = autoPrice(isOpt(f) ? toUah(usd) : price, f); });
       const changed = [...products.values()].filter(isChanged);
       $("savebar").hidden = changed.length === 0;
       $("changed-count").textContent = `Змінено товарів: ${changed.length}`;
@@ -618,7 +661,7 @@
       const cols = feeds.map((f) => `<th class="sep r">Ціна, грн (${isOpt(f) ? "опт " : ""}${escHtml(ruleLabel(f))})</th>`).join("");
       head.innerHTML = `
         <tr><th colspan="3"></th><th class="group">prom_file.xml</th><th class="group">feed/opt.xml</th><th class="group">Усі фіди</th>${groups}</tr>
-        <tr><th>ID</th><th></th><th>Товар</th><th class="sep">Ціна роздріб, грн</th><th class="sep">Ціна гурт, грн</th><th class="sep c">В наявності</th>${cols}</tr>`;
+        <tr><th>ID</th><th></th><th>Товар</th><th class="sep">Ціна роздріб, грн</th><th class="sep">Ціна гурт, $</th><th class="sep c">В наявності</th>${cols}</tr>`;
     }
 
     const escHtml = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -629,10 +672,11 @@
       try {
         const current = await readFeeds();
         const list = (current.data.feeds || []).map((f) => ({ ...f }));
-        const next = mutate(list) || list;
+        const data = { ...current.data };
+        const next = mutate(list, data) || list;
         const body = {
           message,
-          content: b64encode(JSON.stringify({ ...current.data, feeds: next }, null, 2) + "\n"),
+          content: b64encode(JSON.stringify({ ...data, feeds: next }, null, 2) + "\n"),
           branch: BRANCH,
         };
         if (current.sha) body.sha = current.sha;
@@ -679,6 +723,25 @@
           for (const el of [nameEl, pctEl, minEl, maxEl]) el.value = "";
           $("new-feed-base").value = "retail";
         });
+    });
+
+    $("usd-rate").addEventListener("input", () => {
+      const v = parseRate($("usd-rate").value);
+      $("usd-rate").classList.toggle("invalid", Number.isNaN(v));
+      $("rate-save").hidden = v === usdRate;
+    });
+    $("usd-rate").addEventListener("keydown", (e) => { if (e.key === "Enter") $("rate-save").click(); });
+    $("rate-save").addEventListener("click", () => {
+      const v = parseRate($("usd-rate").value);
+      if (Number.isNaN(v)) {
+        setStatus("Курс - число від 1 до 1000, напр. 41,5.", "error");
+        return;
+      }
+      if ([...products.values()].some(isChanged)
+          && !confirm("У таблиці цін є незбережені зміни - після збереження курсу сторінка оновиться і вони зникнуть. Продовжити?")) return;
+      saveFeeds((list, data) => { data.usd_rate = v; return list; },
+        `Адмінка Prom: курс $ для гурту ${v}`,
+        `Курс збережено: ${fmt(v)} грн за $1. Фід опту й фіди від опту оновляться за 1–2 хвилини.`);
     });
 
     function renderCats() {
@@ -736,7 +799,7 @@
 
     async function save() {
       const changed = [...products.values()].filter(isChanged);
-      if (changed.some((p) => Number.isNaN(p.edit.price) || Number.isNaN(p.edit.wholesale))) {
+      if (changed.some((p) => Number.isNaN(p.edit.price) || Number.isNaN(p.edit.wholesale_usd))) {
         setStatus("Виправте ціни, підсвічені червоним: лише число більше нуля або порожньо.", "error");
         return;
       }
