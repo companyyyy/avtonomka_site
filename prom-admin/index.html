@@ -8,9 +8,7 @@
   <link rel="icon" href="/assets/images/logo.jpg" type="image/jpeg">
   <!-- Ціни й наявність товарів фіду prom_file.xml (роздрібні ціни). Додаткові фіди
        (data/ultradomik/feeds.json) будуються з тих самих цін: ± відсоток і/або
-       випадкова надбавка в гривнях (діапазон). Для кожного фіду окремо можна задати
-       ручну ціну товару або прибрати товар - до наступного автооновлення
-       ("prices"/"hidden" у feeds.json) чи назавжди ("excluded"). Читає й комітить data/ultradomik/prices.json
+       випадкова надбавка в гривнях (діапазон). Читає й комітить data/ultradomik/prices.json
        через GitHub API; після коміту GitHub Actions (prom-feed.yml) перебудовує
        обидва фіди й викладає їх на сервер. При кожному автооновленні сайту
        (update.yml) ціни й наявність перезаписуються цінами сайту
@@ -88,14 +86,7 @@
     .feeds input.fname { width: 180px; }
     .feeds input.fpct, .add-feed input.fpct { width: 80px; text-align: right; }
     .feeds input.fadd, .add-feed input.fadd { width: 70px; text-align: right; }
-    .feeds .counts { display: block; color: var(--muted); font-size: 12px; font-weight: 400; }
-    td.feed { white-space: nowrap; }
-    td.feed .auto { display: block; color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
-    td.feed select { font: inherit; font-size: 13px; color: var(--text); background: var(--bg);
-      border: 1px solid var(--border); border-radius: 6px; padding: 4px 4px; margin-top: 4px; display: block; }
-    td.feed.out input.price, td.feed.out .auto { opacity: .4; }
-    td.feed.out select { color: var(--error); }
-    td.feed.manual input.price { font-weight: 600; }
+    .feeds .rule { display: block; color: var(--muted); font-size: 12px; font-weight: 400; }
     .feeds input, .add-feed input { font: inherit; color: var(--text); background: var(--bg);
       border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; }
     .feeds input.invalid, .add-feed input.invalid { outline: 2px solid var(--error); }
@@ -146,7 +137,7 @@
     <p class="status" id="status"></p>
     <section class="card" id="feeds-card" hidden>
       <h2>Фіди</h2>
-      <p class="sub">Кожен фід - ті самі товари, що в основному. Ціна: ± відсоток від ціни основного фіду, або (якщо задано надбавку) ціна з таблиці ± відсоток плюс випадкова сума з діапазону, своя для кожного товару й кожної генерації (напр. від 1 до 200 грн). Ручні ціни й прибрані товари кожного фіду - у таблиці нижче. Посилання на фід лишається тим самим, навіть якщо змінити назву чи ціни. Новий фід з'являється за посиланням приблизно за 1–2 хвилини.</p>
+      <p class="sub">Кожен фід - ті самі товари, що в основному. Ціна: ± відсоток від ціни основного фіду, або (якщо задано надбавку) ціна з таблиці ± відсоток плюс випадкова сума з діапазону, своя для кожного товару й кожної генерації (напр. від 1 до 200 грн). Посилання на фід лишається тим самим, навіть якщо змінити назву чи ціни. Новий фід з'являється за посиланням приблизно за 1–2 хвилини.</p>
       <div class="table-wrap">
         <table class="feeds">
           <thead><tr><th>Назва</th><th>Від основного, %</th><th>Випадкова надбавка, грн</th><th>Посилання</th><th></th></tr></thead>
@@ -169,8 +160,7 @@
       <ul class="other-feeds" id="other-feeds"></ul>
     </section>
 
-    <p class="hint" id="hint" hidden>Ціни й наявність підтягуються з сайту при кожному автооновленні (≈11:10, 15:10, 19:10 Київ). Ручна зміна тут діє одразу, але до наступного автооновлення - потім її перезапише сайт. Товарів, яких немає на сайті, автооновлення не чіпає. У prom_file.xml і фіди з відсотком до кожної ціни додається випадкові 1-10 грн (у таблиці ціни відсоткових фідів - без них); фід з надбавкою отримує свою випадкову суму з діапазону. Товар без ціни у фід не потрапляє.<br>
-      Окремий фід: впишіть у його колонку ручну ціну (піде у фід точно такою, без надбавок) або виберіть «прибрати до оновлення» / «прибрати назавжди». Ручні ціни й «до оновлення» скидаються при наступному автооновленні сайту, «назавжди» - лише вручну (поверніть «у фіді»).</p>
+    <p class="hint" id="hint" hidden>Ціни й наявність підтягуються з сайту при кожному автооновленні (≈11:10, 15:10, 19:10 Київ). Ручна зміна тут діє одразу, але до наступного автооновлення - потім її перезапише сайт. Товарів, яких немає на сайті, автооновлення не чіпає. У prom_file.xml і фіди з відсотком до кожної ціни додається випадкові 1-10 грн (у таблиці ціни відсоткових фідів - без них); фід з надбавкою отримує свою випадкову суму з діапазону. Товар без ціни у фід не потрапляє.</p>
 
     <div class="table-wrap" id="table-wrap" hidden>
       <table>
@@ -209,12 +199,7 @@
       ["feed.xml", "Google Merchant"],
       ["feed/bezpeka.xml", "Bezpeka.club"],
     ];
-    let feeds = []; // [{ file, name, percent, add_min?, add_max?, prices?, hidden?, excluded? }]
-    let mainCfg = {}; // feeds.json -> main: { prices?, hidden?, excluded? } для prom_file.xml
-    const MAIN_KEY = MAIN_FEED.file;
-    // Колонки "у фіді" в таблиці товарів: основний (лише прибрати) і додаткові.
-    const feedKeys = () => [MAIN_KEY, ...feeds.map((f) => f.file)];
-    const feedCfg = (key) => (key === MAIN_KEY ? mainCfg : feeds.find((f) => f.file === key));
+    let feeds = []; // [{ file, name, percent, add_min?, add_max? }]
     // Як CATEGORIES у scripts/generate_ultradomik_feed.py
     const CATEGORIES = {
       1: "Інвертори", 2: "Акумулятори", 3: "Системи 2 в 1", 4: "Кабелі", 5: "Зарядні станції",
@@ -223,8 +208,7 @@
 
     const $ = (id) => document.getElementById(id);
     let token = null;
-    // id -> { item (з feed_items.json), orig, edit: { price, in_stock },
-    //        fOrig, fEdit: { <файл фіду>: { price: ручна|null, state: "on"|"temp"|"perm" } } }
+    // id -> { item (з feed_items.json), orig, edit: { price, in_stock } }
     let products = new Map();
     let filterCat = 0;
 
@@ -274,7 +258,6 @@
       $("table-wrap").hidden = true;
       const [items, prices, feedsFile] = await Promise.all([readJson(ITEMS), readJson(PRICES), readFeeds()]);
       feeds = feedsFile.data.feeds || [];
-      mainCfg = feedsFile.data.main || {};
       renderFeeds();
       renderHead();
       products = new Map();
@@ -283,8 +266,7 @@
         .sort((a, b) => a.cat - b.cat)
         .forEach((item) => {
           const orig = pickEditable(prices.data[item.id]);
-          const fOrig = Object.fromEntries(feedKeys().map((k) => [k, feedItemState(feedCfg(k), item.id)]));
-          products.set(item.id, { item, orig, edit: { ...orig }, fOrig, fEdit: cloneFeedState(fOrig) });
+          products.set(item.id, { item, orig, edit: { ...orig } });
         });
       render();
       $("table-wrap").hidden = false;
@@ -296,18 +278,9 @@
       return { price: d.price ?? null, in_stock: d.in_stock ?? false };
     }
 
-    function feedItemState(f = {}, id) {
-      return {
-        price: f.prices?.[id] ?? null,
-        state: (f.excluded || []).includes(id) ? "perm" : (f.hidden || []).includes(id) ? "temp" : "on",
-      };
+    function isChanged(p) {
+      return Object.keys(p.orig).some((k) => p.orig[k] !== p.edit[k]);
     }
-    const cloneFeedState = (fs) => Object.fromEntries(Object.entries(fs).map(([k, v]) => [k, { ...v }]));
-    const sameFeedState = (a, b) => a.price === b.price && a.state === b.state;
-
-    const isPriceChanged = (p) => Object.keys(p.orig).some((k) => p.orig[k] !== p.edit[k]);
-    const changedFeeds = (p) => Object.keys(p.fEdit).filter((k) => !sameFeedState(p.fOrig[k], p.fEdit[k]));
-    const isChanged = (p) => isPriceChanged(p) || changedFeeds(p).length > 0;
 
     // "12 500" / "12500,00" -> 12500; порожньо -> null; помилка -> NaN
     function parsePrice(text) {
@@ -320,15 +293,15 @@
 
     const fmt = (n) => n.toLocaleString("uk-UA", { maximumFractionDigits: 2 });
 
-    function priceInput(p, target = p.edit) {
+    function priceInput(p) {
       const input = document.createElement("input");
       input.className = "price";
       input.inputMode = "numeric";
-      input.value = target.price ?? "";
+      input.value = p.edit.price ?? "";
       input.addEventListener("input", () => {
         const v = parsePrice(input.value);
         input.classList.toggle("invalid", Number.isNaN(v));
-        target.price = v;
+        p.edit.price = v;
         refreshRow(p);
       });
       // Enter - до ціни в наступному рядку (Shift+Enter - у попередньому).
@@ -351,28 +324,6 @@
         refreshRow(p);
       });
       return input;
-    }
-
-    // Колонка одного фіду: ручна ціна (крім основного - там ціна в першій колонці)
-    // і чи йде товар у цей фід.
-    function feedCell(p, key) {
-      const fe = p.fEdit[key];
-      const cell = td("sep feed");
-      if (key !== MAIN_KEY) {
-        const input = priceInput(p, fe);
-        input.placeholder = "авто";
-        input.title = "Ручна ціна в цьому фіді (до наступного автооновлення). Порожньо - автоматична.";
-        const auto = document.createElement("span");
-        auto.className = "auto";
-        cell.append(input, auto);
-      }
-      const sel = document.createElement("select");
-      for (const [v, label] of [["on", "у фіді"], ["temp", "прибрати до оновлення"], ["perm", "прибрати назавжди"]]) {
-        sel.append(new Option(label, v, false, fe.state === v));
-      }
-      sel.addEventListener("change", () => { fe.state = sel.value; refreshRow(p); });
-      cell.append(sel);
-      return cell;
     }
 
     function td(className, ...children) {
@@ -410,14 +361,14 @@
           cat.append(problem);
         }
 
-        p.feedCells = Object.fromEntries(feedKeys().map((k) => [k, feedCell(p, k)]));
+        p.markupCells = feeds.map(() => td("sep r markup"));
         tr.append(
           td("id", String(d.id)),
           td("img", img),
           td("name", name, cat),
           td("sep", priceInput(p)),
           td("c", checkbox(p)),
-          ...Object.values(p.feedCells),
+          ...p.markupCells,
         );
         tbody.append(tr);
         refreshRow(p);
@@ -429,14 +380,7 @@
       const price = p.edit.price;
       p.row.classList.toggle("changed", isChanged(p));
       p.row.classList.toggle("off", !price || !!p.item.problem);
-      for (const [key, cell] of Object.entries(p.feedCells)) {
-        const fe = p.fEdit[key];
-        cell.classList.toggle("out", fe.state !== "on");
-        cell.classList.toggle("manual", fe.price > 0);
-        const auto = cell.querySelector(".auto");
-        const f = feedCfg(key);
-        if (auto && f) auto.textContent = fe.price > 0 ? "ручна" : autoPrice(price, f);
-      }
+      feeds.forEach((f, i) => { p.markupCells[i].textContent = autoPrice(price, f); });
       const changed = [...products.values()].filter(isChanged);
       $("savebar").hidden = changed.length === 0;
       $("changed-count").textContent = `Змінено товарів: ${changed.length}`;
@@ -467,15 +411,7 @@
       const r = (n) => fmt(Math.max(1, Math.round(n * 100) / 100));
       return hasAdd(f) ? `${r(base + f.add_min)}–${r(base + f.add_max)}` : r(base);
     }
-    // Скільки в фіді ручних цін і прибраних товарів.
-    function countsLabel(f) {
-      const parts = [];
-      const n = (k) => (k === "prices" ? Object.keys(f.prices || {}) : f[k] || []).length;
-      if (n("prices")) parts.push(`ручних цін: ${n("prices")}`);
-      if (n("hidden")) parts.push(`прибрано до оновлення: ${n("hidden")}`);
-      if (n("excluded")) parts.push(`прибрано назавжди: ${n("excluded")}`);
-      return parts.join(" · ");
-    }
+
     const feedUrl = (file) => `${SITE}/${file}`;
 
     // "+20" / "-5,5" / "35" -> число; помилка -> NaN
@@ -554,16 +490,11 @@
         : `Ціна: основний фід ${pctLabel(f.percent)}`;
     }
 
-    function nameCell(text, f, rule = "") {
-      const cell = td("", text);
-      for (const [cls, t] of [["counts", rule], ["counts", countsLabel(f)]]) {
-        if (!t) continue;
-        const span = document.createElement("span");
-        span.className = cls;
-        span.textContent = t;
-        cell.append(span);
-      }
-      return cell;
+    function nameCell(input, f) {
+      const rule = document.createElement("span");
+      rule.className = "rule";
+      rule.textContent = ruleText(f);
+      return td("", input, rule);
     }
 
     function renderFeeds() {
@@ -571,7 +502,7 @@
       tbody.textContent = "";
       const main = document.createElement("tr");
       main.className = "main-feed";
-      main.append(nameCell(MAIN_FEED.name, mainCfg), td("", "0% (ціни з таблиці нижче)"), td("", "1–10 грн"), linkCell(MAIN_FEED.file), td(""));
+      main.append(td("", MAIN_FEED.name), td("", "0% (ціни з таблиці нижче)"), td("", "1–10 грн"), linkCell(MAIN_FEED.file), td(""));
       tbody.append(main);
 
       for (const f of feeds) {
@@ -631,9 +562,7 @@
             `Адмінка Prom: видалено фід ${f.file}`, `Фід «${f.name}» видалено.`);
         });
         const pctCell = td("", pct, " %");
-        const nameTd = nameCell("", f, ruleText(f));
-        nameTd.prepend(name);
-        tr.append(nameTd, pctCell, td("", addMin, " … ", addMax), linkCell(f.file), td("", save, " ", del));
+        tr.append(nameCell(name, f), pctCell, td("", addMin, " … ", addMax), linkCell(f.file), td("", save, " ", del));
         tbody.append(tr);
       }
 
@@ -654,10 +583,10 @@
     function renderHead() {
       const head = $("thead");
       const groups = feeds.map((f) => `<th class="group">${escHtml(f.name)} · ${escHtml(f.file)}</th>`).join("");
-      const cols = feeds.map((f) => `<th class="sep">Ціна, грн (${escHtml(ruleLabel(f))})</th>`).join("");
+      const cols = feeds.map((f) => `<th class="sep r">Ціна, грн (${escHtml(ruleLabel(f))})</th>`).join("");
       head.innerHTML = `
-        <tr><th colspan="3"></th><th class="group" colspan="3">Роздрібні ціни · prom_file.xml</th>${groups}</tr>
-        <tr><th>ID</th><th></th><th>Товар</th><th class="sep">Ціна, грн</th><th class="c">В наявності</th><th class="sep">У фіді</th>${cols}</tr>`;
+        <tr><th colspan="3"></th><th class="group" colspan="2">Роздрібні ціни · prom_file.xml</th>${groups}</tr>
+        <tr><th>ID</th><th></th><th>Товар</th><th class="sep">Ціна, грн</th><th class="c">В наявності</th>${cols}</tr>`;
     }
 
     const escHtml = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -769,17 +698,14 @@
 
     async function save() {
       const changed = [...products.values()].filter(isChanged);
-      if (changed.some((p) => Number.isNaN(p.edit.price) || Object.values(p.fEdit).some((fe) => Number.isNaN(fe.price)))) {
+      if (changed.some((p) => Number.isNaN(p.edit.price))) {
         setStatus("Виправте ціни, підсвічені червоним: лише число більше нуля або порожньо.", "error");
         return;
       }
       $("save-btn").disabled = true;
       setStatus("Збереження…");
       try {
-        const priceChanged = changed.filter(isPriceChanged);
-        const feedChanged = changed.filter((p) => changedFeeds(p).length);
-        if (priceChanged.length) await commit(priceChanged);
-        if (feedChanged.length) await commitFeedEdits(feedChanged);
+        await commit(changed);
         const done = `Збережено (${changed.length} товарів). Фіди оновляться на сайті приблизно за 1–2 хвилини.`;
         await load();
         setStatus(done, "ok");
@@ -822,47 +748,6 @@
       }
     }
 
-    // Правки окремих фідів -> свіжий feeds.json (як commit() для prices.json).
-    async function commitFeedEdits(changed, attempt = 1) {
-      const current = await readFeeds();
-      const data = JSON.parse(JSON.stringify(current.data));
-      data.feeds = data.feeds || [];
-      const conflicts = [];
-      for (const p of changed) {
-        for (const key of changedFeeds(p)) {
-          const f = key === MAIN_KEY ? (data.main = data.main || {}) : data.feeds.find((x) => x.file === key);
-          if (!f) throw new Error(`Фід ${key} щойно видалив хтось інший. Оновіть сторінку.`);
-          const id = p.item.id;
-          if (!sameFeedState(feedItemState(f, id), p.fOrig[key])) { conflicts.push(p.item.name); continue; }
-          const fe = p.fEdit[key];
-          f.prices = { ...(f.prices || {}) };
-          if (fe.price > 0) f.prices[id] = fe.price; else delete f.prices[id];
-          f.hidden = (f.hidden || []).filter((x) => x !== id);
-          f.excluded = (f.excluded || []).filter((x) => x !== id);
-          if (fe.state === "temp") f.hidden.push(id);
-          if (fe.state === "perm") f.excluded.push(id);
-          for (const k of ["prices", "hidden", "excluded"]) if (!Object.keys(f[k]).length) delete f[k];
-        }
-      }
-      if (conflicts.length) {
-        throw new Error("Правки фідів цих товарів щойно змінив хтось інший: " +
-          [...new Set(conflicts)].join(", ") + ". Оновіть сторінку і внесіть зміни ще раз.");
-      }
-      if (data.main && !Object.keys(data.main).length) delete data.main;
-      const body = {
-        message: `Адмінка Prom: правки фідів (товари ${changed.map((p) => p.item.id).join(", ")})`,
-        content: b64encode(JSON.stringify(data, null, 2) + "\n"),
-        branch: BRANCH,
-      };
-      if (current.sha) body.sha = current.sha;
-      try {
-        await gh(`/repos/${REPO}/contents/${FEEDS}`, { method: "PUT", body: JSON.stringify(body) });
-      } catch (e) {
-        if ((e.status === 409 || e.status === 422) && attempt < 3) return commitFeedEdits(changed, attempt + 1);
-        throw e;
-      }
-    }
-
     async function start() {
       token = storageGet(TOKEN_KEY);
       if (!token) {
@@ -894,7 +779,7 @@
     $("search").addEventListener("input", applyFilter);
     $("save-btn").addEventListener("click", save);
     $("reset-btn").addEventListener("click", () => {
-      for (const p of products.values()) { p.edit = { ...p.orig }; p.fEdit = cloneFeedState(p.fOrig); }
+      for (const p of products.values()) p.edit = { ...p.orig };
       render();
     });
     window.addEventListener("beforeunload", (e) => {

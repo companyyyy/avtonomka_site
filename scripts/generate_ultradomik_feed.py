@@ -8,12 +8,6 @@ either +/- percent from the main feed price (invertorshop.xml - Інвертор
 fresh random add_min..add_max UAH per item (feed/enerhiia24.xml - Енергія24,
 +1..200 UAH).
 
-Per feed (feeds.json -> "main" for prom_file.xml, each entry for the extras):
-"prices" {id: price} - a manual price that goes into that feed as is,
-"hidden" [ids] - items left out of that feed. Both last until the next
-scheduled site update (sync_ultradomik_prices.py clears them).
-"excluded" [ids] - items left out of that feed for good.
-
 Prices (UAH) and stock come from data/ultradomik/prices.json, keyed by item
 id. The scheduled site update fills it with site prices
 (scripts/sync_ultradomik_prices.py); a manual edit in the price table at
@@ -63,22 +57,14 @@ def is_num(v):
     return isinstance(v, (int, float)) and not isinstance(v, bool)
 
 
-def feed_rules(f):
-    """Per-item edits of one feed: ({id: manual price}, {ids left out})."""
-    prices = {str(k): v for k, v in (f.get('prices') or {}).items() if is_num(v) and v > 0}
-    skip = {str(x) for x in (f.get('hidden') or [])} | {str(x) for x in (f.get('excluded') or [])}
-    return prices, skip
-
-
 def load_feeds():
-    """[dict(file, name, mult, add, prices, skip)] - the main feed first, then valid extras.
+    """[dict(file, name, mult, add)] - the main feed first, then valid extras.
     add = (min, max) UAH for a random-range feed, None for a plain percent one."""
     try:
         config = json.loads(FEEDS_CONFIG.read_text('utf-8'))
     except FileNotFoundError:
         config = {}
-    prices, skip = feed_rules(config.get('main') or {})
-    feeds = [dict(file=MAIN_FEED, name='Роздрібні ціни', mult=1.0, add=None, prices=prices, skip=skip)]
+    feeds = [dict(file=MAIN_FEED, name='Роздрібні ціни', mult=1.0, add=None)]
     seen = {MAIN_FEED}
     for f in config.get('feeds', []):
         fname, pct = str(f.get('file', '')), f.get('percent', 0)
@@ -90,9 +76,8 @@ def load_feeds():
             print(f'feeds.json: skipped invalid feed {f!r}')
             continue
         seen.add(fname)
-        prices, skip = feed_rules(f)
         feeds.append(dict(file=fname, name=str(f.get('name') or fname), mult=1 + pct / 100,
-                          add=(int(lo), int(hi)) if ranged else None, prices=prices, skip=skip))
+                          add=(int(lo), int(hi)) if ranged else None))
     return feeds
 
 # Group ids are fixed so a group keeps its identity in the client's Prom
@@ -343,7 +328,7 @@ def main():
                 f'      <keywords_ua>{esc(cap_keywords(e["kw_ua"]))}</keywords_ua>',
                 '    </item>',
             ]
-            items.append((pid, price_uah, random.randint(*RANDOM_ADD_UAH), '\n'.join(lines)))
+            items.append((price_uah, random.randint(*RANDOM_ADD_UAH), '\n'.join(lines)))
 
     catalog = '\n'.join(f'    <category id="{cid}" portal_id="{CATEGORIES[cid][1]}">{esc(CATEGORIES[cid][0])}</category>'
                         for cid in sorted(used_cats))
@@ -351,12 +336,8 @@ def main():
     for feed in feeds:
         fname, markup = feed['file'], feed['mult']
         body = []
-        for pid, base, bump, text in items:
-            if pid in feed['skip']:
-                continue
-            if pid in feed['prices']:
-                value = feed['prices'][pid]
-            elif feed['add']:
+        for base, bump, text in items:
+            if feed['add']:
                 # Random-range feed: table price (+/- %) plus its own random UAH,
                 # not the main feed's 1-10.
                 value = max(1, base * markup + random.randint(*feed['add']))
@@ -371,8 +352,7 @@ def main():
         ElementTree.fromstring(xml.encode('utf-8'))
         (ROOT / fname).parent.mkdir(parents=True, exist_ok=True)
         (ROOT / fname).write_text(xml, encoding='utf-8')
-        left_out = sum(pid in feed['skip'] for pid, *_ in items)
-        print(f'{fname} generated: {len(items) - left_out} items ({left_out} left out), markup x{markup:.2f}'
+        print(f'{fname} generated: {len(items)} items, markup x{markup:.2f}'
               + (f', +{feed["add"][0]}..{feed["add"][1]} UAH' if feed['add'] else ''))
 
     built = [f['file'] for f in feeds]
