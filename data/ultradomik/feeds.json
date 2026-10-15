@@ -4,6 +4,13 @@
       "file": "invertorshop.xml",
       "name": "ІнверторШоп",
       "percent": 35
+    },
+    {
+      "file": "feed/enerhiia24.xml",
+      "name": "Енергія24",
+      "percent": 0,
+      "add_min": 1,
+      "add_max": 200
     }
   ]
 }

@@ -10,6 +10,9 @@ scheduled update, which overwrites it with the site price again.
 Items that have no card on the site (feed_only, ud-avr-*, items gone from the
 supplier feed) or no site price keep their manual values.
 The random +1..10 UAH is added later, in generate_ultradomik_feed.py.
+It also clears the temporary per-feed edits in data/ultradomik/feeds.json
+("prices" and "hidden" of every feed - set in /prom-admin/ until the next
+update); "excluded" (left out for good) stays.
 
 Run: python scripts/sync_ultradomik_prices.py
 """
@@ -19,6 +22,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PRICES = ROOT / 'data/ultradomik/prices.json'
+FEEDS = ROOT / 'data/ultradomik/feeds.json'
+TEMPORARY = ('prices', 'hidden')
 
 
 def site_price(raw):
@@ -61,6 +66,24 @@ def main():
         print('  ' + line)
     if kept:
         print('  manual (no site price): ' + ', '.join(kept))
+    clear_temporary_feed_edits()
+
+
+def clear_temporary_feed_edits():
+    try:
+        config = json.loads(FEEDS.read_text('utf-8'))
+    except FileNotFoundError:
+        return
+    cleared = 0
+    for feed in [config.get('main') or {}, *config.get('feeds', [])]:
+        for key in TEMPORARY:
+            cleared += len(feed.get(key) or ())
+            feed.pop(key, None)
+    if config.get('main') == {}:
+        del config['main']
+    if cleared:
+        FEEDS.write_text(json.dumps(config, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    print(f'feeds.json: {cleared} temporary feed edits cleared')
 
 
 if __name__ == '__main__':
