@@ -82,7 +82,8 @@
   "150825": {
     "price": 7875,
     "in_stock": false,
-    "wholesale_usd": 0
+    "wholesale_usd": 0,
+    "off": true
   },
   "150935": {
     "price": 25746,
