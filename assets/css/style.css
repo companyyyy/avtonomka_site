@@ -2556,3 +2556,56 @@ html.lang-en .lang-hide-en { display: none !important; }
 .auction-bid-row:last-child { border-bottom: none; }
 .auction-bid-row__amount { font-weight: 700; color: var(--color-dark); }
 .auction-bid-row__time { color: var(--color-muted); font-size: .78rem; }
+
+/* ---------- Бігучий рядок Telegram (assets/js/main.js) ---------- */
+.tg-ticker {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  background: #229ed9;
+  color: #fff;
+  font-size: .9rem;
+  font-weight: 600;
+  line-height: 34px;
+  height: 34px;
+  text-decoration: none;
+}
+.tg-ticker:hover { background: #1b8bc0; }
+.tg-ticker__track {
+  display: inline-block;
+  animation: tg-ticker 60s linear infinite;
+}
+.tg-ticker:hover .tg-ticker__track { animation-play-state: paused; }
+.tg-ticker__item { display: inline-block; padding-right: 64px; }
+@keyframes tg-ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tg-ticker__track { animation: none; }
+}
+
+/* ---------- «Зараз переглядають» на сторінці товару ---------- */
+.product-viewers {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px 0;
+  font-size: .95rem;
+  color: var(--color-muted);
+}
+.product-viewers__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-green);
+  flex-shrink: 0;
+  animation: viewers-pulse 1.6s ease-in-out infinite;
+}
+@keyframes viewers-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: .35; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .product-viewers__dot { animation: none; }
+}

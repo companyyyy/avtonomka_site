@@ -200,3 +200,71 @@ document.querySelectorAll('.cat-card__zoom').forEach((btn) => {
     openLightbox(btn.dataset.zoomSrc, btn.dataset.zoomAlt || '');
   });
 });
+
+/* ---- Бігучий рядок над шапкою: підписка на Telegram-канал ---- */
+const SITE_LANG = (() => {
+  try { return new URLSearchParams(location.search).get('lang') || localStorage.getItem('lang') || 'uk'; } catch { return 'uk'; }
+})();
+
+(function () {
+  const header = document.querySelector('.site-header');
+  // Не в Telegram mini app - там людина вже в Telegram.
+  if (!header || window.Telegram?.WebApp?.initData) return;
+  const text = SITE_LANG === 'en'
+    ? '📢 Subscribe to our Telegram channel - news, deals and new arrivals'
+    : '📢 Підписуйтесь на наш Telegram-канал - новини, акції та нові надходження';
+  const ticker = document.createElement('a');
+  ticker.className = 'tg-ticker';
+  ticker.href = 'https://t.me/avtonomka_od';
+  ticker.target = '_blank';
+  ticker.rel = 'noopener';
+  ticker.setAttribute('aria-label', text);
+  const track = document.createElement('span');
+  track.className = 'tg-ticker__track';
+  track.setAttribute('aria-hidden', 'true');
+  // Дві однакові половини: анімація зсуває на -50%, і стрічка йде без розриву.
+  for (let i = 0; i < 8; i++) {
+    const item = document.createElement('span');
+    item.className = 'tg-ticker__item';
+    item.textContent = text;
+    track.append(item);
+  }
+  ticker.append(track);
+  header.before(ticker);
+})();
+
+/* ---- Сторінка товару: «зараз переглядають N людей» (1-10) ---- */
+(function () {
+  const priceBlock = document.querySelector('.product-info__price-block');
+  if (!priceBlock) return;
+  const id = document.querySelector('[data-add-to-cart]')?.dataset.id
+    || new URLSearchParams(location.search).get('id') || location.pathname;
+  const key = 'viewers:' + id;
+  let n = 0;
+  try { n = Number(sessionStorage.getItem(key)) || 0; } catch {}
+  if (n < 1 || n > 10) n = 1 + Math.floor(Math.random() * 10);
+
+  const el = document.createElement('div');
+  el.className = 'product-viewers';
+  priceBlock.after(el);
+
+  function label(count) {
+    if (SITE_LANG === 'en') return count === 1 ? '1 person is viewing this product right now' : `${count} people are viewing this product right now`;
+    const word = count === 1 ? 'людина' : count < 5 ? 'людини' : 'людей';
+    return `Зараз цей товар переглядають ${count} ${word}`;
+  }
+  function show() {
+    el.innerHTML = '<span class="product-viewers__dot"></span>';
+    el.append(label(n));
+    try { sessionStorage.setItem(key, String(n)); } catch {}
+  }
+  show();
+  // Час від часу число трохи змінюється (±1, в межах 1-10).
+  (function tick() {
+    setTimeout(() => {
+      n = Math.min(10, Math.max(1, n + (Math.random() < 0.5 ? -1 : 1)));
+      show();
+      tick();
+    }, 15000 + Math.random() * 25000);
+  })();
+})();
