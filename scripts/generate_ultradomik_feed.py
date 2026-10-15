@@ -15,7 +15,10 @@ site sync) and turned into UAH at the rate set there (feeds.json -> usd_rate,
 45 by default); an item whose wholesale price is 0 or empty is left out of it.
 
 Prices (UAH) and stock come from data/ultradomik/prices.json, keyed by item
-id. The scheduled site update fills it with site prices
+id. "off": true there (the «В наявності» checkbox in /prom-admin/, never touched
+by the site sync) marks the item as not available in every feed, whatever the
+site says; otherwise a site item is available when the site has it in stock and
+a feed-only item (no site card) is available. The scheduled site update fills it with site prices
 (scripts/sync_ultradomik_prices.py); a manual edit in the price table at
 https://avtonomka.com.ua/prom-admin/ wins until the next scheduled update.
 Texts (UA + RU), specs and search queries come from
@@ -468,7 +471,8 @@ def main():
             if rejected:
                 report['rejected_photos'].append(f'{pid} {t(e["name_ua"], "ua")}: {rejected}')
             admin_item = {'id': pid, 'name': t(e['name_ua'], 'ua'), 'cat': entry['cat'],
-                          'photo': images[0][len(SITE_URL) + 1:] if images else '', 'problem': ''}
+                          'photo': images[0][len(SITE_URL) + 1:] if images else '', 'problem': '',
+                          'site': pid in products}
             admin_items.append(admin_item)
             if not images:
                 report['no_photo'].append(f'{pid} {t(e["name_ua"], "ua")}')
@@ -479,6 +483,10 @@ def main():
             if not price_uah or price_uah <= 0:
                 report['no_price'].append(f'{pid} {t(e["name_ua"], "ua")}')
                 continue
+
+            # Switched off in /prom-admin/ -> not available anywhere; the site's
+            # stock counts only for items that have a site card.
+            available = not price.get('off') and (price.get('in_stock') or pid not in products)
 
             cat = entry['cat']
             used_cats.add(cat)
@@ -499,7 +507,7 @@ def main():
                 f'      <categoryId>{cat}</categoryId>',
                 f'      <portal_category_id>{e.get("portal") or CATEGORIES[cat][1]}</portal_category_id>',
                 '      <priceuah>{price}</priceuah>',
-                f'      <available>{"true" if price.get("in_stock") else "false"}</available>',
+                f'      <available>{"true" if available else "false"}</available>',
             ]
             if code:
                 lines.append(f'      <vendorCode>{esc(code)}</vendorCode>')
