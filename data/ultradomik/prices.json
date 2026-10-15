@@ -37,12 +37,12 @@
   "148245": {
     "price": 36190,
     "in_stock": true,
-    "wholesale_usd": 0
+    "wholesale_usd": 710
   },
   "148299": {
     "price": 36190,
     "in_stock": true,
-    "wholesale_usd": 0
+    "wholesale_usd": 720
   },
   "148300": {
     "price": 42960,
@@ -67,7 +67,7 @@
   "150649": {
     "price": 1672,
     "in_stock": true,
-    "wholesale_usd": 0
+    "wholesale_usd": 35
   },
   "150674": {
     "price": 38430,
@@ -316,8 +316,8 @@
   },
   "ud-avr-2p": {
     "price": 1125,
-    "in_stock": false,
-    "wholesale_usd": 0
+    "in_stock": true,
+    "wholesale_usd": 29
   },
   "ud-avr-4p": {
     "price": 1305,
