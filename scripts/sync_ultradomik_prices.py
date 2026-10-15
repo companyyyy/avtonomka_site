@@ -1,5 +1,6 @@
 """
-Copies site prices and stock (products.json, supplier feed) into
+Copies site prices and stock (products.json, supplier feed) of every site
+product into
 data/ultradomik/prices.json - the price table of /prom-admin/ that
 prom_file.xml (Ultradomik) and invertorshop.xml are built from.
 
@@ -41,7 +42,9 @@ def main():
     entries = json.loads((ROOT / 'data/ultradomik/products.json').read_text('utf-8'))
     prices = json.loads(PRICES.read_text('utf-8'))
 
+    # The listed items plus every other site product (the feeds take them all).
     ids = [pid for e in entries if not e.get('feed_only') for pid in e['ids']]
+    ids += [pid for pid in products if pid not in set(ids)]
     changed, kept = [], []
     for pid in ids:
         p = products.get(pid)

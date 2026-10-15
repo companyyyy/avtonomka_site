@@ -23,6 +23,14 @@ white-background copies from products.json -> prom_images (plus a photo taken
 from the sheet in assets/images/ultradomik/<id>.jpg, if any), re-checked here.
 An entry with "feed_only": true has no product card on the site - its id is
 our own and its photo comes only from assets/images/ultradomik/.
+Every other product on the site (products.json) goes into the feeds too, with
+texts built from the site card (auto_entries): name, description paragraphs and
+the specs table, category by product_type, photos = white-background copies of
+any of its pictures. The site has these texts in Ukrainian only, so such items
+carry no Russian description/keywords (RU keywords only if the site has them);
+<name> holds the Ukrainian title, since Prom needs the tag. A kit
+("Комплект ...: <inverter> + <battery>") with no white-background photo gets one
+composed from its parts' white-background photos (assets/images/feed-auto/).
 An item with no price or no white-background photo is left out and listed in
 the report. The list of items for the price table (name, category, photo,
 whether it made it into the feed) is written to data/ultradomik/feed_items.json.
@@ -34,6 +42,7 @@ import json
 import random
 import re
 import sys
+from html import unescape
 from pathlib import Path
 from xml.etree import ElementTree
 
@@ -108,7 +117,26 @@ CATEGORIES = {
     8: ('Реле напруги', 14190901),
     9: ('Таймери', 620),
     10: ('Лічильники електроенергії', 15370308),
+    11: ('Комплекти автономного енергоживлення', AUTONOMOUS_ENERGY),
+    12: ('Wi-Fi модулі для інверторів', AUTONOMOUS_ENERGY),
+    13: ('Інше обладнання для автономного живлення', AUTONOMOUS_ENERGY),
 }
+
+# Site product_type -> feed category, for items built from the site card.
+SITE_CATEGORY = [
+    ('Комплекти', 11),
+    ('Wi-Fi', 12),
+    ('2 в 1', 3),
+    ('Акумулятори', 2),
+    ('інвертори', 1),
+    ('кабелі', 4),
+    ('безперебійного', 6),
+    ('АВР', 7),
+    ('Реле напруги', 8),
+    ('Таймери', 9),
+    ('Лічильники', 10),
+    ('Зарядні станції', 5),
+]
 
 USAGE = {
     1: (['резервне живлення будинку, квартири або офісу', 'сонячні електростанції',
@@ -147,6 +175,14 @@ USAGE = {
          'економія електроенергії'],
         ['включение и выключение техники по расписанию', 'освещение, обогреватели, бойлер, полив',
          'экономия электроэнергии']),
+    11: (['резервне живлення будинку, квартири, дачі чи офісу', 'автономна система живлення під ключ',
+          'робота разом із сонячними панелями'],
+         ['резервное питание дома, квартиры, дачи или офиса', 'автономная система питания под ключ',
+          'работа вместе с солнечными панелями']),
+    12: (['віддалений контроль роботи інвертора зі смартфона', 'моніторинг сонячної електростанції'],
+         ['удаленный контроль работы инвертора со смартфона', 'мониторинг солнечной электростанции']),
+    13: (['системи резервного та автономного живлення'],
+         ['системы резервного и автономного питания']),
     10: (['контроль споживання електроенергії побутовою технікою', 'підбір інвертора чи зарядної станції під навантаження',
           'економія електроенергії'],
          ['контроль потребления электроэнергии бытовой техникой', 'подбор инвертора или зарядной станции под нагрузку',
@@ -189,6 +225,112 @@ def cable_kit(entry, pid, lug):
     }
 
 
+def scrub(s):
+    """Text from the site card without the forbidden substring (see FORBIDDEN)."""
+    s = FORBIDDEN.sub('', str(s or ''))
+    s = re.sub(r'\(\s*\)', '', s)
+    return re.sub(r'\s{2,}', ' ', re.sub(r'\s+([,.;:])', r'\1', s)).strip(' ,;-–')
+
+
+def site_specs(html):
+    """[[name, name, value]] rows of the site specs table (section headers skipped)."""
+    rows = []
+    for row in re.findall(r'<tr>(.*?)</tr>', html or '', re.S):
+        cells = [re.sub(r'<[^>]+>', ' ', c) for c in re.findall(r'<td[^>]*>(.*?)</td>', row, re.S)]
+        cells = [scrub(re.sub(r'\s+', ' ', unescape(c))) for c in cells]
+        if len(cells) == 2 and cells[0] and cells[1]:
+            rows.append([cells[0], cells[0], cells[1]])
+    return rows
+
+
+def auto_entries(products, known):
+    """Feed entries for site products missing from data/ultradomik/products.json."""
+    out = []
+    for pid, p in products.items():
+        if pid in known or not p.get('title'):
+            continue
+        ptype = p.get('product_type') or ''
+        cat = next((c for key, c in SITE_CATEGORY if key.lower() in ptype.lower()), 13)
+        title = scrub(p['title'])
+        paras = [scrub(x) for x in (p.get('description') or '').split('\n')]
+        paras = [x for x in paras if x] or [title]
+        specs = site_specs(p.get('specs'))
+        maker = next((v for n, _, v in specs if n.lower() == 'виробник'), '')
+        vendor = next((v for v in PROM_VENDORS
+                       if v.lower() in (maker.lower(), (title.split() or [''])[0].lower())), '')
+        kw_ua = scrub(p.get('merchant_keywords_uk')) or title
+        out.append({
+            'sheet': title, 'ids': [pid], 'cat': cat, 'auto': True,
+            'name_ua': title, 'name_ru': '', 'p_ua': paras, 'p_ru': [],
+            'specs': specs, 'kw_ua': kw_ua, 'kw_ru': scrub(p.get('merchant_keywords_ru')),
+            'vendor': vendor, 'code': re.sub(r'[^0-9A-Za-zА-Яа-яІіЇїЄєҐґ\-_./ ]', '', scrub(p.get('mpn'))),
+        })
+    return out
+
+
+KIT_PHOTOS = ROOT / 'assets/images/feed-auto'
+_white = {}
+
+
+def is_white(img):
+    if img not in _white:
+        path = ROOT / img
+        _white[img] = bool(img) and not FORBIDDEN.search(img) and path.is_file() and white_ratio(path) >= 0.95
+    return _white[img]
+
+
+def model_tokens(text):
+    """Model codes in a kit part ("MUST PV19-6048EXP 48V 6 kW" -> ["PV19-6048EXP"]), not capacities."""
+    return [t for t in re.findall(r'[A-Za-z0-9][A-Za-z0-9-]{3,}', text)
+            if re.search(r'\d', t) and re.search(r'[A-Za-z]', t)
+            and not re.fullmatch(r'\d+(?:[.,]\d+)?(?:ah|kwh|kw|wh|w|v)', t, re.I) and t.lower() != 'lifepo4']
+
+
+def kit_photo(pid, p, products):
+    """White-background photo of a kit composed from its parts' photos, or None."""
+    out = KIT_PHOTOS / f'{pid}.jpg'
+    rel = f'assets/images/feed-auto/{pid}.jpg'
+    if out.exists():
+        return rel
+    norm = lambda s: re.sub(r'[^0-9a-z]', '', (s or '').lower())
+    parts = [x for x in p['title'].split(':', 1)[-1].split('+') if x.strip()]
+    others = [o for o in products.values() if 'Комплект' not in (o.get('product_type') or '')]
+    photos = []
+    for part in parts:
+        found = None
+        for tok in sorted(model_tokens(part), key=len, reverse=True):
+            match = [o for o in others if norm(tok) == norm(o.get('mpn')) or norm(tok) in norm(o['title'])]
+            for o in match:
+                sheet = [f'assets/images/ultradomik/{f.name}'
+                         for f in sorted((ROOT / 'assets/images/ultradomik').glob(f'{o["id"]}.*'))]
+                found = next((i for i in [*sheet, *(o.get('prom_images') or []), o.get('image_link') or '',
+                                          *(o.get('additional_images') or [])] if is_white(i)), None)
+                if found:
+                    break
+            if found:
+                break
+        if not found:
+            return None
+        photos.append(found)
+    if len(photos) < 2:
+        return None
+    size, pad = 1200, 60
+    canvas = Image.new('RGB', (size, size), 'white')
+    box = ((size - pad * (len(photos) + 1)) // len(photos), size - 2 * pad)
+    for i, img in enumerate(photos):
+        im = Image.open(ROOT / img).convert('RGB')
+        # Crop the white margin so the devices fill the frame.
+        bbox = Image.eval(im.convert('L'), lambda v: 255 if v < 240 else 0).getbbox()
+        if bbox:
+            im = im.crop(bbox)
+        im.thumbnail(box)
+        x = pad + i * (box[0] + pad) + (box[0] - im.width) // 2
+        canvas.paste(im, (x, (size - im.height) // 2))
+    KIT_PHOTOS.mkdir(parents=True, exist_ok=True)
+    canvas.save(out, quality=88)
+    return rel
+
+
 def white_ratio(path):
     """Share of near-white (R,G,B >= 240) pixels in a ~2.5% border strip."""
     im = Image.open(path).convert('RGB')
@@ -221,10 +363,22 @@ def cdata(s):
 def description(paras, usage, specs, lang):
     head_use, head_specs = (('Де використовується', 'Основні характеристики') if lang == 'ua'
                             else ('Где используется', 'Основные характеристики'))
-    html = ''.join(f'<p>{esc(p)}</p>' for p in paras)
-    html += f'<p><strong>{head_use}:</strong></p><ul>' + ''.join(f'<li>{esc(u)}</li>' for u in usage) + '</ul>'
-    html += f'<p><strong>{head_specs}:</strong></p><ul>'
-    html += ''.join(f'<li>{esc(n)}: {esc(v)}</li>' for n, v in specs) + '</ul>'
+    # Site texts have "• ..." lines - those become a list.
+    html, bullets = '', []
+    for p in paras + ['']:
+        if p.startswith('•'):
+            bullets.append(p.lstrip('• ').strip())
+            continue
+        if bullets:
+            html += '<ul>' + ''.join(f'<li>{esc(b)}</li>' for b in bullets) + '</ul>'
+            bullets = []
+        if p:
+            html += f'<p>{esc(p)}</p>'
+    if usage:
+        html += f'<p><strong>{head_use}:</strong></p><ul>' + ''.join(f'<li>{esc(u)}</li>' for u in usage) + '</ul>'
+    if specs:
+        html += f'<p><strong>{head_specs}:</strong></p><ul>'
+        html += ''.join(f'<li>{esc(n)}: {esc(v)}</li>' for n, v in specs) + '</ul>'
     return html
 
 
@@ -257,8 +411,12 @@ def main():
 
     report = {'no_data': [], 'no_price': [], 'no_photo': [], 'rejected_photos': []}
     items, used_cats, admin_items = [], set(), []
+    known = {pid for e in entries for pid in e['ids']}
+    auto = auto_entries(products, known)
+    if auto:
+        print(f'{len(auto)} site products not in data/ultradomik/products.json - built from the site card')
 
-    for entry in entries:
+    for entry in entries + auto:
         for pid in entry['ids']:
             # feed_only: sold through the feed only, no product card on the site
             p = products.get(pid) or ({'id': pid, 'title': ''} if entry.get('feed_only') else None)
@@ -282,12 +440,20 @@ def main():
             sheet_photos = [f'assets/images/ultradomik/{f.name}'
                             for f in sorted((ROOT / 'assets/images/ultradomik').glob(f'{pid}.*'))]
             images, rejected = [], 0
-            for img in sheet_photos + list(p.get('prom_images') or []):
+            candidates = sheet_photos + list(p.get('prom_images') or [])
+            if entry.get('auto'):
+                # Any site picture of the item may pass the white-background check.
+                candidates += [p.get('image_link') or ''] + list(p.get('additional_images') or [])
+            for img in dict.fromkeys(c for c in candidates if c):
                 path = ROOT / img
                 if FORBIDDEN.search(img) or not path.exists() or white_ratio(path) < 0.95:
                     rejected += 1
                     continue
                 images.append(f'{SITE_URL}/{img}')
+            if not images and entry.get('auto') and entry['cat'] == 11:
+                composed = kit_photo(pid, p, products)
+                if composed and is_white(composed):
+                    images.append(f'{SITE_URL}/{composed}')
             if rejected:
                 report['rejected_photos'].append(f'{pid} {t(e["name_ua"], "ua")}: {rejected}')
             admin_item = {'id': pid, 'name': t(e['name_ua'], 'ua'), 'cat': entry['cat'],
@@ -307,14 +473,17 @@ def main():
             used_cats.add(cat)
             specs_ua = [(t(n, 'ua'), t(v, 'ua')) for n, v in spec_pairs(e['specs'], 'ua')]
             specs_ru = [(t(n, 'ru'), t(v, 'ru')) for n, v in spec_pairs(e['specs'], 'ru')]
-            desc_ua = description([t(x, 'ua') for x in e['p_ua']], USAGE[cat][0], specs_ua, 'ua')
-            desc_ru = description([t(x, 'ru') for x in e['p_ru']], USAGE[cat][1], specs_ru, 'ru')
+            # A site card text already says where the item is used.
+            usage_ua = [] if entry.get('auto') and len(e['p_ua']) > 1 else USAGE[cat][0]
+            desc_ua = description([t(x, 'ua') for x in e['p_ua']], usage_ua, specs_ua, 'ua')
+            # Built from the site card: no Russian text - RU description is left out.
+            desc_ru = description([t(x, 'ru') for x in e['p_ru']], USAGE[cat][1], specs_ru, 'ru') if e['p_ru'] else ''
             vendor = e.get('vendor', '')
             code = (e.get('code') or '')[:25]
 
             lines = [
                 f'    <item id="{esc(pid)}" selling_type="r">',
-                f'      <name>{esc(t(e["name_ru"], "ru"))}</name>',
+                f'      <name>{esc(t(e["name_ru"] or e["name_ua"], "ru"))}</name>',
                 f'      <name_ua>{esc(t(e["name_ua"], "ua"))}</name_ua>',
                 f'      <categoryId>{cat}</categoryId>',
                 f'      <portal_category_id>{e.get("portal") or CATEGORIES[cat][1]}</portal_category_id>',
@@ -329,10 +498,12 @@ def main():
             # No <param>: Prom validates them against each marketplace category's
             # own characteristic list and flagged ours as invalid data. Specs stay
             # in the description (both languages).
+            if desc_ru:
+                lines.append(f'      <description>{cdata(desc_ru)}</description>')
+            lines.append(f'      <description_ua>{cdata(desc_ua)}</description_ua>')
+            if e['kw_ru']:
+                lines.append(f'      <keywords>{esc(cap_keywords(e["kw_ru"]))}</keywords>')
             lines += [
-                f'      <description>{cdata(desc_ru)}</description>',
-                f'      <description_ua>{cdata(desc_ua)}</description_ua>',
-                f'      <keywords>{esc(cap_keywords(e["kw_ru"]))}</keywords>',
                 f'      <keywords_ua>{esc(cap_keywords(e["kw_ua"]))}</keywords_ua>',
                 '    </item>',
             ]

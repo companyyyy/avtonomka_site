@@ -84,7 +84,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add products.json data/telegram_posts.json catalog_export.csv feed.xml prom_file.xml invertorshop.xml feed/ \
                   data/ultradomik/prices.json data/ultradomik/feed_items.json data/ultradomik/feeds_built.json \
-                  product/ catalog.html catalog/*.html sitemap.xml .htaccess assets/images/prom/ \
+                  product/ catalog.html catalog/*.html sitemap.xml .htaccess assets/images/prom/ assets/images/feed-auto/ \
                   articles.html blog.html index.html
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
