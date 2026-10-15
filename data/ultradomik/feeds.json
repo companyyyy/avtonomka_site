@@ -11,6 +11,13 @@
       "percent": 0,
       "add_min": 1,
       "add_max": 200
+    },
+    {
+      "file": "feed/test.xml",
+      "name": "тест",
+      "percent": 0,
+      "add_min": 221,
+      "add_max": 434
     }
   ]
 }
