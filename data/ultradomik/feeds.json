@@ -16,8 +16,8 @@
       "file": "feed/test.xml",
       "name": "тест",
       "percent": 0,
-      "add_min": 221,
-      "add_max": 434
+      "add_min": 10,
+      "add_max": 4363
     }
   ]
 }
