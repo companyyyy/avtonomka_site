@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shop>
+  <catalog>
+    <category id="1" portal_id="501001">Гібридні інвертори</category>
+    <category id="2" portal_id="501001">Акумулятори</category>
+    <category id="3" portal_id="501001">Системи зберігання електроенергії 2 в 1</category>
+    <category id="4" portal_id="501001">Кабельна продукція</category>
+    <category id="5" portal_id="500901">Зарядні станції</category>
+    <category id="6" portal_id="501001">Безперебійники для роутерів</category>
+    <category id="7" portal_id="501001">Автоматичне введення резерву (АВР)</category>
+  </catalog>
+  <items>
+
+  </items>
+</shop>

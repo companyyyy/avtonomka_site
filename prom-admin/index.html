@@ -8,7 +8,9 @@
   <link rel="icon" href="/assets/images/logo.jpg" type="image/jpeg">
   <!-- Ціни й наявність товарів фіду prom_file.xml (роздрібні ціни). Додаткові фіди
        (data/ultradomik/feeds.json) будуються з тих самих цін: ± відсоток і/або
-       випадкова надбавка в гривнях (діапазон). Читає й комітить data/ultradomik/prices.json
+       випадкова надбавка в гривнях (діапазон). feed/opt.xml (гурт) - лише ручна
+       гуртова ціна (prices.json -> wholesale, автооновлення її не чіпає); товар
+       з гуртовою ціною 0 у фід опту не йде. Читає й комітить data/ultradomik/prices.json
        через GitHub API; після коміту GitHub Actions (prom-feed.yml) перебудовує
        обидва фіди й викладає їх на сервер. При кожному автооновленні сайту
        (update.yml) ціни й наявність перезаписуються цінами сайту
@@ -160,7 +162,8 @@
       <ul class="other-feeds" id="other-feeds"></ul>
     </section>
 
-    <p class="hint" id="hint" hidden>Ціни й наявність підтягуються з сайту при кожному автооновленні (≈11:10, 15:10, 19:10 Київ). Ручна зміна тут діє одразу, але до наступного автооновлення - потім її перезапише сайт. Товарів, яких немає на сайті, автооновлення не чіпає. У prom_file.xml і фіди з відсотком до кожної ціни додається випадкові 1-10 грн (у таблиці ціни відсоткових фідів - без них); фід з надбавкою отримує свою випадкову суму з діапазону. Товар без ціни у фід не потрапляє.</p>
+    <p class="hint" id="hint" hidden>Ціни й наявність підтягуються з сайту при кожному автооновленні (≈11:10, 15:10, 19:10 Київ). Ручна зміна тут діє одразу, але до наступного автооновлення - потім її перезапише сайт. Товарів, яких немає на сайті, автооновлення не чіпає. У prom_file.xml і фіди з відсотком до кожної ціни додається випадкові 1-10 грн (у таблиці ціни відсоткових фідів - без них); фід з надбавкою отримує свою випадкову суму з діапазону. Товар без ціни у фід не потрапляє.<br>
+      «Ціна гурт» - лише вручну, автооновлення її не змінює; іде у фід опту feed/opt.xml точно такою. Товар з гуртовою ціною 0 у фід опту не потрапляє. «В наявності» діє на всі фіди одразу.</p>
 
     <div class="table-wrap" id="table-wrap" hidden>
       <table>
@@ -195,6 +198,7 @@
     const FEEDS = "data/ultradomik/feeds.json";
     const SITE = "https://avtonomka.com.ua";
     const MAIN_FEED = { file: "prom_file.xml", name: "Роздрібні ціни (основний)" };
+    const OPT_FEED = { file: "feed/opt.xml", name: "Гуртові ціни (опт)" };
     const OTHER_FEEDS = [
       ["feed.xml", "Google Merchant"],
       ["feed/bezpeka.xml", "Bezpeka.club"],
@@ -275,7 +279,7 @@
     }
 
     function pickEditable(d = {}) {
-      return { price: d.price ?? null, in_stock: d.in_stock ?? false };
+      return { price: d.price ?? null, wholesale: d.wholesale ?? 0, in_stock: d.in_stock ?? false };
     }
 
     function isChanged(p) {
@@ -290,18 +294,23 @@
       const n = Math.round(parseFloat(t));
       return n > 0 ? n : NaN;
     }
+    // Гуртова ціна: порожньо або 0 -> 0 (товар не йде у фід опту).
+    function parseWholesale(text) {
+      const v = parsePrice(text.replace(/^\s*0+([.,]0*)?\s*$/, ""));
+      return v === null ? 0 : v;
+    }
 
     const fmt = (n) => n.toLocaleString("uk-UA", { maximumFractionDigits: 2 });
 
-    function priceInput(p) {
+    function priceInput(p, field = "price", parse = parsePrice) {
       const input = document.createElement("input");
       input.className = "price";
       input.inputMode = "numeric";
-      input.value = p.edit.price ?? "";
+      input.value = p.edit[field] ?? "";
       input.addEventListener("input", () => {
-        const v = parsePrice(input.value);
+        const v = parse(input.value);
         input.classList.toggle("invalid", Number.isNaN(v));
-        p.edit.price = v;
+        p.edit[field] = v;
         refreshRow(p);
       });
       // Enter - до ціни в наступному рядку (Shift+Enter - у попередньому).
@@ -367,7 +376,8 @@
           td("img", img),
           td("name", name, cat),
           td("sep", priceInput(p)),
-          td("c", checkbox(p)),
+          td("sep", priceInput(p, "wholesale", parseWholesale)),
+          td("sep c", checkbox(p)),
           ...p.markupCells,
         );
         tbody.append(tr);
@@ -428,7 +438,7 @@
       const base = [...name.toLowerCase()].map((c) => TRANSLIT[c] ?? c).join("")
         .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 50) || "feed";
       let file = `feed/${base}.xml`;
-      for (let i = 2; taken.has(file) || file === "feed/bezpeka.xml"; i++) file = `feed/${base}-${i}.xml`;
+      for (let i = 2; taken.has(file) || file === "feed/bezpeka.xml" || file === OPT_FEED.file; i++) file = `feed/${base}-${i}.xml`;
       return file;
     }
 
@@ -504,6 +514,10 @@
       main.className = "main-feed";
       main.append(td("", MAIN_FEED.name), td("", "0% (ціни з таблиці нижче)"), td("", "1–10 грн"), linkCell(MAIN_FEED.file), td(""));
       tbody.append(main);
+      const opt = document.createElement("tr");
+      opt.className = "main-feed";
+      opt.append(td("", OPT_FEED.name), td("", "ціни вручну (колонка «Ціна гурт»)"), td("", "-"), linkCell(OPT_FEED.file), td(""));
+      tbody.append(opt);
 
       for (const f of feeds) {
         const tr = document.createElement("tr");
@@ -585,8 +599,8 @@
       const groups = feeds.map((f) => `<th class="group">${escHtml(f.name)} · ${escHtml(f.file)}</th>`).join("");
       const cols = feeds.map((f) => `<th class="sep r">Ціна, грн (${escHtml(ruleLabel(f))})</th>`).join("");
       head.innerHTML = `
-        <tr><th colspan="3"></th><th class="group" colspan="2">Роздрібні ціни · prom_file.xml</th>${groups}</tr>
-        <tr><th>ID</th><th></th><th>Товар</th><th class="sep">Ціна, грн</th><th class="c">В наявності</th>${cols}</tr>`;
+        <tr><th colspan="3"></th><th class="group">prom_file.xml</th><th class="group">feed/opt.xml</th><th class="group">Усі фіди</th>${groups}</tr>
+        <tr><th>ID</th><th></th><th>Товар</th><th class="sep">Ціна роздріб, грн</th><th class="sep">Ціна гурт, грн</th><th class="sep c">В наявності</th>${cols}</tr>`;
     }
 
     const escHtml = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -698,7 +712,7 @@
 
     async function save() {
       const changed = [...products.values()].filter(isChanged);
-      if (changed.some((p) => Number.isNaN(p.edit.price))) {
+      if (changed.some((p) => Number.isNaN(p.edit.price) || Number.isNaN(p.edit.wholesale))) {
         setStatus("Виправте ціни, підсвічені червоним: лише число більше нуля або порожньо.", "error");
         return;
       }

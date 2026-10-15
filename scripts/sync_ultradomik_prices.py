@@ -10,6 +10,7 @@ scheduled update, which overwrites it with the site price again.
 Items that have no card on the site (feed_only, ud-avr-*, items gone from the
 supplier feed) or no site price keep their manual values.
 The random +1..10 UAH is added later, in generate_ultradomik_feed.py.
+The wholesale price ("wholesale", feed/opt.xml) is set by hand only - kept as is.
 
 Run: python scripts/sync_ultradomik_prices.py
 """

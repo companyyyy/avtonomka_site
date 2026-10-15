@@ -7,6 +7,9 @@ either +/- percent from the main feed price (invertorshop.xml - Інвертор
 +35%) or, when it has add_min/add_max, the table price (+/- percent) plus a
 fresh random add_min..add_max UAH per item (feed/enerhiia24.xml - Енергія24,
 +1..200 UAH).
+feed/opt.xml is the wholesale feed: the "wholesale" price set by hand in
+/prom-admin/ (prices.json, never touched by the site sync), as is; an item
+whose wholesale price is 0 or empty is left out of it.
 
 Prices (UAH) and stock come from data/ultradomik/prices.json, keyed by item
 id. The scheduled site update fills it with site prices
@@ -42,12 +45,13 @@ SITE_URL = 'https://avtonomka.com.ua'
 # from that already-bumped price, a random-range feed adds its own range instead.
 RANDOM_ADD_UAH = (1, 10)
 MAIN_FEED = 'prom_file.xml'                        # Ultradomik
+OPT_FEED = 'feed/opt.xml'                          # гурт, ціни вручну
 FEEDS_CONFIG = ROOT / 'data/ultradomik/feeds.json'  # extra feeds, from /prom-admin/
 # Files this script wrote last time - a feed removed in the admin gets its
 # file deleted, and nothing else (feed/bezpeka.xml etc.) is ever touched.
 FEEDS_BUILT = ROOT / 'data/ultradomik/feeds_built.json'
 FEED_FILE_RE = re.compile(r'^(?:feed/)?[a-z0-9][a-z0-9-]{0,60}\.xml$')
-RESERVED_FILES = {MAIN_FEED, 'prom.xml', 'feed.xml', 'sitemap.xml', 'feed/bezpeka.xml'}
+RESERVED_FILES = {MAIN_FEED, OPT_FEED, 'prom.xml', 'feed.xml', 'sitemap.xml', 'feed/bezpeka.xml'}
 
 
 ADD_LIMIT = 100000  # UAH, bound for add_min/add_max
@@ -64,8 +68,9 @@ def load_feeds():
         config = json.loads(FEEDS_CONFIG.read_text('utf-8'))
     except FileNotFoundError:
         config = {}
-    feeds = [dict(file=MAIN_FEED, name='Роздрібні ціни', mult=1.0, add=None)]
-    seen = {MAIN_FEED}
+    feeds = [dict(file=MAIN_FEED, name='Роздрібні ціни', mult=1.0, add=None),
+             dict(file=OPT_FEED, name='Гурт', mult=1.0, add=None, wholesale=True)]
+    seen = {MAIN_FEED, OPT_FEED}
     for f in config.get('feeds', []):
         fname, pct = str(f.get('file', '')), f.get('percent', 0)
         lo, hi = f.get('add_min'), f.get('add_max')
@@ -328,7 +333,7 @@ def main():
                 f'      <keywords_ua>{esc(cap_keywords(e["kw_ua"]))}</keywords_ua>',
                 '    </item>',
             ]
-            items.append((price_uah, random.randint(*RANDOM_ADD_UAH), '\n'.join(lines)))
+            items.append((price_uah, random.randint(*RANDOM_ADD_UAH), price.get('wholesale'), '\n'.join(lines)))
 
     catalog = '\n'.join(f'    <category id="{cid}" portal_id="{CATEGORIES[cid][1]}">{esc(CATEGORIES[cid][0])}</category>'
                         for cid in sorted(used_cats))
@@ -336,23 +341,26 @@ def main():
     for feed in feeds:
         fname, markup = feed['file'], feed['mult']
         body = []
-        for base, bump, text in items:
-            if feed['add']:
+        for base, bump, wholesale, text in items:
+            if feed.get('wholesale'):
+                if not (isinstance(wholesale, (int, float)) and wholesale > 0):
+                    continue
+                value = wholesale
+            elif feed['add']:
                 # Random-range feed: table price (+/- %) plus its own random UAH,
                 # not the main feed's 1-10.
                 value = max(1, base * markup + random.randint(*feed['add']))
             else:
                 value = (base + bump) * markup
             body.append(text.replace('{price}', f'{round(value, 2):.2f}'))
-        body = '\n'.join(body)
         xml = clean('<?xml version="1.0" encoding="UTF-8"?>\n<shop>\n  <catalog>\n' + catalog +
-                    '\n  </catalog>\n  <items>\n' + body + '\n  </items>\n</shop>\n')
+                    '\n  </catalog>\n  <items>\n' + '\n'.join(body) + '\n  </items>\n</shop>\n')
         if FORBIDDEN.search(xml):
             sys.exit(f'{fname}: forbidden substring found, file not written')
         ElementTree.fromstring(xml.encode('utf-8'))
         (ROOT / fname).parent.mkdir(parents=True, exist_ok=True)
         (ROOT / fname).write_text(xml, encoding='utf-8')
-        print(f'{fname} generated: {len(items)} items, markup x{markup:.2f}'
+        print(f'{fname} generated: {len(body)} items, markup x{markup:.2f}'
               + (f', +{feed["add"][0]}..{feed["add"][1]} UAH' if feed['add'] else ''))
 
     built = [f['file'] for f in feeds]
