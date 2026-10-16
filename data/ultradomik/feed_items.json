@@ -46,10 +46,11 @@
   },
   {
     "id": "150676",
-    "name": "DEYE SE-F5 Pro-C 51.2V 100 Ah 45 кг, LiFePO4",
+    "name": "Акумуляторна батарея Deye SE-F5 Pro-C 51,2 В 100 А·год 5,12 кВт·год LiFePO4",
     "cat": 2,
-    "photo": "",
-    "problem": "немає товару на сайті"
+    "photo": "assets/images/prom/150676_1.jpg",
+    "problem": "",
+    "site": true
   },
   {
     "id": "142740",
@@ -398,14 +399,6 @@
     "site": true
   },
   {
-    "id": "143938",
-    "name": "Комплект автономного енергоживлення: Must PV18-3224VPM II 24V 3.2kW + MUST LP1600-24100, 25.6V 100Ah, LiFePO4",
-    "cat": 11,
-    "photo": "",
-    "problem": "немає фото на білому фоні",
-    "site": true
-  },
-  {
     "id": "150590",
     "name": "Акумуляторна батарея Dyness BX51100 51.2v 100ah, 5.12kwh LiFePo4, Trade IN",
     "cat": 2,
@@ -422,27 +415,43 @@
     "site": true
   },
   {
-    "id": "150935",
-    "name": "Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi, 309х505х147, 14 кг",
-    "cat": 1,
-    "photo": "assets/images/prom/150935_1.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "151057",
-    "name": "Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 400х708х233, 123 кг, 16kWh LiFePO4",
-    "cat": 2,
-    "photo": "assets/images/prom/151057_1.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "151284",
-    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + DAH Solar DHN-LVWES05-G1 100ah 51.2V",
+    "id": "143938",
+    "name": "Комплект автономного енергоживлення: Must PV18-3224VPM II 24V 3.2kW + MUST LP1600-24100, 25.6V 100Ah, LiFePO4",
     "cat": 11,
-    "photo": "assets/images/feed-auto/151284.jpg",
+    "photo": "",
+    "problem": "немає фото на білому фоні",
+    "site": true
+  },
+  {
+    "id": "152219",
+    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48230 51.2V 230Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152219.jpg",
     "problem": "",
+    "site": true
+  },
+  {
+    "id": "152221",
+    "name": "Комплект автономного енергоживлення: Must PV18-3224VPM II+ Felicity FLA24280 25.6V 280Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152221.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152279",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48314TG1-H 51.2V 314Ah, з підігрівом",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152279.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152519",
+    "name": "Wi-Fi-модуль для MUST PV18-6048 EXP",
+    "cat": 12,
+    "photo": "",
+    "problem": "немає фото на білому фоні",
     "site": true
   },
   {
@@ -478,35 +487,27 @@
     "site": true
   },
   {
-    "id": "152219",
-    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48230 51.2V 230Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152219.jpg",
+    "id": "150935",
+    "name": "Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi, 309х505х147, 14 кг",
+    "cat": 1,
+    "photo": "assets/images/prom/150935_1.jpg",
     "problem": "",
     "site": true
   },
   {
-    "id": "152221",
-    "name": "Комплект автономного енергоживлення: Must PV18-3224VPM II+ Felicity FLA24280 25.6V 280Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152221.jpg",
+    "id": "151057",
+    "name": "Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 400х708х233, 123 кг, 16kWh LiFePO4",
+    "cat": 2,
+    "photo": "assets/images/prom/151057_1.jpg",
     "problem": "",
     "site": true
   },
   {
-    "id": "152279",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48314TG1-H 51.2V 314Ah, з підігрівом",
+    "id": "151284",
+    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + DAH Solar DHN-LVWES05-G1 100ah 51.2V",
     "cat": 11,
-    "photo": "assets/images/feed-auto/152279.jpg",
+    "photo": "assets/images/feed-auto/151284.jpg",
     "problem": "",
-    "site": true
-  },
-  {
-    "id": "152519",
-    "name": "Wi-Fi-модуль для MUST PV18-6048 EXP",
-    "cat": 12,
-    "photo": "",
-    "problem": "немає фото на білому фоні",
     "site": true
   }
 ]
