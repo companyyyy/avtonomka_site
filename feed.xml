@@ -6,6 +6,584 @@
     <description>Магазин обладнання для автономного живлення</description>
 
     <item>
+      <g:id>152639</g:id>
+      <g:title>Акумуляторна батарея Felicity FLA12100 PG2 12.8V 100Ah LiFePO4, 295x201x199, 10 кг</g:title>
+      <g:description>Felicity FLA12100 PG2 – акумуляторна батарея LiFePO4 з номінальною напругою 12,8 В та ємністю 100 А·год для ДБЖ, інверторів і автономних систем на 12 В.
+
+Запас енергії близько 1,28 кВт·год. Технологія LiFePO4 розрахована на регулярні цикли заряджання та розряджання, тому батарея підходить для резервного живлення будинку під час відключень і для сонячних електростанцій.
+
+Розміри 295 × 201 × 199 мм, вага 10 кг.</g:description>
+      <g:link>https://avtonomka.com.ua/product/felicity-fla12100-pg2/152639.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/prom/152639_1.jpg</g:image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152639_2.jpg</g:additional_image_link>
+      <g:price>12958.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Felicity</g:brand>
+      <g:mpn>FLA12100PG2</g:mpn>
+      <g:google_product_category>6289</g:google_product_category>
+      <g:product_type>Акумулятори і батарейки &gt; Акумулятори для ДБЖ</g:product_type>
+    </item>
+    <item>
+      <g:id>152675</g:id>
+      <g:title>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48314TG1-H 51.2V 314Ah</g:title>
+      <g:description>Комплект автономного енергоживлення MUST PV19-6048EXP 48V 6 kW + Felicity FLB48314TG1-H 51.2V 314Ah
+
+Комплект автономного енергоживлення MUST та Felicity підійде для будинку, квартири, офісу, майстерні або іншого об&apos;єкта, де потрібна система резервного та автономного живлення. У комплекті поєднані інвертор MUST потужністю 6 кВт та акумулятор Felicity на 16,08 кВт·год, тому система може живити підключене навантаження та накопичувати електроенергію для подальшого використання.
+
+MUST PV19-6048EXP це гібридний інвертор потужністю 6 кВт з номінальною напругою акумулятора 48 В. Він формує вихідну напругу 230 В у вигляді чистої синусоїди, тому підходить для живлення побутової техніки, електроніки та іншого обладнання в межах допустимого навантаження. Інвертор може працювати від акумулятора, сонячних панелей, електромережі або генератора.
+
+Пікова потужність становить 12000 Вт. Вбудований MPPT-контролер працює в діапазоні 150-450 В і підтримує сонячні панелі потужністю до 6 кВт, максимальний струм заряджання 120 А. Є входи USB, RS485 і CAN, підтримується паралельна робота та підключення генератора.
+
+Для контролю роботи передбачений дисплей і вбудований Wi-Fi, а також функції захисту від перевантаження, перегріву та короткого замикання.
+
+Для накопичення енергії використовується Felicity FLB48314TG1-H. Це акумуляторна батарея на основі технології LiFePO4 з номінальною напругою 51,2 В, ємністю 314 А·год та запасом енергії близько 16,08 кВт·год. Така батарея може використовуватися як резервне джерело живлення під час відключень електроенергії або для накопичення енергії від сонячних панелей. Батарея оснащена функцією підігріву, що дозволяє коректно заряджати її за низьких температур.
+
+Такий комплект інвертор + акумулятор містить основні компоненти для організації резервного та автономного живлення. Його можна використовувати для живлення будинку, квартири, офісу, майстерні або іншого об&apos;єкта. За наявності сонячних панелей комплект також дозволяє використовувати сонячну енергію для живлення навантаження та заряджання акумулятора.
+
+Характеристики:
+
+Інвертор: MUST PV19-6048EXP 6 кВт 48 В
+Тип: гібридний інвертор
+Номінальна потужність: 6 кВт
+Кількість фаз: 1
+Напруга АКБ: 48 В
+Форма вихідної напруги: чиста синусоїда 230 В
+Wi-Fi: є
+Акумулятор: Felicity FLB48314TG1-H
+Тип АКБ: LiFePO4
+Номінальна напруга: 51,2 В
+Ємність: 314 А·год
+Енергоємність: близько 16,08 кВт·год
+Підігрів: є
+BMS: є</g:description>
+      <g:link>https://avtonomka.com.ua/product/must-pv19-6048exp-felicity-flb48314tg1-h/152675.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152675.jpg</g:image_link>
+      <g:price>115915.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>MUST</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:is_bundle>yes</g:is_bundle>
+      <g:google_product_category>5142</g:google_product_category>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152699</g:id>
+      <g:title>Комплект автономного енергоживлення: Must PV19-6048EXP 6 кВт 48 В + Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом</g:title>
+      <g:description>Комплект автономного енергоживлення Must PV19-6048EXP 6 кВт 48 В + Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом
+
+Комплект автономного енергоживлення MUST та Felicity підійде для будинку, квартири, офісу, майстерні або іншого об&apos;єкта, де потрібна система резервного та автономного живлення. У комплекті поєднані інвертор MUST потужністю 6 кВт та акумулятор Felicity на 11,78 кВт·год, тому система може живити підключене навантаження та накопичувати електроенергію для подальшого використання.
+
+MUST PV19-6048EXP це гібридний інвертор потужністю 6 кВт з номінальною напругою акумулятора 48 В. Він формує вихідну напругу 230 В у вигляді чистої синусоїди, тому підходить для живлення побутової техніки, електроніки та іншого обладнання в межах допустимого навантаження. Інвертор може працювати від акумулятора, сонячних панелей, електромережі або генератора.
+
+Пікова потужність становить 12000 Вт. Вбудований MPPT-контролер працює в діапазоні 150-450 В і підтримує сонячні панелі потужністю до 6 кВт, максимальний струм заряджання 120 А. Є входи USB, RS485 і CAN, підтримується паралельна робота та підключення генератора.
+
+Для контролю роботи передбачений дисплей і вбудований Wi-Fi, а також функції захисту від перевантаження, перегріву та короткого замикання.
+
+Для накопичення енергії використовується Felicity FLB48230WG1-H. Це акумуляторна батарея на основі технології LiFePO4 з номінальною напругою 51,2 В, ємністю 230 А·год та запасом енергії близько 11,78 кВт·год. Така батарея може використовуватися як резервне джерело живлення під час відключень електроенергії або для накопичення енергії від сонячних панелей. Батарея оснащена функцією підігріву, що дозволяє коректно заряджати її за низьких температур.
+
+Такий комплект інвертор + акумулятор містить основні компоненти для організації резервного та автономного живлення. Його можна використовувати для живлення будинку, квартири, офісу, майстерні або іншого об&apos;єкта. За наявності сонячних панелей комплект також дозволяє використовувати сонячну енергію для живлення навантаження та заряджання акумулятора.
+
+Характеристики:
+
+Інвертор: MUST PV19-6048EXP 6 кВт 48 В
+Тип: гібридний інвертор
+Номінальна потужність: 6 кВт
+Кількість фаз: 1
+Напруга АКБ: 48 В
+Форма вихідної напруги: чиста синусоїда 230 В
+Wi-Fi: є
+Акумулятор: Felicity FLB48230WG1-H
+Тип АКБ: LiFePO4
+Номінальна напруга: 51,2 В
+Ємність: 230 А·год
+Енергоємність: близько 11,78 кВт·год
+Підігрів: є
+BMS: є</g:description>
+      <g:link>https://avtonomka.com.ua/product/must-pv19-6048exp-felicity-flb48230wg1-h/152699.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152699.jpg</g:image_link>
+      <g:price>102257.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>MUST</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:is_bundle>yes</g:is_bundle>
+      <g:google_product_category>5142</g:google_product_category>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152723</g:id>
+      <g:title>Система зберігання електроенергії MUST HBP18-1212 OS 2в1 1.2 кВт 1280 Втг, 225х295х363, 17 кг</g:title>
+      <g:description>MUST HBP18-1212 OS – система зберігання електроенергії формату 2 в 1: інвертор потужністю 1,2 кВт і акумулятор ємністю 1280 Вт·год в одному корпусі.
+
+Готове рішення для резервного живлення квартири, будинку чи офісу під час відключень світла: не потрібно окремо підбирати інвертор, акумулятор і кабелі між ними – досить підключити техніку.
+
+Розміри 225 × 295 × 363 мм, вага 17 кг.</g:description>
+      <g:link>https://avtonomka.com.ua/product/systema-zberihannia-elektroenerhii-must-hbp18-1012-os/152723.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/prom/152723_1.jpg</g:image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152723_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152723_3.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152723_4.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152723_5.jpg</g:additional_image_link>
+      <g:price>20612.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>MUST</g:brand>
+      <g:mpn>HBP18-1212 OS</g:mpn>
+      <g:google_product_category>5142</g:google_product_category>
+      <g:product_type>Автономна енергетика &gt; Системи зберігання електроенергії 2 в 1</g:product_type>
+    </item>
+    <item>
+      <g:id>152724</g:id>
+      <g:title>Комплект автономного енергоживлення: Must PV18-1512 VPM II 1.5 кВт 12 В + Felicity FLA12100PG2 12.8V 100Ah</g:title>
+      <g:description>Комплект автономного енергоживлення Must PV18-1512 VPM II + Felicity FLA12100 PG2 – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.
+
+Гібридний інвертор Must PV18-1512 VPM II потужністю 1,5 кВт працює з акумуляторами 12 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.
+
+Акумулятор Felicity FLA12100 PG2 на основі LiFePO4 (12,8 В, 100 А·год) накопичує близько 1,28 кВт·год енергії. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</g:description>
+      <g:link>https://avtonomka.com.ua/product/must-pv18-1512-vpm-ii-felicity-fla12100pg2/152724.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152724.png</g:image_link>
+      <g:price>24509.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>MUST</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:is_bundle>yes</g:is_bundle>
+      <g:google_product_category>5142</g:google_product_category>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152725</g:id>
+      <g:title>Гібридний інвертор MUST PV19-4024 EXP 4 кВт 24 В, 322х486х134, 9.5 кг</g:title>
+      <g:description>MUST PV19-4024 EXP – гібридний інвертор потужністю 4 кВт для систем резервного та автономного живлення. Працює з акумуляторами 24 В і підходить для будинку, квартири, дачі чи офісу.
+
+Інвертор поєднує перетворювач, зарядний пристрій від мережі та сонячний контролер: енергія може надходити від сонячних панелей, накопичуватися в акумуляторі або братися з мережі. На виході 230 В для живлення побутової техніки та електроніки.
+
+Розміри 322 × 486 × 134 мм, вага 9,5 кг.</g:description>
+      <g:link>https://avtonomka.com.ua/product/must-pv19-4024-exp/152725.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/prom/152725_1.jpg</g:image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152725_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152725_3.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152725_4.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152725_5.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152725_6.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152725_7.jpg</g:additional_image_link>
+      <g:price>18926.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>MUST</g:brand>
+      <g:mpn>PV19-4024EXP</g:mpn>
+      <g:google_product_category>5142</g:google_product_category>
+      <g:product_type>Автономна енергетика &gt; Гібридні інвертори</g:product_type>
+    </item>
+    <item>
+      <g:id>152726</g:id>
+      <g:title>Комплект автономного енергоживлення: Must PV18-1512 VPM II 1.5 кВт 12 Вт+ MUST LP15-12100 12V 100Ah LiFePO4</g:title>
+      <g:description>Комплект автономного енергоживлення Must PV18-1512 VPM II + MUST LP15-12100 – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.
+
+Гібридний інвертор Must PV18-1512 VPM II потужністю 1,5 кВт працює з акумуляторами 12 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.
+
+Акумулятор MUST LP15-12100 на основі LiFePO4 (12,8 В, 100 А·год) накопичує близько 1,28 кВт·год енергії. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</g:description>
+      <g:link>https://avtonomka.com.ua/product/must-pv18-1512-vpm-ii-must-lp15-12100/152726.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152726.png</g:image_link>
+      <g:price>26052.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>MUST</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:is_bundle>yes</g:is_bundle>
+      <g:google_product_category>5142</g:google_product_category>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152730</g:id>
+      <g:title>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + Felicity FLA24280 25.6V 280Ah</g:title>
+      <g:description>Комплект автономного енергоживлення MUST PV19-4024 EXP + Felicity FLA24280 – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.
+
+Гібридний інвертор MUST PV19-4024 EXP потужністю 4 кВт працює з акумуляторами 24 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.
+
+Акумулятор Felicity FLA24280 на основі LiFePO4 (25,6 В, 280 А·год) накопичує близько 7,17 кВт·год енергії. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</g:description>
+      <g:link>https://avtonomka.com.ua/product/must-pv18-4024-exp-felicity-fla24280/152730.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152730.png</g:image_link>
+      <g:price>74705.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>MUST</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:is_bundle>yes</g:is_bundle>
+      <g:google_product_category>5142</g:google_product_category>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152732</g:id>
+      <g:title>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + MUST LP16-48300, 51.2V 300Ah</g:title>
+      <g:description>Комплект автономного енергоживлення MUST PV19-6048EXP + MUST LP16-48300 – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.
+
+Гібридний інвертор MUST PV19-6048EXP потужністю 6 кВт працює з акумуляторами 48 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.
+
+Акумулятор MUST LP16-48300 на основі LiFePO4 (51,2 В, 300 А·год) накопичує близько 15,36 кВт·год енергії. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</g:description>
+      <g:link>https://avtonomka.com.ua/product/must-pv19-6048exp-must-lp16-48300/152732.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152732.png</g:image_link>
+      <g:price>108786.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>MUST</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:is_bundle>yes</g:is_bundle>
+      <g:google_product_category>5142</g:google_product_category>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152746</g:id>
+      <g:title>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48230WG1-H 51.2V 230Ah з підігрівом</g:title>
+      <g:description>Комплект автономного енергоживлення Felicity IVEM6048-II + Felicity FLB48230WG1-H – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.
+
+Гібридний інвертор Felicity IVEM6048-II потужністю 6 кВт працює з акумуляторами 48 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.
+
+Акумулятор Felicity FLB48230WG1-H на основі LiFePO4 (51,2 В, 230 А·год) накопичує близько 11,78 кВт·год енергії. Батарея має вбудований підігрів, тому її можна коректно заряджати й за низьких температур – наприклад, у неопалюваному приміщенні. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</g:description>
+      <g:link>https://avtonomka.com.ua/product/felicity-ivem6048-ii-felicity-flb48230wg1-h/152746.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152746.png</g:image_link>
+      <g:price>99992.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Felicity</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:is_bundle>yes</g:is_bundle>
+      <g:google_product_category>5142</g:google_product_category>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152747</g:id>
+      <g:title>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ MUST LP16-48300, 51.2V 300Ah</g:title>
+      <g:description>Комплект автономного енергоживлення Felicity IVEM6048-II + MUST LP16-48300 – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.
+
+Гібридний інвертор Felicity IVEM6048-II потужністю 6 кВт працює з акумуляторами 48 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.
+
+Акумулятор MUST LP16-48300 на основі LiFePO4 (51,2 В, 300 А·год) накопичує близько 15,36 кВт·год енергії. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</g:description>
+      <g:link>https://avtonomka.com.ua/product/felicity-ivem6048-ii-must-lp16-48300/152747.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152747.png</g:image_link>
+      <g:price>106521.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Felicity</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:is_bundle>yes</g:is_bundle>
+      <g:google_product_category>5142</g:google_product_category>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152795</g:id>
+      <g:title>Wi-Fi-модуль для гібридного інвертора MUST</g:title>
+      <g:description>Wi-Fi-модуль для гібридного інвертора MUST</g:description>
+      <g:link>https://avtonomka.com.ua/product/wi-fi-modul-dlia-hibrydnoho-invertora-must/152795.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/products/152795_1.jpg</g:image_link>
+      <g:price>2718.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>MUST</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:product_type>Автономна енергетика &gt; Wi-Fi модули для гібридних інверторів</g:product_type>
+    </item>
+    <item>
+      <g:id>143938</g:id>
+      <g:title>Комплект автономного енергоживлення: Must PV18-3224VPM II 24V 3.2kW + MUST LP1600-24100, 25.6V 100Ah, LiFePO4</g:title>
+      <g:description>Комплект автономного енергоживлення Must PV18-3224VPM II + MUST LP16-24100 – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.
+
+Гібридний інвертор Must PV18-3224VPM II потужністю 3,2 кВт працює з акумуляторами 24 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.
+
+Акумулятор MUST LP16-24100 на основі LiFePO4 (25,6 В, 100 А·год) накопичує близько 2,56 кВт·год енергії. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</g:description>
+      <g:link>https://avtonomka.com.ua/product/must-pv18-3224vpm-ii-must-lp1600-24100/143938.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/143938.png</g:image_link>
+      <g:price>47411.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>MUST</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:is_bundle>yes</g:is_bundle>
+      <g:google_product_category>5142</g:google_product_category>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>150590</g:id>
+      <g:title>Акумуляторна батарея Dyness BX51100 51.2v 100ah, 5.12kwh LiFePo4 (Trade-IN, б/в)</g:title>
+      <g:description>Акумуляторна батарея Dyness BX51100 51,2 В 100 А·год 5,12 кВт·год LiFePO4
+Dyness BX51100 – це літій-залізо-фосфатна акумуляторна батарея LiFePO4 ємністю 100 А·год та номінальною напругою 51,2 В. Номінальна енергія акумулятора становить 5,12 кВт·год. Батарея призначена для систем резервного та автономного живлення, а також для роботи разом з інвертором.
+Ємність 100 А·год та енергоємність 5,12 кВт·год дозволяють накопичувати енергію для живлення побутового та іншого обладнання під час відключень електроенергії. Завдяки номінальній напрузі 51,2 В акумулятор підходить для систем, розрахованих на 48 В.
+Акумулятор Dyness BX51100 виконаний за технологією LiFePO4, яка добре підходить для систем накопичення енергії з регулярними циклами заряджання та розряджання. Батарея може використовуватися в автономних та гібридних системах, сонячних електростанціях і як акумулятор для інвертора. Передбачена можливість підключення до 30 батарей паралельно, що дозволяє збільшувати загальну ємність системи.
+Корпус має розміри 558 × 545 × 150 мм, вага акумулятора становить 50 кг. Передбачені різні варіанти монтажу, зокрема настінне, підлогове та стекове встановлення. Батарея має комунікаційні інтерфейси CAN, RS485 та RS232 для обміну даними з сумісним обладнанням.
+Дана позиція пропонується за програмою Trade-IN – батарея була у використанні, має високий рівень технічного стану (SOH) і проходить перевірку перед продажем, що дозволяє придбати надійне рішення за більш вигідною ціною.
+
+Де використовується
+Акумулятор Dyness BX51100 100 А·год можна використовувати як джерело накопичення енергії у таких системах:
+• резервного живлення будинку або квартири
+• автономного електроживлення
+• роботи з інвертором
+• накопичення енергії від сонячних панелей
+• живлення обладнання під час відключень електроенергії
+• гібридних та автономних сонячних електростанцій
+Важливо: перед підключенням необхідно перевірити сумісність акумулятора з інвертором за напругою, параметрами заряджання та розряджання, а також способом комунікації. Для збільшення ємності системи батареї Dyness BX51100 можна підключати паралельно, але конфігурацію необхідно підбирати з урахуванням вимог виробника.</g:description>
+      <g:link>https://avtonomka.com.ua/product/dyness-bx51100/150590.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/prom/150590_1.jpg</g:image_link>
+      <g:price>34806.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>used</g:condition>
+      <g:brand>Dyness</g:brand>
+      <g:mpn>BX51100</g:mpn>
+      <g:google_product_category>276</g:google_product_category>
+      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
+    </item>
+    <item>
+      <g:id>150599</g:id>
+      <g:title>Акумулятор MUST LP15-12100 12V 100Ah LiFePO4, 330х173х217, 10.5 кг</g:title>
+      <g:description>MUST LP15-12100 – акумуляторна батарея LiFePO4 з номінальною напругою 12,8 В та ємністю 100 А·год для ДБЖ, інверторів і автономних систем на 12 В.
+
+Запас енергії близько 1,28 кВт·год. Технологія LiFePO4 розрахована на регулярні цикли заряджання та розряджання, тому батарея підходить для резервного живлення будинку під час відключень і для сонячних електростанцій.
+
+Розміри 330 × 173 × 217 мм, вага 10,5 кг.</g:description>
+      <g:link>https://avtonomka.com.ua/product/must-lp15-12100/150599.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/prom/150599_1.jpg</g:image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150599_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150599_3.jpg</g:additional_image_link>
+      <g:price>14501.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>MUST</g:brand>
+      <g:mpn>LP15-12100</g:mpn>
+      <g:google_product_category>6289</g:google_product_category>
+      <g:product_type>Акумулятори і батарейки &gt; Акумулятори для ДБЖ</g:product_type>
+    </item>
+    <item>
+      <g:id>150649</g:id>
+      <g:title>Безперебійник для роутера TTN DC1036P 12000 mAh DC Mini UPS for Wifi Router</g:title>
+      <g:description>Безперебійник для роутера TTN DC1036P 12000 mAh DC Mini UPS for WiFi Router
+
+TTN DC1036P — компактний міні ДБЖ для роутера, який допомагає підтримувати роботу Wi-Fi під час відключення електроенергії. Вбудований акумулятор ємністю 12000 mAh забезпечує резервне живлення роутера та іншого сумісного мережевого обладнання.
+
+Такий безперебійник для роутера зручно використовувати вдома або в офісі, коли важливо залишатися на зв&apos;язку навіть під час перебоїв з електропостачанням. TTN DC1036P підключається між блоком живлення та роутером і автоматично переходить на живлення від акумулятора при зникненні напруги в мережі.
+
+Компактний корпус не займає багато місця, тому DC Mini UPS для WiFi роутера можна розмістити безпосередньо біля мережевого обладнання. Ємність 12000 mAh дозволяє довше підтримувати роботу підключеного пристрою порівняно з невеликими резервними акумуляторами.
+
+TTN DC1036P стане практичним рішенням для резервного живлення роутера, коли під час відключень електроенергії потрібно зберегти доступ до Wi-Fi та інтернету.
+
+Характеристики:
+
+виробник: TTN
+модель: DC1036P
+тип: DC Mini UPS
+ємність акумулятора: 12000 mAh
+призначення: резервне живлення роутера та мережевого обладнання
+тип обладнання: ДБЖ для Wi-Fi роутера
+формат: компактний міні ДБЖ</g:description>
+      <g:link>https://avtonomka.com.ua/product/ttn-dc1036p-12000-mah-dc-mini-ups-for/150649.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/prom/150649_1.jpg</g:image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150649_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150649_3.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150649_4.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150649_5.jpg</g:additional_image_link>
+      <g:price>1672.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>TTN</g:brand>
+      <g:mpn>DC1036P</g:mpn>
+      <g:google_product_category>1348</g:google_product_category>
+      <g:product_type>Обладнання &gt; Джерела безперебійного живлення</g:product_type>
+    </item>
+    <item>
+      <g:id>150674</g:id>
+      <g:title>Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V, 480х500х155, 47 кг</g:title>
+      <g:description>Акумулятор DAH Solar DHN-LVWES05-G1 51,2 В 100 А·год 5,12 кВт·год
+
+DAH Solar DHN-LVWES05-G1 – літій-залізо-фосфатний акумулятор LiFePO4 з номінальною напругою 51,2 В та ємністю 100 А·год. Запас енергії становить 5,12 кВт·год, тому батарея добре підходить як основний накопичувач для системи резервного живлення квартири, будинку чи невеликого офісу.
+
+Акумулятор розрахований на роботу з гібридними інверторами 48 В: вдень він накопичує енергію від сонячних панелей або мережі, а під час відключення електроенергії віддає її на живлення холодильника, освітлення, роутера, котла та іншої побутової техніки. Робочий діапазон напруги – 43,2…58,4 В.
+
+Корпус настінного типу має розміри 480 × 500 × 155 мм, вага батареї – 47 кг. Компактний плаский корпус зручно розмістити на стіні в коридорі, технічному приміщенні чи котельні, не займаючи місця на підлозі.
+
+Де використовується
+• резервне живлення будинку або квартири
+• робота в парі з гібридним інвертором 48 В
+• накопичення енергії від сонячних панелей
+• живлення обладнання під час відключень електроенергії
+• автономні та гібридні сонячні електростанції
+
+Важливо: перед підключенням перевірте сумісність акумулятора з інвертором за напругою, струмами заряду та розряду і протоколом зв&apos;язку BMS. Менеджери Автономки допоможуть підібрати сумісний інвертор.</g:description>
+      <g:link>https://avtonomka.com.ua/product/dah-solar-dhn-lvwes05-g1/150674.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/prom/150674_1.jpg</g:image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150674_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150674_3.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150674_4.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150674_5.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150674_6.jpg</g:additional_image_link>
+      <g:price>38430.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:mpn>DHN-LVWES05-G1</g:mpn>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:google_product_category>276</g:google_product_category>
+      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
+    </item>
+    <item>
+      <g:id>143477</g:id>
+      <g:title>Акумуляторна батарея MUST LP16-24100, 25.6V 100Ah, 442х485.5х177, 23 кг, LiFePO4</g:title>
+      <g:description>⚠️ Продається лише в комплекті з інвертором.
+MUST LP16-24100 – акумуляторна батарея LiFePO4 з номінальною напругою 25,6 В та ємністю 100 А·год для систем з гібридним інвертором на 24 В.
+
+Запас енергії близько 2,56 кВт·год. Технологія LiFePO4 розрахована на регулярні цикли заряджання та розряджання, тому батарея підходить для резервного живлення будинку під час відключень і для сонячних електростанцій.
+
+Розміри 442 × 485,5 × 177 мм, вага 23 кг.</g:description>
+      <g:link>https://avtonomka.com.ua/product/must-lp16-24100/143477.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/prom/143477_1.jpg</g:image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/143477_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/143477_3.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/143477_4.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/143477_5.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/143477_6.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/143477_7.jpg</g:additional_image_link>
+      <g:price>31635.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>MUST</g:brand>
+      <g:mpn>LP16-24100</g:mpn>
+      <g:google_product_category>276</g:google_product_category>
+      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
+    </item>
+    <item>
+      <g:id>150935</g:id>
+      <g:title>Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi, 309х505х147, 14 кг</g:title>
+      <g:description>MUST PV19-6048EXP – гібридний інвертор потужністю 6 кВт для систем резервного та автономного живлення. Працює з акумуляторами 48 В і підходить для будинку, квартири, дачі чи офісу.
+
+Інвертор поєднує перетворювач, зарядний пристрій від мережі та сонячний контролер: енергія може надходити від сонячних панелей, накопичуватися в акумуляторі або братися з мережі. На виході 230 В для живлення побутової техніки та електроніки. Версія з Wi-Fi: за роботою системи можна стежити зі смартфона.
+
+Розміри 309 × 505 × 147 мм, вага 14 кг.</g:description>
+      <g:link>https://avtonomka.com.ua/product/must-pv19-6048exp/150935.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/prom/150935_1.jpg</g:image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150935_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150935_3.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150935_4.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150935_5.jpg</g:additional_image_link>
+      <g:price>25746.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>MUST</g:brand>
+      <g:mpn>PV19-6048EXP</g:mpn>
+      <g:google_product_category>5142</g:google_product_category>
+      <g:product_type>Автономна енергетика &gt; Гібридні інвертори</g:product_type>
+    </item>
+    <item>
+      <g:id>151057</g:id>
+      <g:title>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 400х708х233, 123 кг, 16kWh LiFePO4</g:title>
+      <g:description>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 400х708х233, 123 кг, 16kWh LiFePO4</g:description>
+      <g:link>https://avtonomka.com.ua/product/deye-se-f16-s/151057.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/prom/151057_1.jpg</g:image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/151057_2.jpg</g:additional_image_link>
+      <g:price>95055.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Deye</g:brand>
+      <g:mpn>SE-F16-С</g:mpn>
+      <g:google_product_category>276</g:google_product_category>
+      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
+    </item>
+    <item>
+      <g:id>151284</g:id>
+      <g:title>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + DAH Solar DHN-LVWES05-G1 100ah 51.2V</g:title>
+      <g:description>Комплект автономного енергоживлення MUST PV19-6048EXP 48V 6 кВт + DAH Solar DHN-LVWES05-G1 100Ah 51.2V
+
+Готовий комплект резервного живлення для квартири, будинку чи офісу: гібридний інвертор MUST на 6 кВт у парі з акумулятором DAH Solar на 5,12 кВт·год. Обидва компоненти розраховані на напругу 48 В, тому не потрібно окремо підбирати батарею під інвертор.
+
+MUST PV19-6048EXP – гібридний інвертор з номінальною потужністю 6000 Вт і піковою до 12 000 Вт. Він поєднує перетворювач, зарядний пристрій від мережі та сонячний MPPT-контролер: енергія може надходити від сонячних панелей (до 6000 Вт, діапазон MPPT 150–450 В), накопичуватися в акумуляторі або братися з мережі. На виході – чиста синусоїда 230 В, час перемикання не більше 10 мс. Інвертор підтримує підключення генератора та паралельну роботу декількох пристроїв.
+
+DAH Solar DHN-LVWES05-G1 – акумулятор LiFePO4 51,2 В 100 А·год із запасом енергії 5,12 кВт·год у компактному настінному корпусі 480 × 500 × 155 мм вагою 47 кг. Він накопичує енергію від мережі чи сонця і віддає її під час відключень.
+
+Комплект добре підходить як стартова система: забезпечує живлення холодильника, освітлення, роутера, котла, телевізора та іншої техніки під час відключень. За потреби до системи пізніше можна додати сонячні панелі.
+
+Де використовується
+• резервне живлення квартири, будинку чи офісу
+• системи із сонячними панелями
+• живлення побутової техніки під час відключень електроенергії
+• зменшення залежності від електромережі
+
+Важливо: час автономної роботи залежить від потужності підключених приладів. Якщо потрібен більший запас енергії, менеджери Автономки допоможуть підібрати комплект з ємнішим акумулятором.</g:description>
+      <g:link>https://avtonomka.com.ua/product/must-pv19-6048exp-dah-solar-dhn-lvwes05-g1/151284.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/151284.png</g:image_link>
+      <g:price>63420.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>MUST</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:is_bundle>yes</g:is_bundle>
+      <g:google_product_category>5142</g:google_product_category>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>146741</g:id>
+      <g:title>Сонячний кабель KBE Solar 6 мм, 500 м (бухта), чорний, Німеччина</g:title>
+      <g:description>Сонячний кабель KBE Solar 6 мм², 500 м (бухта), чорний, Німеччина
+
+Сонячний кабель KBE Solar 6 мм² використовується для підключення сонячних панелей та іншого обладнання фотоелектричної системи. Кабель призначений для прокладання електричних з&apos;єднань у сонячних електростанціях та фотоелектричних системах.
+
+KBE Solar має переріз 6 мм² та поставляється в бухті довжиною 500 м. Чорний колір кабелю дозволяє використовувати його для монтажу сонячної електростанції та зручного прокладання кабельних ліній.
+
+Сонячний кабель KBE Solar 6 мм² підходить для використання у фотоелектричних системах, де потрібен кабель для сонячних панелей відповідного перерізу. Велика бухта на 500 м зручна для монтажу систем, у яких необхідна значна довжина кабельної лінії.
+
+Характеристики:
+
+виробник: KBE Solar
+країна виробництва: Німеччина
+переріз: 6 мм²
+довжина: 500 м
+колір: чорний
+тип: сонячний кабель
+призначення: для сонячних панелей та фотоелектричних систем
+форма поставки: бухта</g:description>
+      <g:link>https://avtonomka.com.ua/product/kbe-solar-6-mm-500-m-bukhta-chornyi-nimechchyna/146741.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/prom/146741_1.jpg</g:image_link>
+      <g:price>33955.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>KBE</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:google_product_category>2345</g:google_product_category>
+      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
+    </item>
+    <item>
+      <g:id>151617</g:id>
+      <g:title>Акумуляторна батарея Felicity FLA48314-EU 51.2V 314Ah 16kWh LiFePO4, 435х880х247, 121.5 кг</g:title>
+      <g:description>Акумуляторна батарея Felicity FLA48314-EU 51,2 В 314 А·год 16 кВт·год LiFePO₄, 435 × 880 × 247 мм, 121,5 кг
+
+Felicity FLA48314-EU – це літій-залізо-фосфатна акумуляторна батарея LiFePO₄ ємністю 314 А·год та номінальною напругою 51,2 В. Акумулятор призначений для систем резервного та автономного живлення, а також для роботи разом з інвертором.
+
+Ємність 314 А·год дозволяє накопичувати енергію для живлення побутового та іншого обладнання під час відключень електроенергії. Номінальна енергоємність батареї становить 16 кВт·год, а напруга 51,2 В підходить для систем, розрахованих на 48 В.
+
+Акумулятор виконаний за технологією LiFePO₄, яка добре підходить для систем накопичення енергії з регулярними циклами заряджання та розряджання. Такий формат часто використовують у домашніх системах резервного живлення, сонячних електростанціях та автономних енергетичних комплексах. Акумулятор має вбудовану систему BMS, автоматичний вимикач та запобіжник, а також підтримує зв&apos;язок через CAN та RS485.
+
+Корпус має розміри 435 × 880 × 247 мм, вага акумулятора становить 121,5 кг. Підлогове встановлення дозволяє розміщувати батарею в спеціально підготовленому місці з урахуванням необхідного простору для монтажу та обслуговування.
+
+Де використовується
+
+Акумулятор Felicity FLA48314-EU 314 А·год можна використовувати як джерело накопичення енергії у таких системах:
+• резервного живлення будинку або квартири
+• автономного електроживлення
+• роботи з інвертором
+• накопичення енергії від сонячних панелей
+• живлення обладнання під час відключень електроенергії
+
+Важливо: перед підключенням необхідно перевірити сумісність акумулятора з інвертором за напругою, параметрами заряджання та способом комунікації, якщо вона передбачена.</g:description>
+      <g:link>https://avtonomka.com.ua/product/felicity-fla48314-eu/151617.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/prom/151617_1.jpg</g:image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/151617_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/151617_3.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/151617_4.jpg</g:additional_image_link>
+      <g:price>90824.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Felicity</g:brand>
+      <g:mpn>FLA48314-EU</g:mpn>
+      <g:google_product_category>276</g:google_product_category>
+      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
+    </item>
+    <item>
       <g:id>151777</g:id>
       <g:title>Сонячний кабель KBE 6 мм 1 м, Німеччина</g:title>
       <g:description>Сонячний кабель KBE 6 мм² 1 м, Німеччина
@@ -555,61 +1133,6 @@ MUST PV18-3224 VPM II – гібридний інвертор потужніст
       <g:custom_label_0>backorder</g:custom_label_0>
     </item>
     <item>
-      <g:id>142725</g:id>
-      <g:title>Гібридний інвертор Must PV19-6048EXP 6 кВт 48 В, 309х505х147, 14 кг</g:title>
-      <g:description>Гібридний інвертор Must PV19-6048EXP 6 кВт 48 В, 309х505х147, 14 кг</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-pv19-6048exp/142725.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/prom/142725_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/142725_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/142725_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/142725_4.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/142725_5.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/142725_6.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/142725_7.jpg</g:additional_image_link>
-      <g:price>24840.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>MUST</g:brand>
-      <g:mpn>PV19-6048EXP</g:mpn>
-      <g:google_product_category>5142</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Гібридні інвертори</g:product_type>
-    </item>
-    <item>
-      <g:id>142727</g:id>
-      <g:title>Акумуляторна батарея MUST LP16-48100 51.2V 100Ah, 442х625.5х177, 44 кг, LiFePO4</g:title>
-      <g:description>Акумуляторна батарея MUST LP16-48100 51.2V 100Ah, 442х625.5х177, 44 кг, LiFePO4</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-lp16-48100/142727.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/prom/142727_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/142727_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/142727_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/142727_4.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/142727_5.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/142727_6.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/142727_7.jpg</g:additional_image_link>
-      <g:price>42960.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>MUST</g:brand>
-      <g:mpn>LP16-48100</g:mpn>
-      <g:google_product_category>276</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
-    </item>
-    <item>
-      <g:id>142740</g:id>
-      <g:title>Акумуляторна батарея Dyness DL5.0C (Heating) 51.2V 100Ah LiFePO4, з підігрівом, 558х545х150, 54 кг</g:title>
-      <g:description>Акумуляторна батарея Dyness DL5.0C (Heating) 51.2V 100Ah LiFePO4, з підігрівом, 558х545х150, 54 кг</g:description>
-      <g:link>https://avtonomka.com.ua/product/dyness-dl5-0c-heating/142740.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/prom/142740_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/142740_2.jpg</g:additional_image_link>
-      <g:price>39789.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Dyness</g:brand>
-      <g:identifier_exists>no</g:identifier_exists>
-      <g:google_product_category>276</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
-    </item>
-    <item>
       <g:id>148245</g:id>
       <g:title>Зарядна станція ECOFLOW DELTA 3 1024Wh 1800W (китайські розетки, з перехідниками)</g:title>
       <g:description>Зарядна станція EcoFlow DELTA 3 1024Wh 1800W, китайські розетки з перехідниками
@@ -1003,584 +1526,6 @@ Wi-Fi-модуль має компактний корпус і не потреб
       <g:brand>MUST</g:brand>
       <g:identifier_exists>no</g:identifier_exists>
       <g:product_type>Автономна енергетика &gt; Wi-Fi модули для гібридних інверторів</g:product_type>
-    </item>
-    <item>
-      <g:id>143477</g:id>
-      <g:title>Акумуляторна батарея MUST LP16-24100, 25.6V 100Ah, 442х485.5х177, 23 кг, LiFePO4</g:title>
-      <g:description>⚠️ Продається лише в комплекті з інвертором.
-MUST LP16-24100 – акумуляторна батарея LiFePO4 з номінальною напругою 25,6 В та ємністю 100 А·год для систем з гібридним інвертором на 24 В.
-
-Запас енергії близько 2,56 кВт·год. Технологія LiFePO4 розрахована на регулярні цикли заряджання та розряджання, тому батарея підходить для резервного живлення будинку під час відключень і для сонячних електростанцій.
-
-Розміри 442 × 485,5 × 177 мм, вага 23 кг.</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-lp16-24100/143477.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/prom/143477_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/143477_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/143477_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/143477_4.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/143477_5.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/143477_6.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/143477_7.jpg</g:additional_image_link>
-      <g:price>31635.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>MUST</g:brand>
-      <g:mpn>LP16-24100</g:mpn>
-      <g:google_product_category>276</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
-    </item>
-    <item>
-      <g:id>150935</g:id>
-      <g:title>Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi, 309х505х147, 14 кг</g:title>
-      <g:description>MUST PV19-6048EXP – гібридний інвертор потужністю 6 кВт для систем резервного та автономного живлення. Працює з акумуляторами 48 В і підходить для будинку, квартири, дачі чи офісу.
-
-Інвертор поєднує перетворювач, зарядний пристрій від мережі та сонячний контролер: енергія може надходити від сонячних панелей, накопичуватися в акумуляторі або братися з мережі. На виході 230 В для живлення побутової техніки та електроніки. Версія з Wi-Fi: за роботою системи можна стежити зі смартфона.
-
-Розміри 309 × 505 × 147 мм, вага 14 кг.</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-pv19-6048exp/150935.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/prom/150935_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150935_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150935_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150935_4.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150935_5.jpg</g:additional_image_link>
-      <g:price>25746.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>MUST</g:brand>
-      <g:mpn>PV19-6048EXP</g:mpn>
-      <g:google_product_category>5142</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Гібридні інвертори</g:product_type>
-    </item>
-    <item>
-      <g:id>151057</g:id>
-      <g:title>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 400х708х233, 123 кг, 16kWh LiFePO4</g:title>
-      <g:description>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 400х708х233, 123 кг, 16kWh LiFePO4</g:description>
-      <g:link>https://avtonomka.com.ua/product/deye-se-f16-s/151057.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/prom/151057_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/151057_2.jpg</g:additional_image_link>
-      <g:price>95055.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Deye</g:brand>
-      <g:mpn>SE-F16-С</g:mpn>
-      <g:google_product_category>276</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
-    </item>
-    <item>
-      <g:id>151284</g:id>
-      <g:title>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + DAH Solar DHN-LVWES05-G1 100ah 51.2V</g:title>
-      <g:description>Комплект автономного енергоживлення MUST PV19-6048EXP 48V 6 кВт + DAH Solar DHN-LVWES05-G1 100Ah 51.2V
-
-Готовий комплект резервного живлення для квартири, будинку чи офісу: гібридний інвертор MUST на 6 кВт у парі з акумулятором DAH Solar на 5,12 кВт·год. Обидва компоненти розраховані на напругу 48 В, тому не потрібно окремо підбирати батарею під інвертор.
-
-MUST PV19-6048EXP – гібридний інвертор з номінальною потужністю 6000 Вт і піковою до 12 000 Вт. Він поєднує перетворювач, зарядний пристрій від мережі та сонячний MPPT-контролер: енергія може надходити від сонячних панелей (до 6000 Вт, діапазон MPPT 150–450 В), накопичуватися в акумуляторі або братися з мережі. На виході – чиста синусоїда 230 В, час перемикання не більше 10 мс. Інвертор підтримує підключення генератора та паралельну роботу декількох пристроїв.
-
-DAH Solar DHN-LVWES05-G1 – акумулятор LiFePO4 51,2 В 100 А·год із запасом енергії 5,12 кВт·год у компактному настінному корпусі 480 × 500 × 155 мм вагою 47 кг. Він накопичує енергію від мережі чи сонця і віддає її під час відключень.
-
-Комплект добре підходить як стартова система: забезпечує живлення холодильника, освітлення, роутера, котла, телевізора та іншої техніки під час відключень. За потреби до системи пізніше можна додати сонячні панелі.
-
-Де використовується
-• резервне живлення квартири, будинку чи офісу
-• системи із сонячними панелями
-• живлення побутової техніки під час відключень електроенергії
-• зменшення залежності від електромережі
-
-Важливо: час автономної роботи залежить від потужності підключених приладів. Якщо потрібен більший запас енергії, менеджери Автономки допоможуть підібрати комплект з ємнішим акумулятором.</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-pv19-6048exp-dah-solar-dhn-lvwes05-g1/151284.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/151284.png</g:image_link>
-      <g:price>63420.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>MUST</g:brand>
-      <g:identifier_exists>no</g:identifier_exists>
-      <g:is_bundle>yes</g:is_bundle>
-      <g:google_product_category>5142</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>151617</g:id>
-      <g:title>Акумуляторна батарея Felicity FLA48314-EU 51.2V 314Ah 16kWh LiFePO4, 435х880х247, 121.5 кг</g:title>
-      <g:description>Акумуляторна батарея Felicity FLA48314-EU 51,2 В 314 А·год 16 кВт·год LiFePO₄, 435 × 880 × 247 мм, 121,5 кг
-
-Felicity FLA48314-EU – це літій-залізо-фосфатна акумуляторна батарея LiFePO₄ ємністю 314 А·год та номінальною напругою 51,2 В. Акумулятор призначений для систем резервного та автономного живлення, а також для роботи разом з інвертором.
-
-Ємність 314 А·год дозволяє накопичувати енергію для живлення побутового та іншого обладнання під час відключень електроенергії. Номінальна енергоємність батареї становить 16 кВт·год, а напруга 51,2 В підходить для систем, розрахованих на 48 В.
-
-Акумулятор виконаний за технологією LiFePO₄, яка добре підходить для систем накопичення енергії з регулярними циклами заряджання та розряджання. Такий формат часто використовують у домашніх системах резервного живлення, сонячних електростанціях та автономних енергетичних комплексах. Акумулятор має вбудовану систему BMS, автоматичний вимикач та запобіжник, а також підтримує зв&apos;язок через CAN та RS485.
-
-Корпус має розміри 435 × 880 × 247 мм, вага акумулятора становить 121,5 кг. Підлогове встановлення дозволяє розміщувати батарею в спеціально підготовленому місці з урахуванням необхідного простору для монтажу та обслуговування.
-
-Де використовується
-
-Акумулятор Felicity FLA48314-EU 314 А·год можна використовувати як джерело накопичення енергії у таких системах:
-• резервного живлення будинку або квартири
-• автономного електроживлення
-• роботи з інвертором
-• накопичення енергії від сонячних панелей
-• живлення обладнання під час відключень електроенергії
-
-Важливо: перед підключенням необхідно перевірити сумісність акумулятора з інвертором за напругою, параметрами заряджання та способом комунікації, якщо вона передбачена.</g:description>
-      <g:link>https://avtonomka.com.ua/product/felicity-fla48314-eu/151617.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/prom/151617_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/151617_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/151617_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/151617_4.jpg</g:additional_image_link>
-      <g:price>90824.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Felicity</g:brand>
-      <g:mpn>FLA48314-EU</g:mpn>
-      <g:google_product_category>276</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
-    </item>
-    <item>
-      <g:id>152639</g:id>
-      <g:title>Акумуляторна батарея Felicity FLA12100 PG2 12.8V 100Ah LiFePO4, 295x201x199, 10 кг</g:title>
-      <g:description>Felicity FLA12100 PG2 – акумуляторна батарея LiFePO4 з номінальною напругою 12,8 В та ємністю 100 А·год для ДБЖ, інверторів і автономних систем на 12 В.
-
-Запас енергії близько 1,28 кВт·год. Технологія LiFePO4 розрахована на регулярні цикли заряджання та розряджання, тому батарея підходить для резервного живлення будинку під час відключень і для сонячних електростанцій.
-
-Розміри 295 × 201 × 199 мм, вага 10 кг.</g:description>
-      <g:link>https://avtonomka.com.ua/product/felicity-fla12100-pg2/152639.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/prom/152639_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152639_2.jpg</g:additional_image_link>
-      <g:price>12958.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Felicity</g:brand>
-      <g:mpn>FLA12100PG2</g:mpn>
-      <g:google_product_category>6289</g:google_product_category>
-      <g:product_type>Акумулятори і батарейки &gt; Акумулятори для ДБЖ</g:product_type>
-    </item>
-    <item>
-      <g:id>152675</g:id>
-      <g:title>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48314TG1-H 51.2V 314Ah</g:title>
-      <g:description>Комплект автономного енергоживлення MUST PV19-6048EXP 48V 6 kW + Felicity FLB48314TG1-H 51.2V 314Ah
-
-Комплект автономного енергоживлення MUST та Felicity підійде для будинку, квартири, офісу, майстерні або іншого об&apos;єкта, де потрібна система резервного та автономного живлення. У комплекті поєднані інвертор MUST потужністю 6 кВт та акумулятор Felicity на 16,08 кВт·год, тому система може живити підключене навантаження та накопичувати електроенергію для подальшого використання.
-
-MUST PV19-6048EXP це гібридний інвертор потужністю 6 кВт з номінальною напругою акумулятора 48 В. Він формує вихідну напругу 230 В у вигляді чистої синусоїди, тому підходить для живлення побутової техніки, електроніки та іншого обладнання в межах допустимого навантаження. Інвертор може працювати від акумулятора, сонячних панелей, електромережі або генератора.
-
-Пікова потужність становить 12000 Вт. Вбудований MPPT-контролер працює в діапазоні 150-450 В і підтримує сонячні панелі потужністю до 6 кВт, максимальний струм заряджання 120 А. Є входи USB, RS485 і CAN, підтримується паралельна робота та підключення генератора.
-
-Для контролю роботи передбачений дисплей і вбудований Wi-Fi, а також функції захисту від перевантаження, перегріву та короткого замикання.
-
-Для накопичення енергії використовується Felicity FLB48314TG1-H. Це акумуляторна батарея на основі технології LiFePO4 з номінальною напругою 51,2 В, ємністю 314 А·год та запасом енергії близько 16,08 кВт·год. Така батарея може використовуватися як резервне джерело живлення під час відключень електроенергії або для накопичення енергії від сонячних панелей. Батарея оснащена функцією підігріву, що дозволяє коректно заряджати її за низьких температур.
-
-Такий комплект інвертор + акумулятор містить основні компоненти для організації резервного та автономного живлення. Його можна використовувати для живлення будинку, квартири, офісу, майстерні або іншого об&apos;єкта. За наявності сонячних панелей комплект також дозволяє використовувати сонячну енергію для живлення навантаження та заряджання акумулятора.
-
-Характеристики:
-
-Інвертор: MUST PV19-6048EXP 6 кВт 48 В
-Тип: гібридний інвертор
-Номінальна потужність: 6 кВт
-Кількість фаз: 1
-Напруга АКБ: 48 В
-Форма вихідної напруги: чиста синусоїда 230 В
-Wi-Fi: є
-Акумулятор: Felicity FLB48314TG1-H
-Тип АКБ: LiFePO4
-Номінальна напруга: 51,2 В
-Ємність: 314 А·год
-Енергоємність: близько 16,08 кВт·год
-Підігрів: є
-BMS: є</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-pv19-6048exp-felicity-flb48314tg1-h/152675.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152675.jpg</g:image_link>
-      <g:price>115915.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>MUST</g:brand>
-      <g:identifier_exists>no</g:identifier_exists>
-      <g:is_bundle>yes</g:is_bundle>
-      <g:google_product_category>5142</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152699</g:id>
-      <g:title>Комплект автономного енергоживлення: Must PV19-6048EXP 6 кВт 48 В + Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом</g:title>
-      <g:description>Комплект автономного енергоживлення Must PV19-6048EXP 6 кВт 48 В + Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом
-
-Комплект автономного енергоживлення MUST та Felicity підійде для будинку, квартири, офісу, майстерні або іншого об&apos;єкта, де потрібна система резервного та автономного живлення. У комплекті поєднані інвертор MUST потужністю 6 кВт та акумулятор Felicity на 11,78 кВт·год, тому система може живити підключене навантаження та накопичувати електроенергію для подальшого використання.
-
-MUST PV19-6048EXP це гібридний інвертор потужністю 6 кВт з номінальною напругою акумулятора 48 В. Він формує вихідну напругу 230 В у вигляді чистої синусоїди, тому підходить для живлення побутової техніки, електроніки та іншого обладнання в межах допустимого навантаження. Інвертор може працювати від акумулятора, сонячних панелей, електромережі або генератора.
-
-Пікова потужність становить 12000 Вт. Вбудований MPPT-контролер працює в діапазоні 150-450 В і підтримує сонячні панелі потужністю до 6 кВт, максимальний струм заряджання 120 А. Є входи USB, RS485 і CAN, підтримується паралельна робота та підключення генератора.
-
-Для контролю роботи передбачений дисплей і вбудований Wi-Fi, а також функції захисту від перевантаження, перегріву та короткого замикання.
-
-Для накопичення енергії використовується Felicity FLB48230WG1-H. Це акумуляторна батарея на основі технології LiFePO4 з номінальною напругою 51,2 В, ємністю 230 А·год та запасом енергії близько 11,78 кВт·год. Така батарея може використовуватися як резервне джерело живлення під час відключень електроенергії або для накопичення енергії від сонячних панелей. Батарея оснащена функцією підігріву, що дозволяє коректно заряджати її за низьких температур.
-
-Такий комплект інвертор + акумулятор містить основні компоненти для організації резервного та автономного живлення. Його можна використовувати для живлення будинку, квартири, офісу, майстерні або іншого об&apos;єкта. За наявності сонячних панелей комплект також дозволяє використовувати сонячну енергію для живлення навантаження та заряджання акумулятора.
-
-Характеристики:
-
-Інвертор: MUST PV19-6048EXP 6 кВт 48 В
-Тип: гібридний інвертор
-Номінальна потужність: 6 кВт
-Кількість фаз: 1
-Напруга АКБ: 48 В
-Форма вихідної напруги: чиста синусоїда 230 В
-Wi-Fi: є
-Акумулятор: Felicity FLB48230WG1-H
-Тип АКБ: LiFePO4
-Номінальна напруга: 51,2 В
-Ємність: 230 А·год
-Енергоємність: близько 11,78 кВт·год
-Підігрів: є
-BMS: є</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-pv19-6048exp-felicity-flb48230wg1-h/152699.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152699.jpg</g:image_link>
-      <g:price>102257.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>MUST</g:brand>
-      <g:identifier_exists>no</g:identifier_exists>
-      <g:is_bundle>yes</g:is_bundle>
-      <g:google_product_category>5142</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152723</g:id>
-      <g:title>Система зберігання електроенергії MUST HBP18-1212 OS 2в1 1.2 кВт 1280 Втг, 225х295х363, 17 кг</g:title>
-      <g:description>MUST HBP18-1212 OS – система зберігання електроенергії формату 2 в 1: інвертор потужністю 1,2 кВт і акумулятор ємністю 1280 Вт·год в одному корпусі.
-
-Готове рішення для резервного живлення квартири, будинку чи офісу під час відключень світла: не потрібно окремо підбирати інвертор, акумулятор і кабелі між ними – досить підключити техніку.
-
-Розміри 225 × 295 × 363 мм, вага 17 кг.</g:description>
-      <g:link>https://avtonomka.com.ua/product/systema-zberihannia-elektroenerhii-must-hbp18-1012-os/152723.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/prom/152723_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152723_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152723_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152723_4.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152723_5.jpg</g:additional_image_link>
-      <g:price>20612.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>MUST</g:brand>
-      <g:mpn>HBP18-1212 OS</g:mpn>
-      <g:google_product_category>5142</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Системи зберігання електроенергії 2 в 1</g:product_type>
-    </item>
-    <item>
-      <g:id>152724</g:id>
-      <g:title>Комплект автономного енергоживлення: Must PV18-1512 VPM II 1.5 кВт 12 В + Felicity FLA12100PG2 12.8V 100Ah</g:title>
-      <g:description>Комплект автономного енергоживлення Must PV18-1512 VPM II + Felicity FLA12100 PG2 – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.
-
-Гібридний інвертор Must PV18-1512 VPM II потужністю 1,5 кВт працює з акумуляторами 12 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.
-
-Акумулятор Felicity FLA12100 PG2 на основі LiFePO4 (12,8 В, 100 А·год) накопичує близько 1,28 кВт·год енергії. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-pv18-1512-vpm-ii-felicity-fla12100pg2/152724.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152724.png</g:image_link>
-      <g:price>24509.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>MUST</g:brand>
-      <g:identifier_exists>no</g:identifier_exists>
-      <g:is_bundle>yes</g:is_bundle>
-      <g:google_product_category>5142</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152725</g:id>
-      <g:title>Гібридний інвертор MUST PV19-4024 EXP 4 кВт 24 В, 322х486х134, 9.5 кг</g:title>
-      <g:description>MUST PV19-4024 EXP – гібридний інвертор потужністю 4 кВт для систем резервного та автономного живлення. Працює з акумуляторами 24 В і підходить для будинку, квартири, дачі чи офісу.
-
-Інвертор поєднує перетворювач, зарядний пристрій від мережі та сонячний контролер: енергія може надходити від сонячних панелей, накопичуватися в акумуляторі або братися з мережі. На виході 230 В для живлення побутової техніки та електроніки.
-
-Розміри 322 × 486 × 134 мм, вага 9,5 кг.</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-pv19-4024-exp/152725.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/prom/152725_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152725_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152725_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152725_4.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152725_5.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152725_6.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/152725_7.jpg</g:additional_image_link>
-      <g:price>18926.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>MUST</g:brand>
-      <g:mpn>PV19-4024EXP</g:mpn>
-      <g:google_product_category>5142</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Гібридні інвертори</g:product_type>
-    </item>
-    <item>
-      <g:id>152726</g:id>
-      <g:title>Комплект автономного енергоживлення: Must PV18-1512 VPM II 1.5 кВт 12 Вт+ MUST LP15-12100 12V 100Ah LiFePO4</g:title>
-      <g:description>Комплект автономного енергоживлення Must PV18-1512 VPM II + MUST LP15-12100 – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.
-
-Гібридний інвертор Must PV18-1512 VPM II потужністю 1,5 кВт працює з акумуляторами 12 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.
-
-Акумулятор MUST LP15-12100 на основі LiFePO4 (12,8 В, 100 А·год) накопичує близько 1,28 кВт·год енергії. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-pv18-1512-vpm-ii-must-lp15-12100/152726.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152726.png</g:image_link>
-      <g:price>26052.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>MUST</g:brand>
-      <g:identifier_exists>no</g:identifier_exists>
-      <g:is_bundle>yes</g:is_bundle>
-      <g:google_product_category>5142</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152730</g:id>
-      <g:title>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + Felicity FLA24280 25.6V 280Ah</g:title>
-      <g:description>Комплект автономного енергоживлення MUST PV19-4024 EXP + Felicity FLA24280 – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.
-
-Гібридний інвертор MUST PV19-4024 EXP потужністю 4 кВт працює з акумуляторами 24 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.
-
-Акумулятор Felicity FLA24280 на основі LiFePO4 (25,6 В, 280 А·год) накопичує близько 7,17 кВт·год енергії. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-pv18-4024-exp-felicity-fla24280/152730.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152730.png</g:image_link>
-      <g:price>74705.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>MUST</g:brand>
-      <g:identifier_exists>no</g:identifier_exists>
-      <g:is_bundle>yes</g:is_bundle>
-      <g:google_product_category>5142</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152732</g:id>
-      <g:title>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + MUST LP16-48300, 51.2V 300Ah</g:title>
-      <g:description>Комплект автономного енергоживлення MUST PV19-6048EXP + MUST LP16-48300 – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.
-
-Гібридний інвертор MUST PV19-6048EXP потужністю 6 кВт працює з акумуляторами 48 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.
-
-Акумулятор MUST LP16-48300 на основі LiFePO4 (51,2 В, 300 А·год) накопичує близько 15,36 кВт·год енергії. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-pv19-6048exp-must-lp16-48300/152732.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152732.png</g:image_link>
-      <g:price>108786.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>MUST</g:brand>
-      <g:identifier_exists>no</g:identifier_exists>
-      <g:is_bundle>yes</g:is_bundle>
-      <g:google_product_category>5142</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152746</g:id>
-      <g:title>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48230WG1-H 51.2V 230Ah з підігрівом</g:title>
-      <g:description>Комплект автономного енергоживлення Felicity IVEM6048-II + Felicity FLB48230WG1-H – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.
-
-Гібридний інвертор Felicity IVEM6048-II потужністю 6 кВт працює з акумуляторами 48 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.
-
-Акумулятор Felicity FLB48230WG1-H на основі LiFePO4 (51,2 В, 230 А·год) накопичує близько 11,78 кВт·год енергії. Батарея має вбудований підігрів, тому її можна коректно заряджати й за низьких температур – наприклад, у неопалюваному приміщенні. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</g:description>
-      <g:link>https://avtonomka.com.ua/product/felicity-ivem6048-ii-felicity-flb48230wg1-h/152746.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152746.png</g:image_link>
-      <g:price>99992.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Felicity</g:brand>
-      <g:identifier_exists>no</g:identifier_exists>
-      <g:is_bundle>yes</g:is_bundle>
-      <g:google_product_category>5142</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152747</g:id>
-      <g:title>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ MUST LP16-48300, 51.2V 300Ah</g:title>
-      <g:description>Комплект автономного енергоживлення Felicity IVEM6048-II + MUST LP16-48300 – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.
-
-Гібридний інвертор Felicity IVEM6048-II потужністю 6 кВт працює з акумуляторами 48 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.
-
-Акумулятор MUST LP16-48300 на основі LiFePO4 (51,2 В, 300 А·год) накопичує близько 15,36 кВт·год енергії. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</g:description>
-      <g:link>https://avtonomka.com.ua/product/felicity-ivem6048-ii-must-lp16-48300/152747.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152747.png</g:image_link>
-      <g:price>106521.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Felicity</g:brand>
-      <g:identifier_exists>no</g:identifier_exists>
-      <g:is_bundle>yes</g:is_bundle>
-      <g:google_product_category>5142</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152795</g:id>
-      <g:title>Wi-Fi-модуль для гібридного інвертора MUST</g:title>
-      <g:description>Wi-Fi-модуль для гібридного інвертора MUST</g:description>
-      <g:link>https://avtonomka.com.ua/product/wi-fi-modul-dlia-hibrydnoho-invertora-must/152795.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/products/152795_1.jpg</g:image_link>
-      <g:price>2718.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>MUST</g:brand>
-      <g:identifier_exists>no</g:identifier_exists>
-      <g:product_type>Автономна енергетика &gt; Wi-Fi модули для гібридних інверторів</g:product_type>
-    </item>
-    <item>
-      <g:id>146741</g:id>
-      <g:title>Сонячний кабель KBE Solar 6 мм, 500 м (бухта), чорний, Німеччина</g:title>
-      <g:description>Сонячний кабель KBE Solar 6 мм², 500 м (бухта), чорний, Німеччина
-
-Сонячний кабель KBE Solar 6 мм² використовується для підключення сонячних панелей та іншого обладнання фотоелектричної системи. Кабель призначений для прокладання електричних з&apos;єднань у сонячних електростанціях та фотоелектричних системах.
-
-KBE Solar має переріз 6 мм² та поставляється в бухті довжиною 500 м. Чорний колір кабелю дозволяє використовувати його для монтажу сонячної електростанції та зручного прокладання кабельних ліній.
-
-Сонячний кабель KBE Solar 6 мм² підходить для використання у фотоелектричних системах, де потрібен кабель для сонячних панелей відповідного перерізу. Велика бухта на 500 м зручна для монтажу систем, у яких необхідна значна довжина кабельної лінії.
-
-Характеристики:
-
-виробник: KBE Solar
-країна виробництва: Німеччина
-переріз: 6 мм²
-довжина: 500 м
-колір: чорний
-тип: сонячний кабель
-призначення: для сонячних панелей та фотоелектричних систем
-форма поставки: бухта</g:description>
-      <g:link>https://avtonomka.com.ua/product/kbe-solar-6-mm-500-m-bukhta-chornyi-nimechchyna/146741.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/prom/146741_1.jpg</g:image_link>
-      <g:price>33955.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>KBE</g:brand>
-      <g:identifier_exists>no</g:identifier_exists>
-      <g:google_product_category>2345</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
-    </item>
-    <item>
-      <g:id>143938</g:id>
-      <g:title>Комплект автономного енергоживлення: Must PV18-3224VPM II 24V 3.2kW + MUST LP1600-24100, 25.6V 100Ah, LiFePO4</g:title>
-      <g:description>Комплект автономного енергоживлення Must PV18-3224VPM II + MUST LP16-24100 – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.
-
-Гібридний інвертор Must PV18-3224VPM II потужністю 3,2 кВт працює з акумуляторами 24 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.
-
-Акумулятор MUST LP16-24100 на основі LiFePO4 (25,6 В, 100 А·год) накопичує близько 2,56 кВт·год енергії. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-pv18-3224vpm-ii-must-lp1600-24100/143938.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/143938.png</g:image_link>
-      <g:price>47411.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>MUST</g:brand>
-      <g:identifier_exists>no</g:identifier_exists>
-      <g:is_bundle>yes</g:is_bundle>
-      <g:google_product_category>5142</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>150590</g:id>
-      <g:title>Акумуляторна батарея Dyness BX51100 51.2v 100ah, 5.12kwh LiFePo4 (Trade-IN, б/в)</g:title>
-      <g:description>Акумуляторна батарея Dyness BX51100 51,2 В 100 А·год 5,12 кВт·год LiFePO4
-Dyness BX51100 – це літій-залізо-фосфатна акумуляторна батарея LiFePO4 ємністю 100 А·год та номінальною напругою 51,2 В. Номінальна енергія акумулятора становить 5,12 кВт·год. Батарея призначена для систем резервного та автономного живлення, а також для роботи разом з інвертором.
-Ємність 100 А·год та енергоємність 5,12 кВт·год дозволяють накопичувати енергію для живлення побутового та іншого обладнання під час відключень електроенергії. Завдяки номінальній напрузі 51,2 В акумулятор підходить для систем, розрахованих на 48 В.
-Акумулятор Dyness BX51100 виконаний за технологією LiFePO4, яка добре підходить для систем накопичення енергії з регулярними циклами заряджання та розряджання. Батарея може використовуватися в автономних та гібридних системах, сонячних електростанціях і як акумулятор для інвертора. Передбачена можливість підключення до 30 батарей паралельно, що дозволяє збільшувати загальну ємність системи.
-Корпус має розміри 558 × 545 × 150 мм, вага акумулятора становить 50 кг. Передбачені різні варіанти монтажу, зокрема настінне, підлогове та стекове встановлення. Батарея має комунікаційні інтерфейси CAN, RS485 та RS232 для обміну даними з сумісним обладнанням.
-Дана позиція пропонується за програмою Trade-IN – батарея була у використанні, має високий рівень технічного стану (SOH) і проходить перевірку перед продажем, що дозволяє придбати надійне рішення за більш вигідною ціною.
-
-Де використовується
-Акумулятор Dyness BX51100 100 А·год можна використовувати як джерело накопичення енергії у таких системах:
-• резервного живлення будинку або квартири
-• автономного електроживлення
-• роботи з інвертором
-• накопичення енергії від сонячних панелей
-• живлення обладнання під час відключень електроенергії
-• гібридних та автономних сонячних електростанцій
-Важливо: перед підключенням необхідно перевірити сумісність акумулятора з інвертором за напругою, параметрами заряджання та розряджання, а також способом комунікації. Для збільшення ємності системи батареї Dyness BX51100 можна підключати паралельно, але конфігурацію необхідно підбирати з урахуванням вимог виробника.</g:description>
-      <g:link>https://avtonomka.com.ua/product/dyness-bx51100/150590.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/prom/150590_1.jpg</g:image_link>
-      <g:price>34806.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>used</g:condition>
-      <g:brand>Dyness</g:brand>
-      <g:mpn>BX51100</g:mpn>
-      <g:google_product_category>276</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
-    </item>
-    <item>
-      <g:id>150599</g:id>
-      <g:title>Акумулятор MUST LP15-12100 12V 100Ah LiFePO4, 330х173х217, 10.5 кг</g:title>
-      <g:description>MUST LP15-12100 – акумуляторна батарея LiFePO4 з номінальною напругою 12,8 В та ємністю 100 А·год для ДБЖ, інверторів і автономних систем на 12 В.
-
-Запас енергії близько 1,28 кВт·год. Технологія LiFePO4 розрахована на регулярні цикли заряджання та розряджання, тому батарея підходить для резервного живлення будинку під час відключень і для сонячних електростанцій.
-
-Розміри 330 × 173 × 217 мм, вага 10,5 кг.</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-lp15-12100/150599.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/prom/150599_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150599_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150599_3.jpg</g:additional_image_link>
-      <g:price>14501.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>MUST</g:brand>
-      <g:mpn>LP15-12100</g:mpn>
-      <g:google_product_category>6289</g:google_product_category>
-      <g:product_type>Акумулятори і батарейки &gt; Акумулятори для ДБЖ</g:product_type>
-    </item>
-    <item>
-      <g:id>150649</g:id>
-      <g:title>Безперебійник для роутера TTN DC1036P 12000 mAh DC Mini UPS for Wifi Router</g:title>
-      <g:description>Безперебійник для роутера TTN DC1036P 12000 mAh DC Mini UPS for WiFi Router
-
-TTN DC1036P — компактний міні ДБЖ для роутера, який допомагає підтримувати роботу Wi-Fi під час відключення електроенергії. Вбудований акумулятор ємністю 12000 mAh забезпечує резервне живлення роутера та іншого сумісного мережевого обладнання.
-
-Такий безперебійник для роутера зручно використовувати вдома або в офісі, коли важливо залишатися на зв&apos;язку навіть під час перебоїв з електропостачанням. TTN DC1036P підключається між блоком живлення та роутером і автоматично переходить на живлення від акумулятора при зникненні напруги в мережі.
-
-Компактний корпус не займає багато місця, тому DC Mini UPS для WiFi роутера можна розмістити безпосередньо біля мережевого обладнання. Ємність 12000 mAh дозволяє довше підтримувати роботу підключеного пристрою порівняно з невеликими резервними акумуляторами.
-
-TTN DC1036P стане практичним рішенням для резервного живлення роутера, коли під час відключень електроенергії потрібно зберегти доступ до Wi-Fi та інтернету.
-
-Характеристики:
-
-виробник: TTN
-модель: DC1036P
-тип: DC Mini UPS
-ємність акумулятора: 12000 mAh
-призначення: резервне живлення роутера та мережевого обладнання
-тип обладнання: ДБЖ для Wi-Fi роутера
-формат: компактний міні ДБЖ</g:description>
-      <g:link>https://avtonomka.com.ua/product/ttn-dc1036p-12000-mah-dc-mini-ups-for/150649.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/prom/150649_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150649_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150649_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150649_4.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150649_5.jpg</g:additional_image_link>
-      <g:price>1672.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>TTN</g:brand>
-      <g:mpn>DC1036P</g:mpn>
-      <g:google_product_category>1348</g:google_product_category>
-      <g:product_type>Обладнання &gt; Джерела безперебійного живлення</g:product_type>
-    </item>
-    <item>
-      <g:id>150674</g:id>
-      <g:title>Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V, 480х500х155, 47 кг</g:title>
-      <g:description>Акумулятор DAH Solar DHN-LVWES05-G1 51,2 В 100 А·год 5,12 кВт·год
-
-DAH Solar DHN-LVWES05-G1 – літій-залізо-фосфатний акумулятор LiFePO4 з номінальною напругою 51,2 В та ємністю 100 А·год. Запас енергії становить 5,12 кВт·год, тому батарея добре підходить як основний накопичувач для системи резервного живлення квартири, будинку чи невеликого офісу.
-
-Акумулятор розрахований на роботу з гібридними інверторами 48 В: вдень він накопичує енергію від сонячних панелей або мережі, а під час відключення електроенергії віддає її на живлення холодильника, освітлення, роутера, котла та іншої побутової техніки. Робочий діапазон напруги – 43,2…58,4 В.
-
-Корпус настінного типу має розміри 480 × 500 × 155 мм, вага батареї – 47 кг. Компактний плаский корпус зручно розмістити на стіні в коридорі, технічному приміщенні чи котельні, не займаючи місця на підлозі.
-
-Де використовується
-• резервне живлення будинку або квартири
-• робота в парі з гібридним інвертором 48 В
-• накопичення енергії від сонячних панелей
-• живлення обладнання під час відключень електроенергії
-• автономні та гібридні сонячні електростанції
-
-Важливо: перед підключенням перевірте сумісність акумулятора з інвертором за напругою, струмами заряду та розряду і протоколом зв&apos;язку BMS. Менеджери Автономки допоможуть підібрати сумісний інвертор.</g:description>
-      <g:link>https://avtonomka.com.ua/product/dah-solar-dhn-lvwes05-g1/150674.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/prom/150674_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150674_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150674_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150674_4.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150674_5.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/prom/150674_6.jpg</g:additional_image_link>
-      <g:price>38430.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:mpn>DHN-LVWES05-G1</g:mpn>
-      <g:identifier_exists>no</g:identifier_exists>
-      <g:google_product_category>276</g:google_product_category>
-      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
     </item>
   </channel>
 </rss>
