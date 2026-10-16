@@ -1936,6 +1936,8 @@ main { flex: 1; }
   .footer-contacts { align-items: center; justify-content: center; }
   .footer-bottom { flex-direction: column; gap: 12px; }
   .footer-legal { justify-content: center; }
+  .footer-social { justify-content: center; padding-top: 0; }
+  .footer-social__title { width: 100%; margin: 0; }
 }
 
 @media (max-width: 480px) {
@@ -2610,3 +2612,43 @@ html.lang-en .lang-hide-en { display: none !important; }
 @media (prefers-reduced-motion: reduce) {
   .product-viewers__dot { animation: none; }
 }
+
+/* ---------- Соцмережі у футері ---------- */
+.footer-social {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  padding: 18px 0 2px;
+}
+.footer-social__title {
+  color: rgba(255,255,255,.6);
+  font-size: .85rem;
+  margin-right: 4px;
+}
+.footer-social__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 13px;
+  border-radius: 20px;
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.85);
+  font-size: .85rem;
+  font-weight: 600;
+  transition: background var(--transition), color var(--transition);
+}
+.footer-social__link::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--social-color);
+}
+.footer-social__link:hover { background: var(--social-color); color: #fff; }
+.footer-social__link:hover::before { background: #fff; }
+.footer-social__link--viber     { --social-color: #7360f2; }
+.footer-social__link--facebook  { --social-color: #1877f2; }
+.footer-social__link--instagram { --social-color: #e1306c; }
+.footer-social__link--tiktok    { --social-color: #fe2c55; }
+.footer-social__link--youtube   { --social-color: #ff0000; }

@@ -23,7 +23,8 @@
     "delivery_payment": "Payment & Delivery",
     "return_policy": "Return Policy",
     "warranty": "Warranty",
-    "address": "40 Marselska St, Odesa, Odesa region, 65000, Ukraine"
+    "address": "40 Marselska St, Odesa, Odesa region, 65000, Ukraine",
+    "social": "Follow us:"
   },
   "hero": {
     "heading": "<span>Power stations, batteries, inverters</span> - everything you need for off-grid power.",
