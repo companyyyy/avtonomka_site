@@ -254,6 +254,42 @@
     });
   }
 
+  /* ---- Надсилання замовлення (checkout.js, order-form.js) ----
+     Основне - Supabase (Edge Function order-submit -> таблиці orders,
+     розділ «Замовлення» адмінки, сповіщення менеджеру в Telegram).
+     Запасна копія - Google Таблиця (Apps Script, no-cors: відповідь не
+     читається). Замовлення вважається надісланим, якщо його прийняла хоч
+     одна сторона. Повертає { number } (номер з Supabase або null). */
+  const ORDER_API = 'https://uvndubhmqzqqsrnrxgaj.supabase.co/functions/v1/order-submit';
+  const ORDER_SHEET = 'https://script.google.com/macros/s/AKfycbz7JbuQpZmBlUck24Bjp7SGKZL-JqE_clqLuYb9y15QG4-FSk45ZkpPHf5faZWISHcE/exec';
+
+  function newOrderKey() {
+    try { if (window.crypto && crypto.randomUUID) return crypto.randomUUID(); } catch (e) {}
+    return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 12);
+  }
+
+  function submitOrder(order, sheetData) {
+    const sheet = fetch(ORDER_SHEET, { method: 'POST', mode: 'no-cors', body: sheetData })
+      .then(function () { return true; }, function () { return false; });
+    const ctrl = window.AbortController ? new AbortController() : null;
+    const timer = ctrl && setTimeout(function () { ctrl.abort(); }, 20000);
+    const api = fetch(ORDER_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(Object.assign({ page_url: location.href }, order)),
+      signal: ctrl ? ctrl.signal : undefined
+    })
+      .then(function (r) { return r.json().then(function (j) { return r.ok && j && j.ok ? j : null; }); })
+      .catch(function (err) { console.error('Orders: Supabase', err); return null; })
+      .finally(function () { if (timer) clearTimeout(timer); });
+    return Promise.all([api, sheet]).then(function (res) {
+      if (!res[0] && !res[1]) throw new Error('order not sent');
+      return { number: res[0] ? res[0].number : null };
+    });
+  }
+
+  window.Orders = { submit: submitOrder, newKey: newOrderKey };
+
   window.Cart = {
     add: addItem,
     remove: removeItem,

@@ -262,9 +262,11 @@
 const CONFIG = {
   PRODUCTS_URL: "../products.json",
   MANAGER: "http://t.me/+380987772020",
-  /* Той самий Apps Script Web App, що приймає заявки з сайту
-     (assets/js/order-form.js, assets/js/checkout.js) - усі замовлення
-     пишуться в один аркуш "Заявки", з колонкою "Джерело" для розрізнення. */
+  /* Замовлення: Edge Function order-submit (таблиці orders, розділ
+     «Замовлення» адмінки, сповіщення менеджеру) - як на сайті (assets/js/cart.js). */
+  ORDER_API: "https://uvndubhmqzqqsrnrxgaj.supabase.co/functions/v1/order-submit",
+  /* Запасна копія: той самий Apps Script Web App, що й для сайту - аркуш
+     "Заявки", колонка "Джерело" = "Мініапп". */
   ORDERS_URL: "https://script.google.com/macros/s/AKfycbz7JbuQpZmBlUck24Bjp7SGKZL-JqE_clqLuYb9y15QG4-FSk45ZkpPHf5faZWISHcE/exec",
   /* Той самий проєкт Supabase, що для коментарів на сайті (assets/js/comments.js).
      anon-ключ публічний за задумом: мініапп лише викликає функції з
@@ -1014,7 +1016,20 @@ function submitOrder(){
 
   const orderPayload={ name, phone, city, comment, items:CART, total:cartTotal(), date:new Date().toISOString(), source:"Мініапп" };
 
-  // Записуємо замовлення в Google Таблицю через Apps Script
+  // Основне: Supabase (з підписаними даними Telegram - так видно, хто замовив).
+  // Окремо боту (Telegram.WebApp.sendData) більше не шлемо: менеджеру пише order-submit.
+  const apiReq = CONFIG.ORDER_API ? fetch(CONFIG.ORDER_API, {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      client_key: (crypto.randomUUID ? crypto.randomUUID() : Date.now()+"-"+Math.random().toString(36).slice(2)),
+      source:"Мініапп", name, phone, city, comment,
+      initData: TG?.initData || "",
+      items: CART.map(i=>({ product_id:i.sku, title:i.name, qty:i.qty, price:i.price }))
+    })
+  }).then(r=>r.json()).catch(()=>null) : Promise.resolve(null);
+
+  // Запасна копія в Google Таблицю через Apps Script
   if(CONFIG.ORDERS_URL){
     fetch(CONFIG.ORDERS_URL, {
       method:"POST",
@@ -1024,19 +1039,13 @@ function submitOrder(){
     }).catch(()=>{ /* мовчки ігноруємо мережеву помилку - клієнт бачить toast незалежно */ });
   }
 
-  // Якщо додаток запущено з бота - надсилаємо ще й напряму через Bot API
-  try{
-    if(window.Telegram?.WebApp?.sendData){
-      Telegram.WebApp.sendData(JSON.stringify({type:"order", ...orderPayload}));
-    }
-  }catch(e){}
-
   CART.forEach(i=>track("order",{product:{id:i.sku, name:i.name, category:i.category}}));
   CART=[];
   saveCart();
   document.getElementById("modalOverlay").classList.remove("open");
   document.body.style.overflow="";
   showToast("✅ Замовлення відправлено!");
+  apiReq.then(res=>{ if(res?.ok && res.number) showToast(`✅ Замовлення №${res.number} відправлено!`); });
   if(window.Telegram?.WebApp?.HapticFeedback) Telegram.WebApp.HapticFeedback.notificationOccurred("success");
 }
 

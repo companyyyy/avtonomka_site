@@ -211,7 +211,8 @@
     "submit": "Підтвердити замовлення",
     "submitting": "Надсилання…",
     "success_html": "✓ Дякуємо! Замовлення надіслано, ми зв'яжемось з вами найближчим часом.",
-    "error_html": "Не вдалося надіслати замовлення. Спробуйте пізніше або напишіть нам у <a href=\"https://telegram.me/avtonomka_od\" target=\"_blank\" rel=\"noopener\">Telegram</a>."
+    "error_html": "Не вдалося надіслати замовлення. Спробуйте пізніше або напишіть нам у <a href=\"https://telegram.me/avtonomka_od\" target=\"_blank\" rel=\"noopener\">Telegram</a>.",
+    "order_number": "Номер замовлення: №{number}"
   },
   "order_form": {
     "close_aria": "Закрити",
@@ -225,7 +226,8 @@
     "submit": "Надіслати заявку",
     "submitting": "Надсилання…",
     "success_html": "✓ Дякуємо! Заявку надіслано, ми зв'яжемось з вами найближчим часом.",
-    "error_html": "Не вдалося надіслати заявку. Спробуйте пізніше або напишіть нам у <a href=\"https://telegram.me/avtonomka_od\" target=\"_blank\" rel=\"noopener\">Telegram</a>."
+    "error_html": "Не вдалося надіслати заявку. Спробуйте пізніше або напишіть нам у <a href=\"https://telegram.me/avtonomka_od\" target=\"_blank\" rel=\"noopener\">Telegram</a>.",
+    "order_number": "Номер заявки: №{number}"
   },
   "auction": {
     "list_title": "Аукціон",

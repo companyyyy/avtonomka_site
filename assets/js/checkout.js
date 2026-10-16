@@ -2,17 +2,19 @@
  * checkout.js - сторінка оформлення замовлення (checkout.html).
  *
  * Показує вміст кошика (assets/js/cart.js, той самий localStorage), збирає
- * контакти й дані доставки Новою Поштою та надсилає все одним запитом у
- * Google Apps Script (scripts/order_form_apps_script.gs) - той самий
- * бекенд, що приймає заявки з order-form.js.
+ * контакти й дані доставки Новою Поштою та надсилає замовлення через
+ * window.Orders (cart.js): у Supabase (розділ «Замовлення» адмінки) і запасну
+ * копію в Google Apps Script (scripts/order_form_apps_script.gs).
  */
 
 (function () {
   'use strict';
 
-  /* Має збігатися з ORDER_FORM_ENDPOINT в assets/js/order-form.js та cart.js -
-     це той самий Apps Script Web App. */
-  const ORDER_FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbz7JbuQpZmBlUck24Bjp7SGKZL-JqE_clqLuYb9y15QG4-FSk45ZkpPHf5faZWISHcE/exec';
+  /* Надсилання - window.Orders (assets/js/cart.js): Supabase (розділ
+     «Замовлення» адмінки) + запасна копія в Google Таблиці. */
+
+  // Ключ замовлення живе до успішного надсилання: повтор після помилки не створить дубль.
+  let orderKey = null;
 
   function t(key, vars) {
     return window.I18n ? window.I18n.t(key, vars) : key;
@@ -107,6 +109,19 @@
     submitBtn.textContent = t('checkout.submitting');
     errorBlock.classList.add('hidden');
 
+    orderKey = orderKey || window.Orders.newKey();
+    const order = {
+      client_key:     orderKey,
+      source:         'Кошик',
+      name:           form.name.value.trim(),
+      phone:          form.phone.value.trim(),
+      city:           form.city.value.trim(),
+      np_branch:      form.npBranch.value.trim(),
+      payment_method: form.paymentMethod.value,
+      comment:        form.comment.value.trim(),
+      items:          items.map(i => ({ product_id: i.id, title: i.title, sku: i.sku, qty: i.qty, price: i.price }))
+    };
+
     const data = new URLSearchParams({
       name:          form.name.value.trim(),
       phone:         form.phone.value.trim(),
@@ -120,9 +135,18 @@
       })))
     });
 
-    fetch(ORDER_FORM_ENDPOINT, { method: 'POST', mode: 'no-cors', body: data })
-      .then(function () {
+    window.Orders.submit(order, data)
+      .then(function (res) {
+        orderKey = null;
         layout.classList.add('hidden');
+        if (res.number) {
+          const num = document.createElement('p');
+          num.className = 'order-number';
+          const label = t('checkout.order_number', { number: res.number });
+          // Старий закешований файл перекладів без цього ключа
+          num.textContent = label === 'checkout.order_number' ? 'Номер замовлення: №' + res.number : label;
+          successBlock.append(num);
+        }
         successBlock.classList.remove('hidden');
         window.Cart.clear();
       })

@@ -216,7 +216,8 @@
     "submit": "Confirm Order",
     "submitting": "Sending…",
     "success_html": "✓ Thank you! Your order has been sent, we'll contact you shortly.",
-    "error_html": "Failed to send the order. Please try again later or message us on <a href=\"https://telegram.me/avtonomka_od\" target=\"_blank\" rel=\"noopener\">Telegram</a>."
+    "error_html": "Failed to send the order. Please try again later or message us on <a href=\"https://telegram.me/avtonomka_od\" target=\"_blank\" rel=\"noopener\">Telegram</a>.",
+    "order_number": "Order number: #{number}"
   },
   "order_form": {
     "close_aria": "Close",
@@ -230,7 +231,8 @@
     "submit": "Send Request",
     "submitting": "Sending…",
     "success_html": "✓ Thank you! Your request has been sent, we'll contact you shortly.",
-    "error_html": "Failed to send the request. Please try again later or message us on <a href=\"https://telegram.me/avtonomka_od\" target=\"_blank\" rel=\"noopener\">Telegram</a>."
+    "error_html": "Failed to send the request. Please try again later or message us on <a href=\"https://telegram.me/avtonomka_od\" target=\"_blank\" rel=\"noopener\">Telegram</a>.",
+    "order_number": "Request number: #{number}"
   },
   "auction": {
     "list_title": "Auction",

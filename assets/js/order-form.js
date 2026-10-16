@@ -1,24 +1,18 @@
 /**
- * order-form.js - модальна форма замовлення (збір заявки, без оплати онлайн)
+ * order-form.js - модальна форма швидкої заявки на товар (без оплати онлайн).
  *
- * ІНСТРУКЦІЯ ДЛЯ ПІДКЛЮЧЕННЯ (виконати вручну, один раз):
- * 1. Створи Google Таблицю та встав у неї Apps Script код з файлу
- *    scripts/order_form_apps_script.gs (детальні кроки - у коментарях того файлу).
- * 2. Розгорни Apps Script як Web App і скопіюй URL виду
- *    https://script.google.com/macros/s/XXXXXXXXXXXXX/exec
- * 3. Встав цей URL у константу ORDER_FORM_ENDPOINT нижче.
- * 4. Підключи цей файл на будь-якій сторінці (вже підключено на product.html)
- *    та додай тригер - елемент з атрибутом data-order-form-trigger, напр.:
+ * Надсилає заявку через window.Orders (assets/js/cart.js - має бути підключений
+ * раніше): у Supabase (розділ «Замовлення» адмінки, джерело «Швидка заявка»)
+ * і запасну копію в Google Таблиці (scripts/order_form_apps_script.gs).
+ *
+ * Тригер - елемент з атрибутом data-order-form-trigger, напр.:
  *    <button data-order-form-trigger data-product="Назва товару">Замовити</button>
- *    Якщо data-product не вказано, а на сторінці є #product-title - назва
- *    товару підтягнеться звідти автоматично.
+ * Якщо data-product не вказано, а на сторінці є #product-title - назва
+ * товару підтягнеться звідти автоматично.
  */
 
 (function () {
   'use strict';
-
-  /* ⚠ ВСТАВ СЮДИ URL ВЕБ-ЗАСТОСУНКУ GOOGLE APPS SCRIPT */
-  const ORDER_FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbz7JbuQpZmBlUck24Bjp7SGKZL-JqE_clqLuYb9y15QG4-FSk45ZkpPHf5faZWISHcE/exec';
 
   /* Сторінки в /product/ та /catalog/ лежать на рівень глибше кореня сайту */
   function getBase() {
@@ -121,14 +115,11 @@
     document.body.style.overflow = '';
   }
 
+  // Ключ заявки живе до успішного надсилання: повтор після помилки не створить дубль.
+  let orderKey = null;
+
   function onSubmit(e) {
     e.preventDefault();
-
-    if (!ORDER_FORM_ENDPOINT) {
-      console.warn('order-form.js: ORDER_FORM_ENDPOINT не задано - форма не підключена до Google Sheets.');
-      showError();
-      return;
-    }
 
     submitBtn.disabled = true;
     submitBtn.textContent = t('order_form.submitting');
@@ -141,15 +132,40 @@
       source:  'Сайт'
     });
 
-    /* Apps Script Web App не завжди повертає CORS-заголовки для fetch,
-       тож надсилаємо в режимі no-cors: запит доходить і зберігається
-       в таблиці, а відповідь браузер просто не дає нам прочитати. */
-    fetch(ORDER_FORM_ENDPOINT, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: data
-    })
-      .then(function () {
+    /* Товар зі сторінки товару (кнопка «В кошик» має id, ціну й артикул),
+       якщо заявка саме на нього. */
+    const title = form.product.value.trim();
+    const btn = document.querySelector('[data-add-to-cart][data-id]');
+    const fromPage = btn && (!title || btn.getAttribute('data-title') === title);
+    orderKey = orderKey || window.Orders.newKey();
+    const order = {
+      client_key: orderKey,
+      source:     'Швидка заявка',
+      name:       form.name.value.trim(),
+      phone:      form.phone.value.trim(),
+      comment:    form.comment.value.trim(),
+      items: [{
+        product_id: fromPage ? btn.getAttribute('data-id') : '',
+        title:      title || (fromPage ? btn.getAttribute('data-title') : '') || 'Без товару',
+        sku:        fromPage ? btn.getAttribute('data-sku') || '' : '',
+        qty:        1,
+        price:      fromPage ? btn.getAttribute('data-price') : ''
+      }]
+    };
+
+    /* Supabase (розділ «Замовлення» адмінки) + запасна копія в Google
+       Таблиці - window.Orders з assets/js/cart.js. */
+    window.Orders.submit(order, data)
+      .then(function (res) {
+        orderKey = null;
+        if (res.number) {
+          const num = document.createElement('p');
+          num.className = 'order-number';
+          const label = t('order_form.order_number', { number: res.number });
+          // Старий закешований файл перекладів без цього ключа
+          num.textContent = label === 'order_form.order_number' ? 'Номер заявки: №' + res.number : label;
+          successBlock.append(num);
+        }
         showSuccess();
       })
       .catch(function (err) {

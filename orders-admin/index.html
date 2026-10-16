@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Замовлення - Адмін - Автономка</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="../assets/images/logo.jpg" type="image/jpeg">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f8; color: #222831; line-height: 1.5; min-height: 100vh; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font-family: inherit; }
+    .hidden { display: none !important; }
+
+    .form-input { width: 100%; padding: 8px 12px; border: 2px solid #e0e6ed; border-radius: 8px; font-size: .92rem; font-family: inherit; color: #222831; background: #fff; transition: border-color .2s; outline: none; }
+    .form-input:focus { border-color: #f5a623; }
+    textarea.form-input { resize: vertical; min-height: 64px; }
+
+    .admin-btn { padding: 7px 16px; border-radius: 7px; border: none; font-size: .88rem; font-weight: 600; transition: background .2s; white-space: nowrap; }
+    .admin-btn--primary { background: #f5a623; color: #1a2e4a; }
+    .admin-btn--primary:hover { background: #e69512; }
+    .admin-btn--primary:disabled { opacity: .5; cursor: default; }
+    .admin-btn--light { background: #e0e6ed; color: #1a2e4a; }
+    .admin-btn--light:hover { background: #d0d8e2; }
+    .admin-btn--danger { background: transparent; color: #c0392b; }
+    .admin-btn--danger:hover { background: rgba(231,76,60,.1); }
+    .admin-btn--sm { padding: 5px 12px; font-size: .82rem; }
+
+    .admin-body { max-width: 1240px; margin: 0 auto; padding: 24px 20px 64px; display: flex; flex-direction: column; gap: 20px; }
+    .admin-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(26,46,74,.08); overflow: hidden; }
+    .admin-card__head { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid #e0e6ed; gap: 12px; flex-wrap: wrap; }
+    .admin-card__body { padding: 20px; }
+    .admin-hint { font-size: .9rem; color: #6c757d; padding: 12px 0; }
+    .admin-hint.error { color: #c0392b; }
+    .status-line { min-height: 22px; font-size: .9rem; }
+    .status-line.ok { color: #17a126; }
+    .status-line.error { color: #c0392b; }
+
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; }
+    .stat { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(26,46,74,.08); padding: 14px 18px; }
+    .stat__value { font-size: 1.6rem; font-weight: 800; color: #1a2e4a; line-height: 1.2; font-variant-numeric: tabular-nums; }
+    .stat__label { font-size: .82rem; color: #6c757d; }
+
+    .tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+    .tab { padding: 6px 12px; border-radius: 8px; border: none; background: transparent; color: #6c757d; font-weight: 600; font-size: .88rem; }
+    .tab:hover { background: #f0f2f5; }
+    .tab.active { background: #1a2e4a; color: #fff; }
+    .tab .count { font-weight: 400; opacity: .75; margin-left: 3px; }
+    .toolbar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; padding: 12px 20px; border-bottom: 1px solid #e0e6ed; }
+    .toolbar .form-input { width: auto; padding: 6px 10px; font-size: .88rem; }
+    .toolbar input[type=search] { width: 280px; }
+
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    th { text-align: left; font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: #6c757d; padding: 8px 10px; border-bottom: 2px solid #e0e6ed; white-space: nowrap; }
+    td { padding: 9px 10px; border-bottom: 1px solid #eef1f4; vertical-align: top; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    tr.clickable { cursor: pointer; }
+    tr.clickable:hover td { background: #f7f9fb; }
+    tr.is-new td { background: #fff8e6; }
+    tr.is-new:hover td { background: #fff2cc; }
+    .muted { color: #6c757d; font-size: .8rem; }
+    .nowrap { white-space: nowrap; }
+    .items-short { max-width: 380px; }
+
+    .pill { display: inline-block; font-size: .74rem; font-weight: 700; padding: 2px 9px; border-radius: 20px; white-space: nowrap; }
+    .st-new       { background: #fdecc8; color: #a15c00; }
+    .st-in_work   { background: #dbeafe; color: #1d4ed8; }
+    .st-confirmed { background: #e0e7ff; color: #4338ca; }
+    .st-paid      { background: #d1fae5; color: #047857; }
+    .st-shipped   { background: #cffafe; color: #0e7490; }
+    .st-done      { background: #dcfce7; color: #15803d; }
+    .st-cancelled { background: #f1f2f4; color: #6c757d; }
+    .st-returned  { background: #fee2e2; color: #b91c1c; }
+
+    /* Картка замовлення */
+    .detail-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+    .detail-title { font-size: 1.3rem; font-weight: 800; color: #1a2e4a; }
+    .detail-meta { font-size: .88rem; color: #6c757d; margin-top: 2px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+    .field label { font-size: .78rem; font-weight: 700; color: #6c757d; text-transform: uppercase; letter-spacing: .03em; }
+    .field-row { display: flex; gap: 8px; align-items: center; }
+    .section-title { font-size: .95rem; font-weight: 700; color: #1a2e4a; margin: 20px 0 8px; }
+    .client-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .client-actions a { color: #2a7ab0; font-size: .88rem; font-weight: 600; }
+    .client-actions a:hover { text-decoration: underline; }
+    .comment-box { background: #f7f9fb; border-radius: 8px; padding: 10px 12px; font-size: .9rem; white-space: pre-wrap; }
+
+    .items-table input { padding: 5px 8px; font-size: .88rem; }
+    .items-table input.qty { width: 70px; text-align: right; }
+    .items-table input.price { width: 110px; text-align: right; }
+    .items-table td { vertical-align: middle; }
+    .items-total { text-align: right; font-weight: 800; color: #1a2e4a; font-size: 1.05rem; padding: 10px; }
+    .add-item { display: flex; gap: 8px; margin-top: 8px; }
+    .add-item input { flex: 1; }
+
+    .history-item { display: flex; gap: 12px; padding: 6px 0; border-bottom: 1px solid #eef1f4; font-size: .86rem; }
+    .history-item:last-child { border-bottom: none; }
+    .history-time { color: #6c757d; font-size: .8rem; white-space: nowrap; min-width: 118px; font-variant-numeric: tabular-nums; }
+    .history-old { color: #6c757d; text-decoration: line-through; }
+
+    .savebar { position: sticky; bottom: 0; background: #fff; border-top: 1px solid #e0e6ed; padding: 12px 20px; display: flex; gap: 10px; justify-content: flex-end; align-items: center; z-index: 5; }
+
+    @media (max-width: 800px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .admin-body { padding: 16px 10px 48px; }
+      .admin-card__body { padding: 14px 12px; }
+      .toolbar input[type=search] { width: 100%; }
+    }
+  </style>
+</head>
+<body data-admin-section="orders">
+
+  <div id="admin-app" hidden>
+  <div class="admin-body">
+
+    <div class="admin-card hidden" id="denied-card">
+      <div class="admin-card__body">
+        <p class="admin-hint error" style="padding:0">Цей користувач не має доступу до замовлень. Доступ видається в Supabase - таблиця tg_admins (див. docs/ORDERS.md).</p>
+      </div>
+    </div>
+    <div class="admin-card hidden" id="setup-card">
+      <div class="admin-card__body">
+        <p class="admin-hint error" style="padding:0" id="setup-text"></p>
+      </div>
+    </div>
+
+    <div id="main" class="hidden" style="display:flex;flex-direction:column;gap:20px">
+
+      <div class="stats" id="stats"></div>
+
+      <!-- Список -->
+      <div class="admin-card" id="list-card">
+        <div class="admin-card__head">
+          <div class="tabs" id="status-tabs"></div>
+        </div>
+        <div class="toolbar">
+          <input type="search" id="search" class="form-input" placeholder="Пошук: №, ім'я, телефон, ТТН, товар" autocomplete="off">
+          <select id="f-source" class="form-input">
+            <option value="">Усі джерела</option>
+            <option>Кошик</option>
+            <option>Швидка заявка</option>
+            <option>Мініапп</option>
+          </select>
+          <select id="f-period" class="form-input">
+            <option value="0">За весь час</option>
+            <option value="1">Сьогодні</option>
+            <option value="7">7 днів</option>
+            <option value="30">30 днів</option>
+            <option value="90">90 днів</option>
+          </select>
+          <span style="flex:1"></span>
+          <button id="btn-export" class="admin-btn admin-btn--light admin-btn--sm">Експорт CSV</button>
+          <button id="btn-refresh" class="admin-btn admin-btn--light admin-btn--sm">Оновити</button>
+        </div>
+        <div class="admin-card__body" style="padding-top:8px" id="list-body"></div>
+      </div>
+
+      <!-- Картка замовлення -->
+      <div class="admin-card hidden" id="detail-card">
+        <div class="admin-card__head">
+          <button class="admin-btn admin-btn--light admin-btn--sm" id="btn-back">← До списку</button>
+          <button class="admin-btn admin-btn--danger admin-btn--sm" id="btn-delete">Видалити замовлення</button>
+        </div>
+        <div class="admin-card__body" id="detail-body"></div>
+        <div class="savebar hidden" id="savebar">
+          <span class="status-line" id="save-status"></span>
+          <button class="admin-btn admin-btn--light" id="btn-cancel">Скасувати зміни</button>
+          <button class="admin-btn admin-btn--primary" id="btn-save">Зберегти</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div><!-- /admin-app -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="../assets/js/admin-shell.js"></script>
+  <script>
+    /* Замовлення з сайту (кошик, швидка заявка) і мініаппа - таблиці orders /
+       order_items / order_history у Supabase (scripts/supabase/orders_schema.sql).
+       Пише їх Edge Function order-submit; читати й змінювати можуть лише адміни
+       (tg_admins). Історія змін пишеться в базі сама (тригер на orders,
+       save_order_items для товарів). Посилання з Telegram-сповіщення:
+       orders-admin/#<номер> відкриває одразу картку замовлення.
+       Вхід, шапка й клієнт Supabase - assets/js/admin-shell.js. */
+    const sb = AdminShell.sb;
+    const $ = (id) => document.getElementById(id);
+
+    const STATUSES = [
+      ['new', 'Нове'],
+      ['in_work', 'В роботі'],
+      ['confirmed', 'Підтверджено'],
+      ['paid', 'Оплачено'],
+      ['shipped', 'Відправлено'],
+      ['done', 'Виконано'],
+      ['cancelled', 'Скасовано'],
+      ['returned', 'Повернення'],
+    ];
+    const STATUS_LABEL = Object.fromEntries(STATUSES);
+    const LIMIT = 2000;          // скільки останніх замовлень вантажимо
+    const REFRESH_MS = 60000;    // перевірка нових замовлень
+
+    let orders = [];             // з order_items
+    let filterStatus = '';
+    let current = null;          // відкрите замовлення { order, items, edit, editItems }
+    let products = [];           // products.json для додавання товарів
+    let lastNewCount = null;
+
+    const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    const money = (n) => Math.round(Number(n) || 0).toLocaleString('uk-UA') + ' грн';
+    const fmtDate = (s) => new Date(s).toLocaleString('uk-UA', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' });
+    const pill = (st) => `<span class="pill st-${esc(st)}">${esc(STATUS_LABEL[st] || st)}</span>`;
+    const plural = (n, one, few, many) => (n % 10 === 1 && n % 100 !== 11 ? one : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? few : many);
+    const digits = (s) => String(s || '').replace(/\D/g, '');
+    const phoneHref = (p) => { const d = digits(p); return d ? 'tel:+' + (d.startsWith('380') ? d : d.startsWith('0') ? '38' + d : d) : ''; };
+
+    function setStatus(text, kind = '') {
+      const el = $('save-status');
+      el.textContent = text;
+      el.className = 'status-line ' + kind;
+    }
+
+    /* ---- Дані ---- */
+    async function loadOrders() {
+      const { data, error } = await sb.from('orders').select('*, order_items(*)')
+        .order('created_at', { ascending: false }).limit(LIMIT);
+      if (error) throw error;
+      orders = data.map((o) => ({ ...o, order_items: (o.order_items || []).sort((a, b) => a.position - b.position) }));
+      const newCount = orders.filter((o) => o.status === 'new').length;
+      document.title = (newCount ? `(${newCount}) ` : '') + 'Замовлення - Адмін - Автономка';
+      lastNewCount = newCount;
+    }
+
+    async function loadProducts() {
+      try {
+        const res = await fetch('../products.json', { cache: 'no-store' });
+        products = await res.json();
+      } catch { products = []; }
+    }
+
+    /* ---- Список ---- */
+    function periodStart() {
+      const days = Number($('f-period').value);
+      if (!days) return 0;
+      const d = new Date();
+      d.setHours(0, 0, 0, 0);
+      d.setDate(d.getDate() - (days - 1));
+      return d.getTime();
+    }
+
+    function filtered(ignoreStatus = false) {
+      const q = $('search').value.trim().toLowerCase();
+      const qDigits = digits(q);
+      const source = $('f-source').value;
+      const since = periodStart();
+      return orders.filter((o) => {
+        if (!ignoreStatus && filterStatus && o.status !== filterStatus) return false;
+        if (source && o.source !== source) return false;
+        if (since && Date.parse(o.created_at) < since) return false;
+        if (!q) return true;
+        const hay = [o.number, o.name, o.phone, o.ttn, o.city, o.comment, o.manager_note,
+          ...o.order_items.map((i) => i.title + ' ' + (i.sku || ''))].join(' ').toLowerCase();
+        return hay.includes(q) || (qDigits.length >= 4 && (o.phone_norm || '').includes(qDigits));
+      });
+    }
+
+    function renderStats() {
+      const today = new Date(); today.setHours(0, 0, 0, 0);
+      const month = Date.now() - 30 * 86400000;
+      const live = (o) => !['cancelled', 'returned'].includes(o.status);
+      const stats = [
+        [orders.filter((o) => o.status === 'new').length, 'Нові (не оброблені)'],
+        [orders.filter((o) => o.status === 'in_work' || o.status === 'confirmed').length, 'В роботі / підтверджені'],
+        [orders.filter((o) => Date.parse(o.created_at) >= today.getTime()).length, 'Замовлень сьогодні'],
+        [money(orders.filter((o) => live(o) && Date.parse(o.created_at) >= month).reduce((s, o) => s + Number(o.total || 0), 0)), 'Сума за 30 днів (без скасованих)'],
+      ];
+      $('stats').innerHTML = stats.map(([v, l]) => `<div class="stat"><div class="stat__value">${esc(v)}</div><div class="stat__label">${esc(l)}</div></div>`).join('');
+    }
+
+    function renderTabs() {
+      const base = filtered(true);
+      const count = (st) => base.filter((o) => !st || o.status === st).length;
+      $('status-tabs').innerHTML = [['', 'Усі'], ...STATUSES].map(([st, label]) =>
+        `<button class="tab${st === filterStatus ? ' active' : ''}" data-st="${st}">${esc(label)}<span class="count">${count(st)}</span></button>`).join('');
+    }
+
+    function renderList() {
+      renderStats();
+      renderTabs();
+      const list = filtered();
+      if (!orders.length) {
+        $('list-body').innerHTML = '<p class="admin-hint">Замовлень ще немає. Нові з\'являтимуться тут автоматично.</p>';
+        return;
+      }
+      if (!list.length) {
+        $('list-body').innerHTML = '<p class="admin-hint">Нічого не знайдено за цими фільтрами.</p>';
+        return;
+      }
+      $('list-body').innerHTML = `<div class="table-wrap"><table>
+        <thead><tr><th>№</th><th>Дата</th><th>Клієнт</th><th>Товари</th><th class="num">Сума</th><th>Джерело</th><th>Статус</th></tr></thead>
+        <tbody>${list.map((o) => `
+          <tr class="clickable${o.status === 'new' ? ' is-new' : ''}" data-num="${o.number}">
+            <td class="nowrap"><b>№${o.number}</b></td>
+            <td class="nowrap">${esc(fmtDate(o.created_at))}</td>
+            <td><b>${esc(o.name)}</b><div class="muted nowrap">${esc(o.phone)}</div></td>
+            <td class="items-short">${o.order_items.map((i) => `${esc(i.title)}${i.qty > 1 ? ` <span class="muted">× ${i.qty}</span>` : ''}`).join('<br>')}
+              ${o.ttn ? `<div class="muted">ТТН ${esc(o.ttn)}</div>` : ''}</td>
+            <td class="num">${o.total > 0 ? money(o.total) : '<span class="muted">-</span>'}</td>
+            <td class="nowrap">${esc(o.source)}</td>
+            <td>${pill(o.status)}</td>
+          </tr>`).join('')}</tbody></table></div>
+        ${orders.length >= LIMIT ? `<p class="admin-hint">Показано останні ${LIMIT} замовлень.</p>` : ''}`;
+    }
+
+    $('status-tabs').addEventListener('click', (e) => {
+      const b = e.target.closest('.tab');
+      if (!b) return;
+      filterStatus = b.dataset.st;
+      renderList();
+    });
+    $('list-body').addEventListener('click', (e) => {
+      const tr = e.target.closest('tr[data-num]');
+      if (tr) location.hash = tr.dataset.num;
+    });
+    ['search', 'f-source', 'f-period'].forEach((id) => $(id).addEventListener('input', renderList));
+
+    /* ---- Картка замовлення ---- */
+    const CLIENT_FIELDS = [
+      ['name', "Ім'я"], ['phone', 'Телефон'], ['city', 'Місто'],
+      ['np_branch', 'Відділення / поштомат НП'], ['payment_method', 'Спосіб оплати'],
+    ];
+    const EDIT_FIELDS = ['status', 'ttn', 'manager_note', ...CLIENT_FIELDS.map(([k]) => k)];
+
+    function itemsKey(items) {
+      return JSON.stringify(items.map((i) => [i.product_id || '', i.title, i.sku || '', Number(i.qty), i.price === '' || i.price == null ? null : Number(i.price)]));
+    }
+    function isDirty() {
+      if (!current) return false;
+      return EDIT_FIELDS.some((k) => (current.edit[k] ?? '') !== (current.order[k] ?? ''))
+        || itemsKey(current.editItems) !== itemsKey(current.items);
+    }
+    function refreshSavebar() {
+      $('savebar').classList.toggle('hidden', !isDirty());
+      const total = current.editItems.reduce((s, i) => s + (Number(i.qty) || 0) * (Number(i.price) || 0), 0);
+      const el = document.getElementById('items-total');
+      if (el) el.textContent = 'Разом: ' + money(total);
+    }
+
+    async function openOrder(number) {
+      const o = orders.find((x) => String(x.number) === String(number));
+      if (!o) {
+        $('list-card').classList.add('hidden');
+        $('detail-card').classList.remove('hidden');
+        $('detail-body').innerHTML = `<p class="admin-hint error">Замовлення №${esc(number)} не знайдено.</p>`;
+        return;
+      }
+      const items = o.order_items.map((i) => ({ product_id: i.product_id, title: i.title, sku: i.sku, qty: i.qty, price: i.price }));
+      current = {
+        order: o,
+        items,
+        edit: Object.fromEntries(EDIT_FIELDS.map((k) => [k, o[k] ?? ''])),
+        editItems: items.map((i) => ({ ...i })),
+      };
+      $('list-card').classList.add('hidden');
+      $('detail-card').classList.remove('hidden');
+      setStatus('');
+      renderDetail();
+      window.scrollTo(0, 0);
+
+      // Історія та інші замовлення клієнта
+      const [hist, others] = await Promise.all([
+        sb.from('order_history').select('*').eq('order_id', o.id).order('created_at', { ascending: true }),
+        o.phone_norm
+          ? sb.from('orders').select('number, created_at, total, status').eq('phone_norm', o.phone_norm).neq('id', o.id).order('created_at', { ascending: false }).limit(50)
+          : Promise.resolve({ data: [] }),
+      ]);
+      if (current?.order.id !== o.id) return;
+      renderHistory(hist.data || []);
+      renderOthers(others.data || []);
+    }
+
+    function renderDetail() {
+      const o = current.order;
+      const e = current.edit;
+      const tgLink = o.tg_username ? `https://t.me/${encodeURIComponent(o.tg_username)}` : o.tg_id ? `tg://user?id=${o.tg_id}` : '';
+      const ttnLink = e.ttn ? `https://novaposhta.ua/tracking/?cargo_number=${encodeURIComponent(digits(e.ttn))}` : '';
+      $('detail-body').innerHTML = `
+        <div class="detail-head">
+          <div>
+            <div class="detail-title">Замовлення №${o.number}</div>
+            <div class="detail-meta">${esc(fmtDate(o.created_at))} · ${esc(o.source)}${o.page_url ? ` · <a href="${esc(o.page_url)}" target="_blank" rel="noopener" style="color:#2a7ab0">сторінка</a>` : ''}</div>
+          </div>
+          <div class="field" style="min-width:220px;margin:0">
+            <label for="f-status">Статус</label>
+            <select id="f-status" class="form-input" data-field="status">
+              ${STATUSES.map(([st, l]) => `<option value="${st}"${st === e.status ? ' selected' : ''}>${esc(l)}</option>`).join('')}
+            </select>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <div class="section-title" style="margin-top:0">Клієнт</div>
+            <div class="client-actions">
+              ${phoneHref(o.phone) ? `<a href="${phoneHref(o.phone)}">📞 Подзвонити</a>` : ''}
+              ${tgLink ? `<a href="${tgLink}" target="_blank" rel="noopener">✈ Telegram${o.tg_username ? ' @' + esc(o.tg_username) : ''}</a>` : ''}
+              <a href="#" id="copy-phone">Копіювати телефон</a>
+            </div>
+            ${CLIENT_FIELDS.map(([k, l]) => `
+              <div class="field"><label for="f-${k}">${esc(l)}</label>
+                <input id="f-${k}" class="form-input" data-field="${k}" value="${esc(e[k])}" autocomplete="off"></div>`).join('')}
+            ${o.comment ? `<div class="field"><label>Коментар клієнта</label><div class="comment-box">${esc(o.comment)}</div></div>` : ''}
+          </div>
+
+          <div>
+            <div class="section-title" style="margin-top:0">Доставка й нотатки</div>
+            <div class="field"><label for="f-ttn">ТТН Нової Пошти</label>
+              <div class="field-row">
+                <input id="f-ttn" class="form-input" data-field="ttn" value="${esc(e.ttn)}" placeholder="20450000000000" autocomplete="off">
+                ${ttnLink ? `<a class="admin-btn admin-btn--light admin-btn--sm" href="${ttnLink}" target="_blank" rel="noopener">Відстежити</a>` : ''}
+              </div></div>
+            <div class="field"><label for="f-manager_note">Нотатка менеджера</label>
+              <textarea id="f-manager_note" class="form-input" data-field="manager_note" rows="4">${esc(e.manager_note)}</textarea></div>
+          </div>
+        </div>
+
+        <div class="section-title">Товари</div>
+        <div class="table-wrap"><table class="items-table">
+          <thead><tr><th>Товар</th><th>Артикул</th><th class="num">К-сть</th><th class="num">Ціна, грн</th><th class="num">Сума</th><th></th></tr></thead>
+          <tbody id="items-rows"></tbody>
+        </table></div>
+        <div class="items-total" id="items-total"></div>
+        <div class="add-item">
+          <input id="add-item" class="form-input" list="products-list" placeholder="Додати товар: почніть вводити назву або впишіть свою" autocomplete="off">
+          <button class="admin-btn admin-btn--light" id="btn-add-item">Додати</button>
+          <datalist id="products-list">${products.map((p) => `<option value="${esc(p.title)}">`).join('')}</datalist>
+        </div>
+
+        <div class="grid" style="margin-top:8px">
+          <div><div class="section-title">Історія</div><div id="history"><p class="admin-hint">Завантаження…</p></div></div>
+          <div><div class="section-title">Інші замовлення клієнта</div><div id="others"><p class="admin-hint">Завантаження…</p></div></div>
+        </div>`;
+
+      renderItems();
+      $('detail-body').querySelectorAll('[data-field]').forEach((el) => {
+        el.addEventListener('input', () => {
+          current.edit[el.dataset.field] = el.value;
+          refreshSavebar();
+        });
+      });
+      $('copy-phone').addEventListener('click', async (ev) => {
+        ev.preventDefault();
+        try { await navigator.clipboard.writeText(o.phone || ''); ev.target.textContent = 'Скопійовано ✓'; } catch {}
+      });
+      $('btn-add-item').addEventListener('click', addItem);
+      $('add-item').addEventListener('keydown', (ev) => { if (ev.key === 'Enter') { ev.preventDefault(); addItem(); } });
+      refreshSavebar();
+    }
+
+    function renderItems() {
+      const tbody = $('items-rows');
+      tbody.innerHTML = current.editItems.map((i, n) => `
+        <tr data-n="${n}">
+          <td>${i.product_id ? `<a href="../product.html?id=${encodeURIComponent(i.product_id)}" target="_blank" rel="noopener">${esc(i.title)}</a>` : esc(i.title)}</td>
+          <td class="muted">${esc(i.sku || '')}</td>
+          <td class="num"><input class="form-input qty" data-k="qty" inputmode="numeric" value="${esc(i.qty)}"></td>
+          <td class="num"><input class="form-input price" data-k="price" inputmode="decimal" value="${esc(i.price ?? '')}"></td>
+          <td class="num">${money((Number(i.qty) || 0) * (Number(i.price) || 0))}</td>
+          <td><button class="admin-btn admin-btn--danger admin-btn--sm" data-remove title="Прибрати">✕</button></td>
+        </tr>`).join('');
+      tbody.querySelectorAll('input').forEach((el) => {
+        el.addEventListener('input', () => {
+          const item = current.editItems[el.closest('tr').dataset.n];
+          const raw = el.value.replace(/\s/g, '').replace(',', '.');
+          item[el.dataset.k] = el.dataset.k === 'qty' ? Math.max(1, parseInt(raw, 10) || 1) : (raw === '' ? null : Number(raw));
+          el.closest('tr').children[4].textContent = money((Number(item.qty) || 0) * (Number(item.price) || 0));
+          refreshSavebar();
+        });
+      });
+      tbody.querySelectorAll('[data-remove]').forEach((b) => b.addEventListener('click', () => {
+        if (current.editItems.length === 1) { setStatus('У замовленні має лишитися хоч один товар.', 'error'); $('savebar').classList.remove('hidden'); return; }
+        current.editItems.splice(Number(b.closest('tr').dataset.n), 1);
+        renderItems();
+        refreshSavebar();
+      }));
+    }
+
+    function addItem() {
+      const title = $('add-item').value.trim();
+      if (!title) return;
+      const p = products.find((x) => x.title === title);
+      const price = p ? parseFloat(String(p.price || '').replace(/\s/g, '').replace(',', '.')) : NaN;
+      current.editItems.push({ product_id: p ? String(p.id) : null, title, sku: p?.mpn || null, qty: 1, price: Number.isFinite(price) ? price : null });
+      $('add-item').value = '';
+      renderItems();
+      refreshSavebar();
+    }
+
+    const HISTORY_LABEL = { created: 'Створено', status: 'Статус', ttn: 'ТТН', note: 'Нотатка', client: 'Дані клієнта', items: 'Товари' };
+    function historyValue(kind, v) {
+      if (v == null || v === '') return '<span class="muted">порожньо</span>';
+      return esc(kind === 'status' ? (STATUS_LABEL[v] || v) : v);
+    }
+    function renderHistory(rows) {
+      $('history').innerHTML = rows.length ? rows.map((h) => `
+        <div class="history-item">
+          <span class="history-time">${esc(fmtDate(h.created_at))}</span>
+          <span><b>${esc(HISTORY_LABEL[h.kind] || h.kind)}</b>${h.kind === 'created'
+            ? ` · ${esc(h.new_value || '')}`
+            : `: ${h.old_value != null && h.old_value !== '' ? `<span class="history-old">${historyValue(h.kind, h.old_value)}</span> → ` : ''}${historyValue(h.kind, h.new_value)}`}</span>
+        </div>`).join('') : '<p class="admin-hint">Змін ще не було.</p>';
+    }
+    function renderOthers(rows) {
+      $('others').innerHTML = rows.length ? `<table><tbody>${rows.map((r) => `
+        <tr class="clickable" data-num="${r.number}"><td><b>№${r.number}</b></td><td class="muted">${esc(fmtDate(r.created_at))}</td>
+        <td class="num">${r.total > 0 ? money(r.total) : '-'}</td><td>${pill(r.status)}</td></tr>`).join('')}</tbody></table>
+        <p class="muted" style="margin-top:6px">Разом ${rows.length + 1} ${plural(rows.length + 1, 'замовлення', 'замовлення', 'замовлень')} на ${money(rows.filter((r) => !['cancelled', 'returned'].includes(r.status)).reduce((s, r) => s + Number(r.total || 0), 0) + Number(current.order.total || 0))}</p>`
+        : '<p class="admin-hint">Це перше замовлення з цього телефону.</p>';
+      $('others').querySelectorAll('tr[data-num]').forEach((tr) => tr.addEventListener('click', () => { location.hash = tr.dataset.num; }));
+    }
+
+    async function save() {
+      const o = current.order;
+      if (current.editItems.some((i) => !i.title || !(Number(i.qty) > 0) || (i.price != null && !(Number(i.price) >= 0)))) {
+        setStatus('Перевірте товари: кількість - ціле число більше нуля, ціна - число або порожньо.', 'error');
+        return;
+      }
+      $('btn-save').disabled = true;
+      setStatus('Збереження…');
+      try {
+        const patch = {};
+        EDIT_FIELDS.forEach((k) => {
+          const v = current.edit[k] ?? '';
+          if (v !== (o[k] ?? '')) patch[k] = k === 'status' ? v : (v.trim() === '' ? null : v.trim());
+        });
+        if (Object.keys(patch).length) {
+          const { error } = await sb.from('orders').update(patch).eq('id', o.id);
+          if (error) throw error;
+        }
+        if (itemsKey(current.editItems) !== itemsKey(current.items)) {
+          const { error } = await sb.rpc('save_order_items', { p_order: o.id, p_items: current.editItems });
+          if (error) throw error;
+        }
+        await loadOrders();
+        await openOrder(o.number);
+        setStatus('Збережено ✓', 'ok');
+        $('savebar').classList.remove('hidden');
+        setTimeout(() => { if (!isDirty()) $('savebar').classList.add('hidden'); }, 1500);
+      } catch (e) {
+        setStatus('Не вдалося зберегти: ' + (e.message || e), 'error');
+      } finally {
+        $('btn-save').disabled = false;
+      }
+    }
+
+    $('btn-save').addEventListener('click', save);
+    $('btn-cancel').addEventListener('click', () => openOrder(current.order.number));
+    $('btn-back').addEventListener('click', () => { location.hash = ''; });
+    $('btn-delete').addEventListener('click', async () => {
+      const o = current.order;
+      if (!confirm(`Видалити замовлення №${o.number} назавжди? Його історія теж зникне. Для звичайних відмов краще статус «Скасовано».`)) return;
+      const { error } = await sb.from('orders').delete().eq('id', o.id);
+      if (error) { setStatus('Не вдалося видалити: ' + error.message, 'error'); $('savebar').classList.remove('hidden'); return; }
+      current = null;
+      await loadOrders();
+      location.hash = '';
+    });
+
+    /* ---- Експорт ---- */
+    $('btn-export').addEventListener('click', () => {
+      const rows = [['№', 'Дата', 'Статус', 'Джерело', "Ім'я", 'Телефон', 'Місто', 'Відділення НП', 'Оплата', 'Товари', 'Сума', 'ТТН', 'Коментар клієнта', 'Нотатка менеджера']];
+      filtered().forEach((o) => rows.push([o.number, fmtDate(o.created_at), STATUS_LABEL[o.status] || o.status, o.source, o.name, o.phone,
+        o.city, o.np_branch, o.payment_method, o.order_items.map((i) => `${i.title} × ${i.qty}${i.price != null ? ` по ${i.price}` : ''}`).join('; '),
+        o.total, o.ttn, o.comment, o.manager_note]));
+      const csv = '﻿' + rows.map((r) => r.map((c) => `"${String(c ?? '').replace(/"/g, '""')}"`).join(';')).join('\r\n');
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+      a.download = `zamovlennia-${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    /* ---- Навігація: #<номер> - картка, порожньо - список ---- */
+    function route() {
+      const num = location.hash.replace('#', '');
+      if (current && isDirty() && String(current.order.number) !== num
+          && !confirm('Зміни в замовленні не збережено. Вийти без збереження?')) {
+        history.replaceState(null, '', '#' + current.order.number);
+        return;
+      }
+      if (num) openOrder(num);
+      else {
+        current = null;
+        $('detail-card').classList.add('hidden');
+        $('list-card').classList.remove('hidden');
+        renderList();
+      }
+    }
+    window.addEventListener('hashchange', route);
+    window.addEventListener('beforeunload', (e) => { if (isDirty()) e.preventDefault(); });
+
+    async function refresh() {
+      try {
+        await loadOrders();
+        if (!current) renderList(); else renderStats();
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    $('btn-refresh').addEventListener('click', refresh);
+
+    /* ---- Старт: дані бачать лише адміни зі списку tg_admins ---- */
+    AdminShell.ready(async () => {
+      const { data: isAdmin, error } = await sb.rpc('is_tg_admin');
+      if (error || !isAdmin) { $('denied-card').classList.remove('hidden'); return; }
+      try {
+        await Promise.all([loadOrders(), loadProducts()]);
+      } catch (e) {
+        $('setup-card').classList.remove('hidden');
+        $('setup-text').textContent = /orders|relation|schema cache/i.test(e.message || '')
+          ? 'Таблиць замовлень ще немає: виконайте scripts/supabase/orders_schema.sql у Supabase → SQL Editor (див. docs/ORDERS.md).'
+          : 'Не вдалося завантажити замовлення: ' + (e.message || e);
+        return;
+      }
+      $('main').classList.remove('hidden');
+      route();
+      setInterval(() => { if (!document.hidden) refresh(); }, REFRESH_MS);
+    });
+  </script>
+</body>
+</html>
