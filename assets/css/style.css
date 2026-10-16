@@ -2638,18 +2638,23 @@ html.lang-en .lang-hide-en { display: none !important; }
   font-weight: 600;
   transition: background var(--transition), color var(--transition);
 }
+/* Значок соцмережі (assets/images/social/*.svg, Simple Icons) - маска,
+   тож колір задає background: фірмовий, при наведенні білий. */
 .footer-social__link::before {
   content: '';
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
   background: var(--social-color);
+  -webkit-mask: var(--social-icon) center / contain no-repeat;
+  mask: var(--social-icon) center / contain no-repeat;
 }
 .footer-social__link:hover { background: var(--social-color); color: #fff; }
 .footer-social__link:hover::before { background: #fff; }
-.footer-social__link--telegram  { --social-color: #229ed9; }
-.footer-social__link--viber     { --social-color: #7360f2; }
-.footer-social__link--facebook  { --social-color: #1877f2; }
-.footer-social__link--instagram { --social-color: #e1306c; }
-.footer-social__link--tiktok    { --social-color: #fe2c55; }
-.footer-social__link--youtube   { --social-color: #ff0000; }
+/* TikTok фірмово чорний - на темному футері не видно, тож рожевий акцент бренду */
+.footer-social__link--telegram  { --social-color: #26a5e4; --social-icon: url(../images/social/telegram.svg); }
+.footer-social__link--viber     { --social-color: #7360f2; --social-icon: url(../images/social/viber.svg); }
+.footer-social__link--facebook  { --social-color: #1877f2; --social-icon: url(../images/social/facebook.svg); }
+.footer-social__link--instagram { --social-color: #e1306c; --social-icon: url(../images/social/instagram.svg); }
+.footer-social__link--tiktok    { --social-color: #fe2c55; --social-icon: url(../images/social/tiktok.svg); }
+.footer-social__link--youtube   { --social-color: #ff0000; --social-icon: url(../images/social/youtube.svg); }
