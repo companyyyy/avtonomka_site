@@ -17,6 +17,12 @@
       "name": "PetrovFOP",
       "percent": 16,
       "base": "wholesale"
+    },
+    {
+      "file": "feed/tekhnoizhak.xml",
+      "name": "ТехноЇжак",
+      "percent": 15,
+      "base": "wholesale"
     }
   ],
   "usd_rate": 45.3
