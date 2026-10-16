@@ -3,7 +3,8 @@
   "default_lead_days": 14,
   "by_id": {
     "142723": {
-      "price": 11400
+      "price": 11400,
+      "lead_days": 21
     }
   }
 }
