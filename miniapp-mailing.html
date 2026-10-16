@@ -80,6 +80,9 @@
     .pill--sending { background: rgba(245,166,35,.18); color: #8a5a00; }
     .pill--sent { background: rgba(46,204,64,.15); color: #17a126; }
     .summary { font-size: .95rem; margin-bottom: 10px; }
+    .mode-switch { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 10px; font-size: .92rem; }
+    .mode-switch label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+    #f-targets { min-height: 96px; font-family: inherit; }
     .summary b { color: #1a2e4a; }
     .editor-layout { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 28px; }
     .editor-layout > div, .grid2 > div { min-width: 0; }
@@ -130,7 +133,15 @@
 
               <div class="group">
                 <label class="field">Кому надсилати</label>
-                <div class="conditions">
+                <div class="mode-switch">
+                  <label><input type="radio" name="f-mode" value="segment" checked> За умовами (перегляди, лайки, кошик)</label>
+                  <label><input type="radio" name="f-mode" value="targets"> Вручну: @юзернейми або Telegram ID</label>
+                </div>
+                <div class="hidden" id="targets-box">
+                  <textarea id="f-targets" class="form-input" placeholder="@username або Telegram ID - кожен з нового рядка або через кому&#10;@ivan_petrenko&#10;123456789"></textarea>
+                  <p class="muted" style="margin-top:6px">Отримають ті, хто відкривав мініапп або писав боту і дозволив йому писати. Пауза між розсилками тут не діє. Відписаним (/stop) і тим, хто заблокував бота, не надсилається.</p>
+                </div>
+                <div class="conditions" id="conditions-box">
                   <label>Переглядав товар не менше <input type="number" id="f-min-views" class="form-input num-input" min="0" value="3"> разів за останні <input type="number" id="f-days" class="form-input num-input" min="1" value="30"> днів</label>
                   <label class="check"><input type="checkbox" id="f-liked"> лише ті, в кого товар в обраному ❤️</label>
                   <label class="check"><input type="checkbox" id="f-carted"> лише ті, хто додавав у кошик</label>
@@ -254,7 +265,16 @@
     }
 
     /* ---- Форма ---- */
+    const isManual = () => document.querySelector('input[name="f-mode"]:checked').value === 'targets';
+    // "@a, @b\n123" -> ["@a", "@b", "123"]
+    const targetsFromForm = () => [...new Set($('f-targets').value.split(/[\s,;]+/).map(t => t.trim()).filter(Boolean))];
+    function setMode(manual) {
+      document.querySelector(`input[name="f-mode"][value="${manual ? 'targets' : 'segment'}"]`).checked = true;
+      $('targets-box').classList.toggle('hidden', !manual);
+      $('conditions-box').classList.toggle('hidden', manual);
+    }
     function segmentFromForm() {
+      if (isManual()) return { targets: targetsFromForm() };
       return {
         min_views: Math.max(0, parseInt($('f-min-views').value, 10) || 0),
         days: Math.max(1, parseInt($('f-days').value, 10) || 30),
@@ -275,10 +295,12 @@
       $('f-carted').checked = !!s.carted_only;
       $('f-exclude-ordered').checked = s.exclude_ordered ?? true;
       $('f-cooldown').value = s.cooldown_days ?? 7;
+      $('f-targets').value = (s.targets || []).join('\n');
+      setMode(Array.isArray(s.targets) && s.targets.length > 0);
       $('f-message').value = c?.message || DEFAULT_MESSAGE;
       $('f-button').value = c?.button_text || 'Переглянути товар';
       const locked = c && c.status !== 'draft';
-      document.querySelectorAll('#f-product, #f-title, #f-min-views, #f-days, #f-liked, #f-carted, #f-exclude-ordered, #f-cooldown, #f-message, #f-button')
+      document.querySelectorAll('#f-product, #f-title, #f-min-views, #f-days, #f-liked, #f-carted, #f-exclude-ordered, #f-cooldown, #f-message, #f-button, #f-targets, input[name="f-mode"]')
         .forEach(el => { el.disabled = !!locked; });
       $('editor-title').textContent = !c ? 'Нова розсилка' : locked ? `Розсилка «${c.title}» (${statusLabel(c.status).toLowerCase()})` : `Чернетка «${c.title}»`;
       $('btn-new').classList.toggle('hidden', !c);
@@ -334,7 +356,9 @@
     $('f-product').addEventListener('change', () => {
       $('f-product').classList.remove('invalid'); $('product-msg').textContent = '';
       onProductChange(); $('recipients').innerHTML = ''; lastRecipients = null; });
-    ['f-min-views', 'f-days', 'f-liked', 'f-carted', 'f-exclude-ordered', 'f-cooldown'].forEach(id =>
+    document.querySelectorAll('input[name="f-mode"]').forEach(r => r.addEventListener('change', () => {
+      setMode(isManual()); $('recipients').innerHTML = ''; lastRecipients = null; }));
+    ['f-min-views', 'f-days', 'f-liked', 'f-carted', 'f-exclude-ordered', 'f-cooldown', 'f-targets'].forEach(id =>
       $(id).addEventListener('change', () => { $('recipients').innerHTML = ''; lastRecipients = null; }));
     document.querySelectorAll('[data-insert]').forEach(b => b.addEventListener('click', () => {
       const ta = $('f-message');
@@ -350,6 +374,7 @@
     async function showRecipients() {
       if (!requireProduct()) return null;
       const el = $('recipients');
+      if (isManual()) return showTargets(el);
       el.innerHTML = '<p class="admin-hint">Рахую…</p>';
       const s = segmentFromForm();
       const { data, error } = await sb.rpc('tg_segment', {
@@ -376,6 +401,35 @@
         </table></div>`;
       return ok;
     }
+    // Ручний перелік: хто знайшовся і чи можна йому писати.
+    async function showTargets(el) {
+      const targets = targetsFromForm();
+      if (!targets.length) {
+        el.innerHTML = '<p class="admin-hint error">Впишіть хоча б один @username або Telegram ID.</p>';
+        $('f-targets').focus();
+        return null;
+      }
+      el.innerHTML = '<p class="admin-hint">Шукаю…</p>';
+      const { data, error } = await sb.rpc('tg_resolve_targets', { p_targets: targets });
+      if (error) {
+        el.innerHTML = `<p class="admin-hint error">Помилка: ${escHtml(error.message)}${/tg_resolve_targets/.test(error.message) ? ' - виконайте scripts/supabase/campaign_targets.sql у Supabase.' : ''}</p>`;
+        return null;
+      }
+      const ok = data.filter(r => r.can_message).length;
+      lastRecipients = ok;
+      el.innerHTML = `
+        <p class="summary">Отримають повідомлення: <b>${ok}</b> з ${data.length}${data.length - ok ? ` <span class="muted">(решті писати не можна - причина в таблиці)</span>` : ''}</p>
+        <div class="table-wrap" style="max-height:360px;overflow-y:auto"><table>
+          <thead><tr><th>Вписано</th><th>Клієнт</th><th>Telegram ID</th><th>Писати</th></tr></thead>
+          <tbody>${data.map(r => `<tr>
+            <td>${escHtml(r.input)}</td>
+            <td>${r.name || r.username ? `<strong>${escHtml(r.name || r.username)}</strong>${r.name && r.username ? ` <span class="muted">${escHtml(r.username)}</span>` : ''}` : '<span class="muted">-</span>'}</td>
+            <td class="muted">${r.tg_id ?? '-'}</td>
+            <td>${r.can_message ? `<span class="pill pill--yes">так</span>${r.reason ? ` <span class="muted">${escHtml(r.reason)}</span>` : ''}` : `<span class="pill pill--no">${escHtml(r.reason || 'ні')}</span>`}</td>
+          </tr>`).join('')}</tbody>
+        </table></div>`;
+      return ok;
+    }
     $('btn-recipients').addEventListener('click', showRecipients);
 
     /* ---- Зберегти / надіслати ---- */
@@ -385,6 +439,8 @@
       const message = $('f-message').value.trim();
       if (!message) { setMsg('Напишіть текст повідомлення.', 'error'); return null; }
       if (/\[опишіть знижку/.test(message)) { setMsg('Замініть у тексті «[опишіть знижку…]» на справжню пропозицію.', 'error'); return null; }
+      // Порожній ручний перелік не можна: така кампанія пішла б за умовами всім підходящим.
+      if (isManual() && !targetsFromForm().length) { setMsg('Впишіть хоча б один @username або Telegram ID.', 'error'); $('f-targets').focus(); return null; }
       const row = {
         title: $('f-title').value.trim() || (p ? 'Розсилка: ' + p.title.slice(0, 60) : 'Розсилка ' + new Date().toLocaleDateString('uk-UA')),
         product_id: p ? p.id : null,
