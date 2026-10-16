@@ -2647,6 +2647,7 @@ html.lang-en .lang-hide-en { display: none !important; }
 }
 .footer-social__link:hover { background: var(--social-color); color: #fff; }
 .footer-social__link:hover::before { background: #fff; }
+.footer-social__link--telegram  { --social-color: #229ed9; }
 .footer-social__link--viber     { --social-color: #7360f2; }
 .footer-social__link--facebook  { --social-color: #1877f2; }
 .footer-social__link--instagram { --social-color: #e1306c; }
