@@ -23,6 +23,11 @@
       "name": "ТехноЇжак",
       "percent": 15,
       "base": "wholesale"
+    },
+    {
+      "file": "feed/freeship.xml",
+      "name": "freeship",
+      "percent": 10
     }
   ],
   "usd_rate": 45.3
