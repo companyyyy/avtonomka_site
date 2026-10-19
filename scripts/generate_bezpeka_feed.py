@@ -24,6 +24,9 @@ from pathlib import Path
 from xml.sax.saxutils import escape
 from zoneinfo import ZoneInfo
 
+sys.path.insert(0, str(Path(__file__).parent))
+from clean_title import clean_title
+
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
@@ -149,7 +152,9 @@ def description_html(p):
     # One line = one paragraph (the texts use both single and blank-line breaks).
     paragraphs = [line.strip() for line in text.splitlines() if line.strip()]
     # The first line repeats the title - drop it.
-    if paragraphs and paragraphs[0] == (p.get('title') or '').strip():
+    # (compared cleaned: the description may still carry the supplier's title
+    # with dimensions/weight that clean_title() removed from the title itself)
+    if paragraphs and clean_title(paragraphs[0]) == clean_title(p.get('title')):
         paragraphs = paragraphs[1:]
     return ''.join(f"<p>{html.escape(para, quote=False)}</p>" for para in paragraphs)
 

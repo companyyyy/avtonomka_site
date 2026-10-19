@@ -243,6 +243,15 @@ const BASE = getBase();
 const VIRTUAL_SUPABASE_URL = 'https://uvndubhmqzqqsrnrxgaj.supabase.co';
 const VIRTUAL_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bmR1YmhtcXpxcXNybnJ4Z2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDY4MDIsImV4cCI6MjEwMzkyMjgwMn0.AavrYyhDXBQkjKOMdQ9wAQX6B901dOfUpmtUDwO5Cv8';
 
+/* Габарити й вага з назви - копія scripts/clean_title.js (міняти разом). */
+function cleanVirtualTitle(title) {
+  const num = '\\d+(?:\\.\\d+)?';
+  const token = new RegExp('\\s*,?\\s*(?<![\\p{L}\\d.])(?:' + num + '\\s*[xхX×]\\s*' + num + '\\s*[xхX×]\\s*' + num +
+    '(?:\\s*мм)?|' + num + '\\s*(?:кг|kg)(?![\\p{L}\\d_]))', 'giu');
+  return String(title || '').replace(token, '').replace(/\s*,\s*(?=,|$)/g, '')
+    .replace(/\s{2,}/g, ' ').replace(/^[\s,]+|[\s,]+$/g, '');
+}
+
 function fetchVirtualProducts() {
   return fetch(`${VIRTUAL_SUPABASE_URL}/rest/v1/virtual_products?select=*`, {
     headers: { apikey: VIRTUAL_SUPABASE_ANON_KEY, Authorization: `Bearer ${VIRTUAL_SUPABASE_ANON_KEY}` },
@@ -250,7 +259,7 @@ function fetchVirtualProducts() {
     .then(resp => resp.ok ? resp.json() : [])
     .then(rows => (Array.isArray(rows) ? rows : []).map(r => ({
       id: r.id,
-      title: r.title,
+      title: cleanVirtualTitle(r.title),
       image_link: r.image,
       additional_images: [],
       price: r.price != null ? `${r.price} UAH` : '',

@@ -17,6 +17,7 @@ import requests
 
 sys.path.insert(0, str(Path(__file__).parent))
 from slugify import slugify
+from clean_title import clean_title
 from generate_seo_keywords import build_keywords as build_merchant_keywords
 
 FEED_URL = "https://dfi2.com.ua/price_xml/avtonomka.txt"
@@ -168,6 +169,12 @@ def main() -> int:
     if skipped:
         print(f"  Пропущено {skipped} елемент(и) без 'id' зі списку товарів")
     data = products_only
+
+    # Габарити й вага в назві постачальника (", 700х430х253, 71 кг") - прибираємо
+    # на кожному оновленні, щоб не верталися ні на сайт, ні у фіди.
+    for p in data:
+        if p.get("title"):
+            p["title"] = clean_title(p["title"])
 
     # Preserve existing descriptions, links, embeds and slugs from current products.json
     existing_desc = {}

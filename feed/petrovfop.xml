@@ -476,8 +476,8 @@
       <keywords_ua>АВР TOMZN TOQ5-100/2P, АВР 1 фаза 100А, автоматичне введення резерву, перемикач мережа генератор, АВР на DIN-рейку, перемикач резерву, АВР для генератора, АВР для інвертора, TOQ5-100</keywords_ua>
     </item>
     <item id="150935" selling_type="r">
-      <name>Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi, 309х505х147, 14 кг</name>
-      <name_ua>Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi, 309х505х147, 14 кг</name_ua>
+      <name>Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi</name>
+      <name_ua>Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
       <priceuah>22595.64</priceuah>
@@ -495,8 +495,8 @@
       <keywords_ua>інвертор 6kvt, інвертор маст, інвертор маст 6 kvt, гібридний інвертор 6kvt, гібридний інвертор маст, гібридний інвертор маст 6 kvt, інвертор для сонячних панелей, гібридний інвертор для сонячних панелей, екодрайв, ecodrive, інвертор маст PV19-6048EXP, гібридний інвертор маст PV19-6048EXP, маст PV19-6048EXP</keywords_ua>
     </item>
     <item id="151057" selling_type="r">
-      <name>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 400х708х233, 123 кг, 16kWh LiFePO4</name>
-      <name_ua>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 400х708х233, 123 кг, 16kWh LiFePO4</name_ua>
+      <name>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 16kWh LiFePO4</name>
+      <name_ua>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 16kWh LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
       <priceuah>97213.80</priceuah>
@@ -505,13 +505,13 @@
       <image>https://avtonomka.com.ua/assets/images/prom/151057_1.jpg</image>
       <image>https://avtonomka.com.ua/assets/images/prom/151057_2.jpg</image>
       <image>https://avtonomka.com.ua/assets/images/products/151057_2.jpg</image>
-      <description_ua><![CDATA[<p>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 400х708х233, 123 кг, 16kWh LiFePO4</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку або квартири</li><li>автономне електроживлення</li><li>робота з гібридним інвертором</li><li>накопичення енергії від сонячних панелей</li></ul>]]></description_ua>
+      <description_ua><![CDATA[<p>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 16kWh LiFePO4</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку або квартири</li><li>автономне електроживлення</li><li>робота з гібридним інвертором</li><li>накопичення енергії від сонячних панелей</li></ul>]]></description_ua>
       <keywords>аккумулятор 314ah, аккумулятор дея, аккумулятор дея 314 ah, батарея 314ah, батарея дея, батарея дея 314 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор дея SE-F16-С, батарея дея SE-F16-С, дея SE-F16-С</keywords>
       <keywords_ua>акумулятор 314ah, акумулятор дея, акумулятор дея 314 ah, батарея 314ah, батарея дея, батарея дея 314 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор дея SE-F16-С, батарея дея SE-F16-С, дея SE-F16-С</keywords_ua>
     </item>
     <item id="150674" selling_type="r">
-      <name>Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V, 480х500х155, 47 кг</name>
-      <name_ua>Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V, 480х500х155, 47 кг</name_ua>
+      <name>Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V</name>
+      <name_ua>Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
       <priceuah>39411.00</priceuah>

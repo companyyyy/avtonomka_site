@@ -35,6 +35,7 @@ const fs      = require('fs');
 const path    = require('path');
 const { execFileSync } = require('child_process');
 const { slugify } = require('./slugify');
+const { cleanTitle } = require('./clean_title');
 const { getBackorderOffer, PAGE_SUFFIX } = require('./backorder');
 
 const ROOT           = path.join(__dirname, '..');
@@ -334,7 +335,7 @@ async function loadVirtualProducts() {
     const rows = await resp.json();
     return (Array.isArray(rows) ? rows : []).map(r => ({
       id: r.id,
-      title: r.title,
+      title: cleanTitle(r.title),
       image_link: r.image,
       additional_images: [],
       price: '',
