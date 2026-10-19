@@ -349,6 +349,54 @@
     "site": true
   },
   {
+    "id": "151790",
+    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48314-EU 51.2V 314Ah 16kWh",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/151790.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152205",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 6 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152205.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152206",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ DEYE SE-F5 Pro-C 51.2V 100 Аh",
+    "cat": 11,
+    "photo": "",
+    "problem": "немає фото на білому фоні",
+    "site": true
+  },
+  {
+    "id": "152208",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Deye SE-F16-С 51.2V 314 Аh",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152208.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152211",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48230 51.2V 230Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152211.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152212",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48314-EU 51.2V 314Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152212.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
     "id": "152219",
     "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48230 51.2V 230Ah",
     "cat": 11,
@@ -537,54 +585,6 @@
     "name": "Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + 2 шт. Felicity FLA12100 PG2 12.8V 100Ah",
     "cat": 11,
     "photo": "assets/images/zaglushka.png",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "151790",
-    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48314-EU 51.2V 314Ah 16kWh",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/151790.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152205",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 6 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152205.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152206",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ DEYE SE-F5 Pro-C 51.2V 100 Аh",
-    "cat": 11,
-    "photo": "",
-    "problem": "немає фото на білому фоні",
-    "site": true
-  },
-  {
-    "id": "152208",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Deye SE-F16-С 51.2V 314 Аh",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152208.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152211",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48230 51.2V 230Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152211.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152212",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48314-EU 51.2V 314Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152212.jpg",
     "problem": "",
     "site": true
   }
