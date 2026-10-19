@@ -11,12 +11,33 @@
     <category id="11" portal_id="501001">Комплекти автономного енергоживлення</category>
   </catalog>
   <items>
+    <item id="150825" selling_type="r">
+      <name>Гибридный инвертор MUST PV18-1012VPK 1 кВт 12 В</name>
+      <name_ua>Гібридний інвертор MUST PV18-1012VPK 1 кВт 12 В</name_ua>
+      <categoryId>1</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>13468.95</priceuah>
+      <available>false</available>
+      <vendorCode>PV18-1012VPK</vendorCode>
+      <vendor>MUST</vendor>
+      <image>https://avtonomka.com.ua/assets/images/prom/150825_1.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/150825_2.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/150825_3.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/150825_4.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/150825_5.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/150825_6.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/150825_7.jpg</image>
+      <description><![CDATA[<p>MUST PV18-1012VPK – гибридный инвертор мощностью 1 кВт для систем резервного и автономного электропитания. Модель работает с аккумуляторными батареями на 12 В и предназначена для однофазных систем.</p><p>Инвертор объединяет в одной системе питание от аккумулятора, электросети и солнечных панелей. Солнечная энергия может питать нагрузку и заряжать АКБ, поэтому модель подходит как для резервного питания, так и для небольших автономных систем.</p><p>Корпус 297,5 × 468 × 125 мм, вес 5 кг. При монтаже предусмотрите место для подключения кабелей и свободное пространство для охлаждения. Суммарная нагрузка не должна превышать 1 кВт.</p><p><strong>Где используется:</strong></p><ul><li>резервное питание дома, квартиры или офиса</li><li>солнечные электростанции</li><li>системы накопления электроэнергии</li><li>автономные и гибридные системы питания</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Номинальная мощность: 1 кВт</li><li>Напряжение АКБ: 12 В</li><li>Количество фаз: 1</li><li>Размеры: 297,5 × 468 × 125 мм</li><li>Вес: 5 кг</li></ul>]]></description>
+      <description_ua><![CDATA[<p>MUST PV18-1012VPK – гібридний інвертор потужністю 1 кВт для систем резервного та автономного електроживлення. Модель працює з акумуляторними батареями на 12 В і призначена для однофазних систем.</p><p>Інвертор поєднує в одній системі живлення від акумулятора, електромережі та сонячних панелей. Сонячна енергія може живити навантаження і заряджати АКБ, тому модель підходить як для резервного живлення, так і для невеликих автономних систем.</p><p>Корпус 297,5 × 468 × 125 мм, вага 5 кг. Під час монтажу передбачте місце для підключення кабелів і вільний простір для охолодження. Сумарне навантаження не повинно перевищувати 1 кВт.</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири або офісу</li><li>сонячні електростанції</li><li>системи накопичення електроенергії</li><li>автономні та гібридні системи живлення</li></ul><p><strong>Основні характеристики:</strong></p><ul><li>Номінальна потужність: 1 кВт</li><li>Напруга АКБ: 12 В</li><li>Кількість фаз: 1</li><li>Розміри: 297,5 × 468 × 125 мм</li><li>Вага: 5 кг</li></ul>]]></description_ua>
+      <keywords>гибридный инвертор MUST PV18-1012VPK, инвертор MUST 1 кВт, инвертор 12 В, инвертор маст 1 кВт, гибридный инвертор 1 кВт, инвертор для солнечных панелей, инвертор для резервного питания, PV18-1012VPK</keywords>
+      <keywords_ua>гібридний інвертор MUST PV18-1012VPK, інвертор MUST 1 кВт, інвертор 12 В, інвертор маст 1 кВт, гібридний інвертор 1 кВт, інвертор для сонячних панелей, інвертор для резервного живлення, PV18-1012VPK</keywords_ua>
+    </item>
     <item id="152517" selling_type="r">
       <name>Гибридный инвертор MUST PV18-1512 VPM II 1,5 кВт 12 В</name>
       <name_ua>Гібридний інвертор MUST PV18-1512 VPM II 1,5 кВт 12 В</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>15498.00</priceuah>
+      <priceuah>15495.30</priceuah>
       <available>true</available>
       <vendorCode>PV18-1512VPM II</vendorCode>
       <vendor>MUST</vendor>
@@ -36,7 +57,7 @@
       <name_ua>Гібридний інвертор MUST PV18-3224 VPM II 3,2 кВт 24 В</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>21104.55</priceuah>
+      <priceuah>21108.60</priceuah>
       <available>true</available>
       <vendorCode>PV18-3224VPM II</vendorCode>
       <vendor>MUST</vendor>
@@ -55,7 +76,7 @@
       <name_ua>Гібридний інвертор MUST PV19-4024 EXP 4 кВт 24 В</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>25555.50</priceuah>
+      <priceuah>25560.90</priceuah>
       <available>true</available>
       <vendorCode>PV19-4024EXP</vendorCode>
       <vendor>MUST</vendor>
@@ -69,26 +90,6 @@
       <description_ua><![CDATA[<p>MUST PV19-4024 EXP – гібридний інвертор потужністю 4 кВт для систем резервного та автономного живлення. Модель працює з акумуляторними батареями на 24 В.</p><p>Інвертор поєднує живлення від акумулятора, електромережі та сонячних панелей, що дозволяє зменшити залежність від відключень і використовувати сонячну енергію для навантаження та заряджання АКБ.</p><p>Розміри корпусу 322 × 486 × 134 мм, вага 9,5 кг. Інвертор встановлюється на стіну; під час монтажу передбачте вільний простір для вентиляції.</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири або офісу</li><li>сонячні електростанції</li><li>системи накопичення електроенергії</li><li>автономні та гібридні системи живлення</li></ul><p><strong>Основні характеристики:</strong></p><ul><li>Номінальна потужність: 4 кВт</li><li>Напруга АКБ: 24 В</li><li>Розміри: 322 × 486 × 134 мм</li><li>Вага: 9,5 кг</li></ul>]]></description_ua>
       <keywords>гибридный инвертор MUST PV19-4024 EXP, инвертор MUST 4 кВт, инвертор 24 В, инвертор маст 4024, гибридный инвертор 4 кВт, инвертор для солнечных панелей, инвертор для дома, PV19-4024</keywords>
       <keywords_ua>гібридний інвертор MUST PV19-4024 EXP, інвертор MUST 4 кВт, інвертор 24 В, інвертор маст 4024, гібридний інвертор 4 кВт, інвертор для сонячних панелей, інвертор для дому, PV19-4024</keywords_ua>
-    </item>
-    <item id="150676" selling_type="r">
-      <name>Аккумуляторная батарея Deye SE-F5 Pro-C 51,2 В 100 А·ч 5,12 кВт·ч LiFePO4</name>
-      <name_ua>Акумуляторна батарея Deye SE-F5 Pro-C 51,2 В 100 А·год 5,12 кВт·год LiFePO4</name_ua>
-      <categoryId>2</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>54942.30</priceuah>
-      <available>true</available>
-      <vendorCode>SE-F5 Pro-C</vendorCode>
-      <vendor>Deye</vendor>
-      <image>https://avtonomka.com.ua/assets/images/prom/150676_1.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150676_2.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150676_3.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150676_4.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150676_5.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150676_6.jpg</image>
-      <description><![CDATA[<p>Deye SE-F5 Pro-C – литий-железо-фосфатная аккумуляторная батарея LiFePO4 емкостью 100 А·ч с номинальным напряжением 51,2 В. Аккумулятор предназначен для систем резервного и автономного питания и для работы с инвертором.</p><p>Номинальная энергоемкость 5,12 кВт·ч, а напряжение 51,2 В подходит для систем, рассчитанных на 48 В. Технология LiFePO4 хорошо выдерживает регулярные циклы заряда и разряда.</p><p>Корпус 404 × 547 × 141 мм, вес 45 кг. Перед подключением проверьте совместимость с инвертором по напряжению, параметрам заряда и протоколу коммуникации.</p><p><strong>Где используется:</strong></p><ul><li>резервное питание дома или квартиры</li><li>автономное электропитание</li><li>работа с гибридным инвертором</li><li>накопление энергии от солнечных панелей</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Номинальное напряжение: 51,2 В</li><li>Емкость: 100 А·ч</li><li>Энергоемкость: 5,12 кВт·ч</li><li>Тип аккумулятора: LiFePO4</li><li>Размеры: 404 × 547 × 141 мм</li><li>Вес: 45 кг</li></ul>]]></description>
-      <description_ua><![CDATA[<p>Deye SE-F5 Pro-C – літій-залізо-фосфатна акумуляторна батарея LiFePO4 ємністю 100 А·год з номінальною напругою 51,2 В. Акумулятор призначений для систем резервного та автономного живлення і для роботи з інвертором.</p><p>Номінальна енергоємність 5,12 кВт·год, а напруга 51,2 В підходить для систем, розрахованих на 48 В. Технологія LiFePO4 добре витримує регулярні цикли заряджання та розряджання.</p><p>Корпус 404 × 547 × 141 мм, вага 45 кг. Перед підключенням перевірте сумісність з інвертором за напругою, параметрами заряджання та протоколом комунікації.</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку або квартири</li><li>автономне електроживлення</li><li>робота з гібридним інвертором</li><li>накопичення енергії від сонячних панелей</li></ul><p><strong>Основні характеристики:</strong></p><ul><li>Номінальна напруга: 51,2 В</li><li>Ємність: 100 А·год</li><li>Енергоємність: 5,12 кВт·год</li><li>Тип акумулятора: LiFePO4</li><li>Розміри: 404 × 547 × 141 мм</li><li>Вага: 45 кг</li></ul>]]></description_ua>
-      <keywords>аккумулятор Deye SE-F5 Pro-C, аккумулятор Deye 100 Аh, аккумулятор 51.2 В, аккумулятор 48 В для инвертора, аккумулятор LiFePO4, батарея дея, аккумулятор 5 кВт·ч, батарея для инвертора, SE-F5 Pro-C</keywords>
-      <keywords_ua>акумулятор Deye SE-F5 Pro-C, акумулятор Deye 100 Аh, акумулятор 51.2 В, акумулятор 48 В для інвертора, акумулятор LiFePO4, батарея дея, акумулятор 5 кВт·год, батарея для інвертора, SE-F5 Pro-C</keywords_ua>
     </item>
     <item id="150599" selling_type="r">
       <name>Аккумулятор MUST LP15-12100 12 В 100 А·ч LiFePO4</name>
@@ -112,7 +113,7 @@
       <name_ua>Акумуляторна батарея MUST LP16-24100 25,6 В 100 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>42720.75</priceuah>
+      <priceuah>42708.60</priceuah>
       <available>true</available>
       <vendorCode>LP16-24100</vendorCode>
       <vendor>MUST</vendor>
@@ -127,32 +128,12 @@
       <keywords>аккумулятор MUST LP16-24100, аккумулятор 24 В 100 Аh, аккумулятор 25.6 В, аккумулятор LiFePO4, аккумулятор для инвертора, батарея маст, батарея для инвертора, LP16-24100</keywords>
       <keywords_ua>акумулятор MUST LP16-24100, акумулятор 24 В 100 Аh, акумулятор 25.6 В, акумулятор LiFePO4, акумулятор для інвертора, батарея маст, батарея для інвертора, LP16-24100</keywords_ua>
     </item>
-    <item id="148300" selling_type="r">
-      <name>Аккумуляторная батарея MUST LP16-24200 25,6 В 200 А·ч LiFePO4</name>
-      <name_ua>Акумуляторна батарея MUST LP16-24200 25,6 В 200 А·год LiFePO4</name_ua>
-      <categoryId>2</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>58006.80</priceuah>
-      <available>true</available>
-      <vendorCode>LP16-24200</vendorCode>
-      <vendor>MUST</vendor>
-      <image>https://avtonomka.com.ua/assets/images/prom/148300_1.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/148300_2.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/148300_3.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/148300_4.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/148300_5.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/148300_6.jpg</image>
-      <description><![CDATA[<p>MUST LP16-24200 – аккумуляторная батарея LiFePO4 емкостью 200 А·ч с номинальным напряжением 25,6 В для систем резервного и автономного питания с инвертором на 24 В.</p><p>Энергоемкость около 5,12 кВт·ч – достаточно для длительного питания бытовой техники во время отключений. Технология LiFePO4 обеспечивает большой ресурс циклов.</p><p>Корпус 442 × 486,5 × 250 мм, вес 45 кг.</p><p><strong>Где используется:</strong></p><ul><li>резервное питание дома или квартиры</li><li>автономное электропитание</li><li>работа с гибридным инвертором</li><li>накопление энергии от солнечных панелей</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Номинальное напряжение: 25,6 В</li><li>Емкость: 200 А·ч</li><li>Тип аккумулятора: LiFePO4</li><li>Размеры: 442 × 486,5 × 250 мм</li><li>Вес: 45 кг</li></ul>]]></description>
-      <description_ua><![CDATA[<p>MUST LP16-24200 – акумуляторна батарея LiFePO4 ємністю 200 А·год з номінальною напругою 25,6 В для систем резервного та автономного живлення з інвертором на 24 В.</p><p>Енергоємність близько 5,12 кВт·год – достатньо для тривалого живлення побутової техніки під час відключень. Технологія LiFePO4 забезпечує великий ресурс циклів.</p><p>Корпус 442 × 486,5 × 250 мм, вага 45 кг.</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку або квартири</li><li>автономне електроживлення</li><li>робота з гібридним інвертором</li><li>накопичення енергії від сонячних панелей</li></ul><p><strong>Основні характеристики:</strong></p><ul><li>Номінальна напруга: 25,6 В</li><li>Ємність: 200 А·год</li><li>Тип акумулятора: LiFePO4</li><li>Розміри: 442 × 486,5 × 250 мм</li><li>Вага: 45 кг</li></ul>]]></description_ua>
-      <keywords>аккумулятор MUST LP16-24200, аккумулятор 24 В 200 Аh, аккумулятор 25.6 В 200 Аh, аккумулятор LiFePO4, аккумулятор для инвертора 24 В, батарея маст, батарея для инвертора, LP16-24200</keywords>
-      <keywords_ua>акумулятор MUST LP16-24200, акумулятор 24 В 200 Аh, акумулятор 25.6 В 200 Аh, акумулятор LiFePO4, акумулятор для інвертора 24 В, батарея маст, батарея для інвертора, LP16-24200</keywords_ua>
-    </item>
     <item id="152265" selling_type="r">
       <name>Аккумуляторная батарея MUST LP16-48300 51,2 В 300 А·ч LiFePO4</name>
       <name_ua>Акумуляторна батарея MUST LP16-48300 51,2 В 300 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>113132.70</priceuah>
+      <priceuah>113130.00</priceuah>
       <available>true</available>
       <vendorCode>LP16-48300</vendorCode>
       <vendor>MUST</vendor>
@@ -183,7 +164,7 @@
       <name_ua>Акумуляторна батарея Felicity FLA24280 25,6 В 280 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>76347.90</priceuah>
+      <priceuah>77569.65</priceuah>
       <available>true</available>
       <vendorCode>FLA24280</vendorCode>
       <vendor>Felicity</vendor>
@@ -198,7 +179,7 @@
       <name_ua>Акумуляторна батарея Felicity FLA48230 51,2 В 230 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>104311.80</priceuah>
+      <priceuah>104314.50</priceuah>
       <available>true</available>
       <vendorCode>FLA48230</vendorCode>
       <vendor>Felicity</vendor>
@@ -213,7 +194,7 @@
       <name_ua>Акумуляторна батарея Felicity FLA48314-EU 51,2 В 314 А·год 16 кВт·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>122619.15</priceuah>
+      <priceuah>122616.45</priceuah>
       <available>true</available>
       <vendorCode>FLA48314-EU</vendorCode>
       <vendor>Felicity</vendor>
@@ -231,7 +212,7 @@
       <name_ua>Акумуляторна батарея Felicity FLB48314TG1-H 51,2 В 314 А·год 16 кВт·год LiFePO4 з підігрівом</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>122758.20</priceuah>
+      <priceuah>122754.15</priceuah>
       <available>true</available>
       <vendorCode>FLB48314TG1-H</vendorCode>
       <vendor>Felicity</vendor>
@@ -246,7 +227,7 @@
       <name_ua>Система зберігання електроенергії MUST HBP19-5548 VPM 2 в 1 5,5 кВт 5120 Вт·год</name_ua>
       <categoryId>3</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>99076.50</priceuah>
+      <priceuah>99083.25</priceuah>
       <available>true</available>
       <vendorCode>HBP19-5548VPM</vendorCode>
       <vendor>MUST</vendor>
@@ -265,7 +246,7 @@
       <name_ua>Сонячний кабель KBE Solar 6 мм², 500 м (бухта), червоний, Німеччина</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>45852.75</priceuah>
+      <priceuah>45851.40</priceuah>
       <available>true</available>
       <vendorCode>KBE Solar 6</vendorCode>
       <vendor>KBE</vendor>
@@ -280,7 +261,7 @@
       <name_ua>Сонячний кабель KBE Solar 6 мм², 500 м (бухта), чорний, Німеччина</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>45848.70</priceuah>
+      <priceuah>45852.75</priceuah>
       <available>true</available>
       <vendorCode>KBE Solar 6</vendorCode>
       <vendor>KBE</vendor>
@@ -295,7 +276,7 @@
       <name_ua>Сонячний кабель KBE 6 мм² 1 м, Німеччина</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>99.90</priceuah>
+      <priceuah>97.20</priceuah>
       <available>true</available>
       <vendorCode>KBE Solar 6</vendorCode>
       <vendor>KBE</vendor>
@@ -310,7 +291,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 1,5 м, 2 шт., мідь, мідні наконечники М8</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>1930.50</priceuah>
+      <priceuah>1922.40</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151849_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 1,5 м. На концах установлены медные наконечники М8, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 1,5 м</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М8</li></ul>]]></description>
@@ -323,7 +304,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 1,5 м, 2 шт., мідь, мідні наконечники М10</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>1922.40</priceuah>
+      <priceuah>1923.75</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151853_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 1,5 м. На концах установлены медные наконечники М10, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 1,5 м</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М10</li></ul>]]></description>
@@ -336,7 +317,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 1 м, 2 шт., мідь, мідні наконечники М8</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>1161.00</priceuah>
+      <priceuah>1158.30</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151847_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 1 м. На концах установлены медные наконечники М8, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 1 м</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М8</li></ul>]]></description>
@@ -362,7 +343,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 75 см, 2 шт., мідь, мідні наконечники М8</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>1017.90</priceuah>
+      <priceuah>1016.55</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151850_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 75 см. На концах установлены медные наконечники М8, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 75 см</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М8</li></ul>]]></description>
@@ -375,7 +356,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 75 см, 2 шт., мідь, мідні наконечники М10</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>1015.20</priceuah>
+      <priceuah>1027.35</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151854_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 75 см. На концах установлены медные наконечники М10, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 75 см</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М10</li></ul>]]></description>
@@ -414,7 +395,7 @@
       <name_ua>Зарядна станція EcoFlow DELTA 2 1800 Вт 1024 Вт·год (EU)</name_ua>
       <categoryId>5</categoryId>
       <portal_category_id>500901</portal_category_id>
-      <priceuah>48865.95</priceuah>
+      <priceuah>48859.20</priceuah>
       <available>true</available>
       <vendorCode>DELTA 2 EU</vendorCode>
       <vendor>EcoFlow</vendor>
@@ -432,7 +413,7 @@
       <name_ua>Зарядна станція EcoFlow DELTA 3 1024 Вт·год 1800 Вт (китайські розетки, з перехідниками)</name_ua>
       <categoryId>5</categoryId>
       <portal_category_id>500901</portal_category_id>
-      <priceuah>48870.00</priceuah>
+      <priceuah>48859.20</priceuah>
       <available>true</available>
       <vendorCode>DELTA 3</vendorCode>
       <vendor>EcoFlow</vendor>
@@ -449,7 +430,7 @@
       <name_ua>Безперебійник для роутера TTN DC1036P 12000 mAh, виходи 5/9/12 В, USB, PoE</name_ua>
       <categoryId>6</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>2269.35</priceuah>
+      <priceuah>2259.90</priceuah>
       <available>true</available>
       <vendorCode>DC1036P</vendorCode>
       <image>https://avtonomka.com.ua/assets/images/prom/150649_1.jpg</image>
@@ -466,7 +447,7 @@
       <name_ua>Гібридний інвертор Felicity IVEM6048-II 6 кВт 48 В</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>30481.65</priceuah>
+      <priceuah>30484.35</priceuah>
       <available>true</available>
       <vendorCode>IVEM6048-II</vendorCode>
       <vendor>Felicity</vendor>
@@ -487,7 +468,7 @@
       <name_ua>Акумуляторна батарея Felicity FLB48230WG1-H 51,2 В 230 А·год LiFePO4 з підігрівом</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>104315.85</priceuah>
+      <priceuah>104314.50</priceuah>
       <available>true</available>
       <vendorCode>FLB48230WG1-H</vendorCode>
       <vendor>Felicity</vendor>
@@ -497,32 +478,12 @@
       <keywords>аккумулятор Felicity FLB48230WG1-H, аккумулятор с подогревом, аккумулятор 48 В 230 Аh, аккумулятор 51.2 В, аккумулятор LiFePO4, батарея фелисити, батарея для инвертора, FLB48230</keywords>
       <keywords_ua>акумулятор Felicity FLB48230WG1-H, акумулятор з підігрівом, акумулятор 48 В 230 Аh, акумулятор 51.2 В, акумулятор LiFePO4, батарея фелісіті, батарея для інвертора, FLB48230</keywords_ua>
     </item>
-    <item id="152723" selling_type="r">
-      <name>Система хранения электроэнергии MUST HBP18-1212 OS 2 в 1 1,2 кВт 1280 Вт·ч</name>
-      <name_ua>Система зберігання електроенергії MUST HBP18-1212 OS 2 в 1 1,2 кВт 1280 Вт·год</name_ua>
-      <categoryId>3</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>27838.35</priceuah>
-      <available>true</available>
-      <vendorCode>HBP18-1212OS</vendorCode>
-      <vendor>MUST</vendor>
-      <image>https://avtonomka.com.ua/assets/images/ultradomik/152723.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152723_1.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152723_2.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152723_3.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152723_4.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152723_5.jpg</image>
-      <description><![CDATA[<p>MUST HBP18-1212 OS – система хранения электроэнергии формата 2 в 1: инвертор мощностью 1,2 кВт и аккумулятор емкостью 1280 Вт·ч в одном корпусе.</p><p>Готовое решение для резервного питания квартиры, дома или офиса: не нужно отдельно подбирать инвертор, аккумулятор и кабели между ними. Достаточно подключить технику – и система готова к работе во время отключений.</p><p>Размеры 225 × 295 × 363 мм, вес 17 кг.</p><p><strong>Где используется:</strong></p><ul><li>резервное питание дома или квартиры</li><li>питание офиса или магазина во время отключений</li><li>работа вместе с солнечными панелями</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Номинальная мощность: 1,2 кВт</li><li>Энергоемкость: 1280 Вт·ч</li><li>Размеры: 225 × 295 × 363 мм</li><li>Вес: 17 кг</li></ul>]]></description>
-      <description_ua><![CDATA[<p>MUST HBP18-1212 OS – система зберігання електроенергії формату 2 в 1: інвертор потужністю 1,2 кВт і акумулятор ємністю 1280 Вт·год в одному корпусі.</p><p>Готове рішення для резервного живлення квартири, будинку чи офісу: не потрібно окремо підбирати інвертор, акумулятор і кабелі між ними. Достатньо підключити техніку – і система готова до роботи під час відключень.</p><p>Розміри 225 × 295 × 363 мм, вага 17 кг.</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку або квартири</li><li>живлення офісу чи магазину під час відключень</li><li>робота разом із сонячними панелями</li></ul><p><strong>Основні характеристики:</strong></p><ul><li>Номінальна потужність: 1,2 кВт</li><li>Енергоємність: 1280 Вт·год</li><li>Розміри: 225 × 295 × 363 мм</li><li>Вага: 17 кг</li></ul>]]></description_ua>
-      <keywords>система хранения энергии MUST HBP18-1212 OS, инвертор с аккумулятором, ИБП 2 в 1, система резервного питания, бесперебойник для дома, инвертор 1.2 кВт, накопитель энергии, HBP18-1212OS</keywords>
-      <keywords_ua>система зберігання енергії MUST HBP18-1212 OS, інвертор з акумулятором, ДБЖ 2 в 1, система резервного живлення, безперебійник для дому, інвертор 1.2 кВт, накопичувач енергії, HBP18-1212OS</keywords_ua>
-    </item>
     <item id="ud-avr-2p" selling_type="r">
       <name>Автоматический переключатель ввода резерва АВР TOMZN TOQ5-100/2P 1 фаза 100 А</name>
       <name_ua>Автоматичний перемикач введення резерву АВР TOMZN TOQ5-100/2P 1 фаза 100 А</name_ua>
       <categoryId>7</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>1530.90</priceuah>
+      <priceuah>1526.85</priceuah>
       <available>true</available>
       <vendorCode>TOQ5-100/2P</vendorCode>
       <image>https://avtonomka.com.ua/assets/images/ultradomik/ud-avr-2p.jpg</image>
@@ -536,7 +497,7 @@
       <name_ua>Автоматичний перемикач введення резерву АВР TOMZN TOQ5-100/4P 3 фази 100 А</name_ua>
       <categoryId>7</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>1773.90</priceuah>
+      <priceuah>1771.20</priceuah>
       <available>true</available>
       <vendorCode>TOQ5-100/4P</vendorCode>
       <image>https://avtonomka.com.ua/assets/images/ultradomik/ud-avr-4p.jpg</image>
@@ -550,7 +511,7 @@
       <name_ua>Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>34769.25</priceuah>
+      <priceuah>34766.55</priceuah>
       <available>true</available>
       <vendorCode>PV19-6048EXP</vendorCode>
       <image>https://avtonomka.com.ua/assets/images/prom/150935_1.jpg</image>
@@ -569,7 +530,7 @@
       <name_ua>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 16kWh LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>128335.05</priceuah>
+      <priceuah>128336.40</priceuah>
       <available>true</available>
       <vendorCode>SE-F16-С</vendorCode>
       <image>https://avtonomka.com.ua/assets/images/prom/151057_1.jpg</image>
@@ -584,19 +545,97 @@
       <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + DAH Solar DHN-LVWES05-G1 100ah 51.2V</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>85626.45</priceuah>
+      <priceuah>85623.75</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/feed-auto/151284.jpg</image>
       <description_ua><![CDATA[<p>Комплект автономного енергоживлення MUST PV19-6048EXP 48V 6 кВт + DAH Solar DHN-LVWES05-G1 100Ah 51.2V</p><p>Готовий комплект резервного живлення для квартири, будинку чи офісу: гібридний інвертор MUST на 6 кВт у парі з акумулятором DAH Solar на 5,12 кВт·год. Обидва компоненти розраховані на напругу 48 В, тому не потрібно окремо підбирати батарею під інвертор.</p><p>MUST PV19-6048EXP – гібридний інвертор з номінальною потужністю 6000 Вт і піковою до 12 000 Вт. Він поєднує перетворювач, зарядний пристрій від мережі та сонячний MPPT-контролер: енергія може надходити від сонячних панелей (до 6000 Вт, діапазон MPPT 150–450 В), накопичуватися в акумуляторі або братися з мережі. На виході – чиста синусоїда 230 В, час перемикання не більше 10 мс. Інвертор підтримує підключення генератора та паралельну роботу декількох пристроїв.</p><p>DAH Solar DHN-LVWES05-G1 – акумулятор LiFePO4 51,2 В 100 А·год із запасом енергії 5,12 кВт·год у компактному настінному корпусі 480 × 500 × 155 мм вагою 47 кг. Він накопичує енергію від мережі чи сонця і віддає її під час відключень.</p><p>Комплект добре підходить як стартова система: забезпечує живлення холодильника, освітлення, роутера, котла, телевізора та іншої техніки під час відключень. За потреби до системи пізніше можна додати сонячні панелі.</p><p>Де використовується</p><ul><li>резервне живлення квартири, будинку чи офісу</li><li>системи із сонячними панелями</li><li>живлення побутової техніки під час відключень електроенергії</li><li>зменшення залежності від електромережі</li></ul><p>Важливо: час автономної роботи залежить від потужності підключених приладів. Якщо потрібен більший запас енергії, менеджери Автономки допоможуть підібрати комплект з ємнішим акумулятором.</p>]]></description_ua>
       <keywords>комплект автономного электропитания дан солар, комплект автономного электропитания маст, комплект дан солар, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
       <keywords_ua>комплект автономного живлення дан солар, комплект автономного живлення маст, комплект дан солар, комплект маст, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
     </item>
+    <item id="152219" selling_type="r">
+      <name>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48230 51.2V 230Ah</name>
+      <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48230 51.2V 230Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>138060.45</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/feed-auto/152219.jpg</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення MUST PV19-6048EXP 48V 6 kW + Felicity FLA48230 51.2V 230Ah</p><p>Комплект автономного енергоживлення MUST та Felicity підійде для будинку, квартири, офісу, майстерні або іншого об&apos;єкта, де потрібна система резервного та автономного живлення. У комплекті поєднані інвертор MUST потужністю 6 кВт та акумулятор Felicity на 11,78 кВт·год, тому система може живити підключене навантаження та накопичувати електроенергію для подальшого використання.</p><p>MUST PV19-6048EXP це гібридний інвертор потужністю 6 кВт з номінальною напругою акумулятора 48 В. Він формує вихідну напругу 230 В у вигляді чистої синусоїди, тому підходить для живлення побутової техніки, електроніки та іншого обладнання в межах допустимого навантаження. Інвертор може працювати від акумулятора, сонячних панелей, електромережі або генератора.</p><p>Пікова потужність становить 12000 Вт. Вбудований MPPT-контролер працює в діапазоні 150-450 В і підтримує сонячні панелі потужністю до 6 кВт, максимальний струм заряджання 120 А. Є входи USB, RS485 і CAN, підтримується паралельна робота та підключення генератора.</p><p>Для контролю роботи передбачений дисплей і вбудований Wi-Fi, а також функції захисту від перевантаження, перегріву та короткого замикання.</p><p>Для накопичення енергії використовується Felicity FLA48230. Це акумуляторна батарея на основі технології LiFePO4 з номінальною напругою 51,2 В, ємністю 230 А·год та запасом енергії близько 11,78 кВт·год. Така батарея може використовуватися як резервне джерело живлення під час відключень електроенергії або для накопичення енергії від сонячних панелей.</p><p>Рекомендована глибина розряду становить близько 95%, заявлений ресурс 6000+ циклів. Для зв&apos;язку з інвертором передбачені інтерфейси RS485 і CAN, корпус має захист IP21.</p><p>Такий комплект інвертор + акумулятор містить основні компоненти для організації резервного та автономного живлення. Його можна використовувати для живлення будинку, квартири, офісу, майстерні або іншого об&apos;єкта. За наявності сонячних панелей комплект також дозволяє використовувати сонячну енергію для живлення навантаження та заряджання акумулятора.</p><p>Характеристики:</p><p>Інвертор: MUST PV19-6048EXP 6 кВт 48 В</p><p>Тип: гібридний інвертор</p><p>Номінальна потужність: 6 кВт</p><p>Кількість фаз: 1</p><p>Напруга АКБ: 48 В</p><p>Форма вихідної напруги: чиста синусоїда 230 В</p><p>Wi-Fi: є</p><p>Акумулятор: Felicity FLA48230</p><p>Тип АКБ: LiFePO4</p><p>Номінальна напруга: 51,2 В</p><p>Ємність: 230 А·год</p><p>Енергоємність: близько 11,78 кВт·год</p><p>BMS: є</p>]]></description_ua>
+      <keywords>комплект автономного электропитания селисити, комплект автономного электропитания маст, комплект селисити, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
+      <keywords_ua>комплект автономного живлення селіситі, комплект автономного живлення маст, комплект селіситі, комплект маст, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
+    </item>
+    <item id="152221" selling_type="r">
+      <name>Комплект автономного енергоживлення: Must PV18-3224VPM II+ Felicity FLA24280 25.6V 280Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Must PV18-3224VPM II+ Felicity FLA24280 25.6V 280Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>94587.75</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/feed-auto/152221.jpg</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення Must PV18-3224VPM II+ Felicity FLA24280 25.6V 280Ah</p><p>Комплект автономного енергоживлення MUST та Felicity підійде для будинку, квартири, офісу, майстерні або іншого об&apos;єкта, де потрібна система резервного та автономного живлення. У комплекті поєднані інвертор MUST потужністю 3,2 кВт та акумулятор Felicity на 7,17 кВт·год, тому система може живити підключене навантаження та накопичувати електроенергію для подальшого використання.</p><p>MUST PV18-3224 VPM II це гібридний інвертор потужністю 3,2 кВт з номінальною напругою акумулятора 24 В. Він формує вихідну напругу 230 В у вигляді чистої синусоїди, тому підходить для живлення побутової техніки, електроніки та іншого обладнання в межах допустимого навантаження. Інвертор може працювати від акумулятора, сонячних панелей, електромережі або генератора.</p><p>Пікова потужність становить 6400 ВА. Вбудований сонячний контролер MPPT розрахований на струм до 60 А, максимальний сумарний струм заряджання від сонця та мережі становить 120 А.</p><p>Для контролю роботи передбачений дисплей і вбудований Wi-Fi, а також функції захисту від перевантаження, перегріву та короткого замикання.</p><p>Для накопичення енергії використовується Felicity FLA24280. Це акумуляторна батарея на основі технології LiFePO4 з номінальною напругою 25,6 В, ємністю 280 А·год та запасом енергії близько 7,17 кВт·год. Така батарея може використовуватися як резервне джерело живлення під час відключень електроенергії або для накопичення енергії від сонячних панелей.</p><p>Такий комплект інвертор + акумулятор містить основні компоненти для організації резервного та автономного живлення. Його можна використовувати для живлення будинку, квартири, офісу, майстерні або іншого об&apos;єкта. За наявності сонячних панелей комплект також дозволяє використовувати сонячну енергію для живлення навантаження та заряджання акумулятора.</p><p>Характеристики:</p><p>Інвертор: MUST PV18-3224 VPM II 3,2 кВт 24 В</p><p>Тип: гібридний інвертор</p><p>Номінальна потужність: 3,2 кВт</p><p>Кількість фаз: 1</p><p>Напруга АКБ: 24 В</p><p>Форма вихідної напруги: чиста синусоїда 230 В</p><p>Wi-Fi: є</p><p>Акумулятор: Felicity FLA24280</p><p>Тип АКБ: LiFePO4</p><p>Номінальна напруга: 25,6 В</p><p>Ємність: 280 А·год</p><p>Енергоємність: близько 7,17 кВт·год</p><p>BMS: є</p>]]></description_ua>
+      <keywords>комплект автономного электропитания селисити, комплект автономного электропитания маст, комплект селисити, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
+      <keywords_ua>комплект автономного живлення селіситі, комплект автономного живлення маст, комплект селіситі, комплект маст, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
+    </item>
+    <item id="152279" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48314TG1-H 51.2V 314Ah, з підігрівом</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48314TG1-H 51.2V 314Ah, з підігрівом</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>153436.95</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/feed-auto/152279.jpg</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення Felicity IVEM6048-II + Felicity FLB48314TG1-H – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.</p><p>Гібридний інвертор Felicity IVEM6048-II потужністю 6 кВт працює з акумуляторами 48 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.</p><p>Акумулятор Felicity FLB48314TG1-H на основі LiFePO4 (51,2 В, 314 А·год) накопичує близько 16,08 кВт·год енергії. Батарея має вбудований підігрів, тому її можна коректно заряджати й за низьких температур – наприклад, у неопалюваному приміщенні. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</p>]]></description_ua>
+      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM6048-II, комплект селисити IVEM6048-II, селисити IVEM6048-II</keywords>
+      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM6048-II, комплект селіситі IVEM6048-II, селіситі IVEM6048-II</keywords_ua>
+    </item>
+    <item id="152520" selling_type="r">
+      <name>Акумуляторна батарея Felicity LPBA48100-OL 51.2V 100Ah LiFePO4</name>
+      <name_ua>Акумуляторна батарея Felicity LPBA48100-OL 51.2V 100Ah LiFePO4</name_ua>
+      <categoryId>2</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>54950.40</priceuah>
+      <available>true</available>
+      <vendorCode>LPBA48100-OL</vendorCode>
+      <image>https://avtonomka.com.ua/assets/images/prom/152520_1.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152520_2.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152520_3.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152520_4.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152520_5.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152520_7.jpg</image>
+      <description_ua><![CDATA[<p>Акумуляторна батарея Felicity LPBA48100-OL 51.2V 100Ah LiFePO4</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку або квартири</li><li>автономне електроживлення</li><li>робота з гібридним інвертором</li><li>накопичення енергії від сонячних панелей</li></ul>]]></description_ua>
+      <keywords>аккумулятор 100ah, аккумулятор селисити, аккумулятор селисити 100 ah, батарея 100ah, батарея селисити, батарея селисити 100 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор селисити LPBA48100-OL, батарея селисити LPBA48100-OL, селисити LPBA48100-OL</keywords>
+      <keywords_ua>акумулятор 100ah, акумулятор селіситі, акумулятор селіситі 100 ah, батарея 100ah, батарея селіситі, батарея селіситі 100 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор селіситі LPBA48100-OL, батарея селіситі LPBA48100-OL, селіситі LPBA48100-OL</keywords_ua>
+    </item>
+    <item id="152553" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity LPBA48100-OL 51.2V 100Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity LPBA48100-OL 51.2V 100Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>85629.15</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity LPBA48100-OL 51.2V 100Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM6048-II, комплект селисити IVEM6048-II, селисити IVEM6048-II</keywords>
+      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM6048-II, комплект селіситі IVEM6048-II, селіситі IVEM6048-II</keywords_ua>
+    </item>
+    <item id="152556" selling_type="r">
+      <name>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity LPBA48100-OL 51.2V 100Ah</name>
+      <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity LPBA48100-OL 51.2V 100Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>88682.85</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/feed-auto/152556.jpg</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity LPBA48100-OL 51.2V 100Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания селисити, комплект автономного электропитания маст, комплект селисити, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
+      <keywords_ua>комплект автономного живлення селіситі, комплект автономного живлення маст, комплект селіситі, комплект маст, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
+    </item>
     <item id="150590" selling_type="r">
       <name>Акумуляторна батарея Dyness BX51100 51.2v 100ah, 5.12kwh LiFePo4, Trade IN</name>
       <name_ua>Акумуляторна батарея Dyness BX51100 51.2v 100ah, 5.12kwh LiFePo4, Trade IN</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>46996.20</priceuah>
+      <priceuah>46990.80</priceuah>
       <available>true</available>
       <vendorCode>BX51100</vendorCode>
       <vendor>Dyness</vendor>
@@ -610,7 +649,7 @@
       <name_ua>Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>51881.85</priceuah>
+      <priceuah>51888.60</priceuah>
       <available>true</available>
       <vendorCode>DHN-LVWES05-G1</vendorCode>
       <image>https://avtonomka.com.ua/assets/images/prom/150674_1.jpg</image>
@@ -632,7 +671,7 @@
       <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48314TG1-H 51.2V 314Ah</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>156496.05</priceuah>
+      <priceuah>156498.75</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/feed-auto/152675.jpg</image>
       <description_ua><![CDATA[<p>Комплект автономного енергоживлення MUST PV19-6048EXP 48V 6 kW + Felicity FLB48314TG1-H 51.2V 314Ah</p><p>Комплект автономного енергоживлення MUST та Felicity підійде для будинку, квартири, офісу, майстерні або іншого об&apos;єкта, де потрібна система резервного та автономного живлення. У комплекті поєднані інвертор MUST потужністю 6 кВт та акумулятор Felicity на 16,08 кВт·год, тому система може живити підключене навантаження та накопичувати електроенергію для подальшого використання.</p><p>MUST PV19-6048EXP це гібридний інвертор потужністю 6 кВт з номінальною напругою акумулятора 48 В. Він формує вихідну напругу 230 В у вигляді чистої синусоїди, тому підходить для живлення побутової техніки, електроніки та іншого обладнання в межах допустимого навантаження. Інвертор може працювати від акумулятора, сонячних панелей, електромережі або генератора.</p><p>Пікова потужність становить 12000 Вт. Вбудований MPPT-контролер працює в діапазоні 150-450 В і підтримує сонячні панелі потужністю до 6 кВт, максимальний струм заряджання 120 А. Є входи USB, RS485 і CAN, підтримується паралельна робота та підключення генератора.</p><p>Для контролю роботи передбачений дисплей і вбудований Wi-Fi, а також функції захисту від перевантаження, перегріву та короткого замикання.</p><p>Для накопичення енергії використовується Felicity FLB48314TG1-H. Це акумуляторна батарея на основі технології LiFePO4 з номінальною напругою 51,2 В, ємністю 314 А·год та запасом енергії близько 16,08 кВт·год. Така батарея може використовуватися як резервне джерело живлення під час відключень електроенергії або для накопичення енергії від сонячних панелей. Батарея оснащена функцією підігріву, що дозволяє коректно заряджати її за низьких температур.</p><p>Такий комплект інвертор + акумулятор містить основні компоненти для організації резервного та автономного живлення. Його можна використовувати для живлення будинку, квартири, офісу, майстерні або іншого об&apos;єкта. За наявності сонячних панелей комплект також дозволяє використовувати сонячну енергію для живлення навантаження та заряджання акумулятора.</p><p>Характеристики:</p><p>Інвертор: MUST PV19-6048EXP 6 кВт 48 В</p><p>Тип: гібридний інвертор</p><p>Номінальна потужність: 6 кВт</p><p>Кількість фаз: 1</p><p>Напруга АКБ: 48 В</p><p>Форма вихідної напруги: чиста синусоїда 230 В</p><p>Wi-Fi: є</p><p>Акумулятор: Felicity FLB48314TG1-H</p><p>Тип АКБ: LiFePO4</p><p>Номінальна напруга: 51,2 В</p><p>Ємність: 314 А·год</p><p>Енергоємність: близько 16,08 кВт·год</p><p>Підігрів: є</p><p>BMS: є</p>]]></description_ua>
@@ -644,7 +683,7 @@
       <name_ua>Комплект автономного енергоживлення: Must PV19-6048EXP 6 кВт 48 В + Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>138053.70</priceuah>
+      <priceuah>138056.40</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/feed-auto/152699.jpg</image>
       <description_ua><![CDATA[<p>Комплект автономного енергоживлення Must PV19-6048EXP 6 кВт 48 В + Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом</p><p>Комплект автономного енергоживлення MUST та Felicity підійде для будинку, квартири, офісу, майстерні або іншого об&apos;єкта, де потрібна система резервного та автономного живлення. У комплекті поєднані інвертор MUST потужністю 6 кВт та акумулятор Felicity на 11,78 кВт·год, тому система може живити підключене навантаження та накопичувати електроенергію для подальшого використання.</p><p>MUST PV19-6048EXP це гібридний інвертор потужністю 6 кВт з номінальною напругою акумулятора 48 В. Він формує вихідну напругу 230 В у вигляді чистої синусоїди, тому підходить для живлення побутової техніки, електроніки та іншого обладнання в межах допустимого навантаження. Інвертор може працювати від акумулятора, сонячних панелей, електромережі або генератора.</p><p>Пікова потужність становить 12000 Вт. Вбудований MPPT-контролер працює в діапазоні 150-450 В і підтримує сонячні панелі потужністю до 6 кВт, максимальний струм заряджання 120 А. Є входи USB, RS485 і CAN, підтримується паралельна робота та підключення генератора.</p><p>Для контролю роботи передбачений дисплей і вбудований Wi-Fi, а також функції захисту від перевантаження, перегріву та короткого замикання.</p><p>Для накопичення енергії використовується Felicity FLB48230WG1-H. Це акумуляторна батарея на основі технології LiFePO4 з номінальною напругою 51,2 В, ємністю 230 А·год та запасом енергії близько 11,78 кВт·год. Така батарея може використовуватися як резервне джерело живлення під час відключень електроенергії або для накопичення енергії від сонячних панелей. Батарея оснащена функцією підігріву, що дозволяє коректно заряджати її за низьких температур.</p><p>Такий комплект інвертор + акумулятор містить основні компоненти для організації резервного та автономного живлення. Його можна використовувати для живлення будинку, квартири, офісу, майстерні або іншого об&apos;єкта. За наявності сонячних панелей комплект також дозволяє використовувати сонячну енергію для живлення навантаження та заряджання акумулятора.</p><p>Характеристики:</p><p>Інвертор: MUST PV19-6048EXP 6 кВт 48 В</p><p>Тип: гібридний інвертор</p><p>Номінальна потужність: 6 кВт</p><p>Кількість фаз: 1</p><p>Напруга АКБ: 48 В</p><p>Форма вихідної напруги: чиста синусоїда 230 В</p><p>Wi-Fi: є</p><p>Акумулятор: Felicity FLB48230WG1-H</p><p>Тип АКБ: LiFePO4</p><p>Номінальна напруга: 51,2 В</p><p>Ємність: 230 А·год</p><p>Енергоємність: близько 11,78 кВт·год</p><p>Підігрів: є</p><p>BMS: є</p>]]></description_ua>
@@ -668,7 +707,7 @@
       <name_ua>Комплект автономного енергоживлення: Must PV18-1512 VPM II 1.5 кВт 12 Вт+ MUST LP15-12100 12V 100Ah LiFePO4</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>35178.30</priceuah>
+      <priceuah>35172.90</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/feed-auto/152726.jpg</image>
       <description_ua><![CDATA[<p>Комплект автономного енергоживлення Must PV18-1512 VPM II + MUST LP15-12100 – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.</p><p>Гібридний інвертор Must PV18-1512 VPM II потужністю 1,5 кВт працює з акумуляторами 12 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.</p><p>Акумулятор MUST LP15-12100 на основі LiFePO4 (12,8 В, 100 А·год) накопичує близько 1,28 кВт·год енергії. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</p>]]></description_ua>
@@ -680,7 +719,7 @@
       <name_ua>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + Felicity FLA24280 25.6V 280Ah</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>100861.20</priceuah>
+      <priceuah>99049.50</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/feed-auto/152730.jpg</image>
       <description_ua><![CDATA[<p>Комплект автономного енергоживлення MUST PV19-4024 EXP + Felicity FLA24280 – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.</p><p>Гібридний інвертор MUST PV19-4024 EXP потужністю 4 кВт працює з акумуляторами 24 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.</p><p>Акумулятор Felicity FLA24280 на основі LiFePO4 (25,6 В, 280 А·год) накопичує близько 7,17 кВт·год енергії. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</p>]]></description_ua>
@@ -692,7 +731,7 @@
       <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + MUST LP16-48300, 51.2V 300Ah</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>146871.90</priceuah>
+      <priceuah>146869.20</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/feed-auto/152732.jpg</image>
       <description_ua><![CDATA[<p>Комплект автономного енергоживлення MUST PV19-6048EXP + MUST LP16-48300 – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.</p><p>Гібридний інвертор MUST PV19-6048EXP потужністю 6 кВт працює з акумуляторами 48 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.</p><p>Акумулятор MUST LP16-48300 на основі LiFePO4 (51,2 В, 300 А·год) накопичує близько 15,36 кВт·год енергії. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</p>]]></description_ua>
@@ -704,7 +743,7 @@
       <name_ua>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48230WG1-H 51.2V 230Ah з підігрівом</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>135002.70</priceuah>
+      <priceuah>134997.30</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/feed-auto/152746.jpg</image>
       <description_ua><![CDATA[<p>Комплект автономного енергоживлення Felicity IVEM6048-II + Felicity FLB48230WG1-H – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.</p><p>Гібридний інвертор Felicity IVEM6048-II потужністю 6 кВт працює з акумуляторами 48 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.</p><p>Акумулятор Felicity FLB48230WG1-H на основі LiFePO4 (51,2 В, 230 А·год) накопичує близько 11,78 кВт·год енергії. Батарея має вбудований підігрів, тому її можна коректно заряджати й за низьких температур – наприклад, у неопалюваному приміщенні. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</p>]]></description_ua>
@@ -716,55 +755,79 @@
       <name_ua>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ MUST LP16-48300, 51.2V 300Ah</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>143815.50</priceuah>
+      <priceuah>143804.70</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/feed-auto/152747.jpg</image>
       <description_ua><![CDATA[<p>Комплект автономного енергоживлення Felicity IVEM6048-II + MUST LP16-48300 – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.</p><p>Гібридний інвертор Felicity IVEM6048-II потужністю 6 кВт працює з акумуляторами 48 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.</p><p>Акумулятор MUST LP16-48300 на основі LiFePO4 (51,2 В, 300 А·год) накопичує близько 15,36 кВт·год енергії. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</p>]]></description_ua>
       <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект автономного электропитания маст, комплект автономного электропитания маст 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект маст, комплект маст 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
       <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект автономного живлення маст, комплект автономного живлення маст 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект маст, комплект маст 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
     </item>
-    <item id="152219" selling_type="r">
-      <name>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48230 51.2V 230Ah</name>
-      <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48230 51.2V 230Ah</name_ua>
+    <item id="152797" selling_type="r">
+      <name>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Deye SE-F16-С 314Ah</name>
+      <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Deye SE-F16-С 314Ah</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>138060.45</priceuah>
+      <priceuah>162064.80</priceuah>
       <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/feed-auto/152219.jpg</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення MUST PV19-6048EXP 48V 6 kW + Felicity FLA48230 51.2V 230Ah</p><p>Комплект автономного енергоживлення MUST та Felicity підійде для будинку, квартири, офісу, майстерні або іншого об&apos;єкта, де потрібна система резервного та автономного живлення. У комплекті поєднані інвертор MUST потужністю 6 кВт та акумулятор Felicity на 11,78 кВт·год, тому система може живити підключене навантаження та накопичувати електроенергію для подальшого використання.</p><p>MUST PV19-6048EXP це гібридний інвертор потужністю 6 кВт з номінальною напругою акумулятора 48 В. Він формує вихідну напругу 230 В у вигляді чистої синусоїди, тому підходить для живлення побутової техніки, електроніки та іншого обладнання в межах допустимого навантаження. Інвертор може працювати від акумулятора, сонячних панелей, електромережі або генератора.</p><p>Пікова потужність становить 12000 Вт. Вбудований MPPT-контролер працює в діапазоні 150-450 В і підтримує сонячні панелі потужністю до 6 кВт, максимальний струм заряджання 120 А. Є входи USB, RS485 і CAN, підтримується паралельна робота та підключення генератора.</p><p>Для контролю роботи передбачений дисплей і вбудований Wi-Fi, а також функції захисту від перевантаження, перегріву та короткого замикання.</p><p>Для накопичення енергії використовується Felicity FLA48230. Це акумуляторна батарея на основі технології LiFePO4 з номінальною напругою 51,2 В, ємністю 230 А·год та запасом енергії близько 11,78 кВт·год. Така батарея може використовуватися як резервне джерело живлення під час відключень електроенергії або для накопичення енергії від сонячних панелей.</p><p>Рекомендована глибина розряду становить близько 95%, заявлений ресурс 6000+ циклів. Для зв&apos;язку з інвертором передбачені інтерфейси RS485 і CAN, корпус має захист IP21.</p><p>Такий комплект інвертор + акумулятор містить основні компоненти для організації резервного та автономного живлення. Його можна використовувати для живлення будинку, квартири, офісу, майстерні або іншого об&apos;єкта. За наявності сонячних панелей комплект також дозволяє використовувати сонячну енергію для живлення навантаження та заряджання акумулятора.</p><p>Характеристики:</p><p>Інвертор: MUST PV19-6048EXP 6 кВт 48 В</p><p>Тип: гібридний інвертор</p><p>Номінальна потужність: 6 кВт</p><p>Кількість фаз: 1</p><p>Напруга АКБ: 48 В</p><p>Форма вихідної напруги: чиста синусоїда 230 В</p><p>Wi-Fi: є</p><p>Акумулятор: Felicity FLA48230</p><p>Тип АКБ: LiFePO4</p><p>Номінальна напруга: 51,2 В</p><p>Ємність: 230 А·год</p><p>Енергоємність: близько 11,78 кВт·год</p><p>BMS: є</p>]]></description_ua>
+      <image>https://avtonomka.com.ua/assets/images/feed-auto/152797.jpg</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Deye SE-F16-С 314Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания дея, комплект автономного электропитания маст, комплект дея, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
+      <keywords_ua>комплект автономного живлення дея, комплект автономного живлення маст, комплект дея, комплект маст, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
+    </item>
+    <item id="152818" selling_type="r">
+      <name>Комплект автономного энергопитания: Must PV18-3224VPM II 24V 3.2kW + 2 шт. MUST LP15-12100, 12.8V 100Ah</name>
+      <name_ua>Комплект автономного энергопитания: Must PV18-3224VPM II 24V 3.2kW + 2 шт. MUST LP15-12100, 12.8V 100Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>60355.80</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного энергопитания: Must PV18-3224VPM II 24V 3.2kW + 2 шт. MUST LP15-12100, 12.8V 100Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания маст, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания маст PV18-3224VPM, комплект маст PV18-3224VPM, маст PV18-3224VPM</keywords>
+      <keywords_ua>комплект автономного живлення маст, комплект маст, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення маст PV18-3224VPM, комплект маст PV18-3224VPM, маст PV18-3224VPM</keywords_ua>
+    </item>
+    <item id="152819" selling_type="r">
+      <name>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + 2 шт. MUST LP15-12100, 12.8V 100Ah</name>
+      <name_ua>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + 2 шт. MUST LP15-12100, 12.8V 100Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>64813.50</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + 2 шт. MUST LP15-12100, 12.8V 100Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 4kvt, комплект автономного электропитания маст, комплект автономного электропитания маст 4 kvt, комплект 4kvt, комплект маст, комплект маст 4 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания маст 4024, комплект маст 4024, маст 4024</keywords>
+      <keywords_ua>комплект автономного живлення 4kvt, комплект автономного живлення маст, комплект автономного живлення маст 4 kvt, комплект 4kvt, комплект маст, комплект маст 4 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення маст 4024, комплект маст 4024, маст 4024</keywords_ua>
+    </item>
+    <item id="152820" selling_type="r">
+      <name>Комплект автономного энергопитания: Must PV18-3224VPM II 24V 3.2kW + 2 шт. Felicity FLA12100 PG2 12.8V 100Ah</name>
+      <name_ua>Комплект автономного энергопитания: Must PV18-3224VPM II 24V 3.2kW + 2 шт. Felicity FLA12100 PG2 12.8V 100Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>56188.35</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного энергопитания: Must PV18-3224VPM II 24V 3.2kW + 2 шт. Felicity FLA12100 PG2 12.8V 100Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
       <keywords>комплект автономного электропитания селисити, комплект автономного электропитания маст, комплект селисити, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
       <keywords_ua>комплект автономного живлення селіситі, комплект автономного живлення маст, комплект селіситі, комплект маст, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
     </item>
-    <item id="152221" selling_type="r">
-      <name>Комплект автономного енергоживлення: Must PV18-3224VPM II+ Felicity FLA24280 25.6V 280Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Must PV18-3224VPM II+ Felicity FLA24280 25.6V 280Ah</name_ua>
+    <item id="152821" selling_type="r">
+      <name>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + 2 шт. Felicity FLA12100 PG2 12.8V 100Ah</name>
+      <name_ua>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + 2 шт. Felicity FLA12100 PG2 12.8V 100Ah</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>94078.80</priceuah>
+      <priceuah>60639.30</priceuah>
       <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/feed-auto/152221.jpg</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення Must PV18-3224VPM II+ Felicity FLA24280 25.6V 280Ah</p><p>Комплект автономного енергоживлення MUST та Felicity підійде для будинку, квартири, офісу, майстерні або іншого об&apos;єкта, де потрібна система резервного та автономного живлення. У комплекті поєднані інвертор MUST потужністю 3,2 кВт та акумулятор Felicity на 7,17 кВт·год, тому система може живити підключене навантаження та накопичувати електроенергію для подальшого використання.</p><p>MUST PV18-3224 VPM II це гібридний інвертор потужністю 3,2 кВт з номінальною напругою акумулятора 24 В. Він формує вихідну напругу 230 В у вигляді чистої синусоїди, тому підходить для живлення побутової техніки, електроніки та іншого обладнання в межах допустимого навантаження. Інвертор може працювати від акумулятора, сонячних панелей, електромережі або генератора.</p><p>Пікова потужність становить 6400 ВА. Вбудований сонячний контролер MPPT розрахований на струм до 60 А, максимальний сумарний струм заряджання від сонця та мережі становить 120 А.</p><p>Для контролю роботи передбачений дисплей і вбудований Wi-Fi, а також функції захисту від перевантаження, перегріву та короткого замикання.</p><p>Для накопичення енергії використовується Felicity FLA24280. Це акумуляторна батарея на основі технології LiFePO4 з номінальною напругою 25,6 В, ємністю 280 А·год та запасом енергії близько 7,17 кВт·год. Така батарея може використовуватися як резервне джерело живлення під час відключень електроенергії або для накопичення енергії від сонячних панелей.</p><p>Такий комплект інвертор + акумулятор містить основні компоненти для організації резервного та автономного живлення. Його можна використовувати для живлення будинку, квартири, офісу, майстерні або іншого об&apos;єкта. За наявності сонячних панелей комплект також дозволяє використовувати сонячну енергію для живлення навантаження та заряджання акумулятора.</p><p>Характеристики:</p><p>Інвертор: MUST PV18-3224 VPM II 3,2 кВт 24 В</p><p>Тип: гібридний інвертор</p><p>Номінальна потужність: 3,2 кВт</p><p>Кількість фаз: 1</p><p>Напруга АКБ: 24 В</p><p>Форма вихідної напруги: чиста синусоїда 230 В</p><p>Wi-Fi: є</p><p>Акумулятор: Felicity FLA24280</p><p>Тип АКБ: LiFePO4</p><p>Номінальна напруга: 25,6 В</p><p>Ємність: 280 А·год</p><p>Енергоємність: близько 7,17 кВт·год</p><p>BMS: є</p>]]></description_ua>
-      <keywords>комплект автономного электропитания селисити, комплект автономного электропитания маст, комплект селисити, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
-      <keywords_ua>комплект автономного живлення селіситі, комплект автономного живлення маст, комплект селіситі, комплект маст, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
-    </item>
-    <item id="152279" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48314TG1-H 51.2V 314Ah, з підігрівом</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48314TG1-H 51.2V 314Ah, з підігрівом</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>153430.20</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/feed-auto/152279.jpg</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення Felicity IVEM6048-II + Felicity FLB48314TG1-H – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.</p><p>Гібридний інвертор Felicity IVEM6048-II потужністю 6 кВт працює з акумуляторами 48 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.</p><p>Акумулятор Felicity FLB48314TG1-H на основі LiFePO4 (51,2 В, 314 А·год) накопичує близько 16,08 кВт·год енергії. Батарея має вбудований підігрів, тому її можна коректно заряджати й за низьких температур – наприклад, у неопалюваному приміщенні. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</p>]]></description_ua>
-      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM6048-II, комплект селисити IVEM6048-II, селисити IVEM6048-II</keywords>
-      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM6048-II, комплект селіситі IVEM6048-II, селіситі IVEM6048-II</keywords_ua>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + 2 шт. Felicity FLA12100 PG2 12.8V 100Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 4kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 4 kvt, комплект автономного электропитания маст, комплект автономного электропитания маст 4 kvt, комплект 4kvt, комплект селисити, комплект селисити 4 kvt, комплект маст, комплект маст 4 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
+      <keywords_ua>комплект автономного живлення 4kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 4 kvt, комплект автономного живлення маст, комплект автономного живлення маст 4 kvt, комплект 4kvt, комплект селіситі, комплект селіситі 4 kvt, комплект маст, комплект маст 4 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
     </item>
     <item id="151790" selling_type="r">
       <name>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48314-EU 51.2V 314Ah 16kWh</name>
       <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48314-EU 51.2V 314Ah 16kWh</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>156359.70</priceuah>
+      <priceuah>156357.00</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/feed-auto/151790.jpg</image>
       <description_ua><![CDATA[<p>Комплект автономного енергоживлення MUST PV19-6048EXP 48V 6 кВт + Felicity FLA48314-EU 51.2V 314Ah 16 кВт·год</p><p>Комплект автономного енергоживлення MUST та Felicity підійде для будинку або іншого об&apos;єкта, де потрібна потужна система резервного та автономного живлення. У комплекті поєднані гібридний інвертор MUST на 6 кВт та акумулятор Felicity ємністю 16 кВт·год, тому система може не тільки живити навантаження, а й накопичувати електроенергію для подальшого використання.</p><p>MUST PV19-6048EXP — це гібридний інвертор MUST 6 кВт з робочою напругою акумуляторної системи 48 В. Інвертор призначений для роботи з мережею, акумулятором та сонячними панелями, тому його можна використовувати як основу системи резервного живлення або автономної сонячної електростанції. Він підтримує підключення сонячних панелей загальною потужністю до 6 кВт та має 2 MPPT-контролери для ефективного використання сонячної енергії.</p><p>Інвертор 48 В 6 кВт забезпечує живлення підключеного навантаження від акумулятора або мережі, а накопичену енергію можна використовувати під час відключень електроенергії. Завдяки можливості паралельного підключення декількох інверторів систему можна розширити, якщо в майбутньому виникне потреба у збільшенні потужності.</p><p>Для накопичення електроенергії використовується Felicity FLA48314-EU. Це літій-залізо-фосфатна батарея LiFePO4 з номінальною напругою 51,2 В, ємністю 314 А·год та запасом енергії 16 кВт·год. Максимальний струм заряду та розряду становить 160 А, а максимальна потужність заряду або розряду — 8 кВт. Заявлений ресурс батареї становить 8000+ циклів, а допустима глибина розряду — не менше 95%.</p><p>Акумулятор має вбудовану BMS, яка контролює основні параметри батареї та забезпечує її захист під час роботи. Для зв&apos;язку з інвертором передбачена комунікація через CAN та RS485. За потреби систему можна розширити, підключивши до 15 акумуляторних блоків паралельно, що дозволяє збільшити загальний запас енергії.</p><p>Такий комплект інвертор + акумулятор містить основні компоненти для створення системи резервного та автономного живлення. Його можна використовувати для автономного живлення будинку, офісу, майстерні або іншого об&apos;єкта, а за наявності сонячних панелей — для вироблення, використання та накопичення власної електроенергії.</p><p>Характеристики:</p><p>Інвертор: MUST PV19-6048EXP 48 В 6 кВт</p><p>Тип: гібридний інвертор</p><p>Номінальна потужність: 6 кВт</p><p>Кількість фаз: 1</p><p>Напруга АКБ: 48 В</p><p>Кількість MPPT: 2</p><p>Максимальна потужність сонячних панелей: 6 кВт</p><p>Максимальний струм заряду: 120 А</p><p>Максимальна кількість інверторів при паралельному підключенні: 9</p><p>ККД: до 94%</p><p>WiFi: є</p><p>Форма вихідної напруги: чиста синусоїда</p><p>Робоча температура: від -10 до +50 °C</p><p>Акумулятор: Felicity FLA48314-EU</p><p>Тип АКБ: LiFePO4</p><p>Номінальна напруга: 51,2 В</p><p>Ємність: 314 А·год</p><p>Енергоємність: 16 кВт·год</p><p>Максимальний струм заряду: 160 А</p><p>Максимальний струм розряду: 160 А</p><p>Максимальна потужність заряду/розряду: 8 кВт</p><p>Глибина розряду: ≥95%</p><p>Ресурс: 8000+ циклів</p><p>BMS: є</p><p>Комунікація: CAN, RS485</p><p>Захист: автоматичний вимикач, запобіжник</p><p>Можливість розширення: до 15 акумуляторних блоків паралельно</p>]]></description_ua>
@@ -776,19 +839,31 @@
       <name_ua>Комплект автономного енергоживлення: Felicity IVEM6048-II 6 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>82563.30</priceuah>
+      <priceuah>82567.35</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/feed-auto/152205.jpg</image>
       <description_ua><![CDATA[<p>Комплект автономного енергоживлення Felicity IVEM6048-II 6 кВт 48 В + DAH Solar DHN-LVWES05-G1 100Ah 51.2V</p><p>Готовий комплект резервного живлення для квартири, будинку чи офісу: гібридний інвертор Felicity на 6 кВт у парі з акумулятором DAH Solar на 5,12 кВт·год. Обидва компоненти розраховані на напругу 48 В, тому не потрібно окремо підбирати батарею під інвертор.</p><p>Felicity IVEM6048-II – гібридний інвертор потужністю 6 кВт для систем резервного та автономного живлення. Він поєднує перетворювач, зарядний пристрій від мережі та сонячний контролер: енергія може надходити від сонячних панелей, накопичуватися в акумуляторі або братися з мережі. На виході – 230 В для живлення побутової техніки та електроніки. Розміри інвертора – 420 × 335 × 142 мм, вага – 12,5 кг.</p><p>DAH Solar DHN-LVWES05-G1 – акумулятор LiFePO4 51,2 В 100 А·год із запасом енергії 5,12 кВт·год у компактному настінному корпусі 480 × 500 × 155 мм вагою 47 кг. Він накопичує енергію від мережі чи сонця і віддає її під час відключень.</p><p>Комплект забезпечує живлення холодильника, освітлення, роутера, котла, телевізора та іншої техніки під час відключень. За потреби до системи пізніше можна додати сонячні панелі.</p><p>Де використовується</p><ul><li>резервне живлення квартири, будинку чи офісу</li><li>системи із сонячними панелями</li><li>живлення побутової техніки під час відключень електроенергії</li><li>зменшення залежності від електромережі</li></ul><p>Важливо: час автономної роботи залежить від потужності підключених приладів. Якщо потрібен більший запас енергії, менеджери Автономки допоможуть підібрати комплект з ємнішим акумулятором.</p>]]></description_ua>
       <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания дан солар, комплект автономного электропитания дан солар 6 kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект дан солар, комплект дан солар 6 kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
       <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення дан солар, комплект автономного живлення дан солар 6 kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект дан солар, комплект дан солар 6 kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
     </item>
+    <item id="152208" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Deye SE-F16-С 51.2V 314 Аh</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Deye SE-F16-С 51.2V 314 Аh</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>159009.75</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/feed-auto/152208.jpg</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Deye SE-F16-С 51.2V 314 Аh</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания дея, комплект автономного электропитания дея 6 kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект дея, комплект дея 6 kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
+      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення дея, комплект автономного живлення дея 6 kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект дея, комплект дея 6 kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
+    </item>
     <item id="152211" selling_type="r">
       <name>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48230 51.2V 230Ah</name>
       <name_ua>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48230 51.2V 230Ah</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>135001.35</priceuah>
+      <priceuah>134997.30</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/feed-auto/152211.jpg</image>
       <description_ua><![CDATA[<p>Комплект автономного енергоживлення Felicity IVEM6048-II + Felicity FLA48230 – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.</p><p>Гібридний інвертор Felicity IVEM6048-II потужністю 6 кВт працює з акумуляторами 48 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.</p><p>Акумулятор Felicity FLA48230 на основі LiFePO4 (51,2 В, 230 А·год) накопичує близько 11,78 кВт·год енергії. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</p>]]></description_ua>
@@ -800,7 +875,7 @@
       <name_ua>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48314-EU 51.2V 314Ah</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>153303.30</priceuah>
+      <priceuah>153297.90</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/feed-auto/152212.jpg</image>
       <description_ua><![CDATA[<p>Комплект автономного енергоживлення Felicity IVEM6048-II + Felicity FLA48314-EU – готове рішення для резервного живлення будинку, квартири, дачі чи офісу під час відключень світла.</p><p>Гібридний інвертор Felicity IVEM6048-II потужністю 6 кВт працює з акумуляторами 48 В і видає на виході 230 В, тож від нього можна живити побутову техніку та електроніку в межах допустимого навантаження. Енергія може надходити від сонячних панелей, мережі або генератора.</p><p>Акумулятор Felicity FLA48314-EU на основі LiFePO4 (51,2 В, 314 А·год) накопичує близько 16,08 кВт·год енергії. Інвертор і батарея підібрані за напругою, тому комплект можна використовувати як основу системи автономного живлення.</p>]]></description_ua>
