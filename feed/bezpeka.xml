@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<yml_catalog date="2026-10-20 00:29">
+<yml_catalog date="2026-10-20 11:08">
   <shop>
     <name>Автономка</name>
     <company>Автономка</company>
@@ -453,6 +453,23 @@
         <picture>https://avtonomka.com.ua/assets/images/prom/152519_1.jpg</picture>
         <vendor>MUST</vendor>
         <description><![CDATA[<p>Wi-Fi-модуль для MUST PV18-6048 EXP - аксесуар для дистанційного моніторингу гібридного інвертора MUST. Модуль підключається до комунікаційного порту інвертора та під'єднується до домашньої Wi-Fi мережі, після чого основні параметри роботи системи можна переглядати зі смартфона через мобільний застосунок.</p><p>За допомогою модуля зручно контролювати поточне навантаження, рівень заряду акумулятора, генерацію сонячних панелей та стан мережі, а також переглядати історію роботи системи. Це особливо корисно, якщо інвертор встановлений у технічному приміщенні, підвалі чи котельні, або якщо потрібно стежити за системою резервного живлення на дачі чи в іншому будинку дистанційно.</p><p>Wi-Fi-модуль має компактний корпус і не потребує окремого живлення - достатньо вставити його в порт інвертора та виконати налаштування підключення до мережі. Моніторинг допомагає вчасно помітити розряд батареї під час відключень, оцінити ефективність сонячних панелей і краще планувати споживання електроенергії.</p><p>Модуль призначений для гібридного інвертора MUST PV18-6048 EXP. Перед замовленням для іншої моделі інвертора уточніть сумісність у менеджерів Автономки - ми допоможемо підібрати потрібний варіант.</p>]]></description>
+        <warranty>12</warranty>
+      </offer>
+      <offer id="152520">
+        <url>https://avtonomka.com.ua/product/felicity-lpba48100-ol/152520.html</url>
+        <categoryId>3</categoryId>
+        <available>true</available>
+        <name>Акумуляторна батарея Felicity LPBA48100-OL 51.2V 100Ah LiFePO4</name>
+        <price>40695</price>
+        <picture>https://avtonomka.com.ua/assets/images/prom/152520_1.jpg</picture>
+        <picture>https://avtonomka.com.ua/assets/images/prom/152520_2.jpg</picture>
+        <picture>https://avtonomka.com.ua/assets/images/prom/152520_3.jpg</picture>
+        <picture>https://avtonomka.com.ua/assets/images/prom/152520_4.jpg</picture>
+        <picture>https://avtonomka.com.ua/assets/images/prom/152520_5.jpg</picture>
+        <picture>https://avtonomka.com.ua/assets/images/prom/152520_7.jpg</picture>
+        <vendor>Felicity</vendor>
+        <model>LPBA48100-OL</model>
+        <description><![CDATA[<p>Продається тільки в комплекті з інвертором.</p>]]></description>
         <warranty>12</warranty>
       </offer>
       <offer id="143938">
