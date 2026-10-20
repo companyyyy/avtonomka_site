@@ -15,9 +15,9 @@ site sync) and turned into UAH at the rate set there (feeds.json -> usd_rate,
 45 by default); an item whose wholesale price is 0 or empty is left out of it.
 
 Prices (UAH) and stock come from data/ultradomik/prices.json, keyed by item
-id. "off": true there (the «В наявності» checkbox in /prom-admin/, never touched
-by the site sync) marks the item as not available in every feed, whatever the
-site says; otherwise a site item is available when the site has it in stock and
+id. "off": true there (the «У фідах» checkbox in /prom-admin/, never touched
+by the site sync) leaves the item out of every feed, whatever the site says
+(it stays in the admin table, so the checkbox can be put back); otherwise a site item is available when the site has it in stock and
 a feed-only item (no site card) is available. The scheduled site update fills it with site prices
 (scripts/sync_ultradomik_prices.py); a manual edit in the price table at
 https://avtonomka.com.ua/prom-admin/ wins until the next scheduled update.
@@ -422,7 +422,7 @@ def main():
     entries = json.loads((ROOT / 'data/ultradomik/products.json').read_text('utf-8'))
     prices = json.loads((ROOT / 'data/ultradomik/prices.json').read_text('utf-8'))
 
-    report = {'no_data': [], 'no_price': [], 'no_photo': [], 'rejected_photos': []}
+    report = {'no_data': [], 'no_price': [], 'no_photo': [], 'rejected_photos': [], 'off': []}
     items, used_cats, admin_items = [], set(), []
     rate = usd_rate()
     known = {pid for e in entries for pid in e['ids']}
@@ -479,14 +479,17 @@ def main():
                 admin_item['problem'] = 'немає фото на білому фоні'
                 continue
             price = prices.get(pid, {})
+            if price.get('off'):
+                # Switched off in /prom-admin/ -> left out of every feed.
+                report['off'].append(f'{pid} {t(e["name_ua"], "ua")}')
+                continue
             price_uah = price.get('price')
             if not price_uah or price_uah <= 0:
                 report['no_price'].append(f'{pid} {t(e["name_ua"], "ua")}')
                 continue
 
-            # Switched off in /prom-admin/ -> not available anywhere; the site's
-            # stock counts only for items that have a site card.
-            available = not price.get('off') and (price.get('in_stock') or pid not in products)
+            # The site's stock counts only for items that have a site card.
+            available = price.get('in_stock') or pid not in products
 
             cat = entry['cat']
             used_cats.add(cat)
@@ -582,7 +585,8 @@ def main():
     labels = {'no_data': 'Немає даних/фото на сайті (пропущено)',
               'no_price': 'Без ціни (пропущено)',
               'no_photo': 'Немає фото на білому фоні (пропущено)',
-              'rejected_photos': 'Відхилено фото не на білому фоні'}
+              'rejected_photos': 'Відхилено фото не на білому фоні',
+              'off': 'Вимкнено в /prom-admin/ (прибрано з усіх фідів)'}
     for key, label in labels.items():
         if report[key]:
             print(f'\n{label}:')
