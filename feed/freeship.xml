@@ -15,7 +15,7 @@
       <name_ua>Гібридний інвертор MUST PV18-1512 VPM II 1,5 кВт 12 В</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>13206.60</priceuah>
+      <priceuah>13208.90</priceuah>
       <available>true</available>
       <vendorCode>PV18-1512VPM II</vendorCode>
       <vendor>MUST</vendor>
@@ -35,7 +35,7 @@
       <name_ua>Гібридний інвертор MUST PV18-3224 VPM II 3,2 кВт 24 В</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>17980.25</priceuah>
+      <priceuah>17976.80</priceuah>
       <available>true</available>
       <vendorCode>PV18-3224VPM II</vendorCode>
       <vendor>MUST</vendor>
@@ -54,7 +54,7 @@
       <name_ua>Гібридний інвертор MUST PV19-4024 EXP 4 кВт 24 В</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>21769.50</priceuah>
+      <priceuah>21774.10</priceuah>
       <available>true</available>
       <vendorCode>PV19-4024EXP</vendorCode>
       <vendor>MUST</vendor>
@@ -74,7 +74,7 @@
       <name_ua>Акумулятор MUST LP15-12100 12 В 100 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>16684.20</priceuah>
+      <priceuah>16680.75</priceuah>
       <available>true</available>
       <vendorCode>LP15-12100</vendorCode>
       <vendor>MUST</vendor>
@@ -91,7 +91,7 @@
       <name_ua>Акумуляторна батарея MUST LP16-24100 25,6 В 100 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>36390.60</priceuah>
+      <priceuah>36388.30</priceuah>
       <available>true</available>
       <vendorCode>LP16-24100</vendorCode>
       <vendor>MUST</vendor>
@@ -111,7 +111,7 @@
       <name_ua>Акумуляторна батарея MUST LP16-48300 51,2 В 300 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>96367.70</priceuah>
+      <priceuah>96368.85</priceuah>
       <available>true</available>
       <vendorCode>LP16-48300</vendorCode>
       <vendor>MUST</vendor>
@@ -126,7 +126,7 @@
       <name_ua>Акумулятор Felicity FLA12100PG2 12,8 В 100 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>14906.30</priceuah>
+      <priceuah>14908.60</priceuah>
       <available>true</available>
       <vendorCode>FLA12100PG2</vendorCode>
       <vendor>Felicity</vendor>
@@ -142,7 +142,7 @@
       <name_ua>Акумуляторна батарея Felicity FLA48230 51,2 В 230 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>88868.55</priceuah>
+      <priceuah>88860.50</priceuah>
       <available>true</available>
       <vendorCode>FLA48230</vendorCode>
       <vendor>Felicity</vendor>
@@ -157,7 +157,7 @@
       <name_ua>Акумуляторна батарея Felicity FLA48314-EU 51,2 В 314 А·год 16 кВт·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>104454.50</priceuah>
+      <priceuah>104457.95</priceuah>
       <available>true</available>
       <vendorCode>FLA48314-EU</vendorCode>
       <vendor>Felicity</vendor>
@@ -175,7 +175,7 @@
       <name_ua>Акумуляторна батарея Felicity FLB48314TG1-H 51,2 В 314 А·год 16 кВт·год LiFePO4 з підігрівом</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>104574.10</priceuah>
+      <priceuah>104570.65</priceuah>
       <available>true</available>
       <vendorCode>FLB48314TG1-H</vendorCode>
       <vendor>Felicity</vendor>
@@ -190,7 +190,7 @@
       <name_ua>Система зберігання електроенергії MUST HBP19-5548 VPM 2 в 1 5,5 кВт 5120 Вт·год</name_ua>
       <categoryId>3</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>84396.20</priceuah>
+      <priceuah>84405.40</priceuah>
       <available>true</available>
       <vendorCode>HBP19-5548VPM</vendorCode>
       <vendor>MUST</vendor>
@@ -209,7 +209,7 @@
       <name_ua>Сонячний кабель KBE Solar 6 мм², 500 м (бухта), червоний, Німеччина</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>39054.00</priceuah>
+      <priceuah>39058.60</priceuah>
       <available>true</available>
       <vendorCode>KBE Solar 6</vendorCode>
       <vendor>KBE</vendor>
@@ -224,7 +224,7 @@
       <name_ua>Сонячний кабель KBE Solar 6 мм², 500 м (бухта), чорний, Німеччина</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>39058.60</priceuah>
+      <priceuah>39057.45</priceuah>
       <available>true</available>
       <vendorCode>KBE Solar 6</vendorCode>
       <vendor>KBE</vendor>
@@ -239,7 +239,7 @@
       <name_ua>Сонячний кабель KBE 6 мм² 1 м, Німеччина</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>87.40</priceuah>
+      <priceuah>82.80</priceuah>
       <available>true</available>
       <vendorCode>KBE Solar 6</vendorCode>
       <vendor>KBE</vendor>
@@ -254,7 +254,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 1,5 м, 2 шт., мідь, мідні наконечники М8</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>1643.35</priceuah>
+      <priceuah>1638.75</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151849_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 1,5 м. На концах установлены медные наконечники М8, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 1,5 м</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М8</li></ul>]]></description>
@@ -267,7 +267,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 1,5 м, 2 шт., мідь, мідні наконечники М10</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>1634.15</priceuah>
+      <priceuah>1636.45</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151853_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 1,5 м. На концах установлены медные наконечники М10, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 1,5 м</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М10</li></ul>]]></description>
@@ -280,7 +280,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 1 м, 2 шт., мідь, мідні наконечники М8</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>992.45</priceuah>
+      <priceuah>991.30</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151847_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 1 м. На концах установлены медные наконечники М8, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 1 м</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М8</li></ul>]]></description>
@@ -293,7 +293,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 1 м, 2 шт., мідь, мідні наконечники М10</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>989.00</priceuah>
+      <priceuah>992.45</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151851_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 1 м. На концах установлены медные наконечники М10, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 1 м</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М10</li></ul>]]></description>
@@ -306,7 +306,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 75 см, 2 шт., мідь, мідні наконечники М8</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>871.70</priceuah>
+      <priceuah>864.80</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151850_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 75 см. На концах установлены медные наконечники М8, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 75 см</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М8</li></ul>]]></description>
@@ -319,7 +319,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 75 см, 2 шт., мідь, мідні наконечники М10</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>869.40</priceuah>
+      <priceuah>870.55</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151854_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 75 см. На концах установлены медные наконечники М10, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 75 см</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М10</li></ul>]]></description>
@@ -332,7 +332,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 50 см, 2 шт., мідь, мідні наконечники М8</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>455.40</priceuah>
+      <priceuah>458.85</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151848_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 50 см. На концах установлены медные наконечники М8, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 50 см</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М8</li></ul>]]></description>
@@ -345,7 +345,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 50 см, 2 шт., мідь, мідні наконечники М10</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>454.25</priceuah>
+      <priceuah>458.85</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151852_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 50 см. На концах установлены медные наконечники М10, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 50 см</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М10</li></ul>]]></description>
@@ -358,7 +358,7 @@
       <name_ua>Зарядна станція EcoFlow DELTA 2 1800 Вт 1024 Вт·год (EU)</name_ua>
       <categoryId>5</categoryId>
       <portal_category_id>500901</portal_category_id>
-      <priceuah>41620.80</priceuah>
+      <priceuah>41619.65</priceuah>
       <available>true</available>
       <vendorCode>DELTA 2 EU</vendorCode>
       <vendor>EcoFlow</vendor>
@@ -376,7 +376,7 @@
       <name_ua>Зарядна станція EcoFlow DELTA 3 1024 Вт·год 1800 Вт (китайські розетки, з перехідниками)</name_ua>
       <categoryId>5</categoryId>
       <portal_category_id>500901</portal_category_id>
-      <priceuah>41630.00</priceuah>
+      <priceuah>41628.85</priceuah>
       <available>true</available>
       <vendorCode>DELTA 3</vendorCode>
       <vendor>EcoFlow</vendor>
@@ -410,7 +410,7 @@
       <name_ua>Гібридний інвертор Felicity IVEM6048-II 6 кВт 48 В</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>25970.45</priceuah>
+      <priceuah>25967.00</priceuah>
       <available>true</available>
       <vendorCode>IVEM6048-II</vendorCode>
       <vendor>Felicity</vendor>
@@ -431,7 +431,7 @@
       <name_ua>Акумуляторна батарея Felicity FLB48230WG1-H 51,2 В 230 А·год LiFePO4 з підігрівом</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>88868.55</priceuah>
+      <priceuah>88863.95</priceuah>
       <available>true</available>
       <vendorCode>FLB48230WG1-H</vendorCode>
       <vendor>Felicity</vendor>
@@ -446,7 +446,7 @@
       <name_ua>Автоматичний перемикач введення резерву АВР TOMZN TOQ5-100/2P 1 фаза 100 А</name_ua>
       <categoryId>7</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>1299.50</priceuah>
+      <priceuah>1297.20</priceuah>
       <available>true</available>
       <vendorCode>TOQ5-100/2P</vendorCode>
       <image>https://avtonomka.com.ua/assets/images/ultradomik/ud-avr-2p.jpg</image>
@@ -460,7 +460,7 @@
       <name_ua>Автоматичний перемикач введення резерву АВР TOMZN TOQ5-100/4P 3 фази 100 А</name_ua>
       <categoryId>7</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>1504.20</priceuah>
+      <priceuah>1505.35</priceuah>
       <available>true</available>
       <vendorCode>TOQ5-100/4P</vendorCode>
       <image>https://avtonomka.com.ua/assets/images/ultradomik/ud-avr-4p.jpg</image>
@@ -469,12 +469,34 @@
       <keywords>АВР TOMZN TOQ5-100/4P, АВР 3 фазы 100А, автоматический ввод резерва, переключатель сеть генератор, АВР на DIN-рейку, переключатель резерва, АВР для генератора, АВР для инвертора, TOQ5-100</keywords>
       <keywords_ua>АВР TOMZN TOQ5-100/4P, АВР 3 фази 100А, автоматичне введення резерву, перемикач мережа генератор, АВР на DIN-рейку, перемикач резерву, АВР для генератора, АВР для інвертора, TOQ5-100</keywords_ua>
     </item>
+    <item id="150674" selling_type="r">
+      <name>Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V</name>
+      <name_ua>Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V</name_ua>
+      <categoryId>2</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>44195.65</priceuah>
+      <available>true</available>
+      <vendorCode>DHN-LVWES05-G1</vendorCode>
+      <image>https://avtonomka.com.ua/assets/images/prom/150674_1.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/150674_2.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/150674_3.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/150674_4.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/150674_5.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/150674_6.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/products/150674_2.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/products/150674_3.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/products/150674_4.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/products/150674_5.jpg</image>
+      <description_ua><![CDATA[<p>Акумулятор DAH Solar DHN-LVWES05-G1 51,2 В 100 А·год 5,12 кВт·год</p><p>DAH Solar DHN-LVWES05-G1 – літій-залізо-фосфатний акумулятор LiFePO4 з номінальною напругою 51,2 В та ємністю 100 А·год. Запас енергії становить 5,12 кВт·год, тому батарея добре підходить як основний накопичувач для системи резервного живлення квартири, будинку чи невеликого офісу.</p><p>Акумулятор розрахований на роботу з гібридними інверторами 48 В: вдень він накопичує енергію від сонячних панелей або мережі, а під час відключення електроенергії віддає її на живлення холодильника, освітлення, роутера, котла та іншої побутової техніки. Робочий діапазон напруги – 43,2…58,4 В.</p><p>Корпус настінного типу має розміри 480 × 500 × 155 мм, вага батареї – 47 кг. Компактний плаский корпус зручно розмістити на стіні в коридорі, технічному приміщенні чи котельні, не займаючи місця на підлозі.</p><p>Де використовується</p><ul><li>резервне живлення будинку або квартири</li><li>робота в парі з гібридним інвертором 48 В</li><li>накопичення енергії від сонячних панелей</li><li>живлення обладнання під час відключень електроенергії</li><li>автономні та гібридні сонячні електростанції</li></ul><p>Важливо: перед підключенням перевірте сумісність акумулятора з інвертором за напругою, струмами заряду та розряду і протоколом зв&apos;язку BMS. Менеджери Автономки допоможуть підібрати сумісний інвертор.</p>]]></description_ua>
+      <keywords>аккумулятор 100ah, аккумулятор дан солар, аккумулятор дан солар 100 ah, батарея 100ah, батарея дан солар, батарея дан солар 100 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор дан солар DHN-LVWES05-G1, батарея дан солар DHN-LVWES05-G1, дан солар DHN-LVWES05-G1</keywords>
+      <keywords_ua>акумулятор 100ah, акумулятор дан солар, акумулятор дан солар 100 ah, батарея 100ah, батарея дан солар, батарея дан солар 100 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор дан солар DHN-LVWES05-G1, батарея дан солар DHN-LVWES05-G1, дан солар DHN-LVWES05-G1</keywords_ua>
+    </item>
     <item id="150935" selling_type="r">
       <name>Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi</name>
       <name_ua>Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>29619.40</priceuah>
+      <priceuah>29610.20</priceuah>
       <available>true</available>
       <vendorCode>PV19-6048EXP</vendorCode>
       <image>https://avtonomka.com.ua/assets/images/prom/150935_1.jpg</image>
@@ -493,7 +515,7 @@
       <name_ua>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 16kWh LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>109314.40</priceuah>
+      <priceuah>109315.55</priceuah>
       <available>true</available>
       <vendorCode>SE-F16-С</vendorCode>
       <image>https://avtonomka.com.ua/assets/images/prom/151057_1.jpg</image>
@@ -508,7 +530,7 @@
       <name_ua>Акумуляторна батарея Felicity LPBA48100-OL 51.2V 100Ah LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>46806.15</priceuah>
+      <priceuah>46807.30</priceuah>
       <available>true</available>
       <vendorCode>LPBA48100-OL</vendorCode>
       <image>https://avtonomka.com.ua/assets/images/prom/152520_1.jpg</image>
@@ -520,28 +542,6 @@
       <description_ua><![CDATA[<p>Продається тільки в комплекті з інвертором.</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку або квартири</li><li>автономне електроживлення</li><li>робота з гібридним інвертором</li><li>накопичення енергії від сонячних панелей</li></ul>]]></description_ua>
       <keywords>аккумулятор 100ah, аккумулятор селисити, аккумулятор селисити 100 ah, батарея 100ah, батарея селисити, батарея селисити 100 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор селисити LPBA48100-OL, батарея селисити LPBA48100-OL, селисити LPBA48100-OL</keywords>
       <keywords_ua>акумулятор 100ah, акумулятор селіситі, акумулятор селіситі 100 ah, батарея 100ah, батарея селіситі, батарея селіситі 100 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор селіситі LPBA48100-OL, батарея селіситі LPBA48100-OL, селіситі LPBA48100-OL</keywords_ua>
-    </item>
-    <item id="150674" selling_type="r">
-      <name>Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V</name>
-      <name_ua>Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V</name_ua>
-      <categoryId>2</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>44203.70</priceuah>
-      <available>true</available>
-      <vendorCode>DHN-LVWES05-G1</vendorCode>
-      <image>https://avtonomka.com.ua/assets/images/prom/150674_1.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150674_2.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150674_3.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150674_4.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150674_5.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150674_6.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/products/150674_2.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/products/150674_3.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/products/150674_4.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/products/150674_5.jpg</image>
-      <description_ua><![CDATA[<p>Акумулятор DAH Solar DHN-LVWES05-G1 51,2 В 100 А·год 5,12 кВт·год</p><p>DAH Solar DHN-LVWES05-G1 – літій-залізо-фосфатний акумулятор LiFePO4 з номінальною напругою 51,2 В та ємністю 100 А·год. Запас енергії становить 5,12 кВт·год, тому батарея добре підходить як основний накопичувач для системи резервного живлення квартири, будинку чи невеликого офісу.</p><p>Акумулятор розрахований на роботу з гібридними інверторами 48 В: вдень він накопичує енергію від сонячних панелей або мережі, а під час відключення електроенергії віддає її на живлення холодильника, освітлення, роутера, котла та іншої побутової техніки. Робочий діапазон напруги – 43,2…58,4 В.</p><p>Корпус настінного типу має розміри 480 × 500 × 155 мм, вага батареї – 47 кг. Компактний плаский корпус зручно розмістити на стіні в коридорі, технічному приміщенні чи котельні, не займаючи місця на підлозі.</p><p>Де використовується</p><ul><li>резервне живлення будинку або квартири</li><li>робота в парі з гібридним інвертором 48 В</li><li>накопичення енергії від сонячних панелей</li><li>живлення обладнання під час відключень електроенергії</li><li>автономні та гібридні сонячні електростанції</li></ul><p>Важливо: перед підключенням перевірте сумісність акумулятора з інвертором за напругою, струмами заряду та розряду і протоколом зв&apos;язку BMS. Менеджери Автономки допоможуть підібрати сумісний інвертор.</p>]]></description_ua>
-      <keywords>аккумулятор 100ah, аккумулятор дан солар, аккумулятор дан солар 100 ah, батарея 100ah, батарея дан солар, батарея дан солар 100 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор дан солар DHN-LVWES05-G1, батарея дан солар DHN-LVWES05-G1, дан солар DHN-LVWES05-G1</keywords>
-      <keywords_ua>акумулятор 100ah, акумулятор дан солар, акумулятор дан солар 100 ah, батарея 100ah, батарея дан солар, батарея дан солар 100 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор дан солар DHN-LVWES05-G1, батарея дан солар DHN-LVWES05-G1, дан солар DHN-LVWES05-G1</keywords_ua>
     </item>
   </items>
 </shop>
