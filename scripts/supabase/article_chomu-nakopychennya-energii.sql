@@ -91,7 +91,7 @@ values (
 
 Сонячна енергетика дала можливість виробляти власну електроенергію. А сучасні системи накопичення дають змогу вирішувати, коли і як нею скористатися.',
   'assets/images/articles/chomu-nakopychennya-energii-vazhlyve-yak-paneli.jpg',
-  '2026-09-15'
+  '2026-10-20'
 )
 on conflict (id) do update set
   category = excluded.category,
