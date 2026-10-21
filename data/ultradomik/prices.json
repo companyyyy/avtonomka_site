@@ -407,7 +407,8 @@
   "ud-avr-2p": {
     "price": 1125,
     "in_stock": true,
-    "wholesale_usd": 29
+    "wholesale_usd": 29,
+    "off": true
   },
   "ud-avr-4p": {
     "price": 1305,
