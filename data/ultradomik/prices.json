@@ -39,12 +39,14 @@
   "148245": {
     "price": 36190,
     "in_stock": true,
-    "wholesale_usd": 710
+    "wholesale_usd": 700,
+    "off": false
   },
   "148299": {
     "price": 36190,
     "in_stock": true,
-    "wholesale_usd": 720
+    "wholesale_usd": 700,
+    "off": false
   },
   "148300": {
     "price": 42960,
