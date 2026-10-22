@@ -268,7 +268,7 @@ const SITE_LANG = (() => {
 })();
 
 /* ---- Пошук товарів у шапці ----
-   Поле вставляється в .header-actions на всіх сторінках. products.json
+   Окремий рядок з полем під основною шапкою на всіх сторінках. products.json
    вантажиться лише при першому фокусі; Enter / «Усі результати» ведуть
    на catalog.html?q=… (catalog.js підхоплює параметр). */
 const SITE_ROOT = (document.currentScript && document.currentScript.src || '')
@@ -293,13 +293,13 @@ window.SiteSearch = (function () {
 })();
 
 (function () {
-  const actions = document.querySelector('.site-header .header-actions');
-  if (!actions || window.Telegram?.WebApp?.initData) return;
+  const header = document.querySelector('.site-header');
+  if (!header || window.Telegram?.WebApp?.initData) return;
 
   const en = SITE_LANG === 'en';
   const L = {
     placeholder: en ? 'Search products…' : 'Пошук товарів…',
-    open: en ? 'Search' : 'Пошук',
+    submit: en ? 'Search' : 'Знайти',
     empty: en ? 'Nothing found' : 'Нічого не знайдено',
     toCatalog: en ? 'Go to catalog' : 'Перейти до каталогу',
     all: en ? 'All results' : 'Усі результати',
@@ -308,32 +308,31 @@ window.SiteSearch = (function () {
   };
   const MAX = 7;
   const catalogUrl = SITE_ROOT + 'catalog.html';
-  const icon = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
-
-  const toggle = document.createElement('button');
-  toggle.type = 'button';
-  toggle.className = 'header-search-toggle';
-  toggle.setAttribute('aria-label', L.open);
-  toggle.setAttribute('aria-expanded', 'false');
-  toggle.innerHTML = icon;
+  const icon = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
 
   const form = document.createElement('form');
   form.className = 'header-search';
   form.role = 'search';
   form.action = catalogUrl;
   form.innerHTML =
-    '<span class="header-search__icon">' + icon + '</span>' +
-    '<input type="search" name="q" class="header-search__input" autocomplete="off" ' +
-      'role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="header-search-list">' +
+    '<div class="header-search__field">' +
+      '<input type="search" name="q" class="header-search__input" autocomplete="off" ' +
+        'role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="header-search-list">' +
+      '<button type="submit" class="header-search__btn">' + icon + '<span>' + L.submit + '</span></button>' +
+    '</div>' +
     '<div class="header-search__results" id="header-search-list" role="listbox" hidden></div>';
   const input = form.querySelector('input');
   const list = form.querySelector('.header-search__results');
   input.placeholder = L.placeholder;
   input.setAttribute('aria-label', L.placeholder);
 
-  actions.prepend(form);
-  actions.prepend(toggle);
-  const header = actions.closest('.site-header');
+  const bar = document.createElement('div');
+  bar.className = 'header-search-bar';
+  const wrap = document.createElement('div');
+  wrap.className = 'container';
+  wrap.append(form);
+  bar.append(wrap);
+  header.append(bar);
 
   let products = null;
   let loading = null;
@@ -414,10 +413,7 @@ window.SiteSearch = (function () {
   input.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowDown') { e.preventDefault(); highlight(active + 1); }
     else if (e.key === 'ArrowUp') { e.preventDefault(); highlight(active - 1); }
-    else if (e.key === 'Escape') {
-      if (!list.hidden) setOpen(false);
-      else closePanel();
-    }
+    else if (e.key === 'Escape') setOpen(false);
   });
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -427,23 +423,7 @@ window.SiteSearch = (function () {
     if (q) location.href = resultsUrl(q);
   });
 
-  // Вузькі екрани: іконка розгортає поле панеллю під шапкою.
-  function closePanel() {
-    header.classList.remove('search-open');
-    toggle.setAttribute('aria-expanded', 'false');
-    setOpen(false);
-  }
-  toggle.addEventListener('click', () => {
-    const open = header.classList.toggle('search-open');
-    toggle.setAttribute('aria-expanded', String(open));
-    // Мобільне меню й панель пошуку відкриваються в одному місці.
-    const burger = document.querySelector('.burger.open');
-    if (open && burger) burger.click();
-    if (open) input.focus();
-    else setOpen(false);
-  });
   document.addEventListener('click', (e) => {
-    if (form.contains(e.target) || toggle.contains(e.target)) return;
-    setOpen(false);
+    if (!form.contains(e.target)) setOpen(false);
   });
 })();
