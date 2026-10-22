@@ -282,6 +282,9 @@ function init() {
         || new URLSearchParams(window.location.search).get('cat')
         || '';
       selectedCategory = rawCat ? (SLUG_TO_CATEGORY[rawCat] || rawCat) : '';
+      // Запит із пошуку в шапці: catalog.html?q=…
+      const presetQuery = new URLSearchParams(window.location.search).get('q');
+      if (presetQuery && searchInput) searchInput.value = presetQuery;
       populateCategories();
       renderFacets();
       applyFilters();
@@ -456,7 +459,7 @@ function renderFacets() {
 
 /* ---- Filter + sort ---- */
 function applyFilters() {
-  const query  = (searchInput ? searchInput.value : '').trim().toLowerCase();
+  const query  = (searchInput ? searchInput.value : '').trim();
   const cat    = selectedCategory;
   const slug   = CATEGORY_TO_SLUG[cat];
   const facets = slug && FACET_CONFIG[slug];
@@ -466,7 +469,8 @@ function applyFilters() {
 
   filtered = allProducts.filter(p => {
     const title = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
-    if (query && !title.toLowerCase().includes(query)) return false;
+    if (query && !(window.SiteSearch ? window.SiteSearch.matches(p, query)
+                                     : title.toLowerCase().includes(query.toLowerCase()))) return false;
     if (cat && p.product_type !== cat) return false;
     if (facets) {
       if (facets.power && selectedPowers.size) {

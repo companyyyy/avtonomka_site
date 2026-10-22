@@ -246,6 +246,106 @@ main { flex: 1; }
 }
 .header-actions { flex-shrink: 0; display: flex; gap: 8px; align-items: center; }
 
+/* ---------- Header search (вставляється з main.js) ---------- */
+.header-search-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,.08);
+  border: none;
+  border-radius: var(--radius);
+  color: var(--color-white);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.header-search-toggle:hover,
+.site-header.search-open .header-search-toggle { background: rgba(255,255,255,.18); }
+.header-search {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 101;
+  background: var(--color-dark);
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
+  padding: 10px max(16px, calc((100% - var(--max-w)) / 2 + 16px)) 14px;
+}
+.site-header.search-open .header-search { display: block; }
+.header-search__icon {
+  position: absolute;
+  top: 22px;
+  left: max(28px, calc((100% - var(--max-w)) / 2 + 28px));
+  color: var(--color-muted);
+  pointer-events: none;
+  display: flex;
+}
+.header-search__input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px 0 42px;
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  background: var(--color-white);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 1rem;
+  outline: none;
+}
+.header-search__input:focus { border-color: var(--color-green); }
+.header-search__results {
+  position: relative;
+  margin-top: 8px;
+  max-height: min(70vh, 520px);
+  overflow-y: auto;
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 32px rgba(0,0,0,.25);
+}
+.header-search__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
+}
+.header-search__item:hover,
+.header-search__item.is-active { background: var(--color-grey); }
+.header-search__item img {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  object-fit: contain;
+  background: var(--color-white);
+  border-radius: 6px;
+}
+.header-search__info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.header-search__title {
+  font-size: .92rem;
+  line-height: 1.3;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.header-search__meta { display: flex; gap: 10px; align-items: baseline; font-size: .85rem; }
+.header-search__meta b { color: var(--color-dark); }
+.header-search__meta .is-in { color: #1f9d34; }
+.header-search__meta .is-out { color: var(--color-muted); }
+.header-search__all {
+  display: block;
+  padding: 11px 12px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--color-dark);
+}
+.header-search__all:hover { background: var(--color-grey); }
+.header-search__empty { padding: 14px 12px; color: var(--color-muted); font-size: .92rem; }
+.header-search__empty a { color: var(--color-dark); font-weight: 600; text-decoration: underline; }
+
 /* ---------- Nav dropdown ("Інформація") ---------- */
 .main-nav .has-dropdown { position: relative; }
 .main-nav .dropdown-toggle {
