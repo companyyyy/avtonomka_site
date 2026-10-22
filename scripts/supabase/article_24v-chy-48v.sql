@@ -1,6 +1,6 @@
 -- Автономка: нова стаття "24 В чи 48 В: яку систему резервного живлення обрати для квартири та будинку?".
 -- Виконати ОДИН РАЗ у Supabase Dashboard -> SQL Editor -> New query -> Run.
-insert into public.articles (id, category, title, summary, body, photo, date)
+insert into public.articles (id, category, title, summary, body, photo, date, title_en, summary_en, body_en)
 values (
   '24v-chy-48v-yaku-systemu-obraty',
   'komplekty',
@@ -48,7 +48,50 @@ values (
 
 Головне, щоб під час відключень ви могли користуватися потрібною технікою без постійних хвилювань про залишок заряду. Ознайомитися з різними варіантами та порівняти їхні характеристики можна в каталозі [комплектів автономного енергоживлення](https://avtonomka.com.ua/catalog/komplekty.html).',
   'assets/images/articles/24v-chy-48v-yaku-systemu-obraty.jpg',
-  '2026-10-22'
+  '2026-10-22',
+  '24 V or 48 V: Which Backup Power System to Choose for an Apartment or a House?',
+  'How 24 V and 48 V backup power systems differ, how voltage affects current and load, why voltage is not the same as stored energy, and which option suits an apartment and which a private house better.',
+  'During power outages, you want everyday life to keep going: the lights stay on, the fridge keeps running, the internet works, and you can use the appliances you need without unnecessary restrictions. A backup power system makes this possible, but what it can do depends on choosing the right equipment.
+
+When choosing an inverter, you will often see the labels 24 V and 48 V. Behind these numbers lies an important difference that affects how the system works, how well it handles loads and how easily it can be expanded later. Let''s look at how these options differ and which one is better for an apartment or a private house.
+
+## What 24 V and 48 V mean
+
+The 24 V and 48 V labels refer to the voltage at which the battery side of the backup power system operates. The inverter draws energy from the battery and converts it into the standard 230 V that household appliances need.
+
+The battery''s own voltage may differ slightly from the figure in the inverter''s specifications. For example, 24 V systems often use LiFePO4 batteries with a nominal voltage of 25.6 V, while 48 V systems usually use 51.2 V batteries. This is a normal feature of such equipment, and manufacturers take it into account when designing it.
+
+## Why the difference shows under load
+
+The difference between 24 V and 48 V systems becomes especially noticeable when several powerful appliances run at the same time. For example, if the total consumption is 2400 W, a 24 V system will need a current of about 100 A, while a 48 V system needs only about 50 A. These figures do not take energy losses into account.
+
+The lower the current, the less cables and connections heat up under the same conditions. That is why 48 V systems are often chosen to power high-wattage appliances and a large number of devices. However, the performance of a backup power system depends not only on voltage but also on the inverter and battery specifications and on correct wiring of all components.
+
+## When 24 V is quite enough
+
+For an apartment, a 24 V system is often quite sufficient. It keeps the lights on and lets you use the internet, the fridge, a laptop and other essential equipment during power outages.
+
+At the same time, 24 V systems are not limited to small loads. For example, our catalog includes a [kit with a 4 kW MUST inverter and a Felicity battery](https://avtonomka.com.ua/product/must-pv18-4024-exp-felicity-fla24280/152730.html) that can handle more demanding appliances as well. The key is to calculate the load correctly and choose a battery with enough stored energy.
+
+## For a house, 48 V is often more practical
+
+A private house usually needs more electricity. Besides the fridge and lighting, there are pumps, heating equipment, kitchen and other household appliances. Some devices draw much more power for a short time when they start, so the inverter must be ready for such loads too.
+
+If during outages you need to power not only the essentials but other household appliances as well, a 48 V system is the better fit. It handles high loads better and lets you increase stored energy later by adding compatible batteries. For such needs, consider the [MUST PV19-6048EXP 6 kW kit with a 5.12 kWh DAH Solar battery](https://avtonomka.com.ua/product/must-pv19-6048exp-dah-solar-dhn-lvwes05-g1/151284.html).
+
+## Voltage is not the same as stored energy
+
+Battery voltage alone does not tell you how long it can power your appliances. What matters more is the stored energy, measured in kilowatt-hours (kWh). For example, a 25.6 V battery with a capacity of 100 Ah stores 2.56 kWh, while a 51.2 V battery with the same capacity stores 5.12 kWh.
+
+However, this does not mean a 48 V system will always run longer. A 24 V battery with a higher capacity can store even more energy. So if you want to know how many hours the charge will last during an outage, look first at the battery''s stored energy, the consumption of your appliances and the inverter''s losses.
+
+## What else to consider before buying
+
+It is just as important to think about how the system will work in everyday life. If power is only on for a few hours, the battery must have time to recharge before the next outage. It is also worth planning ahead where to place the equipment and considering inverter noise, ventilation and compatibility of all components. Connecting the system to your home wiring is best left to a professional.
+
+It does not always make sense to buy the most powerful equipment. For some needs 24 V is quite enough, while for others 48 V is more convenient, especially if you may later want to increase the system''s power or stored energy.
+
+The main thing is that during outages you can use the appliances you need without constantly worrying about how much charge is left. You can explore different options and compare their specifications in our [backup power kits catalog](https://avtonomka.com.ua/catalog/komplekty.html).'
 )
 on conflict (id) do update set
   category = excluded.category,
@@ -57,4 +100,7 @@ on conflict (id) do update set
   body     = excluded.body,
   photo    = excluded.photo,
   date     = excluded.date,
+  title_en   = excluded.title_en,
+  summary_en = excluded.summary_en,
+  body_en    = excluded.body_en,
   updated_at = now();
