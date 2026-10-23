@@ -485,7 +485,7 @@ function renderDatasheetButtons(html, p) {
     { wrap: 'product-datasheet-wrap', btn: 'btn-datasheet', link: p.link,
       label: isKit
         ? '↓ Даташит для інвертора' + (invModel ? ': ' + truncateLabel(invModel, 45) : '')
-        : '↓ Скачати даташит для ' + truncateLabel(p.title || 'товару', 55) },
+        : (/manual/i.test(p.link) ? '↓ Скачати інструкцію для ' : '↓ Скачати даташит для ') + truncateLabel(p.title || 'товару', 55) },
     { wrap: 'product-datasheet-wrap-2', btn: 'btn-datasheet-2', link: p.link2,
       label: '↓ Даташит для акумулятора' + (batModel ? ': ' + truncateLabel(batModel, 45) : '') },
   ];

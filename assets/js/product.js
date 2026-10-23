@@ -483,7 +483,7 @@ function render(p) {
       datasheetBtn.removeAttribute('data-i18n');
       datasheetBtn.textContent = isKit
         ? '↓ Даташит для інвертора' + (invModel ? ': ' + truncateLabel(invModel, 45) : '')
-        : '↓ Скачати даташит для ' + truncateLabel(p.title || 'товару', 55);
+        : (/manual/i.test(p.link) ? '↓ Скачати інструкцію для ' : '↓ Скачати даташит для ') + truncateLabel(p.title || 'товару', 55);
       datasheetWrap.classList.remove('hidden');
     } else {
       datasheetWrap.remove();
