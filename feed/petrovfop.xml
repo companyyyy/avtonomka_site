@@ -35,7 +35,7 @@
       <name_ua>Гібридний інвертор MUST PV18-3224 VPM II 3,2 кВт 24 В</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>14762.16</priceuah>
+      <priceuah>14234.94</priceuah>
       <available>true</available>
       <vendorCode>PV18-3224VPM II</vendorCode>
       <vendor>MUST</vendor>
@@ -68,6 +68,22 @@
       <description_ua><![CDATA[<p>MUST PV19-4024 EXP – гібридний інвертор потужністю 4 кВт для систем резервного та автономного живлення. Модель працює з акумуляторними батареями на 24 В.</p><p>Інвертор поєднує живлення від акумулятора, електромережі та сонячних панелей, що дозволяє зменшити залежність від відключень і використовувати сонячну енергію для навантаження та заряджання АКБ.</p><p>Розміри корпусу 322 × 486 × 134 мм, вага 9,5 кг. Інвертор встановлюється на стіну; під час монтажу передбачте вільний простір для вентиляції.</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири або офісу</li><li>сонячні електростанції</li><li>системи накопичення електроенергії</li><li>автономні та гібридні системи живлення</li></ul><p><strong>Основні характеристики:</strong></p><ul><li>Номінальна потужність: 4 кВт</li><li>Напруга АКБ: 24 В</li><li>Розміри: 322 × 486 × 134 мм</li><li>Вага: 9,5 кг</li></ul>]]></description_ua>
       <keywords>гибридный инвертор MUST PV19-4024 EXP, инвертор MUST 4 кВт, инвертор 24 В, инвертор маст 4024, гибридный инвертор 4 кВт, инвертор для солнечных панелей, инвертор для дома, PV19-4024</keywords>
       <keywords_ua>гібридний інвертор MUST PV19-4024 EXP, інвертор MUST 4 кВт, інвертор 24 В, інвертор маст 4024, гібридний інвертор 4 кВт, інвертор для сонячних панелей, інвертор для дому, PV19-4024</keywords_ua>
+    </item>
+    <item id="142740" selling_type="r">
+      <name>Аккумуляторная батарея Dyness DL5.0C 51,2 В 100 А·ч LiFePO4 с подогревом</name>
+      <name_ua>Акумуляторна батарея Dyness DL5.0C 51,2 В 100 А·год LiFePO4 з підігрівом</name_ua>
+      <categoryId>2</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>39541.50</priceuah>
+      <available>true</available>
+      <vendorCode>DL5.0C Heating</vendorCode>
+      <vendor>Dyness</vendor>
+      <image>https://avtonomka.com.ua/assets/images/prom/142740_1.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/142740_2.jpg</image>
+      <description><![CDATA[<p>Dyness DL5.0C (Heating) – аккумуляторная батарея LiFePO4 емкостью 100 А·ч с номинальным напряжением 51,2 В для систем резервного и автономного питания с инвертором на 48 В.</p><p>Энергоемкость батареи 5,12 кВт·ч. Встроенный подогрев помогает корректно заряжать аккумулятор при низких температурах, поэтому модель подходит для неотапливаемых помещений с учетом требований производителя.</p><p>Размеры 558 × 545 × 150 мм, вес 54 кг. Перед подключением проверьте совместимость с инвертором по напряжению и протоколу коммуникации BMS.</p><p><strong>Где используется:</strong></p><ul><li>резервное питание дома или квартиры</li><li>автономное электропитание</li><li>работа с гибридным инвертором</li><li>накопление энергии от солнечных панелей</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Номинальное напряжение: 51,2 В</li><li>Емкость: 100 А·ч</li><li>Энергоемкость: 5,12 кВт·ч</li><li>Тип аккумулятора: LiFePO4</li><li>Подогрев: Да</li><li>Размеры: 558 × 545 × 150 мм</li><li>Вес: 54 кг</li></ul>]]></description>
+      <description_ua><![CDATA[<p>Dyness DL5.0C (Heating) – акумуляторна батарея LiFePO4 ємністю 100 А·год з номінальною напругою 51,2 В для систем резервного та автономного живлення з інвертором на 48 В.</p><p>Енергоємність батареї 5,12 кВт·год. Вбудований підігрів допомагає коректно заряджати акумулятор за низьких температур, тому модель підходить для неопалюваних приміщень з урахуванням вимог виробника.</p><p>Розміри 558 × 545 × 150 мм, вага 54 кг. Перед підключенням перевірте сумісність з інвертором за напругою та протоколом комунікації BMS.</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку або квартири</li><li>автономне електроживлення</li><li>робота з гібридним інвертором</li><li>накопичення енергії від сонячних панелей</li></ul><p><strong>Основні характеристики:</strong></p><ul><li>Номінальна напруга: 51,2 В</li><li>Ємність: 100 А·год</li><li>Енергоємність: 5,12 кВт·год</li><li>Тип акумулятора: LiFePO4</li><li>Підігрів: Так</li><li>Розміри: 558 × 545 × 150 мм</li><li>Вага: 54 кг</li></ul>]]></description_ua>
+      <keywords>аккумулятор Dyness DL5.0C, аккумулятор с подогревом, аккумулятор Dyness 100 Аh, аккумулятор 51.2 В, аккумулятор 48 В для инвертора, аккумулятор LiFePO4, батарея дайнес, батарея для инвертора, DL5.0C</keywords>
+      <keywords_ua>акумулятор Dyness DL5.0C, акумулятор з підігрівом, акумулятор Dyness 100 Аh, акумулятор 51.2 В, акумулятор 48 В для інвертора, акумулятор LiFePO4, батарея дайнес, батарея для інвертора, DL5.0C</keywords_ua>
     </item>
     <item id="150599" selling_type="r">
       <name>Аккумулятор MUST LP15-12100 12 В 100 А·ч LiFePO4</name>
@@ -142,7 +158,7 @@
       <name_ua>Акумуляторна батарея Felicity FLA48230 51,2 В 230 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>78028.56</priceuah>
+      <priceuah>77501.34</priceuah>
       <available>true</available>
       <vendorCode>FLA48230</vendorCode>
       <vendor>Felicity</vendor>
@@ -157,7 +173,7 @@
       <name_ua>Акумуляторна батарея Felicity FLA48314-EU 51,2 В 314 А·год 16 кВт·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>91736.28</priceuah>
+      <priceuah>91209.06</priceuah>
       <available>true</available>
       <vendorCode>FLA48314-EU</vendorCode>
       <vendor>Felicity</vendor>
@@ -175,7 +191,7 @@
       <name_ua>Акумуляторна батарея Felicity FLB48314TG1-H 51,2 В 314 А·год 16 кВт·год LiFePO4 з підігрівом</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>94372.38</priceuah>
+      <priceuah>93845.16</priceuah>
       <available>true</available>
       <vendorCode>FLB48314TG1-H</vendorCode>
       <vendor>Felicity</vendor>
@@ -410,7 +426,7 @@
       <name_ua>Гібридний інвертор Felicity IVEM6048-II 6 кВт 48 В</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>22670.46</priceuah>
+      <priceuah>22143.24</priceuah>
       <available>true</available>
       <vendorCode>IVEM6048-II</vendorCode>
       <vendor>Felicity</vendor>
@@ -465,7 +481,7 @@
       <name_ua>Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>39541.50</priceuah>
+      <priceuah>38487.06</priceuah>
       <available>true</available>
       <vendorCode>DHN-LVWES05-G1</vendorCode>
       <image>https://avtonomka.com.ua/assets/images/prom/150674_1.jpg</image>
@@ -487,7 +503,7 @@
       <name_ua>Акумуляторна батарея Felicity LPBA48100-OL 51.2V 100Ah LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>44286.48</priceuah>
+      <priceuah>39541.50</priceuah>
       <available>true</available>
       <vendorCode>LPBA48100-OL</vendorCode>
       <image>https://avtonomka.com.ua/assets/images/prom/152520_1.jpg</image>
