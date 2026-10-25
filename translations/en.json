@@ -210,7 +210,6 @@
     "np_branch_placeholder": "e.g. Branch #25",
     "payment_method_label": "Payment method *",
     "payment_bank": "Bank transfer",
-    "payment_cod": "Cash on delivery",
     "comment_label": "Comment",
     "comment_placeholder": "Delivery notes, etc. (optional)",
     "consent_html": "I agree to the <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">privacy policy</a> *",

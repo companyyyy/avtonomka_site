@@ -39,9 +39,12 @@
  * кошика — по рядку на товар зі спільним "№ замовлення") на аркуш "Заявки"
  * цієї ж таблиці:
  * Дата/час | Ім'я | Телефон | Товар | Коментар | Кількість | № замовлення |
- * Місто | Відділення/поштомат НП | Спосіб оплати | Джерело | Ціна за од.
+ * Місто | Відділення/поштомат НП | Спосіб оплати | Джерело | Ціна за од. | Сума
  *
- * "Ціна за од." - ціна з кошика (та, що була на сторінці товару в момент
+ * Значення пишуться в колонки ЗА НАЗВОЮ заголовка, тож чужі колонки
+ * (status, assigned_to, assigned_at від бота) не зсуваються й не
+ * перезаписуються. "Ціна за од." і "Сума" (ціна × кількість, грн) -
+ * числа, їх можна сумувати у таблиці. "Ціна за од." - ціна з кошика (та, що була на сторінці товару в момент
  * додавання). Для варіанта «під замовлення» це нижча ціна, а сама умова
  * видна в колонці "Товар": «... (під замовлення, очікується до <дата>)».
  *
@@ -49,14 +52,18 @@
  * кошика (checkout.html) — швидка заявка через order-form.js та заявки з
  * міні-аппи їх не збирають, там ці колонки лишаються порожні.
  *
- * Якщо аркуш уже існує зі старим (5-, 7- чи 10-колонковим) заголовком —
- * скрипт сам дописує відсутні колонки при першому ж запиті, без нового
+ * Якщо в аркуші бракує якихось заголовків — скрипт сам дописує їх
+ * у кінець при першому ж запиті, без нового
  * розгортання. Але якщо ти оновлюєш цей .gs-код у вже розгорнутому проєкті —
  * потрібне нове розгортання (крок 9 вище), інакше зміни коду не застосуються.
  */
 
 const SHEET_NAME = 'Заявки';
-const HEADER = ['Дата/час', "Ім'я", 'Телефон', 'Товар', 'Коментар', 'Кількість', '№ замовлення', 'Місто', 'Відділення/поштомат НП', 'Спосіб оплати', 'Джерело', 'Ціна за од.'];
+const HEADER = ['Дата/час', "Ім'я", 'Телефон', 'Товар', 'Коментар', 'Кількість', '№ замовлення', 'Місто', 'Відділення/поштомат НП', 'Спосіб оплати', 'Джерело', 'Ціна за од.', 'Сума'];
+
+function styleHeader(range) {
+  range.setFontWeight('bold').setBackground('#1a73e8').setFontColor('#ffffff');
+}
 
 function ensureSheet(ss) {
   let sheet = ss.getSheetByName(SHEET_NAME);
@@ -64,22 +71,37 @@ function ensureSheet(ss) {
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
     sheet.appendRow(HEADER);
-    sheet.getRange(1, 1, 1, HEADER.length).setFontWeight('bold').setBackground('#1a73e8').setFontColor('#ffffff');
+    styleHeader(sheet.getRange(1, 1, 1, HEADER.length));
     sheet.setFrozenRows(1);
     return sheet;
   }
 
-  /* Аркуш міг бути створений старою версією скрипта (5- чи 10-колонковим
-     заголовком, без "Кількість"/"№ замовлення"/"Джерело") — дописуємо
-     відсутні заголовки, не чіпаючи вже наявні рядки. */
-  const currentCols = sheet.getLastColumn();
-  if (currentCols < HEADER.length) {
-    sheet.getRange(1, currentCols + 1, 1, HEADER.length - currentCols)
-      .setValues([HEADER.slice(currentCols)])
-      .setFontWeight('bold').setBackground('#1a73e8').setFontColor('#ffffff');
+  /* Аркуш міг бути створений старою версією скрипта, а праворуч інші
+     інструменти (бот менеджерів) дописують свої колонки (status,
+     assigned_to, ...). Тому відсутні заголовки дописуємо В КІНЕЦЬ, не
+     чіпаючи наявні колонки й рядки. */
+  const lastCol = sheet.getLastColumn();
+  const existing = lastCol ? sheet.getRange(1, 1, 1, lastCol).getValues()[0].map(String) : [];
+  const missing = HEADER.filter(function (h) { return existing.indexOf(h) === -1; });
+  if (missing.length) {
+    styleHeader(sheet.getRange(1, lastCol + 1, 1, missing.length).setValues([missing]));
   }
 
   return sheet;
+}
+
+/* Дописує рядок, розкладаючи значення по колонках за назвою заголовка
+   (а не за порядком) - чужі колонки лишаються порожні. */
+function appendByHeader(sheet, values) {
+  const header = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map(String);
+  sheet.appendRow(header.map(function (h) {
+    return Object.prototype.hasOwnProperty.call(values, h) ? values[h] : '';
+  }));
+}
+
+function toNumber(value) {
+  const n = Number(String(value == null ? '' : value).replace(/[^\d.,-]/g, '').replace(',', '.'));
+  return isFinite(n) ? n : 0;
 }
 
 /* Тіло запиту буває двох форматів:
@@ -123,6 +145,17 @@ function doPost(e) {
     }
     if (!Array.isArray(items)) items = [];
 
+    const base = {
+      'Дата/час': timestamp,
+      "Ім'я": name,
+      'Телефон': phone,
+      'Коментар': comment,
+      'Місто': city,
+      'Відділення/поштомат НП': npBranch,
+      'Спосіб оплати': paymentMethod,
+      'Джерело': source
+    };
+
     if (items.length > 0) {
       /* Кошик: один рядок на товар, спільний orderId, щоб бачити,
          які позиції належать одному замовленню. */
@@ -130,29 +163,20 @@ function doPost(e) {
       items.forEach(function (item) {
         const title = (item && (item.title || item.name)) || '';
         const sku   = (item && item.sku) || '';
-        const qty   = (item && item.qty) || 1;
-        const price = (item && item.price != null && item.price !== '')
-          ? (item.price + ' ' + (item.currency || 'UAH'))
-          : '';
-        sheet.appendRow([
-          timestamp,
-          name,
-          phone,
-          sku ? (title + ' (Арт. ' + sku + ')') : title,
-          comment,
-          qty,
-          orderId,
-          city,
-          npBranch,
-          paymentMethod,
-          source,
-          price
-        ]);
+        const qty   = toNumber(item && item.qty) || 1;
+        const price = (item && item.price != null && item.price !== '') ? toNumber(item.price) : '';
+        appendByHeader(sheet, Object.assign({}, base, {
+          'Товар': sku ? (title + ' (Арт. ' + sku + ')') : title,
+          'Кількість': qty,
+          '№ замовлення': orderId,
+          'Ціна за од.': price,
+          'Сума': price === '' ? '' : price * qty
+        }));
       });
     } else {
       /* Швидка заявка на 1 товар (сайт: order-form.js, або заявка без кошика
          з міні-аппи), без даних доставки. */
-      sheet.appendRow([timestamp, name, phone, params.product || '', comment, '', '', '', '', '', source, '']);
+      appendByHeader(sheet, Object.assign({}, base, { 'Товар': params.product || '' }));
     }
 
     return ContentService

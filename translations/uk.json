@@ -205,7 +205,6 @@
     "np_branch_placeholder": "напр. Відділення №25",
     "payment_method_label": "Спосіб оплати *",
     "payment_bank": "Оплата на реквізити",
-    "payment_cod": "Післясплата",
     "comment_label": "Коментар",
     "comment_placeholder": "Побажання щодо доставки тощо (необов'язково)",
     "consent_html": "Я погоджуюсь з <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">політикою конфіденційності</a> *",
