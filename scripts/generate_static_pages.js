@@ -40,6 +40,10 @@ const { getBackorderOffer, PAGE_SUFFIX } = require('./backorder');
 
 const ROOT           = path.join(__dirname, '..');
 const SITE_URL        = 'https://avtonomka.com.ua';
+// Старі адреси знятих товарів -> 301 на категорію (або на той самий товар під
+// новою адресою), щоб Google не бачив 404. Поповнюється автоматично, коли
+// генератор видаляє сторінку знятого товару (див. generateAllProductPages).
+const REMOVED_REDIRECTS_FILE = path.join(__dirname, '..', 'data', 'removed_product_redirects.json');
 const ITEMS_PER_PAGE  = 24;
 const TODAY           = new Date().toISOString().slice(0, 10);
 
@@ -739,6 +743,42 @@ function splitShadowedVirtual(products, virtualProducts) {
   return { kept, redirects };
 }
 
+/* ============================================================
+   Знятий товар -> куди вести його стару адресу. Категорію визначаємо
+   за <title> сторінки, яку зараз видаляємо (product_type там уже немає).
+   ============================================================ */
+
+const TITLE_TO_CATEGORY = [
+  ['комплект', 'komplekty'],
+  ['систем', 'systemy-zberihannya'],
+  ['2 в 1', 'systemy-zberihannya'],
+  ['wi-fi модул', 'wifi-moduli'],
+  ['зарядна станція', 'dzherela-zhyvlennya'],
+  ['безперебій', 'dzherela-zhyvlennya'],
+  ['інвертор', 'hybridni-invertory'],
+  ['дбж', 'akumulyatory-dbzh'],
+  ['акумул', 'akumulyatory'],
+  ['кабел', 'kabeli'],
+  ['накінечн', 'kabeli'],
+];
+
+function removedPageTarget(html) {
+  const m = /<title>([^<]*)<\/title>/.exec(html || '');
+  const title = (m ? m[1] : '').toLowerCase();
+  const hit = TITLE_TO_CATEGORY.find(([kw]) => title.includes(kw));
+  return hit ? `catalog/${hit[1]}.html` : 'catalog.html';
+}
+
+function loadRemovedRedirects() {
+  try { return JSON.parse(fs.readFileSync(REMOVED_REDIRECTS_FILE, 'utf8')); } catch (e) { return {}; }
+}
+
+function saveRemovedRedirects(map) {
+  const sorted = {};
+  Object.keys(map).sort().forEach(k => { sorted[k] = map[k]; });
+  fs.writeFileSync(REMOVED_REDIRECTS_FILE, JSON.stringify(sorted, null, 1) + '\n', 'utf8');
+}
+
 async function generateAllProductPages(products, redirects = []) {
   const template = fs.readFileSync(path.join(ROOT, 'product.html'), 'utf8');
   const outDir   = path.join(ROOT, 'product');
@@ -795,27 +835,34 @@ async function generateAllProductPages(products, redirects = []) {
   /* Remove pages/stubs for products that dropped out of products.json
      entirely (discontinued) — otherwise they'd sit at their old URL forever
      with stale price/availability, which is exactly the risk this whole
-     exercise is meant to avoid. Products keep no redirect once discontinued
-     (same policy as before this change — a clean 404, not a dangling
-     redirect to nothing). */
+     exercise is meant to avoid. The old URL is recorded in
+     data/removed_product_redirects.json and gets a 301 to its category
+     (updateHtaccess) instead of a 404 in Search Console. */
   let removed = 0;
+  const removedRedirects = loadRemovedRedirects();
+  const forget = (rel, file) => {
+    // Стару адресу ведемо в категорію (301 у .htaccess), а не в 404.
+    const key = 'product/' + rel.split(path.sep).join('/');
+    if (!removedRedirects[key]) removedRedirects[key] = removedPageTarget(fs.readFileSync(file, 'utf8'));
+    fs.unlinkSync(file);
+    removed++;
+  };
   fs.readdirSync(outDir, { withFileTypes: true }).forEach(entry => {
     if (entry.isDirectory()) {
       const slugDir = path.join(outDir, entry.name);
       fs.readdirSync(slugDir).forEach(file => {
         if (!validRelPaths.has(path.join(entry.name, file))) {
-          fs.unlinkSync(path.join(slugDir, file));
-          removed++;
+          forget(path.join(entry.name, file), path.join(slugDir, file));
         }
       });
       if (fs.readdirSync(slugDir).length === 0) fs.rmdirSync(slugDir);
     } else if (entry.isFile() && entry.name.endsWith('.html')) {
       if (!validStubNames.has(entry.name)) {
-        fs.unlinkSync(path.join(outDir, entry.name));
-        removed++;
+        forget(entry.name, path.join(outDir, entry.name));
       }
     }
   });
+  saveRemovedRedirects(removedRedirects);
 
   console.log(`generate_static_pages: wrote ${products.length} product pages to /product/<slug>/<id>.html ` +
     `+ ${products.length} legacy redirect stubs` +
@@ -1090,15 +1137,23 @@ ${productEntries}
 
 function updateHtaccess(products, redirects = []) {
   const file = path.join(ROOT, '.htaccess');
-  const rules = products.map(p =>
-    `RewriteRule ^product/${p.id}\\.html$ /product/${productSlug(p)}/${p.id}.html [R=301,L]`
-  ).concat(redirects.map(r =>
-    `RewriteRule ^${r.from.replace(/\./g, '\\.')}$ ${r.to.replace(SITE_URL, '')} [R=301,L]`
-  )).join('\n');
+  const rule = (from, to) =>
+    `RewriteRule ^${from.replace(/\./g, '\\.')}$ ${SITE_URL}/${to.replace(SITE_URL + '/', '')} [R=301,L]`;
+  const live = products.map(p => rule(`product/${p.id}.html`, `product/${productSlug(p)}/${p.id}.html`))
+    .concat(redirects.map(r => rule(r.from, r.to)));
+
+  /* Знятi товари: пропускаємо адреси, де знову є сторінка (товар повернувся),
+     а ціль, якої вже немає (товар зняли вдруге), замінюємо на каталог. */
+  const taken = new Set(products.map(p => `product/${p.id}.html`).concat(redirects.map(r => r.from)));
+  const gone = Object.entries(loadRemovedRedirects())
+    .filter(([from]) => !taken.has(from) && !fs.existsSync(path.join(ROOT, from)))
+    .map(([from, to]) => rule(from, fs.existsSync(path.join(ROOT, to)) ? to : 'catalog.html'));
+  const rules = live.concat(gone).join('\n');
 
   const content = `# Auto-generated by scripts/generate_static_pages.js — do not edit by hand.
 # Redirects old /product/<id>.html URLs to the new /product/<slug>/<id>.html
-# format so existing Google indexing and external links keep working.
+# format, and URLs of removed products to their category, so existing Google
+# indexing and external links keep working.
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
@@ -1107,7 +1162,7 @@ ${rules}
 `;
 
   fs.writeFileSync(file, content, 'utf8');
-  console.log(`generate_static_pages: .htaccess rebuilt — ${products.length + redirects.length} redirect rule(s)`);
+  console.log(`generate_static_pages: .htaccess rebuilt — ${live.length} redirect rule(s) + ${gone.length} for removed products`);
 }
 
 /* ============================================================
