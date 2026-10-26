@@ -16,7 +16,7 @@
       <name_ua>Гібридний інвертор MUST PV18-1512 VPM II 1,5 кВт 12 В</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>13319.30</priceuah>
+      <priceuah>13492.95</priceuah>
       <available>true</available>
       <vendorCode>PV18-1512VPM II</vendorCode>
       <vendor>MUST</vendor>
@@ -36,7 +36,7 @@
       <name_ua>Гібридний інвертор MUST PV18-3224 VPM II 3,2 кВт 24 В</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>16688.80</priceuah>
+      <priceuah>16907.30</priceuah>
       <available>true</available>
       <vendorCode>PV18-3224VPM II</vendorCode>
       <vendor>MUST</vendor>
@@ -55,7 +55,7 @@
       <name_ua>Гібридний інвертор MUST PV19-4024 EXP 4 кВт 24 В</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>21960.40</priceuah>
+      <priceuah>22252.50</priceuah>
       <available>true</available>
       <vendorCode>PV19-4024EXP</vendorCode>
       <vendor>MUST</vendor>
@@ -70,52 +70,12 @@
       <keywords>гибридный инвертор MUST PV19-4024 EXP, инвертор MUST 4 кВт, инвертор 24 В, инвертор маст 4024, гибридный инвертор 4 кВт, инвертор для солнечных панелей, инвертор для дома, PV19-4024</keywords>
       <keywords_ua>гібридний інвертор MUST PV19-4024 EXP, інвертор MUST 4 кВт, інвертор 24 В, інвертор маст 4024, гібридний інвертор 4 кВт, інвертор для сонячних панелей, інвертор для дому, PV19-4024</keywords_ua>
     </item>
-    <item id="142725" selling_type="r">
-      <name>Гибридный инвертор MUST PV19-6048EXP 6 кВт 48 В</name>
-      <name_ua>Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В</name_ua>
-      <categoryId>1</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>28824.75</priceuah>
-      <available>true</available>
-      <vendorCode>PV19-6048EXP</vendorCode>
-      <vendor>MUST</vendor>
-      <image>https://avtonomka.com.ua/assets/images/prom/142725_1.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/142725_2.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/142725_3.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/142725_4.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/142725_5.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/142725_7.jpg</image>
-      <description><![CDATA[<p>MUST PV19-6048EXP – гибридный инвертор мощностью 6 кВт для систем резервного и автономного электропитания. Модель работает с аккумуляторными батареями на 48 В и предназначена для однофазных систем.</p><p>Инвертор объединяет преобразователь, зарядное устройство и солнечный MPPT-контроллер. Номинальная мощность 6000 Вт, кратковременная пиковая – до 12 000 Вт. На выходе чистая синусоида, которая подходит для бытовой техники и чувствительного оборудования.</p><p>MPPT-контроллер поддерживает солнечные панели общей мощностью до 6000 Вт, рабочий диапазон 150–450 В, входной ток до 27 А. Максимальный ток зарядки аккумулятора – 120 А.</p><p>Инвертор работает с литиевыми и свинцово-кислотными аккумуляторами, поддерживает коммуникацию BMS через RS485/CAN, подключение генератора и параллельную работу. Корпус 309 × 505 × 147 мм, вес 14 кг.</p><p><strong>Где используется:</strong></p><ul><li>резервное питание дома, квартиры или офиса</li><li>солнечные электростанции</li><li>системы накопления электроэнергии</li><li>автономные и гибридные системы питания</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Номинальная мощность: 6000 Вт</li><li>Пиковая мощность: 12000 Вт</li><li>Напряжение АКБ: 48 В</li><li>Диапазон MPPT: 150–450 В</li><li>Максимальная мощность PV: 6000 Вт</li><li>Максимальный ток заряда: 120 А</li><li>Коммуникация: RS485 / CAN</li><li>Размеры: 309 × 505 × 147 мм</li><li>Вес: 14 кг</li></ul>]]></description>
-      <description_ua><![CDATA[<p>MUST PV19-6048EXP – гібридний інвертор потужністю 6 кВт для систем резервного та автономного електроживлення. Модель працює з акумуляторними батареями на 48 В і призначена для однофазних систем.</p><p>Інвертор поєднує перетворювач, зарядний пристрій та сонячний MPPT-контролер. Номінальна потужність 6000 Вт, короткочасна пікова – до 12 000 Вт. На виході чиста синусоїда, що підходить для побутової техніки та чутливого обладнання.</p><p>MPPT-контролер підтримує сонячні панелі загальною потужністю до 6000 Вт, робочий діапазон 150–450 В, вхідний струм до 27 А. Максимальний струм заряджання акумулятора – 120 А.</p><p>Інвертор працює з літієвими та свинцево-кислотними акумуляторами, підтримує комунікацію BMS через RS485/CAN, підключення генератора та паралельну роботу. Корпус 309 × 505 × 147 мм, вага 14 кг.</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири або офісу</li><li>сонячні електростанції</li><li>системи накопичення електроенергії</li><li>автономні та гібридні системи живлення</li></ul><p><strong>Основні характеристики:</strong></p><ul><li>Номінальна потужність: 6000 Вт</li><li>Пікова потужність: 12000 Вт</li><li>Напруга АКБ: 48 В</li><li>Діапазон MPPT: 150–450 В</li><li>Максимальна потужність PV: 6000 Вт</li><li>Максимальний струм заряду: 120 А</li><li>Комунікація: RS485 / CAN</li><li>Розміри: 309 × 505 × 147 мм</li><li>Вага: 14 кг</li></ul>]]></description_ua>
-      <keywords>гибридный инвертор MUST PV19-6048EXP, инвертор MUST 6 кВт, инвертор 48 В, инвертор маст 6048, гибридный инвертор 6 кВт, инвертор с MPPT, инвертор для солнечной электростанции, инвертор для дома, PV19-6048EXP</keywords>
-      <keywords_ua>гібридний інвертор MUST PV19-6048EXP, інвертор MUST 6 кВт, інвертор 48 В, інвертор маст 6048, гібридний інвертор 6 кВт, інвертор з MPPT, інвертор для сонячної електростанції, інвертор для дому, PV19-6048EXP</keywords_ua>
-    </item>
-    <item id="150676" selling_type="r">
-      <name>Аккумуляторная батарея Deye SE-F5 Pro-C 51,2 В 100 А·ч 5,12 кВт·ч LiFePO4</name>
-      <name_ua>Акумуляторна батарея Deye SE-F5 Pro-C 51,2 В 100 А·год 5,12 кВт·год LiFePO4</name_ua>
-      <categoryId>2</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>47217.85</priceuah>
-      <available>true</available>
-      <vendorCode>SE-F5 Pro-C</vendorCode>
-      <vendor>Deye</vendor>
-      <image>https://avtonomka.com.ua/assets/images/prom/150676_1.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150676_2.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150676_3.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150676_4.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150676_5.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150676_6.jpg</image>
-      <description><![CDATA[<p>Deye SE-F5 Pro-C – литий-железо-фосфатная аккумуляторная батарея LiFePO4 емкостью 100 А·ч с номинальным напряжением 51,2 В. Аккумулятор предназначен для систем резервного и автономного питания и для работы с инвертором.</p><p>Номинальная энергоемкость 5,12 кВт·ч, а напряжение 51,2 В подходит для систем, рассчитанных на 48 В. Технология LiFePO4 хорошо выдерживает регулярные циклы заряда и разряда.</p><p>Корпус 404 × 547 × 141 мм, вес 45 кг. Перед подключением проверьте совместимость с инвертором по напряжению, параметрам заряда и протоколу коммуникации.</p><p><strong>Где используется:</strong></p><ul><li>резервное питание дома или квартиры</li><li>автономное электропитание</li><li>работа с гибридным инвертором</li><li>накопление энергии от солнечных панелей</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Номинальное напряжение: 51,2 В</li><li>Емкость: 100 А·ч</li><li>Энергоемкость: 5,12 кВт·ч</li><li>Тип аккумулятора: LiFePO4</li><li>Размеры: 404 × 547 × 141 мм</li><li>Вес: 45 кг</li></ul>]]></description>
-      <description_ua><![CDATA[<p>Deye SE-F5 Pro-C – літій-залізо-фосфатна акумуляторна батарея LiFePO4 ємністю 100 А·год з номінальною напругою 51,2 В. Акумулятор призначений для систем резервного та автономного живлення і для роботи з інвертором.</p><p>Номінальна енергоємність 5,12 кВт·год, а напруга 51,2 В підходить для систем, розрахованих на 48 В. Технологія LiFePO4 добре витримує регулярні цикли заряджання та розряджання.</p><p>Корпус 404 × 547 × 141 мм, вага 45 кг. Перед підключенням перевірте сумісність з інвертором за напругою, параметрами заряджання та протоколом комунікації.</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку або квартири</li><li>автономне електроживлення</li><li>робота з гібридним інвертором</li><li>накопичення енергії від сонячних панелей</li></ul><p><strong>Основні характеристики:</strong></p><ul><li>Номінальна напруга: 51,2 В</li><li>Ємність: 100 А·год</li><li>Енергоємність: 5,12 кВт·год</li><li>Тип акумулятора: LiFePO4</li><li>Розміри: 404 × 547 × 141 мм</li><li>Вага: 45 кг</li></ul>]]></description_ua>
-      <keywords>аккумулятор Deye SE-F5 Pro-C, аккумулятор Deye 100 Аh, аккумулятор 51.2 В, аккумулятор 48 В для инвертора, аккумулятор LiFePO4, батарея дея, аккумулятор 5 кВт·ч, батарея для инвертора, SE-F5 Pro-C</keywords>
-      <keywords_ua>акумулятор Deye SE-F5 Pro-C, акумулятор Deye 100 Аh, акумулятор 51.2 В, акумулятор 48 В для інвертора, акумулятор LiFePO4, батарея дея, акумулятор 5 кВт·год, батарея для інвертора, SE-F5 Pro-C</keywords_ua>
-    </item>
     <item id="150599" selling_type="r">
       <name>Аккумулятор MUST LP15-12100 12 В 100 А·ч LiFePO4</name>
       <name_ua>Акумулятор MUST LP15-12100 12 В 100 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>16829.10</priceuah>
+      <priceuah>17051.05</priceuah>
       <available>true</available>
       <vendorCode>LP15-12100</vendorCode>
       <vendor>MUST</vendor>
@@ -132,7 +92,7 @@
       <name_ua>Акумуляторна батарея MUST LP16-24100 25,6 В 100 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>34728.85</priceuah>
+      <priceuah>35179.65</priceuah>
       <available>true</available>
       <vendorCode>LP16-24100</vendorCode>
       <vendor>MUST</vendor>
@@ -152,7 +112,7 @@
       <name_ua>Акумуляторна батарея MUST LP16-48300 51,2 В 300 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>97225.60</priceuah>
+      <priceuah>98497.50</priceuah>
       <available>true</available>
       <vendorCode>LP16-48300</vendorCode>
       <vendor>MUST</vendor>
@@ -167,7 +127,7 @@
       <name_ua>Акумулятор Felicity FLA12100PG2 12,8 В 100 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>15044.30</priceuah>
+      <priceuah>15239.80</priceuah>
       <available>true</available>
       <vendorCode>FLA12100PG2</vendorCode>
       <vendor>Felicity</vendor>
@@ -183,7 +143,7 @@
       <name_ua>Акумуляторна батарея Felicity FLB48100WG1-H 51,2 В 100 А·год LiFePO4 з підігрівом</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>45362.90</priceuah>
+      <priceuah>45966.65</priceuah>
       <available>true</available>
       <vendorCode>FLB48100WG1-H</vendorCode>
       <vendor>Felicity</vendor>
@@ -202,7 +162,7 @@
       <name_ua>Акумуляторна батарея Felicity FLA48230 51,2 В 230 А·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>81375.15</priceuah>
+      <priceuah>82453.85</priceuah>
       <available>true</available>
       <vendorCode>FLA48230</vendorCode>
       <vendor>Felicity</vendor>
@@ -217,7 +177,7 @@
       <name_ua>Акумуляторна батарея Felicity FLA48314-EU 51,2 В 314 А·год 16 кВт·год LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>98523.95</priceuah>
+      <priceuah>99817.70</priceuah>
       <available>true</available>
       <vendorCode>FLA48314-EU</vendorCode>
       <vendor>Felicity</vendor>
@@ -235,7 +195,7 @@
       <name_ua>Акумуляторна батарея Felicity FLB48314TG1-H 51,2 В 314 А·год 16 кВт·год LiFePO4 з підігрівом</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>99777.45</priceuah>
+      <priceuah>101087.30</priceuah>
       <available>true</available>
       <vendorCode>FLB48314TG1-H</vendorCode>
       <vendor>Felicity</vendor>
@@ -250,7 +210,7 @@
       <name_ua>Система зберігання електроенергії MUST HBP19-5548 VPM 2 в 1 5,5 кВт 5120 Вт·год</name_ua>
       <categoryId>3</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>72846.75</priceuah>
+      <priceuah>73803.55</priceuah>
       <available>true</available>
       <vendorCode>HBP19-5548VPM</vendorCode>
       <vendor>MUST</vendor>
@@ -269,7 +229,7 @@
       <name_ua>Сонячний кабель KBE Solar 6 мм², 500 м (бухта), червоний, Німеччина</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>39402.45</priceuah>
+      <priceuah>39919.95</priceuah>
       <available>true</available>
       <vendorCode>KBE Solar 6</vendorCode>
       <vendor>KBE</vendor>
@@ -284,7 +244,7 @@
       <name_ua>Сонячний кабель KBE Solar 6 мм², 500 м (бухта), чорний, Німеччина</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>39394.40</priceuah>
+      <priceuah>39911.90</priceuah>
       <available>true</available>
       <vendorCode>KBE Solar 6</vendorCode>
       <vendor>KBE</vendor>
@@ -299,7 +259,7 @@
       <name_ua>Сонячний кабель KBE 6 мм² 1 м, Німеччина</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>90.85</priceuah>
+      <priceuah>92.00</priceuah>
       <available>true</available>
       <vendorCode>KBE Solar 6</vendorCode>
       <vendor>KBE</vendor>
@@ -314,7 +274,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 1,5 м, 2 шт., мідь, мідні наконечники М8</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>1653.70</priceuah>
+      <priceuah>1670.95</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151849_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 1,5 м. На концах установлены медные наконечники М8, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 1,5 м</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М8</li></ul>]]></description>
@@ -327,7 +287,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 1,5 м, 2 шт., мідь, мідні наконечники М10</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>1657.15</priceuah>
+      <priceuah>1674.40</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151853_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 1,5 м. На концах установлены медные наконечники М10, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 1,5 м</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М10</li></ul>]]></description>
@@ -340,7 +300,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 1 м, 2 шт., мідь, мідні наконечники М8</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>994.75</priceuah>
+      <priceuah>1015.45</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151847_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 1 м. На концах установлены медные наконечники М8, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 1 м</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М8</li></ul>]]></description>
@@ -353,7 +313,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 1 м, 2 шт., мідь, мідні наконечники М10</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>998.20</priceuah>
+      <priceuah>1015.45</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151851_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 1 м. На концах установлены медные наконечники М10, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 1 м</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М10</li></ul>]]></description>
@@ -366,7 +326,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 75 см, 2 шт., мідь, мідні наконечники М8</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>882.05</priceuah>
+      <priceuah>893.55</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151850_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 75 см. На концах установлены медные наконечники М8, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 75 см</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М8</li></ul>]]></description>
@@ -379,7 +339,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 75 см, 2 шт., мідь, мідні наконечники М10</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>875.15</priceuah>
+      <priceuah>888.95</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151854_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 75 см. На концах установлены медные наконечники М10, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 75 см</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М10</li></ul>]]></description>
@@ -392,7 +352,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 50 см, 2 шт., мідь, мідні наконечники М8</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>460.00</priceuah>
+      <priceuah>471.50</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151848_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 50 см. На концах установлены медные наконечники М8, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 50 см</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М8</li></ul>]]></description>
@@ -405,7 +365,7 @@
       <name_ua>Комплект силових кабелів 25 мм² 50 см, 2 шт., мідь, мідні наконечники М10</name_ua>
       <categoryId>4</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>464.60</priceuah>
+      <priceuah>468.05</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/prom/151852_1.jpg</image>
       <description><![CDATA[<p>Комплект силовых кабелей 25 мм² для подключения аккумуляторных батарей к инвертору и другому силовому оборудованию в системах автономного и резервного питания.</p><p>В комплекте 2 медных кабеля длиной по 50 см. На концах установлены медные наконечники М10, поэтому кабели готовы к подключению к соответствующим клеммам без дополнительной опрессовки.</p><p><strong>Где используется:</strong></p><ul><li>монтаж солнечных электростанций</li><li>системы автономного и резервного питания</li><li>соединение оборудования энергосистемы</li></ul><p><strong>Основные характеристики:</strong></p><ul><li>Сечение: 25 мм²</li><li>Длина: 50 см</li><li>Количество: 2 шт.</li><li>Материал: Медь</li><li>Наконечники: Медные М10</li></ul>]]></description>
@@ -418,7 +378,7 @@
       <name_ua>Зарядна станція EcoFlow DELTA 2 1800 Вт 1024 Вт·год (EU)</name_ua>
       <categoryId>5</categoryId>
       <portal_category_id>500901</portal_category_id>
-      <priceuah>37787.85</priceuah>
+      <priceuah>38282.35</priceuah>
       <available>true</available>
       <vendorCode>DELTA 2 EU</vendorCode>
       <vendor>EcoFlow</vendor>
@@ -436,7 +396,7 @@
       <name_ua>Зарядна станція EcoFlow DELTA 3 1024 Вт·год 1800 Вт (китайські розетки, з перехідниками)</name_ua>
       <categoryId>5</categoryId>
       <portal_category_id>500901</portal_category_id>
-      <priceuah>37789.00</priceuah>
+      <priceuah>38280.05</priceuah>
       <available>true</available>
       <vendorCode>DELTA 3</vendorCode>
       <vendor>EcoFlow</vendor>
@@ -453,7 +413,7 @@
       <name_ua>Безперебійник для роутера TTN DC1036P 12000 mAh, виходи 5/9/12 В, USB, PoE</name_ua>
       <categoryId>6</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>1941.20</priceuah>
+      <priceuah>1967.65</priceuah>
       <available>true</available>
       <vendorCode>DC1036P</vendorCode>
       <image>https://avtonomka.com.ua/assets/images/prom/150649_1.jpg</image>
@@ -470,7 +430,7 @@
       <name_ua>Гібридний інвертор Felicity IVEM6048-II 6 кВт 48 В</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>25099.90</priceuah>
+      <priceuah>25431.10</priceuah>
       <available>true</available>
       <vendorCode>IVEM6048-II</vendorCode>
       <vendor>Felicity</vendor>
@@ -491,7 +451,7 @@
       <name_ua>Акумуляторна батарея Felicity FLB48230WG1-H 51,2 В 230 А·год LiFePO4 з підігрівом</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>83174.90</priceuah>
+      <priceuah>84268.55</priceuah>
       <available>true</available>
       <vendorCode>FLB48230WG1-H</vendorCode>
       <vendor>Felicity</vendor>
@@ -506,7 +466,7 @@
       <name_ua>Автоматичний перемикач введення резерву АВР TOMZN TOQ5-100/4P 3 фази 100 А</name_ua>
       <categoryId>7</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>1503.05</priceuah>
+      <priceuah>1504.20</priceuah>
       <available>true</available>
       <vendorCode>TOQ5-100/4P</vendorCode>
       <image>https://avtonomka.com.ua/assets/images/ultradomik/ud-avr-4p.jpg</image>
@@ -515,138 +475,180 @@
       <keywords>АВР TOMZN TOQ5-100/4P, АВР 3 фазы 100А, автоматический ввод резерва, переключатель сеть генератор, АВР на DIN-рейку, переключатель резерва, АВР для генератора, АВР для инвертора, TOQ5-100</keywords>
       <keywords_ua>АВР TOMZN TOQ5-100/4P, АВР 3 фази 100А, автоматичне введення резерву, перемикач мережа генератор, АВР на DIN-рейку, перемикач резерву, АВР для генератора, АВР для інвертора, TOQ5-100</keywords_ua>
     </item>
-    <item id="152471" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом</name_ua>
+    <item id="152934" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48206WG1-H з підігрівом, 51.2V 206Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48206WG1-H з підігрівом, 51.2V 206Ah</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>70634.15</priceuah>
+      <priceuah>102833.00</priceuah>
       <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/feed-auto/152471.jpg</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48206WG1-H з підігрівом, 51.2V 206Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
       <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM6048-II, комплект селисити IVEM6048-II, селисити IVEM6048-II</keywords>
       <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM6048-II, комплект селіситі IVEM6048-II, селіситі IVEM6048-II</keywords_ua>
     </item>
-    <item id="152520" selling_type="r">
-      <name>Акумуляторна батарея Felicity LPBA48100-OL 51.2V 100Ah LiFePO4</name>
-      <name_ua>Акумуляторна батарея Felicity LPBA48100-OL 51.2V 100Ah LiFePO4</name_ua>
+    <item id="152950" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48206WG1-H з підігрівом, 51.2V 206Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48206WG1-H з підігрівом, 51.2V 206Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>118320.05</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48206WG1-H з підігрівом, 51.2V 206Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити T-REX-6KLP1G01, комплект селисити T-REX-6KLP1G01, селисити T-REX-6KLP1G01</keywords>
+      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі T-REX-6KLP1G01, комплект селіситі T-REX-6KLP1G01, селіситі T-REX-6KLP1G01</keywords_ua>
+    </item>
+    <item id="152368" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48280 51.2V 280Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48280 51.2V 280Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>131217.30</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/feed-auto/152368.jpg</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48280 51.2V 280Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект 8kvt, комплект селисити, комплект селисити 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM8048-II, комплект селисити IVEM8048-II, селисити IVEM8048-II</keywords>
+      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект 8kvt, комплект селіситі, комплект селіситі 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM8048-II, комплект селіситі IVEM8048-II, селіситі IVEM8048-II</keywords_ua>
+    </item>
+    <item id="152947" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity LPBA48100-OL 51.2V 100Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity LPBA48100-OL 51.2V 100Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>84491.65</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity LPBA48100-OL 51.2V 100Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити T-REX-6KLP1G01, комплект селисити T-REX-6KLP1G01, селисити T-REX-6KLP1G01</keywords>
+      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі T-REX-6KLP1G01, комплект селіситі T-REX-6KLP1G01, селіситі T-REX-6KLP1G01</keywords_ua>
+    </item>
+    <item id="152173" selling_type="r">
+      <name>Акумуляторна батарея Felicity FLA24230 25.6V 230Ah LiFePO4</name>
+      <name_ua>Акумуляторна батарея Felicity FLA24230 25.6V 230Ah LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>42840.95</priceuah>
+      <priceuah>48540.35</priceuah>
       <available>true</available>
-      <vendorCode>LPBA48100-OL</vendorCode>
-      <image>https://avtonomka.com.ua/assets/images/prom/152520_1.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152520_2.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152520_3.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152520_4.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152520_5.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152520_7.jpg</image>
-      <description_ua><![CDATA[<p>Продається тільки в комплекті з інвертором.</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку або квартири</li><li>автономне електроживлення</li><li>робота з гібридним інвертором</li><li>накопичення енергії від сонячних панелей</li></ul>]]></description_ua>
-      <keywords>аккумулятор 100ah, аккумулятор селисити, аккумулятор селисити 100 ah, батарея 100ah, батарея селисити, батарея селисити 100 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор селисити LPBA48100-OL, батарея селисити LPBA48100-OL, селисити LPBA48100-OL</keywords>
-      <keywords_ua>акумулятор 100ah, акумулятор селіситі, акумулятор селіситі 100 ah, батарея 100ah, батарея селіситі, батарея селіситі 100 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор селіситі LPBA48100-OL, батарея селіситі LPBA48100-OL, селіситі LPBA48100-OL</keywords_ua>
+      <vendorCode>FLA24230</vendorCode>
+      <image>https://avtonomka.com.ua/assets/images/prom/152173_1.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152173_2.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152173_3.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152173_4.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152173_5.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152173_6.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152173_7.jpg</image>
+      <description_ua><![CDATA[<p>Акумуляторна батарея Felicity FLA24230 25.6V 230Ah LiFePO4</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку або квартири</li><li>автономне електроживлення</li><li>робота з гібридним інвертором</li><li>накопичення енергії від сонячних панелей</li></ul>]]></description_ua>
+      <keywords>аккумулятор 230ah, аккумулятор селисити, аккумулятор селисити 230 ah, батарея 230ah, батарея селисити, батарея селисити 230 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор селисити 24230, батарея селисити 24230, селисити 24230</keywords>
+      <keywords_ua>акумулятор 230ah, акумулятор селіситі, акумулятор селіситі 230 ah, батарея 230ah, батарея селіситі, батарея селіситі 230 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор селіситі 24230, батарея селіситі 24230, селіситі 24230</keywords_ua>
     </item>
-    <item id="152937" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</name_ua>
+    <item id="152272" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>132984.85</priceuah>
+      <priceuah>83610.75</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект 8kvt, комплект селисити, комплект селисити 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM8048-II, комплект селисити IVEM8048-II, селисити IVEM8048-II</keywords>
-      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект 8kvt, комплект селіситі, комплект селіситі 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM8048-II, комплект селіситі IVEM8048-II, селіситі IVEM8048-II</keywords_ua>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания дан солар, комплект автономного электропитания дан солар 8 kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект 8kvt, комплект дан солар, комплект дан солар 8 kvt, комплект селисити, комплект селисити 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
+      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення дан солар, комплект автономного живлення дан солар 8 kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект 8kvt, комплект дан солар, комплект дан солар 8 kvt, комплект селіситі, комплект селіситі 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
     </item>
-    <item id="152945" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48100WG1-H з підігрівом, 51.2V 100Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48100WG1-H з підігрівом, 51.2V 100Ah</name_ua>
+    <item id="152933" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48280 51.2V 280Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48280 51.2V 280Ah</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>85909.60</priceuah>
+      <priceuah>115714.15</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48100WG1-H з підігрівом, 51.2V 100Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48280 51.2V 280Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM6048-II, комплект селисити IVEM6048-II, селисити IVEM6048-II</keywords>
+      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM6048-II, комплект селіситі IVEM6048-II, селіситі IVEM6048-II</keywords_ua>
+    </item>
+    <item id="152941" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLA48314-EU 51.2V 314Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLA48314-EU 51.2V 314Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>140896.85</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLA48314-EU 51.2V 314Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
       <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити T-REX-6KLP1G01, комплект селисити T-REX-6KLP1G01, селисити T-REX-6KLP1G01</keywords>
       <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі T-REX-6KLP1G01, комплект селіситі T-REX-6KLP1G01, селіситі T-REX-6KLP1G01</keywords_ua>
     </item>
-    <item id="152948" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48230WG1-H з підігрівом, 51.2V 230Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48230WG1-H з підігрівом, 51.2V 230Ah</name_ua>
+    <item id="152942" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLA48230 51.2V 230Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLA48230 51.2V 230Ah</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>123727.35</priceuah>
+      <priceuah>123526.10</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48230WG1-H з підігрівом, 51.2V 230Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLA48230 51.2V 230Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
       <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити T-REX-6KLP1G01, комплект селисити T-REX-6KLP1G01, селисити T-REX-6KLP1G01</keywords>
       <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі T-REX-6KLP1G01, комплект селіситі T-REX-6KLP1G01, селіситі T-REX-6KLP1G01</keywords_ua>
     </item>
-    <item id="152220" selling_type="r">
-      <name>Комплект автономного енергоживлення: Must PV18-3224VPM II+ Felicity FLA24230 25.6V 230Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Must PV18-3224VPM II+ Felicity FLA24230 25.6V 230Ah</name_ua>
-      <categoryId>11</categoryId>
+    <item id="152266" selling_type="r">
+      <name>Гібридний інвертор Felicity IVEM8048-II 48В 8 кВт</name>
+      <name_ua>Гібридний інвертор Felicity IVEM8048-II 48В 8 кВт</name_ua>
+      <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>64755.35</priceuah>
+      <priceuah>40926.20</priceuah>
       <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/feed-auto/152220.jpg</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Must PV18-3224VPM II+ Felicity FLA24230 25.6V 230Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания селисити, комплект автономного электропитания маст, комплект селисити, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
-      <keywords_ua>комплект автономного живлення селіситі, комплект автономного живлення маст, комплект селіситі, комплект маст, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
+      <vendorCode>IVEM8048-II</vendorCode>
+      <image>https://avtonomka.com.ua/assets/images/prom/152266_1.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152266_2.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152266_3.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152266_4.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152266_5.jpg</image>
+      <description_ua><![CDATA[<p>Гібридний інвертор Felicity IVEM8048-II 48В 8 кВт</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири або офісу</li><li>сонячні електростанції</li><li>системи накопичення електроенергії</li><li>автономні та гібридні системи живлення</li></ul>]]></description_ua>
+      <keywords>инвертор 8kvt, инвертор селисити, инвертор селисити 8 kvt, гибридный инвертор 8kvt, гибридный инвертор селисити, гибридный инвертор селисити 8 kvt, инвертор для солнечных панелей, гибридный инвертор для солнечных панелей, экодрайв, ecodrive, инвертор селисити IVEM8048-II, гибридный инвертор селисити IVEM8048-II, селисити IVEM8048-II</keywords>
+      <keywords_ua>інвертор 8kvt, інвертор селіситі, інвертор селіситі 8 kvt, гібридний інвертор 8kvt, гібридний інвертор селіситі, гібридний інвертор селіситі 8 kvt, інвертор для сонячних панелей, гібридний інвертор для сонячних панелей, екодрайв, ecodrive, інвертор селіситі IVEM8048-II, гібридний інвертор селіситі IVEM8048-II, селіситі IVEM8048-II</keywords_ua>
     </item>
-    <item id="152277" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + Felicity FLA48230 51.2V 230Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + Felicity FLA48230 51.2V 230Ah</name_ua>
+    <item id="152734" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ MUST LP16-48300, 51.2V 300Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ MUST LP16-48300, 51.2V 300Ah</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>121942.55</priceuah>
+      <priceuah>139585.85</priceuah>
       <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/feed-auto/152277.jpg</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + Felicity FLA48230 51.2V 230Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект 8kvt, комплект селисити, комплект селисити 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM8048-II, комплект селисити IVEM8048-II, селисити IVEM8048-II</keywords>
-      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект 8kvt, комплект селіситі, комплект селіситі 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM8048-II, комплект селіситі IVEM8048-II, селіситі IVEM8048-II</keywords_ua>
+      <image>https://avtonomka.com.ua/assets/images/feed-auto/152734.jpg</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ MUST LP16-48300, 51.2V 300Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект автономного электропитания маст, комплект автономного электропитания маст 8 kvt, комплект 8kvt, комплект селисити, комплект селисити 8 kvt, комплект маст, комплект маст 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
+      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект автономного живлення маст, комплект автономного живлення маст 8 kvt, комплект 8kvt, комплект селіситі, комплект селіситі 8 kvt, комплект маст, комплект маст 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
     </item>
-    <item id="152278" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48314TG1-H 51.2V 314Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48314TG1-H 51.2V 314Ah</name_ua>
+    <item id="152943" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLB48314TG1-H з підігрівом, 51.2V 314Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLB48314TG1-H з підігрівом, 51.2V 314Ah</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>140327.60</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/feed-auto/152278.jpg</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48314TG1-H 51.2V 314Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект 8kvt, комплект селисити, комплект селисити 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM8048-II, комплект селисити IVEM8048-II, селисити IVEM8048-II</keywords>
-      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект 8kvt, комплект селіситі, комплект селіситі 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM8048-II, комплект селіситі IVEM8048-II, селіситі IVEM8048-II</keywords_ua>
-    </item>
-    <item id="152472" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>85919.95</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/feed-auto/152472.jpg</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект 8kvt, комплект селисити, комплект селисити 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM8048-II, комплект селисити IVEM8048-II, селисити IVEM8048-II</keywords>
-      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект 8kvt, комплект селіситі, комплект селіситі 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM8048-II, комплект селіситі IVEM8048-II, селіситі IVEM8048-II</keywords_ua>
-    </item>
-    <item id="152936" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity LPBA48100-OL 51.2V 100Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity LPBA48100-OL 51.2V 100Ah</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>83408.35</priceuah>
+      <priceuah>142164.15</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity LPBA48100-OL 51.2V 100Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект 8kvt, комплект селисити, комплект селисити 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM8048-II, комплект селисити IVEM8048-II, селисити IVEM8048-II</keywords>
-      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект 8kvt, комплект селіситі, комплект селіситі 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM8048-II, комплект селіситі IVEM8048-II, селіситі IVEM8048-II</keywords_ua>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLB48314TG1-H з підігрівом, 51.2V 314Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити T-REX-6KLP1G01, комплект селисити T-REX-6KLP1G01, селисити T-REX-6KLP1G01</keywords>
+      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі T-REX-6KLP1G01, комплект селіситі T-REX-6KLP1G01, селіситі T-REX-6KLP1G01</keywords_ua>
+    </item>
+    <item id="152949" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + MUST LP16-48300 51.2V 300Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + MUST LP16-48300 51.2V 300Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>139576.65</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + MUST LP16-48300 51.2V 300Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект автономного электропитания маст, комплект автономного электропитания маст 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект маст, комплект маст 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
+      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект автономного живлення маст, комплект автономного живлення маст 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект маст, комплект маст 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
     </item>
     <item id="150674" selling_type="r">
       <name>Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V</name>
       <name_ua>Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>41966.95</priceuah>
+      <priceuah>42517.80</priceuah>
       <available>true</available>
       <vendorCode>DHN-LVWES05-G1</vendorCode>
       <image>https://avtonomka.com.ua/assets/images/prom/150674_1.jpg</image>
@@ -668,7 +670,7 @@
       <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48314-EU 51.2V 314Ah 16kWh</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>139082.15</priceuah>
+      <priceuah>140907.20</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/feed-auto/152203.jpg</image>
       <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48314-EU 51.2V 314Ah 16kWh</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
@@ -680,7 +682,7 @@
       <name_ua>Акумуляторна батарея Felicity FLA48280 51.2V 280Ah LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>88953.65</priceuah>
+      <priceuah>90122.05</priceuah>
       <available>true</available>
       <vendorCode>FLA48280</vendorCode>
       <image>https://avtonomka.com.ua/assets/images/prom/152352_1.jpg</image>
@@ -693,7 +695,7 @@
       <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48280 51.2V 230Ah</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>116377.70</priceuah>
+      <priceuah>117900.30</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/feed-auto/152377.jpg</image>
       <description_ua><![CDATA[<p>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48280 51.2V 230Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
@@ -705,7 +707,7 @@
       <name_ua>Акумуляторна батарея Felicity FLA48171 51.2V 171Ah LiFePO4</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>65829.45</priceuah>
+      <priceuah>66701.15</priceuah>
       <available>true</available>
       <vendorCode>FLA48171</vendorCode>
       <image>https://avtonomka.com.ua/assets/images/prom/152469_2.jpg</image>
@@ -713,288 +715,12 @@
       <keywords>аккумулятор 171ah, аккумулятор селисити, аккумулятор селисити 171 ah, батарея 171ah, батарея селисити, батарея селисити 171 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор селисити 48171, батарея селисити 48171, селисити 48171</keywords>
       <keywords_ua>акумулятор 171ah, акумулятор селіситі, акумулятор селіситі 171 ah, батарея 171ah, батарея селіситі, батарея селіситі 171 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор селіситі 48171, батарея селіситі 48171, селіситі 48171</keywords_ua>
     </item>
-    <item id="152492" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48171 51.2V 171Ah LiFePO4</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48171 51.2V 171Ah LiFePO4</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>106386.50</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/feed-auto/152492.jpg</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48171 51.2V 171Ah LiFePO4</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект 8kvt, комплект селисити, комплект селисити 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM8048-II, комплект селисити IVEM8048-II, селисити IVEM8048-II</keywords>
-      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект 8kvt, комплект селіситі, комплект селіситі 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM8048-II, комплект селіситі IVEM8048-II, селіситі IVEM8048-II</keywords_ua>
-    </item>
-    <item id="152698" selling_type="r">
-      <name>Комплект автономного енергоживлення: Must PV19-6048EXP 6 кВт 48 В + Felicity FLB48206WG1-H 51.2V 206Ah, з підігрівом</name>
-      <name_ua>Комплект автономного енергоживлення: Must PV19-6048EXP 6 кВт 48 В + Felicity FLB48206WG1-H 51.2V 206Ah, з підігрівом</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>103656.40</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Must PV19-6048EXP 6 кВт 48 В + Felicity FLB48206WG1-H 51.2V 206Ah, з підігрівом</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект автономного электропитания маст, комплект автономного электропитания маст 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект маст, комплект маст 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
-      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект автономного живлення маст, комплект автономного живлення маст 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект маст, комплект маст 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
-    </item>
-    <item id="152700" selling_type="r">
-      <name>Комплект автономного енергоживлення:Felicity IVEM8048-II 8 кВт 48 В + Felicity FLB48206WG1-H 51.2V 206Ah, з підігрівом</name>
-      <name_ua>Комплект автономного енергоживлення:Felicity IVEM8048-II 8 кВт 48 В + Felicity FLB48206WG1-H 51.2V 206Ah, з підігрівом</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>116795.15</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення:Felicity IVEM8048-II 8 кВт 48 В + Felicity FLB48206WG1-H 51.2V 206Ah, з підігрівом</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект 8kvt, комплект селисити, комплект селисити 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM8048-II, комплект селисити IVEM8048-II, селисити IVEM8048-II</keywords>
-      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект 8kvt, комплект селіситі, комплект селіситі 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM8048-II, комплект селіситі IVEM8048-II, селіситі IVEM8048-II</keywords_ua>
-    </item>
-    <item id="152701" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>123729.65</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/feed-auto/152701.jpg</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект 8kvt, комплект селисити, комплект селисити 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM8048-II, комплект селисити IVEM8048-II, селисити IVEM8048-II</keywords>
-      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект 8kvt, комплект селіситі, комплект селіситі 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM8048-II, комплект селіситі IVEM8048-II, селіситі IVEM8048-II</keywords_ua>
-    </item>
-    <item id="152951" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>132976.80</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити T-REX-6KLP1G01, комплект селисити T-REX-6KLP1G01, селисити T-REX-6KLP1G01</keywords>
-      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі T-REX-6KLP1G01, комплект селіситі T-REX-6KLP1G01, селіситі T-REX-6KLP1G01</keywords_ua>
-    </item>
-    <item id="152173" selling_type="r">
-      <name>Акумуляторна батарея Felicity FLA24230 25.6V 230Ah LiFePO4</name>
-      <name_ua>Акумуляторна батарея Felicity FLA24230 25.6V 230Ah LiFePO4</name_ua>
-      <categoryId>2</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>47906.70</priceuah>
-      <available>true</available>
-      <vendorCode>FLA24230</vendorCode>
-      <image>https://avtonomka.com.ua/assets/images/prom/152173_1.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152173_2.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152173_3.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152173_4.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152173_5.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152173_6.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152173_7.jpg</image>
-      <description_ua><![CDATA[<p>Акумуляторна батарея Felicity FLA24230 25.6V 230Ah LiFePO4</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку або квартири</li><li>автономне електроживлення</li><li>робота з гібридним інвертором</li><li>накопичення енергії від сонячних панелей</li></ul>]]></description_ua>
-      <keywords>аккумулятор 230ah, аккумулятор селисити, аккумулятор селисити 230 ah, батарея 230ah, батарея селисити, батарея селисити 230 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор селисити 24230, батарея селисити 24230, селисити 24230</keywords>
-      <keywords_ua>акумулятор 230ah, акумулятор селіситі, акумулятор селіситі 230 ah, батарея 230ah, батарея селіситі, батарея селіситі 230 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор селіситі 24230, батарея селіситі 24230, селіситі 24230</keywords_ua>
-    </item>
-    <item id="152272" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>82522.85</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания дан солар, комплект автономного электропитания дан солар 8 kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект 8kvt, комплект дан солар, комплект дан солар 8 kvt, комплект селисити, комплект селисити 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
-      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення дан солар, комплект автономного живлення дан солар 8 kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект 8kvt, комплект дан солар, комплект дан солар 8 kvt, комплект селіситі, комплект селіситі 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
-    </item>
-    <item id="152933" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48280 51.2V 280Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48280 51.2V 280Ah</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>114216.85</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48280 51.2V 280Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM6048-II, комплект селисити IVEM6048-II, селисити IVEM6048-II</keywords>
-      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM6048-II, комплект селіситі IVEM6048-II, селіситі IVEM6048-II</keywords_ua>
-    </item>
-    <item id="152941" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLA48314-EU 51.2V 314Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLA48314-EU 51.2V 314Ah</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>139069.50</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLA48314-EU 51.2V 314Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити T-REX-6KLP1G01, комплект селисити T-REX-6KLP1G01, селисити T-REX-6KLP1G01</keywords>
-      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі T-REX-6KLP1G01, комплект селіситі T-REX-6KLP1G01, селіситі T-REX-6KLP1G01</keywords_ua>
-    </item>
-    <item id="152942" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLA48230 51.2V 230Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLA48230 51.2V 230Ah</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>121925.30</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLA48230 51.2V 230Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити T-REX-6KLP1G01, комплект селисити T-REX-6KLP1G01, селисити T-REX-6KLP1G01</keywords>
-      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі T-REX-6KLP1G01, комплект селіситі T-REX-6KLP1G01, селіситі T-REX-6KLP1G01</keywords_ua>
-    </item>
-    <item id="152493" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48171 51.2V 171Ah LiFePO4</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48171 51.2V 171Ah LiFePO4</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>91091.50</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48171 51.2V 171Ah LiFePO4</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM6048-II, комплект селисити IVEM6048-II, селисити IVEM6048-II</keywords>
-      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM6048-II, комплект селіситі IVEM6048-II, селіситі IVEM6048-II</keywords_ua>
-    </item>
-    <item id="152495" selling_type="r">
-      <name>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48171 51.2V 171Ah LiFePO4</name>
-      <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48171 51.2V 171Ah LiFePO4</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>93247.75</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/feed-auto/152495.jpg</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48171 51.2V 171Ah LiFePO4</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания селисити, комплект автономного электропитания маст, комплект селисити, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
-      <keywords_ua>комплект автономного живлення селіситі, комплект автономного живлення маст, комплект селіситі, комплект маст, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
-    </item>
-    <item id="152729" selling_type="r">
-      <name>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + Felicity FLA24230 25.6V 230Ah</name>
-      <name_ua>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + Felicity FLA24230 25.6V 230Ah</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>70039.60</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/feed-auto/152729.jpg</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + Felicity FLA24230 25.6V 230Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 4kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 4 kvt, комплект автономного электропитания маст, комплект автономного электропитания маст 4 kvt, комплект 4kvt, комплект селисити, комплект селисити 4 kvt, комплект маст, комплект маст 4 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
-      <keywords_ua>комплект автономного живлення 4kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 4 kvt, комплект автономного живлення маст, комплект автономного живлення маст 4 kvt, комплект 4kvt, комплект селіситі, комплект селіситі 4 kvt, комплект маст, комплект маст 4 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
-    </item>
-    <item id="152938" selling_type="r">
-      <name>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</name>
-      <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>119844.95</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания селисити, комплект автономного электропитания маст, комплект селисити, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
-      <keywords_ua>комплект автономного живлення селіситі, комплект автономного живлення маст, комплект селіситі, комплект маст, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
-    </item>
-    <item id="152939" selling_type="r">
-      <name>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + MUST LP16-24100 25.6V 100Ah</name>
-      <name_ua>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + MUST LP16-24100 25.6V 100Ah</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>56849.10</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + MUST LP16-24100 25.6V 100Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 4kvt, комплект автономного электропитания маст, комплект автономного электропитания маст 4 kvt, комплект 4kvt, комплект маст, комплект маст 4 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания маст 4024, комплект маст 4024, маст 4024</keywords>
-      <keywords_ua>комплект автономного живлення 4kvt, комплект автономного живлення маст, комплект автономного живлення маст 4 kvt, комплект 4kvt, комплект маст, комплект маст 4 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення маст 4024, комплект маст 4024, маст 4024</keywords_ua>
-    </item>
-    <item id="152946" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLA48171 51.2V 171Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLA48171 51.2V 171Ah</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>106381.90</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLA48171 51.2V 171Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити T-REX-6KLP1G01, комплект селисити T-REX-6KLP1G01, селисити T-REX-6KLP1G01</keywords>
-      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі T-REX-6KLP1G01, комплект селіситі T-REX-6KLP1G01, селіситі T-REX-6KLP1G01</keywords_ua>
-    </item>
-    <item id="152266" selling_type="r">
-      <name>Гібридний інвертор Felicity IVEM8048-II 48В 8 кВт</name>
-      <name_ua>Гібридний інвертор Felicity IVEM8048-II 48В 8 кВт</name_ua>
-      <categoryId>1</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>40390.30</priceuah>
-      <available>true</available>
-      <vendorCode>IVEM8048-II</vendorCode>
-      <image>https://avtonomka.com.ua/assets/images/prom/152266_1.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152266_2.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152266_3.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152266_4.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/152266_5.jpg</image>
-      <description_ua><![CDATA[<p>Гібридний інвертор Felicity IVEM8048-II 48В 8 кВт</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири або офісу</li><li>сонячні електростанції</li><li>системи накопичення електроенергії</li><li>автономні та гібридні системи живлення</li></ul>]]></description_ua>
-      <keywords>инвертор 8kvt, инвертор селисити, инвертор селисити 8 kvt, гибридный инвертор 8kvt, гибридный инвертор селисити, гибридный инвертор селисити 8 kvt, инвертор для солнечных панелей, гибридный инвертор для солнечных панелей, экодрайв, ecodrive, инвертор селисити IVEM8048-II, гибридный инвертор селисити IVEM8048-II, селисити IVEM8048-II</keywords>
-      <keywords_ua>інвертор 8kvt, інвертор селіситі, інвертор селіситі 8 kvt, гібридний інвертор 8kvt, гібридний інвертор селіситі, гібридний інвертор селіситі 8 kvt, інвертор для сонячних панелей, гібридний інвертор для сонячних панелей, екодрайв, ecodrive, інвертор селіситі IVEM8048-II, гібридний інвертор селіситі IVEM8048-II, селіситі IVEM8048-II</keywords_ua>
-    </item>
-    <item id="152734" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ MUST LP16-48300, 51.2V 300Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ MUST LP16-48300, 51.2V 300Ah</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>137786.10</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/feed-auto/152734.jpg</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ MUST LP16-48300, 51.2V 300Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект автономного электропитания маст, комплект автономного электропитания маст 8 kvt, комплект 8kvt, комплект селисити, комплект селисити 8 kvt, комплект маст, комплект маст 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
-      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект автономного живлення маст, комплект автономного живлення маст 8 kvt, комплект 8kvt, комплект селіситі, комплект селіситі 8 kvt, комплект маст, комплект маст 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
-    </item>
-    <item id="152943" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLB48314TG1-H з підігрівом, 51.2V 314Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLB48314TG1-H з підігрівом, 51.2V 314Ah</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>140318.40</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLB48314TG1-H з підігрівом, 51.2V 314Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити T-REX-6KLP1G01, комплект селисити T-REX-6KLP1G01, селисити T-REX-6KLP1G01</keywords>
-      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі T-REX-6KLP1G01, комплект селіситі T-REX-6KLP1G01, селіситі T-REX-6KLP1G01</keywords_ua>
-    </item>
-    <item id="152949" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + MUST LP16-48300 51.2V 300Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + MUST LP16-48300 51.2V 300Ah</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>137773.45</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + MUST LP16-48300 51.2V 300Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект автономного электропитания маст, комплект автономного электропитания маст 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект маст, комплект маст 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
-      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект автономного живлення маст, комплект автономного живлення маст 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект маст, комплект маст 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
-    </item>
-    <item id="152934" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48206WG1-H з підігрівом, 51.2V 206Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48206WG1-H з підігрівом, 51.2V 206Ah</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>101494.40</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48206WG1-H з підігрівом, 51.2V 206Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM6048-II, комплект селисити IVEM6048-II, селисити IVEM6048-II</keywords>
-      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM6048-II, комплект селіситі IVEM6048-II, селіситі IVEM6048-II</keywords_ua>
-    </item>
-    <item id="152950" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48206WG1-H з підігрівом, 51.2V 206Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48206WG1-H з підігрівом, 51.2V 206Ah</name_ua>
-      <categoryId>11</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>116783.65</priceuah>
-      <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48206WG1-H з підігрівом, 51.2V 206Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
-      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити T-REX-6KLP1G01, комплект селисити T-REX-6KLP1G01, селисити T-REX-6KLP1G01</keywords>
-      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі T-REX-6KLP1G01, комплект селіситі T-REX-6KLP1G01, селіситі T-REX-6KLP1G01</keywords_ua>
-    </item>
     <item id="150935" selling_type="r">
       <name>Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi</name>
       <name_ua>Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi</name_ua>
       <categoryId>1</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>27253.85</priceuah>
+      <priceuah>27603.45</priceuah>
       <available>true</available>
       <vendorCode>PV19-6048EXP</vendorCode>
       <image>https://avtonomka.com.ua/assets/images/prom/150935_1.jpg</image>
@@ -1013,7 +739,7 @@
       <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>72778.90</priceuah>
+      <priceuah>73741.45</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/feed-auto/152473.jpg</image>
       <description_ua><![CDATA[<p>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
@@ -1025,7 +751,7 @@
       <name_ua>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>117685.25</priceuah>
+      <priceuah>119228.55</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
       <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
@@ -1037,7 +763,7 @@
       <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ DAH Solar DHN-LVWES05-G1 100Ah</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>82511.35</priceuah>
+      <priceuah>83598.10</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
       <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ DAH Solar DHN-LVWES05-G1 100Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
@@ -1049,34 +775,283 @@
       <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLA48280 51.2V 280Ah</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>129503.80</priceuah>
+      <priceuah>131203.50</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
       <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLA48280 51.2V 280Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
       <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити T-REX-6KLP1G01, комплект селисити T-REX-6KLP1G01, селисити T-REX-6KLP1G01</keywords>
       <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі T-REX-6KLP1G01, комплект селіситі T-REX-6KLP1G01, селіситі T-REX-6KLP1G01</keywords_ua>
     </item>
-    <item id="152368" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48280 51.2V 280Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48280 51.2V 280Ah</name_ua>
+    <item id="151057" selling_type="r">
+      <name>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 16kWh LiFePO4</name>
+      <name_ua>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 16kWh LiFePO4</name_ua>
+      <categoryId>2</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>111734.00</priceuah>
+      <available>true</available>
+      <vendorCode>SE-F16-С</vendorCode>
+      <image>https://avtonomka.com.ua/assets/images/prom/151057_1.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/151057_2.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/products/151057_2.jpg</image>
+      <description_ua><![CDATA[<p>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 16kWh LiFePO4</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку або квартири</li><li>автономне електроживлення</li><li>робота з гібридним інвертором</li><li>накопичення енергії від сонячних панелей</li></ul>]]></description_ua>
+      <keywords>аккумулятор 314ah, аккумулятор дея, аккумулятор дея 314 ah, батарея 314ah, батарея дея, батарея дея 314 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор дея SE-F16-С, батарея дея SE-F16-С, дея SE-F16-С</keywords>
+      <keywords_ua>акумулятор 314ah, акумулятор дея, акумулятор дея 314 ah, батарея 314ah, батарея дея, батарея дея 314 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор дея SE-F16-С, батарея дея SE-F16-С, дея SE-F16-С</keywords_ua>
+    </item>
+    <item id="152493" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48171 51.2V 171Ah LiFePO4</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48171 51.2V 171Ah LiFePO4</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>129515.30</priceuah>
+      <priceuah>92294.40</priceuah>
       <available>true</available>
-      <image>https://avtonomka.com.ua/assets/images/feed-auto/152368.jpg</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48280 51.2V 280Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48171 51.2V 171Ah LiFePO4</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM6048-II, комплект селисити IVEM6048-II, селисити IVEM6048-II</keywords>
+      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM6048-II, комплект селіситі IVEM6048-II, селіситі IVEM6048-II</keywords_ua>
+    </item>
+    <item id="152495" selling_type="r">
+      <name>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48171 51.2V 171Ah LiFePO4</name>
+      <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48171 51.2V 171Ah LiFePO4</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>94471.35</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/feed-auto/152495.jpg</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48171 51.2V 171Ah LiFePO4</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания селисити, комплект автономного электропитания маст, комплект селисити, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
+      <keywords_ua>комплект автономного живлення селіситі, комплект автономного живлення маст, комплект селіситі, комплект маст, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
+    </item>
+    <item id="152729" selling_type="r">
+      <name>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + Felicity FLA24230 25.6V 230Ah</name>
+      <name_ua>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + Felicity FLA24230 25.6V 230Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>70956.15</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/feed-auto/152729.jpg</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + Felicity FLA24230 25.6V 230Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 4kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 4 kvt, комплект автономного электропитания маст, комплект автономного электропитания маст 4 kvt, комплект 4kvt, комплект селисити, комплект селисити 4 kvt, комплект маст, комплект маст 4 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
+      <keywords_ua>комплект автономного живлення 4kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 4 kvt, комплект автономного живлення маст, комплект автономного живлення маст 4 kvt, комплект 4kvt, комплект селіситі, комплект селіситі 4 kvt, комплект маст, комплект маст 4 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
+    </item>
+    <item id="152938" selling_type="r">
+      <name>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</name>
+      <name_ua>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>121414.70</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания селисити, комплект автономного электропитания маст, комплект селисити, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
+      <keywords_ua>комплект автономного живлення селіситі, комплект автономного живлення маст, комплект селіситі, комплект маст, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
+    </item>
+    <item id="152939" selling_type="r">
+      <name>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + MUST LP16-24100 25.6V 100Ah</name>
+      <name_ua>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + MUST LP16-24100 25.6V 100Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>57604.65</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + MUST LP16-24100 25.6V 100Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 4kvt, комплект автономного электропитания маст, комплект автономного электропитания маст 4 kvt, комплект 4kvt, комплект маст, комплект маст 4 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания маст 4024, комплект маст 4024, маст 4024</keywords>
+      <keywords_ua>комплект автономного живлення 4kvt, комплект автономного живлення маст, комплект автономного живлення маст 4 kvt, комплект 4kvt, комплект маст, комплект маст 4 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення маст 4024, комплект маст 4024, маст 4024</keywords_ua>
+    </item>
+    <item id="152946" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLA48171 51.2V 171Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLA48171 51.2V 171Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>107775.70</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLA48171 51.2V 171Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити T-REX-6KLP1G01, комплект селисити T-REX-6KLP1G01, селисити T-REX-6KLP1G01</keywords>
+      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі T-REX-6KLP1G01, комплект селіситі T-REX-6KLP1G01, селіситі T-REX-6KLP1G01</keywords_ua>
+    </item>
+    <item id="152492" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48171 51.2V 171Ah LiFePO4</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48171 51.2V 171Ah LiFePO4</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>107780.30</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/feed-auto/152492.jpg</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48171 51.2V 171Ah LiFePO4</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
       <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект 8kvt, комплект селисити, комплект селисити 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM8048-II, комплект селисити IVEM8048-II, селисити IVEM8048-II</keywords>
       <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект 8kvt, комплект селіситі, комплект селіситі 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM8048-II, комплект селіситі IVEM8048-II, селіситі IVEM8048-II</keywords_ua>
     </item>
-    <item id="152947" selling_type="r">
-      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity LPBA48100-OL 51.2V 100Ah</name>
-      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity LPBA48100-OL 51.2V 100Ah</name_ua>
+    <item id="152698" selling_type="r">
+      <name>Комплект автономного енергоживлення: Must PV19-6048EXP 6 кВт 48 В + Felicity FLB48206WG1-H 51.2V 206Ah, з підігрівом</name>
+      <name_ua>Комплект автономного енергоживлення: Must PV19-6048EXP 6 кВт 48 В + Felicity FLB48206WG1-H 51.2V 206Ah, з підігрівом</name_ua>
       <categoryId>11</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>83396.85</priceuah>
+      <priceuah>105011.10</priceuah>
       <available>true</available>
       <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
-      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity LPBA48100-OL 51.2V 100Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Must PV19-6048EXP 6 кВт 48 В + Felicity FLB48206WG1-H 51.2V 206Ah, з підігрівом</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект автономного электропитания маст, комплект автономного электропитания маст 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект маст, комплект маст 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
+      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект автономного живлення маст, комплект автономного живлення маст 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект маст, комплект маст 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
+    </item>
+    <item id="152700" selling_type="r">
+      <name>Комплект автономного енергоживлення:Felicity IVEM8048-II 8 кВт 48 В + Felicity FLB48206WG1-H 51.2V 206Ah, з підігрівом</name>
+      <name_ua>Комплект автономного енергоживлення:Felicity IVEM8048-II 8 кВт 48 В + Felicity FLB48206WG1-H 51.2V 206Ah, з підігрівом</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>118330.40</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення:Felicity IVEM8048-II 8 кВт 48 В + Felicity FLB48206WG1-H 51.2V 206Ah, з підігрівом</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект 8kvt, комплект селисити, комплект селисити 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM8048-II, комплект селисити IVEM8048-II, селисити IVEM8048-II</keywords>
+      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект 8kvt, комплект селіситі, комплект селіситі 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM8048-II, комплект селіситі IVEM8048-II, селіситі IVEM8048-II</keywords_ua>
+    </item>
+    <item id="152701" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>125360.35</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/feed-auto/152701.jpg</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект 8kvt, комплект селисити, комплект селисити 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM8048-II, комплект селисити IVEM8048-II, селисити IVEM8048-II</keywords>
+      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект 8kvt, комплект селіситі, комплект селіситі 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM8048-II, комплект селіситі IVEM8048-II, селіситі IVEM8048-II</keywords_ua>
+    </item>
+    <item id="152951" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>134722.50</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити T-REX-6KLP1G01, комплект селисити T-REX-6KLP1G01, селисити T-REX-6KLP1G01</keywords>
+      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі T-REX-6KLP1G01, комплект селіситі T-REX-6KLP1G01, селіситі T-REX-6KLP1G01</keywords_ua>
+    </item>
+    <item id="152220" selling_type="r">
+      <name>Комплект автономного енергоживлення: Must PV18-3224VPM II+ Felicity FLA24230 25.6V 230Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Must PV18-3224VPM II+ Felicity FLA24230 25.6V 230Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>65607.50</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/feed-auto/152220.jpg</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Must PV18-3224VPM II+ Felicity FLA24230 25.6V 230Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания селисити, комплект автономного электропитания маст, комплект селисити, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</keywords>
+      <keywords_ua>комплект автономного живлення селіситі, комплект автономного живлення маст, комплект селіситі, комплект маст, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive</keywords_ua>
+    </item>
+    <item id="152277" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + Felicity FLA48230 51.2V 230Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + Felicity FLA48230 51.2V 230Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>123536.45</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/feed-auto/152277.jpg</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + Felicity FLA48230 51.2V 230Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект 8kvt, комплект селисити, комплект селисити 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM8048-II, комплект селисити IVEM8048-II, селисити IVEM8048-II</keywords>
+      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект 8kvt, комплект селіситі, комплект селіситі 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM8048-II, комплект селіситі IVEM8048-II, селіситі IVEM8048-II</keywords_ua>
+    </item>
+    <item id="152278" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48314TG1-H 51.2V 314Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48314TG1-H 51.2V 314Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>142179.10</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/feed-auto/152278.jpg</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48314TG1-H 51.2V 314Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект 8kvt, комплект селисити, комплект селисити 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM8048-II, комплект селисити IVEM8048-II, селисити IVEM8048-II</keywords>
+      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект 8kvt, комплект селіситі, комплект селіситі 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM8048-II, комплект селіситі IVEM8048-II, селіситі IVEM8048-II</keywords_ua>
+    </item>
+    <item id="152472" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>87057.30</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/feed-auto/152472.jpg</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект 8kvt, комплект селисити, комплект селисити 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM8048-II, комплект селисити IVEM8048-II, селисити IVEM8048-II</keywords>
+      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект 8kvt, комплект селіситі, комплект селіситі 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM8048-II, комплект селіситі IVEM8048-II, селіситі IVEM8048-II</keywords_ua>
+    </item>
+    <item id="152936" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity LPBA48100-OL 51.2V 100Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity LPBA48100-OL 51.2V 100Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>84495.10</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity LPBA48100-OL 51.2V 100Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект 8kvt, комплект селисити, комплект селисити 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM8048-II, комплект селисити IVEM8048-II, селисити IVEM8048-II</keywords>
+      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект 8kvt, комплект селіситі, комплект селіситі 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM8048-II, комплект селіситі IVEM8048-II, селіситі IVEM8048-II</keywords_ua>
+    </item>
+    <item id="152471" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>71551.85</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/feed-auto/152471.jpg</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM6048-II, комплект селисити IVEM6048-II, селисити IVEM6048-II</keywords>
+      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM6048-II, комплект селіситі IVEM6048-II, селіситі IVEM6048-II</keywords_ua>
+    </item>
+    <item id="152520" selling_type="r">
+      <name>Акумуляторна батарея Felicity LPBA48100-OL 51.2V 100Ah LiFePO4</name>
+      <name_ua>Акумуляторна батарея Felicity LPBA48100-OL 51.2V 100Ah LiFePO4</name_ua>
+      <categoryId>2</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>43406.75</priceuah>
+      <available>true</available>
+      <vendorCode>LPBA48100-OL</vendorCode>
+      <image>https://avtonomka.com.ua/assets/images/prom/152520_1.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152520_2.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152520_3.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152520_4.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152520_5.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/152520_7.jpg</image>
+      <description_ua><![CDATA[<p>Продається тільки в комплекті з інвертором.</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку або квартири</li><li>автономне електроживлення</li><li>робота з гібридним інвертором</li><li>накопичення енергії від сонячних панелей</li></ul>]]></description_ua>
+      <keywords>аккумулятор 100ah, аккумулятор селисити, аккумулятор селисити 100 ah, батарея 100ah, батарея селисити, батарея селисити 100 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор селисити LPBA48100-OL, батарея селисити LPBA48100-OL, селисити LPBA48100-OL</keywords>
+      <keywords_ua>акумулятор 100ah, акумулятор селіситі, акумулятор селіситі 100 ah, батарея 100ah, батарея селіситі, батарея селіситі 100 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор селіситі LPBA48100-OL, батарея селіситі LPBA48100-OL, селіситі LPBA48100-OL</keywords_ua>
+    </item>
+    <item id="152937" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>134725.95</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 8kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 8 kvt, комплект 8kvt, комплект селисити, комплект селисити 8 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити IVEM8048-II, комплект селисити IVEM8048-II, селисити IVEM8048-II</keywords>
+      <keywords_ua>комплект автономного живлення 8kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 8 kvt, комплект 8kvt, комплект селіситі, комплект селіситі 8 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі IVEM8048-II, комплект селіситі IVEM8048-II, селіситі IVEM8048-II</keywords_ua>
+    </item>
+    <item id="152945" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48100WG1-H з підігрівом, 51.2V 100Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48100WG1-H з підігрівом, 51.2V 100Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>87046.95</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48100WG1-H з підігрівом, 51.2V 100Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
+      <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити T-REX-6KLP1G01, комплект селисити T-REX-6KLP1G01, селисити T-REX-6KLP1G01</keywords>
+      <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі T-REX-6KLP1G01, комплект селіситі T-REX-6KLP1G01, селіситі T-REX-6KLP1G01</keywords_ua>
+    </item>
+    <item id="152948" selling_type="r">
+      <name>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48230WG1-H з підігрівом, 51.2V 230Ah</name>
+      <name_ua>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48230WG1-H з підігрівом, 51.2V 230Ah</name_ua>
+      <categoryId>11</categoryId>
+      <portal_category_id>501001</portal_category_id>
+      <priceuah>125350.00</priceuah>
+      <available>true</available>
+      <image>https://avtonomka.com.ua/assets/images/zaglushka.png</image>
+      <description_ua><![CDATA[<p>Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48230WG1-H з підігрівом, 51.2V 230Ah</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку, квартири, дачі чи офісу</li><li>автономна система живлення під ключ</li><li>робота разом із сонячними панелями</li></ul>]]></description_ua>
       <keywords>комплект автономного электропитания 6kvt, комплект автономного электропитания селисити, комплект автономного электропитания селисити 6 kvt, комплект 6kvt, комплект селисити, комплект селисити 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания селисити T-REX-6KLP1G01, комплект селисити T-REX-6KLP1G01, селисити T-REX-6KLP1G01</keywords>
       <keywords_ua>комплект автономного живлення 6kvt, комплект автономного живлення селіситі, комплект автономного живлення селіситі 6 kvt, комплект 6kvt, комплект селіситі, комплект селіситі 6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення селіситі T-REX-6KLP1G01, комплект селіситі T-REX-6KLP1G01, селіситі T-REX-6KLP1G01</keywords_ua>
     </item>

@@ -33,11 +33,10 @@
   },
   {
     "id": "142725",
-    "name": "Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В",
+    "name": "Must PV19-6048EXP 48V 6 kW",
     "cat": 1,
-    "photo": "assets/images/prom/142725_1.jpg",
-    "problem": "",
-    "site": true
+    "photo": "",
+    "problem": "немає товару на сайті"
   },
   {
     "id": "152086",
@@ -48,11 +47,10 @@
   },
   {
     "id": "150676",
-    "name": "Акумуляторна батарея Deye SE-F5 Pro-C 51,2 В 100 А·год 5,12 кВт·год LiFePO4",
+    "name": "DEYE SE-F5 Pro-C 51.2V 100 Ah 45 кг, LiFePO4",
     "cat": 2,
-    "photo": "assets/images/prom/150676_1.jpg",
-    "problem": "",
-    "site": true
+    "photo": "",
+    "problem": "немає товару на сайті"
   },
   {
     "id": "142740",
@@ -328,80 +326,448 @@
     "site": false
   },
   {
-    "id": "152212",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48314-EU 51.2V 314Ah",
+    "id": "152205",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 6 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V",
     "cat": 11,
-    "photo": "assets/images/feed-auto/152212.jpg",
+    "photo": "assets/images/feed-auto/152205.jpg",
     "problem": "",
     "site": true
   },
   {
-    "id": "152471",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом",
+    "id": "152556",
+    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity LPBA48100-OL 51.2V 100Ah",
     "cat": 11,
-    "photo": "assets/images/feed-auto/152471.jpg",
+    "photo": "assets/images/feed-auto/152556.jpg",
     "problem": "",
     "site": true
   },
   {
-    "id": "152520",
-    "name": "Акумуляторна батарея Felicity LPBA48100-OL 51.2V 100Ah LiFePO4",
-    "cat": 2,
-    "photo": "assets/images/prom/152520_1.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152730",
-    "name": "Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + Felicity FLA24280 25.6V 280Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152730.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152745",
-    "name": "Акумуляторна батарея Felicity FLB48280TG1-H 51.2V 280Ah, з підігрівом, LiFePO4",
+    "id": "152640",
+    "name": "Акумуляторна батарея Felicity FLB48206WG1-H 51.2V 206Ah, з підігрівом, LiFePO4",
     "cat": 2,
     "photo": "",
     "problem": "немає фото на білому фоні",
     "site": true
   },
   {
-    "id": "152820",
-    "name": "Комплект автономного энергопитания: Must PV18-3224VPM II 24V 3.2kW + 2 шт. Felicity FLA12100 PG2 12.8V 100Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152820.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152821",
-    "name": "Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + 2 шт. Felicity FLA12100 PG2 12.8V 100Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152821.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152937",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah",
+    "id": "152934",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48206WG1-H з підігрівом, 51.2V 206Ah",
     "cat": 11,
     "photo": "assets/images/zaglushka.png",
     "problem": "",
     "site": true
   },
   {
-    "id": "152945",
-    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48100WG1-H з підігрівом, 51.2V 100Ah",
+    "id": "152950",
+    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48206WG1-H з підігрівом, 51.2V 206Ah",
     "cat": 11,
     "photo": "assets/images/zaglushka.png",
     "problem": "",
     "site": true
   },
   {
-    "id": "152948",
-    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48230WG1-H з підігрівом, 51.2V 230Ah",
+    "id": "152211",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48230 51.2V 230Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152211.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152219",
+    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48230 51.2V 230Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152219.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152368",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48280 51.2V 280Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152368.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152746",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48230WG1-H 51.2V 230Ah з підігрівом",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152746.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152747",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ MUST LP16-48300, 51.2V 300Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152747.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152947",
+    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity LPBA48100-OL 51.2V 100Ah",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152173",
+    "name": "Акумуляторна батарея Felicity FLA24230 25.6V 230Ah LiFePO4",
+    "cat": 2,
+    "photo": "assets/images/prom/152173_1.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152272",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152699",
+    "name": "Комплект автономного енергоживлення: Must PV19-6048EXP 6 кВт 48 В + Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152699.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152732",
+    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + MUST LP16-48300, 51.2V 300Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152732.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152933",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48280 51.2V 280Ah",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152941",
+    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLA48314-EU 51.2V 314Ah",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152942",
+    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLA48230 51.2V 230Ah",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152266",
+    "name": "Гібридний інвертор Felicity IVEM8048-II 48В 8 кВт",
+    "cat": 1,
+    "photo": "assets/images/prom/152266_1.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152675",
+    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48314TG1-H 51.2V 314Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152675.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152734",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ MUST LP16-48300, 51.2V 300Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152734.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152932",
+    "name": "Гібридний інвертор Felicity T-REX-6KLP1G01 6 кВт 48 В",
+    "cat": 1,
+    "photo": "",
+    "problem": "немає фото на білому фоні",
+    "site": true
+  },
+  {
+    "id": "152943",
+    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLB48314TG1-H з підігрівом, 51.2V 314Ah",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152949",
+    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + MUST LP16-48300 51.2V 300Ah",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "150674",
+    "name": "Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V",
+    "cat": 2,
+    "photo": "assets/images/prom/150674_1.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152203",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48314-EU 51.2V 314Ah 16kWh",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152203.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152352",
+    "name": "Акумуляторна батарея Felicity FLA48280 51.2V 280Ah LiFePO4",
+    "cat": 2,
+    "photo": "assets/images/prom/152352_1.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152377",
+    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48280 51.2V 230Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152377.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152469",
+    "name": "Акумуляторна батарея Felicity FLA48171 51.2V 171Ah LiFePO4",
+    "cat": 2,
+    "photo": "assets/images/prom/152469_2.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152797",
+    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Deye SE-F16-С 314Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152797.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152819",
+    "name": "Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + 2 шт. MUST LP15-12100, 12.8V 100Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152819.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "150935",
+    "name": "Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi",
+    "cat": 1,
+    "photo": "assets/images/prom/150935_1.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "151790",
+    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48314-EU 51.2V 314Ah 16kWh",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/151790.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152206",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ DEYE SE-F5 Pro-C 51.2V 100 Аh",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152206.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152473",
+    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152473.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152818",
+    "name": "Комплект автономного энергопитания: Must PV18-3224VPM II 24V 3.2kW + 2 шт. MUST LP15-12100, 12.8V 100Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152818.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152935",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152940",
+    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ DAH Solar DHN-LVWES05-G1 100Ah",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152944",
+    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLA48280 51.2V 280Ah",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "151057",
+    "name": "Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 16kWh LiFePO4",
+    "cat": 2,
+    "photo": "assets/images/prom/151057_1.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "151284",
+    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + DAH Solar DHN-LVWES05-G1 100ah 51.2V",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/151284.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152279",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48314TG1-H 51.2V 314Ah, з підігрівом",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152279.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152493",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48171 51.2V 171Ah LiFePO4",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152495",
+    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48171 51.2V 171Ah LiFePO4",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152495.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152729",
+    "name": "Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + Felicity FLA24230 25.6V 230Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152729.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152938",
+    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152939",
+    "name": "Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + MUST LP16-24100 25.6V 100Ah",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152946",
+    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLA48171 51.2V 171Ah",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152208",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Deye SE-F16-С 51.2V 314 Аh",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152208.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152492",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48171 51.2V 171Ah LiFePO4",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152492.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152698",
+    "name": "Комплект автономного енергоживлення: Must PV19-6048EXP 6 кВт 48 В + Felicity FLB48206WG1-H 51.2V 206Ah, з підігрівом",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152700",
+    "name": "Комплект автономного енергоживлення:Felicity IVEM8048-II 8 кВт 48 В + Felicity FLB48206WG1-H 51.2V 206Ah, з підігрівом",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152701",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152701.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152724",
+    "name": "Комплект автономного енергоживлення: Must PV18-1512 VPM II 1.5 кВт 12 В + Felicity FLA12100PG2 12.8V 100Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152724.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152726",
+    "name": "Комплект автономного енергоживлення: Must PV18-1512 VPM II 1.5 кВт 12 Вт+ MUST LP15-12100 12V 100Ah LiFePO4",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152726.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152951",
+    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah",
     "cat": 11,
     "photo": "assets/images/zaglushka.png",
     "problem": "",
@@ -496,440 +862,80 @@
     "site": true
   },
   {
-    "id": "150674",
-    "name": "Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V",
+    "id": "152212",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48314-EU 51.2V 314Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152212.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152471",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152471.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152520",
+    "name": "Акумуляторна батарея Felicity LPBA48100-OL 51.2V 100Ah LiFePO4",
     "cat": 2,
-    "photo": "assets/images/prom/150674_1.jpg",
+    "photo": "assets/images/prom/152520_1.jpg",
     "problem": "",
     "site": true
   },
   {
-    "id": "152203",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48314-EU 51.2V 314Ah 16kWh",
+    "id": "152730",
+    "name": "Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + Felicity FLA24280 25.6V 280Ah",
     "cat": 11,
-    "photo": "assets/images/feed-auto/152203.jpg",
+    "photo": "assets/images/feed-auto/152730.jpg",
     "problem": "",
     "site": true
   },
   {
-    "id": "152352",
-    "name": "Акумуляторна батарея Felicity FLA48280 51.2V 280Ah LiFePO4",
-    "cat": 2,
-    "photo": "assets/images/prom/152352_1.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152377",
-    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48280 51.2V 230Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152377.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152469",
-    "name": "Акумуляторна батарея Felicity FLA48171 51.2V 171Ah LiFePO4",
-    "cat": 2,
-    "photo": "assets/images/prom/152469_2.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152797",
-    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Deye SE-F16-С 314Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152797.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152819",
-    "name": "Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + 2 шт. MUST LP15-12100, 12.8V 100Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152819.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152208",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Deye SE-F16-С 51.2V 314 Аh",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152208.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152492",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48171 51.2V 171Ah LiFePO4",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152492.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152698",
-    "name": "Комплект автономного енергоживлення: Must PV19-6048EXP 6 кВт 48 В + Felicity FLB48206WG1-H 51.2V 206Ah, з підігрівом",
-    "cat": 11,
-    "photo": "assets/images/zaglushka.png",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152700",
-    "name": "Комплект автономного енергоживлення:Felicity IVEM8048-II 8 кВт 48 В + Felicity FLB48206WG1-H 51.2V 206Ah, з підігрівом",
-    "cat": 11,
-    "photo": "assets/images/zaglushka.png",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152701",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152701.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152724",
-    "name": "Комплект автономного енергоживлення: Must PV18-1512 VPM II 1.5 кВт 12 В + Felicity FLA12100PG2 12.8V 100Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152724.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152726",
-    "name": "Комплект автономного енергоживлення: Must PV18-1512 VPM II 1.5 кВт 12 Вт+ MUST LP15-12100 12V 100Ah LiFePO4",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152726.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152951",
-    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah",
-    "cat": 11,
-    "photo": "assets/images/zaglushka.png",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152173",
-    "name": "Акумуляторна батарея Felicity FLA24230 25.6V 230Ah LiFePO4",
-    "cat": 2,
-    "photo": "assets/images/prom/152173_1.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152272",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V",
-    "cat": 11,
-    "photo": "assets/images/zaglushka.png",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152699",
-    "name": "Комплект автономного енергоживлення: Must PV19-6048EXP 6 кВт 48 В + Felicity FLB48230WG1-H 51.2V 230Ah, з підігрівом",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152699.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152732",
-    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + MUST LP16-48300, 51.2V 300Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152732.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152933",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48280 51.2V 280Ah",
-    "cat": 11,
-    "photo": "assets/images/zaglushka.png",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152941",
-    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLA48314-EU 51.2V 314Ah",
-    "cat": 11,
-    "photo": "assets/images/zaglushka.png",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152942",
-    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLA48230 51.2V 230Ah",
-    "cat": 11,
-    "photo": "assets/images/zaglushka.png",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "151284",
-    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + DAH Solar DHN-LVWES05-G1 100ah 51.2V",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/151284.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152279",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48314TG1-H 51.2V 314Ah, з підігрівом",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152279.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152493",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48171 51.2V 171Ah LiFePO4",
-    "cat": 11,
-    "photo": "assets/images/zaglushka.png",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152495",
-    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48171 51.2V 171Ah LiFePO4",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152495.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152729",
-    "name": "Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + Felicity FLA24230 25.6V 230Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152729.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152938",
-    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah",
-    "cat": 11,
-    "photo": "assets/images/zaglushka.png",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152939",
-    "name": "Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + MUST LP16-24100 25.6V 100Ah",
-    "cat": 11,
-    "photo": "assets/images/zaglushka.png",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152946",
-    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLA48171 51.2V 171Ah",
-    "cat": 11,
-    "photo": "assets/images/zaglushka.png",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152266",
-    "name": "Гібридний інвертор Felicity IVEM8048-II 48В 8 кВт",
-    "cat": 1,
-    "photo": "assets/images/prom/152266_1.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152675",
-    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48314TG1-H 51.2V 314Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152675.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152734",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ MUST LP16-48300, 51.2V 300Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152734.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152932",
-    "name": "Гібридний інвертор Felicity T-REX-6KLP1G01 6 кВт 48 В",
-    "cat": 1,
-    "photo": "",
-    "problem": "немає фото на білому фоні",
-    "site": true
-  },
-  {
-    "id": "152943",
-    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ Felicity FLB48314TG1-H з підігрівом, 51.2V 314Ah",
-    "cat": 11,
-    "photo": "assets/images/zaglushka.png",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152949",
-    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + MUST LP16-48300 51.2V 300Ah",
-    "cat": 11,
-    "photo": "assets/images/zaglushka.png",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152205",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 6 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152205.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152556",
-    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity LPBA48100-OL 51.2V 100Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152556.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152640",
-    "name": "Акумуляторна батарея Felicity FLB48206WG1-H 51.2V 206Ah, з підігрівом, LiFePO4",
+    "id": "152745",
+    "name": "Акумуляторна батарея Felicity FLB48280TG1-H 51.2V 280Ah, з підігрівом, LiFePO4",
     "cat": 2,
     "photo": "",
     "problem": "немає фото на білому фоні",
     "site": true
   },
   {
-    "id": "152934",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48206WG1-H з підігрівом, 51.2V 206Ah",
+    "id": "152820",
+    "name": "Комплект автономного энергопитания: Must PV18-3224VPM II 24V 3.2kW + 2 шт. Felicity FLA12100 PG2 12.8V 100Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152820.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152821",
+    "name": "Комплект автономного енергоживлення: MUST PV19-4024 EXP 4 кВт, 24V + 2 шт. Felicity FLA12100 PG2 12.8V 100Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152821.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "152937",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah",
     "cat": 11,
     "photo": "assets/images/zaglushka.png",
     "problem": "",
     "site": true
   },
   {
-    "id": "152950",
-    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48206WG1-H з підігрівом, 51.2V 206Ah",
+    "id": "152945",
+    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48100WG1-H з підігрівом, 51.2V 100Ah",
     "cat": 11,
     "photo": "assets/images/zaglushka.png",
     "problem": "",
     "site": true
   },
   {
-    "id": "150935",
-    "name": "Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi",
-    "cat": 1,
-    "photo": "assets/images/prom/150935_1.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "151790",
-    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48314-EU 51.2V 314Ah 16kWh",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/151790.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152206",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ DEYE SE-F5 Pro-C 51.2V 100 Аh",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152206.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152473",
-    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152473.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152818",
-    "name": "Комплект автономного энергопитания: Must PV18-3224VPM II 24V 3.2kW + 2 шт. MUST LP15-12100, 12.8V 100Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152818.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152935",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48280TG1-H з підігрівом, 51.2V 280Ah",
-    "cat": 11,
-    "photo": "assets/images/zaglushka.png",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152940",
-    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В+ DAH Solar DHN-LVWES05-G1 100Ah",
-    "cat": 11,
-    "photo": "assets/images/zaglushka.png",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152944",
-    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLA48280 51.2V 280Ah",
-    "cat": 11,
-    "photo": "assets/images/zaglushka.png",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152211",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48230 51.2V 230Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152211.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152219",
-    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48230 51.2V 230Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152219.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152368",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48280 51.2V 280Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152368.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152746",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48230WG1-H 51.2V 230Ah з підігрівом",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152746.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152747",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ MUST LP16-48300, 51.2V 300Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152747.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "152947",
-    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity LPBA48100-OL 51.2V 100Ah",
+    "id": "152948",
+    "name": "Комплект автономного енергоживлення: Felicity T-REX-6KLP1G01 6 кВт 48 В + Felicity FLB48230WG1-H з підігрівом, 51.2V 230Ah",
     "cat": 11,
     "photo": "assets/images/zaglushka.png",
     "problem": "",
