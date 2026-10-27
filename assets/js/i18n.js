@@ -7,7 +7,7 @@
   function getBase() {
     const path = window.location.pathname;
     const depth = path.split('/').length - 2;
-    return depth >= 1 && (path.includes('/catalog/') || path.includes('/product/')) ? '../'.repeat(depth) : '';
+    return depth >= 1 && (path.includes('/catalog/') || path.includes('/product/') || path.includes('/articles/')) ? '../'.repeat(depth) : '';
   }
 
   const BASE = getBase();
@@ -101,6 +101,8 @@
        overwrites it with the real product name once its data loads. */
     if (window.location.pathname.includes('/catalog/')) return 'catalog';
     if (window.location.pathname.includes('/product/')) return 'product';
+    /* articles/<id>.html - свій <title> зі статті, ключа page_title нема */
+    if (window.location.pathname.includes('/articles/')) return 'article';
     return 'home';
   }
 

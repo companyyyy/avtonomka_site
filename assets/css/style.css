@@ -1819,6 +1819,7 @@ main { flex: 1; }
   color: var(--color-dark);
   line-height: 1.4;
 }
+.article-card__title a { color: inherit; text-decoration: none; }
 .article-card__summary {
   font-size: .9rem;
   color: var(--color-muted);

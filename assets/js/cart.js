@@ -22,7 +22,7 @@
   function getBase() {
     const path = window.location.pathname;
     const depth = path.split('/').length - 2;
-    return depth >= 1 && (path.includes('/catalog/') || path.includes('/product/')) ? '../'.repeat(depth) : '';
+    return depth >= 1 && (path.includes('/catalog/') || path.includes('/product/') || path.includes('/articles/')) ? '../'.repeat(depth) : '';
   }
   const BASE = getBase();
 

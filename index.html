@@ -498,7 +498,16 @@
       <div class="container">
         <h2 class="section-title" data-i18n="home.articles_title">Останні статті</h2>
         <div id="home-articles-grid" class="articles-grid"><!-- SSR:HOME-ARTICLES:START -->
-<a href="articles.html#24v-chy-48v-yaku-systemu-obraty" class="article-card" style="text-decoration:none">
+<a href="articles/potuzhnyi-invertor-malenkyi-akumulyator.html" class="article-card" style="text-decoration:none">
+              <div class="article-card__img"><img src="assets/images/articles/potuzhnyi-invertor-malenkyi-akumulyator.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+              <div class="article-card__body">
+                <div class="article-card__date">27 жовтня 2026 р. · <span data-views-id="potuzhnyi-invertor-malenkyi-akumulyator">…</span></div>
+                <h3 class="article-card__title">Потужний інвертор і маленький акумулятор: чому система не тягне очікуване навантаження?</h3>
+                <p class="article-card__summary">Чому інвертор на 6 кВт може вимикатися під навантаженням, хоча його потужності мало б вистачати: як струм розряду акумулятора обмежує систему, чому більша ємність не завжди допомагає, що ще може бути причиною і як правильно поєднати інвертор та батарею.</p>
+              </div>
+              <div class="article-card__footer"><span class="article-card__link">Читати далі →</span></div>
+            </a>
+<a href="articles/24v-chy-48v-yaku-systemu-obraty.html" class="article-card" style="text-decoration:none">
               <div class="article-card__img"><img src="assets/images/articles/24v-chy-48v-yaku-systemu-obraty.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
               <div class="article-card__body">
                 <div class="article-card__date">22 жовтня 2026 р. · <span data-views-id="24v-chy-48v-yaku-systemu-obraty">…</span></div>
@@ -507,21 +516,12 @@
               </div>
               <div class="article-card__footer"><span class="article-card__link">Читати далі →</span></div>
             </a>
-<a href="articles.html#systemy-2-v-1-invertor-i-akumulyator-v-odnomu-korpusi" class="article-card" style="text-decoration:none">
+<a href="articles/systemy-2-v-1-invertor-i-akumulyator-v-odnomu-korpusi.html" class="article-card" style="text-decoration:none">
               <div class="article-card__img"><img src="assets/images/products/150416_1.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
               <div class="article-card__body">
                 <div class="article-card__date">20 жовтня 2026 р. · <span data-views-id="systemy-2-v-1-invertor-i-akumulyator-v-odnomu-korpusi">…</span></div>
                 <h3 class="article-card__title">Системи 2 в 1: інвертор і акумулятор в одному корпусі - кому вони підходять</h3>
                 <p class="article-card__summary">Що таке система зберігання енергії 2 в 1, чим вона відрізняється від окремих інвертора й акумулятора, які в неї переваги та обмеження і для кого це найзручніше рішення для резервного живлення.</p>
-              </div>
-              <div class="article-card__footer"><span class="article-card__link">Читати далі →</span></div>
-            </a>
-<a href="articles.html#chomu-nakopychennya-energii-vazhlyve-yak-paneli" class="article-card" style="text-decoration:none">
-              <div class="article-card__img"><img src="assets/images/articles/chomu-nakopychennya-energii-vazhlyve-yak-paneli.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-              <div class="article-card__body">
-                <div class="article-card__date">15 вересня 2026 р. · <span data-views-id="chomu-nakopychennya-energii-vazhlyve-yak-paneli">…</span></div>
-                <h3 class="article-card__title">Чому системи накопичення енергії стають не менш важливими, ніж сонячні панелі</h3>
-                <p class="article-card__summary">Пояснюємо, чому акумулятор став такою ж ключовою частиною сонячної та резервної системи, як самі панелі: як він дозволяє зберігати надлишок енергії, працювати без панелей і чому LiFePO4 та гібридний інвертор лежать в основі сучасних систем накопичення.</p>
               </div>
               <div class="article-card__footer"><span class="article-card__link">Читати далі →</span></div>
             </a>
@@ -676,7 +676,7 @@
             const title = af(a, 'title');
             const summary = af(a, 'summary');
             const meta = (date ? esc(date) + ' · ' : '') + `<span data-views-id="${esc(a.id)}">…</span>`;
-            return `<a href="articles.html#${esc(a.id)}" class="article-card" style="text-decoration:none">
+            return `<a href="articles/${esc(a.id)}.html" class="article-card" style="text-decoration:none">
               ${img}
               <div class="article-card__body">
                 <div class="article-card__date">${meta}</div>

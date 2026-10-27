@@ -131,7 +131,7 @@ function renderCard(article) {
     ${imgHtml}
     <div class="article-card__body">
       <div class="article-card__date">${metaParts.join(' · ')}</div>
-      <h2 class="article-card__title">${escHtml(title)}</h2>
+      <h2 class="article-card__title"><a href="${articlePageUrl(article.id)}">${escHtml(title)}</a></h2>
       ${summary ? `<p class="article-card__summary">${escHtml(summary)}</p>` : ''}
     </div>
     <div class="article-card__footer">
@@ -237,6 +237,52 @@ function renderFull(article) {
 let allArticles = [];
 let allProducts = [];
 
+/* У кожної статті своя статична сторінка articles/<id>.html (її пише
+   scripts/generate_static_pages.js). Свіжа стаття з адмінки отримує її
+   лише з найближчим оновленням сайту - до того відкриваємо її тут, як
+   раніше (articles.html#<id>). */
+function articlePageUrl(id) {
+  return 'articles/' + encodeURIComponent(id) + '.html';
+}
+
+function goToArticle(id, replace) {
+  const url = articlePageUrl(id);
+  fetch(url, { method: 'HEAD' })
+    .then(r => {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      if (replace) window.location.replace(url); else window.location.href = url;
+    })
+    .catch(() => openArticle(id));
+}
+
+/* articles/<id>.html: текст уже в HTML, тут лише лічильник переглядів і
+   англійська версія (статичний текст - український). */
+async function initStaticArticle(detailEl) {
+  const id = detailEl.dataset.articleId;
+  if (window.I18n && window.I18n.lang === 'en') {
+    try {
+      const resp = await fetch(`${ARTICLES_SUPABASE_URL}/rest/v1/articles?id=eq.${encodeURIComponent(id)}&select=*`, {
+        headers: { apikey: ARTICLES_SUPABASE_ANON_KEY, Authorization: `Bearer ${ARTICLES_SUPABASE_ANON_KEY}` },
+      });
+      const rows = resp.ok ? await resp.json() : [];
+      if (rows[0] && rows[0].body_en) {
+        const prodResp = await fetch('../products.json');
+        if (prodResp.ok) allProducts = await prodResp.json();
+        const html = renderFull(rows[0])
+          .replace(/(href|src)="(?!https?:|#|\.\.\/|\/)([^"]+)"/g, '$1="../$2"');
+        detailEl.innerHTML = html;
+        document.title = rows[0].title_en + ' - Avtonomka';
+        document.documentElement.lang = 'en';
+      }
+    } catch (e) {
+      console.warn('articles.js: could not load English version', e);
+    }
+  }
+  const back = document.getElementById('btn-back');
+  if (back) back.addEventListener('click', () => { window.location.href = '../articles.html'; });
+  populateViews(detailEl, true);
+}
+
 function openArticle(id) {
   const article = allArticles.find(a => a.id === id);
   if (!article) return;
@@ -281,6 +327,9 @@ window.addEventListener('popstate', () => {
 });
 
 async function init() {
+  const staticDetail = document.querySelector('#article-detail[data-article-id]');
+  if (staticDetail) { initStaticArticle(staticDetail); return; }
+
   const grid = document.getElementById('articles-grid');
   if (!grid) return;
 
@@ -316,17 +365,22 @@ async function init() {
 
     grid.addEventListener('click', e => {
       const card = e.target.closest('.article-card');
-      if (card) openArticle(card.dataset.id);
+      if (!card) return;
+      /* Ctrl/середня кнопка по посиланню - нова вкладка, як звичайно */
+      if (e.target.closest('a') && (e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0)) return;
+      e.preventDefault();
+      goToArticle(card.dataset.id);
     });
     grid.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') {
         const card = e.target.closest('.article-card');
-        if (card) openArticle(card.dataset.id);
+        if (card) { e.preventDefault(); goToArticle(card.dataset.id); }
       }
     });
 
+    /* Старі посилання articles.html#<id> -> articles/<id>.html */
     const hash = window.location.hash.slice(1);
-    if (hash && allArticles.find(a => a.id === hash)) openArticle(hash);
+    if (hash && allArticles.find(a => a.id === hash)) goToArticle(hash, true);
 
   } catch (e) {
     grid.innerHTML = `

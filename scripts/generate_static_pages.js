@@ -448,7 +448,7 @@ function buildRelatedArticlesBlock(p, articlesBySlug) {
   if (matches.length === 0) return '';
 
   const items = matches.slice(0, 2).map(a =>
-    `          <li><a href="articles.html#${escapeHtml(a.id)}">${escapeHtml(a.title)}</a></li>`
+    `          <li><a href="articles/${escapeHtml(a.id)}.html">${escapeHtml(a.title)}</a></li>`
   ).join('\n');
 
   return `\n    <section class="related-articles">\n      <div class="container">\n` +
@@ -1084,7 +1084,7 @@ function urlEntry(loc, lastmod, changefreq, priority) {
    section — so static and category URLs, and each one's <lastmod>, stay
    in sync automatically too. catalog.html itself (root grid, not a
    /catalog/<slug> category page) is listed under STATIC_PAGES already. */
-function updateSitemap(products, catalogLastmod, productLastmod) {
+function updateSitemap(products, catalogLastmod, productLastmod, articleLastmod = {}) {
   const file = path.join(ROOT, 'sitemap.xml');
 
   const staticEntries = STATIC_PAGES.map(({ relPath, changefreq, priority }) => {
@@ -1102,6 +1102,10 @@ function updateSitemap(products, catalogLastmod, productLastmod) {
     urlEntry(productUrl(p), productLastmod[p.id] || TODAY, 'weekly', '0.6')
   ).join('\n');
 
+  const articleEntries = Object.keys(articleLastmod).map(id =>
+    urlEntry(articleUrl({ id }), articleLastmod[id], 'monthly', '0.6')
+  ).join('\n');
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
@@ -1111,6 +1115,9 @@ ${staticEntries}
   <!-- Категорії каталогу -->
 ${categoryEntries}
 
+  <!-- Статті -->
+${articleEntries}
+
   <!-- Товари -->
 ${productEntries}
 
@@ -1119,7 +1126,8 @@ ${productEntries}
 
   fs.writeFileSync(file, xml, 'utf8');
   console.log(`generate_static_pages: sitemap.xml rebuilt — ${STATIC_PAGES.length} static + ` +
-    `${Object.keys(SLUG_TO_CATEGORY).length} category + ${products.length} product URLs`);
+    `${Object.keys(SLUG_TO_CATEGORY).length} category + ${products.length} product + ` +
+    `${Object.keys(articleLastmod).length} article URLs`);
 }
 
 /* ============================================================
@@ -1229,7 +1237,7 @@ function renderArticleCard(article) {
     ${imgHtml}
     <div class="article-card__body">
       <div class="article-card__date">${metaParts.join(' · ')}</div>
-      <h2 class="article-card__title">${escapeHtml(title)}</h2>
+      <h2 class="article-card__title"><a href="articles/${escapeHtml(article.id)}.html">${escapeHtml(title)}</a></h2>
       ${summary ? `<p class="article-card__summary">${escapeHtml(summary)}</p>` : ''}
     </div>
     <div class="article-card__footer">
@@ -1247,7 +1255,7 @@ function renderHomeArticleCard(article) {
     ? `<div class="article-card__img"><img src="${escapeHtml(article.photo)}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`
     : '<div class="article-card__img article-card__img--placeholder"></div>';
   const meta = (dateStr ? escapeHtml(dateStr) + ' · ' : '') + `<span data-views-id="${escapeHtml(article.id)}">…</span>`;
-  return `<a href="articles.html#${escapeHtml(article.id)}" class="article-card" style="text-decoration:none">
+  return `<a href="articles/${escapeHtml(article.id)}.html" class="article-card" style="text-decoration:none">
               ${imgHtml}
               <div class="article-card__body">
                 <div class="article-card__date">${meta}</div>
@@ -1256,6 +1264,200 @@ function renderHomeArticleCard(article) {
               </div>
               <div class="article-card__footer"><span class="article-card__link">Читати далі →</span></div>
             </a>`;
+}
+
+/* ============================================================
+   Окрема статична сторінка на кожну статтю: articles/<id>.html.
+   Раніше повний текст відкривався тільки JS-ом по articles.html#<id> -
+   Google відкидає все після "#", тож для нього всі статті були однією
+   сторінкою articles.html без тексту. Тепер у кожної своя адреса,
+   <title>/description/canonical, JSON-LD Article і текст прямо в HTML.
+   articles.js на цих сторінках лише рахує перегляди (і перемальовує
+   текст англійською, якщо обрано EN). Старі articles.html#<id>
+   articles.js переводить сюди.
+   ============================================================ */
+
+const ARTICLES_DIR = path.join(ROOT, 'articles');
+
+function articleUrl(a) {
+  return `${SITE_URL}/articles/${a.id}.html`;
+}
+
+/* Те саме, що articles.js:formatInline() - на вже екранованому тексті. */
+function formatArticleInline(escapedText) {
+  return escapedText
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2">$1</a>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+}
+
+/* Verbatim structure of articles.js:renderFull() (back button -> посилання). */
+function renderArticleBody(body) {
+  return (body || '')
+    .split(/\n\n+/)
+    .map(para => para.trim())
+    .filter(Boolean)
+    .map(para => {
+      if (para.startsWith('## ')) {
+        return `<h2>${formatArticleInline(escapeHtml(para.slice(3).trim()))}</h2>`;
+      }
+      const lines = para.split('\n');
+      if (lines.length > 1 && lines.every(line => line.startsWith('- '))) {
+        const items = lines.map(line => `<li>${formatArticleInline(escapeHtml(line.slice(2).trim()))}</li>`).join('');
+        return `<ul>${items}</ul>`;
+      }
+      return `<p>${formatArticleInline(escapeHtml(para)).replace(/\n/g, '<br>')}</p>`;
+    })
+    .join('\n        ');
+}
+
+/* articles.js:relatedProducts() - перші 4 товари категорії статті. */
+function renderArticleRelated(article, products) {
+  const productType = SLUG_TO_CATEGORY[article.category];
+  if (!productType) return '';
+  const items = products.filter(p => p.product_type === productType).slice(0, 4);
+  if (!items.length) return '';
+  const cards = items.map(p => {
+    const title = p.title || '';
+    const href  = path.posix.join('product', productSlug(p), `${p.id}.html`);
+    const img   = p.image_link || 'assets/images/zaglushka.png';
+    return `
+        <div class="product-card">
+          <a href="${escapeHtml(href)}" class="product-card__img-wrap" aria-label="${escapeHtml(title)}">
+            <img src="${escapeHtml(img)}" alt="${escapeHtml(title)}" loading="lazy" onerror="this.src='../assets/images/zaglushka.png'">
+          </a>
+          <div class="product-card__body">
+            <a href="${escapeHtml(href)}" class="product-card__title">${escapeHtml(title)}</a>
+            <div class="product-card__price-row">
+              <span class="product-card__price">${escapeHtml(formatPrice(p.price || ''))}</span>
+            </div>
+          </div>
+        </div>`;
+  }).join('');
+  return `
+      <div class="article-full__related">
+        <h2 data-i18n="articles.related_products_title">Схожі товари</h2>
+        <div class="products-grid products-grid--compact">${cards}
+        </div>
+      </div>`;
+}
+
+function buildArticleJsonLd(a) {
+  const ld = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: a.title,
+      description: a.summary || undefined,
+      image: a.photo ? absoluteUrl(a.photo) : undefined,
+      datePublished: a.date || undefined,
+      dateModified: (a.updated_at || a.date || '').slice(0, 10) || undefined,
+      inLanguage: 'uk',
+      mainEntityOfPage: articleUrl(a),
+      author: { '@type': 'Organization', name: 'Автономка', url: `${SITE_URL}/` },
+      publisher: {
+        '@type': 'Organization', name: 'Автономка',
+        logo: { '@type': 'ImageObject', url: `${SITE_URL}/assets/images/logo.jpg` },
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Головна', item: `${SITE_URL}/` },
+        { '@type': 'ListItem', position: 2, name: 'Статті', item: `${SITE_URL}/articles.html` },
+        { '@type': 'ListItem', position: 3, name: a.title, item: articleUrl(a) },
+      ],
+    },
+  ];
+  return ld.map(x =>
+    `  <script type="application/ld+json">\n${JSON.stringify(x, null, 2).replace(/<\//g, '<\\/')}\n  </script>`
+  ).join('\n');
+}
+
+function generateArticlePage(a, template, products) {
+  const title   = a.title || '';
+  const summary = a.summary || '';
+  const desc    = truncate(summary || title, 160);
+  const dateStr = formatDateUk(a.date);
+  const imgHtml = a.photo
+    ? `<div class="article-full__img"><img src="${escapeHtml(a.photo)}" alt="${escapeHtml(title)}" onerror="this.parentElement.style.display='none'"></div>`
+    : '';
+  const meta = (dateStr ? escapeHtml(dateStr) + ' · ' : '') +
+    `<span class="article-full__views" data-views-id="${escapeHtml(a.id)}">…</span>`;
+
+  const content = `<div id="article-detail" data-article-id="${escapeHtml(a.id)}">
+  <div class="article-full">
+    <a class="article-full__back" href="articles.html" data-i18n="articles.back">← Назад до статей</a>
+    ${imgHtml}
+    <div class="article-full__content">
+      <div class="article-full__date">${meta}</div>
+      <h1 class="article-full__title">${escapeHtml(title)}</h1>
+      ${summary ? `<p class="article-full__lead">${escapeHtml(summary)}</p>` : ''}
+      <div class="article-full__body">
+        ${renderArticleBody(a.body)}
+      </div>${renderArticleRelated(a, products)}
+    </div>
+  </div>
+        </div>`;
+
+  let html = template;
+  const fullTitle = `${title} - Автономка`;
+  html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(fullTitle)}</title>`);
+  html = html.replace(/<meta name="description" content="[^"]*">/,
+    `<meta name="description" content="${escapeHtml(desc)}">`);
+  html = html.replace(/<meta property="og:title" content="[^"]*">/,
+    `<meta property="og:type" content="article">\n  <meta property="og:title" content="${escapeHtml(title)}">`);
+  html = html.replace(/<meta property="og:description" content="[^"]*">/,
+    `<meta property="og:description" content="${escapeHtml(desc)}">\n  <meta property="og:url" content="${articleUrl(a)}">`);
+  html = html.replace(/<meta property="og:image" content="[^"]*">/,
+    `<meta property="og:image" content="${escapeHtml(a.photo ? absoluteUrl(a.photo) : SITE_URL + '/assets/images/sticker.webp')}">`);
+  html = html.replace(/<link rel="canonical" href="[^"]*">/,
+    `<link rel="canonical" href="${articleUrl(a)}">\n${buildArticleJsonLd(a)}`);
+  // Шапку "Статті" прибираємо - заголовок h1 тут сама стаття.
+  html = html.replace(/\s*<!-- PAGE HEADER -->\s*<div class="page-header">[\s\S]*?<\/div>\s*<\/div>/, '');
+  html = html.replace(/<div id="articles-list">[\s\S]*?<div id="article-detail" class="hidden"><\/div>/, content);
+
+  return rewriteRelativePaths(html, '../');
+}
+
+/* Пише articles/<id>.html для кожної статті й видаляє сторінки статей,
+   яких у Supabase вже нема. Повертає { id: lastmod } для sitemap.xml.
+   Якщо Supabase не відповів (articles порожній) - файли не чіпаємо, а в
+   sitemap ідуть ті сторінки, що вже лежать в articles/. */
+function generateArticlePages(articles, products) {
+  const lastmod = {};
+  if (!articles.length) {
+    if (fs.existsSync(ARTICLES_DIR)) {
+      fs.readdirSync(ARTICLES_DIR).filter(f => f.endsWith('.html')).forEach(f => {
+        lastmod[f.slice(0, -5)] = lastmodFor(path.join('articles', f), false);
+      });
+    }
+    return lastmod;
+  }
+  const template = fs.readFileSync(path.join(ROOT, 'articles.html'), 'utf8');
+  if (!template.includes('<div id="articles-list">')) {
+    console.warn('generate_static_pages: articles.html has no #articles-list - article pages skipped');
+    return lastmod;
+  }
+  fs.mkdirSync(ARTICLES_DIR, { recursive: true });
+
+  const keep = new Set();
+  articles.forEach(a => {
+    if (!a.id || !/^[a-z0-9-]+$/i.test(a.id)) return;
+    const file = path.join(ARTICLES_DIR, `${a.id}.html`);
+    const html = generateArticlePage(a, template, products);
+    const before = fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : null;
+    if (before !== html) fs.writeFileSync(file, html, 'utf8');
+    keep.add(`${a.id}.html`);
+    lastmod[a.id] = lastmodFor(path.join('articles', `${a.id}.html`), before !== html);
+  });
+
+  fs.readdirSync(ARTICLES_DIR)
+    .filter(f => f.endsWith('.html') && !keep.has(f))
+    .forEach(f => fs.unlinkSync(path.join(ARTICLES_DIR, f)));
+
+  console.log(`generate_static_pages: ${keep.size} article pages in articles/`);
+  return lastmod;
 }
 
 /* Generic idempotent inject: replaces an existing SSR:<tag>:START/END block
@@ -1348,7 +1550,9 @@ async function generateTelegramAndArticles() {
   const productLastmod = await generateAllProductPages(allProducts, redirects);
   // Віртуальні товари навмисно не передаємо в каталог - тільки реальні.
   const catalogLastmod = generateCatalogGrids(products);
-  updateSitemap(allProducts, catalogLastmod, productLastmod);
+  const articles = await loadArticles();
+  const articleLastmod = generateArticlePages(articles, products);
+  updateSitemap(allProducts, catalogLastmod, productLastmod, articleLastmod);
   updateHtaccess(allProducts, redirects);
   await generateTelegramAndArticles();
 })();

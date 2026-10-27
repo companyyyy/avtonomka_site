@@ -86,7 +86,7 @@ jobs:
           git add products.json data/telegram_posts.json catalog_export.csv feed.xml prom_file.xml invertorshop.xml feed/ \
                   data/ultradomik/prices.json data/ultradomik/feed_items.json data/ultradomik/feeds_built.json \
                   product/ catalog.html catalog/*.html sitemap.xml .htaccess data/removed_product_redirects.json assets/images/prom/ assets/images/feed-auto/ \
-                  articles.html blog.html index.html
+                  articles.html articles/ blog.html index.html
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "Змін немає, пропускаємо комміт."
