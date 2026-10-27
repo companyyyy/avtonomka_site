@@ -898,7 +898,7 @@
   {
     "id": "152745",
     "title": "Акумуляторна батарея Felicity FLB48280TG1-H 51.2V 280Ah, з підігрівом, LiFePO4",
-    "image_link": "https://dfi2.com.ua/images/152745_1.jpg",
+    "image_link": "assets/images/products/152745_1.png",
     "additional_images": [],
     "price": "81422 UAH",
     "availability": "in_stock",
@@ -1139,7 +1139,7 @@
   {
     "id": "152493",
     "title": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48171 51.2V 171Ah LiFePO4",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152493.png",
     "additional_images": [],
     "price": "80246 UAH",
     "availability": "in_stock",
@@ -1422,7 +1422,7 @@
   {
     "id": "152932",
     "title": "Гібридний інвертор Felicity T-REX-6KLP1G01 6 кВт 48 В",
-    "image_link": "https://dfi2.com.ua/images/152932_1.jpg",
+    "image_link": "assets/images/products/152932_1.png",
     "additional_images": [],
     "price": "35570 UAH",
     "availability": "in_stock",
@@ -1552,7 +1552,7 @@
   {
     "id": "152272",
     "title": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V",
-    "image_link": "assets/images/zaglushka.png",
+    "image_link": "assets/images/komp/152272.png",
     "additional_images": [],
     "price": "72695 UAH",
     "availability": "in_stock",
@@ -2073,7 +2073,7 @@
   {
     "id": "152640",
     "title": "Акумуляторна батарея Felicity FLB48206WG1-H 51.2V 206Ah, з підігрівом, LiFePO4",
-    "image_link": "https://dfi2.com.ua/images/152640_1.jpg",
+    "image_link": "assets/images/products/152640_1.png",
     "additional_images": [],
     "price": "67160 UAH",
     "availability": "in_stock",
