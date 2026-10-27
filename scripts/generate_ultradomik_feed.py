@@ -9,6 +9,9 @@ fresh random add_min..add_max UAH per item (feed/enerhiia24.xml - Енергія
 +1..200 UAH).
 An extra feed with "base": "wholesale" is counted from the wholesale price
 instead (no 1-10 UAH bump; items without a wholesale price are left out).
+"cat_percent": {"<category id>": percent} gives a category its own percent
+instead of the feed's "percent" (e.g. kits +10%, batteries +20%); categories
+not listed there keep the feed's percent.
 feed/opt.xml is the wholesale feed: the wholesale price is set by hand in
 /prom-admin/ in US dollars (prices.json -> wholesale_usd, never touched by the
 site sync) and turned into UAH at the rate set there (feeds.json -> usd_rate,
@@ -86,8 +89,9 @@ def is_num(v):
 
 
 def load_feeds():
-    """[dict(file, name, mult, add)] - the main feed first, then valid extras.
-    add = (min, max) UAH for a random-range feed, None for a plain percent one."""
+    """[dict(file, name, mult, add, cat_mult)] - the main feed first, then valid extras.
+    add = (min, max) UAH for a random-range feed, None for a plain percent one;
+    cat_mult = {category id: multiplier} for categories with their own percent."""
     try:
         config = json.loads(FEEDS_CONFIG.read_text('utf-8'))
     except FileNotFoundError:
@@ -105,8 +109,14 @@ def load_feeds():
             print(f'feeds.json: skipped invalid feed {f!r}')
             continue
         seen.add(fname)
+        cat_mult = {}
+        for cid, cpct in (f.get('cat_percent') or {}).items():
+            if str(cid).isdigit() and int(cid) in CATEGORIES and is_num(cpct) and -90 <= cpct <= 500:
+                cat_mult[int(cid)] = 1 + cpct / 100
+            else:
+                print(f'feeds.json: {fname}: skipped invalid category percent {cid!r}: {cpct!r}')
         feeds.append(dict(file=fname, name=str(f.get('name') or fname), mult=1 + pct / 100,
-                          add=(int(lo), int(hi)) if ranged else None,
+                          add=(int(lo), int(hi)) if ranged else None, cat_mult=cat_mult,
                           from_wholesale=f.get('base') == 'wholesale'))
     return feeds
 
@@ -531,15 +541,16 @@ def main():
             ]
             usd = price.get('wholesale_usd')
             wholesale = round(usd * rate, 2) if is_num(usd) and usd > 0 else 0
-            items.append((price_uah, random.randint(*RANDOM_ADD_UAH), wholesale, '\n'.join(lines)))
+            items.append((price_uah, random.randint(*RANDOM_ADD_UAH), wholesale, cat, '\n'.join(lines)))
 
     catalog = '\n'.join(f'    <category id="{cid}" portal_id="{CATEGORIES[cid][1]}">{esc(CATEGORIES[cid][0])}</category>'
                         for cid in sorted(used_cats))
     feeds = load_feeds()
     for feed in feeds:
-        fname, markup = feed['file'], feed['mult']
+        fname = feed['file']
         body = []
-        for base, bump, wholesale, text in items:
+        for base, bump, wholesale, cat, text in items:
+            markup = feed.get('cat_mult', {}).get(cat, feed['mult'])
             has_wholesale = is_num(wholesale) and wholesale > 0
             if feed.get('wholesale'):
                 if not has_wholesale:
@@ -564,9 +575,11 @@ def main():
         ElementTree.fromstring(xml.encode('utf-8'))
         (ROOT / fname).parent.mkdir(parents=True, exist_ok=True)
         (ROOT / fname).write_text(xml, encoding='utf-8')
-        print(f'{fname} generated: {len(body)} items, markup x{markup:.2f}'
+        print(f'{fname} generated: {len(body)} items, markup x{feed["mult"]:.2f}'
               + (' from wholesale' if feed.get('from_wholesale') else '')
-              + (f', +{feed["add"][0]}..{feed["add"][1]} UAH' if feed['add'] else ''))
+              + (f', +{feed["add"][0]}..{feed["add"][1]} UAH' if feed['add'] else '')
+              + (', by category: ' + ', '.join(f'{c} x{m:.2f}' for c, m in sorted(feed['cat_mult'].items()))
+                 if feed.get('cat_mult') else ''))
 
     built = [f['file'] for f in feeds]
     try:

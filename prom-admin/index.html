@@ -108,6 +108,11 @@
     .feeds a, .other-feeds a { color: var(--accent); word-break: break-all; }
     .feeds .main-feed td { font-weight: 600; }
     .feeds .pending { color: var(--muted); font-size: 13px; }
+    .feeds tr.cat-row td { padding: 4px 8px 12px 24px; }
+    .cat-grid { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; }
+    .cat-grid label { display: inline-flex; gap: 6px; align-items: center; white-space: nowrap; }
+    .cat-grid input.fpct { width: 70px; }
+    .cat-note { color: var(--muted); font-size: 12px; margin: 0 0 6px; }
     .feeds button, .other-feeds button, .add-feed button { padding: 4px 10px; font-size: 14px; }
     .add-feed { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 12px; }
     .add-feed input.fname { width: 220px; }
@@ -152,7 +157,7 @@
     <p class="status" id="status"></p>
     <section class="card" id="feeds-card" hidden>
       <h2>Фіди</h2>
-      <p class="sub">Кожен фід - ті самі товари, що в основному. Ціна: ± відсоток від ціни основного фіду, або (якщо задано надбавку) ціна з таблиці ± відсоток плюс випадкова сума з діапазону, своя для кожного товару й кожної генерації (напр. від 1 до 200 грн). Посилання на фід лишається тим самим, навіть якщо змінити назву чи ціни. Новий фід з'являється за посиланням приблизно за 1–2 хвилини.</p>
+      <p class="sub">Кожен фід - ті самі товари, що в основному. Ціна: ± відсоток від ціни основного фіду, або (якщо задано надбавку) ціна з таблиці ± відсоток плюс випадкова сума з діапазону, своя для кожного товару й кожної генерації (напр. від 1 до 200 грн). Кнопка «Категорії» дає окремий відсоток для категорії (напр. комплекти +10%, акумулятори +20%) - категорії без свого відсотка беруть загальний відсоток фіду. Посилання на фід лишається тим самим, навіть якщо змінити назву чи ціни. Новий фід з'являється за посиланням приблизно за 1–2 хвилини.</p>
       <div class="table-wrap">
         <table class="feeds">
           <thead><tr><th>Назва</th><th>Основа</th><th>Від основи, %</th><th>Випадкова надбавка, грн</th><th>Посилання</th><th></th></tr></thead>
@@ -187,7 +192,7 @@
       <span class="hint" style="margin:0">«Ціна гурт» вписується в доларах; у фід опту і фіди від опту йде ціна × цей курс.</span>
     </div>
 
-    <p class="hint" id="hint" hidden>Роздрібні ціни й наявність на сайті підтягуються при кожному автооновленні (≈11:10, 15:10, 19:10 Київ). Ручна зміна роздрібної ціни діє одразу, але до наступного автооновлення - потім її перезапише сайт. Товарів, яких немає на сайті, автооновлення не чіпає. У prom_file.xml і фіди з відсотком до кожної ціни додається випадкові 1-10 грн (у таблиці ціни відсоткових фідів - без них); фід з надбавкою отримує свою випадкову суму з діапазону. Товар без ціни у фід не потрапляє.<br>
+    <p class="hint" id="hint" hidden>Роздрібні ціни й наявність на сайті підтягуються при кожному автооновленні (щогодини, ≈07:37–21:37 Київ). Ручна зміна роздрібної ціни діє одразу, але до наступного автооновлення - потім її перезапише сайт. Товарів, яких немає на сайті, автооновлення не чіпає. У prom_file.xml і фіди з відсотком до кожної ціни додається випадкові 1-10 грн (у таблиці ціни відсоткових фідів - без них); фід з надбавкою отримує свою випадкову суму з діапазону. Товар без ціни у фід не потрапляє.<br>
       «Ціна гурт» - у доларах, лише вручну, автооновлення її не змінює; у фід опту feed/opt.xml іде ціна × курс $. Товар з гуртовою ціною 0 у фід опту не потрапляє. Знята галочка «У фідах» повністю прибирає товар з усіх фідів одразу, навіть якщо на сайті він є, і діє, поки галочку не повернуть (автооновлення її не скидає). З галочкою товар іде у фіди і він у наявності, якщо він є на сайті.</p>
 
     <div class="table-wrap" id="table-wrap" hidden>
@@ -228,7 +233,8 @@
       ["feed.xml", "Google Merchant"],
       ["feed/bezpeka.xml", "Bezpeka.club"],
     ];
-    let feeds = []; // [{ file, name, percent, add_min?, add_max?, base? }]
+    let feeds = []; // [{ file, name, percent, add_min?, add_max?, base?, cat_percent? }]
+    let usedCats = []; // категорії, що є в таблиці товарів (для «Категорії» фіду)
     // Курс $ для гуртових цін (feeds.json -> usd_rate), як USD_RATE_DEFAULT у генераторі.
     const USD_RATE_DEFAULT = 45;
     let usdRate = USD_RATE_DEFAULT;
@@ -292,6 +298,7 @@
       $("table-wrap").hidden = true;
       const [items, prices, feedsFile] = await Promise.all([readJson(ITEMS), readJson(PRICES), readFeeds()]);
       feeds = feedsFile.data.feeds || [];
+      usedCats = [...new Set(items.data.map((i) => i.cat))].sort((a, b) => a - b);
       usdRate = validRate(feedsFile.data.usd_rate) ? feedsFile.data.usd_rate : USD_RATE_DEFAULT;
       $("usd-rate").value = String(usdRate).replace(".", ",");
       $("rate-save").hidden = true;
@@ -455,7 +462,7 @@
         : p.item.site && !p.siteInStock ? "на сайті немає" : "";
       const usd = p.edit.wholesale_usd;
       p.uahEl.textContent = usd > 0 ? `≈ ${fmt(toUah(usd))} грн` : "у фід опту не йде";
-      feeds.forEach((f, i) => { p.markupCells[i].textContent = autoPrice(isOpt(f) ? toUah(usd) : price, f); });
+      feeds.forEach((f, i) => { p.markupCells[i].textContent = autoPrice(isOpt(f) ? toUah(usd) : price, f, p.item.cat); });
       const changed = [...products.values()].filter(isChanged);
       $("savebar").hidden = changed.length === 0;
       $("changed-count").textContent = `Змінено товарів: ${changed.length}`;
@@ -481,10 +488,15 @@
       const add = hasAdd(f) ? `${signed(f.add_min)}…${signed(f.add_max)} грн` : "";
       return [f.percent || !add ? pctLabel(f.percent) : "", add].filter(Boolean).join(" ");
     }
+    // Відсоток фіду для категорії: свій (cat_percent), інакше загальний.
+    const catPct = (f, cat) => (f.cat_percent && f.cat_percent[cat] != null ? f.cat_percent[cat] : f.percent);
+    // «Комплекти +10%, Акумулятори +20%»
+    const catLabel = (f) => Object.entries(f.cat_percent || {})
+      .map(([c, v]) => `${CATEGORIES[c] || "кат. " + c} ${pctLabel(v)}`).join(", ");
     // Автоматична ціна товару у фіді (без випадкових 1-10 грн основного фіду).
-    function autoPrice(price, f) {
+    function autoPrice(price, f, cat) {
       if (!(price > 0)) return "-";
-      const base = price * (1 + f.percent / 100);
+      const base = price * (1 + catPct(f, cat) / 100);
       const r = (n) => fmt(Math.max(1, Math.round(n * 100) / 100));
       return hasAdd(f) ? `${r(base + f.add_min)}–${r(base + f.add_max)}` : r(base);
     }
@@ -566,9 +578,10 @@
     function ruleText(f) {
       const pct = f.percent ? ` ${pctLabel(f.percent)}` : "";
       const from = isOpt(f) ? "ціна гурт" : hasAdd(f) ? "ціна роздріб" : "основний фід";
-      return hasAdd(f)
+      const cats = catLabel(f) ? `; окремо: ${catLabel(f)}` : "";
+      return (hasAdd(f)
         ? `Ціна: ${from}${pct} ${signed(f.add_min)}…${signed(f.add_max)} грн (випадково для кожного товару)`
-        : `Ціна: ${from} ${pctLabel(f.percent)}`;
+        : `Ціна: ${from} ${pctLabel(f.percent)}`) + cats;
     }
 
     function nameCell(input, f) {
@@ -650,9 +663,14 @@
           saveFeeds((list) => list.filter((x) => x.file !== f.file),
             `Адмінка Prom: видалено фід ${f.file}`, `Фід «${f.name}» видалено.`);
         });
+        const catsBtn = document.createElement("button");
+        const nCats = Object.keys(f.cat_percent || {}).length;
+        catsBtn.textContent = nCats ? `Категорії (${nCats})` : "Категорії";
+        const catRow = categoryRow(f);
+        catsBtn.addEventListener("click", () => { catRow.hidden = !catRow.hidden; });
         const pctCell = td("", pct, " %");
-        tr.append(nameCell(name, f), td("", base), pctCell, td("", addMin, " … ", addMax), linkCell(f.file), td("", save, " ", del));
-        tbody.append(tr);
+        tr.append(nameCell(name, f), td("", base), pctCell, td("", addMin, " … ", addMax), linkCell(f.file), td("", catsBtn, " ", save, " ", del));
+        tbody.append(tr, catRow);
       }
 
       const others = $("other-feeds");
@@ -669,10 +687,64 @@
       $("feeds-card").hidden = false;
     }
 
+    // Рядок під фідом: свій відсоток для кожної категорії (порожньо = загальний відсоток фіду).
+    function categoryRow(f) {
+      const tr = document.createElement("tr");
+      tr.className = "cat-row";
+      tr.hidden = true;
+      const cell = document.createElement("td");
+      cell.colSpan = 6;
+      const note = document.createElement("p");
+      note.className = "cat-note";
+      note.textContent = `Свій відсоток для категорії замість загального (${pctLabel(f.percent)}). Порожнє поле - загальний відсоток фіду.`;
+      const grid = document.createElement("div");
+      grid.className = "cat-grid";
+      const inputs = new Map();
+      for (const cat of usedCats) {
+        const label = document.createElement("label");
+        const input = document.createElement("input");
+        input.className = "fpct";
+        input.inputMode = "decimal";
+        input.placeholder = pctLabel(f.percent);
+        const v = f.cat_percent?.[cat];
+        input.value = v == null ? "" : (v > 0 ? "+" : "") + v;
+        input.addEventListener("input", () => { input.classList.toggle("invalid", Number.isNaN(readCatPct(input))); });
+        inputs.set(cat, input);
+        label.append(CATEGORIES[cat] || `Категорія ${cat}`, input, "%");
+        grid.append(label);
+      }
+      const save = document.createElement("button");
+      save.className = "primary";
+      save.textContent = "Зберегти категорії";
+      save.addEventListener("click", () => {
+        const next = {};
+        for (const [cat, input] of inputs) {
+          const v = readCatPct(input);
+          if (Number.isNaN(v)) { setStatus("Відсоток категорії - число від −90 до +500 (напр. +20 або -5) або порожнє поле.", "error"); return; }
+          if (v !== null) next[cat] = v;
+        }
+        // Категорії, яких зараз немає в таблиці, лишаємо як були.
+        for (const [cat, v] of Object.entries(f.cat_percent || {})) if (!inputs.has(Number(cat))) next[cat] = v;
+        const label = catLabel({ cat_percent: next }) || "без окремих відсотків";
+        saveFeeds((list) => {
+          const it = list.find((x) => x.file === f.file);
+          if (!it) throw new Error("Цей фід щойно видалив хтось інший. Оновіть сторінку.");
+          if (Object.keys(next).length) it.cat_percent = next; else delete it.cat_percent;
+        }, `Адмінка Prom: фід ${f.file}, категорії (${label})`,
+           `Фід «${f.name}»: категорії збережено (${label}). Ціни у фіді оновляться за 1–2 хвилини.`);
+      });
+      grid.append(save);
+      cell.append(note, grid);
+      tr.append(cell);
+      return tr;
+    }
+    // Порожньо -> null (загальний відсоток), інакше як parsePct.
+    const readCatPct = (input) => (input.value.trim() === "" ? null : parsePct(input.value));
+
     function renderHead() {
       const head = $("thead");
       const groups = feeds.map((f) => `<th class="group">${escHtml(f.name)} · ${escHtml(f.file)}</th>`).join("");
-      const cols = feeds.map((f) => `<th class="sep r">Ціна, грн (${isOpt(f) ? "опт " : ""}${escHtml(ruleLabel(f))})</th>`).join("");
+      const cols = feeds.map((f) => `<th class="sep r">Ціна, грн (${isOpt(f) ? "опт " : ""}${escHtml(ruleLabel(f))}${f.cat_percent && Object.keys(f.cat_percent).length ? ", по категоріях" : ""})</th>`).join("");
       head.innerHTML = `
         <tr><th colspan="3"></th><th class="group">prom_file.xml</th><th class="group">feed/opt.xml</th><th class="group">Усі фіди</th>${groups}</tr>
         <tr><th>ID</th><th></th><th>Товар</th><th class="sep">Ціна роздріб, грн</th><th class="sep">Ціна гурт, $</th><th class="sep c">У фідах<br>(усі)</th>${cols}</tr>`;
