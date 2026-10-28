@@ -9,6 +9,8 @@ fresh random add_min..add_max UAH per item (feed/enerhiia24.xml - Енергія
 +1..200 UAH).
 An extra feed with "base": "wholesale" is counted from the wholesale price
 instead (no 1-10 UAH bump; items without a wholesale price are left out).
+A feed with percent 0 and no add_min/add_max is a renamed copy: the same
+prices as prom_file.xml (retail) or feed/opt.xml (wholesale).
 "cat_percent": {"<category id>": percent} gives a category its own percent
 instead of the feed's "percent" (e.g. kits +10%, batteries +20%); categories
 not listed there keep the feed's percent.

@@ -157,7 +157,7 @@
     <p class="status" id="status"></p>
     <section class="card" id="feeds-card" hidden>
       <h2>Фіди</h2>
-      <p class="sub">Кожен фід - ті самі товари, що в основному. Ціна: ± відсоток від ціни основного фіду, або (якщо задано надбавку) ціна з таблиці ± відсоток плюс випадкова сума з діапазону, своя для кожного товару й кожної генерації (напр. від 1 до 200 грн). Кнопка «Категорії» дає окремий відсоток для категорії (напр. комплекти +10%, акумулятори +20%) - категорії без свого відсотка беруть загальний відсоток фіду. Посилання на фід лишається тим самим, навіть якщо змінити назву чи ціни. Новий фід з'являється за посиланням приблизно за 1–2 хвилини.</p>
+      <p class="sub">Кожен фід - ті самі товари, що в основному. Ціна: ± відсоток від ціни основного фіду, або (якщо задано надбавку) ціна з таблиці ± відсоток плюс випадкова сума з діапазону, своя для кожного товару й кожної генерації (напр. від 1 до 200 грн). Відсоток 0 (або порожній) без надбавки - фід без націнки: ціни як в основному фіді (від роздрібу) чи як в опті (від опту), лише інша назва й посилання. Кнопка «Категорії» дає окремий відсоток для категорії (напр. комплекти +10%, акумулятори +20%) - категорії без свого відсотка беруть загальний відсоток фіду. Посилання на фід лишається тим самим, навіть якщо змінити назву чи ціни. Новий фід з'являється за посиланням приблизно за 1–2 хвилини.</p>
       <div class="table-wrap">
         <table class="feeds">
           <thead><tr><th>Назва</th><th>Основа</th><th>Від основи, %</th><th>Випадкова надбавка, грн</th><th>Посилання</th><th></th></tr></thead>
@@ -171,7 +171,7 @@
           <option value="retail">від роздрібу</option>
           <option value="wholesale">від опту</option>
         </select>
-        <input class="fpct" id="new-feed-pct" placeholder="+20" inputmode="decimal" />
+        <input class="fpct" id="new-feed-pct" placeholder="0" inputmode="decimal" title="Порожньо або 0 - без націнки" />
         <span>%</span>
         <span>надбавка від</span>
         <input class="fadd" id="new-feed-min" placeholder="1" inputmode="numeric" />
@@ -483,8 +483,9 @@
     const hasAdd = (f) => f.add_min != null && f.add_max != null;
     const isOpt = (f) => f.base === "wholesale";
     const BASES = [["retail", "Роздріб"], ["wholesale", "Опт"]];
-    // "+35%", "+1…+200 грн", "+10% +1…+200 грн"
+    // "+35%", "+1…+200 грн", "+10% +1…+200 грн", "без націнки"
     function ruleLabel(f) {
+      if (!f.percent && !hasAdd(f)) return "без націнки";
       const add = hasAdd(f) ? `${signed(f.add_min)}…${signed(f.add_max)} грн` : "";
       return [f.percent || !add ? pctLabel(f.percent) : "", add].filter(Boolean).join(" ");
     }
@@ -503,9 +504,10 @@
 
     const feedUrl = (file) => `${SITE}/${file}`;
 
-    // "+20" / "-5,5" / "35" -> число; помилка -> NaN
+    // "+20" / "-5,5" / "35" -> число; порожньо -> 0 (без націнки); помилка -> NaN
     function parsePct(text) {
       const t = text.replace(/[\s%]/g, "").replace(",", ".").replace("−", "-");
+      if (!t) return 0;
       if (!/^[+-]?\d+(\.\d+)?$/.test(t)) return NaN;
       const n = Math.round(parseFloat(t) * 100) / 100;
       return n >= -90 && n <= 500 ? n : NaN;
@@ -581,7 +583,8 @@
       const cats = catLabel(f) ? `; окремо: ${catLabel(f)}` : "";
       return (hasAdd(f)
         ? `Ціна: ${from}${pct} ${signed(f.add_min)}…${signed(f.add_max)} грн (випадково для кожного товару)`
-        : `Ціна: ${from} ${pctLabel(f.percent)}`) + cats;
+        : f.percent ? `Ціна: ${from} ${pctLabel(f.percent)}`
+        : `Ціна: як ${isOpt(f) ? "в опті (opt.xml)" : "в основному фіді (prom_file.xml)"}, без націнки`) + cats;
     }
 
     function nameCell(input, f) {
@@ -782,8 +785,8 @@
       const minEl = $("new-feed-min"), maxEl = $("new-feed-max");
       const name = nameEl.value.trim();
       const add = readAdd(minEl, maxEl);
-      // З надбавкою відсоток можна не вказувати (0).
-      const pct = add && add.min !== null && !pctEl.value.trim() ? 0 : parsePct(pctEl.value);
+      // Порожній відсоток = 0: без надбавки це фід з цінами як у роздробі чи опті.
+      const pct = parsePct(pctEl.value);
       nameEl.classList.toggle("invalid", !name);
       pctEl.classList.toggle("invalid", Number.isNaN(pct));
       if (!name || Number.isNaN(pct)) {
