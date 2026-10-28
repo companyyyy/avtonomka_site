@@ -34,22 +34,29 @@ jobs:
       - name: Install Python dependencies
         run: pip install pillow
 
-      - name: Build prom_file.xml and the extra feeds (data/ultradomik/feeds.json)
-        run: python scripts/generate_ultradomik_feed.py
-
-      - name: Commit and push if changed
+      # Генеруємо поверх свіжого master. Якщо поки йшла генерація хтось запушив
+      # (інший запуск, адмінка, update.yml) - не мержимо XML, а перегенеровуємо.
+      - name: Build feeds, commit and push
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add prom_file.xml invertorshop.xml feed/ data/ultradomik/feed_items.json data/ultradomik/feeds_built.json assets/images/feed-auto/
-          if git diff --cached --quiet; then
-            echo "Змін немає"
-          else
+          for attempt in 1 2 3 4 5; do
+            git fetch origin master
+            git reset --hard origin/master
+            python scripts/generate_ultradomik_feed.py
+            git add prom_file.xml invertorshop.xml feed/ data/ultradomik/feed_items.json data/ultradomik/feeds_built.json assets/images/feed-auto/
+            if git diff --cached --quiet; then
+              echo "Змін немає"
+              exit 0
+            fi
             git commit -m "Оновлення фідів Prom з адмінки"
-            # За час генерації в master могли з'явитися нові коміти.
-            git pull --rebase
-            git push
-          fi
+            if git push origin HEAD:master; then
+              exit 0
+            fi
+            echo "master змінився під час генерації, спроба $attempt - перегенеровую"
+            sleep 5
+          done
+          exit 1
 
       # Коміт бота (GITHUB_TOKEN) не запускає deploy-server.yml, тому викладаємо тут.
       # Сам коміт з адмінки вже запустив деплой, але фіди в ньому ще старі.
