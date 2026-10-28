@@ -32,6 +32,12 @@
       "file": "feed/freeship.xml",
       "name": "freeship",
       "percent": 15
+    },
+    {
+      "file": "feed/lekos.xml",
+      "name": "Lekos",
+      "percent": 17,
+      "base": "wholesale"
     }
   ],
   "usd_rate": 46.3
