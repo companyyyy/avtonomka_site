@@ -441,28 +441,6 @@
       <keywords>аккумулятор Felicity FLB48230WG1-H, аккумулятор с подогревом, аккумулятор 48 В 230 Аh, аккумулятор 51.2 В, аккумулятор LiFePO4, батарея фелисити, батарея для инвертора, FLB48230</keywords>
       <keywords_ua>акумулятор Felicity FLB48230WG1-H, акумулятор з підігрівом, акумулятор 48 В 230 Аh, акумулятор 51.2 В, акумулятор LiFePO4, батарея фелісіті, батарея для інвертора, FLB48230</keywords_ua>
     </item>
-    <item id="150674" selling_type="r">
-      <name>Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V</name>
-      <name_ua>Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V</name_ua>
-      <categoryId>2</categoryId>
-      <portal_category_id>501001</portal_category_id>
-      <priceuah>33799.00</priceuah>
-      <available>true</available>
-      <vendorCode>DHN-LVWES05-G1</vendorCode>
-      <image>https://avtonomka.com.ua/assets/images/prom/150674_1.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150674_2.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150674_3.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150674_4.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150674_5.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/150674_6.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/products/150674_2.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/products/150674_3.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/products/150674_4.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/products/150674_5.jpg</image>
-      <description_ua><![CDATA[<p>Акумулятор DAH Solar DHN-LVWES05-G1 51,2 В 100 А·год 5,12 кВт·год</p><p>DAH Solar DHN-LVWES05-G1 – літій-залізо-фосфатний акумулятор LiFePO4 з номінальною напругою 51,2 В та ємністю 100 А·год. Запас енергії становить 5,12 кВт·год, тому батарея добре підходить як основний накопичувач для системи резервного живлення квартири, будинку чи невеликого офісу.</p><p>Акумулятор розрахований на роботу з гібридними інверторами 48 В: вдень він накопичує енергію від сонячних панелей або мережі, а під час відключення електроенергії віддає її на живлення холодильника, освітлення, роутера, котла та іншої побутової техніки. Робочий діапазон напруги – 43,2…58,4 В.</p><p>Корпус настінного типу має розміри 480 × 500 × 155 мм, вага батареї – 47 кг. Компактний плаский корпус зручно розмістити на стіні в коридорі, технічному приміщенні чи котельні, не займаючи місця на підлозі.</p><p>Де використовується</p><ul><li>резервне живлення будинку або квартири</li><li>робота в парі з гібридним інвертором 48 В</li><li>накопичення енергії від сонячних панелей</li><li>живлення обладнання під час відключень електроенергії</li><li>автономні та гібридні сонячні електростанції</li></ul><p>Важливо: перед підключенням перевірте сумісність акумулятора з інвертором за напругою, струмами заряду та розряду і протоколом зв&apos;язку BMS. Менеджери Автономки допоможуть підібрати сумісний інвертор.</p>]]></description_ua>
-      <keywords>аккумулятор 100ah, аккумулятор дан солар, аккумулятор дан солар 100 ah, батарея 100ah, батарея дан солар, батарея дан солар 100 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор дан солар DHN-LVWES05-G1, батарея дан солар DHN-LVWES05-G1, дан солар DHN-LVWES05-G1</keywords>
-      <keywords_ua>акумулятор 100ah, акумулятор дан солар, акумулятор дан солар 100 ah, батарея 100ah, батарея дан солар, батарея дан солар 100 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор дан солар DHN-LVWES05-G1, батарея дан солар DHN-LVWES05-G1, дан солар DHN-LVWES05-G1</keywords_ua>
-    </item>
     <item id="150935" selling_type="r">
       <name>Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi</name>
       <name_ua>Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi</name_ua>
@@ -500,20 +478,27 @@
       <keywords>аккумулятор 100ah, аккумулятор селисити, аккумулятор селисити 100 ah, батарея 100ah, батарея селисити, батарея селисити 100 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор селисити LPBA48100-OL, батарея селисити LPBA48100-OL, селисити LPBA48100-OL</keywords>
       <keywords_ua>акумулятор 100ah, акумулятор селіситі, акумулятор селіситі 100 ah, батарея 100ah, батарея селіситі, батарея селіситі 100 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор селіситі LPBA48100-OL, батарея селіситі LPBA48100-OL, селіситі LPBA48100-OL</keywords_ua>
     </item>
-    <item id="151057" selling_type="r">
-      <name>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 16kWh LiFePO4</name>
-      <name_ua>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 16kWh LiFePO4</name_ua>
+    <item id="150674" selling_type="r">
+      <name>Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V</name>
+      <name_ua>Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V</name_ua>
       <categoryId>2</categoryId>
       <portal_category_id>501001</portal_category_id>
-      <priceuah>85655.00</priceuah>
+      <priceuah>33799.00</priceuah>
       <available>true</available>
-      <vendorCode>SE-F16-С</vendorCode>
-      <image>https://avtonomka.com.ua/assets/images/prom/151057_1.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/prom/151057_2.jpg</image>
-      <image>https://avtonomka.com.ua/assets/images/products/151057_2.jpg</image>
-      <description_ua><![CDATA[<p>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 16kWh LiFePO4</p><p><strong>Де використовується:</strong></p><ul><li>резервне живлення будинку або квартири</li><li>автономне електроживлення</li><li>робота з гібридним інвертором</li><li>накопичення енергії від сонячних панелей</li></ul>]]></description_ua>
-      <keywords>аккумулятор 314ah, аккумулятор дея, аккумулятор дея 314 ah, батарея 314ah, батарея дея, батарея дея 314 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор дея SE-F16-С, батарея дея SE-F16-С, дея SE-F16-С</keywords>
-      <keywords_ua>акумулятор 314ah, акумулятор дея, акумулятор дея 314 ah, батарея 314ah, батарея дея, батарея дея 314 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор дея SE-F16-С, батарея дея SE-F16-С, дея SE-F16-С</keywords_ua>
+      <vendorCode>DHN-LVWES05-G1</vendorCode>
+      <image>https://avtonomka.com.ua/assets/images/prom/150674_1.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/150674_2.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/150674_3.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/150674_4.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/150674_5.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/prom/150674_6.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/products/150674_2.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/products/150674_3.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/products/150674_4.jpg</image>
+      <image>https://avtonomka.com.ua/assets/images/products/150674_5.jpg</image>
+      <description_ua><![CDATA[<p>Акумулятор DAH Solar DHN-LVWES05-G1 51,2 В 100 А·год 5,12 кВт·год</p><p>DAH Solar DHN-LVWES05-G1 – літій-залізо-фосфатний акумулятор LiFePO4 з номінальною напругою 51,2 В та ємністю 100 А·год. Запас енергії становить 5,12 кВт·год, тому батарея добре підходить як основний накопичувач для системи резервного живлення квартири, будинку чи невеликого офісу.</p><p>Акумулятор розрахований на роботу з гібридними інверторами 48 В: вдень він накопичує енергію від сонячних панелей або мережі, а під час відключення електроенергії віддає її на живлення холодильника, освітлення, роутера, котла та іншої побутової техніки. Робочий діапазон напруги – 43,2…58,4 В.</p><p>Корпус настінного типу має розміри 480 × 500 × 155 мм, вага батареї – 47 кг. Компактний плаский корпус зручно розмістити на стіні в коридорі, технічному приміщенні чи котельні, не займаючи місця на підлозі.</p><p>Де використовується</p><ul><li>резервне живлення будинку або квартири</li><li>робота в парі з гібридним інвертором 48 В</li><li>накопичення енергії від сонячних панелей</li><li>живлення обладнання під час відключень електроенергії</li><li>автономні та гібридні сонячні електростанції</li></ul><p>Важливо: перед підключенням перевірте сумісність акумулятора з інвертором за напругою, струмами заряду та розряду і протоколом зв&apos;язку BMS. Менеджери Автономки допоможуть підібрати сумісний інвертор.</p>]]></description_ua>
+      <keywords>аккумулятор 100ah, аккумулятор дан солар, аккумулятор дан солар 100 ah, батарея 100ah, батарея дан солар, батарея дан солар 100 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор дан солар DHN-LVWES05-G1, батарея дан солар DHN-LVWES05-G1, дан солар DHN-LVWES05-G1</keywords>
+      <keywords_ua>акумулятор 100ah, акумулятор дан солар, акумулятор дан солар 100 ah, батарея 100ah, батарея дан солар, батарея дан солар 100 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор дан солар DHN-LVWES05-G1, батарея дан солар DHN-LVWES05-G1, дан солар DHN-LVWES05-G1</keywords_ua>
     </item>
   </items>
 </shop>
