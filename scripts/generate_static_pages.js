@@ -1290,6 +1290,20 @@ function formatArticleInline(escapedText) {
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
 }
 
+/* Таблиця: абзац, де кожен рядок "| a | b |"; перший рядок - заголовок,
+   рядок-розділювач "|---|---|" пропускається. Те саме, що articles.js:renderTable(). */
+function isArticleTable(lines) {
+  return lines.length > 1 && lines.every(line => line.startsWith('|'));
+}
+function renderArticleTable(lines) {
+  const rows = lines
+    .filter(line => !/^\|[\s:|-]+\|?$/.test(line))
+    .map(line => line.replace(/^\||\|$/g, '').split('|').map(c => formatArticleInline(escapeHtml(c.trim()))));
+  const head = rows.shift().map(c => `<th>${c}</th>`).join('');
+  const body = rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('');
+  return `<div class="article-table"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
+}
+
 /* Verbatim structure of articles.js:renderFull() (back button -> посилання). */
 function renderArticleBody(body) {
   return (body || '')
@@ -1301,6 +1315,7 @@ function renderArticleBody(body) {
         return `<h2>${formatArticleInline(escapeHtml(para.slice(3).trim()))}</h2>`;
       }
       const lines = para.split('\n');
+      if (isArticleTable(lines)) return renderArticleTable(lines);
       if (lines.length > 1 && lines.every(line => line.startsWith('- '))) {
         const items = lines.map(line => `<li>${formatArticleInline(escapeHtml(line.slice(2).trim()))}</li>`).join('');
         return `<ul>${items}</ul>`;
@@ -1341,7 +1356,21 @@ function renderArticleRelated(article, products) {
       </div>`;
 }
 
+/* «## Часті запитання» (або «## FAQ»), далі абзаци "**Питання?** Відповідь"
+   -> [{ q, a }] для FAQPage. Розділ закінчується на наступному ## заголовку. */
+function articleFaq(body) {
+  const faq = [];
+  let inFaq = false;
+  for (const para of (body || '').split(/\n\n+/).map(p => p.trim()).filter(Boolean)) {
+    if (para.startsWith('## ')) { inFaq = /^##\s+(Часті запитання|FAQ)/i.test(para); continue; }
+    const m = inFaq && para.match(/^\*\*([^*]+)\*\*\s*([\s\S]+)$/);
+    if (m) faq.push({ q: m[1].trim(), a: m[2].replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/\*\*/g, '').trim() });
+  }
+  return faq;
+}
+
 function buildArticleJsonLd(a) {
+  const faq = articleFaq(a.body);
   const ld = [
     {
       '@context': 'https://schema.org',
@@ -1369,6 +1398,16 @@ function buildArticleJsonLd(a) {
       ],
     },
   ];
+  if (faq.length) {
+    ld.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map(f => ({
+        '@type': 'Question', name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    });
+  }
   return ld.map(x =>
     `  <script type="application/ld+json">\n${JSON.stringify(x, null, 2).replace(/<\//g, '<\\/')}\n  </script>`
   ).join('\n');

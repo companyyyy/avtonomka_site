@@ -192,6 +192,17 @@ function formatPrice(raw) {
   return num.toLocaleString('uk-UA', { maximumFractionDigits: 0 }) + ' ' + currency;
 }
 
+/* Таблиця: абзац, де кожен рядок "| a | b |"; перший рядок - заголовок,
+   рядок-розділювач "|---|---|" пропускається. */
+function renderTable(lines) {
+  const rows = lines
+    .filter(line => !/^\|[\s:|-]+\|?$/.test(line))
+    .map(line => line.replace(/^\||\|$/g, '').split('|').map(c => formatInline(escHtml(c.trim()))));
+  const head = rows.shift().map(c => `<th>${c}</th>`).join('');
+  const body = rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('');
+  return `<div class="article-table"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
+}
+
 function renderFull(article) {
   const dateStr = formatDate(article.date);
   const title   = articleField(article, 'title');
@@ -212,6 +223,7 @@ function renderFull(article) {
         return `<h2>${formatInline(escHtml(para.slice(3).trim()))}</h2>`;
       }
       const lines = para.split('\n');
+      if (lines.length > 1 && lines.every(line => line.startsWith('|'))) return renderTable(lines);
       if (lines.length > 1 && lines.every(line => line.startsWith('- '))) {
         const items = lines.map(line => `<li>${formatInline(escHtml(line.slice(2).trim()))}</li>`).join('');
         return `<ul>${items}</ul>`;
