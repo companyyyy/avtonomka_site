@@ -38,6 +38,12 @@
       "name": "Lekos",
       "percent": 17,
       "base": "wholesale"
+    },
+    {
+      "file": "feed/test.xml",
+      "name": "Test",
+      "percent": 0,
+      "base": "wholesale"
     }
   ],
   "usd_rate": 46.3
