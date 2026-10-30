@@ -147,6 +147,10 @@ CATEGORIES = {
     13: ('Інше обладнання для автономного живлення', AUTONOMOUS_ENERGY),
 }
 
+# Categories left out of every Prom feed: kits (11) removed on 2026-10-30 at the
+# owner's request. The category id stays reserved - never reuse it.
+EXCLUDED_CATS = {11}
+
 # Site product_type -> feed category, for items built from the site card.
 SITE_CATEGORY = [
     ('Комплекти', 11),
@@ -434,7 +438,7 @@ def main():
     entries = json.loads((ROOT / 'data/ultradomik/products.json').read_text('utf-8'))
     prices = json.loads((ROOT / 'data/ultradomik/prices.json').read_text('utf-8'))
 
-    report = {'no_data': [], 'no_price': [], 'no_photo': [], 'rejected_photos': [], 'off': []}
+    report = {'no_data': [], 'no_price': [], 'no_photo': [], 'rejected_photos': [], 'off': [], 'excluded': []}
     items, used_cats, admin_items = [], set(), []
     rate = usd_rate()
     known = {pid for e in entries for pid in e['ids']}
@@ -486,6 +490,10 @@ def main():
                           'photo': images[0][len(SITE_URL) + 1:] if images else '', 'problem': '',
                           'site': pid in products}
             admin_items.append(admin_item)
+            if entry['cat'] in EXCLUDED_CATS:
+                admin_item['problem'] = 'комплекти не йдуть у фіди'
+                report['excluded'].append(f'{pid} {t(e["name_ua"], "ua")}')
+                continue
             if not images:
                 report['no_photo'].append(f'{pid} {t(e["name_ua"], "ua")}')
                 admin_item['problem'] = 'немає фото на білому фоні'
@@ -601,7 +609,8 @@ def main():
               'no_price': 'Без ціни (пропущено)',
               'no_photo': 'Немає фото на білому фоні (пропущено)',
               'rejected_photos': 'Відхилено фото не на білому фоні',
-              'off': 'Вимкнено в /prom-admin/ (прибрано з усіх фідів)'}
+              'off': 'Вимкнено в /prom-admin/ (прибрано з усіх фідів)',
+              'excluded': 'Комплекти - не йдуть у жоден фід (EXCLUDED_CATS)'}
     for key, label in labels.items():
         if report[key]:
             print(f'\n{label}:')

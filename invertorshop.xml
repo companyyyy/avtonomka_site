@@ -8,7 +8,6 @@
     <category id="5" portal_id="500901">Зарядні станції</category>
     <category id="6" portal_id="501001">Безперебійники для роутерів</category>
     <category id="7" portal_id="501001">Автоматичне введення резерву (АВР)</category>
-    <category id="11" portal_id="501001">Комплекти автономного енергоживлення</category>
   </catalog>
   <items>
     <item id="152517" selling_type="r">
