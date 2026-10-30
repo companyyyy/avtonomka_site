@@ -332,7 +332,10 @@
       }
     });
 
-    $('logout').addEventListener('click', async () => { await sb.auth.signOut(); location.reload(); });
+    // scope: 'local' - вийти лише з кабінету в цьому браузері. За замовчуванням
+    // signOut глобальний і обриває ВСІ сесії акаунта, зокрема адмінку, якщо
+    // в кабінет зайшли адмінським email (адмінка потім ловить «not signed in»).
+    $('logout').addEventListener('click', async () => { await sb.auth.signOut({ scope: 'local' }); location.reload(); });
 
     async function start() {
       const { data } = await sb.auth.getSession();
@@ -342,7 +345,7 @@
         client = (await api('me')).client;
       } catch (err) {
         // Увійшли не B2B-акаунтом (напр. адмінським) - тут йому нічого робити.
-        await sb.auth.signOut();
+        await sb.auth.signOut({ scope: 'local' });
         show('auth');
         $('login-msg').textContent = 'Цей акаунт не є партнерським. Подайте заявку на вкладці «Стати партнером».';
         return;

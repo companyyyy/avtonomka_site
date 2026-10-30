@@ -202,6 +202,7 @@
         if (id && !current) { const c = clients.find((x) => x.id === id); if (c) openCard(c); }
       } catch (e) {
         setStatus($('status'), /not allowed/.test(e.message) ? 'Немає доступу: ваш акаунт не в списку адмінів (tg_admins).'
+          : /not signed in/.test(e.message) ? 'Сесія входу недійсна (напр. після входу цим email у кабінет /b2b/). Натисніть «Вийти» і увійдіть в адмінку знову.'
           : 'Не вдалося завантажити: ' + e.message + ' (чи виконано b2b_schema.sql і задеплоєно функцію b2b? див. docs/B2B.md)', 'error');
       }
     }
