@@ -1066,6 +1066,7 @@ const STATIC_PAGES = [
   { relPath: 'terms.html',            changefreq: 'monthly', priority: '0.3' },
   { relPath: 'about.html',            changefreq: 'monthly', priority: '0.5' },
   { relPath: 'delivery-payment.html', changefreq: 'monthly', priority: '0.4' },
+  { relPath: 'spivpratsia.html',      changefreq: 'monthly', priority: '0.5' },
   { relPath: 'return-policy.html',    changefreq: 'monthly', priority: '0.4' },
   { relPath: 'warranty.html',         changefreq: 'monthly', priority: '0.4' },
 ];
