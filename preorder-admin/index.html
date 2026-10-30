@@ -12,7 +12,10 @@
        читає й комітить scripts/backorder_offers.json через GitHub API (той самий
        токен, що в «Ціни Prom»). Після коміту GitHub Actions (preorder.yml)
        перебудовує сторінки product/<slug>/<id>-pid-zamovlennya.html і feed.xml
-       (логіка - scripts/backorder.js) і викладає їх на сервер. -->
+       (логіка - scripts/backorder.js) і викладає їх на сервер.
+       Ціну можна задати в $ (price_usd): тоді грн = round($ × курс), курс -
+       usd_rate у тому ж файлі, поле «Курс $» угорі; зміна курсу перераховує
+       всі доларові ціни. Без $ - ціна в грн, як раніше. -->
   <style>
     :root {
       --bg: #f6f7f9; --surface: #fff; --text: #1b1f24; --muted: #6b7280;
@@ -40,7 +43,17 @@
       border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; }
     input[type=search] { width: 240px; max-width: 100%; }
     input.days { width: 64px; text-align: right; }
-    input.price { width: 110px; text-align: right; font-variant-numeric: tabular-nums; }
+    input.price, input.usd, input.rate { width: 110px; text-align: right; font-variant-numeric: tabular-nums; }
+    input.usd, input.rate { font: inherit; color: var(--text); background: var(--bg);
+      border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; }
+    input.usd { width: 90px; }
+    input.rate { width: 80px; }
+    input.price:disabled { opacity: .75; cursor: default; }
+    input.usd:focus, input.rate:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+    input.usd.invalid, input.rate.invalid { outline: 2px solid var(--error); }
+    label.rate-box { display: flex; gap: 6px; align-items: center; font-size: 14px; }
+    label.rate-box.changed input { background: var(--changed); }
+    td.site .usd { display: block; font-size: 13px; color: var(--muted); }
     input.price:focus, input[type=search]:focus, input[type=password]:focus {
       outline: 2px solid var(--accent); outline-offset: -1px; }
     input.price.invalid, input.days.invalid { outline: 2px solid var(--error); }
@@ -99,6 +112,7 @@
  <div id="admin-app" hidden>
   <header>
     <h1>Під замовлення</h1>
+    <label class="rate-box" id="rate-box" hidden>Курс $ <input class="rate" id="rate" inputmode="decimal" autocomplete="off" /></label>
     <span class="spacer"></span>
     <div class="cats" id="cats"></div>
     <label class="only"><input type="checkbox" id="only-set" /> лише з ціною</label>
@@ -119,7 +133,7 @@
     </div>
 
     <p class="status" id="status"></p>
-    <p class="hint" id="hint" hidden>Наявність і ціна «на сайті» - з сайту (постачальник), їх тут не змінити. Впишіть ціну під замовлення - у товару з'явиться окрема сторінка «під замовлення» і пропозиція в Google Merchant. Ціна має бути нижчою за ціну на сайті, інакше пропозиція не показується. Строк - через скільки днів товар буде у клієнта (порожньо = <span id="default-days">14</span>). Щоб прибрати пропозицію, зітріть ціну. Після збереження сайт оновиться приблизно за 2–3 хвилини.</p>
+    <p class="hint" id="hint" hidden>Наявність і ціна «на сайті» - з сайту (постачальник), їх тут не змінити. Впишіть ціну під замовлення - у товару з'явиться окрема сторінка «під замовлення» і пропозиція в Google Merchant. Ціна має бути нижчою за ціну на сайті, інакше пропозиція не показується. Ціну можна вписати в доларах - гривні порахуються за курсом угорі, а зміна курсу перерахує всі доларові ціни (поле «грн» у такого товару сіре). Без доларів - вписуйте гривні, як раніше. Строк - через скільки днів товар буде у клієнта (порожньо = <span id="default-days">14</span>). Щоб прибрати пропозицію, зітріть ціну. Після збереження сайт оновиться приблизно за 2–3 хвилини.</p>
 
     <div class="table-wrap" id="table-wrap" hidden>
       <table>
@@ -127,7 +141,7 @@
           <tr>
             <th>ID</th><th></th><th>Товар</th>
             <th class="sep r">На сайті, грн</th>
-            <th class="sep">Під замовлення, грн</th><th>Строк, днів</th>
+            <th class="sep">Під замовлення, $</th><th>Під замовлення, грн</th><th>Строк, днів</th>
             <th>Знижка</th>
           </tr>
         </thead>
@@ -157,6 +171,8 @@
     const $ = (id) => document.getElementById(id);
     let token = null;
     let defaultDays = 14;
+    let rateOrig = null;   // usd_rate з backorder_offers.json
+    let rateEdit = null;   // число, null (порожньо) або NaN (помилка)
     // id -> { product (з products.json або заглушка), orig, edit: { price, lead_days } }
     let products = new Map();
     let filterCat = "";
@@ -218,6 +234,11 @@
         }),
       ]);
       defaultDays = Number(offers.data.default_lead_days ?? 14);
+      rateOrig = Number(offers.data.usd_rate) > 0 ? Number(offers.data.usd_rate) : null;
+      rateEdit = rateOrig;
+      $("rate").value = rateOrig ?? "";
+      $("rate").classList.remove("invalid");
+      $("rate-box").hidden = false;
       $("default-days").textContent = defaultDays;
       const byId = offers.data.by_id || {};
       products = new Map();
@@ -240,23 +261,34 @@
     }
 
     // Стара пропозиція могла бути задана знижкою ("discount") - показуємо як ціну.
+    // price_usd задано - price (грн) не зберігається, рахується з курсу.
     function pickEditable(entry, product) {
-      if (!entry) return { price: null, lead_days: null };
+      if (!entry) return { price: null, price_usd: null, lead_days: null };
+      const price_usd = entry.price_usd != null ? Number(entry.price_usd) : null;
       let price = entry.price != null ? Number(entry.price) : null;
       if (price == null && entry.discount != null && sitePrice(product)) price = sitePrice(product) - Number(entry.discount);
-      return { price, lead_days: entry.lead_days != null ? Number(entry.lead_days) : null };
+      return { price: price_usd != null ? null : price, price_usd, lead_days: entry.lead_days != null ? Number(entry.lead_days) : null };
     }
 
+    const FIELDS = ["price", "price_usd", "lead_days"];
     function isChanged(p) {
-      return p.orig.price !== p.edit.price || p.orig.lead_days !== p.edit.lead_days;
+      return FIELDS.some((f) => p.orig[f] !== p.edit[f]);
+    }
+    const rateChanged = () => rateEdit !== rateOrig;
+    const validRate = () => rateEdit > 0;
+
+    // Ціна в грн, яка піде на сайт: з $ × курс, інакше введена гривнева.
+    function uahPrice(edit) {
+      if (edit.price_usd > 0) return validRate() ? Math.round(edit.price_usd * rateEdit) : NaN;
+      return edit.price;
     }
 
     // "12 500" -> 12500; порожньо -> null; помилка -> NaN
-    function parseNum(text, integer) {
+    function parseNum(text, integer, decimals) {
       const t = text.replace(/[\s\u00a0]/g, "").replace(",", ".");
       if (t === "") return null;
       if (!/^\d+(\.\d+)?$/.test(t)) return NaN;
-      const n = integer ? Number(t) : Math.round(parseFloat(t));
+      const n = integer ? Number(t) : decimals ? Math.round(parseFloat(t) * 100) / 100 : Math.round(parseFloat(t));
       if (integer && !Number.isInteger(n)) return NaN;
       return n > 0 ? n : NaN;
     }
@@ -269,8 +301,9 @@
       input.inputMode = "numeric";
       input.placeholder = placeholder;
       input.value = p.edit[field] ?? "";
+      if (field === "price_usd") input.inputMode = "decimal";
       input.addEventListener("input", () => {
-        const v = parseNum(input.value, field === "lead_days");
+        const v = parseNum(input.value, field === "lead_days", field === "price_usd");
         input.classList.toggle("invalid", Number.isNaN(v));
         p.edit[field] = v;
         refreshRow(p);
@@ -318,6 +351,9 @@
         const site = td("sep r site");
         const price = sitePrice(d);
         site.textContent = price ? fmt(price) : "-";
+        p.siteUsd = document.createElement("span");
+        p.siteUsd.className = "usd";
+        site.append(p.siteUsd);
         const stock = document.createElement("span");
         const inStock = !d.missing && d.availability === "in_stock";
         stock.className = "stock" + (inStock ? "" : " out");
@@ -330,7 +366,8 @@
           td("img", img),
           td("name", name, cat),
           site,
-          td("sep", numInput(p, "price", "price", "")),
+          td("sep", numInput(p, "price_usd", "usd", "")),
+          td("", p.uahInput = numInput(p, "price", "price", "")),
           td("", numInput(p, "lead_days", "days", String(defaultDays))),
           p.noteCell,
         );
@@ -343,8 +380,20 @@
 
     function refreshRow(p) {
       const d = p.product;
-      const price = p.edit.price;
+      const price = uahPrice(p.edit);
       const site = sitePrice(d);
+      // Задано $ - поле грн показує розрахунок і не редагується.
+      const byUsd = p.edit.price_usd > 0;
+      p.uahInput.disabled = byUsd;
+      if (byUsd) {
+        p.uahInput.value = Number.isNaN(price) ? "" : price;
+        p.uahInput.placeholder = validRate() ? "" : "курс?";
+        p.uahInput.classList.remove("invalid");
+      } else if (document.activeElement !== p.uahInput) {
+        p.uahInput.value = p.edit.price ?? "";
+        p.uahInput.placeholder = "";
+      }
+      p.siteUsd.textContent = site && validRate() ? `≈ $${fmt(Math.round(site / rateEdit))}` : "";
       const note = p.noteCell;
       note.textContent = "";
       if (price > 0) {
@@ -357,11 +406,20 @@
           note.textContent = `−${fmt(Math.round(diff))} грн (−${Math.round(diff / site * 100)}%)`;
         }
       }
+      if (byUsd && !validRate()) note.innerHTML = '<span class="warn">вкажіть курс $ угорі</span>';
       p.row.classList.toggle("changed", isChanged(p));
       p.row.classList.toggle("off", !(price > 0));
+      updateSavebar();
+    }
+
+    function updateSavebar() {
       const changed = [...products.values()].filter(isChanged);
-      $("savebar").hidden = changed.length === 0;
-      $("changed-count").textContent = `Змінено товарів: ${changed.length}`;
+      $("savebar").hidden = changed.length === 0 && !rateChanged();
+      $("changed-count").textContent = [
+        rateChanged() ? `Курс $: ${rateOrig ?? "-"} → ${Number.isNaN(rateEdit) ? "?" : rateEdit ?? "-"}` : "",
+        changed.length ? `Змінено товарів: ${changed.length}` : "",
+      ].filter(Boolean).join(" · ");
+      $("rate-box").classList.toggle("changed", rateChanged());
     }
 
     function renderCats() {
@@ -387,7 +445,7 @@
       for (const p of products.values()) {
         const r = p.row;
         r.hidden = (filterCat && r.dataset.cat !== filterCat) || (q && !r.dataset.search.includes(q))
-          || (onlySet && !(p.edit.price > 0) && !(p.orig.price > 0));
+          || (onlySet && !(uahPrice(p.edit) > 0) && !(p.orig.price > 0) && !(p.orig.price_usd > 0));
       }
       showEmpty(q);
     }
@@ -414,15 +472,19 @@
 
     async function save() {
       const changed = [...products.values()].filter(isChanged);
-      if (changed.some((p) => Number.isNaN(p.edit.price) || Number.isNaN(p.edit.lead_days))) {
-        setStatus("Виправте поля, підсвічені червоним: лише ціле число більше нуля або порожньо.", "error");
+      if (changed.some((p) => FIELDS.some((f) => Number.isNaN(p.edit[f])))) {
+        setStatus("Виправте поля, підсвічені червоним: лише число більше нуля або порожньо.", "error");
         return;
       }
+      if (Number.isNaN(rateEdit)) { setStatus("Курс $ - число більше нуля, напр. 41.5", "error"); return; }
+      const usdUsed = [...products.values()].some((p) => p.edit.price_usd > 0);
+      if (usdUsed && !validRate()) { setStatus("Є ціни в $, а курс не задано - вкажіть курс угорі.", "error"); return; }
+      if (!changed.length && !rateChanged()) return;
       $("save-btn").disabled = true;
       setStatus("Збереження…");
       try {
         await commit(changed);
-        const done = `Збережено (${changed.length} товарів). Сайт оновиться приблизно за 2–3 хвилини.`;
+        const done = `Збережено (${[rateChanged() ? "курс $" : "", changed.length ? changed.length + " товарів" : ""].filter(Boolean).join(", ")}). Сайт оновиться приблизно за 2–3 хвилини.`;
         await load();
         setStatus(done, "ok");
       } catch (e) {
@@ -439,26 +501,31 @@
       const byId = { ...(current.data.by_id || {}) };
       const conflicts = changed.filter((p) => {
         const now = pickEditable(byId[p.product.id], p.product);
-        return now.price !== p.orig.price || now.lead_days !== p.orig.lead_days;
+        return FIELDS.some((f) => now[f] !== p.orig[f]);
       });
+      const nowRate = Number(current.data.usd_rate) > 0 ? Number(current.data.usd_rate) : null;
+      if (rateChanged() && nowRate !== rateOrig) {
+        throw new Error(`Курс $ щойно змінив хтось інший (${nowRate}). Оновіть сторінку і внесіть зміни ще раз.`);
+      }
       if (conflicts.length) {
         throw new Error("Ці товари щойно змінив хтось інший: " +
           conflicts.map((p) => p.product.title).join(", ") + ". Оновіть сторінку і внесіть зміни ще раз.");
       }
       for (const p of changed) {
         const id = String(p.product.id);
-        if (!(p.edit.price > 0)) { delete byId[id]; continue; }
-        const { discount, price, lead_days, ...rest } = byId[id] || {};
-        const entry = { ...rest, price: p.edit.price };
+        if (!(p.edit.price_usd > 0) && !(p.edit.price > 0)) { delete byId[id]; continue; }
+        const { discount, price, price_usd, lead_days, ...rest } = byId[id] || {};
+        const entry = p.edit.price_usd > 0 ? { ...rest, price_usd: p.edit.price_usd } : { ...rest, price: p.edit.price };
         if (p.edit.lead_days > 0) entry.lead_days = p.edit.lead_days;
         byId[id] = entry;
       }
       const data = { ...current.data, by_id: byId };
+      if (rateChanged()) { if (rateEdit > 0) data.usd_rate = rateEdit; else delete data.usd_rate; }
       try {
         await gh(`/repos/${REPO}/contents/${OFFERS}`, {
           method: "PUT",
           body: JSON.stringify({
-            message: `Адмінка: під замовлення (товари ${changed.map((p) => p.product.id).join(", ")})`,
+            message: `Адмінка: під замовлення (${[rateChanged() ? `курс $ ${rateEdit}` : "", changed.length ? `товари ${changed.map((p) => p.product.id).join(", ")}` : ""].filter(Boolean).join("; ")})`,
             content: b64encode(JSON.stringify(data, null, 2) + "\n"),
             sha: current.sha,
             branch: BRANCH,
@@ -499,14 +566,24 @@
     });
     $("token").addEventListener("keydown", (e) => { if (e.key === "Enter") $("login-btn").click(); });
     $("search").addEventListener("input", applyFilter);
+    $("rate").addEventListener("input", () => {
+      const t = $("rate").value.replace(/[\s\u00a0]/g, "").replace(",", ".");
+      rateEdit = t === "" ? null : /^\d+(\.\d+)?$/.test(t) && parseFloat(t) > 0 ? Math.round(parseFloat(t) * 100) / 100 : NaN;
+      $("rate").classList.toggle("invalid", Number.isNaN(rateEdit));
+      for (const p of products.values()) refreshRow(p);
+      updateSavebar();
+    });
     $("only-set").addEventListener("change", applyFilter);
     $("save-btn").addEventListener("click", save);
     $("reset-btn").addEventListener("click", () => {
       for (const p of products.values()) p.edit = { ...p.orig };
+      rateEdit = rateOrig;
+      $("rate").value = rateOrig ?? "";
+      $("rate").classList.remove("invalid");
       render();
     });
     window.addEventListener("beforeunload", (e) => {
-      if ([...products.values()].some(isChanged)) e.preventDefault();
+      if ([...products.values()].some(isChanged) || rateChanged()) e.preventDefault();
     });
 
     AdminShell.ready(start);

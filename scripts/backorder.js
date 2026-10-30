@@ -75,10 +75,14 @@ function getBackorderOffer(p) {
   if (isNaN(stockPrice)) { warnOnce(p.id, 'немає ціни в наявності'); return null; }
   const currency = String(p.price).replace(/[\d.,\s]+/, '').trim() || 'UAH';
 
+  // Ціна в $ × курс (config.usd_rate) має пріоритет: змінили курс в адмінці -
+  // перераховуються всі доларові ціни. Округлення до гривні - як в адмінці.
   let price;
-  if (entry.price != null) price = Number(entry.price);
+  const rate = Number(config.usd_rate);
+  if (entry.price_usd != null && rate > 0) price = Math.round(Number(entry.price_usd) * rate);
+  else if (entry.price != null) price = Number(entry.price);
   else if (entry.discount != null) price = stockPrice - Number(entry.discount);
-  if (!(price > 0)) { warnOnce(p.id, 'не задано price/discount'); return null; }
+  if (!(price > 0)) { warnOnce(p.id, 'не задано price_usd/price/discount'); return null; }
   if (price >= stockPrice) {
     warnOnce(p.id, `ціна під замовлення ${price} не нижча за ціну в наявності ${stockPrice}`);
     return null;
