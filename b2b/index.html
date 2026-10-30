@@ -65,7 +65,25 @@
     td.name .cat { display: block; font-size: .78rem; color: var(--muted); }
     td.price { white-space: nowrap; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
     td.price .ask { font-weight: 400; color: var(--muted); font-size: .85rem; }
-    td.qty input { width: 76px; text-align: center; padding: 6px; }
+    td.price.rrp { font-weight: 400; color: var(--muted); }
+    td.price.special { color: #c0392b; }
+    .stepper { display: inline-flex; align-items: center; border: 2px solid var(--line); border-radius: 8px; overflow: hidden; }
+    .stepper button { width: 28px; height: 32px; border: none; background: #f8fafc; color: var(--navy); font: 700 1rem inherit; cursor: pointer; }
+    .stepper button:hover { background: #e8edf3; }
+    .stepper input { width: 52px; border: none; border-radius: 0; text-align: center; padding: 6px 2px; -moz-appearance: textfield; }
+    .stepper input::-webkit-inner-spin-button, .stepper input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    .fav { background: none; border: none; font-size: 1.3rem; line-height: 1; color: #b8c2cc; cursor: pointer; padding: 4px; }
+    .fav.on { color: var(--red); }
+    td.name .open { background: none; border: none; padding: 0; font: inherit; color: var(--navy); text-align: left; cursor: pointer; }
+    td.name .open:hover { text-decoration: underline; }
+    .product .gallery { display: flex; gap: 8px; overflow-x: auto; margin: 0 0 14px; }
+    .product .gallery img { height: 200px; max-width: 100%; object-fit: contain; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+    .product .facts { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0 0 14px; font-size: .92rem; }
+    .product .facts b { color: var(--navy); }
+    .product .desc { white-space: pre-line; font-size: .93rem; margin: 0 0 14px; }
+    .product table { font-size: .9rem; }
+    .product table td { padding: 5px 8px; }
+    .product .specs-section { background: #f8fafc; }
     .stock { font-size: .82rem; white-space: nowrap; }
     .stock.yes { color: #1e8e3e; }
     .stock.no { color: var(--muted); }
@@ -89,7 +107,7 @@
     @media (max-width: 700px) {
       header { padding: 0 10px; gap: 8px; }
       .logo span, .who { display: none; }
-      td.img { display: none; }
+      td.img, td.rrp, th:nth-child(2), th:nth-child(7) { display: none; }
       .row2 { grid-template-columns: 1fr; }
     }
   </style>
@@ -151,11 +169,12 @@
         <input type="search" id="q" placeholder="Пошук за назвою, кодом або артикулом" autocomplete="off">
         <select id="cat"><option value="">Усі категорії</option></select>
         <label class="chk"><input type="checkbox" id="only-stock"> лише в наявності</label>
-        <span class="rate">Ціни в гривнях, гуртові</span>
+        <label class="chk"><input type="checkbox" id="only-fav"> ♥ обране</label>
+        <span class="rate">Ціни в гривнях, гуртові; спецціна - ваша персональна</span>
       </div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Код</th><th></th><th>Товар</th><th>Наявність</th><th style="text-align:right">Ціна, грн</th><th>Кількість</th></tr></thead>
+          <thead><tr><th>Код</th><th></th><th>Товар</th><th>Наявність</th><th style="text-align:right">Ціна, грн</th><th style="text-align:right">Спецціна</th><th style="text-align:right">РРЦ</th><th>Кількість</th><th></th></tr></thead>
           <tbody id="rows"></tbody>
         </table>
       </div>
@@ -200,6 +219,20 @@
     </form>
   </div>
 
+  <div class="overlay" id="product" hidden>
+    <div class="card product">
+      <div style="display:flex;gap:12px;align-items:flex-start;margin:0 0 12px">
+        <h2 id="p-title" style="flex:1;margin:0"></h2>
+        <button type="button" class="btn light" id="p-close">Закрити</button>
+      </div>
+      <div class="gallery" id="p-gallery"></div>
+      <div class="facts" id="p-facts"></div>
+      <div class="desc" id="p-desc"></div>
+      <div class="table-wrap" id="p-specs"></div>
+      <p id="p-link" style="margin:14px 0 0"></p>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script>
   (function () {
@@ -221,9 +254,13 @@
     let client = null;
     let items = [];
     let byId = new Map();
+    let special = {};          // спецціни клієнта: { id: грн }
+    let favs = new Set();
     let cart = {};
     try { cart = JSON.parse(localStorage.getItem(CART_KEY) || '{}') || {}; } catch { cart = {}; }
     const saveCart = () => { try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch { /* приватне вікно */ } };
+    // Ціна, за якою рахується замовлення: спецціна клієнта, а без неї - гуртова.
+    const priceOf = (i) => special[i.id] ?? i.price;
 
     async function api(action, body = {}) {
       const { data, error } = await sb.functions.invoke('b2b', { body: { action, ...body } });
@@ -327,11 +364,14 @@
     // ─── Каталог і кошик ───────────────────────────────────────────
 
     async function loadCatalog() {
-      $('rows').innerHTML = '<tr><td colspan="6" class="empty">Завантаження…</td></tr>';
+      $('rows').innerHTML = '<tr><td colspan="9" class="empty">Завантаження…</td></tr>';
       try {
-        items = (await api('catalog')).items;
+        const r = await api('catalog');
+        items = r.items;
+        special = r.special || {};
+        favs = new Set(r.favorites || []);
       } catch (err) {
-        $('rows').innerHTML = `<tr><td colspan="6" class="empty">Не вдалося завантажити каталог: ${esc(err.message)}</td></tr>`;
+        $('rows').innerHTML = `<tr><td colspan="9" class="empty">Не вдалося завантажити каталог: ${esc(err.message)}</td></tr>`;
         return;
       }
       byId = new Map(items.map((i) => [i.id, i]));
@@ -347,40 +387,112 @@
       const q = $('q').value.trim().toLowerCase();
       const cat = $('cat').value;
       const onlyStock = $('only-stock').checked;
-      const list = items.filter((i) => (!cat || i.cat === cat) && (!onlyStock || i.available)
+      const onlyFav = $('only-fav').checked;
+      const list = items.filter((i) => (!cat || i.cat === cat) && (!onlyStock || i.available) && (!onlyFav || favs.has(i.id))
         && (!q || `${i.code} ${i.name} ${i.mpn || ''}`.toLowerCase().includes(q)));
       $('rows').innerHTML = list.length ? list.map((i) => `
         <tr data-id="${esc(i.id)}"${cart[i.id] ? ' class="in-cart"' : ''}>
           <td class="code">${esc(i.code)}</td>
           <td class="img">${i.photo ? `<img src="${esc(i.photo)}" alt="" loading="lazy">` : ''}</td>
-          <td class="name">${i.url ? `<a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.name)}</a>` : esc(i.name)}<span class="cat">${esc(i.cat)}${i.mpn ? ' · ' + esc(i.mpn) : ''}</span></td>
+          <td class="name"><button type="button" class="open">${esc(i.name)}</button><span class="cat">${esc(i.cat)}${i.mpn ? ' · ' + esc(i.mpn) : ''}</span></td>
           <td><span class="stock ${i.available ? 'yes' : 'no'}">${i.available ? '✓ в наявності' : 'під замовлення'}</span></td>
           <td class="price">${i.price != null ? money(i.price) : '<span class="ask">за запитом</span>'}</td>
-          <td class="qty"><input type="number" min="0" max="9999" step="1" value="${cart[i.id] || ''}" placeholder="0" aria-label="Кількість"></td>
-        </tr>`).join('') : '<tr><td colspan="6" class="empty">Нічого не знайдено</td></tr>';
+          <td class="price special">${special[i.id] != null ? money(special[i.id]) : ''}</td>
+          <td class="price rrp">${i.rrp != null ? money(i.rrp) : ''}</td>
+          <td class="qty"><span class="stepper"><button type="button" data-step="-1" aria-label="Менше">−</button><input type="number" min="0" max="9999" step="1" value="${cart[i.id] || ''}" placeholder="0" aria-label="Кількість"><button type="button" data-step="1" aria-label="Більше">+</button></span></td>
+          <td><button type="button" class="fav${favs.has(i.id) ? ' on' : ''}" aria-label="Обране" title="${favs.has(i.id) ? 'Прибрати з обраного' : 'Додати в обране'}">${favs.has(i.id) ? '♥' : '♡'}</button></td>
+        </tr>`).join('') : '<tr><td colspan="9" class="empty">Нічого не знайдено</td></tr>';
       renderCartBar();
     }
 
-    $('rows').addEventListener('input', (e) => {
-      if (!e.target.matches('td.qty input')) return;
-      const tr = e.target.closest('tr');
-      const qty = Math.min(9999, Math.max(0, Math.round(Number(e.target.value) || 0)));
+    function setQty(tr, value) {
+      const qty = Math.min(9999, Math.max(0, Math.round(Number(value) || 0)));
       if (qty) cart[tr.dataset.id] = qty; else delete cart[tr.dataset.id];
       tr.classList.toggle('in-cart', !!qty);
       saveCart();
       renderCartBar();
+      return qty;
+    }
+
+    $('rows').addEventListener('input', (e) => {
+      if (e.target.matches('td.qty input')) setQty(e.target.closest('tr'), e.target.value);
     });
-    ['q', 'cat', 'only-stock'].forEach((id) => $(id).addEventListener('input', render));
+
+    $('rows').addEventListener('click', async (e) => {
+      const tr = e.target.closest('tr[data-id]');
+      if (!tr) return;
+      const step = e.target.closest('[data-step]');
+      if (step) {
+        const input = tr.querySelector('td.qty input');
+        input.value = setQty(tr, (cart[tr.dataset.id] || 0) + Number(step.dataset.step)) || '';
+        return;
+      }
+      if (e.target.closest('.open')) { openProduct(byId.get(tr.dataset.id)); return; }
+      const fav = e.target.closest('.fav');
+      if (fav) {
+        const id = tr.dataset.id;
+        const on = !favs.has(id);
+        const paint = (v) => { fav.classList.toggle('on', v); fav.textContent = v ? '♥' : '♡'; fav.title = v ? 'Прибрати з обраного' : 'Додати в обране'; };
+        if (on) favs.add(id); else favs.delete(id);
+        paint(on);
+        try {
+          await api('fav', { id, on });
+        } catch (err) {
+          if (on) favs.delete(id); else favs.add(id);
+          paint(!on);
+          alert('Не вдалося зберегти обране: ' + err.message);
+        }
+        if ($('only-fav').checked && !on) render();
+      }
+    });
+    ['q', 'cat', 'only-stock', 'only-fav'].forEach((id) => $(id).addEventListener('input', render));
+
+    // ─── Картка товару ─────────────────────────────────────────────
+    // Опис, фото й характеристики - з products.json сайту (ті самі, що на
+    // сторінці товару); ціни - з каталогу кабінету.
+
+    let siteProducts = null;
+    async function openProduct(i) {
+      if (!i) return;
+      $('p-title').textContent = i.name;
+      $('p-gallery').innerHTML = i.photo ? `<img src="${esc(i.photo)}" alt="">` : '';
+      $('p-desc').textContent = '';
+      $('p-specs').innerHTML = '';
+      const price = priceOf(i);
+      $('p-facts').innerHTML = [
+        `Код: <b>${esc(i.code)}</b>`,
+        i.mpn ? `Артикул: <b>${esc(i.mpn)}</b>` : '',
+        `<span class="stock ${i.available ? 'yes' : 'no'}">${i.available ? '✓ в наявності' : 'під замовлення'}</span>`,
+        `Ваша ціна: <b>${price != null ? money(price) + ' грн' : 'за запитом'}</b>${special[i.id] != null ? ' (спецціна)' : ''}`,
+        i.rrp != null ? `РРЦ: <b>${money(i.rrp)} грн</b>` : '',
+      ].filter(Boolean).join('');
+      $('p-link').innerHTML = i.url ? `<a href="${esc(i.url)}" target="_blank" rel="noopener">Сторінка товару на сайті ↗</a>` : '';
+      $('product').hidden = false;
+      try {
+        siteProducts ??= new Map((await (await fetch('/products.json', { cache: 'no-cache' })).json()).map((p) => [String(p.id), p]));
+      } catch { return; /* лишаємо те, що є з каталогу */ }
+      const p = siteProducts.get(i.id);
+      if (!p || $('product').hidden || $('p-title').textContent !== i.name) return;
+      const photos = [p.image_link, ...(p.additional_images || [])].filter(Boolean);
+      if (photos.length) $('p-gallery').innerHTML = photos.map((u) => `<img src="/${esc(u.replace(/^\//, ''))}" alt="" loading="lazy">`).join('');
+      $('p-desc').textContent = p.description || '';
+      // specs - готовий HTML таблиці характеристик з нашого ж products.json (як на сторінці товару).
+      $('p-specs').innerHTML = p.specs || '';
+    }
+    const closeProduct = () => { $('product').hidden = true; };
+    $('p-close').addEventListener('click', closeProduct);
+    $('product').addEventListener('click', (e) => { if (e.target === $('product')) closeProduct(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeProduct(); });
 
     const cartLines = () => Object.entries(cart).filter(([id]) => byId.has(id)).map(([id, qty]) => ({ item: byId.get(id), qty }));
-    const cartTotal = (lines) => lines.reduce((s, l) => s + (l.item.price || 0) * l.qty, 0);
+    const cartTotal = (lines) => lines.reduce((s, l) => s + (priceOf(l.item) || 0) * l.qty, 0);
 
     function renderCartBar() {
       const lines = cartLines();
       $('cartbar').hidden = $('v-catalog').hidden || !lines.length;
       const units = lines.reduce((s, l) => s + l.qty, 0);
       $('cart-count').textContent = `Позицій: ${lines.length} (${units} шт.)`;
-      const ask = lines.some((l) => l.item.price == null);
+      const ask = lines.some((l) => priceOf(l.item) == null);
       $('cart-sum').textContent = `${money(cartTotal(lines))} грн${ask ? ' + позиції за запитом' : ''}`;
     }
 
@@ -395,7 +507,7 @@
       const lines = cartLines();
       $('lines').innerHTML = lines.map((l) => `<tr><td class="code">${esc(l.item.code)}</td><td>${esc(l.item.name)}</td>
         <td style="white-space:nowrap">× ${l.qty}</td>
-        <td class="price">${l.item.price != null ? money(l.item.price * l.qty) + ' грн' : '<span class="ask">за запитом</span>'}</td></tr>`).join('');
+        <td class="price">${priceOf(l.item) != null ? money(priceOf(l.item) * l.qty) + ' грн' : '<span class="ask">за запитом</span>'}</td></tr>`).join('');
       $('lines-total').textContent = `Разом: ${money(cartTotal(lines))} грн`;
       $('checkout-msg').textContent = '';
       $('checkout').hidden = false;

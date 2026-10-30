@@ -63,6 +63,11 @@
     .overlay { position: fixed; inset: 0; background: rgba(10,20,35,.5); z-index: 60; display: flex; justify-content: center; align-items: flex-start; overflow-y: auto; padding: 40px 16px; }
     .overlay[hidden] { display: none; }
     .overlay .admin-card { width: 100%; max-width: 760px; }
+    #sp .admin-card { max-width: 980px; }
+    #sp td { vertical-align: middle; }
+    #sp td input { width: 110px; padding: 5px 8px; text-align: right; }
+    #sp tr.has td { background: #fff8e6; }
+    #sp tr.changed td { background: #eef9f0; }
   </style>
 </head>
 <body data-admin-section="b2b">
@@ -124,6 +129,34 @@
         <div class="creds" id="creds" hidden></div>
       </div>
     </form>
+  </div>
+
+  <div class="overlay" id="sp" hidden>
+    <div class="admin-card">
+      <div class="admin-card__head">
+        <h2 id="sp-title"></h2>
+        <div style="display:flex;gap:8px">
+          <button type="button" class="admin-btn admin-btn--primary" id="sp-save">Зберегти</button>
+          <button type="button" class="admin-btn admin-btn--light" id="sp-close">Закрити</button>
+        </div>
+      </div>
+      <div class="toolbar">
+        <input type="search" class="form-input" id="sp-q" placeholder="Назва або код" autocomplete="off">
+        <label style="display:flex;gap:6px;align-items:center;margin:0;text-transform:none;letter-spacing:0;font-weight:400;font-size:.88rem">
+          <input type="checkbox" id="sp-only"> лише зі спецціною</label>
+        <span class="status-line" id="sp-status"></span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Код</th><th>Товар</th><th class="num">Гурт, грн</th><th class="num">РРЦ, грн</th><th class="num">Спецціна, грн</th></tr></thead>
+          <tbody id="sp-rows"></tbody>
+        </table>
+      </div>
+      <div class="admin-card__body" style="padding-top:8px">
+        <p class="admin-hint">Спецціна діє лише для цього клієнта: у кабінеті вона в окремій колонці, і замовлення рахується за нею.
+          Порожнє поле - звичайна гуртова ціна. Змінені рядки підсвічено зеленим, не забудьте «Зберегти».</p>
+      </div>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
@@ -251,6 +284,7 @@
             if (confirm(`Закрити доступ «${c.company}»? Клієнт не зможе увійти в кабінет.`)) run('admin_update', { id: c.id, status: 'blocked' });
           }));
         }
+        if (c.status === 'approved') a.append(button('Спецціни', 'admin-btn--light', () => openSpecial(c)));
         if (c.status === 'blocked' && c.user_id) a.append(button('Розблокувати', 'admin-btn--light', () => run('admin_update', { id: c.id, status: 'approved' })));
       }
       $('dlg').hidden = false;
@@ -304,6 +338,84 @@
     $('dlg').addEventListener('click', (e) => { if (e.target === $('dlg')) closeCard(); });
     $('dlg-form').addEventListener('submit', (e) => e.preventDefault());
     $('add-btn').addEventListener('click', () => openCard(null));
+
+    // ─── Спецціни клієнта ──────────────────────────────────────────
+
+    let sp = null; // { client, items, special, edits }
+
+    async function openSpecial(c) {
+      sp = { client: c, items: [], special: {}, edits: {} };
+      $('sp-title').textContent = 'Спецціни: ' + c.company;
+      $('sp-q').value = '';
+      $('sp-only').checked = false;
+      $('sp-rows').innerHTML = '<tr><td colspan="5" class="admin-hint" style="text-align:center">Завантаження…</td></tr>';
+      setStatus($('sp-status'), '');
+      $('sp').hidden = false;
+      try {
+        const r = await api('admin_special_get', { id: c.id });
+        sp.items = r.items;
+        sp.special = r.special || {};
+        $('sp-only').checked = Object.keys(sp.special).length > 0;
+        renderSpecial();
+      } catch (e) {
+        setStatus($('sp-status'), 'Не вдалося завантажити: ' + e.message, 'error');
+      }
+    }
+
+    function renderSpecial() {
+      const q = $('sp-q').value.trim().toLowerCase();
+      const only = $('sp-only').checked;
+      const list = sp.items.filter((i) => (!q || `${i.code} ${i.name}`.toLowerCase().includes(q))
+        && (!only || sp.special[i.id] != null || i.id in sp.edits));
+      $('sp-rows').innerHTML = list.length ? list.map((i) => {
+        const v = i.id in sp.edits ? sp.edits[i.id] : (sp.special[i.id] ?? '');
+        return `<tr data-id="${esc(i.id)}" class="${i.id in sp.edits ? 'changed' : sp.special[i.id] != null ? 'has' : ''}">
+          <td class="muted">${esc(i.code)}</td>
+          <td>${esc(i.name)}</td>
+          <td class="num">${i.price != null ? money(i.price) : '<span class="muted">-</span>'}</td>
+          <td class="num muted">${i.rrp != null ? money(i.rrp) : ''}</td>
+          <td class="num"><input class="form-input" type="number" min="0" step="0.01" value="${esc(v)}" placeholder="—"></td>
+        </tr>`;
+      }).join('') : '<tr><td colspan="5" class="admin-hint" style="text-align:center">Нічого не знайдено</td></tr>';
+    }
+
+    $('sp-rows').addEventListener('input', (e) => {
+      const tr = e.target.closest('tr[data-id]');
+      if (!tr) return;
+      const id = tr.dataset.id;
+      const v = e.target.value.trim();
+      if (v === String(sp.special[id] ?? '')) delete sp.edits[id]; else sp.edits[id] = v;
+      tr.className = id in sp.edits ? 'changed' : sp.special[id] != null ? 'has' : '';
+    });
+    $('sp-q').addEventListener('input', renderSpecial);
+    $('sp-only').addEventListener('input', renderSpecial);
+
+    $('sp-save').addEventListener('click', async () => {
+      const ids = Object.keys(sp.edits);
+      if (!ids.length) { setStatus($('sp-status'), 'Змін немає'); return; }
+      const prices = Object.fromEntries(ids.map((id) => [id, sp.edits[id] === '' ? null : Number(sp.edits[id])]));
+      $('sp-save').disabled = true;
+      setStatus($('sp-status'), 'Зберігаємо…');
+      try {
+        const r = await api('admin_special_set', { id: sp.client.id, prices });
+        sp.special = r.special || {};
+        sp.edits = {};
+        renderSpecial();
+        setStatus($('sp-status'), `Збережено (${ids.length})`, 'ok');
+      } catch (e) {
+        setStatus($('sp-status'), e.message, 'error');
+      } finally {
+        $('sp-save').disabled = false;
+      }
+    });
+
+    function closeSpecial() {
+      if (sp && Object.keys(sp.edits).length && !confirm('Є незбережені спецціни. Закрити без збереження?')) return;
+      $('sp').hidden = true;
+      sp = null;
+    }
+    $('sp-close').addEventListener('click', closeSpecial);
+    $('sp').addEventListener('click', (e) => { if (e.target === $('sp')) closeSpecial(); });
 
     AdminShell.ready(load);
   </script>

@@ -8,7 +8,8 @@
 //   apply        { company, edrpou?, contact_name, phone, email, city?, comment? } - заявка на доступ
 // B2B-клієнт (app_metadata.role = 'b2b', статус approved):
 //   me           - профіль і статус (працює і для заблокованого - щоб показати причину)
-//   catalog      - товари з гуртовими цінами
+//   catalog      - товари з гуртовими цінами, РРЦ, спецціни клієнта, обране
+//   fav          { id, on }                    - додати / прибрати з обраного
 //   order        { client_key, items: [{ id, qty }], city?, np_branch?, payment_method?, comment? }
 //   orders       - мої замовлення
 // Адмін (tg_admins):
@@ -16,11 +17,15 @@
 //   admin_approve { id, password? }            - створює вхід клієнту, повертає пароль
 //   admin_create  { company, email, ..., password? } - клієнт одразу зі входом
 //   admin_update  { id, status?, manager_note?, password?, company?, edrpou?, contact_name?, phone?, city? }
+//   admin_special_get { id }                   - каталог і спецціни клієнта
+//   admin_special_set { id, prices: { <product_id>: число | null } } - null = прибрати спецціну
 //
 // Ціни - ті самі, що у feed/opt.xml: wholesale_usd × usd_rate з
 // data/ultradomik/prices.json і feeds.json (редагуються в /prom-admin/).
 // Функція читає їх із сайту, тож зміна ціни в адмінці діє тут одразу після
 // оновлення файлів на сайті (1-2 хв), без окремої синхронізації.
+// Спецціна (b2b_special_prices) - окрема ціна товару для окремого клієнта;
+// де вона є, замовлення рахується за нею.
 //
 // Секрети: TELEGRAM_BOT_TOKEN, MANAGER_CHAT_ID (як для order-submit; без них
 // просто немає сповіщень). SUPABASE_URL і SUPABASE_SERVICE_ROLE_KEY Supabase додає сам.
@@ -97,7 +102,7 @@ async function notifyManager(lines: string[]) {
 
 // ─── Каталог ────────────────────────────────────────────────────────────
 
-type Item = { id: string; code: string; name: string; cat: string; photo: string; url: string | null; mpn: string | null; price: number | null; available: boolean };
+type Item = { id: string; code: string; name: string; cat: string; photo: string; url: string | null; mpn: string | null; price: number | null; rrp: number | null; available: boolean };
 let cache: { at: number; items: Item[] } | null = null;
 
 async function siteJson(path: string) {
@@ -135,12 +140,19 @@ async function catalog(): Promise<Item[]> {
       mpn: s?.mpn || null,
       // Як feed/opt.xml: round(wholesale_usd × usd_rate, 2); без гурту - ціна за запитом.
       price: usd > 0 ? Math.round(usd * rate * 100) / 100 : null,
+      // РРЦ - роздрібна ціна сайту (як у prom_file.xml до націнок).
+      rrp: Number(p.price) || parseFloat(s?.price) || null,
       // Як <available> у фідах: не вимкнено в адмінці і є на сайті (або товар лише для фідів).
       available: !p.off && (p.in_stock === true || !s),
     });
   }
   cache = { at: Date.now(), items };
   return items;
+}
+
+async function specialPrices(clientId: string) {
+  const { data } = await db.from("b2b_special_prices").select("product_id, price").eq("client_id", clientId);
+  return Object.fromEntries((data ?? []).map((r) => [r.product_id, Number(r.price)]));
 }
 
 // ─── Хто викликає ───────────────────────────────────────────────────────
@@ -211,10 +223,11 @@ async function apply(b: any) {
 async function order(client: any, b: any) {
   const raw = Array.isArray(b.items) ? b.items.slice(0, MAX_ITEMS) : [];
   const byId = new Map((await catalog()).map((i) => [i.id, i]));
+  const special = await specialPrices(client.id);
   const items = raw.map((r: any) => ({ it: byId.get(String(r?.id ?? "")), qty: Math.min(9999, Math.max(1, Math.round(Number(r?.qty) || 1))) }))
     .filter((r: any) => r.it)
     .map((r: any, n: number) => ({
-      position: n, product_id: r.it.id, title: r.it.name, sku: r.it.code, qty: r.qty, price: r.it.price,
+      position: n, product_id: r.it.id, title: r.it.name, sku: r.it.code, qty: r.qty, price: special[r.it.id] ?? r.it.price,
     }));
   if (!items.length) return json({ error: "no items" }, 400);
 
@@ -315,6 +328,31 @@ async function admin(action: string, b: any) {
     return json({ ok: true, email: c.email, password });
   }
 
+  if (action === "admin_special_get") {
+    return json({ ok: true, items: await catalog(), special: await specialPrices(c.id) });
+  }
+
+  if (action === "admin_special_set") {
+    const known = new Set((await catalog()).map((i) => i.id));
+    const set: { client_id: string; product_id: string; price: number; updated_at: string }[] = [];
+    const del: string[] = [];
+    for (const [id, v] of Object.entries(b.prices ?? {})) {
+      if (!known.has(id)) continue;
+      const n = Math.round(Number(v) * 100) / 100;
+      if (v === null || v === "" || !(n > 0)) del.push(id);
+      else set.push({ client_id: c.id, product_id: id, price: n, updated_at: new Date().toISOString() });
+    }
+    if (set.length) {
+      const { error } = await db.from("b2b_special_prices").upsert(set);
+      if (error) return json({ error: error.message }, 500);
+    }
+    if (del.length) {
+      const { error } = await db.from("b2b_special_prices").delete().eq("client_id", c.id).in("product_id", del);
+      if (error) return json({ error: error.message }, 500);
+    }
+    return json({ ok: true, special: await specialPrices(c.id) });
+  }
+
   if (action === "admin_update") {
     const patch: Record<string, unknown> = { updated_at: new Date().toISOString() };
     for (const k of ["company", "edrpou", "contact_name", "phone", "city"] as const) {
@@ -371,7 +409,22 @@ Deno.serve(async (req) => {
     if (action === "me") return json({ ok: true, client });
     if (client.status !== "approved") return json({ error: "not approved", status: client.status }, 403);
 
-    if (action === "catalog") return json({ ok: true, items: await catalog() });
+    if (action === "catalog") {
+      const [items, special, { data: favs }] = await Promise.all([
+        catalog(), specialPrices(client.id),
+        db.from("b2b_favorites").select("product_id").eq("client_id", client.id),
+      ]);
+      return json({ ok: true, items, special, favorites: (favs ?? []).map((f) => f.product_id) });
+    }
+    if (action === "fav") {
+      const id = text(b.id, 40);
+      if (!id) return json({ error: "no id" }, 400);
+      const { error } = b.on
+        ? await db.from("b2b_favorites").upsert({ client_id: client.id, product_id: id })
+        : await db.from("b2b_favorites").delete().eq("client_id", client.id).eq("product_id", id);
+      if (error) return json({ error: error.message }, 500);
+      return json({ ok: true });
+    }
     if (action === "order") return await order(client, b);
     if (action === "orders") {
       const { data, error } = await db.from("orders")

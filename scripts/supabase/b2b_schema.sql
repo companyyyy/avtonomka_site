@@ -1,5 +1,5 @@
 -- Автономка: B2B-кабінет (/b2b/) - клієнти-партнери, їх вхід і замовлення.
--- Виконати ОДИН РАЗ у Supabase Dashboard → SQL Editor → New query → Run,
+-- Виконати у Supabase Dashboard → SQL Editor → New query → Run,
 -- ПІСЛЯ miniapp_tracking_schema.sql (tg_admins, is_tg_admin()) і
 -- orders_schema.sql (orders). Безпечно запускати повторно.
 --
@@ -66,6 +66,31 @@ create policy "client reads own b2b_clients" on public.b2b_clients
 -- посиланням на клієнта - так вони одразу видні в розділі «Замовлення».
 alter table public.orders add column if not exists b2b_client_id uuid references public.b2b_clients (id) on delete set null;
 create index if not exists orders_b2b_client_idx on public.orders (b2b_client_id, created_at desc);
+
+-- Спецціни: окрема ціна товару для окремого клієнта (грн). Немає рядка -
+-- у клієнта звичайна гуртова. Ставить менеджер у картці клієнта (b2b-admin/).
+-- product_id - id постачальника (як у products.json), не код для клієнтів.
+create table if not exists public.b2b_special_prices (
+  client_id   uuid not null references public.b2b_clients (id) on delete cascade,
+  product_id  text not null,
+  price       numeric(12, 2) not null check (price > 0),
+  updated_at  timestamptz not null default now(),
+  primary key (client_id, product_id)
+);
+
+-- Обране клієнта (сердечко в каталозі).
+create table if not exists public.b2b_favorites (
+  client_id   uuid not null references public.b2b_clients (id) on delete cascade,
+  product_id  text not null,
+  created_at  timestamptz not null default now(),
+  primary key (client_id, product_id)
+);
+
+-- Обидві таблиці читає й пише лише функція b2b (service_role): RLS без
+-- політик = закрито для anon і authenticated.
+alter table public.b2b_special_prices enable row level security;
+alter table public.b2b_favorites enable row level security;
+revoke all on public.b2b_special_prices, public.b2b_favorites from anon, authenticated;
 
 -- ─── 3. B2B-клієнт не має доступу ні до чого, крім свого ───────────────
 
