@@ -82,6 +82,11 @@
   .brand-name { font-family:'Unbounded',sans-serif; font-size:10px; font-weight:700; color:#5a8a5a; letter-spacing:1px; text-transform:uppercase; }
   .brand-line { flex:1; height:1px; background:var(--border); }
   .brand-count { font-size:10px; color:var(--text3); }
+  /* Оригінальний логотип бренду на білій плашці - на зеленому фоні зелений
+     текст бренду губився */
+  .brand-logo { display:flex; align-items:center; background:#fff; padding:5px 10px; border-radius:8px; box-shadow:0 1px 3px rgba(26,46,26,.12); }
+  .brand-logo img { height:20px; max-width:140px; object-fit:contain; display:block; }
+  .brand-logo img.tall { height:28px; }
 
   /* POWER (kW) HEADER — "Комплекти" groups by power, not brand; make the
      kW value pop instead of reading like a muted brand label */
@@ -467,6 +472,13 @@ const KNOWN_BRANDS = [
   [/Felicity/i, "Felicity"], [/\bMUST\b/i, "MUST"], [/\bKBE\b/i, "KBE"],
   [/EcoFlow/i, "EcoFlow"], [/\bTTN\b/, "TTN"],
 ];
+// Оригінальні логотипи (з офіційних сайтів брендів) для заголовків груп.
+// Бренду без логотипа (TTN) лишається текстовий заголовок.
+const BRAND_LOGOS = {
+  "DAH Solar":"brands/dah-solar.png", "Dyness":"brands/dyness.svg", "Deye":"brands/deye.svg",
+  "Felicity":"brands/felicity.png", "MUST":"brands/must.png", "KBE":"brands/kbe.png",
+  "EcoFlow":"brands/ecoflow.svg",
+};
 function detectBrand(title){
   const found=new Set();
   for(const[re,name] of KNOWN_BRANDS) if(re.test(title)) found.add(name);
@@ -775,7 +787,10 @@ function renderProducts(){
     if(multi&&brand!=="-"){
       const isPower=activeCat==="Комплекти автономного енергоживлення";
       const bh=document.createElement("div"); bh.className="brand-header";
-      const nameHTML=isPower?`<div class="brand-name brand-name--power"><span class="power-bolt">⚡</span> ${brand}</div>`:`<div class="brand-name">${brand}</div>`;
+      const logo=!isPower&&!isFav&&BRAND_LOGOS[brand];
+      const nameHTML=isPower?`<div class="brand-name brand-name--power"><span class="power-bolt">⚡</span> ${brand}</div>`
+        :logo?`<div class="brand-logo"><img src="${logo}" alt="${brand}" title="${brand}"${brand==="KBE"?' class="tall"':''} onerror="this.parentNode.outerHTML='<div class=&quot;brand-name&quot;>${brand}</div>'"></div>`
+        :`<div class="brand-name">${brand}</div>`;
       bh.innerHTML=`${nameHTML}<div class="brand-line"></div><div class="brand-count">${bItems.length} шт</div>`;
       el.appendChild(bh);
     }
