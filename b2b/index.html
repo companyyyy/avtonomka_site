@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Автономка B2B</title>
+  <link rel="icon" href="/assets/images/logo.jpg" type="image/jpeg" />
+  <!--
+    B2B-кабінет: вхід партнера, каталог з гуртовими цінами, замовлення, мої замовлення.
+    Бекенд - Edge Function supabase/functions/b2b, клієнтів веде розділ адмінки b2b-admin/.
+    Інструкція - docs/B2B.md.
+  -->
+  <style>
+    :root { --navy: #1a2e4a; --accent: #f5a623; --green: #2ecc40; --bg: #f4f6f9; --card: #fff; --text: #222831;
+            --muted: #6c757d; --line: #e0e6ed; --red: #e74c3c; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.45 'Segoe UI', Arial, sans-serif; }
+    header { position: sticky; top: 0; z-index: 20; background: var(--navy); color: #fff; display: flex; align-items: center;
+             gap: 14px; padding: 0 20px; height: 58px; box-shadow: 0 2px 12px rgba(0,0,0,.25); }
+    .logo { display: flex; align-items: center; gap: 9px; color: var(--green); font-weight: 800; text-decoration: none; }
+    .logo img { width: 34px; height: 34px; border-radius: 5px; background: #fff; object-fit: contain; }
+    .logo b { color: var(--accent); }
+    nav { display: flex; gap: 4px; flex: 1; }
+    nav button { background: none; border: none; color: rgba(255,255,255,.75); font: 600 .9rem inherit; padding: 7px 13px; border-radius: 7px; cursor: pointer; }
+    nav button.active { background: var(--accent); color: var(--navy); }
+    .who { font-size: .84rem; color: rgba(255,255,255,.7); }
+    .btn { background: var(--accent); color: var(--navy); border: none; border-radius: 8px; padding: 10px 18px; font: 700 .95rem inherit; cursor: pointer; }
+    .btn:hover { background: #e0921a; }
+    .btn:disabled { opacity: .5; cursor: default; }
+    .btn.ghost { background: rgba(255,255,255,.1); color: #fff; font-weight: 600; padding: 7px 13px; }
+    .btn.light { background: #e8edf3; color: var(--navy); }
+    main { max-width: 1200px; margin: 0 auto; padding: 24px 16px 120px; }
+    .card { background: var(--card); border-radius: 12px; box-shadow: 0 4px 24px rgba(26,46,74,.08); padding: 24px; }
+    .narrow { max-width: 460px; margin: 32px auto; }
+    h1 { font-size: 1.3rem; color: var(--navy); margin: 0 0 6px; }
+    h2 { font-size: 1.1rem; color: var(--navy); margin: 0 0 14px; }
+    p.hint { color: var(--muted); font-size: .88rem; margin: 0 0 18px; }
+    label { display: block; font-size: .76rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin: 0 0 5px; }
+    input, select, textarea { width: 100%; padding: 9px 12px; border: 2px solid var(--line); border-radius: 8px; font: .95rem inherit; background: #fff; color: var(--text); outline: none; }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+    .field { margin: 0 0 14px; }
+    .msg { min-height: 20px; font-size: .88rem; margin: 10px 0 0; }
+    .msg.error { color: var(--red); }
+    .msg.ok { color: #1e8e3e; }
+    .tabs { display: flex; gap: 6px; margin: 0 0 18px; }
+    .tabs button { flex: 1; padding: 9px; border: 2px solid var(--line); background: #fff; border-radius: 8px; font: 600 .9rem inherit; cursor: pointer; color: var(--muted); }
+    .tabs button.active { border-color: var(--accent); color: var(--navy); }
+    .hp { position: absolute; left: -9999px; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 0 0 14px; }
+    .toolbar input[type=search] { flex: 1 1 240px; width: auto; }
+    .toolbar select { width: auto; }
+    .toolbar .chk { display: flex; gap: 6px; align-items: center; font-size: .9rem; color: var(--muted); text-transform: none; letter-spacing: 0; font-weight: 400; margin: 0; }
+    .toolbar .chk input { width: auto; }
+    .rate { color: var(--muted); font-size: .85rem; margin-left: auto; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; background: #fff; }
+    th, td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
+    th { font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); background: #f8fafc; position: sticky; top: 58px; }
+    td.code { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+    td.img img { width: 48px; height: 48px; object-fit: contain; display: block; }
+    td.name a { color: var(--navy); text-decoration: none; }
+    td.name a:hover { text-decoration: underline; }
+    td.name .cat { display: block; font-size: .78rem; color: var(--muted); }
+    td.price { white-space: nowrap; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+    td.price .ask { font-weight: 400; color: var(--muted); font-size: .85rem; }
+    td.qty input { width: 76px; text-align: center; padding: 6px; }
+    .stock { font-size: .82rem; white-space: nowrap; }
+    .stock.yes { color: #1e8e3e; }
+    .stock.no { color: var(--muted); }
+    tr.in-cart { background: #fff8e6; }
+    .empty { text-align: center; color: var(--muted); padding: 30px; }
+    .cartbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: var(--navy); color: #fff; display: flex; align-items: center;
+               gap: 16px; padding: 12px 20px; box-shadow: 0 -2px 12px rgba(0,0,0,.2); }
+    .cartbar .sum { font-weight: 700; font-size: 1.05rem; }
+    .cartbar .grow { flex: 1; }
+    .overlay { position: fixed; inset: 0; background: rgba(10,20,35,.55); z-index: 40; display: flex; align-items: flex-start; justify-content: center; overflow-y: auto; padding: 30px 16px; }
+    .overlay .card { width: 100%; max-width: 720px; }
+    .lines td { padding: 6px 8px; font-size: .9rem; }
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 8px; }
+    .order { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin: 0 0 12px; background: #fff; }
+    .order-head { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; margin: 0 0 8px; }
+    .order-head b { color: var(--navy); }
+    .status { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: .8rem; font-weight: 600; background: #e8edf3; color: var(--navy); }
+    .status.new { background: #fff3d6; } .status.done { background: #d9f5e1; } .status.cancelled, .status.returned { background: #fde2e0; }
+    .order ul { margin: 0; padding-left: 18px; font-size: .9rem; }
+    @media (max-width: 700px) {
+      header { padding: 0 10px; gap: 8px; }
+      .logo span, .who { display: none; }
+      td.img { display: none; }
+      .row2 { grid-template-columns: 1fr; }
+      th { top: 0; position: static; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="logo" href="/"><img src="/assets/images/logo.jpg" alt=""><span>Автономка <b>B2B</b></span></a>
+    <nav id="nav" hidden>
+      <button type="button" data-view="catalog" class="active">Каталог</button>
+      <button type="button" data-view="orders">Мої замовлення</button>
+    </nav>
+    <span class="who" id="who"></span>
+    <button type="button" class="btn ghost" id="logout" hidden>Вийти</button>
+  </header>
+
+  <main>
+    <!-- Вхід / заявка -->
+    <section id="v-auth" class="card narrow" hidden>
+      <div class="tabs">
+        <button type="button" data-tab="login" class="active">Вхід</button>
+        <button type="button" data-tab="apply">Стати партнером</button>
+      </div>
+      <form id="login-form">
+        <h1>Вхід для партнерів</h1>
+        <p class="hint">Гуртові ціни й замовлення для дилерів, монтажників і магазинів.</p>
+        <div class="field"><label for="l-email">Email</label><input type="email" id="l-email" autocomplete="username" required></div>
+        <div class="field"><label for="l-pass">Пароль</label><input type="password" id="l-pass" autocomplete="current-password" required></div>
+        <button class="btn" type="submit" style="width:100%">Увійти</button>
+        <div class="msg error" id="login-msg"></div>
+        <p class="hint" style="margin:14px 0 0">Забули пароль? Напишіть або подзвоніть менеджеру - він задасть новий.</p>
+      </form>
+      <form id="apply-form" hidden>
+        <h1>Заявка на гуртовий доступ</h1>
+        <p class="hint">Менеджер перевірить дані й надішле вам логін і пароль.</p>
+        <div class="field"><label for="a-company">Компанія / ФОП *</label><input id="a-company" required maxlength="200"></div>
+        <div class="field"><label for="a-edrpou">ЄДРПОУ / ІПН</label><input id="a-edrpou" maxlength="20" inputmode="numeric"></div>
+        <div class="field"><label for="a-name">Контактна особа *</label><input id="a-name" required maxlength="100" autocomplete="name"></div>
+        <div class="row2">
+          <div class="field"><label for="a-phone">Телефон *</label><input id="a-phone" type="tel" required maxlength="40" autocomplete="tel" placeholder="+380"></div>
+          <div class="field"><label for="a-email">Email *</label><input id="a-email" type="email" required maxlength="200" autocomplete="email"></div>
+        </div>
+        <div class="field"><label for="a-city">Місто</label><input id="a-city" maxlength="120"></div>
+        <div class="field"><label for="a-comment">Коментар</label><textarea id="a-comment" rows="3" maxlength="2000" placeholder="Чим займаєтесь, які обсяги цікавлять"></textarea></div>
+        <input class="hp" id="a-website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn" type="submit" style="width:100%">Надіслати заявку</button>
+        <div class="msg" id="apply-msg"></div>
+      </form>
+    </section>
+
+    <!-- Заявка на розгляді / заблоковано -->
+    <section id="v-wait" class="card narrow" hidden>
+      <h1 id="wait-title"></h1>
+      <p class="hint" id="wait-text"></p>
+    </section>
+
+    <!-- Каталог -->
+    <section id="v-catalog" hidden>
+      <div class="toolbar">
+        <input type="search" id="q" placeholder="Пошук за назвою, кодом або артикулом" autocomplete="off">
+        <select id="cat"><option value="">Усі категорії</option></select>
+        <label class="chk"><input type="checkbox" id="only-stock"> лише в наявності</label>
+        <span class="rate">Ціни в гривнях, гуртові</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Код</th><th></th><th>Товар</th><th>Наявність</th><th style="text-align:right">Ціна, грн</th><th>Кількість</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Мої замовлення -->
+    <section id="v-orders" hidden>
+      <h2>Мої замовлення</h2>
+      <div id="orders"></div>
+    </section>
+  </main>
+
+  <div class="cartbar" id="cartbar" hidden>
+    <span id="cart-count"></span>
+    <span class="sum" id="cart-sum"></span>
+    <span class="grow"></span>
+    <button type="button" class="btn light" id="cart-clear">Очистити</button>
+    <button type="button" class="btn" id="cart-open">Оформити замовлення</button>
+  </div>
+
+  <div class="overlay" id="checkout" hidden>
+    <form class="card" id="checkout-form">
+      <h2>Оформлення замовлення</h2>
+      <div class="table-wrap"><table class="lines"><tbody id="lines"></tbody></table></div>
+      <p style="text-align:right;font-weight:700;margin:10px 0 18px" id="lines-total"></p>
+      <div class="row2">
+        <div class="field"><label for="o-city">Місто доставки</label><input id="o-city" maxlength="120"></div>
+        <div class="field"><label for="o-np">Відділення НП / адреса</label><input id="o-np" maxlength="200"></div>
+      </div>
+      <div class="field"><label for="o-pay">Оплата</label>
+        <select id="o-pay">
+          <option>Безготівковий розрахунок (рахунок)</option>
+          <option>Накладений платіж</option>
+          <option>Готівка</option>
+        </select>
+      </div>
+      <div class="field"><label for="o-comment">Коментар</label><textarea id="o-comment" rows="3" maxlength="2000"></textarea></div>
+      <div class="msg error" id="checkout-msg"></div>
+      <div class="actions">
+        <button type="button" class="btn light" id="checkout-close">Назад</button>
+        <button type="submit" class="btn" id="checkout-submit">Підтвердити замовлення</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script>
+  (function () {
+    // ⚠ Ті самі URL і ключ, що в assets/js/admin-shell.js. Власний storageKey -
+    // щоб сесія B2B-клієнта не змішувалась із сесією адмінки на цьому ж домені.
+    const sb = window.supabase.createClient(
+      'https://uvndubhmqzqqsrnrxgaj.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bmR1YmhtcXpxcXNybnJ4Z2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDY4MDIsImV4cCI6MjEwMzkyMjgwMn0.AavrYyhDXBQkjKOMdQ9wAQX6B901dOfUpmtUDwO5Cv8',
+      { auth: { storageKey: 'avtonomka-b2b-auth' } },
+    );
+    const CART_KEY = 'avtonomka_b2b_cart';
+    const STATUS = { new: 'Нове', in_work: 'В роботі', confirmed: 'Підтверджено', paid: 'Оплачено',
+      shipped: 'Відправлено', done: 'Виконано', cancelled: 'Скасовано', returned: 'Повернення' };
+
+    const $ = (id) => document.getElementById(id);
+    const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const money = (n) => Number(n).toLocaleString('uk-UA', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+
+    let client = null;
+    let items = [];
+    let byId = new Map();
+    let cart = {};
+    try { cart = JSON.parse(localStorage.getItem(CART_KEY) || '{}') || {}; } catch { cart = {}; }
+    const saveCart = () => { try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch { /* приватне вікно */ } };
+
+    async function api(action, body = {}) {
+      const { data, error } = await sb.functions.invoke('b2b', { body: { action, ...body } });
+      if (error) {
+        let detail = {};
+        try { detail = await error.context.json(); } catch { /* не JSON */ }
+        const e = new Error(detail.error || error.message);
+        e.status = error.context?.status;
+        e.detail = detail;
+        throw e;
+      }
+      return data;
+    }
+
+    function show(view) {
+      ['auth', 'wait', 'catalog', 'orders'].forEach((v) => { $('v-' + v).hidden = v !== view; });
+      $('nav').hidden = !(view === 'catalog' || view === 'orders');
+      document.querySelectorAll('#nav button').forEach((b) => b.classList.toggle('active', b.dataset.view === view));
+      $('cartbar').hidden = view !== 'catalog' || !cartLines().length;
+    }
+
+    // ─── Вхід і заявка ─────────────────────────────────────────────
+
+    document.querySelectorAll('.tabs button').forEach((b) => b.addEventListener('click', () => {
+      document.querySelectorAll('.tabs button').forEach((x) => x.classList.toggle('active', x === b));
+      $('login-form').hidden = b.dataset.tab !== 'login';
+      $('apply-form').hidden = b.dataset.tab !== 'apply';
+    }));
+
+    $('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      $('login-msg').textContent = '';
+      const { error } = await sb.auth.signInWithPassword({ email: $('l-email').value.trim(), password: $('l-pass').value });
+      if (error) {
+        $('login-msg').textContent = error.message === 'Invalid login credentials' ? 'Невірний email або пароль'
+          : /banned/i.test(error.message) ? 'Доступ закрито. Зверніться до менеджера.' : error.message;
+        return;
+      }
+      $('l-pass').value = '';
+      start();
+    });
+
+    $('apply-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msg = $('apply-msg');
+      msg.className = 'msg';
+      msg.textContent = 'Надсилаємо…';
+      try {
+        const r = await api('apply', {
+          company: $('a-company').value, edrpou: $('a-edrpou').value, contact_name: $('a-name').value,
+          phone: $('a-phone').value, email: $('a-email').value, city: $('a-city').value,
+          comment: $('a-comment').value, website: $('a-website').value,
+        });
+        msg.className = 'msg ok';
+        msg.textContent = r.already
+          ? 'Заявка з цим email уже є. Менеджер зв\'яжеться з вами.'
+          : 'Дякуємо! Заявку отримано - менеджер зв\'яжеться з вами і надішле дані для входу.';
+        if (!r.already) e.target.reset();
+      } catch (err) {
+        msg.className = 'msg error';
+        msg.textContent = err.message || 'Не вдалося надіслати. Спробуйте ще раз.';
+      }
+    });
+
+    $('logout').addEventListener('click', async () => { await sb.auth.signOut(); location.reload(); });
+
+    async function start() {
+      const { data } = await sb.auth.getSession();
+      $('logout').hidden = !data.session;
+      if (!data.session) { show('auth'); return; }
+      try {
+        client = (await api('me')).client;
+      } catch (err) {
+        // Увійшли не B2B-акаунтом (напр. адмінським) - тут йому нічого робити.
+        await sb.auth.signOut();
+        show('auth');
+        $('login-msg').textContent = 'Цей акаунт не є партнерським. Подайте заявку на вкладці «Стати партнером».';
+        return;
+      }
+      $('who').textContent = client.company;
+      if (client.status !== 'approved') {
+        $('wait-title').textContent = client.status === 'pending' ? 'Заявка на розгляді' : 'Доступ закрито';
+        $('wait-text').textContent = client.status === 'pending'
+          ? 'Менеджер перевіряє дані. Щойно доступ відкриють, тут з\'явиться каталог з гуртовими цінами.'
+          : 'Доступ до гуртових цін зараз закрито. Зверніться до менеджера.';
+        show('wait');
+        return;
+      }
+      show('catalog');
+      $('o-city').value = client.city || '';
+      loadCatalog();
+    }
+
+    // ─── Каталог і кошик ───────────────────────────────────────────
+
+    async function loadCatalog() {
+      $('rows').innerHTML = '<tr><td colspan="6" class="empty">Завантаження…</td></tr>';
+      try {
+        items = (await api('catalog')).items;
+      } catch (err) {
+        $('rows').innerHTML = `<tr><td colspan="6" class="empty">Не вдалося завантажити каталог: ${esc(err.message)}</td></tr>`;
+        return;
+      }
+      byId = new Map(items.map((i) => [i.id, i]));
+      // Зниклі з каталогу товари прибираємо з кошика.
+      Object.keys(cart).forEach((id) => { if (!byId.has(id)) delete cart[id]; });
+      saveCart();
+      const cats = [...new Set(items.map((i) => i.cat).filter(Boolean))];
+      $('cat').innerHTML = '<option value="">Усі категорії</option>' + cats.map((c) => `<option>${esc(c)}</option>`).join('');
+      render();
+    }
+
+    function render() {
+      const q = $('q').value.trim().toLowerCase();
+      const cat = $('cat').value;
+      const onlyStock = $('only-stock').checked;
+      const list = items.filter((i) => (!cat || i.cat === cat) && (!onlyStock || i.available)
+        && (!q || `${i.code} ${i.name} ${i.mpn || ''}`.toLowerCase().includes(q)));
+      $('rows').innerHTML = list.length ? list.map((i) => `
+        <tr data-id="${esc(i.id)}"${cart[i.id] ? ' class="in-cart"' : ''}>
+          <td class="code">${esc(i.code)}</td>
+          <td class="img">${i.photo ? `<img src="${esc(i.photo)}" alt="" loading="lazy">` : ''}</td>
+          <td class="name">${i.url ? `<a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.name)}</a>` : esc(i.name)}<span class="cat">${esc(i.cat)}${i.mpn ? ' · ' + esc(i.mpn) : ''}</span></td>
+          <td><span class="stock ${i.available ? 'yes' : 'no'}">${i.available ? '✓ в наявності' : 'під замовлення'}</span></td>
+          <td class="price">${i.price != null ? money(i.price) : '<span class="ask">за запитом</span>'}</td>
+          <td class="qty"><input type="number" min="0" max="9999" step="1" value="${cart[i.id] || ''}" placeholder="0" aria-label="Кількість"></td>
+        </tr>`).join('') : '<tr><td colspan="6" class="empty">Нічого не знайдено</td></tr>';
+      renderCartBar();
+    }
+
+    $('rows').addEventListener('input', (e) => {
+      if (!e.target.matches('td.qty input')) return;
+      const tr = e.target.closest('tr');
+      const qty = Math.min(9999, Math.max(0, Math.round(Number(e.target.value) || 0)));
+      if (qty) cart[tr.dataset.id] = qty; else delete cart[tr.dataset.id];
+      tr.classList.toggle('in-cart', !!qty);
+      saveCart();
+      renderCartBar();
+    });
+    ['q', 'cat', 'only-stock'].forEach((id) => $(id).addEventListener('input', render));
+
+    const cartLines = () => Object.entries(cart).filter(([id]) => byId.has(id)).map(([id, qty]) => ({ item: byId.get(id), qty }));
+    const cartTotal = (lines) => lines.reduce((s, l) => s + (l.item.price || 0) * l.qty, 0);
+
+    function renderCartBar() {
+      const lines = cartLines();
+      $('cartbar').hidden = $('v-catalog').hidden || !lines.length;
+      const units = lines.reduce((s, l) => s + l.qty, 0);
+      $('cart-count').textContent = `Позицій: ${lines.length} (${units} шт.)`;
+      const ask = lines.some((l) => l.item.price == null);
+      $('cart-sum').textContent = `${money(cartTotal(lines))} грн${ask ? ' + позиції за запитом' : ''}`;
+    }
+
+    $('cart-clear').addEventListener('click', () => {
+      if (!confirm('Очистити кошик?')) return;
+      cart = {};
+      saveCart();
+      render();
+    });
+
+    $('cart-open').addEventListener('click', () => {
+      const lines = cartLines();
+      $('lines').innerHTML = lines.map((l) => `<tr><td class="code">${esc(l.item.code)}</td><td>${esc(l.item.name)}</td>
+        <td style="white-space:nowrap">× ${l.qty}</td>
+        <td class="price">${l.item.price != null ? money(l.item.price * l.qty) + ' грн' : '<span class="ask">за запитом</span>'}</td></tr>`).join('');
+      $('lines-total').textContent = `Разом: ${money(cartTotal(lines))} грн`;
+      $('checkout-msg').textContent = '';
+      $('checkout').hidden = false;
+    });
+    $('checkout-close').addEventListener('click', () => { $('checkout').hidden = true; });
+
+    $('checkout-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const lines = cartLines();
+      if (!lines.length) return;
+      const btn = $('checkout-submit');
+      btn.disabled = true;
+      $('checkout-msg').textContent = '';
+      // Один ключ на кошик: повторне натискання після збою мережі не створить дубль.
+      const key = sessionStorage.getItem('b2b_order_key') || crypto.randomUUID();
+      try { sessionStorage.setItem('b2b_order_key', key); } catch { /* ignore */ }
+      try {
+        const r = await api('order', {
+          client_key: key,
+          items: lines.map((l) => ({ id: l.item.id, qty: l.qty })),
+          city: $('o-city').value, np_branch: $('o-np').value, payment_method: $('o-pay').value, comment: $('o-comment').value,
+        });
+        try { sessionStorage.removeItem('b2b_order_key'); } catch { /* ignore */ }
+        cart = {};
+        saveCart();
+        $('o-comment').value = '';
+        $('checkout').hidden = true;
+        render();
+        alert(`Замовлення №${r.number} прийнято. Менеджер зв'яжеться з вами для підтвердження.`);
+      } catch (err) {
+        $('checkout-msg').textContent = err.status === 429 ? 'Забагато замовлень за короткий час. Спробуйте за кілька хвилин.'
+          : 'Не вдалося надіслати замовлення: ' + err.message;
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    // ─── Мої замовлення ────────────────────────────────────────────
+
+    async function loadOrders() {
+      $('orders').innerHTML = '<p class="hint">Завантаження…</p>';
+      try {
+        const { orders } = await api('orders');
+        $('orders').innerHTML = orders.length ? orders.map((o) => `
+          <div class="order">
+            <div class="order-head">
+              <b>№${o.number}</b>
+              <span>${new Date(o.created_at).toLocaleString('uk-UA', { dateStyle: 'short', timeStyle: 'short' })}</span>
+              <span class="status ${esc(o.status)}">${esc(STATUS[o.status] || o.status)}</span>
+              ${o.ttn ? `<span>ТТН: ${esc(o.ttn)}</span>` : ''}
+              <span style="margin-left:auto;font-weight:700">${money(o.total)} грн</span>
+            </div>
+            <ul>${(o.order_items || []).sort((a, b) => a.position - b.position).map((i) =>
+              `<li>${i.sku ? `[${esc(i.sku)}] ` : ''}${esc(i.title)} × ${i.qty}${i.price != null ? ` - ${money(i.price * i.qty)} грн` : ''}</li>`).join('')}</ul>
+          </div>`).join('') : '<p class="hint">Замовлень ще немає.</p>';
+      } catch (err) {
+        $('orders').innerHTML = `<p class="msg error">Не вдалося завантажити: ${esc(err.message)}</p>`;
+      }
+    }
+
+    document.querySelectorAll('#nav button').forEach((b) => b.addEventListener('click', () => {
+      show(b.dataset.view);
+      if (b.dataset.view === 'orders') loadOrders();
+      else renderCartBar();
+    }));
+
+    start();
+  })();
+  </script>
+</body>
+</html>

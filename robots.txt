@@ -6,5 +6,8 @@ Disallow: /auction-admin.html
 Disallow: /miniapp-admin.html
 Disallow: /prom-admin/
 Disallow: /preorder-admin/
+Disallow: /orders-admin/
+Disallow: /b2b/
+Disallow: /b2b-admin/
 
 Sitemap: https://avtonomka.com.ua/sitemap.xml

@@ -1,0 +1,4 @@
+# Сторінку браузер не кешує: після оновлення коду одразу видно нову версію.
+<IfModule mod_headers.c>
+  Header set Cache-Control "no-cache, no-store, must-revalidate"
+</IfModule>

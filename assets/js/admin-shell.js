@@ -1,13 +1,13 @@
 /* admin-shell.js - спільна шапка, меню й вхід для всіх сторінок адмінки:
    admin.html (контент), miniapp-admin.html, miniapp-mailing.html,
-   auction-admin.html, prom-admin/, preorder-admin/, orders-admin/.
+   auction-admin.html, prom-admin/, preorder-admin/, orders-admin/, b2b-admin/.
 
    Один вхід - користувач Supabase Auth (email + пароль). Сесію supabase-js
    тримає в localStorage цього домену, тож увійти достатньо на будь-якій
    сторінці адмінки - решта вже відкриваються залогіненими.
 
    Підключення на сторінці (після supabase-js, до власного скрипта сторінки):
-     <body data-admin-section="orders|content|miniapp|mailing|auction|prom|preorder">
+     <body data-admin-section="orders|content|miniapp|mailing|auction|prom|preorder|b2b">
        <div id="admin-app" hidden> ...вміст розділу... </div>
        <script src=".../supabase.js"></script>
        <script src=".../assets/js/admin-shell.js"></script>
@@ -32,6 +32,7 @@
     ['auction', 'Аукціон', 'auction-admin.html'],
     ['prom', 'Ціни Prom', 'prom-admin/'],
     ['preorder', 'Під замовлення', 'preorder-admin/'],
+    ['b2b', 'B2B', 'b2b-admin/'],
   ];
 
   const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -107,6 +108,12 @@
   const waiting = [];
 
   function show(s) {
+    // B2B-клієнт (docs/B2B.md) - теж користувач Supabase Auth, але в адмінку не пускаємо.
+    if (s && s.user.app_metadata?.role === 'b2b') {
+      sb.auth.signOut();
+      s = null;
+      document.getElementById('ash-login-msg').textContent = 'Це акаунт B2B-клієнта - вхід у кабінет: /b2b/';
+    }
     session = s;
     document.getElementById('ash-logout').hidden = !s;
     document.getElementById('ash-email').textContent = s ? s.user.email : '';

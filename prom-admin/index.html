@@ -74,6 +74,8 @@
     tbody tr.changed { background: var(--changed); }
     tbody tr.off td.name, tbody tr.off td.img { opacity: .5; }
     td.id { color: var(--muted); font-variant-numeric: tabular-nums; width: 70px; }
+    td.id b { color: var(--text); font-weight: 600; }
+    .supplier-id { display: block; font-size: .75em; color: var(--muted); font-weight: 400; text-transform: none; letter-spacing: 0; }
     td.img { width: 52px; }
     td.img img { width: 40px; height: 40px; object-fit: contain; background: #fff; border-radius: 4px; display: block; }
     td.name .cat { display: block; color: var(--muted); font-size: 13px; }
@@ -403,6 +405,22 @@
       return span;
     }
 
+    // Код товару для клієнтів і B2B = id постачальника − 140000 (152517 → 12517),
+    // назад: код + 140000. Те саме - productCode() у supabase/functions/b2b і b2b/.
+    const CODE_OFFSET = 140000;
+    const productCode = (id) => (/^\d+$/.test(id) && Number(id) > CODE_OFFSET ? String(Number(id) - CODE_OFFSET) : id);
+
+    function idCell(id) {
+      const code = document.createElement("b");
+      code.textContent = productCode(id);
+      if (code.textContent === id) return code;
+      const supplier = document.createElement("span");
+      supplier.className = "supplier-id";
+      supplier.textContent = id;
+      supplier.title = "id постачальника";
+      return [code, supplier];
+    }
+
     function td(className, ...children) {
       const cell = document.createElement("td");
       if (className) cell.className = className;
@@ -418,7 +436,7 @@
         const tr = document.createElement("tr");
         p.row = tr;
         tr.dataset.cat = d.cat;
-        tr.dataset.search = `${d.id} ${d.name}`.toLowerCase();
+        tr.dataset.search = `${productCode(String(d.id))} ${d.id} ${d.name}`.toLowerCase();
 
         const img = document.createElement("img");
         img.alt = "";
@@ -440,7 +458,7 @@
 
         p.markupCells = feeds.map(() => td("sep r markup"));
         tr.append(
-          td("id", String(d.id)),
+          td("id", ...[idCell(String(d.id))].flat()),
           td("img", img),
           td("name", name, cat),
           td("sep", priceInput(p)),
@@ -750,7 +768,7 @@
       const cols = feeds.map((f) => `<th class="sep r">Ціна, грн (${isOpt(f) ? "опт " : ""}${escHtml(ruleLabel(f))}${f.cat_percent && Object.keys(f.cat_percent).length ? ", по категоріях" : ""})</th>`).join("");
       head.innerHTML = `
         <tr><th colspan="3"></th><th class="group">prom_file.xml</th><th class="group">feed/opt.xml</th><th class="group">Усі фіди</th>${groups}</tr>
-        <tr><th>ID</th><th></th><th>Товар</th><th class="sep">Ціна роздріб, грн</th><th class="sep">Ціна гурт, $</th><th class="sep c">У фідах<br>(усі)</th>${cols}</tr>`;
+        <tr><th>Код<br><span class="supplier-id">id пост.</span></th><th></th><th>Товар</th><th class="sep">Ціна роздріб, грн</th><th class="sep">Ціна гурт, $</th><th class="sep c">У фідах<br>(усі)</th>${cols}</tr>`;
     }
 
     const escHtml = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
