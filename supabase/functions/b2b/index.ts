@@ -187,9 +187,9 @@ function clientInput(b: any) {
 async function apply(b: any) {
   if (text(b.website, 100)) return json({ ok: true }); // пастка для ботів
   const c = clientInput(b);
-  if (!c.company || !c.contact_name || !isEmail(c.email) || (normalizePhone(c.phone ?? "")?.length ?? 0) < 10) {
-    return json({ error: "Заповніть назву компанії, контактну особу, телефон і email" }, 400);
-  }
+  if (!c.company || !c.contact_name) return json({ error: "Заповніть назву компанії і контактну особу" }, 400);
+  if ((normalizePhone(c.phone ?? "")?.length ?? 0) < 10) return json({ error: "Вкажіть телефон повністю, напр. +380 67 123 45 67" }, 400);
+  if (!isEmail(c.email)) return json({ error: "Перевірте email" }, 400);
   const { data: same } = await db.from("b2b_clients").select("id, status").eq("email", c.email!).limit(1);
   if (same?.length) {
     return json({ ok: true, already: true, status: same[0].status });

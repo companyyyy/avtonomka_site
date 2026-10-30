@@ -270,6 +270,13 @@
     $('apply-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const msg = $('apply-msg');
+      // Та сама перевірка телефону, що й у функції b2b: повний номер, ≥ 10 цифр.
+      if ($('a-phone').value.replace(/\D/g, '').length < 10) {
+        msg.className = 'msg error';
+        msg.textContent = 'Вкажіть телефон повністю, напр. +380 67 123 45 67';
+        $('a-phone').focus();
+        return;
+      }
       msg.className = 'msg';
       msg.textContent = 'Надсилаємо…';
       try {
