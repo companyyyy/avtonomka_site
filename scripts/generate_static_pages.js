@@ -892,7 +892,6 @@ function renderCard(p, base) {
 
   const isKit = CATEGORY_TO_SLUG[p.product_type] === 'komplekty';
   let stackExtraHtml = '';
-  let installmentNoteHtml = '';
   if (isKit) {
     let monobrandBadgeHtml = '';
     let tierBadgeHtml = '';
@@ -904,8 +903,7 @@ function renderCard(p, base) {
     if (tier) {
       tierBadgeHtml = `<span class="product-card__pill product-card__pill--tier-${tier}">${escapeHtml(TIER_LABELS[tier])}</span>`;
     }
-    stackExtraHtml = `<span class="product-card__pill product-card__pill--installment">+ Розстрочка</span>${tierBadgeHtml}${monobrandBadgeHtml}`;
-    installmentNoteHtml = '<div class="product-card__installment-note">Запитайте умови у менеджера!</div>';
+    stackExtraHtml = `${tierBadgeHtml}${monobrandBadgeHtml}`;
   }
 
   let cableSpecsHtml = '';
@@ -938,7 +936,6 @@ function renderCard(p, base) {
         <span class="product-card__price">${escapeHtml(priceStr)}</span>
         ${p.mpn ? `<span class="product-card__sku">Арт. ${escapeHtml(p.mpn)}</span>` : ''}
       </div>
-      ${installmentNoteHtml}
     </div>
     <div class="product-card__footer">
       <a href="${href}" class="btn btn-block">Детальніше →</a>

@@ -570,14 +570,13 @@ function renderCard(p) {
   const zagl     = _assetsBase + 'assets/images/zaglushka.png';
   const href     = `${_productBase}${encodeURIComponent(p.slug || p.id)}/${encodeURIComponent(p.id)}.html`;
 
-  /* Kit-only badges: mono-brand, "Легкий/Оптимальний/Супер запасливий"
-     capacity tier, and an installment tag - all stacked as small pills over
+  /* Kit-only badges: mono-brand and "Легкий/Оптимальний/Супер запасливий"
+     capacity tier - stacked as small pills over
      the top-left corner of the image, availability included. */
   const topBadgeHtml = isTopProduct(p.id) ? `<span class="product-card__pill product-card__pill--top">${escapeHtml(t('catalog.top_badge'))}</span>` : '';
 
   const isKit = CATEGORY_TO_SLUG[p.product_type] === 'komplekty';
   let stackExtraHtml = '';
-  let installmentNoteHtml = '';
   if (isKit) {
     let monobrandBadgeHtml = '';
     let tierBadgeHtml = '';
@@ -589,8 +588,7 @@ function renderCard(p) {
     if (tier) {
       tierBadgeHtml = `<span class="product-card__pill product-card__pill--tier-${tier}">${escapeHtml(t('catalog.tier_' + tier))}</span>`;
     }
-    stackExtraHtml = `<span class="product-card__pill product-card__pill--installment">${escapeHtml(t('catalog.installment_badge'))}</span>${tierBadgeHtml}${monobrandBadgeHtml}`;
-    installmentNoteHtml = `<div class="product-card__installment-note">${escapeHtml(t('catalog.installment_note'))}</div>`;
+    stackExtraHtml = `${tierBadgeHtml}${monobrandBadgeHtml}`;
   }
 
   /* Cable-only spec pills: cross-section, lug size, length - whichever the
@@ -626,7 +624,6 @@ function renderCard(p) {
         <span class="product-card__price">${escapeHtml(priceStr)}</span>
         ${p.mpn ? `<span class="product-card__sku">${t('catalog.article')} ${escapeHtml(p.mpn)}</span>` : ''}
       </div>
-      ${installmentNoteHtml}
     </div>
     <div class="product-card__footer">
       <a href="${href}" class="btn btn-block">

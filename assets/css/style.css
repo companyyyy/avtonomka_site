@@ -648,7 +648,6 @@ main { flex: 1; }
 .product-card__pill--in-stock     { background: #17a126; }
 .product-card__pill--out-of-stock { background: var(--color-muted); }
 .product-card__pill--backorder    { background: #c07d00; }
-.product-card__pill--installment  { background: var(--color-orange); color: var(--color-dark); }
 .product-card__pill--tier-light   { background: #1976d2; }
 .product-card__pill--tier-optimal { background: #c07d00; }
 .product-card__pill--tier-super   { background: #7b1fa2; }
@@ -705,11 +704,6 @@ main { flex: 1; }
   white-space: nowrap;
 }
 
-
-.product-card__installment-note {
-  font-size: .72rem;
-  color: var(--color-muted);
-}
 
 /* Footer / CTA */
 .product-card__footer {

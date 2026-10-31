@@ -208,7 +208,7 @@ function buildBadgeStackHtml(p, displayTitle) {
     const tierHtml = tier
       ? `<span class="product-card__pill product-card__pill--tier-${tier}">${escHtml(t('catalog.tier_' + tier))}</span>`
       : '';
-    extraHtml = `<span class="product-card__pill product-card__pill--installment">${escHtml(t('catalog.installment_badge'))}</span>${tierHtml}${monobrandHtml}`;
+    extraHtml = `${tierHtml}${monobrandHtml}`;
   } else if (slug === 'kabeli') {
     const cs = extractCrossSection(displayTitle);
     if (cs) extraHtml += `<span class="product-card__pill product-card__pill--spec">⌀ ${escHtml(cs)}</span>`;
