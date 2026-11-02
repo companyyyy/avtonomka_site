@@ -845,9 +845,10 @@ function escHtml(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").
 
 /* Product descriptions on the site are full multi-paragraph texts (800-3500
    chars) - way too long for the compact modal here. Take just the lead
-   sentence: the first paragraph, or the second if the first is a short
-   title-line restatement, trimmed to a word boundary. Full text stays in
-   p.desc for search (line ~479) - this only shortens what's displayed. */
+   sentences: the first paragraph, or the second if the first is a short
+   title-line restatement, trimmed to whole sentences (word boundary as a
+   fallback). Full text stays in p.desc for search (line ~479) - this
+   only shortens what's displayed. */
 function shortDesc(text,max){
   if(!text) return "";
   const paras=String(text).split(/\n{2,}/).map(s=>s.trim()).filter(Boolean);
@@ -855,6 +856,14 @@ function shortDesc(text,max){
   if(body.length<100 && paras.length>1) body=paras[1];
   body=body.replace(/\*\*/g,"").replace(/\s+/g," ").trim();
   if(body.length<=max) return body;
+  // Prefer whole sentences so the text doesn't stop mid-thought
+  const sentences=body.match(/[^.!?]+[.!?]+(?=\s|$)/g)||[];
+  let out="";
+  for(const sn of sentences){
+    if((out+sn).length>max) break;
+    out+=sn;
+  }
+  if(out.trim().length>=max*0.4) return out.trim();
   let cut=body.slice(0,max);
   const lastSpace=cut.lastIndexOf(" ");
   if(lastSpace>max*0.6) cut=cut.slice(0,lastSpace);
@@ -878,7 +887,7 @@ function openModal(p){
         <div class="modal-name">${p.shortName}</div>
         ${likeBtnHTML(p.id)}
       </div>
-      ${p.desc?`<p style="font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:12px">${escHtml(shortDesc(p.desc,160))}</p>`:""}
+      ${p.desc?`<p style="font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:12px">${escHtml(shortDesc(p.desc,320))}</p>`:""}
       ${p.price?`<div class="modal-price">${fmt(p.price)} <span style="font-size:14px;color:var(--text2);font-family:Inter,sans-serif;font-weight:400">${p.unit}</span></div>`:""}
       ${stockNote}
       <div class="modal-discount">💚 <strong>Інсталяторам та гуртовим покупцям</strong> - спеціальна ціна. Зв'яжіться з менеджером.</div>
