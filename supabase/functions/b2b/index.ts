@@ -8,9 +8,10 @@
 //   apply        { company, edrpou?, contact_name, phone, email, city?, comment? } - заявка на доступ
 // B2B-клієнт (app_metadata.role = 'b2b', статус approved):
 //   me           - профіль і статус (працює і для заблокованого - щоб показати причину)
-//   catalog      - товари з гуртовими цінами, РРЦ, спецціни клієнта, обране
+//   catalog      - товари з гуртовими цінами ($ і грн), курс, РРЦ, спецціни клієнта, обране
 //   fav          { id, on }                    - додати / прибрати з обраного
 //   order        { client_key, items: [{ id, qty }], city?, np_branch?, payment_method?, comment? }
+//                  np_branch - «Служба: відділення / адреса», напр. «Укрпошта: 01001, вул. ...»
 //   orders       - мої замовлення
 // Адмін (tg_admins):
 //   admin_list
@@ -102,8 +103,9 @@ async function notifyManager(lines: string[]) {
 
 // ─── Каталог ────────────────────────────────────────────────────────────
 
-type Item = { id: string; code: string; name: string; cat: string; photo: string; url: string | null; mpn: string | null; price: number | null; rrp: number | null; available: boolean };
+type Item = { id: string; code: string; name: string; cat: string; photo: string; url: string | null; mpn: string | null; usd: number | null; price: number | null; rrp: number | null; available: boolean };
 let cache: { at: number; items: Item[] } | null = null;
+let usdRate = 45; // курс із feeds.json, оновлюється разом із каталогом
 
 async function siteJson(path: string) {
   const r = await fetch(`${SITE_URL}/${path}?t=${Date.now()}`, { headers: { "Cache-Control": "no-cache" } });
@@ -120,6 +122,7 @@ async function catalog(): Promise<Item[]> {
     siteJson("products.json"),
   ]);
   const rate = Number(feeds?.usd_rate) > 0 ? Number(feeds.usd_rate) : 45;
+  usdRate = rate;
   const site = new Map<string, any>((products as any[]).map((p) => [String(p.id), p]));
   const abs = (u: string) => (!u ? "" : /^https?:/.test(u) ? u : `${SITE_URL}/${u.replace(/^\//, "")}`);
 
@@ -138,6 +141,7 @@ async function catalog(): Promise<Item[]> {
       photo: abs(it.photo || s?.image_link || ""),
       url: s?.slug ? `${SITE_URL}/product/${s.slug}/${id}.html` : null,
       mpn: s?.mpn || null,
+      usd: usd > 0 ? usd : null,
       // Як feed/opt.xml: round(wholesale_usd × usd_rate, 2); без гурту - ціна за запитом.
       price: usd > 0 ? Math.round(usd * rate * 100) / 100 : null,
       // РРЦ - роздрібна ціна сайту (як у prom_file.xml до націнок).
@@ -414,7 +418,7 @@ Deno.serve(async (req) => {
         catalog(), specialPrices(client.id),
         db.from("b2b_favorites").select("product_id").eq("client_id", client.id),
       ]);
-      return json({ ok: true, items, special, favorites: (favs ?? []).map((f) => f.product_id) });
+      return json({ ok: true, items, rate: usdRate, special, favorites: (favs ?? []).map((f) => f.product_id) });
     }
     if (action === "fav") {
       const id = text(b.id, 40);

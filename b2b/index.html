@@ -39,6 +39,7 @@
     p.hint { color: var(--muted); font-size: .88rem; margin: 0 0 18px; }
     label { display: block; font-size: .76rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin: 0 0 5px; }
     input, select, textarea { width: 100%; padding: 9px 12px; border: 2px solid var(--line); border-radius: 8px; font: .95rem inherit; background: #fff; color: var(--text); outline: none; }
+    input, select, textarea, button { font-family: inherit; } /* 'font: ... inherit' вище не спрацьовує - textarea лишалась моноширинною */
     input:focus, select:focus, textarea:focus { border-color: var(--accent); }
     .field { margin: 0 0 14px; }
     .msg { min-height: 20px; font-size: .88rem; margin: 10px 0 0; }
@@ -57,7 +58,7 @@
     .table-wrap { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; background: #fff; }
     th, td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
-    th { font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); background: #f8fafc; }
+    th { white-space: nowrap; font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); background: #f8fafc; }
     td.code { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
     td.img img { width: 48px; height: 48px; object-fit: contain; display: block; }
     td.name a { color: var(--navy); text-decoration: none; }
@@ -78,8 +79,11 @@
     td.name .open:hover { text-decoration: underline; }
     .product .gallery { display: flex; gap: 8px; overflow-x: auto; margin: 0 0 14px; }
     .product .gallery img { height: 200px; max-width: 100%; object-fit: contain; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
-    .product .facts { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0 0 14px; font-size: .92rem; }
-    .product .facts b { color: var(--navy); }
+    .product .facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin: 0 0 16px; }
+    .product .facts > div { background: #f8fafc; border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; }
+    .product .facts .k { display: block; font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+    .product .facts b { color: var(--navy); font-variant-numeric: tabular-nums; }
+    .product .facts .special b { color: #c0392b; }
     .product .desc { white-space: pre-line; font-size: .93rem; margin: 0 0 14px; }
     .product table { font-size: .9rem; }
     .product table td { padding: 5px 8px; }
@@ -95,9 +99,23 @@
     .cartbar .grow { flex: 1; }
     .overlay { position: fixed; inset: 0; background: rgba(10,20,35,.55); z-index: 40; display: flex; align-items: flex-start; justify-content: center; overflow-y: auto; padding: 30px 16px; }
     .overlay .card { width: 100%; max-width: 720px; }
-    .lines td { padding: 6px 8px; font-size: .9rem; }
+    nav .badge { display: inline-block; min-width: 20px; padding: 0 6px; margin-left: 4px; border-radius: 10px; background: var(--red); color: #fff; font-size: .75rem; line-height: 18px; text-align: center; }
+    .cart-grid { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 18px; align-items: start; }
+    .cart-grid > .card { padding: 0; overflow: hidden; }
+    .cart-grid form.card { padding: 20px; position: sticky; top: 76px; }
+    .cart-table td.name { min-width: 180px; }
+    .cart-table .del { background: none; border: none; color: var(--muted); font-size: 1.2rem; cursor: pointer; padding: 4px 6px; }
+    .cart-table .del:hover { color: var(--red); }
+    .cart-total { display: flex; flex-wrap: wrap; gap: 4px 18px; justify-content: flex-end; align-items: baseline; padding: 14px 16px; }
+    .cart-total b { font-size: 1.15rem; color: var(--navy); }
+    .cart-total span { color: var(--muted); font-size: .88rem; }
+    .seg { display: flex; flex-wrap: wrap; gap: 6px; }
+    .seg label { flex: 1 1 auto; margin: 0; text-transform: none; letter-spacing: 0; font-size: .9rem; color: var(--navy); }
+    .seg input { position: absolute; opacity: 0; pointer-events: none; }
+    .seg span { display: block; text-align: center; padding: 8px 10px; border: 2px solid var(--line); border-radius: 8px; cursor: pointer; white-space: nowrap; }
+    .seg input:checked + span { border-color: var(--accent); background: #fff8e6; }
+    .seg input:focus-visible + span { outline: 2px solid var(--navy); }
     .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 8px; }
     .order { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin: 0 0 12px; background: #fff; }
     .order-head { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; margin: 0 0 8px; }
     .order-head b { color: var(--navy); }
@@ -107,8 +125,9 @@
     @media (max-width: 700px) {
       header { padding: 0 10px; gap: 8px; }
       .logo span, .who { display: none; }
-      td.img, td.rrp, th:nth-child(2), th:nth-child(7) { display: none; }
-      .row2 { grid-template-columns: 1fr; }
+      .img, .rrp { display: none; }
+      .row2, .cart-grid { grid-template-columns: 1fr; }
+      .cart-grid form.card { position: static; }
     }
   </style>
 </head>
@@ -117,6 +136,7 @@
     <a class="logo" href="/"><img src="/assets/images/logo.jpg" alt=""><span>Автономка <b>B2B</b></span></a>
     <nav id="nav" hidden>
       <button type="button" data-view="catalog" class="active">Каталог</button>
+      <button type="button" data-view="cart">Кошик<span class="badge" id="nav-cart-n" hidden></span></button>
       <button type="button" data-view="orders">Мої замовлення</button>
     </nav>
     <span class="who" id="who"></span>
@@ -170,13 +190,56 @@
         <select id="cat"><option value="">Усі категорії</option></select>
         <label class="chk"><input type="checkbox" id="only-stock"> лише в наявності</label>
         <label class="chk"><input type="checkbox" id="only-fav"> ♥ обране</label>
-        <span class="rate">Ціни в гривнях, гуртові; спецціна - ваша персональна</span>
+        <span class="rate" id="rate"></span>
       </div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Код</th><th></th><th>Товар</th><th>Наявність</th><th style="text-align:right">Ціна, грн</th><th style="text-align:right">Спецціна</th><th style="text-align:right">РРЦ</th><th>Кількість</th><th></th></tr></thead>
+          <thead><tr><th>Код</th><th class="img"></th><th>Товар</th><th>Наявність</th><th style="text-align:right">Ціна, $</th><th style="text-align:right">Ціна, грн</th><th style="text-align:right" title="Ваша персональна ціна">Спецціна</th><th class="rrp" style="text-align:right">РРЦ, грн</th><th>Кількість</th><th></th></tr></thead>
           <tbody id="rows"></tbody>
         </table>
+      </div>
+    </section>
+
+    <!-- Кошик і оформлення -->
+    <section id="v-cart" hidden>
+      <h2>Кошик</h2>
+      <div class="card empty" id="cart-empty" hidden>
+        <p>Кошик порожній.</p>
+        <button type="button" class="btn light" data-go="catalog">До каталогу</button>
+      </div>
+      <div class="cart-grid" id="cart-body">
+        <div class="card">
+          <div class="table-wrap">
+            <table class="cart-table">
+              <thead><tr><th>Код</th><th>Товар</th><th style="text-align:right">Ціна, $</th><th style="text-align:right">Ціна, грн</th><th>Кількість</th><th style="text-align:right">Сума, грн</th><th></th></tr></thead>
+              <tbody id="cart-rows"></tbody>
+            </table>
+          </div>
+          <div class="cart-total" id="cart-total"></div>
+        </div>
+
+        <form class="card" id="checkout-form">
+          <h2>Доставка й оплата</h2>
+          <div class="field"><label>Служба доставки</label>
+            <div class="seg">
+              <label><input type="radio" name="carrier" value="Нова пошта" checked><span>Нова пошта</span></label>
+              <label><input type="radio" name="carrier" value="Укрпошта"><span>Укрпошта</span></label>
+              <label><input type="radio" name="carrier" value="Делівері"><span>Делівері</span></label>
+            </div>
+          </div>
+          <div class="field"><label for="o-city">Місто *</label><input id="o-city" maxlength="120" required></div>
+          <div class="field"><label for="o-branch">Відділення / адреса *</label>
+            <textarea id="o-branch" rows="2" maxlength="180" required placeholder="№ відділення чи поштомата, або індекс і адреса"></textarea></div>
+          <div class="field"><label for="o-pay">Оплата</label>
+            <select id="o-pay">
+              <option>Безготівковий розрахунок (рахунок)</option>
+              <option>Готівка</option>
+            </select>
+          </div>
+          <div class="field"><label for="o-comment">Коментар</label><textarea id="o-comment" rows="3" maxlength="2000"></textarea></div>
+          <div class="msg error" id="checkout-msg"></div>
+          <button type="submit" class="btn" id="checkout-submit" style="width:100%">Підтвердити замовлення</button>
+        </form>
       </div>
     </section>
 
@@ -192,31 +255,7 @@
     <span class="sum" id="cart-sum"></span>
     <span class="grow"></span>
     <button type="button" class="btn light" id="cart-clear">Очистити</button>
-    <button type="button" class="btn" id="cart-open">Оформити замовлення</button>
-  </div>
-
-  <div class="overlay" id="checkout" hidden>
-    <form class="card" id="checkout-form">
-      <h2>Оформлення замовлення</h2>
-      <div class="table-wrap"><table class="lines"><tbody id="lines"></tbody></table></div>
-      <p style="text-align:right;font-weight:700;margin:10px 0 18px" id="lines-total"></p>
-      <div class="row2">
-        <div class="field"><label for="o-city">Місто доставки</label><input id="o-city" maxlength="120"></div>
-        <div class="field"><label for="o-np">Відділення НП / адреса</label><input id="o-np" maxlength="200"></div>
-      </div>
-      <div class="field"><label for="o-pay">Оплата</label>
-        <select id="o-pay">
-          <option>Безготівковий розрахунок (рахунок)</option>
-          <option>Готівка</option>
-        </select>
-      </div>
-      <div class="field"><label for="o-comment">Коментар</label><textarea id="o-comment" rows="3" maxlength="2000"></textarea></div>
-      <div class="msg error" id="checkout-msg"></div>
-      <div class="actions">
-        <button type="button" class="btn light" id="checkout-close">Назад</button>
-        <button type="submit" class="btn" id="checkout-submit">Підтвердити замовлення</button>
-      </div>
-    </form>
+    <button type="button" class="btn" data-go="cart">Перейти до кошика</button>
   </div>
 
   <div class="overlay" id="product" hidden>
@@ -244,6 +283,7 @@
       { auth: { storageKey: 'avtonomka-b2b-auth' } },
     );
     const CART_KEY = 'avtonomka_b2b_cart';
+    const DELIVERY_KEY = 'avtonomka_b2b_delivery'; // остання служба/місто/відділення - підставляємо наступного разу
     const STATUS = { new: 'Нове', in_work: 'В роботі', confirmed: 'Підтверджено', paid: 'Оплачено',
       shipped: 'Відправлено', done: 'Виконано', cancelled: 'Скасовано', returned: 'Повернення' };
 
@@ -255,12 +295,16 @@
     let items = [];
     let byId = new Map();
     let special = {};          // спецціни клієнта: { id: грн }
+    let rate = null;           // курс $ гурту з /prom-admin/ (feeds.json)
     let favs = new Set();
     let cart = {};
     try { cart = JSON.parse(localStorage.getItem(CART_KEY) || '{}') || {}; } catch { cart = {}; }
     const saveCart = () => { try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch { /* приватне вікно */ } };
     // Ціна, за якою рахується замовлення: спецціна клієнта, а без неї - гуртова.
     const priceOf = (i) => special[i.id] ?? i.price;
+    // Гурт у $. Стара версія функції b2b не віддає usd - тоді рахуємо з грн і курсу.
+    const usdOf = (i) => i.usd ?? (i.price != null && rate ? Math.round(i.price / rate * 100) / 100 : null);
+    const usd = (n) => Number(n).toLocaleString('uk-UA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
     async function api(action, body = {}) {
       const { data, error } = await sb.functions.invoke('b2b', { body: { action, ...body } });
@@ -276,8 +320,8 @@
     }
 
     function show(view) {
-      ['auth', 'wait', 'catalog', 'orders'].forEach((v) => { $('v-' + v).hidden = v !== view; });
-      $('nav').hidden = !(view === 'catalog' || view === 'orders');
+      ['auth', 'wait', 'catalog', 'cart', 'orders'].forEach((v) => { $('v-' + v).hidden = v !== view; });
+      $('nav').hidden = !['catalog', 'cart', 'orders'].includes(view);
       document.querySelectorAll('#nav button').forEach((b) => b.classList.toggle('active', b.dataset.view === view));
       $('cartbar').hidden = view !== 'catalog' || !cartLines().length;
     }
@@ -360,23 +404,33 @@
         return;
       }
       show('catalog');
-      $('o-city').value = client.city || '';
+      let saved = {};
+      try { saved = JSON.parse(localStorage.getItem(DELIVERY_KEY) || '{}') || {}; } catch { /* приватне вікно */ }
+      $('o-city').value = saved.city || client.city || '';
+      $('o-branch').value = saved.branch || '';
+      const carrier = document.querySelector(`#checkout-form input[name=carrier][value="${CSS.escape(saved.carrier || '')}"]`);
+      if (carrier) carrier.checked = true;
       loadCatalog();
     }
 
     // ─── Каталог і кошик ───────────────────────────────────────────
 
     async function loadCatalog() {
-      $('rows').innerHTML = '<tr><td colspan="9" class="empty">Завантаження…</td></tr>';
+      $('rows').innerHTML = '<tr><td colspan="10" class="empty">Завантаження…</td></tr>';
       try {
         const r = await api('catalog');
         items = r.items;
         special = r.special || {};
         favs = new Set(r.favorites || []);
+        rate = Number(r.rate) || null;
+        if (!rate) {
+          try { rate = Number((await (await fetch('/data/ultradomik/feeds.json', { cache: 'no-cache' })).json()).usd_rate) || null; } catch { /* без курсу */ }
+        }
       } catch (err) {
-        $('rows').innerHTML = `<tr><td colspan="9" class="empty">Не вдалося завантажити каталог: ${esc(err.message)}</td></tr>`;
+        $('rows').innerHTML = `<tr><td colspan="10" class="empty">Не вдалося завантажити каталог: ${esc(err.message)}</td></tr>`;
         return;
       }
+      $('rate').textContent = rate ? `Курс: 1 $ = ${usd(rate)} грн` : '';
       byId = new Map(items.map((i) => [i.id, i]));
       // Зниклі з каталогу товари прибираємо з кошика.
       Object.keys(cart).forEach((id) => { if (!byId.has(id)) delete cart[id]; });
@@ -399,26 +453,28 @@
           <td class="img">${i.photo ? `<img src="${esc(i.photo)}" alt="" loading="lazy">` : ''}</td>
           <td class="name"><button type="button" class="open">${esc(i.name)}</button><span class="cat">${esc(i.cat)}${i.mpn ? ' · ' + esc(i.mpn) : ''}</span></td>
           <td><span class="stock ${i.available ? 'yes' : 'no'}">${i.available ? '✓ в наявності' : 'під замовлення'}</span></td>
-          <td class="price">${i.price != null ? money(i.price) : '<span class="ask">за запитом</span>'}</td>
+          <td class="price">${usdOf(i) != null ? usd(usdOf(i)) : '<span class="ask">за запитом</span>'}</td>
+          <td class="price">${i.price != null ? money(i.price) : ''}</td>
           <td class="price special">${special[i.id] != null ? money(special[i.id]) : ''}</td>
           <td class="price rrp">${i.rrp != null ? money(i.rrp) : ''}</td>
           <td class="qty"><span class="stepper"><button type="button" data-step="-1" aria-label="Менше">−</button><input type="number" min="0" max="9999" step="1" value="${cart[i.id] || ''}" placeholder="0" aria-label="Кількість"><button type="button" data-step="1" aria-label="Більше">+</button></span></td>
           <td><button type="button" class="fav${favs.has(i.id) ? ' on' : ''}" aria-label="Обране" title="${favs.has(i.id) ? 'Прибрати з обраного' : 'Додати в обране'}">${favs.has(i.id) ? '♥' : '♡'}</button></td>
-        </tr>`).join('') : '<tr><td colspan="9" class="empty">Нічого не знайдено</td></tr>';
+        </tr>`).join('') : '<tr><td colspan="10" class="empty">Нічого не знайдено</td></tr>';
       renderCartBar();
     }
 
-    function setQty(tr, value) {
+    function setQty(id, value) {
       const qty = Math.min(9999, Math.max(0, Math.round(Number(value) || 0)));
-      if (qty) cart[tr.dataset.id] = qty; else delete cart[tr.dataset.id];
-      tr.classList.toggle('in-cart', !!qty);
+      if (qty) cart[id] = qty; else delete cart[id];
       saveCart();
       renderCartBar();
       return qty;
     }
 
     $('rows').addEventListener('input', (e) => {
-      if (e.target.matches('td.qty input')) setQty(e.target.closest('tr'), e.target.value);
+      if (!e.target.matches('td.qty input')) return;
+      const tr = e.target.closest('tr');
+      tr.classList.toggle('in-cart', !!setQty(tr.dataset.id, e.target.value));
     });
 
     $('rows').addEventListener('click', async (e) => {
@@ -426,8 +482,9 @@
       if (!tr) return;
       const step = e.target.closest('[data-step]');
       if (step) {
-        const input = tr.querySelector('td.qty input');
-        input.value = setQty(tr, (cart[tr.dataset.id] || 0) + Number(step.dataset.step)) || '';
+        const qty = setQty(tr.dataset.id, (cart[tr.dataset.id] || 0) + Number(step.dataset.step));
+        tr.querySelector('td.qty input').value = qty || '';
+        tr.classList.toggle('in-cart', !!qty);
         return;
       }
       if (e.target.closest('.open')) { openProduct(byId.get(tr.dataset.id)); return; }
@@ -461,14 +518,16 @@
       $('p-gallery').innerHTML = i.photo ? `<img src="${esc(i.photo)}" alt="">` : '';
       $('p-desc').textContent = '';
       $('p-specs').innerHTML = '';
-      const price = priceOf(i);
+      const fact = (k, v, cls = '') => `<div class="${cls}"><span class="k">${k}</span><b>${v}</b></div>`;
       $('p-facts').innerHTML = [
-        `Код: <b>${esc(i.code)}</b>`,
-        i.mpn ? `Артикул: <b>${esc(i.mpn)}</b>` : '',
-        `<span class="stock ${i.available ? 'yes' : 'no'}">${i.available ? '✓ в наявності' : 'під замовлення'}</span>`,
-        `Ваша ціна: <b>${price != null ? money(price) + ' грн' : 'за запитом'}</b>${special[i.id] != null ? ' (спецціна)' : ''}`,
-        i.rrp != null ? `РРЦ: <b>${money(i.rrp)} грн</b>` : '',
-      ].filter(Boolean).join('');
+        fact('Код', esc(i.code)),
+        i.mpn ? fact('Артикул', esc(i.mpn)) : '',
+        fact('Наявність', `<span class="stock ${i.available ? 'yes' : 'no'}">${i.available ? '✓ в наявності' : 'під замовлення'}</span>`),
+        fact('Ціна, $', usdOf(i) != null ? usd(usdOf(i)) : 'за запитом'),
+        i.price != null ? fact('Ціна, грн', money(i.price)) : '',
+        special[i.id] != null ? fact('Спецціна', money(special[i.id]), 'special') : '',
+        i.rrp != null ? fact('РРЦ, грн', money(i.rrp)) : '',
+      ].join('');
       $('p-link').innerHTML = i.url ? `<a href="${esc(i.url)}" target="_blank" rel="noopener">Сторінка товару на сайті ↗</a>` : '';
       $('product').hidden = false;
       try {
@@ -493,6 +552,8 @@
     function renderCartBar() {
       const lines = cartLines();
       $('cartbar').hidden = $('v-catalog').hidden || !lines.length;
+      $('nav-cart-n').hidden = !lines.length;
+      $('nav-cart-n').textContent = lines.length;
       const units = lines.reduce((s, l) => s + l.qty, 0);
       $('cart-count').textContent = `Позицій: ${lines.length} (${units} шт.)`;
       const ask = lines.some((l) => priceOf(l.item) == null);
@@ -506,16 +567,64 @@
       render();
     });
 
-    $('cart-open').addEventListener('click', () => {
+    // ─── Кошик ─────────────────────────────────────────────────────
+
+    const lineSum = (l) => (priceOf(l.item) != null ? money(priceOf(l.item) * l.qty) : '<span class="ask">за запитом</span>');
+
+    function renderCartTotal(lines) {
+      const ask = lines.some((l) => priceOf(l.item) == null);
+      const total = cartTotal(lines);
+      $('cart-total').innerHTML = `<span>Позицій: ${lines.length}, ${lines.reduce((s, l) => s + l.qty, 0)} шт.</span>`
+        + (rate && total ? `<span>≈ ${usd(total / rate)} $ за курсом ${usd(rate)}</span>` : '')
+        + `<b>Разом: ${money(total)} грн${ask ? ' + позиції за запитом' : ''}</b>`;
+    }
+
+    function renderCart() {
       const lines = cartLines();
-      $('lines').innerHTML = lines.map((l) => `<tr><td class="code">${esc(l.item.code)}</td><td>${esc(l.item.name)}</td>
-        <td style="white-space:nowrap">× ${l.qty}</td>
-        <td class="price">${priceOf(l.item) != null ? money(priceOf(l.item) * l.qty) + ' грн' : '<span class="ask">за запитом</span>'}</td></tr>`).join('');
-      $('lines-total').textContent = `Разом: ${money(cartTotal(lines))} грн`;
-      $('checkout-msg').textContent = '';
-      $('checkout').hidden = false;
+      $('cart-empty').hidden = !!lines.length;
+      $('cart-body').hidden = !lines.length;
+      $('cart-rows').innerHTML = lines.map((l) => {
+        const i = l.item;
+        const sp = special[i.id] != null;
+        return `<tr data-id="${esc(i.id)}">
+          <td class="code">${esc(i.code)}</td>
+          <td class="name">${esc(i.name)}${i.mpn ? `<span class="cat">${esc(i.mpn)}</span>` : ''}</td>
+          <td class="price">${sp ? '' : usdOf(i) != null ? usd(usdOf(i)) : ''}</td>
+          <td class="price${sp ? ' special' : ''}" title="${sp ? 'Спецціна' : ''}">${priceOf(i) != null ? money(priceOf(i)) : '<span class="ask">за запитом</span>'}</td>
+          <td class="qty"><span class="stepper"><button type="button" data-step="-1" aria-label="Менше">−</button><input type="number" min="1" max="9999" step="1" value="${l.qty}" aria-label="Кількість"><button type="button" data-step="1" aria-label="Більше">+</button></span></td>
+          <td class="price sum">${lineSum(l)}</td>
+          <td><button type="button" class="del" aria-label="Прибрати" title="Прибрати з кошика">×</button></td>
+        </tr>`;
+      }).join('');
+      renderCartTotal(lines);
+    }
+
+    // Під час введення кількості не перемальовуємо таблицю (інакше злітає фокус) -
+    // лише суму рядка й підсумок; 0 / порожнє поле прибирає рядок, коли поле втратить фокус.
+    function cartQty(tr, value) {
+      const qty = setQty(tr.dataset.id, value);
+      if (!qty) { renderCart(); return; }
+      tr.querySelector('.sum').innerHTML = lineSum({ item: byId.get(tr.dataset.id), qty });
+      renderCartTotal(cartLines());
+    }
+    $('cart-rows').addEventListener('input', (e) => {
+      if (e.target.matches('td.qty input') && Number(e.target.value) > 0) cartQty(e.target.closest('tr'), e.target.value);
     });
-    $('checkout-close').addEventListener('click', () => { $('checkout').hidden = true; });
+    $('cart-rows').addEventListener('change', (e) => {
+      if (e.target.matches('td.qty input')) cartQty(e.target.closest('tr'), e.target.value);
+    });
+    $('cart-rows').addEventListener('click', (e) => {
+      const tr = e.target.closest('tr[data-id]');
+      if (!tr) return;
+      const step = e.target.closest('[data-step]');
+      if (step) {
+        const qty = (cart[tr.dataset.id] || 0) + Number(step.dataset.step);
+        if (qty > 0) tr.querySelector('td.qty input').value = qty;
+        cartQty(tr, qty);
+      } else if (e.target.closest('.del')) {
+        cartQty(tr, 0);
+      }
+    });
 
     $('checkout-form').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -524,6 +633,11 @@
       const btn = $('checkout-submit');
       btn.disabled = true;
       $('checkout-msg').textContent = '';
+      // Реального списку відділень немає: служба + відділення/адреса текстом ідуть у np_branch замовлення.
+      const carrier = document.querySelector('#checkout-form input[name=carrier]:checked').value;
+      const city = $('o-city').value.trim();
+      const branch = $('o-branch').value.trim().replace(/\s+/g, ' ');
+      try { localStorage.setItem(DELIVERY_KEY, JSON.stringify({ carrier, city, branch })); } catch { /* приватне вікно */ }
       // Один ключ на кошик: повторне натискання після збою мережі не створить дубль.
       const key = sessionStorage.getItem('b2b_order_key') || crypto.randomUUID();
       try { sessionStorage.setItem('b2b_order_key', key); } catch { /* ignore */ }
@@ -531,15 +645,16 @@
         const r = await api('order', {
           client_key: key,
           items: lines.map((l) => ({ id: l.item.id, qty: l.qty })),
-          city: $('o-city').value, np_branch: $('o-np').value, payment_method: $('o-pay').value, comment: $('o-comment').value,
+          city, np_branch: `${carrier}: ${branch}`, payment_method: $('o-pay').value, comment: $('o-comment').value,
         });
         try { sessionStorage.removeItem('b2b_order_key'); } catch { /* ignore */ }
         cart = {};
         saveCart();
         $('o-comment').value = '';
-        $('checkout').hidden = true;
         render();
         alert(`Замовлення №${r.number} прийнято. Менеджер зв'яжеться з вами для підтвердження.`);
+        show('orders');
+        loadOrders();
       } catch (err) {
         $('checkout-msg').textContent = err.status === 429 ? 'Забагато замовлень за короткий час. Спробуйте за кілька хвилин.'
           : 'Не вдалося надіслати замовлення: ' + err.message;
@@ -560,6 +675,7 @@
               <b>№${o.number}</b>
               <span>${new Date(o.created_at).toLocaleString('uk-UA', { dateStyle: 'short', timeStyle: 'short' })}</span>
               <span class="status ${esc(o.status)}">${esc(STATUS[o.status] || o.status)}</span>
+              ${o.np_branch || o.city ? `<span>${esc([o.city, o.np_branch].filter(Boolean).join(', '))}</span>` : ''}
               ${o.ttn ? `<span>ТТН: ${esc(o.ttn)}</span>` : ''}
               <span style="margin-left:auto;font-weight:700">${money(o.total)} грн</span>
             </div>
@@ -571,11 +687,15 @@
       }
     }
 
-    document.querySelectorAll('#nav button').forEach((b) => b.addEventListener('click', () => {
-      show(b.dataset.view);
-      if (b.dataset.view === 'orders') loadOrders();
-      else renderCartBar();
-    }));
+    function go(view) {
+      show(view);
+      if (view === 'orders') loadOrders();
+      else if (view === 'cart') { renderCart(); renderCartBar(); }
+      else render(); // кількості могли змінитись у кошику
+      window.scrollTo(0, 0);
+    }
+    document.querySelectorAll('#nav button').forEach((b) => b.addEventListener('click', () => go(b.dataset.view)));
+    document.querySelectorAll('[data-go]').forEach((b) => b.addEventListener('click', () => go(b.dataset.go)));
 
     start();
   })();
