@@ -34,7 +34,7 @@ BRAND_PHONETIC = {
     'DAH Solar': ('дан солар', 'дан солар'),
     'Deye':      ('дея', 'дея'),
     'Dyness':    ('дайнес', 'дайнес'),
-    'Felicity':  ('селіситі', 'селисити'),
+    # Felicity: no phonetic - nobody searches "селіситі"/"селисити".
     'MUST':      ('маст', 'маст'),
     'KBE':       ('кбе', 'кбе'),                 # unverified
     'EcoFlow':   ('екофлоу', 'экофлоу'),          # unverified
