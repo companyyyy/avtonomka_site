@@ -10,8 +10,10 @@
 //   me           - профіль і статус (працює і для заблокованого - щоб показати причину)
 //   catalog      - товари з гуртовими цінами ($ і грн), курс, РРЦ, спецціни клієнта, обране
 //   fav          { id, on }                    - додати / прибрати з обраного
-//   order        { client_key, items: [{ id, qty }], city?, np_branch?, payment_method?, comment? }
+//   order        { client_key, items: [{ id, qty }], city?, np_branch?, payment_method?, comment?, points? }
 //                  np_branch - «Служба: відділення / адреса», напр. «Укрпошта: 01001, вул. ...»
+//                  points - оплатити частину балами партнерської програми (функція affiliate,
+//                  docs/AFFILIATE.md); не вдалося списати - замовлення все одно приймається, points_error
 //   orders       - мої замовлення
 // Адмін (tg_admins):
 //   admin_list
@@ -271,6 +273,24 @@ async function order(client: any, b: any) {
   const { error: itemsError } = await db.from("order_items").insert(items.map((i: any) => ({ ...i, order_id: o.id })));
   if (itemsError) console.error("b2b: items", itemsError);
 
+  // Оплата балами: перевірки (баланс, частка суми, блокування від подвійного списання) - у affiliate_spend.
+  let pointsSpent = 0;
+  let pointsError: string | null = null;
+  const points = Math.floor(Number(b.points) || 0);
+  if (points > 0 && !itemsError) {
+    const { data: aff } = await db.from("affiliates").select("id").eq("client_id", client.id).maybeSingle();
+    const { data: spent, error } = aff
+      ? await db.rpc("affiliate_spend", { p_affiliate: aff.id, p_order: o.id, p_points: points })
+      : { data: 0, error: { message: "not a partner" } };
+    if (error) {
+      pointsError = /not enough/.test(error.message) ? "Недостатньо балів"
+        : /too many points/.test(error.message) ? "Балами можна оплатити лише частину суми" : error.message;
+      console.error("b2b: points", error);
+    } else pointsSpent = spent ?? 0;
+  }
+  const { data: pv } = pointsSpent ? await db.from("affiliate_settings").select("point_value").eq("id", 1).single() : { data: null };
+  const pointsUah = pointsSpent * (Number(pv?.point_value) || 1);
+
   await notifyManager([
     `🏢 <b>B2B замовлення №${o.number}</b> · ${escHtml(client.company)}`,
     `${escHtml(client.contact_name)}, ${escHtml(client.phone)}`,
@@ -279,10 +299,11 @@ async function order(client: any, b: any) {
     "",
     ...items.map((i: any) => `• [${escHtml(i.sku)}] ${escHtml(i.title)} × ${i.qty}${i.price != null ? ` - ${money(i.price * i.qty)}` : " - ціна за запитом"}`),
     total > 0 ? `<b>Разом: ${money(total)}</b>` : "",
+    pointsSpent ? `🎁 Оплачено балами: ${pointsSpent} (−${money(pointsUah)}), до оплати: <b>${money(total - pointsUah)}</b>` : "",
     o.comment ? `\nКоментар: ${escHtml(o.comment)}` : "",
     `\n<a href="${SITE_URL}/orders-admin/#${o.number}">Відкрити в адмінці</a>`,
   ]);
-  return json({ ok: true, number: o.number });
+  return json({ ok: true, number: o.number, points_spent: pointsSpent, points_error: pointsError });
 }
 
 async function admin(action: string, b: any) {
@@ -432,7 +453,7 @@ Deno.serve(async (req) => {
     if (action === "order") return await order(client, b);
     if (action === "orders") {
       const { data, error } = await db.from("orders")
-        .select("number, created_at, status, total, city, np_branch, comment, ttn, order_items(title, sku, qty, price, position)")
+        .select("number, created_at, status, total, affiliate_points_spent, city, np_branch, comment, ttn, order_items(title, sku, qty, price, position)")
         .eq("b2b_client_id", client.id).order("created_at", { ascending: false }).limit(100);
       if (error) return json({ error: error.message }, 500);
       return json({ ok: true, orders: data });

@@ -9,6 +9,7 @@
 //   name, phone, city?, np_branch?, payment_method?, comment?, page_url?,
 //   items: [{ product_id?, title, sku?, qty, price? }],
 //   initData?              // мініапп: підписані дані Telegram - звідти tg_id клієнта
+//   aff?                   // cookie aff_ref партнерської програми (assets/js/affiliate.js)
 // }
 // Відповідь: { ok: true, number } або { error } зі статусом 4xx/5xx.
 //
@@ -17,6 +18,8 @@
 //
 // Секрети (Edge Functions → Secrets) - ті самі, що для бота: TELEGRAM_BOT_TOKEN,
 // MANAGER_CHAT_ID (без нього замовлення зберігаються, але сповіщень немає).
+// AFFILIATE_SECRET - той самий, що у функції affiliate (перевірка cookie
+// партнера; без нього замовлення до партнерів не прив'язуються).
 // SUPABASE_URL і SUPABASE_SERVICE_ROLE_KEY Supabase додає сам.
 // JWT-перевірку вимкнути (Enforce JWT verification = off): сайт без сесії Supabase.
 // Інструкція - docs/ORDERS.md.
@@ -27,6 +30,7 @@ const BOT_TOKEN = Deno.env.get("TELEGRAM_BOT_TOKEN") ?? "";
 const MANAGER_CHAT_ID = Deno.env.get("MANAGER_CHAT_ID") ?? "";
 const TG_API = Deno.env.get("TELEGRAM_API_BASE") ?? "https://api.telegram.org";
 const SITE_URL = (Deno.env.get("SITE_URL") ?? "https://avtonomka.com.ua").replace(/\/$/, "");
+const AFF_SECRET = Deno.env.get("AFFILIATE_SECRET") ?? "";
 const SOURCES = ["Кошик", "Швидка заявка", "Мініапп"];
 const MAX_ITEMS = 50;
 // Не більше стількох замовлень з одного телефону за 10 хвилин (захист від спаму).
@@ -100,11 +104,57 @@ export function cleanItems(raw: unknown) {
   }).filter((i) => i.title);
 }
 
+// ─── Партнерська програма (scripts/supabase/affiliate_schema.sql, docs/AFFILIATE.md) ───
+
+// Як signToken / verifyToken у функції affiliate: «КОД.unix-секунди.підпис».
+async function verifyAffToken(token: string | null) {
+  const m = /^([A-HJ-NP-Z2-9]{6,8})\.(\d{9,11})\.([\w-]{22})$/.exec(token ?? "");
+  if (!m || !AFF_SECRET) return null;
+  const sig = btoa(String.fromCharCode(...await hmac(enc.encode(AFF_SECRET), `aff:${m[1]}.${m[2]}`)))
+    .replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "").slice(0, 22);
+  return sig === m[3] ? { code: m[1], ts: Number(m[2]) } : null;
+}
+
+// Категорії товарів для категорійних ставок: { "<product_id>": "<product_type>" }.
+async function productCategories(items: { product_id: string | null }[]) {
+  try {
+    const r = await fetch(`${SITE_URL}/products.json?t=${Date.now()}`, { headers: { "Cache-Control": "no-cache" } });
+    const byId = new Map(((await r.json()) as any[]).map((p) => [String(p.id), p.product_type]));
+    return Object.fromEntries(items.filter((i) => i.product_id && byId.get(i.product_id)).map((i) => [i.product_id, byId.get(i.product_id!)]));
+  } catch (e) {
+    console.error("order-submit: products.json", e);
+    return {};
+  }
+}
+
+// Прив'язати замовлення до партнера. Без cookie - лише довічна прив'язка за
+// телефоном (якщо ввімкнена в налаштуваннях). Помилки не заважають замовленню.
+async function attachAffiliate(orderId: string, items: { product_id: string | null }[], aff: unknown) {
+  try {
+    const token = await verifyAffToken(text(aff, 80));
+    if (!token) {
+      const { data: s } = await db.from("affiliate_settings").select("enabled, lifetime_days").eq("id", 1).maybeSingle();
+      if (!s?.enabled || !(s.lifetime_days > 0)) return null;
+    }
+    const { data, error } = await db.rpc("affiliate_on_new_order", {
+      p_order: orderId,
+      p_code: token?.code ?? null,
+      p_clicked_at: token ? new Date(token.ts * 1000).toISOString() : null,
+      p_categories: await productCategories(items),
+    });
+    if (error) throw error;
+    return data?.attached ? data : null;
+  } catch (e) {
+    console.error("order-submit: affiliate", e);
+    return null;
+  }
+}
+
 const escHtml = (s: unknown) =>
   String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const money = (n: number) => `${Math.round(n).toLocaleString("uk-UA")} грн`;
 
-async function notifyManager(order: any, items: any[]) {
+async function notifyManager(order: any, items: any[], aff: any = null) {
   if (!MANAGER_CHAT_ID || !BOT_TOKEN) return;
   const who = order.tg_username ? ` (@${escHtml(order.tg_username)})` : order.tg_id ? ` (<a href="tg://user?id=${order.tg_id}">Telegram</a>)` : "";
   const lines = [
@@ -116,6 +166,7 @@ async function notifyManager(order: any, items: any[]) {
     ...items.map((i) => `• ${escHtml(i.title)} × ${i.qty}${i.price != null ? ` - ${money(i.price * i.qty)}` : ""}`),
     order.total > 0 ? `<b>Разом: ${money(order.total)}</b>` : "",
     order.comment ? `\nКоментар: ${escHtml(order.comment)}` : "",
+    aff ? `🤝 Партнер: ${escHtml(aff.code)} (${aff.points} балів)` : "",
     `\n<a href="${SITE_URL}/orders-admin/#${order.number}">Відкрити в адмінці</a>`,
   ].filter((l) => l !== "");
   try {
@@ -188,6 +239,7 @@ Deno.serve(async (req) => {
   const { error: itemsError } = await db.from("order_items").insert(items.map((i) => ({ ...i, order_id: order.id })));
   if (itemsError) console.error("order-submit: items", itemsError);
 
-  await notifyManager(order, items);
+  const aff = itemsError ? null : await attachAffiliate(order.id, items, b.aff);
+  await notifyManager(order, items, aff);
   return json({ ok: true, number: order.number });
 });
