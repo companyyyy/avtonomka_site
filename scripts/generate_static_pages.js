@@ -1158,7 +1158,8 @@ function affiliateRules() {
     ['^' + p + '=' + code + '&(.*)$', '/$1?%2#aff=%1'],
     ['^(.*)&' + p + '=' + code + '$', '/$1?%1#aff=%2'],
     ['^(.*)&' + p + '=' + code + '&(.*)$', '/$1?%1&%3#aff=%2'],
-  ].map(([cond, to]) => `RewriteCond %{QUERY_STRING} ${cond}\nRewriteRule ^(.*)$ ${to} [NE,R=301,L]`).join('\n');
+  // Повна адреса з https - інакше сервер підставляє http:// і браузер робить зайвий редирект.
+  ].map(([cond, to]) => `RewriteCond %{QUERY_STRING} ${cond}\nRewriteRule ^(.*)$ ${SITE_URL}${to} [NE,R=301,L]`).join('\n');
 }
 
 function updateHtaccess(products, redirects = []) {
