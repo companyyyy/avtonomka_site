@@ -7,9 +7,11 @@
   <title>Автономка B2B</title>
   <link rel="icon" href="/assets/images/logo.jpg" type="image/jpeg" />
   <!--
-    B2B-кабінет: вхід партнера, каталог з гуртовими цінами, замовлення, мої замовлення.
-    Бекенд - Edge Function supabase/functions/b2b, клієнтів веде розділ адмінки b2b-admin/.
-    Інструкція - docs/B2B.md.
+    B2B-кабінет: вхід партнера, каталог з гуртовими цінами, замовлення, мої замовлення,
+    партнерська (реферальна) програма.
+    Бекенд - Edge Functions supabase/functions/b2b і supabase/functions/affiliate (вкладка
+    «Партнерська програма», оплата балами), клієнтів веде розділ адмінки b2b-admin/.
+    Інструкція - docs/B2B.md, docs/AFFILIATE.md.
   -->
   <style>
     :root { --navy: #1a2e4a; --accent: #f5a623; --green: #2ecc40; --bg: #f4f6f9; --card: #fff; --text: #222831;
@@ -122,6 +124,26 @@
     .status { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: .8rem; font-weight: 600; background: #e8edf3; color: var(--navy); }
     .status.new { background: #fff3d6; } .status.done { background: #d9f5e1; } .status.cancelled, .status.returned { background: #fde2e0; }
     .order ul { margin: 0; padding-left: 18px; font-size: .9rem; }
+    .stack { display: flex; flex-direction: column; gap: 18px; }
+    .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+    .tiles > div { background: #f8fafc; border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; }
+    .tiles .k { display: block; font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+    .tiles b { font-size: 1.25rem; color: var(--navy); font-variant-numeric: tabular-nums; }
+    .tiles .main { background: #fff8e6; border-color: var(--accent); }
+    .linkrow { display: flex; gap: 8px; align-items: center; }
+    .linkrow input { flex: 1; font-family: ui-monospace, Consolas, monospace; font-size: .88rem; }
+    .linkrow .btn { white-space: nowrap; }
+    .code-big { font: 800 1.6rem ui-monospace, Consolas, monospace; letter-spacing: .12em; color: var(--navy); }
+    .period { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 12px; }
+    .period input { width: auto; }
+    .chk-line { display: flex; gap: 8px; align-items: flex-start; text-transform: none; letter-spacing: 0; font-size: .92rem; font-weight: 400; color: var(--text); }
+    .chk-line input { width: auto; margin-top: 3px; }
+    .rules { white-space: pre-line; font-size: .92rem; background: #f8fafc; border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; max-height: 260px; overflow-y: auto; }
+    .s-pending, .s-new { background: #fff3d6; } .s-approved, .s-paid { background: #d9f5e1; } .s-cancelled, .s-reversed, .s-rejected { background: #fde2e0; }
+    td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    td.plus { color: #1e8e3e; } td.minus { color: var(--red); }
+    .points-box { border: 2px dashed var(--accent); border-radius: 10px; padding: 10px 12px; margin: 0 0 14px; background: #fffdf6; }
+    .points-box .hint { margin: 4px 0 0; }
     @media (max-width: 700px) {
       header { padding: 0 10px; gap: 8px; }
       .logo span, .who { display: none; }
@@ -138,6 +160,7 @@
       <button type="button" data-view="catalog" class="active">Каталог</button>
       <button type="button" data-view="cart">Кошик<span class="badge" id="nav-cart-n" hidden></span></button>
       <button type="button" data-view="orders">Мої замовлення</button>
+      <button type="button" data-view="partner">Партнерська програма</button>
     </nav>
     <span class="who" id="who"></span>
     <button type="button" class="btn ghost" id="logout" hidden>Вийти</button>
@@ -237,6 +260,11 @@
             </select>
           </div>
           <div class="field"><label for="o-comment">Коментар</label><textarea id="o-comment" rows="3" maxlength="2000"></textarea></div>
+          <div class="points-box" id="points-box" hidden>
+            <label for="o-points">Оплатити балами</label>
+            <input type="number" id="o-points" min="0" step="1" inputmode="numeric" placeholder="0">
+            <p class="hint" id="points-hint"></p>
+          </div>
           <div class="msg error" id="checkout-msg"></div>
           <button type="submit" class="btn" id="checkout-submit" style="width:100%">Підтвердити замовлення</button>
         </form>
@@ -247,6 +275,107 @@
     <section id="v-orders" hidden>
       <h2>Мої замовлення</h2>
       <div id="orders"></div>
+    </section>
+
+    <!-- Партнерська програма (функція affiliate, docs/AFFILIATE.md) -->
+    <section id="v-partner" hidden>
+      <div class="card narrow" id="p-loading"><p class="hint">Завантаження…</p></div>
+
+      <!-- Ще не партнер -->
+      <div class="card" id="p-join" hidden style="max-width:760px;margin:0 auto">
+        <h1>Партнерська програма</h1>
+        <p class="hint">Діліться посиланнями на наші товари - і отримуйте бали з кожної покупки клієнтів, яких ви привели.
+          Бали можна витратити на свої замовлення тут, у кабінеті, або вивести грошима.</p>
+        <div class="tiles" id="join-terms" style="margin:0 0 16px"></div>
+        <div id="join-cats" class="hint"></div>
+        <div class="field"><label>Правила програми</label><div class="rules" id="join-rules"></div></div>
+        <label class="chk-line"><input type="checkbox" id="join-accept"> Я ознайомився(-лась) з правилами партнерської програми і погоджуюсь з ними</label>
+        <div style="margin:16px 0 0"><button type="button" class="btn" id="join-btn" disabled>Стати партнером</button></div>
+        <div class="msg error" id="join-msg"></div>
+      </div>
+
+      <!-- Партнер -->
+      <div class="stack" id="p-main" hidden>
+        <div class="card" id="p-blocked" hidden style="border-left:4px solid var(--red)">
+          <b>Участь у програмі призупинено.</b> Нові переходи й замовлення не враховуються. Зверніться до менеджера.
+        </div>
+        <div class="card">
+          <div style="display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;margin:0 0 14px">
+            <div><label>Ваш код</label><span class="code-big" id="p-code"></span></div>
+            <p class="hint" style="margin:0;flex:1;min-width:240px">Додайте <b id="p-param"></b> до будь-якої адреси сайту - або візьміть готове посилання нижче.
+              Покупець, що перейшов за ним, закріплюється за вами на <b id="p-days"></b>. <a href="/partnerska-programa.html" target="_blank" rel="noopener">Правила програми ↗</a></p>
+          </div>
+          <div class="field"><label for="p-home">Посилання на головну</label>
+            <div class="linkrow"><input id="p-home" readonly><button type="button" class="btn light" data-copy="p-home">Копіювати</button></div></div>
+          <div class="field" style="margin:0"><label for="p-url">Генератор посилань: вставте адресу товару чи категорії</label>
+            <div class="linkrow"><input id="p-url" placeholder="https://avtonomka.com.ua/product/..." autocomplete="off"></div>
+            <div class="linkrow" style="margin-top:8px"><input id="p-out" readonly placeholder="Тут з'явиться ваше посилання"><button type="button" class="btn light" data-copy="p-out">Копіювати</button></div>
+            <div class="msg error" id="p-url-msg"></div>
+            <p class="hint" style="margin:6px 0 0">На сторінках товарів у цьому браузері також з'явиться кнопка «Скопіювати моє посилання».</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Баланс</h2>
+          <div class="tiles" id="p-balance"></div>
+        </div>
+
+        <div class="card">
+          <h2>Статистика</h2>
+          <div class="period">
+            <label for="p-from" style="margin:0">З</label><input type="date" id="p-from">
+            <label for="p-to" style="margin:0">по</label><input type="date" id="p-to">
+            <button type="button" class="btn light" id="p-all">За весь час</button>
+          </div>
+          <div class="tiles" id="p-stats" style="margin:0 0 16px"></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Дата</th><th>Замовлення</th><th style="text-align:right">Сума-база, грн</th><th style="text-align:right">%</th><th style="text-align:right">Бали</th><th>Статус</th></tr></thead>
+              <tbody id="p-commissions"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Виплата грошима</h2>
+          <p class="hint" id="pay-hint"></p>
+          <form id="pay-form">
+            <div class="row2">
+              <div class="field"><label for="pay-points">Сума, балів</label><input type="number" id="pay-points" min="1" step="1" required></div>
+              <div class="field"><label>Куди</label>
+                <div class="seg">
+                  <label><input type="radio" name="pay-method" value="iban" checked><span>IBAN (рахунок ФОП)</span></label>
+                  <label><input type="radio" name="pay-method" value="card"><span>Картка</span></label>
+                </div>
+              </div>
+            </div>
+            <div class="field" id="pay-iban-f"><label for="pay-iban">IBAN</label><input id="pay-iban" maxlength="40" placeholder="UA00 0000 0000 0000 0000 0000 0000 0" autocomplete="off"></div>
+            <div class="field" id="pay-card-f" hidden><label for="pay-card">Номер картки</label><input id="pay-card" maxlength="23" inputmode="numeric" autocomplete="off"></div>
+            <div class="row2">
+              <div class="field"><label for="pay-name">ПІБ отримувача / назва ФОП</label><input id="pay-name" maxlength="150" required></div>
+              <div class="field"><label for="pay-ipn">ІПН (для ФОП)</label><input id="pay-ipn" maxlength="12" inputmode="numeric"></div>
+            </div>
+            <button type="submit" class="btn" id="pay-btn">Запросити виплату</button>
+            <div class="msg" id="pay-msg"></div>
+          </form>
+          <div class="table-wrap" style="margin-top:14px">
+            <table>
+              <thead><tr><th>Дата</th><th style="text-align:right">Бали</th><th style="text-align:right">Сума, грн</th><th>Статус</th><th>Коментар</th></tr></thead>
+              <tbody id="p-payouts"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Історія балансу</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Дата</th><th>Операція</th><th style="text-align:right">Бали</th><th>Коментар</th></tr></thead>
+              <tbody id="p-tx"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -283,6 +412,13 @@
       { auth: { storageKey: 'avtonomka-b2b-auth' } },
     );
     const CART_KEY = 'avtonomka_b2b_cart';
+    const PARTNER_KEY = 'avtonomka_aff_code'; // код партнера - для кнопки на сторінках товарів (assets/js/affiliate.js)
+    const SITE = 'https://avtonomka.com.ua';
+    const AFF_PARAM = 'ref'; // як PARAM в assets/js/affiliate.js
+    const C_STATUS = { pending: 'Очікує', approved: 'Підтверджено', cancelled: 'Скасовано', reversed: 'Сторно' };
+    const P_STATUS = { new: 'В обробці', paid: 'Виплачено', rejected: 'Відхилено' };
+    const TX_TYPE = { commission: 'Нарахування', reversal: 'Сторно', spend: 'Оплата замовлення', spend_refund: 'Повернення балів',
+      payout: 'Виплата', payout_refund: 'Виплату скасовано', adjustment: 'Коригування' };
     const DELIVERY_KEY = 'avtonomka_b2b_delivery'; // остання служба/місто/відділення - підставляємо наступного разу
     const STATUS = { new: 'Нове', in_work: 'В роботі', confirmed: 'Підтверджено', paid: 'Оплачено',
       shipped: 'Відправлено', done: 'Виконано', cancelled: 'Скасовано', returned: 'Повернення' };
@@ -306,8 +442,8 @@
     const usdOf = (i) => i.usd ?? (i.price != null && rate ? Math.round(i.price / rate * 100) / 100 : null);
     const usd = (n) => Number(n).toLocaleString('uk-UA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-    async function api(action, body = {}) {
-      const { data, error } = await sb.functions.invoke('b2b', { body: { action, ...body } });
+    async function api(action, body = {}, fn = 'b2b') {
+      const { data, error } = await sb.functions.invoke(fn, { body: { action, ...body } });
       if (error) {
         let detail = {};
         try { detail = await error.context.json(); } catch { /* не JSON */ }
@@ -320,8 +456,8 @@
     }
 
     function show(view) {
-      ['auth', 'wait', 'catalog', 'cart', 'orders'].forEach((v) => { $('v-' + v).hidden = v !== view; });
-      $('nav').hidden = !['catalog', 'cart', 'orders'].includes(view);
+      ['auth', 'wait', 'catalog', 'cart', 'orders', 'partner'].forEach((v) => { $('v-' + v).hidden = v !== view; });
+      $('nav').hidden = !['catalog', 'cart', 'orders', 'partner'].includes(view);
       document.querySelectorAll('#nav button').forEach((b) => b.classList.toggle('active', b.dataset.view === view));
       $('cartbar').hidden = view !== 'catalog' || !cartLines().length;
     }
@@ -379,12 +515,21 @@
     // scope: 'local' - вийти лише з кабінету в цьому браузері. За замовчуванням
     // signOut глобальний і обриває ВСІ сесії акаунта, зокрема адмінку, якщо
     // в кабінет зайшли адмінським email (адмінка потім ловить «not signed in»).
-    $('logout').addEventListener('click', async () => { await sb.auth.signOut({ scope: 'local' }); location.reload(); });
+    $('logout').addEventListener('click', async () => {
+      try { localStorage.removeItem(PARTNER_KEY); } catch { /* приватне вікно */ }
+      await sb.auth.signOut({ scope: 'local' });
+      location.reload();
+    });
 
     async function start() {
       const { data } = await sb.auth.getSession();
       $('logout').hidden = !data.session;
-      if (!data.session) { show('auth'); return; }
+      if (!data.session) {
+        show('auth');
+        // Прийшли зі сторінки партнерської програми: вона для B2B-клієнтів.
+        if (location.hash === '#partner') $('login-msg').textContent = 'Партнерська програма - для клієнтів B2B-кабінету. Увійдіть або подайте заявку на вкладці «Стати партнером».';
+        return;
+      }
       try {
         client = (await api('me')).client;
       } catch (err) {
@@ -403,7 +548,7 @@
         show('wait');
         return;
       }
-      show('catalog');
+      if (location.hash === '#partner') go('partner'); else show('catalog');
       let saved = {};
       try { saved = JSON.parse(localStorage.getItem(DELIVERY_KEY) || '{}') || {}; } catch { /* приватне вікно */ }
       $('o-city').value = saved.city || client.city || '';
@@ -606,6 +751,7 @@
       if (!qty) { renderCart(); return; }
       tr.querySelector('.sum').innerHTML = lineSum({ item: byId.get(tr.dataset.id), qty });
       renderCartTotal(cartLines());
+      if (!$('points-box').hidden) renderPoints(); // максимум балів залежить від суми
     }
     $('cart-rows').addEventListener('input', (e) => {
       if (e.target.matches('td.qty input') && Number(e.target.value) > 0) cartQty(e.target.closest('tr'), e.target.value);
@@ -642,17 +788,23 @@
       const key = sessionStorage.getItem('b2b_order_key') || crypto.randomUUID();
       try { sessionStorage.setItem('b2b_order_key', key); } catch { /* ignore */ }
       try {
+        const points = $('points-box').hidden ? 0 : Math.floor(Number($('o-points').value) || 0);
         const r = await api('order', {
           client_key: key,
           items: lines.map((l) => ({ id: l.item.id, qty: l.qty })),
           city, np_branch: `${carrier}: ${branch}`, payment_method: $('o-pay').value, comment: $('o-comment').value,
+          points: points || undefined,
         });
         try { sessionStorage.removeItem('b2b_order_key'); } catch { /* ignore */ }
         cart = {};
         saveCart();
         $('o-comment').value = '';
+        $('o-points').value = '';
+        partner = null; // баланс змінився - перечитаємо
         render();
-        alert(`Замовлення №${r.number} прийнято. Менеджер зв'яжеться з вами для підтвердження.`);
+        alert(`Замовлення №${r.number} прийнято. Менеджер зв'яжеться з вами для підтвердження.`
+          + (r.points_spent ? `\nОплачено балами: ${r.points_spent}.` : '')
+          + (r.points_error ? `\nБали не списано: ${r.points_error}.` : ''));
         show('orders');
         loadOrders();
       } catch (err) {
@@ -678,6 +830,7 @@
               ${o.np_branch || o.city ? `<span>${esc([o.city, o.np_branch].filter(Boolean).join(', '))}</span>` : ''}
               ${o.ttn ? `<span>ТТН: ${esc(o.ttn)}</span>` : ''}
               <span style="margin-left:auto;font-weight:700">${money(o.total)} грн</span>
+              ${o.affiliate_points_spent ? `<span>🎁 балами: ${o.affiliate_points_spent}</span>` : ''}
             </div>
             <ul>${(o.order_items || []).sort((a, b) => a.position - b.position).map((i) =>
               `<li>${i.sku ? `[${esc(i.sku)}] ` : ''}${esc(i.title)} × ${i.qty}${i.price != null ? ` - ${money(i.price * i.qty)} грн` : ''}</li>`).join('')}</ul>
@@ -687,10 +840,234 @@
       }
     }
 
+    // ─── Партнерська програма ──────────────────────────────────────
+
+    let partner = null; // відповідь affiliate «me»: { terms, partner, summary, details }
+
+    async function loadPartner() {
+      partner = await api('me', {}, 'affiliate');
+      try {
+        if (partner.partner) localStorage.setItem(PARTNER_KEY, partner.partner.code);
+        else localStorage.removeItem(PARTNER_KEY);
+      } catch { /* приватне вікно */ }
+      return partner;
+    }
+
+    const pts = (n) => Number(n || 0).toLocaleString('uk-UA');
+    const uah = (points) => money(points * (partner?.terms.point_value || 1));
+    const tile = (k, v, main) => `<div${main ? ' class="main"' : ''}><span class="k">${k}</span><b>${v}</b></div>`;
+    const day = (d) => new Date(d).toLocaleDateString('uk-UA');
+    const isoDay = (d) => d.toISOString().slice(0, 10);
+
+    function termsTiles(t) {
+      return [
+        tile('Винагорода', `${t.default_rate}%`, true),
+        tile('Cookie діє', `${t.cookie_days} дн.`),
+        tile('Підтвердження', `${t.hold_days} дн. після виконання`),
+        tile('Мін. виплата', `${money(t.min_payout)} грн`),
+        tile('1 бал', `${money(t.point_value)} грн`),
+      ].join('');
+    }
+
+    async function openPartner() {
+      $('p-loading').hidden = false;
+      $('p-join').hidden = true;
+      $('p-main').hidden = true;
+      try {
+        await loadPartner();
+      } catch (err) {
+        $('p-loading').innerHTML = `<p class="msg error">Не вдалося завантажити: ${esc(err.message)}</p>`;
+        return;
+      }
+      $('p-loading').hidden = true;
+      const t = partner.terms;
+      if (!partner.partner) {
+        $('join-terms').innerHTML = termsTiles(t);
+        $('join-cats').textContent = t.category_rates.length
+          ? 'Ставки по категоріях: ' + t.category_rates.map((c) => `${c.category} - ${c.rate}%`).join(', ') : '';
+        $('join-rules').textContent = t.rules_text || 'Див. сторінку програми: avtonomka.com.ua/partnerska-programa.html';
+        $('join-btn').disabled = !$('join-accept').checked || !t.enabled;
+        $('join-msg').textContent = t.enabled ? '' : 'Програма тимчасово не приймає нових партнерів.';
+        $('p-join').hidden = false;
+        return;
+      }
+      const p = partner.partner;
+      $('p-main').hidden = false;
+      $('p-blocked').hidden = p.status !== 'blocked';
+      $('p-code').textContent = p.code;
+      $('p-param').textContent = `?${AFF_PARAM}=${p.code}`;
+      $('p-days').textContent = `${t.cookie_days} дн.`;
+      $('p-home').value = `${SITE}/?${AFF_PARAM}=${p.code}`;
+      renderBalance();
+      fillPayout();
+      if (!$('p-from').value) {
+        const now = new Date();
+        $('p-from').value = isoDay(new Date(now.getFullYear(), now.getMonth(), 1));
+        $('p-to').value = isoDay(now);
+      }
+      loadStats();
+    }
+
+    function renderBalance() {
+      const s = partner.summary;
+      $('p-balance').innerHTML = [
+        tile('Доступно', `${pts(s.balance)} б. <span class="hint">≈ ${uah(s.balance)} грн</span>`, true),
+        tile('Очікує підтвердження', pts(s.pending)),
+        tile('В резерві (заявка)', pts(s.reserved)),
+        tile('Виплачено', pts(s.paid)),
+      ].join('');
+    }
+
+    function fillPayout() {
+      const t = partner.terms;
+      const s = partner.summary;
+      const minPts = Math.ceil(t.min_payout / t.point_value);
+      const blocked = partner.partner.status !== 'active';
+      $('pay-hint').textContent = blocked ? 'Виплати недоступні, поки участь призупинено.'
+        : s.reserved > 0 ? 'У вас є заявка в обробці - нову можна подати після неї.'
+        : s.balance < minPts ? `Мінімальна виплата - ${money(t.min_payout)} грн (${pts(minPts)} балів). Зараз доступно ${pts(s.balance)}.`
+        : `Доступно до виплати: ${pts(s.balance)} балів (≈ ${uah(s.balance)} грн). Мінімум - ${pts(minPts)} балів. Виплату робить менеджер вручну.`;
+      $('pay-btn').disabled = blocked || s.reserved > 0 || s.balance < minPts;
+      $('pay-points').min = minPts;
+      $('pay-points').max = Math.max(minPts, s.balance);
+      if (!$('pay-points').value) $('pay-points').value = s.balance >= minPts ? s.balance : '';
+      const d = partner.details;
+      if (d && !$('pay-name').value) {
+        document.querySelector(`input[name=pay-method][value=${d.method === 'card' ? 'card' : 'iban'}]`).checked = true;
+        $('pay-iban').value = d.iban || '';
+        $('pay-card').value = d.card || '';
+        $('pay-name').value = d.name || '';
+        $('pay-ipn').value = d.ipn || '';
+        payMethod();
+      }
+    }
+
+    async function loadStats() {
+      const from = $('p-from').value;
+      const to = $('p-to').value;
+      // «по» включно: до початку наступного дня.
+      const toNext = to ? isoDay(new Date(new Date(to).getTime() + 86400000)) : undefined;
+      $('p-commissions').innerHTML = '<tr><td colspan="6" class="empty">Завантаження…</td></tr>';
+      try {
+        const r = await api('stats', { from: from || undefined, to: toNext }, 'affiliate');
+        const s = r.summary;
+        const conv = s.clicks ? Math.round(s.orders / s.clicks * 1000) / 10 : 0;
+        $('p-stats').innerHTML = [tile('Переходи', pts(s.clicks)), tile('Замовлення', pts(s.orders)),
+          tile('Конверсія', `${conv}%`), tile('Підтверджено балів', pts(s.earned))].join('');
+        $('p-commissions').innerHTML = r.commissions.length ? r.commissions.map((k) => `<tr>
+            <td>${day(k.date)}</td><td>№${esc(k.order)}</td><td class="num">${money(k.base)}</td>
+            <td class="num">${k.rate != null ? k.rate : ''}</td><td class="num"><b>${pts(k.points)}</b></td>
+            <td><span class="status s-${esc(k.status)}">${C_STATUS[k.status] || esc(k.status)}</span></td></tr>`).join('')
+          : '<tr><td colspan="6" class="empty">За цей період замовлень немає</td></tr>';
+        $('p-payouts').innerHTML = r.payouts.length ? r.payouts.map((p) => `<tr>
+            <td>${day(p.created_at)}</td><td class="num">${pts(p.amount)}</td><td class="num">${money(p.amount_uah)}</td>
+            <td><span class="status s-${esc(p.status)}">${P_STATUS[p.status] || esc(p.status)}</span></td><td>${esc(p.admin_comment)}</td></tr>`).join('')
+          : '<tr><td colspan="5" class="empty">Заявок ще не було</td></tr>';
+        $('p-tx').innerHTML = r.transactions.length ? r.transactions.map((x) => `<tr>
+            <td>${day(x.created_at)}</td><td>${TX_TYPE[x.type] || esc(x.type)}</td>
+            <td class="num ${x.amount > 0 ? 'plus' : 'minus'}">${x.amount > 0 ? '+' : ''}${pts(x.amount)}</td><td>${esc(x.comment)}</td></tr>`).join('')
+          : '<tr><td colspan="4" class="empty">Операцій ще немає</td></tr>';
+      } catch (err) {
+        $('p-commissions').innerHTML = `<tr><td colspan="6" class="empty">Не вдалося завантажити: ${esc(err.message)}</td></tr>`;
+      }
+    }
+    $('p-from').addEventListener('change', loadStats);
+    $('p-to').addEventListener('change', loadStats);
+    $('p-all').addEventListener('click', () => { $('p-from').value = ''; $('p-to').value = ''; loadStats(); });
+
+    $('join-accept').addEventListener('change', () => { $('join-btn').disabled = !$('join-accept').checked || !partner?.terms.enabled; });
+    $('join-btn').addEventListener('click', async () => {
+      $('join-btn').disabled = true;
+      $('join-msg').textContent = '';
+      try {
+        await api('join', { accept: true }, 'affiliate');
+        openPartner();
+      } catch (err) {
+        $('join-msg').textContent = err.message;
+        $('join-btn').disabled = false;
+      }
+    });
+
+    // Генератор: будь-яка адреса нашого сайту → та сама з ?ref=КОД (інші параметри лишаються).
+    $('p-url').addEventListener('input', () => {
+      const raw = $('p-url').value.trim();
+      $('p-out').value = '';
+      $('p-url-msg').textContent = '';
+      if (!raw) return;
+      let u;
+      try { u = new URL(raw, SITE); } catch { $('p-url-msg').textContent = 'Це не схоже на адресу сторінки'; return; }
+      if (!/(^|\.)avtonomka\.com\.ua$/.test(u.hostname)) { $('p-url-msg').textContent = 'Потрібна адреса сторінки avtonomka.com.ua'; return; }
+      u.protocol = 'https:';
+      u.hash = '';
+      u.searchParams.set(AFF_PARAM, partner.partner.code);
+      $('p-out').value = u.href;
+    });
+    document.querySelectorAll('[data-copy]').forEach((b) => b.addEventListener('click', () => {
+      const v = $(b.dataset.copy).value;
+      if (!v) return;
+      navigator.clipboard.writeText(v).then(() => { const t = b.textContent; b.textContent = '✓'; setTimeout(() => { b.textContent = t; }, 1500); },
+        () => { $(b.dataset.copy).select(); });
+    }));
+
+    function payMethod() {
+      const card = document.querySelector('input[name=pay-method]:checked').value === 'card';
+      $('pay-card-f').hidden = !card;
+      $('pay-iban-f').hidden = card;
+    }
+    document.querySelectorAll('input[name=pay-method]').forEach((r) => r.addEventListener('change', payMethod));
+
+    $('pay-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msg = $('pay-msg');
+      const points = Math.floor(Number($('pay-points').value) || 0);
+      if (!confirm(`Запросити виплату ${pts(points)} балів (≈ ${uah(points)} грн)? Сума зарезервується до обробки менеджером.`)) return;
+      $('pay-btn').disabled = true;
+      msg.className = 'msg';
+      msg.textContent = 'Надсилаємо…';
+      try {
+        await api('payout', {
+          points,
+          details: { method: document.querySelector('input[name=pay-method]:checked').value, iban: $('pay-iban').value,
+            card: $('pay-card').value, name: $('pay-name').value, ipn: $('pay-ipn').value },
+        }, 'affiliate');
+        msg.className = 'msg ok';
+        msg.textContent = 'Заявку прийнято. Менеджер опрацює її найближчим часом.';
+        $('pay-points').value = '';
+        await loadPartner();
+        renderBalance();
+        fillPayout();
+        loadStats();
+      } catch (err) {
+        msg.className = 'msg error';
+        msg.textContent = err.message;
+        $('pay-btn').disabled = false;
+      }
+    });
+
+    // Оплата балами в кошику: лише для партнерів з позитивним балансом.
+    async function renderPoints() {
+      $('points-box').hidden = true;
+      try { partner ??= await loadPartner(); } catch { return; }
+      const bal = partner.partner ? partner.summary.balance : 0;
+      if (bal <= 0) return;
+      const t = partner.terms;
+      const total = cartTotal(cartLines());
+      const max = Math.max(0, Math.min(bal, Math.floor(total * t.max_points_share / 100 / t.point_value)));
+      if (!max) return;
+      $('o-points').max = max;
+      if (Number($('o-points').value) > max) $('o-points').value = max;
+      $('points-hint').textContent = `Доступно ${pts(bal)} балів, на це замовлення - до ${pts(max)} (1 бал = ${money(t.point_value)} грн). `
+        + 'Бали списуються під час оформлення; якщо замовлення скасують - повернуться.';
+      $('points-box').hidden = false;
+    }
+
     function go(view) {
       show(view);
+      // #partner - щоб після оновлення сторінки й за посиланням з partnerska-programa.html відкривалась ця вкладка.
+      history.replaceState(null, '', view === 'partner' ? '#partner' : location.pathname);
       if (view === 'orders') loadOrders();
-      else if (view === 'cart') { renderCart(); renderCartBar(); }
+      else if (view === 'partner') openPartner();
+      else if (view === 'cart') { renderCart(); renderCartBar(); renderPoints(); }
       else render(); // кількості могли змінитись у кошику
       window.scrollTo(0, 0);
     }
