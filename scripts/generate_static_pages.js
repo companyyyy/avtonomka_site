@@ -1064,6 +1064,7 @@ const STATIC_PAGES = [
   { relPath: 'about.html',            changefreq: 'monthly', priority: '0.5' },
   { relPath: 'delivery-payment.html', changefreq: 'monthly', priority: '0.4' },
   { relPath: 'spivpratsia.html',      changefreq: 'monthly', priority: '0.5' },
+  { relPath: 'partnerska-programa.html', changefreq: 'monthly', priority: '0.5' },
   { relPath: 'return-policy.html',    changefreq: 'monthly', priority: '0.4' },
   { relPath: 'warranty.html',         changefreq: 'monthly', priority: '0.4' },
 ];
@@ -1141,6 +1142,25 @@ ${productEntries}
    picked up by whatever deploys this repo to that host.
    ============================================================ */
 
+/* Партнерська програма: «...?ref=КОД» → 301 на ту саму адресу без ref, з
+   «#aff=КОД» (фрагмент пошук не індексує - дублів сторінок немає). Код з
+   фрагмента забирає assets/js/affiliate.js і ставить cookie. Інші параметри
+   (UTM тощо) лишаються. Назва параметра - та сама, що PARAM в affiliate.js. */
+const AFFILIATE_PARAM = 'ref';
+
+function affiliateRules() {
+  const p = AFFILIATE_PARAM;
+  const code = '([A-Za-z0-9]{4,12})';
+  // %N - з останньої RewriteCond; NE - щоб «#» і вже закодовані символи не кодувались вдруге.
+  return [
+    // Порожній «?» прибирає старий query - інакше Apache допише ref назад і редирект зациклиться.
+    ['^' + p + '=' + code + '$', '/$1?#aff=%1'],
+    ['^' + p + '=' + code + '&(.*)$', '/$1?%2#aff=%1'],
+    ['^(.*)&' + p + '=' + code + '$', '/$1?%1#aff=%2'],
+    ['^(.*)&' + p + '=' + code + '&(.*)$', '/$1?%1&%3#aff=%2'],
+  ].map(([cond, to]) => `RewriteCond %{QUERY_STRING} ${cond}\nRewriteRule ^(.*)$ ${to} [NE,R=301,L]`).join('\n');
+}
+
 function updateHtaccess(products, redirects = []) {
   const file = path.join(ROOT, '.htaccess');
   const rule = (from, to) =>
@@ -1162,6 +1182,10 @@ function updateHtaccess(products, redirects = []) {
 # indexing and external links keep working.
 <IfModule mod_rewrite.c>
 RewriteEngine On
+
+# Партнерська програма (docs/AFFILIATE.md)
+${affiliateRules()}
+RewriteRule ^partnerska-programa/?$ ${SITE_URL}/partnerska-programa.html [R=301,L]
 
 ${rules}
 </IfModule>

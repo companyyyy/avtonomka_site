@@ -276,7 +276,9 @@
     const api = fetch(ORDER_API, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(Object.assign({ page_url: location.href }, order)),
+      // aff - cookie партнерської програми (affiliate.js); без неї тіло запиту як і раніше.
+      body: JSON.stringify(Object.assign({ page_url: location.href }, order,
+        window.Affiliate && window.Affiliate.token() ? { aff: window.Affiliate.token() } : {})),
       signal: ctrl ? ctrl.signal : undefined
     })
       .then(function (r) { return r.json().then(function (j) { return r.ok && j && j.ok ? j : null; }); })
