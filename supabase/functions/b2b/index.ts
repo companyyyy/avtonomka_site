@@ -30,6 +30,9 @@
 // Спецціна (b2b_special_prices) - окрема ціна товару для окремого клієнта;
 // де вона є, замовлення рахується за нею.
 //
+// Замовлення також дописуються в Google Таблицю «Заявки» (де й замовлення з
+// сайту) - той самий Apps Script, що в assets/js/cart.js (ORDER_SHEET), джерело «B2B».
+//
 // Секрети: TELEGRAM_BOT_TOKEN, MANAGER_CHAT_ID (як для order-submit; без них
 // просто немає сповіщень). SUPABASE_URL і SUPABASE_SERVICE_ROLE_KEY Supabase додає сам.
 
@@ -40,6 +43,9 @@ const MANAGER_CHAT_ID = Deno.env.get("MANAGER_CHAT_ID") ?? "";
 const TG_API = Deno.env.get("TELEGRAM_API_BASE") ?? "https://api.telegram.org";
 const SITE_URL = (Deno.env.get("SITE_URL") ?? "https://avtonomka.com.ua").replace(/\/$/, "");
 const MAX_ITEMS = 100;
+// ⚠ Той самий URL, що ORDER_SHEET в assets/js/cart.js і CONFIG.ORDERS_URL у miniapp_v/index.html.
+const ORDER_SHEET = Deno.env.get("ORDER_SHEET_URL") ??
+  "https://script.google.com/macros/s/AKfycbz7JbuQpZmBlUck24Bjp7SGKZL-JqE_clqLuYb9y15QG4-FSk45ZkpPHf5faZWISHcE/exec";
 
 // Код товару для клієнтів = id постачальника − 140000 (152517 → 12517).
 // Назад: код + 140000. Те саме - productCode() у prom-admin/ і b2b/.
@@ -101,6 +107,27 @@ async function notifyManager(lines: string[]) {
   } catch (e) {
     console.error("b2b: Telegram", e);
   }
+}
+
+// Рядки в Google Таблицю «Заявки» - у тому ж форматі, що надсилає кошик сайту
+// (checkout.js): один рядок на товар. Скрипт таблиці - scripts/order_form_apps_script.gs.
+async function sendToSheet(fields: Record<string, string>, items: { title: string; sku: string; qty: number; price: number | null }[]) {
+  try {
+    const r = await fetch(ORDER_SHEET, {
+      method: "POST",
+      body: new URLSearchParams({ ...fields, items: JSON.stringify(items.map((i) => ({ ...i, currency: "UAH" }))) }),
+      signal: AbortSignal.timeout(15_000),
+    });
+    if (!r.ok) console.error("b2b: Google Таблиця", r.status);
+  } catch (e) {
+    console.error("b2b: Google Таблиця", e);
+  }
+}
+
+// Фонова задача: відповідь клієнту не чекає на Google (якщо рантайм це вміє).
+function background(p: Promise<unknown>) {
+  const rt = (globalThis as any).EdgeRuntime;
+  return rt?.waitUntil ? (rt.waitUntil(p), Promise.resolve()) : p;
 }
 
 // ─── Каталог ────────────────────────────────────────────────────────────
@@ -303,6 +330,17 @@ async function order(client: any, b: any) {
     o.comment ? `\nКоментар: ${escHtml(o.comment)}` : "",
     `\n<a href="${SITE_URL}/orders-admin/#${o.number}">Відкрити в адмінці</a>`,
   ]);
+  await background(sendToSheet({
+    name: [client.contact_name, client.company].filter(Boolean).join(" · "),
+    phone: client.phone ?? "",
+    city: o.city ?? "",
+    npBranch: o.np_branch ?? "",
+    paymentMethod: o.payment_method ?? "",
+    // № замовлення з адмінки - у коментарі (своя колонка «№ замовлення» в таблиці - час заявки).
+    comment: [`B2B №${o.number}`, client.edrpou ? `ЄДРПОУ ${client.edrpou}` : "",
+      pointsSpent ? `оплачено балами ${pointsSpent} (−${money(pointsUah)})` : "", o.comment ?? ""].filter(Boolean).join(" · "),
+    source: "B2B",
+  }, items));
   return json({ ok: true, number: o.number, points_spent: pointsSpent, points_error: pointsError });
 }
 
