@@ -885,7 +885,9 @@
         $('join-terms').innerHTML = termsTiles(t);
         $('join-cats').textContent = t.category_rates.length
           ? 'Ставки по категоріях: ' + t.category_rates.map((c) => `${c.category} - ${c.rate}%`).join(', ') : '';
-        $('join-rules').textContent = t.rules_text || 'Див. сторінку програми: avtonomka.com.ua/partnerska-programa.html';
+        // Текст правил з адмінки - як текст (без HTML); поки його немає - посилання на сторінку програми.
+        if (t.rules_text) $('join-rules').textContent = t.rules_text;
+        else $('join-rules').innerHTML = 'Див. <a href="/partnerska-programa.html" target="_blank" rel="noopener">сторінку партнерської програми ↗</a>';
         $('join-btn').disabled = !$('join-accept').checked || !t.enabled;
         $('join-msg').textContent = t.enabled ? '' : 'Програма тимчасово не приймає нових партнерів.';
         $('p-join').hidden = false;
