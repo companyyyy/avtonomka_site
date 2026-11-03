@@ -10,7 +10,8 @@
 -- немає. Код партнера - 6 символів A-Z і 2-9 без схожих 0/O, 1/I.
 --
 -- Хто пише й читає: лише Edge Functions affiliate, b2b і order-submit (ключем
--- service_role). RLS увімкнено без політик - anon і authenticated закрито.
+-- service_role). RLS увімкнено без політик - anon і authenticated закрито
+-- (виняток: адміни читають affiliate_settings - курс балу для orders-admin/).
 -- Уся грошова логіка - тут, у функціях нижче; функції Edge лише перевіряють,
 -- хто викликає, і передають параметри. Інструкція - docs/AFFILIATE.md.
 --
@@ -152,6 +153,12 @@ alter table public.affiliate_admin_log    enable row level security;
 revoke all on public.affiliate_settings, public.affiliate_rates, public.affiliates, public.affiliate_clicks,
   public.affiliate_commissions, public.affiliate_transactions, public.affiliate_payouts, public.affiliate_admin_log
   from anon, authenticated;
+
+-- Адмінка «Замовлення» (orders-admin/) читає курс балу, щоб показати «до оплати».
+grant select on public.affiliate_settings to authenticated;
+drop policy if exists "admins read affiliate_settings" on public.affiliate_settings;
+create policy "admins read affiliate_settings" on public.affiliate_settings
+  for select to authenticated using (public.is_tg_admin());
 
 -- ─── 5. Розрахунок ────────────────────────────────────────────────────
 

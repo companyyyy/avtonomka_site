@@ -1,13 +1,13 @@
 /* admin-shell.js - спільна шапка, меню й вхід для всіх сторінок адмінки:
    admin.html (контент), miniapp-admin.html, miniapp-mailing.html,
-   auction-admin.html, prom-admin/, preorder-admin/, orders-admin/, b2b-admin/.
+   auction-admin.html, prom-admin/, preorder-admin/, orders-admin/, b2b-admin/, affiliate-admin/.
 
    Один вхід - користувач Supabase Auth (email + пароль). Сесію supabase-js
    тримає в localStorage цього домену, тож увійти достатньо на будь-якій
    сторінці адмінки - решта вже відкриваються залогіненими.
 
    Підключення на сторінці (після supabase-js, до власного скрипта сторінки):
-     <body data-admin-section="orders|content|miniapp|mailing|auction|prom|preorder|b2b">
+     <body data-admin-section="orders|content|miniapp|mailing|auction|prom|preorder|b2b|affiliate">
        <div id="admin-app" hidden> ...вміст розділу... </div>
        <script src=".../supabase.js"></script>
        <script src=".../assets/js/admin-shell.js"></script>
@@ -33,6 +33,7 @@
     ['prom', 'Ціни Prom', 'prom-admin/'],
     ['preorder', 'Під замовлення', 'preorder-admin/'],
     ['b2b', 'B2B', 'b2b-admin/'],
+    ['affiliate', 'Партнерка', 'affiliate-admin/'],
   ];
 
   const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);

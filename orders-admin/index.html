@@ -210,6 +210,7 @@
     let filterStatus = '';
     let current = null;          // відкрите замовлення { order, items, edit, editItems }
     let products = [];           // products.json для додавання товарів
+    let pointValue = 1;          // грн за 1 бал партнерської програми (affiliate_settings)
     let lastNewCount = null;
 
     const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -349,7 +350,9 @@
       $('savebar').classList.toggle('hidden', !isDirty());
       const total = current.editItems.reduce((s, i) => s + (Number(i.qty) || 0) * (Number(i.price) || 0), 0);
       const el = document.getElementById('items-total');
-      if (el) el.textContent = 'Разом: ' + money(total);
+      // Частину оплачено балами партнерської програми (B2B) - менеджеру видно, скільки брати з клієнта.
+      const spent = Number(current.order.affiliate_points_spent) || 0;
+      if (el) el.textContent = 'Разом: ' + money(total) + (spent ? ` · балами: ${spent} б. = −${money(spent * pointValue)} · до оплати: ${money(total - spent * pointValue)}` : '');
     }
 
     async function openOrder(number) {
@@ -394,7 +397,7 @@
         <div class="detail-head">
           <div>
             <div class="detail-title">Замовлення №${o.number}</div>
-            <div class="detail-meta">${esc(fmtDate(o.created_at))} · ${esc(o.source)}${o.page_url ? ` · <a href="${esc(o.page_url)}" target="_blank" rel="noopener" style="color:#2a7ab0">сторінка</a>` : ''}</div>
+            <div class="detail-meta">${esc(fmtDate(o.created_at))} · ${esc(o.source)}${o.page_url ? ` · <a href="${esc(o.page_url)}" target="_blank" rel="noopener" style="color:#2a7ab0">сторінка</a>` : ''}${o.affiliate_id ? ` · <a href="../affiliate-admin/#order-${o.number}" style="color:#2a7ab0">🤝 партнерське</a>` : ''}${o.affiliate_points_spent ? ` · <b>🎁 оплачено балами: ${o.affiliate_points_spent}</b>` : ''}</div>
           </div>
           <div class="field" style="min-width:220px;margin:0">
             <label for="f-status">Статус</label>
@@ -621,6 +624,9 @@
       if (error || !isAdmin) { $('denied-card').classList.remove('hidden'); return; }
       try {
         await Promise.all([loadOrders(), loadProducts()]);
+        // Без affiliate_schema.sql таблиці немає - лишається 1 грн за бал.
+        sb.from('affiliate_settings').select('point_value').eq('id', 1).maybeSingle()
+          .then(({ data }) => { if (data) pointValue = Number(data.point_value) || 1; });
       } catch (e) {
         $('setup-card').classList.remove('hidden');
         $('setup-text').textContent = /orders|relation|schema cache/i.test(e.message || '')

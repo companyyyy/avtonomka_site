@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Партнерка - Адмін - Автономка</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="../assets/images/logo.jpg" type="image/jpeg">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f8; color: #222831; line-height: 1.5; min-height: 100vh; }
+    button { cursor: pointer; font-family: inherit; }
+    [hidden] { display: none !important; }
+
+    .form-input { width: 100%; padding: 8px 12px; border: 2px solid #e0e6ed; border-radius: 8px; font-size: .92rem; font-family: inherit; color: #222831; background: #fff; outline: none; }
+    .form-input:focus { border-color: #f5a623; }
+    textarea.form-input { resize: vertical; min-height: 64px; }
+    label { display: block; font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: #6c757d; margin: 0 0 4px; }
+    .chk { display: flex; gap: 8px; align-items: center; text-transform: none; letter-spacing: 0; font-size: .92rem; font-weight: 400; color: #222831; margin: 0; }
+    .chk input { width: auto; }
+
+    .admin-btn { padding: 7px 16px; border-radius: 7px; border: none; font-size: .88rem; font-weight: 600; white-space: nowrap; }
+    .admin-btn--primary { background: #f5a623; color: #1a2e4a; }
+    .admin-btn--primary:hover { background: #e69512; }
+    .admin-btn--primary:disabled, .admin-btn--light:disabled { opacity: .5; cursor: default; }
+    .admin-btn--light { background: #e0e6ed; color: #1a2e4a; }
+    .admin-btn--light:hover { background: #d0d8e2; }
+    .admin-btn--danger { background: transparent; color: #c0392b; }
+    .admin-btn--danger:hover { background: rgba(231,76,60,.1); }
+
+    .admin-body { max-width: 1240px; margin: 0 auto; padding: 24px 20px 64px; display: flex; flex-direction: column; gap: 20px; }
+    .admin-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(26,46,74,.08); overflow: hidden; }
+    .admin-card__head { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid #e0e6ed; gap: 12px; flex-wrap: wrap; }
+    .admin-card__head h2 { font-size: 1.05rem; color: #1a2e4a; }
+    .admin-card__body { padding: 20px; }
+    .admin-hint { font-size: .9rem; color: #6c757d; padding: 12px 0; }
+    .status-line { min-height: 22px; font-size: .9rem; }
+    .status-line.ok { color: #17a126; }
+    .status-line.error { color: #c0392b; }
+
+    .tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+    .tab { padding: 6px 12px; border-radius: 8px; border: none; background: transparent; color: #6c757d; font-weight: 600; font-size: .88rem; }
+    .tab:hover { background: #f0f2f5; }
+    .tab.active { background: #1a2e4a; color: #fff; }
+    .tab .count { font-weight: 400; opacity: .75; margin-left: 3px; }
+    .toolbar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; padding: 12px 20px; border-bottom: 1px solid #e0e6ed; }
+    .toolbar .form-input { width: auto; padding: 6px 10px; font-size: .88rem; }
+    .toolbar input[type=search] { width: 240px; }
+    .toolbar .grow { flex: 1; }
+
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    th { text-align: left; font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: #6c757d; padding: 8px 10px; border-bottom: 2px solid #e0e6ed; white-space: nowrap; }
+    td { padding: 9px 10px; border-bottom: 1px solid #eef1f4; vertical-align: top; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    tr.clickable { cursor: pointer; }
+    tr.clickable:hover td { background: #f7f9fb; }
+    tr.hl td { background: #fffaf0; }
+    .muted { color: #6c757d; font-size: .82rem; }
+    code { font-family: ui-monospace, Consolas, monospace; font-weight: 700; color: #1a2e4a; }
+    .badge { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: .78rem; font-weight: 600; background: #e0e6ed; color: #1a2e4a; white-space: nowrap; }
+    .badge.pending, .badge.new { background: #fff3d6; } .badge.approved, .badge.paid, .badge.active { background: #d9f5e1; }
+    .badge.cancelled, .badge.reversed, .badge.rejected, .badge.blocked { background: #fde2e0; }
+    .plus { color: #17a126; } .minus { color: #c0392b; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px 16px; }
+    .grid .wide { grid-column: 1 / -1; }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-end; margin-top: 16px; }
+    .actions .form-input { width: auto; }
+    .section-title { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #1a2e4a; margin: 18px 0 8px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+    .stats > div { background: #f8fafc; border: 1px solid #e0e6ed; border-radius: 10px; padding: 8px 12px; }
+    .stats b { display: block; font-size: 1.15rem; color: #1a2e4a; }
+    .stats span { font-size: .74rem; color: #6c757d; text-transform: uppercase; letter-spacing: .04em; }
+    .details-box { margin-top: 12px; padding: 12px 14px; border-radius: 10px; background: #eef9f0; border: 1px solid #bfe8c8; font-size: .92rem; }
+    .rates td input { width: 90px; padding: 5px 8px; text-align: right; }
+    .overlay { position: fixed; inset: 0; background: rgba(10,20,35,.5); z-index: 60; display: flex; justify-content: center; align-items: flex-start; overflow-y: auto; padding: 40px 16px; }
+    .overlay .admin-card { width: 100%; max-width: 820px; }
+    pre.json { white-space: pre-wrap; font-size: .78rem; color: #6c757d; max-width: 420px; }
+  </style>
+</head>
+<body data-admin-section="affiliate">
+  <div id="admin-app" hidden>
+  <div class="admin-body">
+
+    <div class="admin-card">
+      <div class="admin-card__head">
+        <h2>Партнерська програма</h2>
+        <div class="tabs" id="tabs">
+          <button type="button" class="tab active" data-tab="partners">Партнери</button>
+          <button type="button" class="tab" data-tab="commissions">Нарахування</button>
+          <button type="button" class="tab" data-tab="payouts">Виплати<span class="count" id="payouts-new"></span></button>
+          <button type="button" class="tab" data-tab="settings">Налаштування</button>
+          <button type="button" class="tab" data-tab="log">Журнал дій</button>
+        </div>
+      </div>
+
+      <!-- Партнери -->
+      <section data-panel="partners">
+        <div class="toolbar">
+          <input type="search" class="form-input" id="pa-q" placeholder="Код, компанія, телефон, email" autocomplete="off">
+          <span class="grow"></span>
+          <button type="button" class="admin-btn admin-btn--light" id="pa-csv">CSV</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Код</th><th>Партнер</th><th>З</th><th class="num">Переходи</th><th class="num">Замовлення</th><th class="num">Зароблено</th><th class="num">Баланс</th><th class="num">Ставка</th><th>Статус</th></tr></thead>
+            <tbody id="pa-rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Нарахування -->
+      <section data-panel="commissions" hidden>
+        <div class="toolbar">
+          <select class="form-input" id="co-status">
+            <option value="">Усі статуси</option><option value="pending">Очікує</option><option value="approved">Підтверджено</option>
+            <option value="cancelled">Скасовано</option><option value="reversed">Сторно</option>
+          </select>
+          <select class="form-input" id="co-partner"><option value="">Усі партнери</option></select>
+          <input type="date" class="form-input" id="co-from" title="З">
+          <input type="date" class="form-input" id="co-to" title="По">
+          <input type="search" class="form-input" id="co-q" placeholder="№ замовлення" style="width:130px" autocomplete="off">
+          <span class="grow"></span>
+          <button type="button" class="admin-btn admin-btn--light" id="co-csv">CSV</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Дата</th><th>Замовлення</th><th>Партнер</th><th class="num">База, грн</th><th class="num">Бали</th><th>Статус</th><th>Джерело</th></tr></thead>
+            <tbody id="co-rows"></tbody>
+          </table>
+        </div>
+        <div class="admin-card__body">
+          <div class="section-title" style="margin-top:0">Призначити або зняти партнера з замовлення</div>
+          <div class="actions" style="margin-top:0">
+            <div><label for="as-number">№ замовлення</label><input class="form-input" id="as-number" type="number" min="1" style="width:140px"></div>
+            <div><label for="as-code">Код партнера</label><input class="form-input" id="as-code" maxlength="8" placeholder="порожньо = зняти" style="width:170px;text-transform:uppercase"></div>
+            <button type="button" class="admin-btn admin-btn--primary" id="as-btn">Зберегти</button>
+            <span class="status-line" id="as-status"></span>
+          </div>
+          <p class="admin-hint">Наявне нарахування за цим замовленням прибирається (підтверджене - через сторно в журналі балансу), нове створюється за поточними ставками.</p>
+        </div>
+      </section>
+
+      <!-- Виплати -->
+      <section data-panel="payouts" hidden>
+        <div class="toolbar">
+          <select class="form-input" id="po-status">
+            <option value="new">Нові</option><option value="paid">Виплачено</option><option value="rejected">Відхилено</option><option value="">Усі</option>
+          </select>
+          <input type="date" class="form-input" id="po-from" title="З">
+          <input type="date" class="form-input" id="po-to" title="По">
+          <span class="grow"></span>
+          <button type="button" class="admin-btn admin-btn--light" id="po-csv">CSV</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Дата</th><th>Партнер</th><th class="num">Бали</th><th class="num">Сума, грн</th><th>Статус</th><th>Коментар</th></tr></thead>
+            <tbody id="po-rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Налаштування -->
+      <section data-panel="settings" hidden>
+        <form class="admin-card__body" id="st-form" autocomplete="off">
+          <div class="grid">
+            <div class="wide"><label class="chk"><input type="checkbox" id="st-enabled"> Програма увімкнена (вимкнена - переходи й нові замовлення не враховуються)</label></div>
+            <div><label for="st-default_rate">Загальний відсоток, %</label><input class="form-input" id="st-default_rate" type="number" min="0" max="100" step="0.01"></div>
+            <div><label for="st-cookie_days">Строк cookie, днів</label><input class="form-input" id="st-cookie_days" type="number" min="1" max="365"></div>
+            <div><label for="st-attribution">Атрибуція</label>
+              <select class="form-input" id="st-attribution"><option value="last">Останній клік</option><option value="first">Перший клік</option></select></div>
+            <div><label for="st-hold_days">Період повернення, днів</label><input class="form-input" id="st-hold_days" type="number" min="0" max="365"></div>
+            <div><label for="st-min_payout">Мінімальна виплата, грн</label><input class="form-input" id="st-min_payout" type="number" min="0" step="1"></div>
+            <div><label for="st-max_points_share">Макс. оплата балами, % замовлення</label><input class="form-input" id="st-max_points_share" type="number" min="0" max="100" step="1"></div>
+            <div><label for="st-point_value">Курс: 1 бал = грн</label><input class="form-input" id="st-point_value" type="number" min="0.0001" step="0.01"></div>
+            <div><label for="st-lifetime_days">Довічна прив'язка клієнта, днів</label><input class="form-input" id="st-lifetime_days" type="number" min="0" max="3650" title="0 = вимкнено"></div>
+            <div><label>Параметр у посиланні</label><div style="padding:8px 0"><code>?ref=КОД</code> <span class="muted">(змінюється в коді, див. docs/AFFILIATE.md)</span></div></div>
+            <div class="wide"><label for="st-rules_text">Правила програми (показуються партнеру перед вступом і на сторінці партнерської програми)</label>
+              <textarea class="form-input" id="st-rules_text" rows="10" maxlength="20000"></textarea></div>
+          </div>
+
+          <div class="section-title">Відсотки по категоріях</div>
+          <p class="muted" style="margin:0 0 8px">Порожнє поле - діє індивідуальний відсоток партнера, а без нього - загальний. 0 - за цю категорію не нараховується.</p>
+          <div class="table-wrap"><table class="rates"><thead><tr><th>Категорія</th><th class="num">%</th></tr></thead><tbody id="st-cats"></tbody></table></div>
+
+          <div class="section-title">Відсотки для окремих товарів (найвищий пріоритет)</div>
+          <div class="table-wrap"><table class="rates"><thead><tr><th>Товар</th><th class="num">%</th><th></th></tr></thead><tbody id="st-products"></tbody></table></div>
+          <div class="actions" style="margin-top:8px">
+            <input class="form-input" id="st-add-product" list="st-product-list" placeholder="Почніть вводити назву товару" style="flex:1;min-width:260px">
+            <datalist id="st-product-list"></datalist>
+            <button type="button" class="admin-btn admin-btn--light" id="st-add-btn">Додати товар</button>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="admin-btn admin-btn--primary">Зберегти налаштування</button>
+            <span class="status-line" id="st-status"></span>
+          </div>
+          <p class="admin-hint">Пріоритет ставки: товар → категорія → індивідуальна партнера → загальна. Ставки фіксуються в нарахуванні на момент
+            замовлення - зміни тут не перераховують уже створені нарахування.</p>
+        </form>
+      </section>
+
+      <!-- Журнал -->
+      <section data-panel="log" hidden>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Коли</th><th>Хто</th><th>Дія</th><th>Об'єкт</th><th>Деталі</th></tr></thead>
+            <tbody id="lg-rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="admin-card__body" style="padding-top:8px">
+        <div class="status-line" id="status"></div>
+        <p class="admin-hint">Партнери - B2B-клієнти, які на вкладці «Партнерська програма» в кабінеті <b>/b2b/</b> погодились з правилами.
+          Нарахування «Очікує» стає «Підтверджено» через період повернення після статусу «Виконано» в розділі «Замовлення».
+          Інструкція - docs/AFFILIATE.md.</p>
+      </div>
+    </div>
+
+  </div>
+  </div><!-- /admin-app -->
+
+  <div class="overlay" id="dlg" hidden>
+    <div class="admin-card">
+      <div class="admin-card__head">
+        <h2 id="dlg-title"></h2>
+        <button type="button" class="admin-btn admin-btn--light" id="dlg-close">Закрити</button>
+      </div>
+      <div class="admin-card__body" id="dlg-body"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="../assets/js/admin-shell.js"></script>
+  <script>
+    /* Партнерська програма: партнери (B2B-клієнти), нарахування, виплати,
+       налаштування й ставки, журнал дій адмінів. Усе - через Edge Function
+       affiliate (дії admin_*), таблиці affiliate_* (scripts/supabase/affiliate_schema.sql).
+       Адреси: #<id партнера> - картка партнера (посилання з Telegram),
+       #payouts - вкладка виплат, #order-<№> - нарахування за замовленням. Інструкція - docs/AFFILIATE.md. */
+    const sb = AdminShell.sb;
+    const $ = (id) => document.getElementById(id);
+    const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const money = (n) => Math.round(Number(n) || 0).toLocaleString('uk-UA');
+    const pts = (n) => Number(n || 0).toLocaleString('uk-UA');
+    const fmtDate = (d) => (d ? new Date(d).toLocaleString('uk-UA', { dateStyle: 'short', timeStyle: 'short' }) : '');
+    const fmtDay = (d) => (d ? new Date(d).toLocaleDateString('uk-UA') : '');
+
+    const C_STATUS = { pending: 'Очікує', approved: 'Підтверджено', cancelled: 'Скасовано', reversed: 'Сторно' };
+    const P_STATUS = { new: 'Нова', paid: 'Виплачено', rejected: 'Відхилено' };
+    const A_STATUS = { active: 'Активний', blocked: 'Заблоковано' };
+    const SOURCE = { cookie: 'посилання', lifetime: 'довічна прив\'язка', admin: 'вручну' };
+    const ACTIONS = { settings: 'Налаштування', partner: 'Партнер', adjust: 'Коригування балансу', commission_status: 'Статус нарахування',
+      assign_order: 'Призначено замовлення', reassign_order: 'Перепризначено замовлення', unassign_order: 'Знято з замовлення',
+      payout_paid: 'Виплату здійснено', payout_rejected: 'Виплату відхилено', view_payout_details: 'Перегляд реквізитів' };
+    // Дозволені ручні переходи - як в affiliate_set_commission_status().
+    const TRANSITIONS = { pending: ['approved', 'cancelled'], approved: ['reversed'], cancelled: ['pending'], reversed: ['approved'] };
+
+    let data = null;      // відповідь admin_overview
+    let byId = new Map(); // партнери
+    let tab = 'partners';
+    let edits = { cats: {}, products: {} };
+    let routed = false;   // адресу (#...) розбираємо лише при першому завантаженні
+
+    async function api(action, body = {}) {
+      const { data, error } = await sb.functions.invoke('affiliate', { body: { action, ...body } });
+      if (error) {
+        let detail = {};
+        try { detail = await error.context.json(); } catch { /* не JSON */ }
+        throw new Error(detail.error || error.message);
+      }
+      return data;
+    }
+
+    function setStatus(el, text, kind = '') { el.textContent = text; el.className = 'status-line ' + kind; }
+    const partnerName = (id) => { const p = byId.get(id); return p ? `${p.code} · ${p.b2b_clients?.company || ''}` : '-'; };
+
+    async function load() {
+      try {
+        data = await api('admin_overview');
+      } catch (e) {
+        setStatus($('status'), /not allowed/.test(e.message) ? 'Немає доступу: ваш акаунт не в списку адмінів (tg_admins).'
+          : 'Не вдалося завантажити: ' + e.message + ' (чи виконано affiliate_schema.sql і задеплоєно функцію affiliate? див. docs/AFFILIATE.md)', 'error');
+        return;
+      }
+      byId = new Map(data.partners.map((p) => [p.id, p]));
+      $('co-partner').innerHTML = '<option value="">Усі партнери</option>'
+        + data.partners.map((p) => `<option value="${esc(p.id)}">${esc(p.code)} · ${esc(p.b2b_clients?.company)}</option>`).join('');
+      const fresh = data.payouts.filter((p) => p.status === 'new').length;
+      $('payouts-new').textContent = fresh || '';
+      fillSettings();
+      renderAll();
+      if (!routed) { routed = true; route(); }
+    }
+
+    function renderAll() { renderPartners(); renderCommissions(); renderPayouts(); renderLog(); }
+
+    function showTab(t) {
+      tab = t;
+      document.querySelectorAll('#tabs .tab').forEach((b) => b.classList.toggle('active', b.dataset.tab === t));
+      document.querySelectorAll('[data-panel]').forEach((s) => { s.hidden = s.dataset.panel !== t; });
+    }
+    $('tabs').addEventListener('click', (e) => { const b = e.target.closest('[data-tab]'); if (b) showTab(b.dataset.tab); });
+
+    function route() {
+      const h = decodeURIComponent(location.hash.slice(1));
+      if (!h) return;
+      if (h === 'payouts') showTab('payouts');
+      else if (h.startsWith('order-')) { showTab('commissions'); $('co-q').value = h.slice(6); renderCommissions(); }
+      else if (byId.has(h)) openPartner(byId.get(h));
+    }
+
+    // ─── Період ────────────────────────────────────────────────────
+
+    function inPeriod(d, fromId, toId) {
+      const t = Date.parse(d);
+      const from = $(fromId).value ? Date.parse($(fromId).value) : -Infinity;
+      const to = $(toId).value ? Date.parse($(toId).value) + 86400000 : Infinity;
+      return t >= from && t < to;
+    }
+
+    // ─── Партнери ──────────────────────────────────────────────────
+
+    function partnerRows() {
+      const q = $('pa-q').value.trim().toLowerCase();
+      return data.partners.filter((p) => !q || [p.code, p.b2b_clients?.company, p.b2b_clients?.contact_name, p.b2b_clients?.phone, p.b2b_clients?.email]
+        .join(' ').toLowerCase().includes(q));
+    }
+
+    function renderPartners() {
+      const list = partnerRows();
+      $('pa-rows').innerHTML = list.length ? list.map((p) => `
+        <tr class="clickable" data-id="${esc(p.id)}">
+          <td><code>${esc(p.code)}</code></td>
+          <td><b>${esc(p.b2b_clients?.company)}</b><div class="muted">${esc(p.b2b_clients?.contact_name)} · ${esc(p.b2b_clients?.phone)}</div></td>
+          <td class="muted">${fmtDay(p.created_at)}</td>
+          <td class="num">${pts(p.summary.clicks)}</td>
+          <td class="num">${pts(p.summary.orders)}</td>
+          <td class="num">${pts(p.summary.earned)}</td>
+          <td class="num ${p.summary.balance < 0 ? 'minus' : ''}"><b>${pts(p.summary.balance)}</b></td>
+          <td class="num">${p.custom_rate != null ? p.custom_rate + '%' : '<span class="muted">загальна</span>'}</td>
+          <td><span class="badge ${esc(p.status)}">${A_STATUS[p.status]}</span>${p.b2b_clients?.status !== 'approved' ? ' <span class="badge blocked">B2B закрито</span>' : ''}</td>
+        </tr>`).join('') : '<tr><td colspan="9" class="admin-hint" style="text-align:center">Партнерів ще немає</td></tr>';
+    }
+    $('pa-q').addEventListener('input', renderPartners);
+    $('pa-rows').addEventListener('click', (e) => { const tr = e.target.closest('tr[data-id]'); if (tr) openPartner(byId.get(tr.dataset.id)); });
+
+    function button(label, cls, onClick) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'admin-btn ' + cls;
+      b.textContent = label;
+      b.addEventListener('click', onClick);
+      return b;
+    }
+
+    function openDialog(title, html, hash) {
+      $('dlg-title').textContent = title;
+      $('dlg-body').innerHTML = html;
+      $('dlg').hidden = false;
+      if (hash) history.replaceState(null, '', '#' + hash);
+    }
+    function closeDialog() { $('dlg').hidden = true; history.replaceState(null, '', location.pathname); }
+    $('dlg-close').addEventListener('click', closeDialog);
+    $('dlg').addEventListener('click', (e) => { if (e.target === $('dlg')) closeDialog(); });
+
+    // Дія з діалогу: кнопки вимикаються, після успіху - перезавантаження даних і повторне відкриття.
+    async function run(action, body, reopen) {
+      const buttons = [...$('dlg-body').querySelectorAll('button')];
+      buttons.forEach((b) => { b.disabled = true; });
+      setStatus($('d-status'), 'Зберігаємо…');
+      try {
+        await api(action, body);
+        await load();
+        if (reopen) reopen();
+        setStatus($('d-status'), 'Збережено', 'ok');
+      } catch (e) {
+        setStatus($('d-status'), e.message, 'error');
+        buttons.forEach((b) => { b.disabled = false; });
+      }
+    }
+
+    function openPartner(p) {
+      if (!p) return;
+      const s = p.summary;
+      const c = p.b2b_clients || {};
+      openDialog(`Партнер ${p.code} · ${c.company || ''}`, `
+        <div class="muted" style="margin-bottom:12px">${esc(c.contact_name)} · ${esc(c.phone)} · ${esc(c.email)} · партнер з ${fmtDay(p.created_at)}
+          · <a href="../b2b-admin/#${esc(p.client_id)}">картка B2B-клієнта</a></div>
+        <div class="stats">
+          <div><span>Баланс</span><b class="${s.balance < 0 ? 'minus' : ''}">${pts(s.balance)}</b></div>
+          <div><span>Очікує</span><b>${pts(s.pending)}</b></div>
+          <div><span>В резерві</span><b>${pts(s.reserved)}</b></div>
+          <div><span>Виплачено</span><b>${pts(s.paid)}</b></div>
+          <div><span>Переходи</span><b>${pts(s.clicks)}</b></div>
+          <div><span>Замовлення</span><b>${pts(s.orders)}</b></div>
+        </div>
+        <div class="section-title">Ставка й статус</div>
+        <div class="actions" style="margin-top:0">
+          <div><label for="d-rate">Індивідуальний %</label><input class="form-input" id="d-rate" type="number" min="0" max="100" step="0.01" value="${p.custom_rate ?? ''}" placeholder="загальний" style="width:140px"></div>
+          <span id="d-rate-btn"></span><span id="d-block-btn"></span>
+        </div>
+        <div class="section-title">Ручне коригування балансу</div>
+        <div class="actions" style="margin-top:0">
+          <div><label for="d-adj">Бали (+/−)</label><input class="form-input" id="d-adj" type="number" step="1" style="width:120px"></div>
+          <div style="flex:1;min-width:220px"><label for="d-adj-c">Коментар (обов'язково)</label><input class="form-input" id="d-adj-c" maxlength="500" style="width:100%"></div>
+          <span id="d-adj-btn"></span>
+        </div>
+        <div class="actions"><span id="d-links"></span></div>
+        <div class="status-line" id="d-status" style="margin-top:10px"></div>`, p.id);
+      const reopen = () => openPartner(byId.get(p.id));
+      $('d-rate-btn').append(button('Зберегти %', 'admin-btn--primary', () => run('admin_partner', { id: p.id, custom_rate: $('d-rate').value }, reopen)));
+      $('d-block-btn').append(p.status === 'active'
+        ? button('Заблокувати', 'admin-btn--danger', () => {
+          if (confirm(`Заблокувати партнера ${p.code}? Код перестане трекати переходи, нові нарахування не створюватимуться.`)) run('admin_partner', { id: p.id, status: 'blocked' }, reopen);
+        })
+        : button('Розблокувати', 'admin-btn--light', () => run('admin_partner', { id: p.id, status: 'active' }, reopen)));
+      $('d-adj-btn').append(button('Провести', 'admin-btn--light', () => {
+        const points = Math.trunc(Number($('d-adj').value));
+        if (!points) { setStatus($('d-status'), 'Вкажіть кількість балів', 'error'); return; }
+        if (!$('d-adj-c').value.trim()) { setStatus($('d-status'), 'Потрібен коментар', 'error'); return; }
+        if (confirm(`${points > 0 ? 'Нарахувати' : 'Списати'} ${Math.abs(points)} балів партнеру ${p.code}?`)) run('admin_adjust', { id: p.id, points, comment: $('d-adj-c').value }, reopen);
+      }));
+      $('d-links').append(button('Нарахування партнера', 'admin-btn--light', () => {
+        closeDialog(); showTab('commissions'); $('co-partner').value = p.id; renderCommissions();
+      }));
+    }
+
+    // ─── Нарахування ───────────────────────────────────────────────
+
+    function commissionRows() {
+      const st = $('co-status').value;
+      const pa = $('co-partner').value;
+      const q = $('co-q').value.trim();
+      return data.commissions.filter((k) => (!st || k.status === st) && (!pa || k.affiliate_id === pa)
+        && (!q || String(k.orders?.number ?? '').includes(q)) && inPeriod(k.created_at, 'co-from', 'co-to'));
+    }
+
+    function renderCommissions() {
+      const list = commissionRows();
+      $('co-rows').innerHTML = list.length ? list.map((k) => `
+        <tr class="clickable" data-id="${esc(k.id)}">
+          <td class="muted">${fmtDate(k.created_at)}</td>
+          <td><a href="../orders-admin/#${esc(k.orders?.number)}" onclick="event.stopPropagation()">№${esc(k.orders?.number)}</a></td>
+          <td>${esc(partnerName(k.affiliate_id))}</td>
+          <td class="num">${money(k.base_amount)}</td>
+          <td class="num"><b>${pts(k.commission_amount)}</b></td>
+          <td><span class="badge ${esc(k.status)}">${C_STATUS[k.status]}</span></td>
+          <td class="muted">${SOURCE[k.source] || esc(k.source)}</td>
+        </tr>`).join('') : '<tr><td colspan="7" class="admin-hint" style="text-align:center">Нарахувань немає</td></tr>';
+    }
+    ['co-status', 'co-partner', 'co-from', 'co-to', 'co-q'].forEach((id) => $(id).addEventListener('input', renderCommissions));
+    $('co-rows').addEventListener('click', (e) => {
+      const tr = e.target.closest('tr[data-id]');
+      if (tr) openCommission(data.commissions.find((k) => k.id === tr.dataset.id));
+    });
+
+    function openCommission(k) {
+      if (!k) return;
+      const next = TRANSITIONS[k.status] || [];
+      openDialog(`Нарахування за замовлення №${k.orders?.number}`, `
+        <div class="muted" style="margin-bottom:12px">${esc(partnerName(k.affiliate_id))} · створено ${fmtDate(k.created_at)}
+          ${k.approved_at ? ` · підтверджено ${fmtDate(k.approved_at)}` : ''} · замовлення: ${esc(k.orders?.status)} · джерело: ${SOURCE[k.source] || esc(k.source)}</div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Позиція</th><th>Категорія</th><th class="num">К-сть</th><th class="num">База, грн</th><th class="num">%</th><th class="num">Грн</th></tr></thead>
+          <tbody>${(k.items_snapshot || []).map((i) => `<tr><td>${esc(i.title)}</td><td class="muted">${esc((i.category || '').split('>').pop())}</td>
+            <td class="num">${i.qty}</td><td class="num">${money(i.base)}</td><td class="num">${i.rate}</td><td class="num">${Number(i.commission).toFixed(2)}</td></tr>`).join('')}</tbody>
+        </table></div>
+        <p style="margin:10px 0 0;text-align:right">База: <b>${money(k.base_amount)} грн</b> · Нараховано: <b>${pts(k.commission_amount)} балів</b>
+          · <span class="badge ${esc(k.status)}">${C_STATUS[k.status]}</span></p>
+        ${k.comment ? `<p class="muted">Коментар: ${esc(k.comment)}</p>` : ''}
+        ${next.length ? `<div class="section-title">Змінити статус вручну</div>
+        <div class="actions" style="margin-top:0">
+          <div><label for="d-cs">Новий статус</label><select class="form-input" id="d-cs">${next.map((s) => `<option value="${s}">${C_STATUS[s]}</option>`).join('')}</select></div>
+          <div style="flex:1;min-width:220px"><label for="d-cs-c">Коментар (обов'язково)</label><input class="form-input" id="d-cs-c" maxlength="500" style="width:100%"></div>
+          <span id="d-cs-btn"></span>
+        </div>` : ''}
+        <div class="status-line" id="d-status" style="margin-top:10px"></div>`);
+      if (next.length) {
+        $('d-cs-btn').append(button('Застосувати', 'admin-btn--primary', () => {
+          if (!$('d-cs-c').value.trim()) { setStatus($('d-status'), 'Потрібен коментар', 'error'); return; }
+          run('admin_commission_status', { id: k.id, status: $('d-cs').value, comment: $('d-cs-c').value },
+            () => openCommission(data.commissions.find((x) => x.id === k.id)));
+        }));
+      }
+    }
+
+    $('as-btn').addEventListener('click', async () => {
+      const number = Number($('as-number').value);
+      const code = $('as-code').value.trim().toUpperCase();
+      if (!number) { setStatus($('as-status'), 'Вкажіть № замовлення', 'error'); return; }
+      if (!confirm(code ? `Призначити замовлення №${number} партнеру ${code}?` : `Зняти партнера з замовлення №${number}?`)) return;
+      setStatus($('as-status'), 'Зберігаємо…');
+      try {
+        const r = await api('admin_assign', { number, code: code || null });
+        setStatus($('as-status'), code ? `Призначено: ${r.result.points} балів` : 'Партнера знято', 'ok');
+        $('as-number').value = '';
+        $('as-code').value = '';
+        await load();
+      } catch (e) {
+        setStatus($('as-status'), e.message, 'error');
+      }
+    });
+
+    // ─── Виплати ───────────────────────────────────────────────────
+
+    function payoutRows() {
+      const st = $('po-status').value;
+      return data.payouts.filter((p) => (!st || p.status === st) && inPeriod(p.created_at, 'po-from', 'po-to'));
+    }
+
+    function renderPayouts() {
+      const list = payoutRows();
+      $('po-rows').innerHTML = list.length ? list.map((p) => `
+        <tr class="clickable${p.status === 'new' ? ' hl' : ''}" data-id="${esc(p.id)}">
+          <td class="muted">${fmtDate(p.created_at)}</td>
+          <td>${esc(partnerName(p.affiliate_id))}</td>
+          <td class="num">${pts(p.amount)}</td>
+          <td class="num"><b>${money(p.amount_uah)}</b></td>
+          <td><span class="badge ${esc(p.status)}">${P_STATUS[p.status]}</span></td>
+          <td class="muted">${esc(p.admin_comment)}</td>
+        </tr>`).join('') : '<tr><td colspan="6" class="admin-hint" style="text-align:center">Заявок немає</td></tr>';
+    }
+    ['po-status', 'po-from', 'po-to'].forEach((id) => $(id).addEventListener('input', renderPayouts));
+    $('po-rows').addEventListener('click', (e) => {
+      const tr = e.target.closest('tr[data-id]');
+      if (tr) openPayout(data.payouts.find((p) => p.id === tr.dataset.id));
+    });
+
+    function openPayout(p) {
+      if (!p) return;
+      openDialog(`Виплата ${money(p.amount_uah)} грн · ${partnerName(p.affiliate_id)}`, `
+        <div class="muted">Заявка ${fmtDate(p.created_at)} · ${pts(p.amount)} балів · <span class="badge ${esc(p.status)}">${P_STATUS[p.status]}</span>
+          ${p.processed_at ? ` · оброблено ${fmtDate(p.processed_at)}` : ''}</div>
+        ${p.admin_comment ? `<p class="muted">Коментар: ${esc(p.admin_comment)}</p>` : ''}
+        <div class="actions"><span id="d-show"></span></div>
+        <div class="details-box" id="d-details" hidden></div>
+        ${p.status === 'new' ? `<div class="section-title">Обробити</div>
+        <div class="actions" style="margin-top:0">
+          <div style="flex:1;min-width:240px"><label for="d-pc">Коментар (для відхилення - обов'язково, партнер його побачить)</label><input class="form-input" id="d-pc" maxlength="500" style="width:100%"></div>
+          <span id="d-pay-btns"></span>
+        </div>` : ''}
+        <div class="status-line" id="d-status" style="margin-top:10px"></div>`);
+      $('d-show').append(button('Показати реквізити', 'admin-btn--light', async () => {
+        try {
+          const { details: d } = await api('admin_payout_details', { id: p.id });
+          $('d-details').innerHTML = d ? `${d.method === 'card' ? `Картка: <b>${esc(d.card)}</b>` : `IBAN: <b>${esc(d.iban)}</b>`}<br>
+            Отримувач: <b>${esc(d.name)}</b>${d.ipn ? `<br>ІПН: <b>${esc(d.ipn)}</b>` : ''}` : 'Реквізити не вдалося розшифрувати (чи не змінювали AFFILIATE_SECRET?)';
+          $('d-details').hidden = false;
+        } catch (e) { setStatus($('d-status'), e.message, 'error'); }
+      }));
+      if (p.status === 'new') {
+        const reopen = () => openPayout(data.payouts.find((x) => x.id === p.id));
+        $('d-pay-btns').append(
+          button('Виплачено', 'admin-btn--primary', () => {
+            if (confirm(`Підтвердити, що ${money(p.amount_uah)} грн виплачено?`)) run('admin_payout', { id: p.id, status: 'paid', comment: $('d-pc').value }, reopen);
+          }),
+          button('Відхилити', 'admin-btn--danger', () => {
+            if (!$('d-pc').value.trim()) { setStatus($('d-status'), 'Вкажіть причину відхилення', 'error'); return; }
+            if (confirm('Відхилити заявку? Бали повернуться на баланс партнера.')) run('admin_payout', { id: p.id, status: 'rejected', comment: $('d-pc').value }, reopen);
+          }));
+      }
+    }
+
+    // ─── Налаштування ──────────────────────────────────────────────
+
+    const S_FIELDS = ['default_rate', 'cookie_days', 'attribution', 'hold_days', 'min_payout', 'max_points_share', 'point_value', 'lifetime_days', 'rules_text'];
+    const productTitle = (id) => data.products.find((p) => p.id === id)?.title || `товар ${id} (немає на сайті)`;
+
+    function fillSettings() {
+      const s = data.settings;
+      $('st-enabled').checked = s.enabled;
+      S_FIELDS.forEach((k) => { $('st-' + k).value = s[k] ?? ''; });
+      edits = { cats: {}, products: {} };
+      data.rates.forEach((r) => { edits[r.scope === 'product' ? 'products' : 'cats'][r.scope_id] = String(r.rate); });
+      renderRates();
+      $('st-product-list').innerHTML = data.products.map((p) => `<option value="${esc(p.title)}">`).join('');
+    }
+
+    function renderRates() {
+      // Категорії з products.json + ті, для яких ставку задали раніше (товарів могло вже не бути).
+      const cats = [...new Set([...data.categories, ...Object.keys(edits.cats)])].sort();
+      $('st-cats').innerHTML = cats.map((c) => `<tr><td>${esc(c)}</td>
+        <td class="num"><input class="form-input" type="number" min="0" max="100" step="0.01" data-cat="${esc(c)}" value="${esc(edits.cats[c] ?? '')}" placeholder="—"></td></tr>`).join('');
+      const prods = Object.keys(edits.products);
+      $('st-products').innerHTML = prods.length ? prods.map((id) => `<tr><td>${esc(productTitle(id))} <span class="muted">${esc(id)}</span></td>
+        <td class="num"><input class="form-input" type="number" min="0" max="100" step="0.01" data-product="${esc(id)}" value="${esc(edits.products[id])}"></td>
+        <td><button type="button" class="admin-btn admin-btn--danger" data-del="${esc(id)}">×</button></td></tr>`).join('')
+        : '<tr><td colspan="3" class="muted">Немає - діють ставки категорій</td></tr>';
+    }
+    $('st-cats').addEventListener('input', (e) => { if (e.target.dataset.cat) edits.cats[e.target.dataset.cat] = e.target.value; });
+    $('st-products').addEventListener('input', (e) => { if (e.target.dataset.product) edits.products[e.target.dataset.product] = e.target.value; });
+    $('st-products').addEventListener('click', (e) => { const b = e.target.closest('[data-del]'); if (b) { delete edits.products[b.dataset.del]; renderRates(); } });
+    $('st-add-btn').addEventListener('click', () => {
+      const v = $('st-add-product').value.trim();
+      const p = data.products.find((x) => x.title === v || x.id === v);
+      if (!p) { setStatus($('st-status'), 'Оберіть товар зі списку', 'error'); return; }
+      if (!(p.id in edits.products)) edits.products[p.id] = edits.cats[p.category] ?? String(data.settings.default_rate);
+      $('st-add-product').value = '';
+      renderRates();
+    });
+
+    $('st-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const settings = { enabled: $('st-enabled').checked };
+      S_FIELDS.forEach((k) => { settings[k] = $('st-' + k).value; });
+      const rates = [
+        ...Object.entries(edits.cats).filter(([, v]) => v !== '').map(([id, rate]) => ({ scope: 'category', scope_id: id, rate: Number(rate) })),
+        ...Object.entries(edits.products).filter(([, v]) => v !== '').map(([id, rate]) => ({ scope: 'product', scope_id: id, rate: Number(rate) })),
+      ];
+      setStatus($('st-status'), 'Зберігаємо…');
+      try {
+        await api('admin_settings', { settings, rates });
+        await load();
+        setStatus($('st-status'), 'Збережено. Нові ставки діють для нових замовлень.', 'ok');
+      } catch (err) {
+        setStatus($('st-status'), err.message, 'error');
+      }
+    });
+
+    // ─── Журнал ────────────────────────────────────────────────────
+
+    function renderLog() {
+      $('lg-rows').innerHTML = data.log.length ? data.log.map((l) => `<tr>
+        <td class="muted">${fmtDate(l.created_at)}</td>
+        <td>${esc(data.admins[l.admin_id] || l.admin_id || 'система')}</td>
+        <td>${esc(ACTIONS[l.action] || l.action)}</td>
+        <td>${esc(byId.has(l.target) ? partnerName(l.target) : l.target)}</td>
+        <td><pre class="json">${esc(l.details ? JSON.stringify(l.details, null, 1) : '')}</pre></td></tr>`).join('')
+        : '<tr><td colspan="5" class="admin-hint" style="text-align:center">Дій ще не було</td></tr>';
+    }
+
+    // ─── CSV (поточний фільтр і період) ────────────────────────────
+
+    function csv(name, header, rows) {
+      const cell = (v) => { const s = String(v ?? ''); return /[";\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
+      const text = '﻿' + [header, ...rows].map((r) => r.map(cell).join(';')).join('\r\n'); // BOM і «;» - щоб Excel відкрив кирилицю
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([text], { type: 'text/csv;charset=utf-8' }));
+      a.download = `${name}_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+    $('pa-csv').addEventListener('click', () => csv('partners',
+      ['Код', 'Компанія', 'Контакт', 'Телефон', 'Email', 'Партнер з', 'Переходи', 'Замовлення', 'Зароблено', 'Очікує', 'Баланс', 'Виплачено', 'Ставка', 'Статус'],
+      partnerRows().map((p) => [p.code, p.b2b_clients?.company, p.b2b_clients?.contact_name, p.b2b_clients?.phone, p.b2b_clients?.email, fmtDay(p.created_at),
+        p.summary.clicks, p.summary.orders, p.summary.earned, p.summary.pending, p.summary.balance, p.summary.paid, p.custom_rate ?? '', A_STATUS[p.status]])));
+    $('co-csv').addEventListener('click', () => csv('commissions',
+      ['Дата', 'Замовлення', 'Партнер', 'База, грн', 'Бали', 'Статус', 'Підтверджено', 'Джерело'],
+      commissionRows().map((k) => [fmtDate(k.created_at), k.orders?.number, partnerName(k.affiliate_id), k.base_amount, k.commission_amount,
+        C_STATUS[k.status], fmtDate(k.approved_at), SOURCE[k.source] || k.source])));
+    $('po-csv').addEventListener('click', () => csv('payouts',
+      ['Дата', 'Партнер', 'Бали', 'Сума, грн', 'Статус', 'Оброблено', 'Коментар'],
+      payoutRows().map((p) => [fmtDate(p.created_at), partnerName(p.affiliate_id), p.amount, p.amount_uah, P_STATUS[p.status], fmtDate(p.processed_at), p.admin_comment])));
+
+    AdminShell.ready(load);
+  </script>
+</body>
+</html>
