@@ -1475,8 +1475,15 @@
   {
     "id": "153026",
     "title": "Гібридний інвертор MUST PV18-2012 ECO 2 кВт 12 В TRADE-IN",
-    "image_link": "",
-    "additional_images": [],
+    "image_link": "assets/images/products/153026_1.jpg",
+    "additional_images": [
+      "assets/images/products/153026_2.jpg",
+      "assets/images/products/153026_3.jpg",
+      "assets/images/products/153026_4.jpg",
+      "assets/images/products/153026_5.jpg",
+      "assets/images/products/153026_6.jpg",
+      "assets/images/products/153026_7.jpg"
+    ],
     "price": "11725 UAH",
     "availability": "in_stock",
     "product_type": "Автономна енергетика > Гибридні інвертори",
