@@ -13,7 +13,8 @@
     "info": "Information",
     "delivery_payment": "Payment & Delivery",
     "return_policy": "Return Policy",
-    "warranty": "Warranty"
+    "warranty": "Warranty",
+    "affiliate": "Affiliate program"
   },
   "footer": {
     "copy": "© 2026 Avtonomka. All rights reserved.",
@@ -24,7 +25,8 @@
     "return_policy": "Return Policy",
     "warranty": "Warranty",
     "address": "40 Marselska St, Odesa, Odesa region, 65000, Ukraine",
-    "social": "Follow us:"
+    "social": "Follow us:",
+    "affiliate": "Affiliate program"
   },
   "hero": {
     "heading": "<span>Power stations, batteries, inverters</span> - everything you need for off-grid power.",

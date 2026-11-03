@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Партнерська програма - Автономка</title>
+  <meta name="description" content="Партнерська програма Автономки: діліться посиланнями на інвертори, акумулятори й комплекти автономного живлення та отримуйте відсоток з кожної покупки.">
+  <link rel="icon" href="assets/images/logo.jpg" type="image/jpeg">
+  <link rel="canonical" href="https://avtonomka.com.ua/partnerska-programa.html">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261022b">
+  <style>
+    .coop-steps { counter-reset: step; list-style: none; margin: 0 0 12px !important; }
+    .coop-steps li { counter-increment: step; position: relative; padding-left: 44px; margin-bottom: 14px !important; }
+    .coop-steps li::before { content: counter(step); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%;
+      background: var(--color-orange); color: var(--color-dark); font-weight: 800; display: flex; align-items: center; justify-content: center; line-height: 1; }
+    .coop-cta { display: flex; gap: 10px; flex-wrap: wrap; margin: 24px 0 8px; }
+    .aff-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; margin: 0 0 14px; }
+    .aff-tiles > div { background: #fff8e6; border-left: 4px solid var(--color-orange); border-radius: 8px; padding: 12px 16px; }
+    .aff-tiles b { display: block; font-size: 1.35rem; color: var(--color-dark); }
+    .aff-tiles span { font-size: .85rem; color: var(--color-muted); }
+    .aff-faq { border: 1px solid var(--color-border); border-radius: 10px; padding: 12px 16px; margin: 0 0 10px; background: var(--color-white); }
+    .aff-faq summary { font-weight: 700; cursor: pointer; }
+    .aff-faq p { margin: 10px 0 0 !important; }
+    .aff-rules { white-space: pre-line; background: var(--color-white); border: 1px solid var(--color-border); border-radius: 10px; padding: 16px 18px; }
+    .aff-rules:empty { display: none; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <!-- ======= HEADER ======= -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="logo-link">
+          <img src="assets/images/logo.jpg" alt="Автономка" class="logo-img">
+          <span class="logo-text" data-i18n="brand.name">Автономка</span>
+        </a>
+        <nav class="main-nav" id="main-nav" aria-label="Головне меню">
+          <ul>
+            <li><a href="index.html" data-i18n="nav.home">Головна</a></li>
+            <li><a href="catalog.html" data-i18n="nav.catalog">Каталог</a></li>
+            <li><a href="articles.html" data-i18n="nav.articles">Статті</a></li>
+            <li><a href="about.html" data-i18n="nav.about">Про нас</a></li>
+            <li class="has-dropdown">
+              <a href="#" class="dropdown-toggle" data-i18n="nav.info" aria-haspopup="true" aria-expanded="false">Інформація</a>
+              <ul class="dropdown-menu">
+                <li><a href="delivery-payment.html" data-i18n="nav.delivery_payment">Оплата та доставка</a></li>
+                <li><a href="return-policy.html" data-i18n="nav.return_policy">Умови повернення</a></li>
+                <li><a href="warranty.html" data-i18n="nav.warranty">Гарантія</a></li>
+                <li><a href="partnerska-programa.html" data-i18n="nav.affiliate">Партнерська програма</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <div class="lang-switcher"></div>
+          <a href="spivpratsia.html" class="btn btn-partner btn-sm" data-i18n="nav.partner">Стати партнером</a>
+          <a href="https://telegram.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg btn-sm" data-i18n="nav.contact">
+            ✈ Написати нам
+          </a>
+        </div>
+        <button class="burger" id="burger" aria-label="Відкрити меню" aria-expanded="false" aria-controls="main-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="container">
+      <h1 data-lang="uk">Партнерська програма</h1>
+      <h1 data-lang="en" hidden>Affiliate program</h1>
+      <p data-lang="uk">Рекомендуйте обладнання для автономного живлення - і отримуйте винагороду з кожної покупки</p>
+      <p data-lang="en" hidden>Recommend backup power equipment and earn a reward from every purchase</p>
+    </div>
+  </div>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <!-- Тексти умов (%, строки, мінімальна виплата) підставляє скрипт унизу з налаштувань програми (функція affiliate). -->
+        <div class="legal-content aff-page" data-lang="uk">
+          <h2>Для кого</h2>
+          <p>Для монтажників сонячних станцій і систем резервного живлення, електриків, блогерів і тематичних сайтів - і для всіх, кого друзі питають «що поставити, щоб було світло».</p>
+
+          <h2>Як це працює</h2>
+          <ol class="coop-steps">
+            <li><b>Отримайте доступ до B2B-кабінету.</b> Програма працює для клієнтів кабінету <a href="b2b/">avtonomka.com.ua/b2b</a> - подайте заявку, менеджер надішле логін і пароль.</li>
+            <li><b>Увімкніть програму.</b> На вкладці «Партнерська програма» погодьтеся з правилами - кабінет видасть ваш персональний код і посилання.</li>
+            <li><b>Діліться посиланнями.</b> На головну, категорію чи будь-який товар - генератор посилань у кабінеті додає ваш код до будь-якої адреси сайту.</li>
+            <li><b>Отримуйте бали.</b> Коли покупець, що перейшов за вашим посиланням, оформить і отримає замовлення, вам нараховується відсоток від суми товарів.</li>
+          </ol>
+
+          <h2>Умови</h2>
+          <div class="aff-tiles" data-terms="uk"><p>Завантаження умов…</p></div>
+          <p class="aff-cats" data-cats="uk"></p>
+          <ul>
+            <li>Винагорода рахується від суми товарів після знижок, без вартості доставки.</li>
+            <li>Нарахування видно в кабінеті одразу після замовлення зі статусом «Очікує»; бали стають доступними, коли замовлення виконано і минув період повернення.</li>
+            <li>Якщо замовлення скасують або повернуть, нарахування анулюється.</li>
+            <li>Бали можна витратити на свої замовлення в B2B-кабінеті або вивести грошима на рахунок ФОП чи картку.</li>
+            <li>Замовлення за власним посиланням не враховуються.</li>
+          </ul>
+
+          <div class="coop-cta">
+            <a href="b2b/#partner" class="btn btn-partner">Стати партнером</a>
+            <a href="https://telegram.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg">✈ Запитати менеджера</a>
+          </div>
+
+          <h2>Питання й відповіді</h2>
+          <details class="aff-faq"><summary>Що, як покупець перейде за посиланням, а купить пізніше?</summary>
+            <p>Покупець закріплюється за вами на <span data-t="cookie_days">30</span> днів після переходу. Якщо він за цей час оформить замовлення на сайті з того самого браузера - нарахування ваше.</p></details>
+          <details class="aff-faq"><summary>А якщо покупець перейде за посиланнями двох партнерів?</summary>
+            <p data-t="attribution_text">Замовлення зараховується тому партнеру, за чиїм посиланням покупець перейшов останнім.</p></details>
+          <details class="aff-faq"><summary>Коли можна вивести гроші?</summary>
+            <p>Коли на балансі набереться щонайменше <span data-t="min_payout">500</span> грн. Заявку подаєте в кабінеті, менеджер робить виплату вручну, а статус заявки видно там само.</p></details>
+          <details class="aff-faq"><summary>Чи бачу я, хто купив?</summary>
+            <p>Ні. У кабінеті видно дату, частково приховану суму замовлення, ставку й нараховані бали - без імені, телефону чи адреси покупця.</p></details>
+          <details class="aff-faq"><summary>Я не компанія - можна брати участь?</summary>
+            <p>Так. У заявці на доступ до кабінету вкажіть своє ПІБ замість назви компанії.</p></details>
+
+          <h2>Правила програми</h2>
+          <div class="aff-rules" data-rules="uk"></div>
+        </div>
+
+        <div class="legal-content aff-page" data-lang="en" hidden>
+          <h2>Who it's for</h2>
+          <p>Solar and backup power installers, electricians, bloggers and niche websites - and anyone whose friends ask "what should I buy to keep the lights on".</p>
+
+          <h2>How it works</h2>
+          <ol class="coop-steps">
+            <li><b>Get access to the B2B account.</b> The program is available to clients of <a href="b2b/">avtonomka.com.ua/b2b</a> - apply there and a manager will send you a login.</li>
+            <li><b>Join the program.</b> On the "Affiliate program" tab accept the rules - you will get your personal code and link.</li>
+            <li><b>Share links.</b> To the home page, a category or any product - the link generator adds your code to any page of the site.</li>
+            <li><b>Earn points.</b> When a customer who followed your link places and receives an order, you get a percentage of the product total.</li>
+          </ol>
+
+          <h2>Terms</h2>
+          <div class="aff-tiles" data-terms="en"><p>Loading…</p></div>
+          <p class="aff-cats" data-cats="en"></p>
+          <ul>
+            <li>The reward is calculated from the product total after discounts, excluding delivery.</li>
+            <li>You see the reward as "Pending" right after the order; points become available once the order is completed and the return period has passed.</li>
+            <li>If the order is cancelled or returned, the reward is cancelled.</li>
+            <li>Points can be spent on your own orders in the B2B account or paid out to a bank account or card.</li>
+            <li>Orders placed through your own link do not count.</li>
+          </ul>
+
+          <div class="coop-cta">
+            <a href="b2b/#partner" class="btn btn-partner">Become a partner</a>
+            <a href="https://telegram.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg">✈ Ask a manager</a>
+          </div>
+
+          <h2>Rules</h2>
+          <p class="muted">The full rules are available in Ukrainian.</p>
+          <div class="aff-rules" data-rules="en"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======= FOOTER ======= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-top">
+        <div class="footer-logo">
+          <img src="assets/images/logo.jpg" alt="Автономка" style="height:32px;width:32px;object-fit:contain;border-radius:4px">
+          <span class="footer-logo-text" data-i18n="brand.name">Автономка</span>
+        </div>
+        <nav class="footer-links" aria-label="Нижня навігація">
+          <a href="index.html" data-i18n="nav.home">Головна</a>
+          <a href="catalog.html" data-i18n="nav.catalog">Каталог</a>
+          <a href="blog.html" data-i18n="nav.news">Новини</a>
+          <a href="articles.html" data-i18n="nav.articles">Статті</a>
+          <a href="https://telegram.me/avtonomka_od" target="_blank" rel="noopener">Telegram</a>
+        </nav>
+        </div>
+        <div class="footer-contacts">
+          <div class="footer-contacts__info">
+            <a href="tel:+380987772020">+38 (098) 777-20-20</a>
+            <a href="https://telegram.me/avtonomka_od" target="_blank" rel="noopener">telegram.me/avtonomka_od</a>
+            <span data-i18n="footer.location">📍 Одеса</span>
+            <a class="footer-address" href="https://www.google.com/maps?q=46.5711592,30.7967831" target="_blank" rel="noopener" data-i18n="footer.address">вул. Марсельська, 40, м. Одеса, Одеська обл., 65000, Україна</a>
+            <a href="mailto:avtonomka77@gmail.com">avtonomka77@gmail.com</a>
+          </div>
+          <iframe class="footer-map" src="https://maps.google.com/maps?q=46.5711592,30.7967831&z=16&output=embed" width="220" height="120" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Автономка на карті"></iframe>
+        </div>
+        <div class="footer-social">
+          <span class="footer-social__title" data-i18n="footer.social">Ми в соцмережах:</span>
+          <a class="footer-social__link footer-social__link--telegram" href="https://telegram.me/avtonomka_od" target="_blank" rel="noopener">Telegram</a>
+          <a class="footer-social__link footer-social__link--viber" href="https://invite.viber.com/?g2=AQATxD%2BOYhBuf1ceu6nAtZT0iqUkLF0jW5ka5XheqKHmicgsMRbmdGaAQoFggTxJ" target="_blank" rel="noopener">Viber</a>
+          <a class="footer-social__link footer-social__link--facebook" href="https://www.facebook.com/avtonomkapower" target="_blank" rel="noopener">Facebook</a>
+          <a class="footer-social__link footer-social__link--instagram" href="https://www.instagram.com/avtonomkapower/" target="_blank" rel="noopener">Instagram</a>
+          <a class="footer-social__link footer-social__link--tiktok" href="https://www.tiktok.com/@avtonomka_od" target="_blank" rel="noopener">TikTok</a>
+          <a class="footer-social__link footer-social__link--youtube" href="https://www.youtube.com/@avtonomka_od" target="_blank" rel="noopener">YouTube</a>
+        </div>
+        <div class="footer-bottom">
+        <p class="footer-copy" data-i18n="footer.copy">&copy; 2026 Автономка. Всі права захищені.</p>
+        <div class="footer-legal">
+          <a href="privacy.html" data-i18n="footer.privacy">Політика конфіденційності</a>
+          <a href="terms.html" data-i18n="footer.terms">Правила користування</a>
+          <a href="delivery-payment.html" data-i18n="footer.delivery_payment">Оплата та доставка</a>
+          <a href="partnerska-programa.html" data-i18n="footer.affiliate">Партнерська програма</a>
+          <a href="return-policy.html" data-i18n="footer.return_policy">Умови повернення</a>
+          <a href="warranty.html" data-i18n="footer.warranty">Гарантія</a>
+        </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/i18n.js?v=20260831c"></script>
+  <script src="assets/js/main.js?v=20261022b"></script>
+  <script src="assets/js/cart.js?v=20261103a"></script>
+  <script src="assets/js/affiliate.js?v=20261103a"></script>
+  <script>
+    // Партнерська програма: мова сторінки (як у i18n.js - ?lang або localStorage) і умови з налаштувань
+    // програми (функція affiliate, дія terms; docs/AFFILIATE.md) - відсотки й строки тут не захардкоджені.
+    (function () {
+      let lang = new URLSearchParams(location.search).get('lang');
+      try { if (lang !== 'en' && lang !== 'uk') lang = localStorage.getItem('lang'); } catch (e) { /* приватне вікно */ }
+      lang = lang === 'en' ? 'en' : 'uk';
+      document.querySelectorAll('[data-lang]').forEach(function (el) { el.hidden = el.dataset.lang !== lang; });
+
+      const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bmR1YmhtcXpxcXNybnJ4Z2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDY4MDIsImV4cCI6MjEwMzkyMjgwMn0.AavrYyhDXBQkjKOMdQ9wAQX6B901dOfUpmtUDwO5Cv8';
+      const esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+      const n = function (v) { return Number(v).toLocaleString(lang === 'en' ? 'en-US' : 'uk-UA', { maximumFractionDigits: 2 }); };
+      const L = lang === 'en'
+        ? { rate: 'reward from each order', cookie: 'days the link works', hold: 'days return period', min: 'UAH minimum payout', point: 'UAH = 1 point', cats: 'By category: ', days: ' days' }
+        : { rate: 'винагорода з кожного замовлення', cookie: 'днів діє посилання', hold: 'днів - період повернення', min: 'грн - мінімальна виплата', point: 'грн = 1 бал', cats: 'Ставки по категоріях: ', days: ' дн.' };
+
+      fetch('https://uvndubhmqzqqsrnrxgaj.supabase.co/functions/v1/affiliate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + KEY, apikey: KEY },
+        body: JSON.stringify({ action: 'terms' })
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          const t = j.terms;
+          if (!t) throw new Error(j.error || 'no terms');
+          const tile = function (v, k) { return '<div><b>' + v + '</b><span>' + k + '</span></div>'; };
+          document.querySelectorAll('[data-terms]').forEach(function (el) {
+            el.innerHTML = tile(n(t.default_rate) + '%', L.rate) + tile(t.cookie_days, L.cookie) + tile(t.hold_days, L.hold)
+              + tile(n(t.min_payout), L.min) + tile(n(t.point_value), L.point);
+          });
+          document.querySelectorAll('[data-cats]').forEach(function (el) {
+            el.textContent = t.category_rates.length
+              ? L.cats + t.category_rates.map(function (c) { return c.category + ' - ' + n(c.rate) + '%'; }).join(', ') : '';
+          });
+          document.querySelectorAll('[data-rules]').forEach(function (el) { el.textContent = t.rules_text || ''; });
+          document.querySelectorAll('[data-t=cookie_days]').forEach(function (el) { el.textContent = t.cookie_days; });
+          document.querySelectorAll('[data-t=min_payout]').forEach(function (el) { el.textContent = n(t.min_payout); });
+          if (t.attribution === 'first') {
+            document.querySelectorAll('[data-t=attribution_text]').forEach(function (el) {
+              el.textContent = 'Замовлення зараховується тому партнеру, за чиїм посиланням покупець перейшов першим (поки діє його посилання).';
+            });
+          }
+        })
+        .catch(function (err) {
+          console.warn('Affiliate terms', err);
+          document.querySelectorAll('[data-terms]').forEach(function (el) {
+            el.innerHTML = '<p>' + esc(lang === 'en' ? 'Terms are temporarily unavailable - please ask a manager.' : 'Умови тимчасово не завантажились - уточніть у менеджера.') + '</p>';
+          });
+        });
+    })();
+  </script>
+</body>
+</html>
