@@ -47,9 +47,15 @@ def apply_price_adjustments(data) -> None:
 
     by_id = config.get("by_id", {})
     by_category = config.get("by_category", {})
+    fixed = config.get("fixed_by_id", {})
     adjusted = 0
 
     for p in data:
+        if p.get("id") in fixed:
+            # Фіксована ціна - замість ціни постачальника, без знижок.
+            p["price"] = f'{fixed[p["id"]]} UAH'
+            adjusted += 1
+            continue
         discount = by_id.get(p.get("id"))
         if discount is None:
             discount = by_category.get(p.get("product_type", ""))

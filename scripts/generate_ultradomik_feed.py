@@ -64,6 +64,14 @@ SITE_URL = 'https://avtonomka.com.ua'
 # item's price (prom_file.xml price); the extra percent feeds take their percent
 # from that already-bumped price, a random-range feed adds its own range instead.
 RANDOM_ADD_UAH = (1, 10)
+# Fixed retail price for some items (scripts/price_adjustments.json -> fixed_by_id,
+# the same file fetch_feed.py applies to the site): exactly this price in the
+# retail feeds, no 1-10 bump; in client feeds it is a ceiling. opt.xml is untouched.
+try:
+    FIXED_PRICES = {str(k): float(v) for k, v in json.loads(
+        (ROOT / 'scripts/price_adjustments.json').read_text(encoding='utf-8')).get('fixed_by_id', {}).items()}
+except (OSError, ValueError):
+    FIXED_PRICES = {}
 MAIN_FEED = 'prom_file.xml'                        # Ultradomik
 OPT_FEED = 'feed/opt.xml'                          # гурт, ціни вручну
 FEEDS_CONFIG = ROOT / 'data/ultradomik/feeds.json'  # extra feeds, from /prom-admin/
@@ -559,7 +567,7 @@ def main():
             ]
             usd = price.get('wholesale_usd')
             wholesale = round(usd * rate, 2) if is_num(usd) and usd > 0 else 0
-            items.append((price_uah, random.randint(*RANDOM_ADD_UAH), wholesale, cat, '\n'.join(lines)))
+            items.append((price_uah, random.randint(*RANDOM_ADD_UAH), wholesale, cat, '\n'.join(lines), FIXED_PRICES.get(pid)))
 
     catalog = '\n'.join(f'    <category id="{cid}" portal_id="{CATEGORIES[cid][1]}">{esc(CATEGORIES[cid][0])}</category>'
                         for cid in sorted(used_cats))
@@ -567,7 +575,7 @@ def main():
     for feed in feeds:
         fname = feed['file']
         body = []
-        for base, bump, wholesale, cat, text in items:
+        for base, bump, wholesale, cat, text, fixed in items:
             markup = feed.get('cat_mult', {}).get(cat, feed['mult'])
             has_wholesale = is_num(wholesale) and wholesale > 0
             if feed.get('wholesale'):
@@ -585,6 +593,8 @@ def main():
                 value = max(1, base * markup + random.randint(*feed['add']))
             else:
                 value = (base + bump) * markup
+            if fixed and not feed.get('wholesale'):
+                value = min(value, fixed)
             body.append(text.replace('{price}', f'{round(value, 2):.2f}'))
         xml = clean('<?xml version="1.0" encoding="UTF-8"?>\n<shop>\n  <catalog>\n' + catalog +
                     '\n  </catalog>\n  <items>\n' + '\n'.join(body) + '\n  </items>\n</shop>\n')
