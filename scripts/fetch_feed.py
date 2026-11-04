@@ -186,6 +186,7 @@ def main() -> int:
     existing_desc = {}
     existing_link = {}
     existing_link2 = {}
+    existing_manual = {}
     existing_embed = {}
     existing_specs = {}
     existing_slug = {}
@@ -199,6 +200,9 @@ def main() -> int:
                     existing_link[item["id"]] = item["link"]
                 if item.get("link2"):
                     existing_link2[item["id"]] = item["link2"]
+                for k in ("manual", "manual2"):
+                    if item.get(k):
+                        existing_manual.setdefault(item["id"], {})[k] = item[k]
                 if item.get("embed"):
                     existing_embed[item["id"]] = item["embed"]
                 if item.get("specs"):
@@ -213,6 +217,7 @@ def main() -> int:
         p["link"] = existing_link.get(p["id"], "")
         if p["id"] in existing_link2:
             p["link2"] = existing_link2[p["id"]]
+        p.update(existing_manual.get(p["id"], {}))
         p["embed"] = existing_embed.get(p["id"], "")
         p["specs"] = existing_specs.get(p["id"], "")
         # Slug is sticky: computed once per id and kept forever after, so a

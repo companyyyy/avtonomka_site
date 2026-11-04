@@ -60,7 +60,8 @@
     "merchant_keywords_ru": "комплект автономного электропитания 6kvt, комплект 6kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
     "prom_images": [
       "assets/images/prom/152471_1.jpg"
-    ]
+    ],
+    "manual": "assets/docs/felicity-ivem6048-ii-manual.pdf"
   },
   {
     "id": "152520",
@@ -92,7 +93,8 @@
       "assets/images/prom/152520_4.jpg",
       "assets/images/prom/152520_5.jpg",
       "assets/images/prom/152520_7.jpg"
-    ]
+    ],
+    "manual": "assets/docs/felicity-lpba48100-ol-manual.pdf"
   },
   {
     "id": "152730",
@@ -114,7 +116,8 @@
     "merchant_keywords_ru": "комплект автономного электропитания 4kvt, комплект автономного электропитания маст, комплект автономного электропитания маст 4 kvt, комплект 4kvt, комплект маст, комплект маст 4 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
     "prom_images": [
       "assets/images/prom/152730_1.jpg"
-    ]
+    ],
+    "manual2": "assets/docs/felicity-fla24280-eu-manual.pdf"
   },
   {
     "id": "152745",
@@ -337,7 +340,9 @@
     "merchant_keywords_ru": "комплект автономного электропитания 6kvt, комплект 6kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
     "prom_images": [
       "assets/images/prom/152211_1.jpg"
-    ]
+    ],
+    "manual": "assets/docs/felicity-ivem6048-ii-manual.pdf",
+    "manual2": "assets/docs/felicity-fla48230-eu-manual.pdf"
   },
   {
     "id": "152219",
@@ -359,7 +364,8 @@
     "merchant_keywords_ru": "комплект автономного электропитания маст, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
     "prom_images": [
       "assets/images/prom/152219_1.jpg"
-    ]
+    ],
+    "manual2": "assets/docs/felicity-fla48230-eu-manual.pdf"
   },
   {
     "id": "152368",
@@ -402,7 +408,9 @@
     "merchant_keywords_ru": "комплект автономного электропитания 6kvt, комплект 6kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
     "prom_images": [
       "assets/images/prom/152746_1.jpg"
-    ]
+    ],
+    "manual": "assets/docs/felicity-ivem6048-ii-manual.pdf",
+    "manual2": "assets/docs/felicity-flb48230wg1-h-manual.pdf"
   },
   {
     "id": "146741",
@@ -444,7 +452,8 @@
     "merchant_keywords_ru": "аккумулятор 280ah, батарея 280ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive",
     "prom_images": [
       "assets/images/prom/152174_1.jpg"
-    ]
+    ],
+    "manual": "assets/docs/felicity-fla24280-eu-manual.pdf"
   },
   {
     "id": "152266",
@@ -548,7 +557,8 @@
     "merchant_keywords_ru": "комплект автономного электропитания маст, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
     "prom_images": [
       "assets/images/prom/152675_1.jpg"
-    ]
+    ],
+    "manual2": "assets/docs/felicity-flb48314tg1-h-manual.pdf"
   },
   {
     "id": "130059",
@@ -681,7 +691,8 @@
     "merchant_keywords_ru": "комплект автономного электропитания маст, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
     "prom_images": [
       "assets/images/prom/152221_1.jpg"
-    ]
+    ],
+    "manual2": "assets/docs/felicity-fla24280-eu-manual.pdf"
   },
   {
     "id": "152253",
@@ -723,7 +734,8 @@
     "merchant_keywords_ru": "комплект автономного электропитания 8kvt, комплект 8kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
     "prom_images": [
       "assets/images/prom/152277_1.jpg"
-    ]
+    ],
+    "manual2": "assets/docs/felicity-fla48230-eu-manual.pdf"
   },
   {
     "id": "152278",
@@ -744,7 +756,8 @@
     "merchant_keywords_ru": "комплект автономного электропитания 8kvt, комплект 8kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
     "prom_images": [
       "assets/images/prom/152278_1.jpg"
-    ]
+    ],
+    "manual2": "assets/docs/felicity-flb48314tg1-h-manual.pdf"
   },
   {
     "id": "152472",
@@ -824,7 +837,9 @@
     "specs": "",
     "slug": "felicity-ivem6048-ii-felicity-lpba48100-ol",
     "merchant_keywords_uk": "комплект автономного живлення 6kvt, комплект 6kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive",
-    "merchant_keywords_ru": "комплект автономного электропитания 6kvt, комплект 6kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive"
+    "merchant_keywords_ru": "комплект автономного электропитания 6kvt, комплект 6kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
+    "manual": "assets/docs/felicity-ivem6048-ii-manual.pdf",
+    "manual2": "assets/docs/felicity-lpba48100-ol-manual.pdf"
   },
   {
     "id": "152727",
@@ -879,7 +894,8 @@
     "specs": "",
     "slug": "felicity-ivem8048-ii-felicity-lpba48100-ol",
     "merchant_keywords_uk": "комплект автономного живлення 8kvt, комплект 8kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive",
-    "merchant_keywords_ru": "комплект автономного электропитания 8kvt, комплект 8kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive"
+    "merchant_keywords_ru": "комплект автономного электропитания 8kvt, комплект 8kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
+    "manual2": "assets/docs/felicity-lpba48100-ol-manual.pdf"
   },
   {
     "id": "152175",
@@ -900,7 +916,8 @@
     "merchant_keywords_ru": "аккумулятор 230ah, батарея 230ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive",
     "prom_images": [
       "assets/images/prom/152175_1.jpg"
-    ]
+    ],
+    "manual": "assets/docs/felicity-fla48230-eu-manual.pdf"
   },
   {
     "id": "152264",
@@ -938,7 +955,8 @@
     "specs": "",
     "slug": "felicity-flb48230wg1-h",
     "merchant_keywords_uk": "акумулятор 230ah, батарея 230ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive",
-    "merchant_keywords_ru": "аккумулятор 230ah, батарея 230ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive"
+    "merchant_keywords_ru": "аккумулятор 230ah, батарея 230ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive",
+    "manual": "assets/docs/felicity-flb48230wg1-h-manual.pdf"
   },
   {
     "id": "152699",
@@ -960,7 +978,8 @@
     "merchant_keywords_ru": "комплект автономного электропитания 6kvt, комплект автономного электропитания маст, комплект автономного электропитания маст 6 kvt, комплект 6kvt, комплект маст, комплект маст 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
     "prom_images": [
       "assets/images/prom/152699_1.jpg"
-    ]
+    ],
+    "manual2": "assets/docs/felicity-flb48230wg1-h-manual.pdf"
   },
   {
     "id": "152933",
@@ -978,7 +997,8 @@
     "specs": "",
     "slug": "felicity-ivem6048-ii-felicity-fla48280",
     "merchant_keywords_uk": "комплект автономного живлення 6kvt, комплект 6kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive",
-    "merchant_keywords_ru": "комплект автономного электропитания 6kvt, комплект 6kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive"
+    "merchant_keywords_ru": "комплект автономного электропитания 6kvt, комплект 6kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
+    "manual": "assets/docs/felicity-ivem6048-ii-manual.pdf"
   },
   {
     "id": "151849",
@@ -1018,7 +1038,8 @@
     "specs": "",
     "slug": "must-pv19-6048exp-felicity-lpba48100-ol",
     "merchant_keywords_uk": "комплект автономного живлення маст, комплект маст, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive",
-    "merchant_keywords_ru": "комплект автономного электропитания маст, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive"
+    "merchant_keywords_ru": "комплект автономного электропитания маст, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
+    "manual2": "assets/docs/felicity-lpba48100-ol-manual.pdf"
   },
   {
     "id": "152640",
@@ -1054,7 +1075,8 @@
     "specs": "",
     "slug": "felicity-ivem6048-ii-felicity-flb48206wg1-h-z-pidihrivom",
     "merchant_keywords_uk": "комплект автономного живлення 6kvt, комплект 6kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive",
-    "merchant_keywords_ru": "комплект автономного электропитания 6kvt, комплект 6kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive"
+    "merchant_keywords_ru": "комплект автономного электропитания 6kvt, комплект 6kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
+    "manual": "assets/docs/felicity-ivem6048-ii-manual.pdf"
   },
   {
     "id": "153026",
@@ -1122,7 +1144,8 @@
     "merchant_keywords_ru": "комплект автономного электропитания 6kvt, комплект автономного электропитания дея, комплект автономного электропитания дея 6 kvt, комплект 6kvt, комплект дея, комплект дея 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
     "prom_images": [
       "assets/images/prom/152208_1.jpg"
-    ]
+    ],
+    "manual": "assets/docs/felicity-ivem6048-ii-manual.pdf"
   },
   {
     "id": "152492",
@@ -1200,7 +1223,8 @@
     "merchant_keywords_ru": "комплект автономного электропитания 8kvt, комплект 8kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
     "prom_images": [
       "assets/images/prom/152701_1.jpg"
-    ]
+    ],
+    "manual2": "assets/docs/felicity-flb48230wg1-h-manual.pdf"
   },
   {
     "id": "152724",
@@ -1425,7 +1449,8 @@
     "merchant_keywords_ru": "комплект автономного электропитания 6kvt, комплект автономного электропитания дея, комплект автономного электропитания дея 6 kvt, комплект 6kvt, комплект дея, комплект дея 6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
     "prom_images": [
       "assets/images/prom/152206_1.jpg"
-    ]
+    ],
+    "manual": "assets/docs/felicity-ivem6048-ii-manual.pdf"
   },
   {
     "id": "152473",
@@ -1486,7 +1511,8 @@
     "specs": "",
     "slug": "felicity-ivem6048-ii-felicity-flb48280tg1-h-z-pidihrivom",
     "merchant_keywords_uk": "комплект автономного живлення 6kvt, комплект 6kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive",
-    "merchant_keywords_ru": "комплект автономного электропитания 6kvt, комплект 6kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive"
+    "merchant_keywords_ru": "комплект автономного электропитания 6kvt, комплект 6kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
+    "manual": "assets/docs/felicity-ivem6048-ii-manual.pdf"
   },
   {
     "id": "150416",
@@ -1599,7 +1625,8 @@
       "assets/images/prom/152085_5.jpg",
       "assets/images/prom/152085_6.jpg",
       "assets/images/prom/152085_7.jpg"
-    ]
+    ],
+    "manual": "assets/docs/felicity-ivem6048-ii-manual.pdf"
   },
   {
     "id": "152270",
@@ -1620,7 +1647,8 @@
     "merchant_keywords_ru": "аккумулятор 314ah, батарея 314ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive",
     "prom_images": [
       "assets/images/prom/152270_1.jpg"
-    ]
+    ],
+    "manual": "assets/docs/felicity-flb48314tg1-h-manual.pdf"
   },
   {
     "id": "152352",
@@ -1773,7 +1801,8 @@
       "assets/images/prom/151617_2.jpg",
       "assets/images/prom/151617_3.jpg",
       "assets/images/prom/151617_4.jpg"
-    ]
+    ],
+    "manual": "assets/docs/felicity-fla48314-eu-manual.pdf"
   },
   {
     "id": "152279",
@@ -1795,7 +1824,9 @@
     "merchant_keywords_ru": "комплект автономного электропитания 6kvt, комплект 6kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
     "prom_images": [
       "assets/images/prom/152279_1.jpg"
-    ]
+    ],
+    "manual": "assets/docs/felicity-ivem6048-ii-manual.pdf",
+    "manual2": "assets/docs/felicity-flb48314tg1-h-manual.pdf"
   },
   {
     "id": "152296",
@@ -1848,7 +1879,8 @@
     "merchant_keywords_ru": "комплект автономного электропитания 6kvt, комплект 6kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive",
     "prom_images": [
       "assets/images/prom/152493_1.jpg"
-    ]
+    ],
+    "manual": "assets/docs/felicity-ivem6048-ii-manual.pdf"
   },
   {
     "id": "152495",

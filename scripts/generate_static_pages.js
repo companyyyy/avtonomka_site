@@ -482,7 +482,8 @@ function datasheetExists(link) {
 
 function renderDatasheetButtons(html, p) {
   const isKit = !!(p.link && p.link2 && /Комплект/i.test(p.product_type || ''));
-  const parts = isKit
+  const isMultiKit = /Комплект/i.test((p.product_type || '') + (p.title || ''));
+  const parts = isMultiKit
     ? (p.title || '').replace(/^Комплект автономного енергоживлення:\s*/i, '')
         .split(/\s*\+\s*/).map(s => s.trim().replace(/,\s*$/, ''))
     : [];
@@ -495,6 +496,12 @@ function renderDatasheetButtons(html, p) {
         : (/manual/i.test(p.link) ? '↓ Скачати інструкцію для ' : '↓ Скачати даташит для ') + truncateLabel(p.title || 'товару', 55) },
     { wrap: 'product-datasheet-wrap-2', btn: 'btn-datasheet-2', link: p.link2,
       label: '↓ Даташит для акумулятора' + (batModel ? ': ' + truncateLabel(batModel, 45) : '') },
+    { wrap: 'product-manual-wrap', btn: 'btn-manual', link: p.manual,
+      label: isMultiKit
+        ? '↓ Інструкція користувача для інвертора' + (invModel ? ': ' + truncateLabel(invModel, 45) : '')
+        : '↓ Інструкція користувача для ' + truncateLabel(p.title || 'товару', 55) },
+    { wrap: 'product-manual-wrap-2', btn: 'btn-manual-2', link: p.manual2,
+      label: '↓ Інструкція користувача для акумулятора' + (batModel ? ': ' + truncateLabel(batModel, 45) : '') },
   ];
   for (const b of buttons) {
     const re = new RegExp(`\\s*<div id="${b.wrap}" class="hidden"([^>]*)>\\s*<a id="${b.btn}" href="#"([^>]*?) data-i18n="[^"]*">[\\s\\S]*?</a>\\s*</div>`);

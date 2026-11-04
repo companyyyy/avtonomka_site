@@ -504,6 +504,29 @@ function render(p) {
     }
   }
 
+  /* ---- User manual button(s) ----
+     manual - інструкція до товару (у комплекті - до інвертора),
+     manual2 - до акумулятора комплекту. */
+  const isMultiKit = /Комплект/i.test((p.product_type || '') + (p.title || ''));
+  const [kitInv, kitBat] = isMultiKit ? kitModelParts(p.title) : [null, null];
+  [
+    { wrap: 'product-manual-wrap', btn: 'btn-manual', link: p.manual,
+      label: isMultiKit
+        ? '↓ Інструкція користувача для інвертора' + (kitInv ? ': ' + truncateLabel(kitInv, 45) : '')
+        : '↓ Інструкція користувача для ' + truncateLabel(p.title || 'товару', 55) },
+    { wrap: 'product-manual-wrap-2', btn: 'btn-manual-2', link: p.manual2,
+      label: '↓ Інструкція користувача для акумулятора' + (kitBat ? ': ' + truncateLabel(kitBat, 45) : '') },
+  ].forEach(b => {
+    const wrap = document.getElementById(b.wrap);
+    const btn  = document.getElementById(b.btn);
+    if (!wrap || !btn) return;
+    if (!b.link) { wrap.remove(); return; }
+    btn.href = resolveImg(b.link);
+    btn.removeAttribute('data-i18n');
+    btn.textContent = b.label;
+    wrap.classList.remove('hidden');
+  });
+
   /* ---- Show content: only one state may exist in the DOM at a time ---- */
   document.getElementById('loading-state')?.remove();
   document.getElementById('not-found-state')?.remove();
