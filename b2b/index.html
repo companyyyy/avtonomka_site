@@ -462,6 +462,8 @@
       { auth: { storageKey: 'avtonomka-b2b-auth' } },
     );
     const CART_KEY = 'avtonomka_b2b_cart';
+    // Інше головне фото, де фото з фіду (чорний товар на білому) погано видно в списку й на плитці.
+    const PHOTOS = { '130059': '/assets/images/products/130059_3.jpg' };
     const PARTNER_KEY = 'avtonomka_aff_code'; // код партнера - для кнопки на сторінках товарів (assets/js/affiliate.js)
     const SITE = 'https://avtonomka.com.ua';
     const AFF_PARAM = 'ref'; // як PARAM в assets/js/affiliate.js
@@ -620,6 +622,7 @@
         const r = await api('catalog');
         // Лише те, що в наявності: «під замовлення» в кабінеті не показуємо.
         items = r.items.filter((i) => i.available);
+        items.forEach((i) => { if (PHOTOS[i.id]) i.photo = PHOTOS[i.id]; });
         cats = r.cats || [];
         special = r.special || {};
         favs = new Set(r.favorites || []);
@@ -693,13 +696,10 @@
     const plural = (n) => { const a = n % 10, b = n % 100; return a === 1 && b !== 11 ? 'товар' : a >= 2 && a <= 4 && (b < 12 || b > 14) ? 'товари' : 'товарів'; };
     const catOf = (i) => i.cat || 'Інше';
 
-    // Фото плитки, де перше фото товару погано видно на плитці.
-    const TILE_PHOTOS = { 'Генератори': '/assets/images/products/130059_3.jpg' };
-
     function renderTiles() {
       const tile = (cat, list) => {
         const pic = cat == null ? '<span class="all">☰</span>'
-          : TILE_PHOTOS[cat] || (list.find((i) => i.photo) || {}).photo;
+          : (list.find((i) => i.photo) || {}).photo;
         return `<button type="button" class="cat-tile" style="--c:${cat == null ? '#6b7f99' : catColor(cat)}" data-cat="${esc(cat ?? '')}">
           <span class="pic">${cat == null ? pic : pic ? `<img src="${esc(pic)}" alt="" loading="lazy">` : ''}</span>
           <b>${esc(cat ?? 'Усі товари')}</b>
