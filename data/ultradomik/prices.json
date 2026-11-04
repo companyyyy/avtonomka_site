@@ -70,7 +70,7 @@
     "price": 64727,
     "in_stock": true,
     "wholesale_usd": 1300,
-    "off": false
+    "off": true
   },
   "150590": {
     "price": 34950,
