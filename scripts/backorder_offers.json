@@ -7,7 +7,8 @@
       "lead_days": 21
     },
     "151617": {
-      "price_usd": 1700
+      "price_usd": 1700,
+      "lead_days": 21
     }
   },
   "usd_rate": 46.7
