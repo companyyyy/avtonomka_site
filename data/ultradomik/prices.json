@@ -86,7 +86,8 @@
   "150649": {
     "price": 1725,
     "in_stock": true,
-    "wholesale_usd": 35
+    "wholesale_usd": 38,
+    "off": false
   },
   "150674": {
     "price": 37685,
