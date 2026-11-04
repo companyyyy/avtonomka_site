@@ -23,6 +23,7 @@ from generate_seo_keywords import build_keywords as build_merchant_keywords
 FEED_URL = "https://dfi2.com.ua/price_xml/avtonomka.txt"
 OUTPUT_FILE = Path(__file__).parent.parent / "products.json"
 PRICE_ADJUSTMENTS_FILE = Path(__file__).parent / "price_adjustments.json"
+PRODUCT_DOCS_FILE = Path(__file__).parent / "product_docs.json"
 
 HEADERS = {
     "User-Agent": (
@@ -30,6 +31,44 @@ HEADERS = {
         "+http://www.google.com/bot.html)"
     )
 }
+
+
+def fill_docs_by_model(data) -> None:
+    """Даташити й інструкції за моделлю в назві (product_docs.json) - лише в
+    порожні поля, тож вручну проставлене посилання ніколи не перезаписується."""
+    try:
+        rules = json.loads(PRODUCT_DOCS_FILE.read_text(encoding="utf-8"))["rules"]
+    except Exception:
+        return
+    root = OUTPUT_FILE.parent
+
+    def find(text, kind):
+        for r in rules:
+            doc = r.get(kind)
+            if doc and re.search(r["match"], text, re.I) and (root / doc).exists():
+                return doc
+        return ""
+
+    for p in data:
+        title = p.get("title") or ""
+        # «Wi-Fi-модуль для MUST PV19…» - аксесуар, а не сам інвертор
+        if re.search(r"Wi-?Fi", title, re.I):
+            continue
+        if re.search("Комплект", (p.get("product_type") or "") + title, re.I):
+            body = re.sub(r"^Комплект автономного енергоживлення:\s*", "", title, flags=re.I)
+            parts = re.split(r"\s*\+\s*", body)
+            if len(parts) != 2:
+                continue
+            inv, bat = parts
+            slots = (("link", inv, "datasheet"), ("link2", bat, "datasheet"),
+                     ("manual", inv, "manual"), ("manual2", bat, "manual"))
+        else:
+            slots = (("link", title, "datasheet"), ("manual", title, "manual"))
+        for field, text, kind in slots:
+            if not p.get(field):
+                doc = find(text, kind)
+                if doc:
+                    p[field] = doc
 
 
 def apply_price_adjustments(data) -> None:
@@ -237,6 +276,8 @@ def main() -> int:
         else:
             p.pop("merchant_keywords_uk", None)
             p.pop("merchant_keywords_ru", None)
+
+    fill_docs_by_model(data)
 
     download_prom_images(data)
 

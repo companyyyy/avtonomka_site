@@ -1,0 +1,31 @@
+{
+  "_comment": "Модель у назві → документи. fetch_feed.py підставляє їх лише в порожні поля (link/link2 - даташит, manual/manual2 - інструкція), щоб товар, який випав із фіду й повернувся, не губив документи. У комплекті ліва частина назви до «+» - інвертор (link, manual), права - акумулятор (link2, manual2).",
+  "rules": [
+    {"match": "IVEM\\s?6048", "datasheet": "assets/docs/felicity-ivem6048-ii.pdf", "manual": "assets/docs/felicity-ivem6048-ii-manual.pdf"},
+    {"match": "IVEM\\s?8048", "datasheet": "assets/docs/felicity-ivem8048-ii.pdf"},
+    {"match": "IVEM\\s?12048", "datasheet": "assets/docs/felicity-ivem12048-ii.pdf"},
+    {"match": "IVEM\\s?4024", "datasheet": "assets/docs/felicity-ivem4024-ii.pdf"},
+    {"match": "PV19-?\\s?\\d{4}\\s?EXP", "datasheet": "assets/docs/must-pv1900-exp.pdf"},
+    {"match": "PV18-?\\s?\\d{4}\\s?VPM\\s?II", "datasheet": "assets/docs/must-pv1800-vpm-ii.pdf"},
+    {"match": "PV18-?\\s?\\d{4}\\s?VPK", "datasheet": "assets/docs/must-pv1800-vpk.pdf"},
+    {"match": "PV18-?\\s?\\d{4}\\s?ECO", "datasheet": "assets/docs/must-pv1800-eco.pdf"},
+    {"match": "SUN-?12K-SG02LP1", "datasheet": "assets/docs/deye-sun-12k-sg02lp1-eu-am3-p.pdf"},
+    {"match": "FLA\\s?24280", "datasheet": "assets/docs/felicity-fla24280-eu.pdf", "manual": "assets/docs/felicity-fla24280-eu-manual.pdf"},
+    {"match": "FLA\\s?24230", "datasheet": "assets/docs/felicity-fla24230-eu.pdf"},
+    {"match": "FLA\\s?24100", "datasheet": "assets/docs/felicity-fla24100.pdf"},
+    {"match": "FLA\\s?48230", "datasheet": "assets/docs/felicity-fla48230.pdf", "manual": "assets/docs/felicity-fla48230-eu-manual.pdf"},
+    {"match": "FLA\\s?48280", "datasheet": "assets/docs/felicity-fla48280-eu.pdf"},
+    {"match": "FLA\\s?48314", "datasheet": "assets/docs/felicity-fla48314-eu.pdf", "manual": "assets/docs/felicity-fla48314-eu-manual.pdf"},
+    {"match": "FLA\\s?12100", "datasheet": "assets/docs/felicity-fla12100pg2.pdf"},
+    {"match": "FLB\\s?48100\\s?WG1", "datasheet": "assets/docs/felicity-flb48100wg1.pdf"},
+    {"match": "FLB\\s?48230\\s?WG1", "datasheet": "assets/docs/felicity-flb48100-48230wg1.pdf", "manual": "assets/docs/felicity-flb48230wg1-h-manual.pdf"},
+    {"match": "FLB\\s?48314\\s?TG1", "datasheet": "assets/docs/felicity-flb48314tg1.pdf", "manual": "assets/docs/felicity-flb48314tg1-h-manual.pdf"},
+    {"match": "LPBA\\s?48100", "datasheet": "assets/docs/felicity-lpba48100-ol.pdf", "manual": "assets/docs/felicity-lpba48100-ol-manual.pdf"},
+    {"match": "SE-?F16", "datasheet": "assets/docs/deye-se-f16-c.pdf"},
+    {"match": "SE-?F5", "datasheet": "assets/docs/deye-se-f5-pro-c.pdf"},
+    {"match": "LP16-?\\s?48100", "datasheet": "assets/docs/must-lp1600.pdf"},
+    {"match": "LP15-?\\s?24100", "datasheet": "assets/docs/must-lp1500.pdf"},
+    {"match": "BX51100", "datasheet": "assets/docs/dyness-bx51100.pdf"},
+    {"match": "LVWES05", "datasheet": "assets/docs/dahsolar-dhn-lvwes05-g.pdf"}
+  ]
+}
