@@ -625,13 +625,14 @@
     // ─── Фільтри (як у каталозі сайту, assets/js/catalog.js) ───────
     // Значення розбираємо з назви товару: бренд, потужність, напруга, ємність.
 
-    const KNOWN_BRANDS = ['DAH Solar', 'Deye', 'Dyness', 'Felicity', 'Must', 'EcoFlow', 'TTN'];
+    const KNOWN_BRANDS = ['DAH Solar', 'Deye', 'Dyness', 'Felicity', 'Must', 'EcoFlow', 'TTN', 'MaXpeedingRods'];
     const FACETS = { brand: 'Бренд', power: 'Потужність', voltage: 'Напруга', capacity: 'Ємність' };
     const CAT_FACETS = {
       'Гібридні інвертори': ['power', 'voltage', 'brand'],
       'Акумулятори до гібридних інверторів': ['voltage', 'capacity', 'brand'],
       'Акумулятори до ДБЖ': ['voltage', 'capacity', 'brand'],
       'Системи зберігання 2 в 1': ['power', 'brand'],
+      'Генератори': ['power', 'brand'],
     };
     const facetsOf = (cat) => CAT_FACETS[cat] || ['brand'];
     const num = (s) => Number(String(s).replace(',', '.'));

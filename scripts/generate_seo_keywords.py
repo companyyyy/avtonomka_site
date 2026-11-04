@@ -50,6 +50,7 @@ KNOWN_BRANDS = [
     (re.compile(r'\bKBE\b', re.I), 'KBE'),
     (re.compile(r'EcoFlow', re.I), 'EcoFlow'),
     (re.compile(r'\bTTN\b'), 'TTN'),
+    (re.compile(r'MaXpeedingRods', re.I), 'MaXpeedingRods'),
 ]
 
 
@@ -117,6 +118,14 @@ CATEGORY_WORDS = {
         'type_words': [('зарядна станція', 'зарядная станция'), ('портативна зарядна станція', 'портативная зарядная станция')],
         'spec_re': re.compile(r'(\d+)\s*[Ww][Hh]\b', re.I),
         'spec_suffix': 'wh',
+        'connector': ('для дому', 'для дома'),
+        'extra_tags': [],
+    },
+    'Обладнання > Генератори': {
+        'confidence': 'EXTRAPOLATED — no example given, review closely',
+        'type_words': [('інверторний генератор', 'инверторный генератор'), ('бензиновий генератор', 'бензиновый генератор')],
+        'spec_re': re.compile(r'(\d+(?:[.,]\d+)?)\s*кВт', re.I),
+        'spec_suffix': 'kvt',
         'connector': ('для дому', 'для дома'),
         'extra_tags': [],
     },

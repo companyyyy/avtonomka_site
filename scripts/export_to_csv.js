@@ -20,6 +20,7 @@ const BRAND_KEYWORDS = [
   ['KBE',       'KBE'],
   ['TOMZN',     'TOMZN'],
   ['Geya',      'Geya'],
+  ['MaXpeedingRods', 'MaXpeedingRods'],
 ];
 
 function extractBrand(title) {

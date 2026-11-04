@@ -68,6 +68,7 @@ const _SLUG_TO_CATEGORY = {
   'akumulyatory-dbzh':    'Акумулятори і батарейки > Акумулятори для ДБЖ',
   'systemy-zberihannya':  'Автономна енергетика > Системи зберігання електроенергії 2 в 1',
   'wifi-moduli':          'Автономна енергетика > Wi-Fi модули для гібридних інверторів',
+  'generatory':           'Обладнання > Генератори',
 };
 const _CATEGORY_TO_SLUG = {};
 Object.keys(_SLUG_TO_CATEGORY).forEach(function(slug) {
@@ -86,7 +87,7 @@ function categoryLabel(productType) {
 
 /* ---- Badge helpers (mirrors assets/js/catalog.js - same badges the
    catalog card shows for this product, kept in sync by hand). ---- */
-const KNOWN_BRANDS = ['DAH Solar', 'Deye', 'Dyness', 'Felicity', 'Must'];
+const KNOWN_BRANDS = ['DAH Solar', 'Deye', 'Dyness', 'Felicity', 'Must', 'MaXpeedingRods'];
 function extractBrand(title) {
   if (!title) return null;
   for (const b of KNOWN_BRANDS) {

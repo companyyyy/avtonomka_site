@@ -53,6 +53,7 @@ CATEGORIES = {
     'Акумулятори і батарейки > Акумулятори для ДБЖ': (6, 'Акумулятори для ДБЖ'),
     'Автономна енергетика > Силові та сонячні кабелі': (7, 'Силові та сонячні кабелі'),
     'Автономна енергетика > Wi-Fi модули для гібридних інверторів': (8, 'Wi-Fi модулі для інверторів'),
+    'Обладнання > Генератори': (9, 'Генератори'),
 }
 
 # Same list and rule as detectBrand() in generate_merchant_feed.js: the first
@@ -66,6 +67,7 @@ BRANDS = [
     ('KBE', re.compile(r'\bkbe\b', re.I)),
     ('TTN', re.compile(r'\bttn\b', re.I)),
     ('DAH Solar', re.compile(r'dah\s*solar', re.I)),
+    ('MaXpeedingRods', re.compile(r'maxpeedingrods', re.I)),
 ]
 
 # Mirrors MPN_FIX / MPN_INVALID in generate_merchant_feed.js.

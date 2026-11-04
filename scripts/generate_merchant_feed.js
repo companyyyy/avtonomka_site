@@ -86,6 +86,7 @@ const BRANDS = [
   ['EcoFlow', /ecoflow/i],
   ['KBE', /\bkbe\b/i],
   ['TTN', /\bttn\b/i],
+  ['MaXpeedingRods', /maxpeedingrods/i],
 ];
 
 function detectBrand(title) {
@@ -145,6 +146,7 @@ const GOOGLE_CATEGORY = {
   'Автономна енергетика > Системи зберігання електроенергії 2 в 1': 5142,
   'Обладнання > Джерела безперебійного живлення':                  1348,  // Electronics > ... > Power > UPS (EcoFlow, ДБЖ для роутера)
   'Автономна енергетика > Силові та сонячні кабелі':               2345,  // Hardware > ... > Electrical Wires & Cable
+  'Обладнання > Генератори':                                       1218,  // Hardware > Power & Electrical Supplies > Generators
 };
 
 /* У product_type постачальника «Гибридні» - це ключ (знижки, каталог, Supabase),

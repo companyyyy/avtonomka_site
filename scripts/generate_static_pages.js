@@ -75,6 +75,7 @@ const SLUG_TO_CATEGORY = {
   'akumulyatory-dbzh':    'Акумулятори і батарейки > Акумулятори для ДБЖ',
   'systemy-zberihannya':  'Автономна енергетика > Системи зберігання електроенергії 2 в 1',
   'wifi-moduli':          'Автономна енергетика > Wi-Fi модули для гібридних інверторів',
+  'generatory':           'Обладнання > Генератори',
 };
 const CATEGORY_LABEL_UK = {
   'hybridni-invertory':   'Гібридні інвертори',
@@ -85,6 +86,7 @@ const CATEGORY_LABEL_UK = {
   'akumulyatory-dbzh':    'Акумулятори для ДБЖ',
   'systemy-zberihannya':  'Системи зберігання енергії',
   'wifi-moduli':          'Wi-Fi модулі для інверторів',
+  'generatory':           'Генератори',
 };
 const CATEGORY_TO_SLUG = {};
 Object.keys(SLUG_TO_CATEGORY).forEach(slug => { CATEGORY_TO_SLUG[SLUG_TO_CATEGORY[slug]] = slug; });
@@ -193,6 +195,7 @@ const KNOWN_BRANDS = [
   [/\bKBE\b/i,       'KBE'],
   [/EcoFlow/i,       'EcoFlow'],
   [/\bTTN\b/,        'TTN'],
+  [/MaXpeedingRods/i, 'MaXpeedingRods'],
 ];
 
 function detectBrand(title) {
@@ -749,6 +752,7 @@ function splitShadowedVirtual(products, virtualProducts) {
    ============================================================ */
 
 const TITLE_TO_CATEGORY = [
+  ['генератор', 'generatory'], // «Інверторний генератор» - раніше за «інвертор»
   ['комплект', 'komplekty'],
   ['систем', 'systemy-zberihannya'],
   ['2 в 1', 'systemy-zberihannya'],
