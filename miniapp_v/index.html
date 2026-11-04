@@ -314,6 +314,7 @@ const TG=window.Telegram?.WebApp;
 const TG_USER=TG?.initDataUnsafe?.user?.id ? TG.initDataUnsafe.user : null;
 const HEART_SVG='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 3 4.5 6.6 4.5c2.1 0 3.6 1.2 4.4 2.6.8-1.4 2.3-2.6 4.4-2.6 3.6 0 5.7 3.7 4.2 7.2C19.5 16.4 12 21 12 21z"/></svg>';
 const FAV="__fav__";
+const ALL="__all__"; // «Повний список»: усі товари з роздільниками категорія → бренд
 // Параметр запуску: з посилання t.me/<бот>/<апп>?startapp=... Telegram кладе
 // його в start_param, а кнопка web_app у повідомленні бота (розсилка)
 // передає його в адресі сторінки (?startapp=...).
@@ -686,14 +687,25 @@ function buildCats(){
     row.onclick=()=>openCat(cat);
     grid.appendChild(row);
   });
+  const allRow=document.createElement("div");
+  allRow.className="cat-row";
+  allRow.innerHTML=`
+    <div class="cat-icon-wrap">📋</div>
+    <div class="cat-info">
+      <div class="cat-row-name">Повний список</div>
+      <div class="cat-row-count">${all.length} позицій · усі категорії</div>
+    </div>
+    <div class="cat-row-arrow">›</div>`;
+  allRow.onclick=()=>openCat(ALL);
+  grid.appendChild(allRow);
 }
 
 // ── OPEN CATEGORY ──
 function openFavorites(){ openCat(FAV); }
 function openCat(cat){
   const ph=document.getElementById('headerPhone'); if(ph) ph.style.display='none';
-  const isFav=cat===FAV;
-  track(isFav?"favorites_open":"category_open",{category:isFav?null:cat});
+  const isFav=cat===FAV, isAll=cat===ALL;
+  track(isFav?"favorites_open":"category_open",{category:isFav?null:isAll?"Повний список":cat});
   activeCat=cat;
   searchQ="";
   document.getElementById("searchInput").value="";
@@ -703,8 +715,9 @@ function openCat(cat){
   document.getElementById("screenProducts").classList.add("active");
   document.getElementById("backBtn").classList.add("visible");
   document.getElementById("searchWrap").classList.add("visible");
-  document.getElementById("headerTitle").textContent=isFav?"Обране":cat;
-  document.getElementById("headerSub").textContent=isFav?`❤️ ${LIKES.size} позицій`:`${ce(cat)} ${all.filter(p=>p.category===cat).length} позицій`;
+  document.getElementById("headerTitle").textContent=isFav?"Обране":isAll?"Повний список":cat;
+  document.getElementById("headerSub").textContent=isFav?`❤️ ${LIKES.size} позицій`:isAll?`📋 ${all.length} позицій`
+    :`${ce(cat)} ${all.filter(p=>p.category===cat).length} позицій`;
 
   renderProducts();
 }
@@ -727,13 +740,13 @@ document.getElementById("searchInput").addEventListener("input",e=>{
   // У базу - лише "дописаний" запит, а не кожна літера
   clearTimeout(searchTrackTm);
   const q=e.target.value.trim();
-  if(q.length>=2) searchTrackTm=setTimeout(()=>track("search",{category:activeCat===FAV?null:activeCat, query:q}),1500);
+  if(q.length>=2) searchTrackTm=setTimeout(()=>track("search",{category:activeCat===FAV||activeCat===ALL?null:activeCat, query:q}),1500);
 });
 
 // ── RENDER PRODUCTS ──
 function renderProducts(){
-  const isFav=activeCat===FAV;
-  let items=isFav?all.filter(p=>LIKES.has(p.id)):all.filter(p=>p.category===activeCat);
+  const isFav=activeCat===FAV, isAll=activeCat===ALL;
+  let items=isFav?all.filter(p=>LIKES.has(p.id)):isAll?all:all.filter(p=>p.category===activeCat);
   if(searchQ)items=items.filter(p=>p.name.toLowerCase().includes(searchQ)||p.brand.toLowerCase().includes(searchQ)||p.desc.toLowerCase().includes(searchQ));
 
   const el=document.getElementById("productsContent");
@@ -747,22 +760,42 @@ function renderProducts(){
     return;
   }
 
-  // Title bar
-  const tb=document.createElement("div"); tb.className="cat-title-bar";
-  tb.innerHTML=isFav
-    ?`<span class="cat-title-icon">❤️</span><span class="cat-title-text">Обране</span><span class="cat-title-count">${items.length} поз.</span>`
-    :`<span class="cat-title-icon">${ce(activeCat)}</span><span class="cat-title-text">${activeCat}</span><span class="cat-title-count">${items.length} поз.</span>`;
-  el.appendChild(tb);
+  if(isFav){
+    // Обране: одна шапка, групи - за категорією (там товари з різних категорій)
+    appendTitleBar(el,"❤️","Обране",items.length);
+    appendGroups(el,items,"category",null);
+  }else if(isAll){
+    // Повний список: як каталог сайту - шапка категорії, всередині групи за брендом
+    const byCat=groupBy(items,"category");
+    Object.keys(byCat).sort((a,b)=>catRank(a)-catRank(b)).forEach(cat=>{
+      appendTitleBar(el,ce(cat),cat,byCat[cat].length);
+      appendGroups(el,byCat[cat],"brand",cat);
+    });
+  }else{
+    appendTitleBar(el,ce(activeCat),activeCat,items.length);
+    appendGroups(el,items,"brand",activeCat);
+  }
+  // Start observing newly added rows
+  requestAnimationFrame(initLazyObserver);
+}
 
-  // Group by brand (в обраному - за категорією, бо там товари з різних категорій)
-  const byBrand=groupBy(items,isFav?"category":"brand");
+function appendTitleBar(el,icon,text,count){
+  const tb=document.createElement("div"); tb.className="cat-title-bar";
+  tb.innerHTML=`<span class="cat-title-icon">${icon}</span><span class="cat-title-text">${text}</span><span class="cat-title-count">${count} поз.</span>`;
+  el.appendChild(tb);
+}
+
+// Групи товарів однієї категорії (cat) за брендом - або, в обраному (cat = null), за категорією.
+function appendGroups(el,items,key,cat){
+  const isFav=cat===null;
+  const byBrand=groupBy(items,key);
   const multi=Object.keys(byBrand).length>1;
 
   // For "Автономне енергоживлення" sort by numeric power value
   const brandKeys = Object.keys(byBrand);
   if(isFav){
     brandKeys.sort((a,b)=>catRank(a)-catRank(b));
-  }else if(activeCat==="Комплекти автономного енергоживлення"){
+  }else if(cat==="Комплекти автономного енергоживлення"){
     brandKeys.sort((a,b)=>{
       const pa=parseFloat(a.replace(",",".").replace("кВт","").trim())||999;
       const pb=parseFloat(b.replace(",",".").replace("кВт","").trim())||999;
@@ -770,7 +803,7 @@ function renderProducts(){
     });
   }
 
-  const sortMetric=SORT_METRIC[activeCat];
+  const sortMetric=SORT_METRIC[cat];
   if(sortMetric){
     for(const brand of brandKeys){
       byBrand[brand].sort((a,b)=>{
@@ -785,7 +818,7 @@ function renderProducts(){
 
   for(const brand of brandKeys){ const bItems=byBrand[brand];
     if(multi&&brand!=="-"){
-      const isPower=activeCat==="Комплекти автономного енергоживлення";
+      const isPower=cat==="Комплекти автономного енергоживлення";
       const bh=document.createElement("div"); bh.className="brand-header";
       const logo=!isPower&&!isFav&&BRAND_LOGOS[brand];
       const nameHTML=isPower?`<div class="brand-name brand-name--power"><span class="power-bolt">⚡</span> ${brand}</div>`
@@ -827,8 +860,6 @@ function renderProducts(){
       }
     });
   }
-  // Start observing newly added rows
-  requestAnimationFrame(initLazyObserver);
 }
 
 function getStockBadge(p){

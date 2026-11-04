@@ -427,3 +427,40 @@ window.SiteSearch = (function () {
     if (!form.contains(e.target)) setOpen(false);
   });
 })();
+
+/* ---- Головна: кількість товарів у плитках категорій ----
+   Рахуємо з products.json лише товари «в наявності» (як фільтр «В наявності»
+   в каталозі), замість зашитих у index.html чисел, які застарівали.
+   ⚠ Відповідність slug → product_type - як SLUG_TO_CATEGORY в catalog.js. */
+(function () {
+  const els = document.querySelectorAll('[id^="cat-count-"]');
+  if (!els.length) return;
+  const SLUG_TO_CATEGORY = {
+    'hybridni-invertory':   'Автономна енергетика > Гибридні інвертори',
+    'akumulyatory':         'Автономна енергетика > Акумулятори для гібридних інверторів',
+    'komplekty':            'Автономна енергетика > Комплекти автономного енергоживлення',
+    'kabeli':               'Автономна енергетика > Силові та сонячні кабелі',
+    'dzherela-zhyvlennya':  'Обладнання > Джерела безперебійного живлення',
+    'akumulyatory-dbzh':    'Акумулятори і батарейки > Акумулятори для ДБЖ',
+    'systemy-zberihannya':  'Автономна енергетика > Системи зберігання електроенергії 2 в 1',
+    'wifi-moduli':          'Автономна енергетика > Wi-Fi модули для гібридних інверторів',
+  };
+  const label = (n) => {
+    if (SITE_LANG === 'en') return n + (n === 1 ? ' product' : ' products');
+    const m10 = n % 10, m100 = n % 100;
+    const word = m10 === 1 && m100 !== 11 ? 'товар' : m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? 'товари' : 'товарів';
+    return n + ' ' + word;
+  };
+  fetch(SITE_ROOT + 'products.json', { cache: 'no-cache' })
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(d => {
+      const list = Array.isArray(d) ? d : (d.products || []);
+      const counts = {};
+      list.forEach(p => { if (p.availability === 'in_stock') counts[p.product_type] = (counts[p.product_type] || 0) + 1; });
+      els.forEach(el => {
+        const type = SLUG_TO_CATEGORY[el.id.replace('cat-count-', '')];
+        if (type) el.textContent = label(counts[type] || 0);
+      });
+    })
+    .catch(() => { /* лишаємо числа з HTML */ });
+})();

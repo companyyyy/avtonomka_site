@@ -11,7 +11,7 @@
 //   terms        - умови програми (для публічної сторінки): %, cookie, мін. виплата, правила
 //   click        { code, landing?, referrer?, token? } - перехід за посиланням; повертає
 //                  { token, max_age } для cookie aff_ref (token = код.час.підпис) або token: null
-// B2B-клієнт (app_metadata.role = 'b2b', статус approved):
+// B2B-клієнт (app_metadata.role = 'b2b', статус approved, b2b_clients.affiliate_enabled):
 //   me           - умови, мій партнерський запис (або null), баланс, реквізити
 //   join         { accept: true } - стати партнером (погодився з правилами)
 //   stats        { from?, to? } - зведення за період, нарахування, журнал, виплати
@@ -484,9 +484,10 @@ Deno.serve(async (req) => {
     }
 
     if (user.app_metadata?.role !== "b2b") return json({ error: "not a b2b client" }, 403);
-    const { data: client } = await db.from("b2b_clients").select("id, status, company, contact_name, phone")
-      .eq("user_id", user.id).maybeSingle();
+    const { data: client } = await db.from("b2b_clients").select("*").eq("user_id", user.id).maybeSingle();
     if (!client || client.status !== "approved") return json({ error: "not approved" }, 403);
+    // Програму вмикає менеджер окремо для кожного клієнта (галочка в b2b-admin/).
+    if (client.affiliate_enabled !== true) return json({ error: "Партнерська програма для вашого акаунта не підключена" }, 403);
     return await partnerAction(action, client, b);
   } catch (e) {
     console.error("affiliate:", action, e);

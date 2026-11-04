@@ -48,6 +48,20 @@ create table if not exists public.b2b_clients (
   approved_at   timestamptz
 );
 
+-- Вкладка «Партнерська програма» в кабінеті - лише для клієнтів, яким менеджер
+-- поставив галочку в картці (b2b-admin/). Коли колонку додано вперше, галочку
+-- отримують ті, хто вже є партнером, щоб у них нічого не зникло.
+do $$
+begin
+  if not exists (select 1 from information_schema.columns
+                  where table_schema = 'public' and table_name = 'b2b_clients' and column_name = 'affiliate_enabled') then
+    alter table public.b2b_clients add column affiliate_enabled boolean not null default false;
+    if to_regclass('public.affiliates') is not null then
+      update public.b2b_clients set affiliate_enabled = true where id in (select client_id from public.affiliates);
+    end if;
+  end if;
+end $$;
+
 create index if not exists b2b_clients_status_idx on public.b2b_clients (status, created_at desc);
 create index if not exists b2b_clients_email_idx  on public.b2b_clients (lower(email));
 

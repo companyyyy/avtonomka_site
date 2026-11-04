@@ -63,6 +63,7 @@
     .overlay { position: fixed; inset: 0; background: rgba(10,20,35,.5); z-index: 60; display: flex; justify-content: center; align-items: flex-start; overflow-y: auto; padding: 40px 16px; }
     .overlay[hidden] { display: none; }
     .overlay .admin-card { width: 100%; max-width: 760px; }
+    label.chk { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; text-transform: none; letter-spacing: 0; font-weight: 600; font-size: .9rem; color: #1a2e4a; margin: 0; }
     #sp .admin-card { max-width: 980px; }
     #sp td { vertical-align: middle; }
     #sp td input { width: 110px; padding: 5px 8px; text-align: right; }
@@ -123,6 +124,8 @@
           <div class="wide" id="comment-wrap"><label>Коментар клієнта</label><div id="f-comment" style="white-space:pre-wrap;font-size:.92rem"></div></div>
           <div class="wide"><label for="f-note">Нотатка менеджера</label><textarea class="form-input" id="f-note" maxlength="2000"></textarea></div>
           <div><label for="f-password">Пароль для входу</label><input class="form-input" id="f-password" maxlength="72" placeholder="порожньо = згенерувати" autocomplete="new-password"></div>
+          <div class="wide" id="aff-wrap"><label class="chk"><input type="checkbox" id="f-aff"> Партнерська програма - показувати клієнту вкладку в кабінеті
+            <span class="muted">(без галочки вкладку приховано; збережіть картку)</span></label></div>
         </div>
         <div class="actions" id="dlg-actions"></div>
         <div class="status-line" id="dlg-status" style="margin-top:10px"></div>
@@ -223,7 +226,7 @@
           <td class="muted">${fmtDate(c.created_at)}</td>
           <td class="num">${c.orders || ''}</td>
           <td class="num">${c.total ? money(c.total) : ''}</td>
-          <td><span class="badge ${c.status}">${STATUS[c.status] || c.status}</span></td>
+          <td><span class="badge ${c.status}">${STATUS[c.status] || c.status}</span>${c.affiliate_enabled ? ' <span class="badge" title="Партнерська програма підключена">🤝</span>' : ''}</td>
         </tr>`).join('') : '<tr><td colspan="7" class="admin-hint" style="text-align:center">Нікого немає</td></tr>';
     }
 
@@ -263,6 +266,8 @@
       $('f-comment').textContent = c?.comment || '';
       $('comment-wrap').hidden = !c?.comment;
       $('f-password').value = '';
+      $('f-aff').checked = c?.affiliate_enabled === true;
+      $('aff-wrap').hidden = !c;
       $('creds').hidden = true;
       setStatus($('dlg-status'), '');
 
@@ -271,7 +276,7 @@
       if (!c) {
         a.append(button('Створити клієнта і вхід', 'admin-btn--primary', () => run('admin_create', { ...fields(), password: $('f-password').value || undefined }, true)));
       } else {
-        a.append(button('Зберегти', 'admin-btn--primary', () => run('admin_update', { id: c.id, ...fields(true) })));
+        a.append(button('Зберегти', 'admin-btn--primary', () => run('admin_update', { id: c.id, ...fields(true), affiliate_enabled: $('f-aff').checked })));
         if (c.status === 'pending' || c.status === 'rejected' || (c.status === 'blocked' && !c.user_id)) {
           a.append(button('Схвалити і створити вхід', 'admin-btn--primary', () => run('admin_approve', { id: c.id, password: $('f-password').value || undefined }, true)));
         }

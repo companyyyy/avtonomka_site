@@ -7,19 +7,23 @@
 // Без входу:
 //   apply        { company, edrpou?, contact_name, phone, email, city?, comment? } - заявка на доступ
 // B2B-клієнт (app_metadata.role = 'b2b', статус approved):
-//   me           - профіль і статус (працює і для заблокованого - щоб показати причину)
-//   catalog      - товари з гуртовими цінами ($ і грн), курс, РРЦ, спецціни клієнта, обране
+//   me           - профіль і статус (працює і для заблокованого - щоб показати причину);
+//                  affiliate_enabled - чи показувати вкладку «Партнерська програма»
+//   catalog      - товари з гуртовими цінами ($ і грн), курс, РРЦ, спецціни клієнта, обране;
+//                  cat - категорія кабінету (B2B_CATEGORIES), cats - їх порядок для плиток
 //   fav          { id, on }                    - додати / прибрати з обраного
 //   order        { client_key, items: [{ id, qty }], city?, np_branch?, payment_method?, comment?, points? }
 //                  np_branch - «Служба: відділення / адреса», напр. «Укрпошта: 01001, вул. ...»
 //                  points - оплатити частину балами партнерської програми (функція affiliate,
-//                  docs/AFFILIATE.md); не вдалося списати - замовлення все одно приймається, points_error
+//                  docs/AFFILIATE.md; лише з affiliate_enabled); не вдалося списати - замовлення
+//                  все одно приймається, points_error
 //   orders       - мої замовлення
 // Адмін (tg_admins):
 //   admin_list
 //   admin_approve { id, password? }            - створює вхід клієнту, повертає пароль
 //   admin_create  { company, email, ..., password? } - клієнт одразу зі входом
-//   admin_update  { id, status?, manager_note?, password?, company?, edrpou?, contact_name?, phone?, city? }
+//   admin_update  { id, status?, manager_note?, password?, company?, edrpou?, contact_name?, phone?, city?,
+//                   affiliate_enabled? } - affiliate_enabled: галочка «Партнерська програма» для клієнта
 //   admin_special_get { id }                   - каталог і спецціни клієнта
 //   admin_special_set { id, prices: { <product_id>: число | null } } - null = прибрати спецціну
 //
@@ -60,6 +64,23 @@ const CATEGORIES: Record<number, string> = {
   5: "Зарядні станції", 6: "Безперебійники для роутерів", 7: "АВР", 8: "Реле напруги", 9: "Таймери",
   10: "Лічильники електроенергії", 11: "Комплекти", 12: "Wi-Fi модулі", 13: "Інше обладнання",
 };
+
+// Категорії кабінету - у порядку плиток. Акумулятори діляться на «до гібридних
+// інверторів» і «до ДБЖ» за категорією товару на сайті, Wi-Fi модулі йдуть разом
+// з інверторами. Комплектів у кабінеті немає (їх збирають із цих же товарів).
+const B2B_CATEGORIES = [
+  "Гібридні інвертори", "Акумулятори до гібридних інверторів", "Акумулятори до ДБЖ", "Зарядні станції",
+  "Системи зберігання 2 в 1", "Кабельна продукція", "Безперебійники для роутерів", "АВР", "Реле напруги",
+  "Таймери", "Лічильники електроенергії", "Інше обладнання",
+];
+const NO_B2B_CATS = new Set([11]);
+
+function b2bCategory(cat: number, siteType: string | undefined) {
+  if (cat === 12) return "Гібридні інвертори";
+  if (cat === 2) return /ДБЖ/.test(siteType ?? "") ? "Акумулятори до ДБЖ" : "Акумулятори до гібридних інверторів";
+  const name = CATEGORIES[cat] ?? "";
+  return B2B_CATEGORIES.includes(name) ? name : "Інше обладнання";
+}
 
 const db = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, {
   auth: { persistSession: false },
@@ -158,6 +179,7 @@ async function catalog(): Promise<Item[]> {
   const items: Item[] = [];
   for (const it of feedItems as any[]) {
     if (it.problem === "немає товару на сайті") continue; // зник з сайту - як і з фідів
+    if (NO_B2B_CATS.has(it.cat)) continue;
     const id = String(it.id);
     const p = prices[id] ?? {};
     const s = site.get(id);
@@ -166,7 +188,7 @@ async function catalog(): Promise<Item[]> {
       id,
       code: productCode(id),
       name: it.name,
-      cat: CATEGORIES[it.cat] ?? "",
+      cat: b2bCategory(it.cat, s?.product_type),
       photo: abs(it.photo || s?.image_link || ""),
       url: s?.slug ? `${SITE_URL}/product/${s.slug}/${id}.html` : null,
       mpn: s?.mpn || null,
@@ -202,7 +224,7 @@ async function isAdmin(userId: string) {
   return !!data;
 }
 
-const CLIENT_FIELDS = "id, status, company, edrpou, contact_name, phone, email, city";
+const CLIENT_FIELDS = ["id", "status", "company", "edrpou", "contact_name", "phone", "email", "city"];
 
 async function createLogin(email: string, password: string) {
   const { data, error } = await db.auth.admin.createUser({
@@ -304,7 +326,7 @@ async function order(client: any, b: any) {
   let pointsSpent = 0;
   let pointsError: string | null = null;
   const points = Math.floor(Number(b.points) || 0);
-  if (points > 0 && !itemsError) {
+  if (points > 0 && !itemsError && client.affiliate_enabled === true) {
     const { data: aff } = await db.from("affiliates").select("id").eq("client_id", client.id).maybeSingle();
     const { data: spent, error } = aff
       ? await db.rpc("affiliate_spend", { p_affiliate: aff.id, p_order: o.id, p_points: points })
@@ -422,6 +444,7 @@ async function admin(action: string, b: any) {
       if (k in b) patch[k] = text(b[k], k === "company" ? 200 : 120);
     }
     if ("manager_note" in b) patch.manager_note = text(b.manager_note, 2000);
+    if (typeof b.affiliate_enabled === "boolean") patch.affiliate_enabled = b.affiliate_enabled;
     if (b.status) {
       if (!["pending", "approved", "rejected", "blocked"].includes(b.status)) return json({ error: "bad status" }, 400);
       if (b.status === "approved" && !c.user_id) return json({ error: "Спершу схваліть заявку - створиться вхід" }, 400);
@@ -467,9 +490,12 @@ Deno.serve(async (req) => {
     }
 
     if (user.app_metadata?.role !== "b2b") return json({ error: "not a b2b client" }, 403);
-    const { data: client } = await db.from("b2b_clients").select(CLIENT_FIELDS).eq("user_id", user.id).maybeSingle();
+    // select("*"): поки не виконано SQL з колонкою affiliate_enabled, кабінет працює (вкладка просто прихована).
+    const { data: client } = await db.from("b2b_clients").select("*").eq("user_id", user.id).maybeSingle();
     if (!client) return json({ error: "not a b2b client" }, 403);
-    if (action === "me") return json({ ok: true, client });
+    if (action === "me") {
+      return json({ ok: true, client: { ...Object.fromEntries(CLIENT_FIELDS.map((k) => [k, client[k]])), affiliate_enabled: client.affiliate_enabled === true } });
+    }
     if (client.status !== "approved") return json({ error: "not approved", status: client.status }, 403);
 
     if (action === "catalog") {
@@ -477,7 +503,7 @@ Deno.serve(async (req) => {
         catalog(), specialPrices(client.id),
         db.from("b2b_favorites").select("product_id").eq("client_id", client.id),
       ]);
-      return json({ ok: true, items, rate: usdRate, special, favorites: (favs ?? []).map((f) => f.product_id) });
+      return json({ ok: true, items, cats: B2B_CATEGORIES, rate: usdRate, special, favorites: (favs ?? []).map((f) => f.product_id) });
     }
     if (action === "fav") {
       const id = text(b.id, 40);
