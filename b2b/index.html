@@ -135,6 +135,11 @@
     tr.sep.cat td span { font-weight: 600; color: color-mix(in srgb, var(--c) 70%, #1a2e4a); background: #fff; font-size: .78rem;
                     margin-left: 8px; padding: 1px 8px; border-radius: 20px; }
     tr.sep.brand td { font-size: .76rem; text-transform: uppercase; letter-spacing: .07em; color: #4a5d78; padding: 9px 12px 5px; background: #f5f8fc; }
+    tr.sep.brand td .logo-b { display: inline-flex; align-items: center; background: #fff; padding: 4px 10px; border-radius: 8px;
+                    box-shadow: 0 1px 3px rgba(26,46,74,.14); vertical-align: middle; }
+    tr.sep.brand td .logo-b img { height: 20px; max-width: 140px; object-fit: contain; display: block; }
+    tr.sep.brand td .logo-b img.tall { height: 28px; }
+    tr.sep.brand.has-logo td::before { display: none; }
     tr.sep.brand td::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 8px; vertical-align: 1px;
                     background: var(--c, var(--accent)); }
     .cartbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: var(--navy); color: #fff; display: flex; align-items: center;
@@ -647,7 +652,10 @@
     // ─── Фільтри (як у каталозі сайту, assets/js/catalog.js) ───────
     // Значення розбираємо з назви товару: бренд, потужність, напруга, ємність.
 
-    const KNOWN_BRANDS = ['DAH Solar', 'Deye', 'Dyness', 'Felicity', 'Must', 'EcoFlow', 'TTN', 'MaXpeedingRods'];
+    const KNOWN_BRANDS = ['DAH Solar', 'Deye', 'Dyness', 'Felicity', 'Must', 'EcoFlow', 'TTN', 'KBE', 'MaXpeedingRods'];
+    // Оригінальні логотипи брендів - ті самі файли, що в мініапп (miniapp_v/brands/, BRAND_LOGOS там).
+    const BRAND_LOGOS = { 'DAH Solar': 'dah-solar.png', Dyness: 'dyness.svg', Deye: 'deye.svg', Felicity: 'felicity.png',
+      MUST: 'must.png', KBE: 'kbe.png', EcoFlow: 'ecoflow.svg' };
     const FACETS = { brand: 'Бренд', power: 'Потужність', voltage: 'Напруга', capacity: 'Ємність' };
     const CAT_FACETS = {
       'Гібридні інвертори': ['power', 'voltage', 'brand'],
@@ -704,10 +712,10 @@
           <span>${onlyStock ? `${inStock} ${plural(inStock)}` : `${list.length} ${plural(list.length)} · ${inStock} в наявності`}</span>
         </button>`;
       };
-      $('cat-tiles').innerHTML = cats.map((c) => {
+      $('cat-tiles').innerHTML = tile(null, items) + cats.map((c) => {
         const list = items.filter((i) => catOf(i) === c);
         return onlyStock && !list.some((i) => i.available) ? '' : tile(c, list);
-      }).join('') + tile(null, items);
+      }).join('');
     }
 
     function renderFacets(pool) {
@@ -779,7 +787,11 @@
           prevCat = c; prevBrand = undefined;
         }
         if (brands.get(c).size > 1 && i.f.brand !== prevBrand) {
-          head += `<tr class="sep brand" style="--c:${catColor(c)}"><td colspan="10">${esc(i.f.brand || 'Інші')}</td></tr>`;
+          const logo = BRAND_LOGOS[i.f.brand];
+          head += `<tr class="sep brand${logo ? ' has-logo' : ''}" style="--c:${catColor(c)}"><td colspan="10">${logo
+            ? `<span class="logo-b"><img src="/miniapp_v/brands/${logo}" alt="${esc(i.f.brand)}" title="${esc(i.f.brand)}"${i.f.brand === 'KBE' ? ' class="tall"' : ''}`
+              + ` onerror="this.parentNode.outerHTML='${esc(i.f.brand)}'"></span>`
+            : esc(i.f.brand || 'Інші')}</td></tr>`;
           prevBrand = i.f.brand;
         }
         return head + rowHtml(i);

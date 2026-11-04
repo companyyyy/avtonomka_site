@@ -700,7 +700,7 @@ function buildCats(){
     </div>
     <div class="cat-row-arrow">›</div>`;
   allRow.onclick=()=>openCat(ALL);
-  grid.appendChild(allRow);
+  grid.prepend(allRow); // першим, над категоріями
 }
 
 // ── OPEN CATEGORY ──
