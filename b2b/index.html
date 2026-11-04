@@ -92,9 +92,6 @@
     .product table { font-size: .9rem; }
     .product table td { padding: 5px 8px; }
     .product .specs-section { background: #f8fafc; }
-    .stock { display: inline-block; font-size: .78rem; font-weight: 600; white-space: nowrap; padding: 2px 9px; border-radius: 20px; }
-    .stock.yes { color: #1e7a3c; background: #e3f5e9; }
-    .stock.no { color: #7a6a4f; background: #f6efe2; }
     tr.in-cart { background: #fff8e6; }
     .empty { text-align: center; color: var(--muted); padding: 30px; }
     .cat-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; }
@@ -108,15 +105,11 @@
     .cat-tile .pic { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; border-radius: 10px; padding: 10px;
                 background: radial-gradient(circle at 50% 45%, #fff 0, color-mix(in srgb, var(--c) 12%, #fff) 75%); }
     .cat-tile .pic img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; }
-    .cat-tile .pic .all { font-size: 3.2rem; color: #fff; }
+    .cat-tile .pic .all { font-size: 3.2rem; color: var(--navy); opacity: .7; }
     .cat-tile b { display: block; color: var(--navy); font-size: 1rem; line-height: 1.25; margin: 10px 4px 6px; }
     .cat-tile > span:last-child { align-self: flex-start; margin: 0 4px; font-size: .78rem; color: color-mix(in srgb, var(--c) 70%, #1a2e4a);
                 background: color-mix(in srgb, var(--c) 12%, #fff); padding: 2px 9px; border-radius: 20px; }
-    .cat-tile.all-tile { background: linear-gradient(150deg, #24406a, var(--navy)); }
-    .cat-tile.all-tile::before { background: var(--accent); }
-    .cat-tile.all-tile .pic { background: rgba(255,255,255,.06); }
-    .cat-tile.all-tile b { color: #fff; }
-    .cat-tile.all-tile > span:last-child { color: var(--navy); background: var(--accent); }
+
     .crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 0 0 12px; }
     .crumbs h2 { margin: 0; padding-left: 12px; border-left: 4px solid var(--c, var(--accent)); }
     .facets { display: flex; flex-direction: column; gap: 8px; margin: 0 0 14px; }
@@ -263,7 +256,6 @@
     <section id="v-catalog" hidden>
       <div class="toolbar">
         <input type="search" id="q" placeholder="Пошук за назвою, кодом або артикулом" autocomplete="off">
-        <label class="chk"><input type="checkbox" id="only-stock"> лише в наявності</label>
         <label class="chk"><input type="checkbox" id="only-fav"> ♥ обране</label>
         <span class="rate" id="rate"></span>
       </div>
@@ -274,7 +266,7 @@
         <div class="facets" id="facets"></div>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Код</th><th class="img"></th><th>Товар</th><th>Наявність</th><th style="text-align:right">Ціна, $</th><th style="text-align:right">Ціна, грн</th><th style="text-align:right" title="Ваша персональна ціна">Спецціна</th><th class="rrp" style="text-align:right">РРЦ, грн</th><th>Кількість</th><th></th></tr></thead>
+            <thead><tr><th>Код</th><th class="img"></th><th>Товар</th><th style="text-align:right">Ціна, $</th><th style="text-align:right">Ціна, грн</th><th style="text-align:right" title="Ваша персональна ціна">Спецціна</th><th class="rrp" style="text-align:right">РРЦ, грн</th><th>Кількість</th><th></th></tr></thead>
             <tbody id="rows"></tbody>
           </table>
         </div>
@@ -626,7 +618,8 @@
       $('cat-tiles').innerHTML = '<div class="card empty">Завантаження…</div>';
       try {
         const r = await api('catalog');
-        items = r.items;
+        // Лише те, що в наявності: «під замовлення» в кабінеті не показуємо.
+        items = r.items.filter((i) => i.available);
         cats = r.cats || [];
         special = r.special || {};
         favs = new Set(r.favorites || []);
@@ -700,21 +693,22 @@
     const plural = (n) => { const a = n % 10, b = n % 100; return a === 1 && b !== 11 ? 'товар' : a >= 2 && a <= 4 && (b < 12 || b > 14) ? 'товари' : 'товарів'; };
     const catOf = (i) => i.cat || 'Інше';
 
+    // Фото плитки, де перше фото товару погано видно на плитці.
+    const TILE_PHOTOS = { 'Генератори': '/assets/images/products/130059_3.jpg' };
+
     function renderTiles() {
-      const onlyStock = $('only-stock').checked;
       const tile = (cat, list) => {
-        const inStock = list.filter((i) => i.available).length;
         const pic = cat == null ? '<span class="all">☰</span>'
-          : ((list.find((i) => i.photo && i.available) || list.find((i) => i.photo)) || {}).photo;
-        return `<button type="button" class="cat-tile${cat == null ? ' all-tile' : ''}"${cat == null ? '' : ` style="--c:${catColor(cat)}"`} data-cat="${esc(cat ?? '')}">
+          : TILE_PHOTOS[cat] || (list.find((i) => i.photo) || {}).photo;
+        return `<button type="button" class="cat-tile" style="--c:${cat == null ? '#6b7f99' : catColor(cat)}" data-cat="${esc(cat ?? '')}">
           <span class="pic">${cat == null ? pic : pic ? `<img src="${esc(pic)}" alt="" loading="lazy">` : ''}</span>
           <b>${esc(cat ?? 'Усі товари')}</b>
-          <span>${onlyStock ? `${inStock} ${plural(inStock)}` : `${list.length} ${plural(list.length)} · ${inStock} в наявності`}</span>
+          <span>${list.length} ${plural(list.length)}</span>
         </button>`;
       };
       $('cat-tiles').innerHTML = tile(null, items) + cats.map((c) => {
         const list = items.filter((i) => catOf(i) === c);
-        return onlyStock && !list.some((i) => i.available) ? '' : tile(c, list);
+        return list.length ? tile(c, list) : '';
       }).join('');
     }
 
@@ -747,7 +741,6 @@
           <td class="code">${esc(i.code)}</td>
           <td class="img">${i.photo ? `<img src="${esc(i.photo)}" alt="" loading="lazy">` : ''}</td>
           <td class="name"><button type="button" class="open">${esc(i.name)}</button><span class="cat">${esc([curCat ? '' : i.cat, i.mpn].filter(Boolean).join(' · '))}</span></td>
-          <td><span class="stock ${i.available ? 'yes' : 'no'}">${i.available ? '✓ в наявності' : 'під замовлення'}</span></td>
           <td class="price">${usdOf(i) != null ? usd(usdOf(i)) : '<span class="ask">за запитом</span>'}</td>
           <td class="price">${i.price != null ? money(i.price) : ''}</td>
           <td class="price special">${special[i.id] != null ? money(special[i.id]) : ''}</td>
@@ -759,7 +752,6 @@
 
     function render() {
       const q = $('q').value.trim().toLowerCase();
-      const onlyStock = $('only-stock').checked;
       const onlyFav = $('only-fav').checked;
       // Пошук і «обране» - по всьому каталогу, тож замість плиток одразу список.
       const tiles = curCat === null && !q && !onlyFav;
@@ -770,11 +762,11 @@
       const cat = curCat || '';
       $('cat-title').textContent = cat || (q ? 'Пошук по всіх категоріях' : onlyFav ? 'Обране' : 'Усі товари');
       $('cat-title').style.setProperty('--c', cat ? catColor(cat) : 'var(--accent)');
-      const pool = items.filter((i) => (!cat || catOf(i) === cat) && (!onlyStock || i.available) && (!onlyFav || favs.has(i.id))
+      const pool = items.filter((i) => (!cat || catOf(i) === cat) && (!onlyFav || favs.has(i.id))
         && (!q || `${i.code} ${i.name} ${i.mpn || ''}`.toLowerCase().includes(q)));
       renderFacets(pool);
       const list = pool.filter((i) => Object.entries(facetSel).every(([k, set]) => !set.size || set.has(i.f[k]))).sort(byKey);
-      if (!list.length) { $('rows').innerHTML = '<tr><td colspan="10" class="empty">Нічого не знайдено</td></tr>'; return; }
+      if (!list.length) { $('rows').innerHTML = '<tr><td colspan="9" class="empty">Нічого не знайдено</td></tr>'; return; }
       // Підзаголовки брендів - лише де в категорії їх кілька.
       const brands = new Map();
       list.forEach((i) => { const c = catOf(i); if (!brands.has(c)) brands.set(c, new Set()); brands.get(c).add(i.f.brand); });
@@ -783,12 +775,12 @@
         let head = '';
         const c = catOf(i);
         if (c !== prevCat) {
-          if (!cat) head += `<tr class="sep cat" style="--c:${catColor(c)}"><td colspan="10">${esc(c)}<span>${list.filter((x) => catOf(x) === c).length}</span></td></tr>`;
+          if (!cat) head += `<tr class="sep cat" style="--c:${catColor(c)}"><td colspan="9">${esc(c)}<span>${list.filter((x) => catOf(x) === c).length}</span></td></tr>`;
           prevCat = c; prevBrand = undefined;
         }
         if (brands.get(c).size > 1 && i.f.brand !== prevBrand) {
           const logo = BRAND_LOGOS[i.f.brand];
-          head += `<tr class="sep brand${logo ? ' has-logo' : ''}" style="--c:${catColor(c)}"><td colspan="10">${logo
+          head += `<tr class="sep brand${logo ? ' has-logo' : ''}" style="--c:${catColor(c)}"><td colspan="9">${logo
             ? `<span class="logo-b"><img src="/miniapp_v/brands/${logo}" alt="${esc(i.f.brand)}" title="${esc(i.f.brand)}"${i.f.brand === 'KBE' ? ' class="tall"' : ''}`
               + ` onerror="this.parentNode.outerHTML='${esc(i.f.brand)}'"></span>`
             : esc(i.f.brand || 'Інші')}</td></tr>`;
@@ -867,7 +859,7 @@
         if ($('only-fav').checked && !on) render();
       }
     });
-    ['q', 'only-stock', 'only-fav'].forEach((id) => $(id).addEventListener('input', render));
+    ['q', 'only-fav'].forEach((id) => $(id).addEventListener('input', render));
 
     // ─── Картка товару ─────────────────────────────────────────────
     // Опис, фото й характеристики - з products.json сайту (ті самі, що на
@@ -884,7 +876,6 @@
       $('p-facts').innerHTML = [
         fact('Код', esc(i.code)),
         i.mpn ? fact('Артикул', esc(i.mpn)) : '',
-        fact('Наявність', `<span class="stock ${i.available ? 'yes' : 'no'}">${i.available ? '✓ в наявності' : 'під замовлення'}</span>`),
         fact('Ціна, $', usdOf(i) != null ? usd(usdOf(i)) : 'за запитом'),
         i.price != null ? fact('Ціна, грн', money(i.price)) : '',
         special[i.id] != null ? fact('Спецціна', money(special[i.id]), 'special') : '',
