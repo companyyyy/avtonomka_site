@@ -18,7 +18,7 @@
             --muted: #6c757d; --line: #e0e6ed; --red: #e74c3c; }
     * { box-sizing: border-box; }
     [hidden] { display: none !important; } /* інакше display:flex у .overlay/.cartbar/nav перебиває hidden */
-    body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.45 'Segoe UI', Arial, sans-serif; }
+    body { margin: 0; background: var(--bg) linear-gradient(180deg, #e4ebf5 0, var(--bg) 360px) no-repeat; color: var(--text); font: 15px/1.45 'Segoe UI', Arial, sans-serif; }
     header { position: sticky; top: 0; z-index: 20; background: var(--navy); color: #fff; display: flex; align-items: center;
              gap: 14px; padding: 0 20px; height: 58px; box-shadow: 0 2px 12px rgba(0,0,0,.25); }
     .logo { display: flex; align-items: center; gap: 9px; color: var(--green); font-weight: 800; text-decoration: none; }
@@ -51,7 +51,8 @@
     .tabs button { flex: 1; padding: 9px; border: 2px solid var(--line); background: #fff; border-radius: 8px; font: 600 .9rem inherit; cursor: pointer; color: var(--muted); }
     .tabs button.active { border-color: var(--accent); color: var(--navy); }
     .hp { position: absolute; left: -9999px; }
-    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 0 0 14px; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 0 0 18px; }
+    #v-catalog > .toolbar { background: var(--card); border-radius: 12px; padding: 12px 14px; box-shadow: 0 4px 24px rgba(26,46,74,.08); }
     .toolbar input[type=search] { flex: 1 1 240px; width: auto; }
     .toolbar select { width: auto; }
     .toolbar .chk { display: flex; gap: 6px; align-items: center; font-size: .9rem; color: var(--muted); text-transform: none; letter-spacing: 0; font-weight: 400; margin: 0; }
@@ -60,7 +61,8 @@
     .table-wrap { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; background: #fff; }
     th, td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
-    th { white-space: nowrap; font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); background: #f8fafc; }
+    th { white-space: nowrap; font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; color: #4a5d78; background: #eaf0f7; }
+    #rows tr[data-id]:hover td { background: #f7faff; }
     td.code { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
     td.img img { width: 48px; height: 48px; object-fit: contain; display: block; }
     td.name a { color: var(--navy); text-decoration: none; }
@@ -90,34 +92,51 @@
     .product table { font-size: .9rem; }
     .product table td { padding: 5px 8px; }
     .product .specs-section { background: #f8fafc; }
-    .stock { font-size: .82rem; white-space: nowrap; }
-    .stock.yes { color: #1e8e3e; }
-    .stock.no { color: var(--muted); }
+    .stock { display: inline-block; font-size: .78rem; font-weight: 600; white-space: nowrap; padding: 2px 9px; border-radius: 20px; }
+    .stock.yes { color: #1e7a3c; background: #e3f5e9; }
+    .stock.no { color: #7a6a4f; background: #f6efe2; }
     tr.in-cart { background: #fff8e6; }
     .empty { text-align: center; color: var(--muted); padding: 30px; }
     .cat-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; }
-    .cat-tile { position: relative; aspect-ratio: 1; display: flex; flex-direction: column; background: var(--card); border: 2px solid transparent; border-radius: 14px;
-                box-shadow: 0 4px 24px rgba(26,46,74,.08); padding: 14px; cursor: pointer; text-align: left; font: inherit; color: var(--text); overflow: hidden; }
-    .cat-tile:hover, .cat-tile:focus-visible { border-color: var(--accent); outline: none; }
-    .cat-tile .pic { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; }
-    .cat-tile .pic img { max-width: 100%; max-height: 100%; object-fit: contain; }
-    .cat-tile .pic .all { font-size: 3.2rem; color: var(--navy); }
-    .cat-tile b { display: block; color: var(--navy); font-size: 1rem; line-height: 1.25; margin: 10px 0 2px; }
-    .cat-tile span { font-size: .82rem; color: var(--muted); }
+    /* --c - акцентний колір категорії (CAT_COLORS у скрипті) */
+    .cat-tile { --c: var(--navy); position: relative; aspect-ratio: 1; display: flex; flex-direction: column; background: var(--card); border: 2px solid transparent;
+                border-radius: 14px; box-shadow: 0 4px 24px rgba(26,46,74,.08); padding: 10px 10px 14px; cursor: pointer; text-align: left; font: inherit;
+                color: var(--text); overflow: hidden; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+    .cat-tile::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--c); }
+    .cat-tile:hover, .cat-tile:focus-visible { border-color: color-mix(in srgb, var(--c) 55%, #fff); transform: translateY(-3px);
+                box-shadow: 0 10px 28px rgba(26,46,74,.14); outline: none; }
+    .cat-tile .pic { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; border-radius: 10px; padding: 10px;
+                background: radial-gradient(circle at 50% 45%, #fff 0, color-mix(in srgb, var(--c) 12%, #fff) 75%); }
+    .cat-tile .pic img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+    .cat-tile .pic .all { font-size: 3.2rem; color: #fff; }
+    .cat-tile b { display: block; color: var(--navy); font-size: 1rem; line-height: 1.25; margin: 10px 4px 6px; }
+    .cat-tile > span:last-child { align-self: flex-start; margin: 0 4px; font-size: .78rem; color: color-mix(in srgb, var(--c) 70%, #1a2e4a);
+                background: color-mix(in srgb, var(--c) 12%, #fff); padding: 2px 9px; border-radius: 20px; }
+    .cat-tile.all-tile { background: linear-gradient(150deg, #24406a, var(--navy)); }
+    .cat-tile.all-tile::before { background: var(--accent); }
+    .cat-tile.all-tile .pic { background: rgba(255,255,255,.06); }
+    .cat-tile.all-tile b { color: #fff; }
+    .cat-tile.all-tile > span:last-child { color: var(--navy); background: var(--accent); }
     .crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 0 0 12px; }
-    .crumbs h2 { margin: 0; }
+    .crumbs h2 { margin: 0; padding-left: 12px; border-left: 4px solid var(--c, var(--accent)); }
     .facets { display: flex; flex-direction: column; gap: 8px; margin: 0 0 14px; }
     .facets:empty { display: none; }
     .facet { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
     .facet > span { min-width: 92px; font-size: .76rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
     .facet button { border: 2px solid var(--line); background: #fff; color: var(--navy); border-radius: 18px; padding: 4px 12px; font: 600 .85rem inherit; cursor: pointer; }
-    .facet button.on { border-color: var(--accent); background: #fff8e6; }
+    .facet button:hover { border-color: #b9c6d8; }
+    .facet button.on { border-color: var(--navy); background: var(--navy); color: #fff; }
+    .facet button.on small { color: rgba(255,255,255,.7); }
     .facet button small { color: var(--muted); font-weight: 400; margin-left: 3px; }
     .facet .reset { border: none; background: none; color: var(--muted); text-decoration: underline; padding: 4px 6px; }
-    tr.sep td { background: var(--bg); font-weight: 700; color: var(--navy); border-bottom: none; }
-    tr.sep.cat td { font-size: 1rem; padding: 16px 10px 6px; }
-    tr.sep.cat td span { font-weight: 400; color: var(--muted); font-size: .85rem; margin-left: 6px; }
-    tr.sep.brand td { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 8px 10px 4px; background: #f8fafc; }
+    tr.sep td { font-weight: 700; color: var(--navy); border-bottom: none; }
+    tr.sep.cat td { font-size: 1rem; padding: 12px 12px; border-left: 4px solid var(--c);
+                    background: linear-gradient(90deg, color-mix(in srgb, var(--c) 14%, #fff), #fff 70%); }
+    tr.sep.cat td span { font-weight: 600; color: color-mix(in srgb, var(--c) 70%, #1a2e4a); background: #fff; font-size: .78rem;
+                    margin-left: 8px; padding: 1px 8px; border-radius: 20px; }
+    tr.sep.brand td { font-size: .76rem; text-transform: uppercase; letter-spacing: .07em; color: #4a5d78; padding: 9px 12px 5px; background: #f5f8fc; }
+    tr.sep.brand td::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 8px; vertical-align: 1px;
+                    background: var(--c, var(--accent)); }
     .cartbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: var(--navy); color: #fff; display: flex; align-items: center;
                gap: 16px; padding: 12px 20px; box-shadow: 0 -2px 12px rgba(0,0,0,.2); }
     .cartbar .sum { font-weight: 700; font-size: 1.05rem; }
@@ -173,7 +192,10 @@
       .img, .rrp { display: none; }
       .row2, .cart-grid { grid-template-columns: 1fr; }
       .cat-tiles { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-      .cat-tile { padding: 10px; }
+      .cat-tile { aspect-ratio: auto; padding: 8px 8px 12px; }
+      .cat-tile .pic { flex: none; height: 120px; }
+      .cat-tile b { font-size: .92rem; }
+      .cat-tile > span:last-child { border-radius: 10px; font-size: .74rem; }
       .facet > span { min-width: 100%; }
       .cart-grid form.card { position: static; }
     }
@@ -661,6 +683,12 @@
 
     // ─── Каталог: плитки категорій і список ────────────────────────
 
+    // Акцентні кольори категорій - приглушені, у тон фірмовим (синій, помаранчевий, зелений).
+    const CAT_COLORS = {
+      'Гібридні інвертори': '#f5a623', 'Акумулятори до гібридних інверторів': '#2f9e5f', 'Акумулятори до ДБЖ': '#3b7dd8',
+      'Зарядні станції': '#7466c2', 'Системи зберігання 2 в 1': '#1e9aa8', 'Генератори': '#e0712c', 'Кабельна продукція': '#c4524e',
+    };
+    const catColor = (c) => CAT_COLORS[c] || '#6b7f99';
     const plural = (n) => { const a = n % 10, b = n % 100; return a === 1 && b !== 11 ? 'товар' : a >= 2 && a <= 4 && (b < 12 || b > 14) ? 'товари' : 'товарів'; };
     const catOf = (i) => i.cat || 'Інше';
 
@@ -670,7 +698,7 @@
         const inStock = list.filter((i) => i.available).length;
         const pic = cat == null ? '<span class="all">☰</span>'
           : ((list.find((i) => i.photo && i.available) || list.find((i) => i.photo)) || {}).photo;
-        return `<button type="button" class="cat-tile" data-cat="${esc(cat ?? '')}">
+        return `<button type="button" class="cat-tile${cat == null ? ' all-tile' : ''}"${cat == null ? '' : ` style="--c:${catColor(cat)}"`} data-cat="${esc(cat ?? '')}">
           <span class="pic">${cat == null ? pic : pic ? `<img src="${esc(pic)}" alt="" loading="lazy">` : ''}</span>
           <b>${esc(cat ?? 'Усі товари')}</b>
           <span>${onlyStock ? `${inStock} ${plural(inStock)}` : `${list.length} ${plural(list.length)} · ${inStock} в наявності`}</span>
@@ -733,6 +761,7 @@
       if (tiles) { renderTiles(); return; }
       const cat = curCat || '';
       $('cat-title').textContent = cat || (q ? 'Пошук по всіх категоріях' : onlyFav ? 'Обране' : 'Усі товари');
+      $('cat-title').style.setProperty('--c', cat ? catColor(cat) : 'var(--accent)');
       const pool = items.filter((i) => (!cat || catOf(i) === cat) && (!onlyStock || i.available) && (!onlyFav || favs.has(i.id))
         && (!q || `${i.code} ${i.name} ${i.mpn || ''}`.toLowerCase().includes(q)));
       renderFacets(pool);
@@ -746,11 +775,11 @@
         let head = '';
         const c = catOf(i);
         if (c !== prevCat) {
-          if (!cat) head += `<tr class="sep cat"><td colspan="10">${esc(c)}<span>${list.filter((x) => catOf(x) === c).length}</span></td></tr>`;
+          if (!cat) head += `<tr class="sep cat" style="--c:${catColor(c)}"><td colspan="10">${esc(c)}<span>${list.filter((x) => catOf(x) === c).length}</span></td></tr>`;
           prevCat = c; prevBrand = undefined;
         }
         if (brands.get(c).size > 1 && i.f.brand !== prevBrand) {
-          head += `<tr class="sep brand"><td colspan="10">${esc(i.f.brand || 'Інші')}</td></tr>`;
+          head += `<tr class="sep brand" style="--c:${catColor(c)}"><td colspan="10">${esc(i.f.brand || 'Інші')}</td></tr>`;
           prevBrand = i.f.brand;
         }
         return head + rowHtml(i);
