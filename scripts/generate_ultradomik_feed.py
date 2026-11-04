@@ -65,8 +65,9 @@ SITE_URL = 'https://avtonomka.com.ua'
 # from that already-bumped price, a random-range feed adds its own range instead.
 RANDOM_ADD_UAH = (1, 10)
 # Fixed retail price for some items (scripts/price_adjustments.json -> fixed_by_id,
-# the same file fetch_feed.py applies to the site): exactly this price in the
-# retail feeds, no 1-10 bump; in client feeds it is a ceiling. opt.xml is untouched.
+# the same file fetch_feed.py applies to the site): exactly this price in the main
+# retail feed (prom_file.xml), no 1-10 bump. Client feeds apply their own markups
+# to it as usual; opt.xml is untouched.
 try:
     FIXED_PRICES = {str(k): float(v) for k, v in json.loads(
         (ROOT / 'scripts/price_adjustments.json').read_text(encoding='utf-8')).get('fixed_by_id', {}).items()}
@@ -593,8 +594,8 @@ def main():
                 value = max(1, base * markup + random.randint(*feed['add']))
             else:
                 value = (base + bump) * markup
-            if fixed and not feed.get('wholesale'):
-                value = min(value, fixed)
+            if fixed and fname == MAIN_FEED:
+                value = fixed
             body.append(text.replace('{price}', f'{round(value, 2):.2f}'))
         xml = clean('<?xml version="1.0" encoding="UTF-8"?>\n<shop>\n  <catalog>\n' + catalog +
                     '\n  </catalog>\n  <items>\n' + '\n'.join(body) + '\n  </items>\n</shop>\n')
