@@ -63,8 +63,8 @@
     th, td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
     th { white-space: nowrap; font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; color: #4a5d78; background: #eaf0f7; }
     #rows tr[data-id]:hover td { background: #f7faff; }
-    /* Розділювачі груп колонок каталогу: товар | $ | грн, спецціна, РРЦ | кількість | обране */
-    #cat-table tr:not(.sep) > :is(:nth-child(4), :nth-child(5), :nth-child(8), :nth-child(9)) { border-left: 1px solid #cfd8e3; }
+    /* Розділювачі колонок каталогу: товар | $ | грн | спецціна | РРЦ | кількість | обране */
+    #cat-table tr:not(.sep) > :nth-child(n+4) { border-left: 1px solid #cfd8e3; }
     td.code { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
     td.img img { width: 48px; height: 48px; object-fit: contain; display: block; }
     td.name a { color: var(--navy); text-decoration: none; }
