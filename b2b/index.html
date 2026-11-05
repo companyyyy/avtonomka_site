@@ -63,6 +63,8 @@
     th, td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
     th { white-space: nowrap; font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; color: #4a5d78; background: #eaf0f7; }
     #rows tr[data-id]:hover td { background: #f7faff; }
+    /* Розділювачі груп колонок каталогу: товар | $ | грн, спецціна, РРЦ | кількість | обране */
+    #cat-table tr:not(.sep) > :is(:nth-child(4), :nth-child(5), :nth-child(8), :nth-child(9)) { border-left: 1px solid #cfd8e3; }
     td.code { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
     td.img img { width: 48px; height: 48px; object-fit: contain; display: block; }
     td.name a { color: var(--navy); text-decoration: none; }
@@ -265,7 +267,7 @@
         <div class="crumbs"><button type="button" class="btn light" id="cat-back">← Усі категорії</button><h2 id="cat-title"></h2></div>
         <div class="facets" id="facets"></div>
         <div class="table-wrap">
-          <table>
+          <table id="cat-table">
             <thead><tr><th>Код</th><th class="img"></th><th>Товар</th><th style="text-align:right">Ціна, $</th><th style="text-align:right">Ціна, грн</th><th style="text-align:right" title="Ваша персональна ціна">Спецціна</th><th class="rrp" style="text-align:right">РРЦ, грн</th><th>Кількість</th><th></th></tr></thead>
             <tbody id="rows"></tbody>
           </table>
@@ -486,6 +488,8 @@
     let rate = null;           // курс $ гурту з /prom-admin/ (feeds.json)
     let favs = new Set();
     let cats = [];             // категорії кабінету в порядку плиток (функція b2b, B2B_CATEGORIES)
+    let curView = 'catalog';
+    let curProduct = null;     // id товару у відкритій картці
     let curCat = null;         // null - плитки категорій, '' - усі товари, інакше назва категорії
     let facetSel = {};         // вибрані значення фільтрів: { power: Set, ... }
     let cart = {};
@@ -511,6 +515,7 @@
     }
 
     function show(view) {
+      curView = view;
       ['auth', 'wait', 'catalog', 'cart', 'orders', 'partner'].forEach((v) => { $('v-' + v).hidden = v !== view; });
       $('nav').hidden = !['catalog', 'cart', 'orders', 'partner'].includes(view);
       document.querySelectorAll('#nav button').forEach((b) => b.classList.toggle('active', b.dataset.view === view));
@@ -573,6 +578,7 @@
     $('logout').addEventListener('click', async () => {
       try { localStorage.removeItem(PARTNER_KEY); } catch { /* приватне вікно */ }
       await sb.auth.signOut({ scope: 'local' });
+      history.replaceState(null, '', location.pathname);
       location.reload();
     });
 
@@ -604,7 +610,13 @@
         show('wait');
         return;
       }
-      if (location.hash === '#partner' && client.affiliate_enabled) go('partner'); else show('catalog');
+      // Після оновлення сторінки лишаємось у тій самій категорії чи пошуку.
+      const was = history.state || {};
+      curCat = was.cat ?? null;
+      $('q').value = was.q || '';
+      $('only-fav').checked = !!was.fav;
+      if (location.hash === '#partner' && client.affiliate_enabled) enter('partner'); else show('catalog');
+      history.replaceState(navState(), '', navUrl());
       let saved = {};
       try { saved = JSON.parse(localStorage.getItem(DELIVERY_KEY) || '{}') || {}; } catch { /* приватне вікно */ }
       $('o-city').value = saved.city || client.city || '';
@@ -724,9 +736,13 @@
       }).join('') + (Object.values(facetSel).some((x) => x.size) ? '<div class="facet"><button type="button" class="reset" data-reset>Скинути фільтри</button></div>' : '');
     }
 
-    // Сортування й роздільники: категорія (порядок плиток) → бренд → потужність / ємність.
+    // Сортування й роздільники: категорія (порядок плиток) → бренд (спершу Felicity, MUST, далі за алфавітом)
+    // → потужність, напруга, ємність; акумулятори - лише напруга й ємність (24 В 100, 200 А·год…, потім 48 В).
     // Без значення - в кінець групи (Wi-Fi модулі після інверторів бренду, «Інші» після брендів).
-    const sortKey = (i) => [cats.indexOf(catOf(i)), i.f.brand || '\uffff', i.f.power ?? 1e9, i.f.voltage ?? 1e9, i.f.capacity ?? 1e9, i.n];
+    const TOP_BRANDS = ['Felicity', 'MUST'];
+    const brandRank = (b) => (TOP_BRANDS.includes(b) ? TOP_BRANDS.indexOf(b) : TOP_BRANDS.length);
+    const sortKey = (i) => [cats.indexOf(catOf(i)), brandRank(i.f.brand), i.f.brand || '\uffff',
+      catOf(i).startsWith('Акумулятори') ? 0 : i.f.power ?? 1e9, i.f.voltage ?? 1e9, i.f.capacity ?? 1e9, i.n];
     function byKey(a, b) {
       const x = sortKey(a), y = sortKey(b);
       for (let n = 0; n < x.length; n++) {
@@ -794,6 +810,7 @@
       curCat = cat;
       facetSel = {};
       render();
+      pushNav();
       window.scrollTo(0, 0);
     }
     $('cat-tiles').addEventListener('click', (e) => {
@@ -859,7 +876,13 @@
         if ($('only-fav').checked && !on) render();
       }
     });
-    ['q', 'only-fav'].forEach((id) => $(id).addEventListener('input', render));
+    ['q', 'only-fav'].forEach((id) => $(id).addEventListener('input', () => {
+      render();
+      // Початок пошуку - окремий крок історії, далі лише оновлюємо його текст.
+      const s = navState();
+      const started = (s.q || s.fav) && !(history.state?.q || history.state?.fav);
+      history[started ? 'pushState' : 'replaceState'](s, '', navUrl());
+    }));
 
     // ─── Картка товару ─────────────────────────────────────────────
     // Опис, фото й характеристики - з products.json сайту (ті самі, що на
@@ -868,6 +891,8 @@
     let siteProducts = null;
     async function openProduct(i) {
       if (!i) return;
+      curProduct = i.id;
+      pushNav();
       $('p-title').textContent = i.name;
       $('p-gallery').innerHTML = i.photo ? `<img src="${esc(i.photo)}" alt="">` : '';
       $('p-desc').textContent = '';
@@ -894,7 +919,11 @@
       // specs - готовий HTML таблиці характеристик з нашого ж products.json (як на сторінці товару).
       $('p-specs').innerHTML = p.specs || '';
     }
-    const closeProduct = () => { $('product').hidden = true; };
+    const closeProduct = () => {
+      if ($('product').hidden) return;
+      if (history.state?.product) history.back(); // закриє картку через popstate
+      else { curProduct = null; $('product').hidden = true; }
+    };
     $('p-close').addEventListener('click', closeProduct);
     $('product').addEventListener('click', (e) => { if (e.target === $('product')) closeProduct(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeProduct(); });
@@ -1013,8 +1042,7 @@
         alert(`Замовлення №${r.number} прийнято. Менеджер зв'яжеться з вами для підтвердження.`
           + (r.points_spent ? `\nОплачено балами: ${r.points_spent}.` : '')
           + (r.points_error ? `\nБали не списано: ${r.points_error}.` : ''));
-        show('orders');
-        loadOrders();
+        go('orders');
       } catch (err) {
         $('checkout-msg').textContent = err.status === 429 ? 'Забагато замовлень за короткий час. Спробуйте за кілька хвилин.'
           : 'Не вдалося надіслати замовлення: ' + err.message;
@@ -1272,14 +1300,41 @@
       $('points-box').hidden = false;
     }
 
-    function go(view) {
+    // ─── Історія браузера ──────────────────────────────────────────
+    // Кожен перехід у кабінеті - запис в історії, тож кнопки «назад/вперед» браузера
+    // ходять між екранами, а не виводять із кабінету.
+
+    const navState = () => ({ view: curView, cat: curCat, q: $('q').value, fav: $('only-fav').checked, product: curProduct });
+    // #partner - щоб після оновлення сторінки й за посиланням з partnerska-programa.html відкривалась ця вкладка.
+    const navUrl = () => (curView === 'partner' ? '#partner' : location.pathname);
+    function pushNav() {
+      const s = navState();
+      if (JSON.stringify(s) !== JSON.stringify(history.state)) history.pushState(s, '', navUrl());
+    }
+    window.addEventListener('popstate', (e) => {
+      if ($('nav').hidden) return; // не увійшли
+      const s = e.state || {};
+      if ((s.cat ?? null) !== curCat) facetSel = {};
+      curCat = s.cat ?? null;
+      $('q').value = s.q || '';
+      $('only-fav').checked = !!s.fav;
+      enter(s.view || 'catalog');
+      curProduct = s.product || null;
+      if (curProduct) openProduct(byId.get(curProduct));
+      else $('product').hidden = true;
+    });
+
+    function enter(view) {
       show(view);
-      // #partner - щоб після оновлення сторінки й за посиланням з partnerska-programa.html відкривалась ця вкладка.
-      history.replaceState(null, '', view === 'partner' ? '#partner' : location.pathname);
       if (view === 'orders') loadOrders();
       else if (view === 'partner') openPartner();
       else if (view === 'cart') { renderCart(); renderCartBar(); renderPoints(); }
       else render(); // кількості могли змінитись у кошику
+    }
+    function go(view) {
+      curProduct = null;
+      enter(view);
+      pushNav();
       window.scrollTo(0, 0);
     }
     document.querySelectorAll('#nav button').forEach((b) => b.addEventListener('click', () => go(b.dataset.view)));
