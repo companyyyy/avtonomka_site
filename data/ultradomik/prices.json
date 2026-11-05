@@ -1,7 +1,9 @@
 {
   "130059": {
     "price": 29999,
-    "in_stock": true
+    "in_stock": true,
+    "wholesale_usd": 630,
+    "off": false
   },
   "142723": {
     "price": 14869,
