@@ -339,7 +339,7 @@
     "price": 40925,
     "in_stock": true,
     "wholesale_usd": 810,
-    "off": false
+    "off": true
   },
   "152297": {
     "price": 71376,
