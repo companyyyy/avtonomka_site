@@ -234,6 +234,7 @@ function getBase() {
   return depth >= 1 && path.includes('/product/') ? '../'.repeat(depth) : '';
 }
 const BASE = getBase();
+let allProducts = [];
 
 /* ---- Віртуальні товари (public.virtual_products, розділ 9.4
    ARCHITECTURE.md) - потрібні тут так само, як на каталозі: без цього
@@ -338,6 +339,7 @@ function init() {
       const virtual = results[1];
       const products = (Array.isArray(data) ? data : (data.products || [])).concat(virtual);
       const product  = products.find(p => String(p.id) === String(id));
+      allProducts = products;
       if (!product) { showNotFound(); return; }
       const offer = getOrderOffer();
       render(offer
@@ -348,6 +350,21 @@ function init() {
       showError();
       console.error('product.js:', e);
     });
+}
+
+/* Акумулятор, що продається лише в комплекті: посилання на комплекти з поля
+   kit_ids у products.json (ті, що зараз у наявності). Mirrors buildKitLinksBlock()
+   in scripts/generate_static_pages.js. */
+function renderKitLinks(p, descEl) {
+  const old = document.getElementById('product-kits');
+  if (old) old.remove();
+  const kits = (p.kit_ids || []).map(id => allProducts.find(k => String(k.id) === String(id)))
+    .filter(k => k && k.availability === 'in_stock');
+  if (!kits.length) return;
+  const title = (k) => (window.I18n ? window.I18n.productTitle(k) : k.title).replace(/^Комплект автономного \S+:\s*/i, '');
+  descEl.insertAdjacentHTML('afterend', `<div id="product-kits" class="product-kits"><div class="product-kits__title">${escHtml(t('product.kits_label'))}</div><ul>${
+    kits.map(k => `<li><a href="${BASE}product/${encodeURIComponent(k.slug)}/${encodeURIComponent(k.id)}.html">${escHtml(title(k))}</a></li>`).join('')
+  }</ul></div>`);
 }
 
 /* ---- Render product ---- */
@@ -429,6 +446,7 @@ function render(p) {
       const clean = cleanDescription(p.description || '');
       descEl.textContent = clean || t('product.no_desc');
     }
+    renderKitLinks(p, descEl);
   }
 
   /* ---- Specs table - hide in EN ---- */

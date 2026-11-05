@@ -239,7 +239,7 @@ def main() -> int:
                     existing_link[item["id"]] = item["link"]
                 if item.get("link2"):
                     existing_link2[item["id"]] = item["link2"]
-                for k in ("manual", "manual2"):
+                for k in ("manual", "manual2", "kit_ids"):
                     if item.get(k):
                         existing_manual.setdefault(item["id"], {})[k] = item[k]
                 if item.get("embed"):

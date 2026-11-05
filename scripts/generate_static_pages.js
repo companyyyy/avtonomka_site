@@ -542,6 +542,19 @@ function buildOfferAltBlock(p, order, variant) {
 /* variant: 'stock' (основна сторінка) або 'order' (сторінка «під замовлення»,
    тоді order обовʼязковий). order на основній сторінці - лише для посилання
    «можна дешевше під замовлення». */
+let productsById = new Map();
+
+/* Акумулятор, що продається лише в комплекті: посилання на комплекти з поля
+   kit_ids у products.json (ті, що зараз у наявності). Mirrors renderKitLinks() in
+   assets/js/product.js. */
+function buildKitLinksBlock(p) {
+  const kits = (p.kit_ids || []).map(id => productsById.get(String(id))).filter(k => k && k.availability === 'in_stock');
+  if (!kits.length) return '';
+  return `<div id="product-kits" class="product-kits"><div class="product-kits__title" data-i18n="product.kits_label">Доступні комплекти:</div><ul>${
+    kits.map(k => `<li><a href="${escapeHtml(productUrl(k))}">${escapeHtml(k.title.replace(/^Комплект автономного \S+:\s*/i, ''))}</a></li>`).join('')
+  }</ul></div>`;
+}
+
 function generateProductPage(p, template, articlesBySlug, order = null, variant = 'stock') {
   const isOrder     = variant === 'order' && !!order;
   const title       = p.title || '';
@@ -687,7 +700,7 @@ function generateProductPage(p, template, articlesBySlug, order = null, variant 
   );
   html = html.replace(
     '<div id="product-desc" class="product-desc"></div>',
-    `<div id="product-desc" class="product-desc">${descText}</div>`
+    `<div id="product-desc" class="product-desc">${descText}</div>${buildKitLinksBlock(p)}`
   );
 
   html = renderDatasheetButtons(html, p);
@@ -802,6 +815,7 @@ async function generateAllProductPages(products, redirects = []) {
   const validStubNames = new Set(); // 'id.html' — current legacy stubs
   let orderPages = 0;
 
+  productsById = new Map(products.map(p => [String(p.id), p]));
   products.forEach(p => {
     const slug = productSlug(p);
     const dir  = path.join(outDir, slug);

@@ -126,6 +126,7 @@
     "top_badge": "🔥 TOP"
   },
   "product": {
+    "kits_label": "Available kits:",
     "breadcrumb_home": "Home",
     "breadcrumb_catalog": "Catalog",
     "breadcrumb_item": "Product",

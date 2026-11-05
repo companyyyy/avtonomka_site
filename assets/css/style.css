@@ -1463,6 +1463,11 @@ main { flex: 1; }
   overflow-y: auto;
   white-space: pre-line;
 }
+.product-kits { margin-top: 12px; font-size: .92rem; line-height: 1.5; }
+.product-kits__title { font-weight: 600; margin-bottom: 4px; }
+.product-kits ul { margin: 0; padding-left: 18px; }
+.product-kits li { margin-bottom: 4px; }
+.product-kits a { color: var(--color-dark); text-decoration: underline; }
 .product-desc::-webkit-scrollbar { width: 4px; }
 .product-desc::-webkit-scrollbar-track { background: var(--color-grey); border-radius: 2px; }
 .product-desc::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 2px; }

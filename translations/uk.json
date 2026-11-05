@@ -124,6 +124,7 @@
     "top_badge": "🔥 ТОП"
   },
   "product": {
+    "kits_label": "Доступні комплекти:",
     "breadcrumb_home": "Головна",
     "breadcrumb_catalog": "Каталог",
     "breadcrumb_item": "Товар",
