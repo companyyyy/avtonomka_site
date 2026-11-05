@@ -596,7 +596,7 @@ function generateProductPage(p, template, articlesBySlug, order = null, variant 
     `<meta property="og:title" content="${escapeHtml(pageTitle)} - Автономка">`
   );
   html = html.replace(
-    '<meta property="og:image" content="assets/images/sticker.webp">',
+    '<meta property="og:image" content="assets/images/logo.jpg">',
     `<meta property="og:image" content="${escapeHtml(image)}">`
   );
   html = html.replace(
@@ -629,7 +629,6 @@ function generateProductPage(p, template, articlesBySlug, order = null, variant 
   html = html.replace(
     `        <!-- Not found -->
         <div id="not-found-state" class="empty-state hidden">
-          <img src="assets/images/1111111.webp" alt="" loading="lazy">
           <h3 data-i18n="product.not_found_title">Товар не знайдено</h3>
           <p data-i18n="product.not_found_text">Можливо, товар більше не існує або посилання невірне.</p>
           <a href="catalog.html" class="btn btn-primary" data-i18n="product.not_found_btn">Повернутись до каталогу</a>
@@ -641,7 +640,6 @@ function generateProductPage(p, template, articlesBySlug, order = null, variant 
   html = html.replace(
     `        <!-- Error -->
         <div id="error-state" class="empty-state hidden">
-          <img src="assets/images/sticker.webp" alt="" loading="lazy">
           <h3 data-i18n="product.error_title">Помилка завантаження</h3>
           <p data-i18n="product.error_text">Не вдалося завантажити інформацію про товар. Спробуйте пізніше.</p>
           <a href="catalog.html" class="btn btn-outline" data-i18n="product.error_btn">До каталогу</a>
@@ -1497,7 +1495,7 @@ function generateArticlePage(a, template, products) {
   html = html.replace(/<meta property="og:description" content="[^"]*">/,
     `<meta property="og:description" content="${escapeHtml(desc)}">\n  <meta property="og:url" content="${articleUrl(a)}">`);
   html = html.replace(/<meta property="og:image" content="[^"]*">/,
-    `<meta property="og:image" content="${escapeHtml(a.photo ? absoluteUrl(a.photo) : SITE_URL + '/assets/images/sticker.webp')}">`);
+    `<meta property="og:image" content="${escapeHtml(a.photo ? absoluteUrl(a.photo) : SITE_URL + '/assets/images/logo.jpg')}">`);
   html = html.replace(/<link rel="canonical" href="[^"]*">/,
     `<link rel="canonical" href="${articleUrl(a)}">\n${buildArticleJsonLd(a)}`);
   // Шапку "Статті" прибираємо - заголовок h1 тут сама стаття.

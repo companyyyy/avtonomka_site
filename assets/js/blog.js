@@ -125,7 +125,6 @@ function showLoading(grid) {
 function showEmpty(grid) {
   grid.innerHTML = `
     <div class="empty-state">
-      <img src="assets/images/1111111.webp" alt="Хом'як" loading="lazy">
       <h3>${escHtml(t('blog.empty_title'))}</h3>
       <p>${escHtml(t('blog.empty_text'))}</p>
       <a href="https://telegram.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg">
@@ -137,7 +136,6 @@ function showEmpty(grid) {
 function showError(grid) {
   grid.innerHTML = `
     <div class="empty-state">
-      <img src="assets/images/sticker.webp" alt="" loading="lazy">
       <h3>${escHtml(t('blog.error_title'))}</h3>
       <p>${escHtml(t('blog.error_text'))}</p>
       <a href="https://telegram.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg">

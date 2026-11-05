@@ -450,23 +450,6 @@ main { flex: 1; }
   max-width: 420px;
 }
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-.hero-mascot {
-  flex-shrink: 0;
-  width: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.hero-mascot img {
-  width: 100%;
-  max-width: 220px;
-  filter: drop-shadow(0 8px 32px rgba(0,0,0,.35));
-  animation: float 4s ease-in-out infinite;
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-14px); }
-}
 
 /* ---------- Home split (categories + tg feed) ---------- */
 .home-split {
@@ -828,12 +811,6 @@ main { flex: 1; }
   transition: color var(--transition);
 }
 .contacts-info a:hover { color: #ffc555; }
-.contacts-mascot {
-  flex-shrink: 0;
-  width: 200px;
-  opacity: .92;
-}
-.contacts-mascot img { width: 100%; }
 
 /* ---------- Footer ---------- */
 .site-footer {
@@ -1681,7 +1658,6 @@ main { flex: 1; }
   padding: 64px 24px;
   text-align: center;
 }
-.empty-state img { width: 160px; opacity: .85; }
 .empty-state h3 { font-size: 1.2rem; color: var(--color-dark); }
 .empty-state p { color: var(--color-muted); max-width: 380px; }
 
@@ -1715,15 +1691,6 @@ main { flex: 1; }
   padding: 48px 24px;
   gap: 24px;
 }
-.page-404__stickers {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.page-404__stickers img { width: 120px; animation: float 4s ease-in-out infinite; }
-.page-404__stickers img:nth-child(2) { animation-delay: -.8s; }
-.page-404__stickers img:nth-child(3) { animation-delay: -1.6s; }
 .page-404 h1 {
   font-size: clamp(3rem, 10vw, 6rem);
   font-weight: 900;
@@ -1924,7 +1891,6 @@ main { flex: 1; }
   .product-gallery { position: static; }
   .checkout-layout { grid-template-columns: 1fr; }
   .contacts-inner { flex-direction: column; text-align: center; }
-  .contacts-mascot { width: 140px; }
 }
 
 @media (max-width: 900px) {
@@ -1972,7 +1938,6 @@ main { flex: 1; }
 
   .hero { padding: 28px 0 24px; }
   .hero-inner { flex-direction: column-reverse; gap: 28px; }
-  .hero-mascot { width: 180px; }
   .hero h1 { font-size: 1.55rem; }
   .hero-actions { flex-direction: column; }
 
@@ -1992,13 +1957,8 @@ main { flex: 1; }
   .section { padding: 40px 0; }
   .section-title { font-size: 1.4rem; }
 
-  /* Hero: hide hamster */
-  .hero-mascot { display: none; }
-
   /* TG feed: center "Відкрити канал" */
   .tg-feed-cta { text-align: center; }
-
-  /* Why us: hide hamster icons */
 
   /* Articles: horizontal card layout (wider, less tall) */
   .article-card {
@@ -2013,8 +1973,7 @@ main { flex: 1; }
   .article-card__summary { display: none; }
   .article-card__footer { grid-column: 2; grid-row: 2; padding: 0 14px 12px; }
 
-  /* Contacts: hide hamster, center yellow stripe */
-  .contacts-mascot { display: none; }
+  /* Contacts: center yellow stripe */
   .contacts-section .section-title::after { margin: 8px auto 0; }
 
   /* Contacts: hide Telegram button */
@@ -2036,8 +1995,6 @@ main { flex: 1; }
 }
 
 /* ======= EN LANGUAGE OVERRIDES ======= */
-.lang-en .lang-hide-en { display: none !important; }
-html.lang-en .lang-hide-en { display: none !important; }
 
 /* ======= LANGUAGE SWITCHER ======= */
 .lang-switcher {

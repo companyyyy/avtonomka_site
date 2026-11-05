@@ -366,7 +366,6 @@ async function init() {
     if (!Array.isArray(allArticles) || allArticles.length === 0) {
       grid.innerHTML = `
         <div class="empty-state">
-          <img src="assets/images/sticker.webp" alt="" loading="lazy">
           <h3>${t('articles.empty_title')}</h3>
           <p>${t('articles.empty_text')}</p>
         </div>`;
@@ -398,7 +397,6 @@ async function init() {
   } catch (e) {
     grid.innerHTML = `
       <div class="empty-state">
-        <img src="assets/images/sticker.webp" alt="" loading="lazy">
         <h3>${t('articles.error_title')}</h3>
         <p>${t('articles.error_text')}</p>
       </div>`;

@@ -549,7 +549,6 @@ function render() {
   if (page.length === 0) {
     grid.innerHTML = `
       <div class="empty-state" style="grid-column:1/-1">
-        <img src="${_assetsBase}assets/images/sticker.webp" alt="" loading="lazy">
         <h3>${t('catalog.empty_title')}</h3>
         <p>${t('catalog.empty_text')}</p>
       </div>`;
@@ -693,7 +692,6 @@ function showLoading() {
 function showError() {
   grid.innerHTML = `
     <div class="empty-state" style="grid-column:1/-1">
-      <img src="${_assetsBase}assets/images/sticker.webp" alt="" loading="lazy">
       <h3>${t('catalog.error_title')}</h3>
       <p>${t('catalog.error_text')}</p>
     </div>`;
