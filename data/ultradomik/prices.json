@@ -727,7 +727,9 @@
   },
   "153115": {
     "price": 63904,
-    "in_stock": true
+    "in_stock": true,
+    "wholesale_usd": 0,
+    "off": true
   },
   "ud-avr-2p": {
     "price": 1125,
