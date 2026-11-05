@@ -24,9 +24,6 @@ CHANNEL_URL = f"https://t.me/s/{CHANNEL}"
 OUTPUT_FILE = Path(__file__).parent.parent / "data" / "telegram_posts.json"
 MAX_POSTS   = 30
 
-# Пости, чиє фото не показуємо на сайті (банер із хом'яком); текст лишається.
-HIDDEN_PHOTO_POST_IDS = {"602", "607", "615"}
-
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -79,9 +76,6 @@ def parse_posts(html: str) -> list[dict]:
             m = re.search(r"url\(['\"]?(https?://[^'\")\s]+)['\"]?\)", style)
             if m:
                 photo = m.group(1)
-
-        if post_id in HIDDEN_PHOTO_POST_IDS:
-            photo = ""
 
         if not text and not photo:
             continue
