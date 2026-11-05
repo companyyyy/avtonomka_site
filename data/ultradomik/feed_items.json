@@ -151,11 +151,10 @@
   },
   {
     "id": "150416",
-    "name": "Система зберігання електроенергії MUST HBP19-5548 VPM 2 в 1 5,5 кВт 5120 Вт·год",
+    "name": "MUST HBP19-5548 VPM 2в1 5.5 кВт 5120 Втг",
     "cat": 3,
-    "photo": "assets/images/prom/150416_1.jpg",
-    "problem": "",
-    "site": true
+    "photo": "",
+    "problem": "немає товару на сайті"
   },
   {
     "id": "152253",
@@ -321,6 +320,14 @@
     "photo": "assets/images/ultradomik/ud-avr-4p.jpg",
     "problem": "",
     "site": false
+  },
+  {
+    "id": "143938",
+    "name": "Комплект автономного енергоживлення: Must PV18-3224VPM II 24V 3.2kW + MUST LP16-24100, 25.6V 100Ah, LiFePO4",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/143938.jpg",
+    "problem": "комплекти не йдуть у фіди",
+    "site": true
   },
   {
     "id": "150590",
@@ -491,10 +498,106 @@
     "site": true
   },
   {
-    "id": "153026",
-    "name": "Гібридний інвертор MUST PV18-2012 ECO 2 кВт 12 В TRADE-IN",
+    "id": "153115",
+    "name": "Акумуляторна батарея Felicity FLA48230 51.2V 230Ah TRADE-IN LiFePO4",
+    "cat": 2,
+    "photo": "",
+    "problem": "немає фото на білому фоні",
+    "site": true
+  },
+  {
+    "id": "153138",
+    "name": "Гібридний інвертор Must PV18-4024 PRO 4 кВт 24 В Wi-Fi",
     "cat": 1,
-    "photo": "assets/images/products/153026_2.jpg",
+    "photo": "",
+    "problem": "немає фото на білому фоні",
+    "site": true
+  },
+  {
+    "id": "153151",
+    "name": "Комплект автономного енергоживлення: Must PV18-2012 PRO 2 кВт 12 В + MUST LP15-12100 12V 100Ah LiFePO4",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "комплекти не йдуть у фіди",
+    "site": true
+  },
+  {
+    "id": "153153",
+    "name": "Комплект автономного енергоживлення: Must PV18-4024 PRO 4 кВт 24 В Wi-Fi + Felicity FLA24280 25.6V 280Ah",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "комплекти не йдуть у фіди",
+    "site": true
+  },
+  {
+    "id": "153154",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Dyness BX51100 51.2v 100ah TRADE-IN, 5.12kwh LiFePo4",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "комплекти не йдуть у фіди",
+    "site": true
+  },
+  {
+    "id": "153155",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + Dyness BX51100 51.2v 100ah TRADE-IN, 5.12kwh LiFePo4",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "комплекти не йдуть у фіди",
+    "site": true
+  },
+  {
+    "id": "153156",
+    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Dyness BX51100 51.2v 100ah TRADE-IN, 5.12kwh LiFePo4",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "комплекти не йдуть у фіди",
+    "site": true
+  },
+  {
+    "id": "153157",
+    "name": "Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48230 51.2V 230Ah TRADE-IN LiFePO4",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "комплекти не йдуть у фіди",
+    "site": true
+  },
+  {
+    "id": "153159",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48230 51.2V 230Ah TRADE-IN LiFePO4",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "комплекти не йдуть у фіди",
+    "site": true
+  },
+  {
+    "id": "150935",
+    "name": "Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi",
+    "cat": 1,
+    "photo": "assets/images/prom/150935_1.jpg",
+    "problem": "",
+    "site": true
+  },
+  {
+    "id": "151285",
+    "name": "Комплект автономного енергоживлення: Must PV18-2012 PRO 2 кВт 12 В + Felicity FLA12100PG2 12.8V 100Ah",
+    "cat": 11,
+    "photo": "assets/images/zaglushka.png",
+    "problem": "комплекти не йдуть у фіди",
+    "site": true
+  },
+  {
+    "id": "152211",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48230 51.2V 230Ah",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152211.jpg",
+    "problem": "комплекти не йдуть у фіди",
+    "site": true
+  },
+  {
+    "id": "130059",
+    "name": "Інверторний бензиновий генератор MaXpeedingRods MXR3500-EU, у кожусі, потужність ном/макс - 3.0кВт/3.3кВт, Витрата 0.45л/год, бак 4л, ручний стартер",
+    "cat": 14,
+    "photo": "assets/images/prom/130059_2.jpg",
     "problem": "",
     "site": true
   },
@@ -508,7 +611,7 @@
   },
   {
     "id": "152221",
-    "name": "Комплект автономного енергоживлення: Must PV18-3224VPM II+ Felicity FLA24280 25.6V 280Ah",
+    "name": "Комплект автономного енергоживлення: Must PV18-3224VPM II 3.2 кВт 24 В+ Felicity FLA24280 25.6V 280Ah",
     "cat": 11,
     "photo": "assets/images/feed-auto/152221.jpg",
     "problem": "комплекти не йдуть у фіди",
@@ -552,6 +655,14 @@
     "cat": 2,
     "photo": "assets/images/prom/152352_1.jpg",
     "problem": "",
+    "site": true
+  },
+  {
+    "id": "152365",
+    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48230 51.2V 230Ah TRADE-IN LiFePO4\n",
+    "cat": 11,
+    "photo": "assets/images/feed-auto/152365.jpg",
+    "problem": "комплекти не йдуть у фіди",
     "site": true
   },
   {
@@ -632,46 +743,6 @@
     "cat": 12,
     "photo": "",
     "problem": "немає фото на білому фоні",
-    "site": true
-  },
-  {
-    "id": "152211",
-    "name": "Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48230 51.2V 230Ah",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/152211.jpg",
-    "problem": "комплекти не йдуть у фіди",
-    "site": true
-  },
-  {
-    "id": "130059",
-    "name": "Інверторний бензиновий генератор MaXpeedingRods MXR3500-EU, у кожусі, потужність ном/макс - 3.0кВт/3.3кВт, Витрата 0.45л/год, бак 4л, ручний стартер",
-    "cat": 14,
-    "photo": "assets/images/prom/130059_2.jpg",
-    "problem": "",
-    "site": true
-  },
-  {
-    "id": "153115",
-    "name": "Акумуляторна батарея Felicity FLA48230 51.2V 230Ah TRADE-IN LiFePO4",
-    "cat": 2,
-    "photo": "",
-    "problem": "немає фото на білому фоні",
-    "site": true
-  },
-  {
-    "id": "143938",
-    "name": "Комплект автономного енергоживлення: Must PV18-3224VPM II 24V 3.2kW + MUST LP16-24100, 25.6V 100Ah, LiFePO4",
-    "cat": 11,
-    "photo": "assets/images/feed-auto/143938.jpg",
-    "problem": "комплекти не йдуть у фіди",
-    "site": true
-  },
-  {
-    "id": "150935",
-    "name": "Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi",
-    "cat": 1,
-    "photo": "assets/images/prom/150935_1.jpg",
-    "problem": "",
     "site": true
   }
 ]
