@@ -123,6 +123,11 @@ def apply_price_adjustments(data) -> None:
 
 PROM_IMAGES_DIR = Path(__file__).parent.parent / "assets" / "images" / "prom"
 
+# Головне фото у фідах, коли перше фото постачальника невдале: id товару -> файл.
+PROM_MAIN_IMAGE = {
+    "130059": "130059_1.jpg",  # MXR3500: жовтий корпус збоку, а не чорна панель спереду
+}
+
 
 def download_prom_images(data) -> None:
     """Фото для фіда Prom (prom.xml) - тільки оригінальні фото постачальника
@@ -159,6 +164,9 @@ def download_prom_images(data) -> None:
                     print(f"  Prom-фото не скачано: {url} ({exc})", file=sys.stderr)
                     continue
             local.append(f"assets/images/prom/{name}")
+        main = f"assets/images/prom/{PROM_MAIN_IMAGE.get(p.get('id'))}"
+        if main in local:
+            local = list(dict.fromkeys([main] + local))
         if local:
             p["prom_images"] = local[:10]
         else:
